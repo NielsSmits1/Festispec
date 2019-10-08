@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec_WPF", "Festispec_WPF\Festispec_WPF.csproj", "{EE7EC1E1-D253-4B1B-B038-211A27AD9ABC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE7EC1E1-D253-4B1B-B038-211A27AD9ABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE7EC1E1-D253-4B1B-B038-211A27AD9ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE7EC1E1-D253-4B1B-B038-211A27AD9ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE7EC1E1-D253-4B1B-B038-211A27AD9ABC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4278DB0E-6110-4DB4-8E9E-624A893C04FA}
+	EndGlobalSection
+EndGlobal
