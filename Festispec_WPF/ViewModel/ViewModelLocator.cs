@@ -52,7 +52,15 @@ namespace Festispec_WPF.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public LoginRegisterVM GetLoginRegisterVm
+        {
+            get
+            {
+                return new LoginRegisterVM();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

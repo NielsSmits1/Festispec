@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Festispec_WPF"
         mc:Ignorable="d"
         WindowState="Maximized"
+        DataContext="{Binding GetLoginRegisterVm, Source={StaticResource Locator}}"
         Title="FestiSpec IT4J">
 
     <Border Padding="100 10">
@@ -28,8 +29,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Content="Login" Grid.Column="0" Height="30"/>
-                <Button Content="Registreren" Grid.Column="2"/>
+                <Button Content="Login" Grid.Column="0" Height="30" Command="{Binding LoginCommand}"/>
+                <Button Content="Registreren" Grid.Column="2" Command="{Binding RegisterCommand}"/>
             </Grid>
 
         </StackPanel>
