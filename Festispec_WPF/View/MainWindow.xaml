@@ -8,6 +8,7 @@
         WindowState="Maximized"
         Title="FestiSpec IT4J">
 
+    <Border Padding="10"> 
     <StackPanel>
 
         <TextBlock HorizontalAlignment="Center" Text="FestiSpec IT4J" FontSize="30" />
@@ -22,4 +23,5 @@
         </Grid>
         
     </StackPanel>
+    </Border>
 </Window>
