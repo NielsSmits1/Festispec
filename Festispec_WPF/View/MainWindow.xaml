@@ -10,7 +10,16 @@
         
         Title="FestiSpec IT4J">
 
-    <Grid>
+    <StackPanel>
+
+        <TextBlock HorizontalAlignment="Center" Text="FestiSpec IT4J" FontSize="30" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+        </Grid>
         
-    </Grid>
+    </StackPanel>
 </Window>
