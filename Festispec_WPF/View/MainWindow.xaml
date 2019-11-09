@@ -126,6 +126,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="250"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -133,12 +134,44 @@
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
-                <Label Content="Emailadres:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                <Label Content="Vul hier uw e-mail in" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBox Width="200" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="2"></TextBox>
+                <Label Content="Contactgegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Emailadres" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1"></TextBox>
+                <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="2" ></Label>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2"></TextBox>
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Certificaten inspecteur" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <ListBox Grid.Row="1" Grid.Column="1">
+                    <!--Hier zit een binding op het veld name van de tabel Certificaat-->
+                </ListBox>
+
+                <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                <ListBox Grid.Row="1" Grid.Column="3">
+                    <ListBoxItem Content="1">
+
+                    </ListBoxItem>
+                    <ListBoxItem Content="2">
+
+                    </ListBoxItem>
+                </ListBox>
+            </Grid>
+
         </StackPanel>
 
         <StackPanel Grid.Column="6" Background="AliceBlue">
