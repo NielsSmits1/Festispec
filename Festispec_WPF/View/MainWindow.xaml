@@ -9,22 +9,26 @@
     <!--WindowState="Maximized" WindowStyle="None"-->
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="101"/>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="134"/>
+            <ColumnDefinition Width="263"/>
+            <ColumnDefinition Width="126"/>
+            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="600"/>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
 
-        <Menu>
+        <Menu Grid.ColumnSpan="2">
             <MenuItem Width="100" Height="50" Background="Purple" Foreground="White" Header="Home" FontSize="20" ></MenuItem>
             <MenuItem Width="100" Height="50" Background="Purple" Foreground="White" Header="Inspecteurs" FontSize="16" Margin="0,20,0,0"></MenuItem>
         </Menu>
 
-        
-        <StackPanel Grid.Column="2">
+
+        <StackPanel Grid.Column="3" Grid.ColumnSpan="4" Width="600">
             <Label Content="Inspecteurs" Grid.Column="2" FontSize="20" Background="AliceBlue"></Label>
             <Grid  Height="50">
                 <Grid.ColumnDefinitions>
@@ -34,17 +38,40 @@
                 <!--SEARCH BAR-->
                 <TextBox Text="Zoek voor inspecteur" FontSize="15" BorderBrush="Black"></TextBox>
                 <!--CREATE BUTTON-->
-                <Button Grid.Column="1" Content="Nieuwe inspecteur&#x0a;      aanmaken" FontSize="15" Background="MediumPurple" Foreground="White" BorderBrush="Black">
+                <Button Grid.Column="1" Content="Nieuwe inspecteur&#x0a;      aanmaken" FontSize="15" Background="MediumPurple" Foreground="White" BorderBrush="Black" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.095"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="0.248"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
                 </Button>
             </Grid>
-            <!--LIST OF EXISTING INSPECTORS-->
             <ListView Background="AliceBlue">
-                
+                <DataGrid RenderTransformOrigin="0.5,0.5" Width="586" SelectionChanged="DataGrid_SelectionChanged" Height="27" IsReadOnly="True" ItemsSource="{Binding Inspecteurs}" >
+                    <DataGrid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.085"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </DataGrid.RenderTransform>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Inspecteur" Binding="{Binding voornaam}" Width="*" />
+                        <DataGridTextColumn Header="Straatnaam" Binding="{Binding Straatnaam}" Width="*" />
+                        <DataGridTextColumn Header="Huisnummer" Binding="{Binding Huisnummer}" Width="*" />
+                        <DataGridTextColumn Header="Woonplaats" Binding="{Binding Woonplaats}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </ListView>
-            
+            <!--LIST OF EXISTING INSPECTORS-->
+
         </StackPanel>
 
-        <StackPanel Grid.Column="4" Background="AliceBlue">
+        <StackPanel Grid.Column="8" Background="AliceBlue">
             <Label Content="Nieuwe inspecteur aanmaken" FontSize="30" Foreground="Black"></Label>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -59,14 +86,14 @@
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
                 <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                   <!--NAME-->
+                <!--NAME-->
                 <Label Content="Voornaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
                 <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" ></TextBox>
                 <Label Content="Tussenvoegsel" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
                 <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2"></TextBox>
                 <Label Content="Achternaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
                 <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3"></TextBox>
-                 <!--END NAME-->
+                <!--END NAME-->
             </Grid>
             <Border BorderThickness="1" BorderBrush="Black"></Border>
 
@@ -141,8 +168,8 @@
             <Border BorderThickness="1" BorderBrush="Black"></Border>
         </StackPanel>
 
-        <StackPanel Grid.Column="6" Background="AliceBlue">
-            
+        <StackPanel Grid.Column="10" Background="AliceBlue">
+
         </StackPanel>
     </Grid>
 </Window>
