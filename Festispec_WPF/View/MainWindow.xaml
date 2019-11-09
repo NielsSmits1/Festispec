@@ -38,7 +38,7 @@
                 <!--SEARCH BAR-->
                 <TextBox Text="Zoek voor inspecteur" FontSize="15" BorderBrush="Black"></TextBox>
                 <!--CREATE BUTTON-->
-                <Button Grid.Column="1" Content="Nieuwe inspecteur&#x0a;      aanmaken" FontSize="15" Background="MediumPurple" Foreground="White" BorderBrush="Black" RenderTransformOrigin="0.5,0.5">
+                <Button Grid.Column="1" Content="Nieuwe inspecteur&#x0a; aanmaken" FontSize="15" Background="MediumPurple" Foreground="White" BorderBrush="Black" RenderTransformOrigin="0.5,0.5">
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -60,7 +60,7 @@
                         </TransformGroup>
                     </DataGrid.RenderTransform>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Inspecteur" Binding="{Binding voornaam}" Width="*" />
+                        <DataGridTextColumn Header="Inspecteur" Binding="{Binding Voornaam}" Width="*" />
                         <DataGridTextColumn Header="Straatnaam" Binding="{Binding Straatnaam}" Width="*" />
                         <DataGridTextColumn Header="Huisnummer" Binding="{Binding Huisnummer}" Width="*" />
                         <DataGridTextColumn Header="Woonplaats" Binding="{Binding Woonplaats}" Width="*" />
