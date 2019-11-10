@@ -52,6 +52,14 @@ namespace Festispec_WPF.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        public InspectorVM Inspector
+        {
+            get
+            {
+                return new InspectorVM();
+            }
+        }
         
         public static void Cleanup()
         {

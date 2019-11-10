@@ -20,7 +20,7 @@ namespace Festispec_WPF
             this.Kaartvraag_vragenlijst = new HashSet<Kaartvraag_vragenlijst>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Vraag { get; set; }
         public byte[] FileBytes { get; set; }
         public string MimeType { get; set; }

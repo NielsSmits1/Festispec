@@ -14,8 +14,8 @@ namespace Festispec_WPF
     
     public partial class Vragenlijst_bijlage
     {
-        public string Bijlage_ID { get; set; }
-        public string Vragenlijst_ID { get; set; }
+        public int Bijlage_ID { get; set; }
+        public int Vragenlijst_ID { get; set; }
         public byte[] FileBytes { get; set; }
         public string MimeType { get; set; }
     

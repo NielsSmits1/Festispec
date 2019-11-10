@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Vragenlijst] (
-    [ID]          NCHAR (10)    NOT NULL,
+    [ID]          INT           IDENTITY (1, 1) NOT NULL,
     [Titel]       NVARCHAR (50) NOT NULL,
     [Versie]      NVARCHAR (50) NOT NULL,
-    [Template_ID] NCHAR (10)    NULL,
+    [Template_ID] INT           NULL,
     [Opmerking]   NTEXT         NULL,
     [Is_Ingevuld] BIT           NOT NULL,
     CONSTRAINT [PK_Vragenlijst] PRIMARY KEY CLUSTERED ([ID] ASC),

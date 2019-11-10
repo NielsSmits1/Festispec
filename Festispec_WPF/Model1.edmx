@@ -9,30 +9,30 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Datum" Type="datetime" Nullable="false" />
-          <Property Name="Contactpersoon_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Contactpersoon_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Beschikbaarheid">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Inspecteur_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Inspecteur_ID" Type="int" Nullable="false" />
           <Property Name="Datum" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Bijlagevraag">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Vraag" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Certificaat">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Certificaat_inspecteur">
@@ -40,15 +40,15 @@
             <PropertyRef Name="Inspecteur" />
             <PropertyRef Name="Certificaat_ID" />
           </Key>
-          <Property Name="Inspecteur" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Certificaat_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Inspecteur" Type="int" Nullable="false" />
+          <Property Name="Certificaat_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Contactpersoon">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Klant_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Klant_ID" Type="int" Nullable="false" />
           <Property Name="Voornaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Tussenvoegsel" Type="nvarchar" MaxLength="50" />
           <Property Name="Achernaam" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -59,10 +59,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gebruikersnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Wachtwoord" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NAW" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAW" Type="int" Nullable="false" />
           <Property Name="Actief" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspecteurs_inspectie">
@@ -70,21 +70,21 @@
             <PropertyRef Name="Inspecteur_ID" />
             <PropertyRef Name="Inspectienummer" />
           </Key>
-          <Property Name="Inspecteur_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Inspectienummer" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Inspecteur_ID" Type="int" Nullable="false" />
+          <Property Name="Inspectienummer" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspectie">
           <Key>
             <PropertyRef Name="Inspectienummer" />
           </Key>
-          <Property Name="Inspectienummer" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Inspectienummer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" Nullable="false" />
-          <Property Name="Werknemer_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Klant_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Werknemer_ID" Type="int" Nullable="false" />
+          <Property Name="Klant_ID" Type="int" Nullable="false" />
           <Property Name="Titel" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Versie" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Locatie_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Locatie_ID" Type="int" Nullable="false" />
           <Property Name="Voltooid" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspectie_niet_ingevuld_vragenlijst">
@@ -92,17 +92,17 @@
             <PropertyRef Name="Inspectienummer" />
             <PropertyRef Name="Vragenlijst_ID" />
           </Key>
-          <Property Name="Inspectienummer" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Vragenlijst_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Inspectienummer" Type="int" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspectie_Rapportage">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Titel" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Text" Type="ntext" Nullable="false" />
-          <Property Name="Inspectienummer" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Inspectienummer" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspectie_Wel_Ingevuld_Vragenlijst">
           <Key>
@@ -110,15 +110,15 @@
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Inspecteur_ID" />
           </Key>
-          <Property Name="Inspectienummer" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Vragenlijst_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Inspecteur_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Inspectienummer" Type="int" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+          <Property Name="Inspecteur_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Kaartvraag">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Vraag" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FileBytes" Type="varbinary(max)" Nullable="false" />
           <Property Name="MimeType" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -128,33 +128,33 @@
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Kaartvraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Kaartvraag_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+          <Property Name="Kaartvraag_ID" Type="int" Nullable="false" />
           <Property Name="Filepath_Antwoord" Type="nvarchar(max)" />
           <Property Name="Opmerking" Type="ntext" />
-          <Property Name="Positie" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Positie" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Klant">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Bedrijfsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NAW" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAW" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Locatie">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Huisnummer" Type="nvarchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Vraag" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag_antwoord">
@@ -162,7 +162,7 @@
             <PropertyRef Name="Meerkeuzevraag_ID" />
             <PropertyRef Name="Antwoord" />
           </Key>
-          <Property Name="Meerkeuzevraag_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Meerkeuzevraag_ID" Type="int" Nullable="false" />
           <Property Name="Antwoord" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag_vragenlijst">
@@ -170,16 +170,16 @@
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Meerkeuzevraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Meerkeuzevraag_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+          <Property Name="Meerkeuzevraag_ID" Type="int" Nullable="false" />
           <Property Name="Antwoord" Type="nvarchar" MaxLength="50" />
-          <Property Name="Positie" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Positie" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="NAW_inspecteur">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Voornaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Tussenvoegsel" Type="nvarchar" MaxLength="50" />
           <Property Name="Achternaam" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -193,9 +193,9 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Huisnummer" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="KvkNummer" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -203,12 +203,12 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Voornaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Tussenvoegsel" Type="nvarchar" MaxLength="50" />
           <Property Name="Achternaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Huisnummer" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="GeboorteDatum" Type="date" Nullable="false" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -217,8 +217,8 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Verzoek_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Verzoek_ID" Type="int" Nullable="false" />
           <Property Name="Datum" Type="date" Nullable="false" />
           <Property Name="Bedrag" Type="decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="Tekst" Type="ntext" Nullable="false" />
@@ -227,7 +227,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Vraag" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Openvraag_vragenlijst">
@@ -235,10 +235,10 @@
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Openvraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Openvraag_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+          <Property Name="Openvraag_ID" Type="int" Nullable="false" />
           <Property Name="Antwoord" Type="nvarchar" MaxLength="50" />
-          <Property Name="Positie" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Positie" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Planning_werknemer">
           <Key>
@@ -246,7 +246,7 @@
             <PropertyRef Name="StartDate" />
             <PropertyRef Name="EndDate" />
           </Key>
-          <Property Name="Werknemer_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Werknemer_ID" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" Nullable="false" />
         </EntityType>
@@ -256,11 +256,21 @@
           </Key>
           <Property Name="Rol" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Tabelvraag">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Vraag" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VraagKop" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AntwoordKop" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -271,40 +281,47 @@
             <PropertyRef Name="Situatie" />
             <PropertyRef Name="Vragenlijst_ID" />
           </Key>
-          <Property Name="Tabelvraag_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Tabelvraag_ID" Type="int" Nullable="false" />
           <Property Name="Situatie" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Antwoord" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Vragenlijst_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
           <Key>
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Tabelvraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Tabelvraag_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Positie" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+          <Property Name="Tabelvraag_ID" Type="int" Nullable="false" />
+          <Property Name="Positie" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Telefoonnummer">
           <Key>
             <PropertyRef Name="Telefoonnummer" />
           </Key>
           <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NAW_Werknemer_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAW_Werknemer_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Telefoonnummer_inspecteur">
+          <Key>
+            <PropertyRef Name="Telefoonnummer" />
+          </Key>
+          <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NAW_Inspecteur_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Template">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="ntext" Nullable="false" />
         </EntityType>
         <EntityType Name="Verzoek">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Klant_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Klant_ID" Type="int" Nullable="false" />
           <Property Name="Verzoek_geaccepteerd" Type="bit" Nullable="false" />
           <Property Name="Aanvraag" Type="ntext" Nullable="false" />
         </EntityType>
@@ -312,10 +329,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Titel" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Versie" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Template_ID" Type="nchar" MaxLength="10" />
+          <Property Name="Template_ID" Type="int" />
           <Property Name="Opmerking" Type="ntext" />
           <Property Name="Is_Ingevuld" Type="bit" Nullable="false" />
         </EntityType>
@@ -324,8 +341,8 @@
             <PropertyRef Name="Bijlage_ID" />
             <PropertyRef Name="Vragenlijst_ID" />
           </Key>
-          <Property Name="Bijlage_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Vragenlijst_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Bijlage_ID" Type="int" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
           <Property Name="FileBytes" Type="varbinary(max)" />
           <Property Name="MimeType" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -333,11 +350,11 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Rol" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Wachtwoord" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NAW" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAW" Type="int" Nullable="false" />
           <Property Name="Actief" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Werknemers_inspectie">
@@ -345,8 +362,8 @@
             <PropertyRef Name="Werknemer_ID" />
             <PropertyRef Name="Inspectienummer" />
           </Key>
-          <Property Name="Werknemer_ID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Inspectienummer" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Werknemer_ID" Type="int" Nullable="false" />
+          <Property Name="Inspectienummer" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -714,6 +731,18 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Telefoonnummer_NAW_inspecteur">
+          <End Role="NAW_inspecteur" Type="Self.NAW_inspecteur" Multiplicity="1" />
+          <End Role="Telefoonnummer_inspecteur" Type="Self.Telefoonnummer_inspecteur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NAW_inspecteur">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Telefoonnummer_inspecteur">
+              <PropertyRef Name="NAW_Inspecteur_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Telefoonnummer_NAW_werknemer">
           <End Role="NAW_werknemer" Type="Self.NAW_werknemer" Multiplicity="1" />
           <End Role="Telefoonnummer" Type="Self.Telefoonnummer" Multiplicity="*" />
@@ -850,10 +879,12 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <EntitySet Name="Openvraag_vragenlijst" EntityType="Self.Openvraag_vragenlijst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Planning_werknemer" EntityType="Self.Planning_werknemer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol_werknemer" EntityType="Self.Rol_werknemer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Telefoonnummer" EntityType="Self.Telefoonnummer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Telefoonnummer_inspecteur" EntityType="Self.Telefoonnummer_inspecteur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Verzoek" EntityType="Self.Verzoek" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vragenlijst" EntityType="Self.Vragenlijst" Schema="dbo" store:Type="Tables" />
@@ -986,6 +1017,10 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <End Role="Vragenlijst" EntitySet="Vragenlijst" />
             <End Role="Tabelvraag_vragenlijst" EntitySet="Tabelvraag_vragenlijst" />
           </AssociationSet>
+          <AssociationSet Name="FK_Telefoonnummer_NAW_inspecteur" Association="Self.FK_Telefoonnummer_NAW_inspecteur">
+            <End Role="NAW_inspecteur" EntitySet="NAW_inspecteur" />
+            <End Role="Telefoonnummer_inspecteur" EntitySet="Telefoonnummer_inspecteur" />
+          </AssociationSet>
           <AssociationSet Name="FK_Telefoonnummer_NAW_werknemer" Association="Self.FK_Telefoonnummer_NAW_werknemer">
             <End Role="NAW_werknemer" EntitySet="NAW_werknemer" />
             <End Role="Telefoonnummer" EntitySet="Telefoonnummer" />
@@ -1032,17 +1067,17 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Datum" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Contactpersoon_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Contactpersoon_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contactpersoon" Relationship="Self.FK_Afspraak_Contactpersoon" FromRole="Afspraak" ToRole="Contactpersoon" />
         </EntityType>
         <EntityType Name="Beschikbaarheid">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Inspecteur_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Inspecteur_ID" Type="Int32" Nullable="false" />
           <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Inspecteur" Relationship="Self.FK_Beschikbaarheid_Inspecteur" FromRole="Beschikbaarheid" ToRole="Inspecteur" />
         </EntityType>
@@ -1050,7 +1085,7 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Vragenlijst_bijlage" Relationship="Self.FK_Vragenlijst_bijlage_Bijlagevraag" FromRole="Bijlagevraag" ToRole="Vragenlijst_bijlage" />
         </EntityType>
@@ -1058,7 +1093,7 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inspecteur" Relationship="Self.Certificaat_inspecteur" FromRole="Certificaat" ToRole="Inspecteur" />
         </EntityType>
@@ -1066,8 +1101,8 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Klant_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Klant_ID" Type="Int32" Nullable="false" />
           <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Tussenvoegsel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Achernaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1080,10 +1115,10 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Gebruikersnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Wachtwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NAW" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NAW" Type="Int32" Nullable="false" />
           <Property Name="Actief" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Beschikbaarheid" Relationship="Self.FK_Beschikbaarheid_Inspecteur" FromRole="Inspecteur" ToRole="Beschikbaarheid" />
           <NavigationProperty Name="NAW_inspecteur" Relationship="Self.FK_Inspecteur_NAW_inspecteur" FromRole="Inspecteur" ToRole="NAW_inspecteur" />
@@ -1095,14 +1130,14 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="Inspectienummer" />
           </Key>
-          <Property Name="Inspectienummer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Inspectienummer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Werknemer_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Klant_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Werknemer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Klant_ID" Type="Int32" Nullable="false" />
           <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Versie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Locatie_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Locatie_ID" Type="Int32" Nullable="false" />
           <Property Name="Voltooid" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Klant" Relationship="Self.FK_Inspectie_Klant" FromRole="Inspectie" ToRole="Klant" />
           <NavigationProperty Name="Locatie" Relationship="Self.FK_Inspectie_Locatie" FromRole="Inspectie" ToRole="Locatie" />
@@ -1116,10 +1151,10 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Inspectienummer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Inspectienummer" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Rapportage_Inspectie" FromRole="Inspectie_Rapportage" ToRole="Inspectie" />
         </EntityType>
         <EntityType Name="Inspectie_Wel_Ingevuld_Vragenlijst">
@@ -1128,9 +1163,9 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Inspecteur_ID" />
           </Key>
-          <Property Name="Inspectienummer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Vragenlijst_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Inspecteur_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Inspectienummer" Type="Int32" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
+          <Property Name="Inspecteur_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Inspecteur" Relationship="Self.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Inspecteur" FromRole="Inspectie_Wel_Ingevuld_Vragenlijst" ToRole="Inspecteur" />
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Inspectie" FromRole="Inspectie_Wel_Ingevuld_Vragenlijst" ToRole="Inspectie" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Vragenlijst" FromRole="Inspectie_Wel_Ingevuld_Vragenlijst" ToRole="Vragenlijst" />
@@ -1139,7 +1174,7 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FileBytes" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="MimeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1150,11 +1185,11 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Kaartvraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Kaartvraag_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
+          <Property Name="Kaartvraag_ID" Type="Int32" Nullable="false" />
           <Property Name="Filepath_Antwoord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Opmerking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Positie" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Positie" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Kaartvraag" Relationship="Self.FK_Kaartvraag_vragenlijst_Kaartvraag" FromRole="Kaartvraag_vragenlijst" ToRole="Kaartvraag" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Kaartvraag_vragenlijst_Vragenlijst" FromRole="Kaartvraag_vragenlijst" ToRole="Vragenlijst" />
         </EntityType>
@@ -1162,9 +1197,9 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bedrijfsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NAW" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NAW" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contactpersoon" Relationship="Self.FK_Contactpersoon_Klant" FromRole="Klant" ToRole="Contactpersoon" />
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Klant" FromRole="Klant" ToRole="Inspectie" />
           <NavigationProperty Name="NAW_Klant" Relationship="Self.FK_Klant_NAW_Klant" FromRole="Klant" ToRole="NAW_Klant" />
@@ -1174,16 +1209,16 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Huisnummer" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Locatie" FromRole="Locatie" ToRole="Inspectie" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Meerkeuzevraag_antwoord" Relationship="Self.FK_Meerkeuzevraag_antwoord_Meerkeuzevraag" FromRole="Meerkeuzevraag" ToRole="Meerkeuzevraag_antwoord" />
           <NavigationProperty Name="Meerkeuzevraag_vragenlijst" Relationship="Self.FK_Meerkeuzevraag_vragenlijst_Meerkeuzevraag" FromRole="Meerkeuzevraag" ToRole="Meerkeuzevraag_vragenlijst" />
@@ -1193,7 +1228,7 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="Meerkeuzevraag_ID" />
             <PropertyRef Name="Antwoord" />
           </Key>
-          <Property Name="Meerkeuzevraag_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Meerkeuzevraag_ID" Type="Int32" Nullable="false" />
           <Property Name="Antwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Meerkeuzevraag" Relationship="Self.FK_Meerkeuzevraag_antwoord_Meerkeuzevraag" FromRole="Meerkeuzevraag_antwoord" ToRole="Meerkeuzevraag" />
         </EntityType>
@@ -1202,10 +1237,10 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Meerkeuzevraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Meerkeuzevraag_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
+          <Property Name="Meerkeuzevraag_ID" Type="Int32" Nullable="false" />
           <Property Name="Antwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Positie" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Positie" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Meerkeuzevraag" Relationship="Self.FK_Meerkeuzevraag_vragenlijst_Meerkeuzevraag" FromRole="Meerkeuzevraag_vragenlijst" ToRole="Meerkeuzevraag" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Meerkeuzevraag_vragenlijst_Vragenlijst" FromRole="Meerkeuzevraag_vragenlijst" ToRole="Vragenlijst" />
         </EntityType>
@@ -1213,7 +1248,7 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Tussenvoegsel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1223,14 +1258,15 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inspecteur" Relationship="Self.FK_Inspecteur_NAW_inspecteur" FromRole="NAW_inspecteur" ToRole="Inspecteur" />
+          <NavigationProperty Name="Telefoonnummer_inspecteur" Relationship="Self.FK_Telefoonnummer_NAW_inspecteur" FromRole="NAW_inspecteur" ToRole="Telefoonnummer_inspecteur" />
         </EntityType>
         <EntityType Name="NAW_Klant">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Huisnummer" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="KvkNummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Klant" Relationship="Self.FK_Klant_NAW_Klant" FromRole="NAW_Klant" ToRole="Klant" />
@@ -1239,12 +1275,12 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Tussenvoegsel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Huisnummer" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GeboorteDatum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1255,8 +1291,8 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Verzoek_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Verzoek_ID" Type="Int32" Nullable="false" />
           <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Bedrag" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="Tekst" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1266,7 +1302,7 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Openvraag_vragenlijst" Relationship="Self.FK_Openvraag_vragenlijst_Openvraag" FromRole="Openvraag" ToRole="Openvraag_vragenlijst" />
         </EntityType>
@@ -1275,10 +1311,10 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Openvraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Openvraag_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
+          <Property Name="Openvraag_ID" Type="Int32" Nullable="false" />
           <Property Name="Antwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Positie" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Positie" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Openvraag" Relationship="Self.FK_Openvraag_vragenlijst_Openvraag" FromRole="Openvraag_vragenlijst" ToRole="Openvraag" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Openvraag_vragenlijst_Vragenlijst" FromRole="Openvraag_vragenlijst" ToRole="Vragenlijst" />
         </EntityType>
@@ -1288,7 +1324,7 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="StartDate" />
             <PropertyRef Name="EndDate" />
           </Key>
-          <Property Name="Werknemer_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Werknemer_ID" Type="Int32" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Werknemer" Relationship="Self.FK_Planning_werknemer_Werknemer" FromRole="Planning_werknemer" ToRole="Werknemer" />
@@ -1300,11 +1336,21 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Werknemer" Relationship="Self.FK_Werknemer_Rol_werknemer" FromRole="Rol_werknemer" ToRole="Werknemer" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Tabelvraag">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VraagKop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AntwoordKop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1317,10 +1363,10 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="Situatie" />
             <PropertyRef Name="Vragenlijst_ID" />
           </Key>
-          <Property Name="Tabelvraag_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Tabelvraag_ID" Type="Int32" Nullable="false" />
           <Property Name="Situatie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Antwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Vragenlijst_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tabelvraag" Relationship="Self.FK_Tabelvraag_antwoord_Tabelvraag" FromRole="Tabelvraag_antwoord" ToRole="Tabelvraag" />
         </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
@@ -1328,9 +1374,9 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Tabelvraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Tabelvraag_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Positie" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
+          <Property Name="Tabelvraag_ID" Type="Int32" Nullable="false" />
+          <Property Name="Positie" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tabelvraag" Relationship="Self.FK_Tabelvraag_vragenlijst_Tabelvraag" FromRole="Tabelvraag_vragenlijst" ToRole="Tabelvraag" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Tabelvraag_vragenlijst_Vragenlijst" FromRole="Tabelvraag_vragenlijst" ToRole="Vragenlijst" />
         </EntityType>
@@ -1339,14 +1385,22 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="Telefoonnummer1" />
           </Key>
           <Property Name="Telefoonnummer1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NAW_Werknemer_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NAW_Werknemer_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="NAW_werknemer" Relationship="Self.FK_Telefoonnummer_NAW_werknemer" FromRole="Telefoonnummer" ToRole="NAW_werknemer" />
+        </EntityType>
+        <EntityType Name="Telefoonnummer_inspecteur">
+          <Key>
+            <PropertyRef Name="Telefoonnummer" />
+          </Key>
+          <Property Name="Telefoonnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NAW_Inspecteur_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NAW_inspecteur" Relationship="Self.FK_Telefoonnummer_NAW_inspecteur" FromRole="Telefoonnummer_inspecteur" ToRole="NAW_inspecteur" />
         </EntityType>
         <EntityType Name="Template">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Vragenlijst_Template" FromRole="Template" ToRole="Vragenlijst" />
         </EntityType>
@@ -1354,8 +1408,8 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Klant_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Klant_ID" Type="Int32" Nullable="false" />
           <Property Name="Verzoek_geaccepteerd" Type="Boolean" Nullable="false" />
           <Property Name="Aanvraag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Klant" Relationship="Self.FK_Verzoek_Klant" FromRole="Verzoek" ToRole="Klant" />
@@ -1365,10 +1419,10 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Versie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Template_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Template_ID" Type="Int32" />
           <Property Name="Opmerking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Is_Ingevuld" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Inspectie_Wel_Ingevuld_Vragenlijst" Relationship="Self.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Vragenlijst" FromRole="Vragenlijst" ToRole="Inspectie_Wel_Ingevuld_Vragenlijst" />
@@ -1385,8 +1439,8 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             <PropertyRef Name="Bijlage_ID" />
             <PropertyRef Name="Vragenlijst_ID" />
           </Key>
-          <Property Name="Bijlage_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Vragenlijst_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Bijlage_ID" Type="Int32" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <Property Name="FileBytes" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="MimeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bijlagevraag" Relationship="Self.FK_Vragenlijst_bijlage_Bijlagevraag" FromRole="Vragenlijst_bijlage" ToRole="Bijlagevraag" />
@@ -1396,11 +1450,11 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Wachtwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NAW" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NAW" Type="Int32" Nullable="false" />
           <Property Name="Actief" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="NAW_werknemer" Relationship="Self.FK_Werknemer_NAW_werknemer" FromRole="Werknemer" ToRole="NAW_werknemer" />
           <NavigationProperty Name="Planning_werknemer" Relationship="Self.FK_Planning_werknemer_Werknemer" FromRole="Werknemer" ToRole="Planning_werknemer" />
@@ -1639,6 +1693,18 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Telefoonnummer_NAW_inspecteur">
+          <End Role="NAW_inspecteur" Type="Self.NAW_inspecteur" Multiplicity="1" />
+          <End Role="Telefoonnummer_inspecteur" Type="Self.Telefoonnummer_inspecteur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NAW_inspecteur">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Telefoonnummer_inspecteur">
+              <PropertyRef Name="NAW_Inspecteur_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Telefoonnummer_NAW_werknemer">
           <End Role="NAW_werknemer" Type="Self.NAW_werknemer" Multiplicity="1" />
           <End Role="Telefoonnummer" Type="Self.Telefoonnummer" Multiplicity="*" />
@@ -1824,10 +1890,12 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <EntitySet Name="Openvraag_vragenlijst" EntityType="Self.Openvraag_vragenlijst" />
           <EntitySet Name="Planning_werknemer" EntityType="Self.Planning_werknemer" />
           <EntitySet Name="Rol_werknemer" EntityType="Self.Rol_werknemer" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" />
           <EntitySet Name="Telefoonnummer" EntityType="Self.Telefoonnummer" />
+          <EntitySet Name="Telefoonnummer_inspecteur" EntityType="Self.Telefoonnummer_inspecteur" />
           <EntitySet Name="Template" EntityType="Self.Template" />
           <EntitySet Name="Verzoek" EntityType="Self.Verzoek" />
           <EntitySet Name="Vragenlijst" EntityType="Self.Vragenlijst" />
@@ -1905,6 +1973,10 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <AssociationSet Name="FK_Meerkeuzevraag_vragenlijst_Vragenlijst" Association="Self.FK_Meerkeuzevraag_vragenlijst_Vragenlijst">
             <End Role="Vragenlijst" EntitySet="Vragenlijst" />
             <End Role="Meerkeuzevraag_vragenlijst" EntitySet="Meerkeuzevraag_vragenlijst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telefoonnummer_NAW_inspecteur" Association="Self.FK_Telefoonnummer_NAW_inspecteur">
+            <End Role="NAW_inspecteur" EntitySet="NAW_inspecteur" />
+            <End Role="Telefoonnummer_inspecteur" EntitySet="Telefoonnummer_inspecteur" />
           </AssociationSet>
           <AssociationSet Name="FK_Telefoonnummer_NAW_werknemer" Association="Self.FK_Telefoonnummer_NAW_werknemer">
             <End Role="NAW_werknemer" EntitySet="NAW_werknemer" />
@@ -2220,6 +2292,17 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FestiSpecModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tabelvraag">
             <EntityTypeMapping TypeName="FestiSpecModel.Tabelvraag">
               <MappingFragment StoreEntitySet="Tabelvraag">
@@ -2254,6 +2337,14 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
               <MappingFragment StoreEntitySet="Telefoonnummer">
                 <ScalarProperty Name="Telefoonnummer1" ColumnName="Telefoonnummer" />
                 <ScalarProperty Name="NAW_Werknemer_ID" ColumnName="NAW_Werknemer_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telefoonnummer_inspecteur">
+            <EntityTypeMapping TypeName="FestiSpecModel.Telefoonnummer_inspecteur">
+              <MappingFragment StoreEntitySet="Telefoonnummer_inspecteur">
+                <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
+                <ScalarProperty Name="NAW_Inspecteur_ID" ColumnName="NAW_Inspecteur_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

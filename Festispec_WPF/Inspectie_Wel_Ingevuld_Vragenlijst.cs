@@ -14,9 +14,9 @@ namespace Festispec_WPF
     
     public partial class Inspectie_Wel_Ingevuld_Vragenlijst
     {
-        public string Inspectienummer { get; set; }
-        public string Vragenlijst_ID { get; set; }
-        public string Inspecteur_ID { get; set; }
+        public int Inspectienummer { get; set; }
+        public int Vragenlijst_ID { get; set; }
+        public int Inspecteur_ID { get; set; }
     
         public virtual Inspecteur Inspecteur { get; set; }
         public virtual Inspectie Inspectie { get; set; }

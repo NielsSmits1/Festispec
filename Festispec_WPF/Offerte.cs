@@ -14,8 +14,8 @@ namespace Festispec_WPF
     
     public partial class Offerte
     {
-        public string ID { get; set; }
-        public string Verzoek_ID { get; set; }
+        public int ID { get; set; }
+        public int Verzoek_ID { get; set; }
         public System.DateTime Datum { get; set; }
         public decimal Bedrag { get; set; }
         public string Tekst { get; set; }

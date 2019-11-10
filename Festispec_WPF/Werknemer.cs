@@ -21,11 +21,11 @@ namespace Festispec_WPF
             this.Inspectie = new HashSet<Inspectie>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Rol { get; set; }
         public string Username { get; set; }
         public string Wachtwoord { get; set; }
-        public string NAW { get; set; }
+        public int NAW { get; set; }
         public bool Actief { get; set; }
     
         public virtual NAW_werknemer NAW_werknemer { get; set; }

@@ -21,7 +21,7 @@ namespace Festispec_WPF
             this.Meerkeuzevraag_vragenlijst = new HashSet<Meerkeuzevraag_vragenlijst>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Vraag { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

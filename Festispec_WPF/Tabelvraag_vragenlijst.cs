@@ -14,9 +14,9 @@ namespace Festispec_WPF
     
     public partial class Tabelvraag_vragenlijst
     {
-        public string Vragenlijst_ID { get; set; }
-        public string Tabelvraag_ID { get; set; }
-        public string Positie { get; set; }
+        public int Vragenlijst_ID { get; set; }
+        public int Tabelvraag_ID { get; set; }
+        public int Positie { get; set; }
     
         public virtual Tabelvraag Tabelvraag { get; set; }
         public virtual Vragenlijst Vragenlijst { get; set; }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920">
+        Title="MainWindow" Height="1080" Width="1920"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
     <!--WindowState="Maximized" WindowStyle="None"-->
     <Grid>
         <Grid.ColumnDefinitions>
@@ -71,7 +72,7 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Column="8" Background="AliceBlue">
+        <StackPanel Grid.Column="8" Background="AliceBlue" DataContext="{Binding Inspector, Source={StaticResource Locator}}">
             <Label Content="Nieuwe inspecteur aanmaken" FontSize="30" Foreground="Black"></Label>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -88,11 +89,11 @@
                 <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <!--NAME-->
                 <Label Content="Voornaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" ></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding FirstName, Mode=OneWayToSource}"></TextBox>
                 <Label Content="Tussenvoegsel" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2"></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding InBetween, Mode=OneWayToSource}"></TextBox>
                 <Label Content="Achternaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3"></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding LastName, Mode=OneWayToSource}"></TextBox>
                 <!--END NAME-->
             </Grid>
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -110,10 +111,10 @@
                 </Grid.RowDefinitions>
                 <Label Content="Woonplaats:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Postcode" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                <TextBox Width="150" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1"></TextBox>
+                <TextBox Width="150" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding ZipCode, Mode=OneWayToSource}"></TextBox>
 
                 <Label Content="Huisnummer" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2"></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding HomeNumber, Mode=OneWayToSource}"></TextBox>
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -129,7 +130,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="Geboortedatum:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <DatePicker Grid.Row="1" Grid.Column="1"/>
+                <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding DateOfBirth, Mode=OneWayToSource}"/>
             </Grid>
             <Border BorderThickness="1" BorderBrush="Black"></Border>
 
@@ -145,7 +146,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="Financiële gegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="IBAN" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2"></TextBox>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding IBAN, Mode=OneWayToSource}"></TextBox>
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -163,8 +164,9 @@
                 </Grid.RowDefinitions>
                 <Label Content="Contactgegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Emailadres" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1"></TextBox>
+                <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding Email, Mode=OneWayToSource}"></TextBox>
                 <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="2" ></Label>
+                <!-- New binding required-->
                 <TextBox Width="200" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2"></TextBox>
             </Grid>
 
@@ -199,6 +201,27 @@
                 </ListBox>
             </Grid>
 
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Inloggegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Gebruikersnaam" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <Label Content="Wachtwoord" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="Username" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding UserName, Mode=OneWayToSource}"></TextBox>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="Password" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding Password, Mode=OneWayToSource}"></TextBox>
+            </Grid>
+            <Button Content="Inspecteur toevoegen" Command="{Binding AddInspectorCommand}"></Button>
         </StackPanel>
 
         <StackPanel Grid.Column="10" Background="AliceBlue">

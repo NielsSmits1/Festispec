@@ -20,8 +20,8 @@ namespace Festispec_WPF
             this.Afspraak = new HashSet<Afspraak>();
         }
     
-        public string ID { get; set; }
-        public string Klant_ID { get; set; }
+        public int ID { get; set; }
+        public int Klant_ID { get; set; }
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }
         public string Achernaam { get; set; }

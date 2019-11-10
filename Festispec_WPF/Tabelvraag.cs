@@ -21,7 +21,7 @@ namespace Festispec_WPF
             this.Tabelvraag_vragenlijst = new HashSet<Tabelvraag_vragenlijst>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Vraag { get; set; }
         public string VraagKop { get; set; }
         public string AntwoordKop { get; set; }

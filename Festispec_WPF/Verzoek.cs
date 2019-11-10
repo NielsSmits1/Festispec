@@ -20,8 +20,8 @@ namespace Festispec_WPF
             this.Offerte = new HashSet<Offerte>();
         }
     
-        public string ID { get; set; }
-        public string Klant_ID { get; set; }
+        public int ID { get; set; }
+        public int Klant_ID { get; set; }
         public bool Verzoek_geaccepteerd { get; set; }
         public string Aanvraag { get; set; }
     

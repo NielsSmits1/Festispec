@@ -20,7 +20,7 @@ namespace Festispec_WPF
             this.Inspecteur = new HashSet<Inspecteur>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

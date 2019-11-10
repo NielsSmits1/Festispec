@@ -14,10 +14,10 @@ namespace Festispec_WPF
     
     public partial class Tabelvraag_antwoord
     {
-        public string Tabelvraag_ID { get; set; }
+        public int Tabelvraag_ID { get; set; }
         public string Situatie { get; set; }
         public string Antwoord { get; set; }
-        public string Vragenlijst_ID { get; set; }
+        public int Vragenlijst_ID { get; set; }
     
         public virtual Tabelvraag Tabelvraag { get; set; }
     }

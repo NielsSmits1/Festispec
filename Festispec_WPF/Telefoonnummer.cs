@@ -15,7 +15,7 @@ namespace Festispec_WPF
     public partial class Telefoonnummer
     {
         public string Telefoonnummer1 { get; set; }
-        public string NAW_Werknemer_ID { get; set; }
+        public int NAW_Werknemer_ID { get; set; }
     
         public virtual NAW_werknemer NAW_werknemer { get; set; }
     }

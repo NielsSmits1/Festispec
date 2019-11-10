@@ -21,7 +21,7 @@ namespace Festispec_WPF
             this.Werknemer = new HashSet<Werknemer>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }
         public string Achternaam { get; set; }

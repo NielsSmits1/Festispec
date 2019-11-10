@@ -14,9 +14,9 @@ namespace Festispec_WPF
     
     public partial class Afspraak
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public System.DateTime Datum { get; set; }
-        public string Contactpersoon_ID { get; set; }
+        public int Contactpersoon_ID { get; set; }
     
         public virtual Contactpersoon Contactpersoon { get; set; }
     }

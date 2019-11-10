@@ -26,10 +26,10 @@ namespace Festispec_WPF
             this.Inspectie = new HashSet<Inspectie>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Titel { get; set; }
         public string Versie { get; set; }
-        public string Template_ID { get; set; }
+        public Nullable<int> Template_ID { get; set; }
         public string Opmerking { get; set; }
         public bool Is_Ingevuld { get; set; }
     

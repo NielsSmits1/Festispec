@@ -14,7 +14,7 @@ namespace Festispec_WPF
     
     public partial class Planning_werknemer
     {
-        public string Werknemer_ID { get; set; }
+        public int Werknemer_ID { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
     

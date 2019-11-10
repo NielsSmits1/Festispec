@@ -23,10 +23,10 @@ namespace Festispec_WPF
             this.Inspectie = new HashSet<Inspectie>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Gebruikersnaam { get; set; }
         public string Wachtwoord { get; set; }
-        public string NAW { get; set; }
+        public int NAW { get; set; }
         public bool Actief { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

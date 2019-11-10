@@ -14,10 +14,10 @@ namespace Festispec_WPF
     
     public partial class Meerkeuzevraag_vragenlijst
     {
-        public string Vragenlijst_ID { get; set; }
-        public string Meerkeuzevraag_ID { get; set; }
+        public int Vragenlijst_ID { get; set; }
+        public int Meerkeuzevraag_ID { get; set; }
         public string Antwoord { get; set; }
-        public string Positie { get; set; }
+        public int Positie { get; set; }
     
         public virtual Meerkeuzevraag Meerkeuzevraag { get; set; }
         public virtual Vragenlijst Vragenlijst { get; set; }

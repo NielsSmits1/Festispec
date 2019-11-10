@@ -20,7 +20,7 @@ namespace Festispec_WPF
             this.Klant = new HashSet<Klant>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Postcode { get; set; }
         public string Huisnummer { get; set; }
         public string KvkNummer { get; set; }

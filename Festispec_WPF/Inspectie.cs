@@ -24,14 +24,14 @@ namespace Festispec_WPF
             this.Werknemer = new HashSet<Werknemer>();
         }
     
-        public string Inspectienummer { get; set; }
+        public int Inspectienummer { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
-        public string Werknemer_ID { get; set; }
-        public string Klant_ID { get; set; }
+        public int Werknemer_ID { get; set; }
+        public int Klant_ID { get; set; }
         public string Titel { get; set; }
         public string Versie { get; set; }
-        public string Locatie_ID { get; set; }
+        public int Locatie_ID { get; set; }
         public bool Voltooid { get; set; }
     
         public virtual Klant Klant { get; set; }

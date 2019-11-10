@@ -14,10 +14,10 @@ namespace Festispec_WPF
     
     public partial class Openvraag_vragenlijst
     {
-        public string Vragenlijst_ID { get; set; }
-        public string Openvraag_ID { get; set; }
+        public int Vragenlijst_ID { get; set; }
+        public int Openvraag_ID { get; set; }
         public string Antwoord { get; set; }
-        public string Positie { get; set; }
+        public int Positie { get; set; }
     
         public virtual Openvraag Openvraag { get; set; }
         public virtual Vragenlijst Vragenlijst { get; set; }

@@ -14,10 +14,10 @@ namespace Festispec_WPF
     
     public partial class Inspectie_Rapportage
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Titel { get; set; }
         public string Text { get; set; }
-        public string Inspectienummer { get; set; }
+        public int Inspectienummer { get; set; }
     
         public virtual Inspectie Inspectie { get; set; }
     }

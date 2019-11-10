@@ -14,8 +14,8 @@ namespace Festispec_WPF
     
     public partial class Beschikbaarheid
     {
-        public string ID { get; set; }
-        public string Inspecteur_ID { get; set; }
+        public int ID { get; set; }
+        public int Inspecteur_ID { get; set; }
         public System.DateTime Datum { get; set; }
     
         public virtual Inspecteur Inspecteur { get; set; }

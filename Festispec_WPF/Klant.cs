@@ -22,9 +22,9 @@ namespace Festispec_WPF
             this.Verzoek = new HashSet<Verzoek>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Bedrijfsnaam { get; set; }
-        public string NAW { get; set; }
+        public int NAW { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contactpersoon> Contactpersoon { get; set; }

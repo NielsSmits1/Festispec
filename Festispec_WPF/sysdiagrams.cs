@@ -12,15 +12,12 @@ namespace Festispec_WPF
     using System;
     using System.Collections.Generic;
     
-    public partial class Kaartvraag_vragenlijst
+    public partial class sysdiagrams
     {
-        public int Vragenlijst_ID { get; set; }
-        public int Kaartvraag_ID { get; set; }
-        public string Filepath_Antwoord { get; set; }
-        public string Opmerking { get; set; }
-        public int Positie { get; set; }
-    
-        public virtual Kaartvraag Kaartvraag { get; set; }
-        public virtual Vragenlijst Vragenlijst { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
