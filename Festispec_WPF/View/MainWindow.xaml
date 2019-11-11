@@ -16,10 +16,10 @@
 
             <!-- Login fields-->
             <TextBlock Text="Username" Padding="0 5"/>
-            <TextBox Padding="0 5" />
+            <TextBox Text="{Binding Username}" Padding="0 5" />
 
             <TextBlock Text="Password" Padding="0 5" />
-            <TextBox Padding="0 5" Margin="0 0 0 20"/>
+            <TextBox Text="{Binding Password}" Padding="0 5" Margin="0 0 0 20"/>
 
             <!-- Button layouts -->
             <Grid>
