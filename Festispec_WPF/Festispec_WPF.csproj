@@ -202,6 +202,7 @@
     </Compile>
     <Compile Include="ViewModel\CertificateVM.cs" />
     <Compile Include="ViewModel\InspectorVM.cs" />
+    <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Model\Vragenlijst.cs">
