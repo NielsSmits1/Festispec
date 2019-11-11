@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Festispec_WPF.Model;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Festispec_WPF.ViewModel
         {
             _nawInspecteur = new NAW_inspecteur();
             _inspecteur = new Inspecteur();
+            _phonenumber = new Telefoonnummer_inspecteur();
             AddInspectorCommand = new RelayCommand(AddInspector);
         }
 
@@ -35,6 +37,8 @@ namespace Festispec_WPF.ViewModel
 
         //Inspector in system
         private Inspecteur _inspecteur;
+
+        private Telefoonnummer_inspecteur _phonenumber;
 
         public int NAWInspector_ID
         {
@@ -128,49 +132,5 @@ namespace Festispec_WPF.ViewModel
             set { _inspecteur.Actief = value; RaisePropertyChanged("Active"); }
         }
 
-    }
-
-        public string Voornaam
-        {
-            get { return _inspecteur.Voornaam; }
-            set { _inspecteur.Voornaam = value; RaisePropertyChanged("Voornaam"); }
-        }
-
-        public string Tussenvoegsel
-        {
-            get { return _inspecteur.Tussenvoegsel; }
-            set { _inspecteur.Tussenvoegsel = value; RaisePropertyChanged("Tussenvoegsel"); }
-        }
-
-        public string Achternaam
-        {
-            get { return _inspecteur.Achternaam; }
-            set { _inspecteur.Achternaam = value; RaisePropertyChanged("Achternaam"); }
-        }
-        public string Postcode
-        {
-            get { return _inspecteur.Postcode; }
-            set { _inspecteur.Postcode = value; RaisePropertyChanged("Postcode"); }
-        }
-        public string Huisnummer
-        {
-            get { return _inspecteur.Huisnummer; }
-            set { _inspecteur.Huisnummer = value; RaisePropertyChanged("Huisnummer"); }
-        }
-        public DateTime Geboortedatum
-        {
-            get { return _inspecteur.Geboortedatum; }
-            set { _inspecteur.Geboortedatum = value; RaisePropertyChanged("Geboortedatum"); }
-        }
-        public string IBAN
-        {
-            get { return _inspecteur.IBAN; }
-            set { _inspecteur.IBAN = value; RaisePropertyChanged("IBAN"); }
-        }
-        public string Email
-        {
-            get { return _inspecteur.Email; }
-            set { _inspecteur.Email = value; RaisePropertyChanged("Email"); }
-        }
     }
 }

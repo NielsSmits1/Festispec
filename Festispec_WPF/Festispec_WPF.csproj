@@ -82,137 +82,138 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Afspraak.cs">
+    <Compile Include="Model\Afspraak.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Beschikbaarheid.cs">
+    <Compile Include="Model\Beschikbaarheid.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Bijlagevraag.cs">
+    <Compile Include="Model\Bijlagevraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Certificaat.cs">
+    <Compile Include="Model\Certificaat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Contactpersoon.cs">
+    <Compile Include="Model\Contactpersoon.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="database_firewall_rules.cs">
+    <Compile Include="Model\database_firewall_rules.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Inspecteur.cs">
+    <Compile Include="Model\Inspecteur.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Inspectie.cs">
+    <Compile Include="Model\Inspectie.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Inspectie_Rapportage.cs">
+    <Compile Include="Model\Inspectie_Rapportage.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Inspectie_Wel_Ingevuld_Vragenlijst.cs">
+    <Compile Include="Model\Inspectie_Wel_Ingevuld_Vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Kaartvraag.cs">
+    <Compile Include="Model\Kaartvraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Kaartvraag_vragenlijst.cs">
+    <Compile Include="Model\Kaartvraag_vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Klant.cs">
+    <Compile Include="Model\Klant.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Locatie.cs">
+    <Compile Include="Model\Locatie.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Meerkeuzevraag.cs">
+    <Compile Include="Model\Meerkeuzevraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Meerkeuzevraag_antwoord.cs">
+    <Compile Include="Model\Meerkeuzevraag_antwoord.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Meerkeuzevraag_vragenlijst.cs">
+    <Compile Include="Model\Meerkeuzevraag_vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Context.cs">
+    <Compile Include="Model\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.cs" />
-    <Compile Include="Model1.Designer.cs">
+    <Compile Include="Model\Model1.cs" />
+    <Compile Include="Model\Model1.Designer.cs">
       <DependentUpon>Model1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model11.cs">
+    <Compile Include="Model\Model11.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model11.Designer.cs">
+    <Compile Include="Model\Model11.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="NAW_inspecteur.cs">
+    <Compile Include="Model\NAW_inspecteur.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="NAW_Klant.cs">
+    <Compile Include="Model\NAW_Klant.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="NAW_werknemer.cs">
+    <Compile Include="Model\NAW_werknemer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Offerte.cs">
+    <Compile Include="Model\Offerte.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Openvraag.cs">
+    <Compile Include="Model\Openvraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Openvraag_vragenlijst.cs">
+    <Compile Include="Model\Openvraag_vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Planning_werknemer.cs">
+    <Compile Include="Model\Planning_werknemer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Rol_werknemer.cs">
+    <Compile Include="Model\Rol_werknemer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
+    <Compile Include="Model\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Tabelvraag.cs">
+    <Compile Include="Model\Tabelvraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Tabelvraag_antwoord.cs">
+    <Compile Include="Model\Tabelvraag_antwoord.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Tabelvraag_vragenlijst.cs">
+    <Compile Include="Model\Tabelvraag_vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Telefoonnummer.cs">
+    <Compile Include="Model\Telefoonnummer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Telefoonnummer_inspecteur.cs">
+    <Compile Include="Model\Telefoonnummer_inspecteur.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Template.cs">
+    <Compile Include="Model\Template.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Verzoek.cs">
+    <Compile Include="Model\Verzoek.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CertificateVM.cs" />
     <Compile Include="ViewModel\InspectorVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Vragenlijst.cs">
+    <Compile Include="Model\Vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Vragenlijst_bijlage.cs">
+    <Compile Include="Model\Vragenlijst_bijlage.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Werknemer.cs">
+    <Compile Include="Model\Werknemer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="View\InspectorCrudWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -220,8 +221,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\InspectorCrudWindow.xaml.cs">
+      <DependentUpon>InspectorCrudWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -243,11 +244,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model1.edmx">
+    <EntityDeploy Include="Model\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model11.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model1.edmx.diagram">
+    <None Include="Model\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -259,18 +260,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model1.Context.tt">
+    <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model1.tt">
+    <Content Include="Model\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model11.cs</LastGenOutput>
     </Content>
