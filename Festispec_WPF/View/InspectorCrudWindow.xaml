@@ -1,4 +1,4 @@
-﻿<Window x:Class="Festispec_WPF.MainWindow"
+﻿<Window x:Class="Festispec_WPF.InspectorCrudWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -51,7 +51,7 @@
                 </Button>
             </Grid>
             <ListView Background="AliceBlue">
-                <DataGrid RenderTransformOrigin="0.5,0.5" Width="586" SelectionChanged="DataGrid_SelectionChanged" Height="27" IsReadOnly="True" ItemsSource="{Binding Inspecteurs}" >
+                <DataGrid RenderTransformOrigin="0.5,0.5" Width="586"  Height="27" IsReadOnly="True" ItemsSource="{Binding Inspecteurs}" >
                     <DataGrid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
