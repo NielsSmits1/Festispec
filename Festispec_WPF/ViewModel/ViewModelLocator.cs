@@ -53,6 +53,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public InspectorVM Inspector
+        {
+            get
+            {
+                return new InspectorVM();
+            }
+        }
+        
         public LoginRegisterVM GetLoginRegisterVm
         {
             get
