@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Festispec_WPF.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HomeScreenView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HomeScreenView : Window
     {
-        public MainWindow()
+        public HomeScreenView()
         {
             InitializeComponent();
         }
