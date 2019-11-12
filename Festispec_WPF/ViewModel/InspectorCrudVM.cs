@@ -9,12 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Data.Entity;
+using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.Model.Repositories;
 
 namespace Festispec_WPF.ViewModel
 {
     public class InspectorCrudVM : ViewModelBase
     {
-        FestiSpecEntities context;
+        private UnitOfWork UOW;
+        private IRepository<Certificaat> Certificates { get; set; }
         private CertificateVM _selected;
         public ICommand AddInspectorCommand { get; set; }
         public ICommand MoveToAvailableCommand { get; set; }
@@ -38,13 +41,12 @@ namespace Festispec_WPF.ViewModel
 
         public InspectorCrudVM()
         {
-            context = new FestiSpecEntities();
-            using (context)
-            {
-                var list = context.Certificaat.ToList().Select(certificaat => new CertificateVM(certificaat));
-                AvailableCertificates = new ObservableCollection<CertificateVM>(list);
-                context.SaveChanges();
-            }
+            UOW = new ViewModelLocator().UOW;
+            Certificates = new Repository<Certificaat>(UOW.Context);
+            var list = Certificates.GetAll().ToList().Select(certificaat => new CertificateVM(certificaat));
+            AvailableCertificates = new ObservableCollection<CertificateVM>(list);
+            UOW.Complete();
+
 
             MoveToAvailableCommand = new RelayCommand(MoveCertificateToAvailable);
             MoveToChosenCommand = new RelayCommand(MoveCertificateToChosen);
@@ -71,20 +73,23 @@ namespace Festispec_WPF.ViewModel
 
         public void AddInspector()
         {
-            using (context = new FestiSpecEntities())
+
+            NewInspector.Active = true;
+            Repository<NAW_inspecteur> NAW = new Repository<NAW_inspecteur>(UOW.Context);
+            Repository<Telefoonnummer_inspecteur> Phonenumber = new Repository<Telefoonnummer_inspecteur>(UOW.Context);
+            NAW.Add(NewInspector.NAWInspector);
+            UOW.Inspectors.Add(NewInspector.InspectorData);
+            Phonenumber.Add(NewInspector.PhonenumberModel);
+            //var inspector = context.Inspecteur.Find(NewInspector.Inspector_ID);
+            UOW.Complete();
+            foreach (var item in NewInspector.ChosenCertificates)
             {
-                NewInspector.Active = true;
-                context.NAW_inspecteur.Add(NewInspector.NAWInspector);
-                context.Inspecteur.Add(NewInspector.InspectorData);
-                context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
-                //var inspector = context.Inspecteur.Find(NewInspector.Inspector_ID);
-                foreach (var item in NewInspector.ChosenCertificates)
-                {
-                    NewInspector.InspectorData.Certificaat.Add(item.Certificate);
-                }
-                context.Entry(NewInspector.InspectorData).State = EntityState.Added;
-                context.SaveChanges();
+                UOW.Inspectors.Get(NewInspector.Inspector_ID).Certificaat.Add(item.Certificate);
             }
+
+
+            UOW.Complete();
+
         }
     }
 }

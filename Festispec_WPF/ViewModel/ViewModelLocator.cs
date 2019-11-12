@@ -13,6 +13,8 @@
 */
 
 using CommonServiceLocator;
+using Festispec_WPF.Model;
+using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -27,6 +29,9 @@ namespace Festispec_WPF.ViewModel
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
+        /// 
+
+        private UnitOfWork _unitOfWork;
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -78,6 +83,18 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return new LoginRegisterVM();
+            }
+        }
+
+        public UnitOfWork UOW
+        {
+            get
+            {
+                if(_unitOfWork == null)
+                {
+                    _unitOfWork = new UnitOfWork(new FestiSpecEntities());
+                }
+                return _unitOfWork;
             }
         }
 
