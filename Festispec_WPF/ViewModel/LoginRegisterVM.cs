@@ -27,7 +27,7 @@ namespace Festispec_WPF.ViewModel
 
         private void HandleLogin()
         {
-            Console.WriteLine(Username, Password);
+            Console.WriteLine($"Username = {Username}, {Password}");
 
             using (var context = new FestiSpecEntities())
             {
