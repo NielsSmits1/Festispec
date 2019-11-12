@@ -5,41 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
-        Title="HomeScreenView" Height="450" Width="800">
-    <StackPanel>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        Title="Home" 
+        WindowState="Maximized"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
 
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="0" />
+    <Border Padding="50">
+        <StackPanel Margin="3,14,-3,-3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="1" />
+                <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
+                        Foreground="White"
+                        Grid.Column="0" Command="{Binding ShowKlantenCommand}" Background="#FF6A6A6A">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10" />
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="/Images/klanten.png"/>
+                </Button>
 
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="2" />
+                <Button x:Name="InplanButton" Width="150" Height="150" FontSize="16"
+                        Foreground="White"
+                        Grid.Column="1" Command="{Binding ShowInplanVerzoekenCommand}" Background="#FF6A6A6A">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10" />
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="/Images/verzoeken_inplannen.png"/>
+                </Button>
 
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <Button x:Name="InspecteursButton" Width="150" Height="150" FontSize="16"
+                        Foreground="White"  
+                        Grid.Column="2" Command="{Binding ShowInspecteursCommand}" Background="#FF6A6A6A">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10" />
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="/Images/inspecteurs.png"/>
+                </Button>
 
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="0" />
+            </Grid>
+            <Border Margin="75">
+                <Grid RenderTransformOrigin="0.5,0.783" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="1" />
-        </Grid>
-    </StackPanel>
+                    <Button x:Name="VragenlijstButton" Width="150" Height="150" FontSize="16" 
+                        Foreground="White"  
+                        Grid.Column="0" Command="{Binding ShowVragenlijstCommand}" Background="#FF6A6A6A">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10" />
+                            </Style>
+                        </Button.Resources>
+                        <Image Source="/Images/vragenlijsten.png" Height="140" Width="136"/>
+                    </Button>
+
+                    <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
+                        Foreground="White"  
+                        Grid.Column="1" Command="{Binding ShowKalenderCommand}" Background="#FF6A6A6A">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10" />
+                            </Style>
+                        </Button.Resources>
+                        <Image Source="/Images/weekkalender.png" Width="134"/>
+                    </Button>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Border>
 </Window>
