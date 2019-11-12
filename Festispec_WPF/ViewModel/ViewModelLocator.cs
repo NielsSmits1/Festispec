@@ -43,6 +43,7 @@ namespace Festispec_WPF.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<HomeScreenVM>();
         }
 
         public MainViewModel Main
@@ -66,6 +67,14 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return new LoginRegisterVM();
+            }
+        }
+
+        public HomeScreenVM HomeScreen
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HomeScreenVM>();
             }
         }
 

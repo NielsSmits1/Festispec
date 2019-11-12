@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Home" 
         WindowState="Maximized"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding HomeScreen, Source={StaticResource Locator}}">
 
     <Border Padding="50">
         <StackPanel Margin="3,14,-3,-3">

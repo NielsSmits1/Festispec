@@ -8,16 +8,17 @@ using System.Windows.Input;
 
 namespace Festispec_WPF.ViewModel
 {
-    class HomeScreenVM
+    public class HomeScreenVM
     {
         // Moeten nog instanties van schermen gemaakt worden 
         /*
         private KlantWindow _klantWindow;
         private VerzoekeninplanWindow _verzoekenInplanWindow;
-        private InspectuersWindow _inspecteursWindow;
         private VragenlijstWindow _vragenlijstWindow;
         private KlalenderWindow _kalenderWindow;
         */
+
+        private InspectorCrudWindow _inspecteursWindow;
 
         // commands
         public ICommand ShowKlantenCommand { get; set; }
@@ -45,7 +46,8 @@ namespace Festispec_WPF.ViewModel
         }
         public void ShowInspecteurs()
         {
-            throw new NotImplementedException();
+            _inspecteursWindow = new InspectorCrudWindow();
+            _inspecteursWindow.Show();
         }
         public void ShowVragenlijst()
         {
