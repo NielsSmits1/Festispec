@@ -167,7 +167,7 @@
                 <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding Email, Mode=OneWayToSource}"></TextBox>
                 <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="2" ></Label>
                 <!-- New binding required-->
-                <TextBox Width="200" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2"></TextBox>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding Phonenumber, Mode=OneWayToSource}"></TextBox>
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -186,19 +186,32 @@
                 </Grid.RowDefinitions>
                 <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Certificaten inspecteur" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <ListBox Grid.Row="1" Grid.Column="1">
-                    <!--Hier zit een binding op het veld name van de tabel Certificaat-->
-                </ListBox>
+                <DataGrid DataContext="{Binding Main, Source={StaticResource Locator}}" Grid.Row="1" Grid.Column="1" AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding ChosenCertificates}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToAvailableCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
 
                 <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                <ListBox Grid.Row="1" Grid.Column="3" SelectedItem="">
-                    <ListBoxItem Content="1" >
-
-                    </ListBoxItem>
-                    <ListBoxItem Content="2">
-
-                    </ListBoxItem>
-                </ListBox>
+                <DataGrid DataContext="{Binding Main, Source={StaticResource Locator}}" Grid.Row="1" Grid.Column="3"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding AvailableCertificates}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToChosenCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>

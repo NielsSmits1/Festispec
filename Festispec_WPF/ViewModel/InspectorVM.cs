@@ -28,8 +28,13 @@ namespace Festispec_WPF.ViewModel
                 Active = true;
                 context.NAW_inspecteur.Add(_nawInspecteur);
                 context.Inspecteur.Add(_inspecteur);
+                context.Telefoonnummer_inspecteur.Add(_phonenumber);
+                ViewModelLocator vml = new ViewModelLocator();
+                vml.Main.SaveCertificatesToInspector(Inspector_ID, context);
                 context.SaveChanges();
             }
+
+            
         }
 
         //NAW data
@@ -130,6 +135,18 @@ namespace Festispec_WPF.ViewModel
         {
             get { return _inspecteur.Actief; }
             set { _inspecteur.Actief = value; RaisePropertyChanged("Active"); }
+        }
+
+        public string Phonenumber
+        {
+            get { return _phonenumber.Telefoonnummer; }
+            set { _phonenumber.Telefoonnummer = value; RaisePropertyChanged("Phonenuber"); }
+        }
+
+        public int Phonenumber_NAWInspector_ID
+        {
+            get { return _phonenumber.NAW_Inspecteur_ID; }
+            set { _phonenumber.NAW_Inspecteur_ID = NAWInspector_ID;RaisePropertyChanged("Phonenumber_NAWInspector_ID"); }
         }
 
     }
