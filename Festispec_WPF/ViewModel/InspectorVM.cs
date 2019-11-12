@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,38 +13,46 @@ namespace Festispec_WPF.ViewModel
 {
     public class InspectorVM : ViewModelBase
     {
-        public ICommand AddInspectorCommand { get; set; }
+        public ObservableCollection<CertificateVM> ChosenCertificates { get; set; }
         public InspectorVM()
         {
+            ChosenCertificates = new ObservableCollection<CertificateVM>();
             _nawInspecteur = new NAW_inspecteur();
             _inspecteur = new Inspecteur();
             _phonenumber = new Telefoonnummer_inspecteur();
-            AddInspectorCommand = new RelayCommand(AddInspector);
-        }
-
-        public void AddInspector()
-        {
-            using(var context = new FestiSpecEntities())
-            {
-                Active = true;
-                context.NAW_inspecteur.Add(_nawInspecteur);
-                context.Inspecteur.Add(_inspecteur);
-                context.Telefoonnummer_inspecteur.Add(_phonenumber);
-                ViewModelLocator vml = new ViewModelLocator();
-                vml.Main.SaveCertificatesToInspector(Inspector_ID, context);
-                context.SaveChanges();
-            }
-
-            
         }
 
         //NAW data
         private NAW_inspecteur _nawInspecteur;
 
+        public NAW_inspecteur NAWInspector
+        {
+            get
+            {
+                return _nawInspecteur;
+            }
+        }
+
         //Inspector in system
         private Inspecteur _inspecteur;
 
+        public Inspecteur InspectorData
+        {
+            get
+            {
+                return _inspecteur;
+            }
+        }
+
         private Telefoonnummer_inspecteur _phonenumber;
+
+        public Telefoonnummer_inspecteur PhonenumberModel
+        {
+            get
+            {
+                return _phonenumber;
+            }
+        }
 
         public int NAWInspector_ID
         {
