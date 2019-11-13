@@ -50,24 +50,14 @@
                     </Button.RenderTransform>
                 </Button>
             </Grid>
-            <ListView Background="AliceBlue">
-                <DataGrid RenderTransformOrigin="0.5,0.5" Width="586"  Height="27" IsReadOnly="True" ItemsSource="{Binding Inspecteurs}" >
-                    <DataGrid.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-0.085"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </DataGrid.RenderTransform>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Inspecteur" Binding="{Binding Voornaam}" Width="*" />
-                        <DataGridTextColumn Header="Straatnaam" Binding="{Binding Straatnaam}" Width="*" />
-                        <DataGridTextColumn Header="Huisnummer" Binding="{Binding Huisnummer}" Width="*" />
-                        <DataGridTextColumn Header="Woonplaats" Binding="{Binding Woonplaats}" Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </ListView>
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Inspectors}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Inspecteur" Binding="{Binding FullName}" Width="*" />
+                    <!--<DataGridTextColumn Header="Straatnaam" Binding="{Binding Straatnaam}" Width="*" />-->
+                    <DataGridTextColumn Header="Huisnummer" Binding="{Binding HomeNumber}" Width="*" />
+                    <!--<DataGridTextColumn Header="Woonplaats" Binding="{Binding Woonplaats}" Width="*" />-->
+                </DataGrid.Columns>
+            </DataGrid>
             <!--LIST OF EXISTING INSPECTORS-->
 
         </StackPanel>
