@@ -14,7 +14,7 @@ namespace Festispec_WPF.ViewModel
     public class RegisterVM : ViewModelBase
     {
         public ICommand RegisterCommand { get; set; }
-        private RegisterView windowRegisterView;
+        private RegisterView _windowRegisterView;
 
         public RegisterVM()
         {
@@ -25,9 +25,8 @@ namespace Festispec_WPF.ViewModel
         private void HandleRegister()
         {
             /* Information required: 
-             * Werknemer_ID PK AA
-             * Rol FK
              * EERST NAW AANMAKEN, DAARNA DE REST.
+             *
              * NAW FK
              *      Voornaam
              *      Tussenvoegsel nullable
@@ -37,12 +36,16 @@ namespace Festispec_WPF.ViewModel
              *      Geboortedatum
              *      IBAN
              *      email
+             *
+             *
+             * Werknemer_ID PK AA
+             * Rol FK
              * Username
              * Wachtwoord
              * Actief
              */
-            windowRegisterView = new RegisterView();
-            windowRegisterView.Show();
+            _windowRegisterView = new RegisterView();
+            _windowRegisterView.Show();
         }
     }
 }
