@@ -18,7 +18,6 @@ namespace Festispec_WPF.ViewModel
         public string Username { get; set; }
         public string Password { get; set; }
 
-
         public LoginRegisterVM()
         {
             LoginCommand = new RelayCommand(HandleLogin);
@@ -27,31 +26,18 @@ namespace Festispec_WPF.ViewModel
 
         private void HandleLogin()
         {
-            Console.WriteLine($"Username = {Username}, {Password}");
-
             using (var context = new FestiSpecEntities())
             {
                 var targetPerson = (from person in context.Werknemer.ToList()
-                    where person.Username == Username && person.Wachtwoord == Password
-                    select person).ToList();
+                                    where person.Username == Username && person.Wachtwoord == Password
+                                    select person).ToList();
 
-                if(targetPerson.Count == 0)
-                {
-                    Console.WriteLine("Invalid login");
-                }
-                else
-                {
-                    Console.WriteLine("Valid login");
-                }
-
-                Console.WriteLine(Username, Password);
+                Console.WriteLine(targetPerson.Count == 0 ? "Invalid login" : "Valid login");
             }
-
         }
 
         private void HandleRegister()
         {
-
             throw new Exception("Unimplemeted");
         }
     }
