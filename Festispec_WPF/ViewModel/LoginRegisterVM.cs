@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec_WPF.Model;
+using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -13,14 +14,21 @@ namespace Festispec_WPF.ViewModel
 {
     public class LoginRegisterVM : ViewModelBase
     {
-        public ICommand LoginCommand { get; set; }
+        //properties
         public string Username { get; set; }
         public string Password { get; set; }
 
+        //reference commands
+        public ICommand LoginCommand { get; set; }
+        public ICommand RegisterCommand { get; set; }
+
+        //local variables
+        private RegisterView _windowRegisterView;
 
         public LoginRegisterVM()
         {
             LoginCommand = new RelayCommand(HandleLogin);
+            RegisterCommand = new RelayCommand(OpenRegisterWindow);
         }
 
         private void HandleLogin()
@@ -42,6 +50,12 @@ namespace Festispec_WPF.ViewModel
                     //TODO send to next screen
                 }
             }
+        }
+
+        private void OpenRegisterWindow()
+        {
+            _windowRegisterView = new RegisterView();
+            _windowRegisterView.Show();
         }
     }
 }

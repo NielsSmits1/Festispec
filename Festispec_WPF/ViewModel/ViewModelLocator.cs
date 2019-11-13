@@ -70,11 +70,11 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        public RegisterVM GetRegisterVm
+        public EmployeeVM GetRegisterVm
         {
             get
             {
-                return new RegisterVM();
+                return new EmployeeVM();
             }
         }
 

@@ -205,7 +205,7 @@
     <Compile Include="ViewModel\InspectorVM.cs" />
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\RegisterVM.cs" />
+    <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Model\Vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>

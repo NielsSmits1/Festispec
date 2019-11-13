@@ -21,27 +21,28 @@
                 <!-- left row -->
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="Voornaam" />
-                    <TextBox />
+                    <TextBox Text="{Binding FirstName}" />
                     <TextBlock Text="Tussenvoegsel" />
-                    <TextBox />
+                    <TextBox Text="{Binding InfixName}" />
                     <TextBlock Text="Achternaam" />
-                    <TextBox />
+                    <TextBox Text="{Binding LastName}" />
                     <TextBlock Text="Postcode" />
-                    <TextBox />
+                    <TextBox Text="{Binding Postcode}" />
                     <TextBlock Text="Huisnummer" />
-                    <TextBox />
+                    <TextBox Text="{Binding HouseNumber}" />
                     <TextBlock Text="Geboortedatum" />
-                    <TextBox />
+                    <TextBox Text="{Binding DoB}" />
                     <TextBlock Text="IBAN" />
-                    <TextBox />
+                    <TextBox Text="{Binding Iban}" />
                     <TextBlock Text="e-mail" />
-                    <TextBox />
+                    <TextBox Text="{Binding MailAdress}" />
                 </StackPanel>
 
                 <!-- right row -->
                 <StackPanel Grid.Column="2">
                     <TextBlock Text="Rol" />
-                    <ComboBox SelectedIndex="0">
+                    <!-- TODO get selectables from database -->
+                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding Role, Mode=TwoWay}">
                         <ComboBoxItem Content="admin" />
                         <ComboBoxItem Content="rol1" />
                         <ComboBoxItem Content="rol2" />
@@ -49,13 +50,13 @@
                         <ComboBoxItem Content="rol4" />
                     </ComboBox>
                     <TextBlock Text="Username" />
-                    <TextBox />
+                    <TextBox Text="{Binding Username}" />
                     <TextBlock Text="Wachtwoord" />
-                    <TextBox />
+                    <TextBox Text="{Binding Password}" />
 
                 </StackPanel>
             </Grid>
-            <Button Height="30" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="30 50 30 0" Content="Registreren" />
+            <Button Height="30" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="30 50 30 0" Content="Registreren" Command="{Binding RegisterCommand}"/>
 
         </StackPanel>
     </Border>

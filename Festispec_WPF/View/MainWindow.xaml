@@ -30,7 +30,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Content="Login" Grid.Column="0" Height="30" Command="{Binding LoginCommand}"/>
-                <Button DataContext="{Binding GetRegisterVm, Source={StaticResource Locator}}" Content="Registreren" Grid.Column="2" Command="{Binding RegisterCommand}" Margin="4.2,0,-4.4,0.4"/>
+                <Button Content="Registreren" Grid.Column="2" Command="{Binding RegisterCommand}" Margin="4.2,0,-4.4,0.4"/>
             </Grid>
 
         </StackPanel>
