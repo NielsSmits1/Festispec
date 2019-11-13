@@ -70,6 +70,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public RegisterVM GetRegisterVm
+        {
+            get
+            {
+                return new RegisterVM();
+            }
+        }
+
         public HomeScreenVM HomeScreen
         {
             get

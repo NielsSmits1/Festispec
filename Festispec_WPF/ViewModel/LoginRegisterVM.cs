@@ -14,14 +14,13 @@ namespace Festispec_WPF.ViewModel
     public class LoginRegisterVM : ViewModelBase
     {
         public ICommand LoginCommand { get; set; }
-        public ICommand RegisterCommand { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+
 
         public LoginRegisterVM()
         {
             LoginCommand = new RelayCommand(HandleLogin);
-            RegisterCommand = new RelayCommand(HandleRegister);
         }
 
         private void HandleLogin()
@@ -32,13 +31,17 @@ namespace Festispec_WPF.ViewModel
                                     where person.Username == Username && person.Wachtwoord == Password
                                     select person).ToList();
 
-                Console.WriteLine(targetPerson.Count == 0 ? "Invalid login" : "Valid login");
+                if (targetPerson.Count == 0) 
+                {
+                    Console.WriteLine("Invalid login");
+                    //TODO give error message
+                }
+                else
+                {
+                    Console.WriteLine("Valid login");
+                    //TODO send to next screen
+                }
             }
-        }
-
-        private void HandleRegister()
-        {
-            throw new Exception("Unimplemeted");
         }
     }
 }
