@@ -7,8 +7,56 @@
         mc:Ignorable="d"
         DataContext="{Binding GetRegisterVm, Source={StaticResource Locator}}"
         WindowState="Maximized"
-        Title="RegisterView" Height="450" Width="800">
-    <Grid>
-        <Button Content="test"/>
-    </Grid>
+        Title="RegisterView">
+
+    <Border Padding="100 10">
+        <StackPanel VerticalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- left row -->
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Voornaam" />
+                    <TextBox />
+                    <TextBlock Text="Tussenvoegsel" />
+                    <TextBox />
+                    <TextBlock Text="Achternaam" />
+                    <TextBox />
+                    <TextBlock Text="Postcode" />
+                    <TextBox />
+                    <TextBlock Text="Huisnummer" />
+                    <TextBox />
+                    <TextBlock Text="Geboortedatum" />
+                    <TextBox />
+                    <TextBlock Text="IBAN" />
+                    <TextBox />
+                    <TextBlock Text="e-mail" />
+                    <TextBox />
+                </StackPanel>
+
+                <!-- right row -->
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Rol" />
+                    <ComboBox SelectedIndex="0">
+                        <ComboBoxItem Content="admin" />
+                        <ComboBoxItem Content="rol1" />
+                        <ComboBoxItem Content="rol2" />
+                        <ComboBoxItem Content="rol3" />
+                        <ComboBoxItem Content="rol4" />
+                    </ComboBox>
+                    <TextBlock Text="Username" />
+                    <TextBox />
+                    <TextBlock Text="Wachtwoord" />
+                    <TextBox />
+
+                </StackPanel>
+            </Grid>
+            <Button Height="30" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="30 50 30 0" Content="Registreren" />
+
+        </StackPanel>
+    </Border>
 </Window>
