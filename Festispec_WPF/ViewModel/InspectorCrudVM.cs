@@ -42,6 +42,7 @@ namespace Festispec_WPF.ViewModel
         public InspectorCrudVM()
         {
             UOW = new ViewModelLocator().UOW;
+            NewInspector = new InspectorVM();
             Certificates = new Repository<Certificaat>(UOW.Context);
             var list = Certificates.GetAll().ToList().Select(certificaat => new CertificateVM(certificaat));
             AvailableCertificates = new ObservableCollection<CertificateVM>(list);
@@ -76,12 +77,14 @@ namespace Festispec_WPF.ViewModel
 
             NewInspector.Active = true;
             Repository<NAW_inspecteur> NAW = new Repository<NAW_inspecteur>(UOW.Context);
-            Repository<Telefoonnummer_inspecteur> Phonenumber = new Repository<Telefoonnummer_inspecteur>(UOW.Context);
+            
             NAW.Add(NewInspector.NAWInspector);
+            UOW.Context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
             UOW.Inspectors.Add(NewInspector.InspectorData);
-            Phonenumber.Add(NewInspector.PhonenumberModel);
-            //var inspector = context.Inspecteur.Find(NewInspector.Inspector_ID);
             UOW.Complete();
+            
+            //var inspector = context.Inspecteur.Find(NewInspector.Inspector_ID);
+            
             foreach (var item in NewInspector.ChosenCertificates)
             {
                 UOW.Inspectors.Get(NewInspector.Inspector_ID).Certificaat.Add(item.Certificate);

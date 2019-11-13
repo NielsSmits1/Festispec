@@ -13,7 +13,7 @@ namespace Festispec_WPF.ViewModel
 {
     public class InspectorVM : ViewModelBase
     {
-        public ObservableCollection<CertificateVM> ChosenCertificates { get; set; }
+        public ObservableCollection<CertificateVM> ChosenCertificates { get; set;}
         public InspectorVM()
         {
             ChosenCertificates = new ObservableCollection<CertificateVM>();
@@ -149,7 +149,7 @@ namespace Festispec_WPF.ViewModel
         public string Phonenumber
         {
             get { return _phonenumber.Telefoonnummer; }
-            set { _phonenumber.Telefoonnummer = value; RaisePropertyChanged("Phonenuber"); }
+            set { _phonenumber.Telefoonnummer = value; Phonenumber_NAWInspector_ID = 0; RaisePropertyChanged("Phonenuber");  }
         }
 
         public int Phonenumber_NAWInspector_ID
