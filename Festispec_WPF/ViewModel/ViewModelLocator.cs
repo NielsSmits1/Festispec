@@ -13,6 +13,8 @@
 */
 
 using CommonServiceLocator;
+using Festispec_WPF.Model;
+using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -27,6 +29,9 @@ namespace Festispec_WPF.ViewModel
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
+        /// 
+
+        private UnitOfWork _unitOfWork;
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -41,8 +46,9 @@ namespace Festispec_WPF.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-
+            SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<HomeScreenVM>();
         }
 
         public MainViewModel Main
@@ -61,6 +67,18 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public InspectorCrudVM InspectorCrud
+        {
+            get
+            {
+                //if(ServiceLocator.Current.GetInstance<InspectorCrudVM>() == null)
+                //{
+                //    SimpleIoc.Default.Register<InspectorCrudVM>();
+                //}
+                return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
+            }
+        }
+        
         public LoginRegisterVM GetLoginRegisterVm
         {
             get
@@ -73,6 +91,34 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return new CRCustomerVM();
+            }
+        }
+
+        public EmployeeVM GetRegisterVm
+        {
+            get
+            {
+                return new EmployeeVM();
+            }
+        }
+
+        public HomeScreenVM HomeScreen
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HomeScreenVM>();
+            }
+        }
+        
+        public UnitOfWork UOW
+        {
+            get
+            {
+                if(_unitOfWork == null)
+                {
+                    _unitOfWork = new UnitOfWork(new FestiSpecEntities());
+                }
+                return _unitOfWork;
             }
         }
 

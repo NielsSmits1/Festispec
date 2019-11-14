@@ -256,16 +256,6 @@
           </Key>
           <Property Name="Rol" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Tabelvraag">
           <Key>
             <PropertyRef Name="ID" />
@@ -364,24 +354,6 @@
           </Key>
           <Property Name="Werknemer_ID" Type="int" Nullable="false" />
           <Property Name="Inspectienummer" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Afspraak_Contactpersoon">
           <End Role="Contactpersoon" Type="Self.Contactpersoon" Multiplicity="1" />
@@ -879,7 +851,6 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <EntitySet Name="Openvraag_vragenlijst" EntityType="Self.Openvraag_vragenlijst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Planning_werknemer" EntityType="Self.Planning_werknemer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol_werknemer" EntityType="Self.Rol_werknemer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" Schema="dbo" store:Type="Tables" />
@@ -891,16 +862,6 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <EntitySet Name="Vragenlijst_bijlage" EntityType="Self.Vragenlijst_bijlage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Werknemer" EntityType="Self.Werknemer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Werknemers_inspectie" EntityType="Self.Werknemers_inspectie" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
-            <DefiningQuery>SELECT 
-    [database_firewall_rules].[id] AS [id], 
-    [database_firewall_rules].[name] AS [name], 
-    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
-    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
-    [database_firewall_rules].[create_date] AS [create_date], 
-    [database_firewall_rules].[modify_date] AS [modify_date]
-    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Afspraak_Contactpersoon" Association="Self.FK_Afspraak_Contactpersoon">
             <End Role="Contactpersoon" EntitySet="Contactpersoon" />
             <End Role="Afspraak" EntitySet="Afspraak" />
@@ -1336,16 +1297,6 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Werknemer" Relationship="Self.FK_Werknemer_Rol_werknemer" FromRole="Rol_werknemer" ToRole="Werknemer" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Tabelvraag">
           <Key>
             <PropertyRef Name="ID" />
@@ -1460,22 +1411,6 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <NavigationProperty Name="Planning_werknemer" Relationship="Self.FK_Planning_werknemer_Werknemer" FromRole="Werknemer" ToRole="Planning_werknemer" />
           <NavigationProperty Name="Rol_werknemer" Relationship="Self.FK_Werknemer_Rol_werknemer" FromRole="Werknemer" ToRole="Rol_werknemer" />
           <NavigationProperty Name="Inspectie" Relationship="Self.Werknemers_inspectie" FromRole="Werknemer" ToRole="Inspectie" />
-        </EntityType>
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_Afspraak_Contactpersoon">
           <End Role="Contactpersoon" Type="Self.Contactpersoon" Multiplicity="1" />
@@ -1890,7 +1825,6 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <EntitySet Name="Openvraag_vragenlijst" EntityType="Self.Openvraag_vragenlijst" />
           <EntitySet Name="Planning_werknemer" EntityType="Self.Planning_werknemer" />
           <EntitySet Name="Rol_werknemer" EntityType="Self.Rol_werknemer" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" />
@@ -1901,7 +1835,6 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
           <EntitySet Name="Vragenlijst" EntityType="Self.Vragenlijst" />
           <EntitySet Name="Vragenlijst_bijlage" EntityType="Self.Vragenlijst_bijlage" />
           <EntitySet Name="Werknemer" EntityType="Self.Werknemer" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
           <AssociationSet Name="FK_Afspraak_Contactpersoon" Association="Self.FK_Afspraak_Contactpersoon">
             <End Role="Contactpersoon" EntitySet="Contactpersoon" />
             <End Role="Afspraak" EntitySet="Afspraak" />
@@ -2292,17 +2225,6 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="FestiSpecModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tabelvraag">
             <EntityTypeMapping TypeName="FestiSpecModel.Tabelvraag">
               <MappingFragment StoreEntitySet="Tabelvraag">
@@ -2397,18 +2319,6 @@ warning 6002: The table/view 'FestiSpec.sys.database_firewall_rules' does not ha
                 <ScalarProperty Name="Wachtwoord" ColumnName="Wachtwoord" />
                 <ScalarProperty Name="NAW" ColumnName="NAW" />
                 <ScalarProperty Name="Actief" ColumnName="Actief" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="database_firewall_rules">
-            <EntityTypeMapping TypeName="FestiSpecModel.database_firewall_rules">
-              <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

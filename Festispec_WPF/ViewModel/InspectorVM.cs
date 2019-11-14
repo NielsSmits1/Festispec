@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,33 +13,59 @@ namespace Festispec_WPF.ViewModel
 {
     public class InspectorVM : ViewModelBase
     {
-        public ICommand AddInspectorCommand { get; set; }
+        public ObservableCollection<CertificateVM> ChosenCertificates { get; set;}
         public InspectorVM()
         {
+            ChosenCertificates = new ObservableCollection<CertificateVM>();
             _nawInspecteur = new NAW_inspecteur();
             _inspecteur = new Inspecteur();
             _phonenumber = new Telefoonnummer_inspecteur();
-            AddInspectorCommand = new RelayCommand(AddInspector);
         }
 
-        public void AddInspector()
+        public InspectorVM(NAW_inspecteur NAW)
         {
-            using(var context = new FestiSpecEntities())
-            {
-                Active = true;
-                context.NAW_inspecteur.Add(_nawInspecteur);
-                context.Inspecteur.Add(_inspecteur);
-                context.SaveChanges();
-            }
+            _nawInspecteur = NAW;
         }
 
         //NAW data
         private NAW_inspecteur _nawInspecteur;
 
+        public NAW_inspecteur NAWInspector
+        {
+            get
+            {
+                return _nawInspecteur;
+            }
+        }
+
         //Inspector in system
         private Inspecteur _inspecteur;
 
+        public Inspecteur InspectorData
+        {
+            get
+            {
+                return _inspecteur;
+            }
+        }
+
         private Telefoonnummer_inspecteur _phonenumber;
+
+        public Telefoonnummer_inspecteur PhonenumberModel
+        {
+            get
+            {
+                return _phonenumber;
+            }
+        }
+
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + InBetween + " " + LastName;
+            }
+        }
 
         public int NAWInspector_ID
         {
@@ -48,7 +75,7 @@ namespace Festispec_WPF.ViewModel
 
         public string FirstName
         {
-            get { return _nawInspecteur.Voornaam; }
+            get { return _nawInspecteur.Voornaam ; }
             set { _nawInspecteur.Voornaam = value; RaisePropertyChanged("FirstName"); }
         }
 
@@ -130,6 +157,18 @@ namespace Festispec_WPF.ViewModel
         {
             get { return _inspecteur.Actief; }
             set { _inspecteur.Actief = value; RaisePropertyChanged("Active"); }
+        }
+
+        public string Phonenumber
+        {
+            get { return _phonenumber.Telefoonnummer; }
+            set { _phonenumber.Telefoonnummer = value; Phonenumber_NAWInspector_ID = 0; RaisePropertyChanged("Phonenuber");  }
+        }
+
+        public int Phonenumber_NAWInspector_ID
+        {
+            get { return _phonenumber.NAW_Inspecteur_ID; }
+            set { _phonenumber.NAW_Inspecteur_ID = NAWInspector_ID;RaisePropertyChanged("Phonenumber_NAWInspector_ID"); }
         }
 
     }
