@@ -202,6 +202,11 @@
     </Compile>
     <Compile Include="ViewModel\HomeScreenVM.cs" />
     <Compile Include="ViewModel\EmployeeVM.cs" />
+    <Compile Include="ViewModel\ContactPersonVM.cs" />
+    <Compile Include="ViewModel\CRCustomerVM.cs" />
+    <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\NAW_KlantVM.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Model\Vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -223,6 +228,14 @@
     <Compile Include="View\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomerCrudWindow.xaml.cs">
+      <DependentUpon>CustomerCrudWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\CustomerCrudWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+
     <Page Include="View\HomeScreenView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

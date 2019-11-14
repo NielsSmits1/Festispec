@@ -86,6 +86,13 @@ namespace Festispec_WPF.ViewModel
                 return new LoginRegisterVM();
             }
         }
+        public CRCustomerVM CRCustomer
+        {
+            get
+            {
+                return new CRCustomerVM();
+            }
+        }
 
         public EmployeeVM GetRegisterVm
         {
