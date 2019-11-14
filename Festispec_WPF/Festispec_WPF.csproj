@@ -221,7 +221,6 @@
     <Compile Include="ViewModel\InspectorVM.cs" />
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -235,7 +234,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Page Include="View\HomeScreenView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
