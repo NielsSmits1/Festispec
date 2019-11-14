@@ -225,6 +225,12 @@
     <Compile Include="View\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\VerzoekInplanView.xaml.cs">
+      <DependentUpon>VerzoekInplanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WeekplanningView.xaml.cs">
+      <DependentUpon>WeekplanningView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\HomeScreenView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -253,6 +259,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VerzoekInplanView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WeekplanningView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

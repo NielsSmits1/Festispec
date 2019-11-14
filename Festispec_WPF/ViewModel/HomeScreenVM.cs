@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Festispec_WPF.View;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,12 @@ namespace Festispec_WPF.ViewModel
         // Moeten nog instanties van schermen gemaakt worden 
         /*
         private KlantWindow _klantWindow;
-        private VerzoekeninplanWindow _verzoekenInplanWindow;
         private VragenlijstWindow _vragenlijstWindow;
-        private KlalenderWindow _kalenderWindow;
         */
 
         private InspectorCrudWindow _inspecteursWindow;
+        private WeekplanningView _weekPlanningWindow;
+        private VerzoekInplanView _verzoekInplanWindow;
 
         // commands
         public ICommand ShowKlantenCommand { get; set; }
@@ -42,7 +43,8 @@ namespace Festispec_WPF.ViewModel
         }
         public void ShowInplanVerzoeken()
         {
-            throw new NotImplementedException();
+            _verzoekInplanWindow = new VerzoekInplanView();
+            _verzoekInplanWindow.Show();
         }
         public void ShowInspecteurs()
         {
@@ -55,7 +57,8 @@ namespace Festispec_WPF.ViewModel
         }
         public void ShowKalender()
         {
-            throw new NotImplementedException();
+            _weekPlanningWindow = new WeekplanningView();
+            _weekPlanningWindow.Show();
         }
     }
 }
