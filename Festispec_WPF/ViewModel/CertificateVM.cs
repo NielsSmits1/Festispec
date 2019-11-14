@@ -17,6 +17,14 @@ namespace Festispec_WPF.ViewModel
             _certificate = newCertificate;
         }
 
+        public Certificaat Certificate
+        {
+            get
+            {
+                return _certificate;
+            }
+        }
+
         public int ID
         {
             get { return _certificate.ID; }
