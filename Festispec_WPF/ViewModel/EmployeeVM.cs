@@ -164,7 +164,7 @@ namespace Festispec_WPF.ViewModel
                 context.SaveChanges();
             }
         }
-
+        //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.
         private void GetAllRoles()
         {
             RolesCollection = new ObservableCollection<string>();
