@@ -41,9 +41,7 @@
                 <!-- right row -->
                 <StackPanel Grid.Column="2">
                     <TextBlock Text="Rol" />
-                    <!-- TODO get selectables from database -->
-                    <ComboBox  SelectedIndex="0" ItemsSource="{Binding RolesCollection, Mode=TwoWay}">
-                    </ComboBox>
+                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding Role}" ItemsSource="{Binding RolesCollection, Mode=TwoWay}"/>
                     <TextBlock Text="Username" />
                     <TextBox Text="{Binding Username}" />
                     <TextBlock Text="Wachtwoord" />
