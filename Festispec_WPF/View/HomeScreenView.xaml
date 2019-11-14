@@ -23,33 +23,18 @@
                 <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"
                         Grid.Column="0" Command="{Binding ShowKlantenCommand}" Background="#FF6A6A6A">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10" />
-                        </Style>
-                    </Button.Resources>
                     <Image Source="/Images/klanten.png"/>
                 </Button>
 
                 <Button x:Name="InplanButton" Width="150" Height="150" FontSize="16"
                         Foreground="White"
                         Grid.Column="1" Command="{Binding ShowInplanVerzoekenCommand}" Background="#FF6A6A6A">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10" />
-                        </Style>
-                    </Button.Resources>
                     <Image Source="/Images/verzoeken_inplannen.png"/>
                 </Button>
 
                 <Button x:Name="InspecteursButton" Width="150" Height="150" FontSize="16"
                         Foreground="White"  
                         Grid.Column="2" Command="{Binding ShowInspecteursCommand}" Background="#FF6A6A6A">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10" />
-                        </Style>
-                    </Button.Resources>
                     <Image Source="/Images/inspecteurs.png"/>
                 </Button>
 
@@ -64,22 +49,12 @@
                     <Button x:Name="VragenlijstButton" Width="150" Height="150" FontSize="16" 
                         Foreground="White"  
                         Grid.Column="0" Command="{Binding ShowVragenlijstCommand}" Background="#FF6A6A6A">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10" />
-                            </Style>
-                        </Button.Resources>
                         <Image Source="/Images/vragenlijsten.png" Height="140" Width="136"/>
                     </Button>
 
                     <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"  
                         Grid.Column="1" Command="{Binding ShowKalenderCommand}" Background="#FF6A6A6A">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10" />
-                            </Style>
-                        </Button.Resources>
                         <Image Source="/Images/weekkalender.png" Width="134"/>
                     </Button>
                 </Grid>
