@@ -84,7 +84,7 @@ namespace Festispec_WPF.ViewModel
             NAW.Add(NewInspector.NAWInspector);
             UOW.Context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
             UOW.Inspectors.Add(NewInspector.InspectorData);
-            UOW.Complete();
+            //UOW.Complete();
             
             //var inspector = context.Inspecteur.Find(NewInspector.Inspector_ID);
             
