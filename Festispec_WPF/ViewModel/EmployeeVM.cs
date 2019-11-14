@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Festispec_WPF.Model;
 using GalaSoft.MvvmLight;
@@ -12,10 +13,12 @@ namespace Festispec_WPF.ViewModel
 
         //private variables
         private readonly Werknemer _werknemer;
+        public ObservableCollection<string> RolesCollection { get; set; }
 
         //constructor
         public EmployeeVM()
         {
+            GetAllRoles();
             RegisterCommand = new RelayCommand(HandleRegister);
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
@@ -145,6 +148,19 @@ namespace Festispec_WPF.ViewModel
                 context.NAW_werknemer.Add(_nawWerknemer);
                 context.Werknemer.Add(_werknemer);
                 context.SaveChanges();
+            }
+        }
+
+        private void GetAllRoles()
+        {
+            RolesCollection = new ObservableCollection<string>();
+            using (var context = new FestiSpecEntities())
+            {
+                foreach (var variable in context.Rol_werknemer)
+                {
+                    RolesCollection.Add(variable.Rol);
+                    Console.WriteLine(variable.Rol);
+                }
             }
         }
     }
