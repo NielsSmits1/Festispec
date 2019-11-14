@@ -39,7 +39,7 @@ namespace Festispec_WPF.ViewModel
                                     where person.Username == Username && person.Wachtwoord == Password
                                     select person).ToList();
 
-                if (targetPerson.Count == 0) 
+                if (targetPerson.Count == 0)
                 {
                     Console.WriteLine("Invalid login");
                     //TODO give error message
@@ -47,7 +47,6 @@ namespace Festispec_WPF.ViewModel
                 else
                 {
                     Console.WriteLine("Valid login");
-                    //TODO send to next screen
                 }
             }
         }

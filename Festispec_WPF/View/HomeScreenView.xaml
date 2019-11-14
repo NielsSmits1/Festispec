@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="Home" 
         WindowState="Maximized"
+        Width="1920"
+        Height="1080"
         DataContext="{Binding HomeScreen, Source={StaticResource Locator}}">
 
-    <Border Padding="50">
-        <StackPanel Margin="3,14,-3,-3">
+    <Border Padding="200">
+        <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -53,7 +55,7 @@
 
             </Grid>
             <Border Margin="75">
-                <Grid RenderTransformOrigin="0.5,0.783" >
+                <Grid Width="920">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
