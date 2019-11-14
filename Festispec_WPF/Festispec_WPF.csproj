@@ -214,6 +214,7 @@
     <Compile Include="ViewModel\InspectorVM.cs" />
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

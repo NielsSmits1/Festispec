@@ -8,7 +8,9 @@
         Title="MenuView"
         WindowState="Maximized"
         Width="1920"
-        Height="1080">
+        Height="1080"
+        DataContext="{Binding GetMenu, Source={StaticResource Locator}}">
+        
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="104" />
@@ -20,24 +22,24 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0" >
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowHomeCommand}">
                 <Image Source="/Images/Home.png" />
             </Button>
         </Grid>
         <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKlantenCommand}">
                 <Image Source="/Images/klanten.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInplanVerzoekenCommand}">
                 <Image Source="/Images/verzoeken_inplannen.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInspecteursCommand}">
                 <Image Source="/Images/inspecteurs.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowVragenlijstCommand}">
                 <Image Source="/Images/vragenlijsten.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKalenderCommand}">
                 <Image Source="/Images/weekkalender.PNG" />
             </Button>
         </StackPanel>
