@@ -13,7 +13,7 @@ namespace Festispec_WPF.ViewModel
 
         //private variables
         private readonly Werknemer _werknemer;
-        public ObservableCollection<string> RolesCollection { get; set; }
+        private readonly Telefoonnummer _werknemerTelefoonNummer;
 
         //constructor
         public EmployeeVM()
@@ -22,9 +22,12 @@ namespace Festispec_WPF.ViewModel
             RegisterCommand = new RelayCommand(HandleRegister);
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
+            _werknemerTelefoonNummer = new Telefoonnummer();
         }
 
-        //TODO add phonenumber lookup table 
+        //public variables
+        public ObservableCollection<string> RolesCollection { get; set; }
+
         //properties
         public string FirstName
         {
@@ -107,7 +110,6 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        //TODO fix dit man
         public string Role
         {
             get => _werknemer.Rol;
@@ -141,12 +143,24 @@ namespace Festispec_WPF.ViewModel
         //command references
         public ICommand RegisterCommand { get; set; }
 
+        public string Phonenumber
+        {
+            get => _werknemerTelefoonNummer.Telefoonnummer1;
+
+            set
+            {
+                _werknemerTelefoonNummer.Telefoonnummer1 = value;
+                RaisePropertyChanged();
+            }
+        }
+        //TODO handle double register click (program crash)
         private void HandleRegister()
         {
             using (var context = new FestiSpecEntities())
             {
                 context.NAW_werknemer.Add(_nawWerknemer);
                 context.Werknemer.Add(_werknemer);
+                context.Telefoonnummer.Add(_werknemerTelefoonNummer);
                 context.SaveChanges();
             }
         }
@@ -159,7 +173,6 @@ namespace Festispec_WPF.ViewModel
                 foreach (var variable in context.Rol_werknemer)
                 {
                     RolesCollection.Add(variable.Rol);
-                    Console.WriteLine(variable.Rol);
                 }
             }
         }

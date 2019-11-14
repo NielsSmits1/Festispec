@@ -46,6 +46,8 @@
                     <TextBox Text="{Binding Username}" />
                     <TextBlock Text="Wachtwoord" />
                     <TextBox Text="{Binding Password}" />
+                    <TextBlock Text="Telefoonnummer" />
+                    <TextBox Text="{Binding Phonenumber}" />
 
                 </StackPanel>
             </Grid>
