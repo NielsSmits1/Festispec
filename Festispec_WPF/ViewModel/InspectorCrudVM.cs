@@ -22,7 +22,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand AddInspectorCommand { get; set; }
         public ICommand MoveToAvailableCommand { get; set; }
         public ICommand MoveToChosenCommand { get; set; }
-
+        public ObservableCollection<InspectorVM> Inspectors { get; set; }
         public ICommand CreateNewInspectorCommand { get; set; }
         public InspectorVM NewInspector { get; set; }
         public CertificateVM SelectedCertificate
@@ -41,8 +41,11 @@ namespace Festispec_WPF.ViewModel
 
         public InspectorCrudVM()
         {
+            
+            
             UOW = new ViewModelLocator().UOW;
             NewInspector = new InspectorVM();
+            Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
             Certificates = new Repository<Certificaat>(UOW.Context);
             var list = Certificates.GetAll().ToList().Select(certificaat => new CertificateVM(certificaat));
             AvailableCertificates = new ObservableCollection<CertificateVM>(list);
@@ -81,7 +84,7 @@ namespace Festispec_WPF.ViewModel
             NAW.Add(NewInspector.NAWInspector);
             UOW.Context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
             UOW.Inspectors.Add(NewInspector.InspectorData);
-            UOW.Complete();
+            //UOW.Complete();
             
             //var inspector = context.Inspecteur.Find(NewInspector.Inspector_ID);
             
