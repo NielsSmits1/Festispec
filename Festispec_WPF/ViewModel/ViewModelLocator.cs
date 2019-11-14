@@ -48,6 +48,7 @@ namespace Festispec_WPF.ViewModel
             ////}
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<HomeScreenVM>();
         }
 
         public MainViewModel Main
@@ -86,6 +87,22 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public EmployeeVM GetRegisterVm
+        {
+            get
+            {
+                return new EmployeeVM();
+            }
+        }
+
+        public HomeScreenVM HomeScreen
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HomeScreenVM>();
+            }
+        }
+        
         public UnitOfWork UOW
         {
             get
