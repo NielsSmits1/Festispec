@@ -52,6 +52,9 @@ namespace Festispec_WPF.ViewModel
             _customer = new CustomerVM();
         }
 
-
+        internal Contactpersoon toModel()
+        {
+            return _contactPerson;
+        }
     }
 }

@@ -40,5 +40,10 @@ namespace Festispec_WPF.ViewModel
         {
             _NAW_Klant = new NAW_Klant();
         }
+
+        internal NAW_Klant toModel()
+        {
+            return _NAW_Klant;
+        }
     }
 }
