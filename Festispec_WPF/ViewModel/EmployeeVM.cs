@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Festispec_WPF.Model;
+using Festispec_WPF.Model.Repositories;
+using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -9,11 +11,10 @@ namespace Festispec_WPF.ViewModel
 {
     public class EmployeeVM : ViewModelBase
     {
-        private readonly NAW_werknemer _nawWerknemer;
-
         //private variables
-        private readonly Werknemer _werknemer;
-        private readonly Telefoonnummer _werknemerTelefoonNummer;
+        private NAW_werknemer _nawWerknemer;
+        private Werknemer _werknemer;
+        private Telefoonnummer _werknemerTelefoonNummer;
 
         //constructor
         public EmployeeVM()
@@ -156,13 +157,14 @@ namespace Festispec_WPF.ViewModel
         //TODO handle double register click (program crash)
         private void HandleRegister()
         {
-            using (var context = new FestiSpecEntities())
-            {
-                context.NAW_werknemer.Add(_nawWerknemer);
-                context.Werknemer.Add(_werknemer);
-                context.Telefoonnummer.Add(_werknemerTelefoonNummer);
-                context.SaveChanges();
-            }
+            UnitOfWork UOW = new ViewModelLocator().UOW;
+            IRepository<NAW_werknemer> naw_employees = new Repository<NAW_werknemer>(UOW.Context);
+            IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
+            naw_employees.Add(_nawWerknemer);
+            UOW.Employees.Add(_werknemer);
+            phonenumber.Add(_werknemerTelefoonNummer);
+            UOW.Complete();
+
         }
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.
         private void GetAllRoles()

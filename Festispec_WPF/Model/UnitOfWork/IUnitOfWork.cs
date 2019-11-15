@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Festispec_WPF.Model.Interface_Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace Festispec_WPF.Model.UnitOfWork
     interface IUnitOfWork : IDisposable
     {
         IInspectorRepository Inspectors { get; }
+        IEmployeeRepository Employees { get;}
+        INAWEmployeeRepository NawEmployee { get; }
         int Complete();
     }
 }

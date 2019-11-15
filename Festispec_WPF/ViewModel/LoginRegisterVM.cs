@@ -41,12 +41,16 @@ namespace Festispec_WPF.ViewModel
 
                 if (targetPerson.Count == 0)
                 {
-                    Console.WriteLine("Invalid login");
-                    //TODO give error message
+                    Console.WriteLine("failed to login");
+                    FailedLoginView failedLoginView = new FailedLoginView();
+                    failedLoginView.Show();
                 }
                 else
                 {
-                    Console.WriteLine("Valid login");
+                    Console.WriteLine("login ok");
+                    MenuView menuView = new MenuView();
+                    menuView.Show();
+                        
                 }
             }
         }
