@@ -25,14 +25,14 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Vraag" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Certificaat">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Certificaat_inspecteur">
@@ -51,8 +51,8 @@
           <Property Name="Klant_ID" Type="int" Nullable="false" />
           <Property Name="Voornaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Tussenvoegsel" Type="nvarchar" MaxLength="50" />
-          <Property Name="Achernaam" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Telefoonummer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Achternaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspecteur">
@@ -60,7 +60,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Gebruikersnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Wachtwoord" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NAW" Type="int" Nullable="false" />
           <Property Name="Actief" Type="bit" Nullable="false" />
@@ -148,13 +148,14 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="Huisnummer" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Plaatsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Vraag" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag_antwoord">
@@ -170,7 +171,7 @@
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Meerkeuzevraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Meerkeuzevraag_ID" Type="int" Nullable="false" />
           <Property Name="Antwoord" Type="nvarchar" MaxLength="50" />
           <Property Name="Positie" Type="int" Nullable="false" />
@@ -184,7 +185,8 @@
           <Property Name="Tussenvoegsel" Type="nvarchar" MaxLength="50" />
           <Property Name="Achternaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="Huisnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Plaatsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Geboortedatum" Type="date" Nullable="false" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -195,8 +197,10 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="Huisnummer" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Plaatsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="KvkNummer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vestigingsnummer" Type="int" Nullable="false" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="NAW_werknemer">
@@ -208,7 +212,8 @@
           <Property Name="Tussenvoegsel" Type="nvarchar" MaxLength="50" />
           <Property Name="Achternaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="Huisnummer" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Plaatsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GeboorteDatum" Type="date" Nullable="false" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -227,7 +232,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Vraag" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Openvraag_vragenlijst">
@@ -260,7 +265,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Vraag" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VraagKop" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AntwoordKop" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -305,6 +310,14 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vereiste_certificaten">
+          <Key>
+            <PropertyRef Name="Inspectienummer" />
+            <PropertyRef Name="Certificaat_ID" />
+          </Key>
+          <Property Name="Inspectienummer" Type="int" Nullable="false" />
+          <Property Name="Certificaat_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Verzoek">
           <Key>
@@ -727,6 +740,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Vereiste_certificaten_Certificaat">
+          <End Role="Certificaat" Type="Self.Certificaat" Multiplicity="1" />
+          <End Role="Vereiste_certificaten" Type="Self.Vereiste_certificaten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Certificaat">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vereiste_certificaten">
+              <PropertyRef Name="Certificaat_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vereiste_certificaten_Inspectie">
+          <End Role="Inspectie" Type="Self.Inspectie" Multiplicity="1" />
+          <End Role="Vereiste_certificaten" Type="Self.Vereiste_certificaten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectie">
+              <PropertyRef Name="Inspectienummer" />
+            </Principal>
+            <Dependent Role="Vereiste_certificaten">
+              <PropertyRef Name="Inspectienummer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Verzoek_Klant">
           <End Role="Klant" Type="Self.Klant" Multiplicity="1" />
           <End Role="Verzoek" Type="Self.Verzoek" Multiplicity="*" />
@@ -857,6 +894,7 @@
           <EntitySet Name="Telefoonnummer" EntityType="Self.Telefoonnummer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Telefoonnummer_inspecteur" EntityType="Self.Telefoonnummer_inspecteur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vereiste_certificaten" EntityType="Self.Vereiste_certificaten" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Verzoek" EntityType="Self.Verzoek" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vragenlijst" EntityType="Self.Vragenlijst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vragenlijst_bijlage" EntityType="Self.Vragenlijst_bijlage" Schema="dbo" store:Type="Tables" />
@@ -986,6 +1024,14 @@
             <End Role="NAW_werknemer" EntitySet="NAW_werknemer" />
             <End Role="Telefoonnummer" EntitySet="Telefoonnummer" />
           </AssociationSet>
+          <AssociationSet Name="FK_Vereiste_certificaten_Certificaat" Association="Self.FK_Vereiste_certificaten_Certificaat">
+            <End Role="Certificaat" EntitySet="Certificaat" />
+            <End Role="Vereiste_certificaten" EntitySet="Vereiste_certificaten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vereiste_certificaten_Inspectie" Association="Self.FK_Vereiste_certificaten_Inspectie">
+            <End Role="Inspectie" EntitySet="Inspectie" />
+            <End Role="Vereiste_certificaten" EntitySet="Vereiste_certificaten" />
+          </AssociationSet>
           <AssociationSet Name="FK_Verzoek_Klant" Association="Self.FK_Verzoek_Klant">
             <End Role="Klant" EntitySet="Klant" />
             <End Role="Verzoek" EntitySet="Verzoek" />
@@ -1046,7 +1092,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Vragenlijst_bijlage" Relationship="Self.FK_Vragenlijst_bijlage_Bijlagevraag" FromRole="Bijlagevraag" ToRole="Vragenlijst_bijlage" />
         </EntityType>
@@ -1054,9 +1100,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inspecteur" Relationship="Self.Certificaat_inspecteur" FromRole="Certificaat" ToRole="Inspecteur" />
+          <NavigationProperty Name="Inspectie" Relationship="Self.Vereiste_certificaten" FromRole="Certificaat" ToRole="Inspectie" />
         </EntityType>
         <EntityType Name="Contactpersoon">
           <Key>
@@ -1066,8 +1113,8 @@
           <Property Name="Klant_ID" Type="Int32" Nullable="false" />
           <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Tussenvoegsel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Achernaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Telefoonummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Afspraak" Relationship="Self.FK_Afspraak_Contactpersoon" FromRole="Contactpersoon" ToRole="Afspraak" />
           <NavigationProperty Name="Klant" Relationship="Self.FK_Contactpersoon_Klant" FromRole="Contactpersoon" ToRole="Klant" />
@@ -1077,7 +1124,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Gebruikersnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Wachtwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NAW" Type="Int32" Nullable="false" />
           <Property Name="Actief" Type="Boolean" Nullable="false" />
@@ -1106,6 +1153,7 @@
           <NavigationProperty Name="Inspectie_Wel_Ingevuld_Vragenlijst" Relationship="Self.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Inspectie" FromRole="Inspectie" ToRole="Inspectie_Wel_Ingevuld_Vragenlijst" />
           <NavigationProperty Name="Inspecteur" Relationship="Self.Inspecteurs_inspectie" FromRole="Inspectie" ToRole="Inspecteur" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.Inspectie_niet_ingevuld_vragenlijst" FromRole="Inspectie" ToRole="Vragenlijst" />
+          <NavigationProperty Name="Certificaat" Relationship="Self.Vereiste_certificaten" FromRole="Inspectie" ToRole="Certificaat" />
           <NavigationProperty Name="Werknemer" Relationship="Self.Werknemers_inspectie" FromRole="Inspectie" ToRole="Werknemer" />
         </EntityType>
         <EntityType Name="Inspectie_Rapportage">
@@ -1172,14 +1220,15 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Huisnummer" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Plaatsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Locatie" FromRole="Locatie" ToRole="Inspectie" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Meerkeuzevraag_antwoord" Relationship="Self.FK_Meerkeuzevraag_antwoord_Meerkeuzevraag" FromRole="Meerkeuzevraag" ToRole="Meerkeuzevraag_antwoord" />
           <NavigationProperty Name="Meerkeuzevraag_vragenlijst" Relationship="Self.FK_Meerkeuzevraag_vragenlijst_Meerkeuzevraag" FromRole="Meerkeuzevraag" ToRole="Meerkeuzevraag_vragenlijst" />
@@ -1198,7 +1247,7 @@
             <PropertyRef Name="Vragenlijst_ID" />
             <PropertyRef Name="Meerkeuzevraag_ID" />
           </Key>
-          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Meerkeuzevraag_ID" Type="Int32" Nullable="false" />
           <Property Name="Antwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Positie" Type="Int32" Nullable="false" />
@@ -1214,7 +1263,8 @@
           <Property Name="Tussenvoegsel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Huisnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Plaatsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Geboortedatum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1227,8 +1277,10 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Huisnummer" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Plaatsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="KvkNummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Vestigingsnummer" Type="Int32" Nullable="false" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Klant" Relationship="Self.FK_Klant_NAW_Klant" FromRole="NAW_Klant" ToRole="Klant" />
         </EntityType>
@@ -1241,7 +1293,8 @@
           <Property Name="Tussenvoegsel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Huisnummer" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Plaatsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GeboorteDatum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1263,7 +1316,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Openvraag_vragenlijst" Relationship="Self.FK_Openvraag_vragenlijst_Openvraag" FromRole="Openvraag" ToRole="Openvraag_vragenlijst" />
         </EntityType>
@@ -1301,7 +1354,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VraagKop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AntwoordKop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1796,6 +1849,10 @@
           <End Role="Inspectie" Type="Self.Inspectie" Multiplicity="*" />
           <End Role="Vragenlijst" Type="Self.Vragenlijst" Multiplicity="*" />
         </Association>
+        <Association Name="Vereiste_certificaten">
+          <End Role="Certificaat" Type="Self.Certificaat" Multiplicity="*" />
+          <End Role="Inspectie" Type="Self.Inspectie" Multiplicity="*" />
+        </Association>
         <Association Name="Werknemers_inspectie">
           <End Role="Inspectie" Type="Self.Inspectie" Multiplicity="*" />
           <End Role="Werknemer" Type="Self.Werknemer" Multiplicity="*" />
@@ -1971,6 +2028,10 @@
             <End Role="Inspectie" EntitySet="Inspectie" />
             <End Role="Vragenlijst" EntitySet="Vragenlijst" />
           </AssociationSet>
+          <AssociationSet Name="Vereiste_certificaten" Association="Self.Vereiste_certificaten">
+            <End Role="Certificaat" EntitySet="Certificaat" />
+            <End Role="Inspectie" EntitySet="Inspectie" />
+          </AssociationSet>
           <AssociationSet Name="Werknemers_inspectie" Association="Self.Werknemers_inspectie">
             <End Role="Inspectie" EntitySet="Inspectie" />
             <End Role="Werknemer" EntitySet="Werknemer" />
@@ -2023,8 +2084,8 @@
                 <ScalarProperty Name="Klant_ID" ColumnName="Klant_ID" />
                 <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
                 <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
-                <ScalarProperty Name="Achernaam" ColumnName="Achernaam" />
-                <ScalarProperty Name="Telefoonummer" ColumnName="Telefoonummer" />
+                <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+                <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2033,7 +2094,7 @@
             <EntityTypeMapping TypeName="FestiSpecModel.Inspecteur">
               <MappingFragment StoreEntitySet="Inspecteur">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Gebruikersnaam" ColumnName="Gebruikersnaam" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Wachtwoord" ColumnName="Wachtwoord" />
                 <ScalarProperty Name="NAW" ColumnName="NAW" />
                 <ScalarProperty Name="Actief" ColumnName="Actief" />
@@ -2110,6 +2171,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
                 <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2148,6 +2210,7 @@
                 <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
                 <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
                 <ScalarProperty Name="Geboortedatum" ColumnName="Geboortedatum" />
                 <ScalarProperty Name="IBAN" ColumnName="IBAN" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -2160,7 +2223,9 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
                 <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
                 <ScalarProperty Name="KvkNummer" ColumnName="KvkNummer" />
+                <ScalarProperty Name="Vestigingsnummer" ColumnName="Vestigingsnummer" />
                 <ScalarProperty Name="IBAN" ColumnName="IBAN" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2174,6 +2239,7 @@
                 <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
                 <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
                 <ScalarProperty Name="GeboorteDatum" ColumnName="GeboorteDatum" />
                 <ScalarProperty Name="IBAN" ColumnName="IBAN" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -2344,6 +2410,14 @@
             </EndProperty>
             <EndProperty Name="Vragenlijst">
               <ScalarProperty Name="ID" ColumnName="Vragenlijst_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Vereiste_certificaten" TypeName="FestiSpecModel.Vereiste_certificaten" StoreEntitySet="Vereiste_certificaten">
+            <EndProperty Name="Certificaat">
+              <ScalarProperty Name="ID" ColumnName="Certificaat_ID" />
+            </EndProperty>
+            <EndProperty Name="Inspectie">
+              <ScalarProperty Name="Inspectienummer" ColumnName="Inspectienummer" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="Werknemers_inspectie" TypeName="FestiSpecModel.Werknemers_inspectie" StoreEntitySet="Werknemers_inspectie">

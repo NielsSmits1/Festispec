@@ -11,6 +11,8 @@ namespace Festispec_WPF.Model.UnitOfWork
     {
         IInspectorRepository Inspectors { get; }
         INAWInspectorRepository NAWInspectors { get;}
+
+        IPhonenumberInspectorRepository PhonenumberInspectors { get; }
         int Complete();
     }
 }

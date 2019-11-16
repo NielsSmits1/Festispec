@@ -11,20 +11,36 @@ using System.Windows.Input;
 using System.Data.Entity;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.Model.Repositories;
+using Festispec_WPF.View;
 
 namespace Festispec_WPF.ViewModel
 {
     public class InspectorCrudVM : ViewModelBase
     {
         private UnitOfWork UOW;
+        private EditInspectorWindow _editInspectorWindow;
         private IRepository<Certificaat> Certificates { get; set; }
         private CertificateVM _selected;
+        private InspectorVM _inspector;
         public ICommand AddInspectorCommand { get; set; }
         public ICommand MoveToAvailableCommand { get; set; }
         public ICommand MoveToChosenCommand { get; set; }
+        public ICommand OpenEditInspectorCommand { get; set; }
         public ObservableCollection<InspectorVM> Inspectors { get; set; }
         public ICommand CreateNewInspectorCommand { get; set; }
         public InspectorVM NewInspector { get; set; }
+
+        public InspectorVM SelectedInspector
+        {
+            get
+            {
+                return _inspector;
+            }
+            set
+            {
+                _inspector = value;
+            }
+        }
         public CertificateVM SelectedCertificate
         {
             get
@@ -56,6 +72,23 @@ namespace Festispec_WPF.ViewModel
             MoveToChosenCommand = new RelayCommand(MoveCertificateToChosen);
             AddInspectorCommand = new RelayCommand(AddInspector);
             CreateNewInspectorCommand = new RelayCommand(CreateNewInspector);
+            OpenEditInspectorCommand = new RelayCommand(OpenEditInspector);
+        }
+
+        public void OpenEditInspector()
+        {
+            SelectedInspector.InspectorData = UOW.Inspectors.Get(SelectedInspector.NAWInspector_ID);
+            var NawPhonenumber = UOW.PhonenumberInspectors.GetAll().FirstOrDefault(t => t.NAW_Inspecteur_ID == SelectedInspector.NAWInspector_ID);
+            //.Select(t => new Telefoonnummer_inspecteur { Telefoonnummer = t.Telefoonnummer, NAW_Inspecteur_ID = t.NAW_Inspecteur_ID}).ToList();
+            // var certificates
+            if(NawPhonenumber == null)
+            {
+                return;
+            }
+            SelectedInspector.PhonenumberModel = NawPhonenumber;
+           // SelectedInspector.ChosenCertificates = UOW
+            _editInspectorWindow = new EditInspectorWindow();
+            _editInspectorWindow.Show();
         }
 
         public void MoveCertificateToChosen()
@@ -78,7 +111,6 @@ namespace Festispec_WPF.ViewModel
         public void AddInspector()
         {
 
-            NewInspector.Active = true;
             Repository<NAW_inspecteur> NAW = new Repository<NAW_inspecteur>(UOW.Context);
             
             NAW.Add(NewInspector.NAWInspector);
