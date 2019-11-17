@@ -53,7 +53,6 @@ namespace Festispec_WPF.ViewModel
                 menuView.Show();
 
             }
-
         }
 
         private void OpenRegisterWindow()
