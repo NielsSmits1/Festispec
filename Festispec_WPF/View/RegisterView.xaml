@@ -33,7 +33,7 @@
                     <TextBlock Text="Plaatsnaam" />
                     <TextBox Text="{Binding TownName}" />
                     <TextBlock Text="Geboortedatum" />
-                    <TextBox Text="{Binding DoB}" />
+                    <DatePicker Text="{Binding DoB}"/>
                     <TextBlock Text="IBAN" />
                     <TextBox Text="{Binding Iban}" />
                     <TextBlock Text="E-mail" />

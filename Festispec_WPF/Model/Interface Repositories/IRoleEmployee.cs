@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Festispec_WPF.Model.Interface_Repositories
 {
-    public interface IPhonenumber : IRepository<Telefoonnummer>
+    public interface IRoleEmployee : IRepository<Rol_werknemer>
     {
     }
 }

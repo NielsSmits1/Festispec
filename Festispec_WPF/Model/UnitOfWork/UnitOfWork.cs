@@ -19,6 +19,7 @@ namespace Festispec_WPF.Model.UnitOfWork
             Employees = new EmployeeRepository(context);
             NawEmployee = new NAWEmployeeRepository(context);
             Employee = new EmployeeRepository(context);
+            RoleEmployee = new RoleEmployeeRepository(context);
         }
 
         public FestiSpecEntities Context => _context;
@@ -27,6 +28,7 @@ namespace Festispec_WPF.Model.UnitOfWork
         public IEmployeeRepository Employees { get; private set; }
         public INAWEmployeeRepository NawEmployee { get; private set; }
         public IEmployeeRepository Employee { get; private set; }
+        public IRoleEmployee RoleEmployee { get; private set; }
 
         public int Complete()
         {

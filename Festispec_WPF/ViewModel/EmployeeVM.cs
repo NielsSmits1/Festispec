@@ -15,6 +15,7 @@ namespace Festispec_WPF.ViewModel
         private NAW_werknemer _nawWerknemer;
         private Werknemer _werknemer;
         private Telefoonnummer _werknemerTelefoonNummer;
+        private UnitOfWork UOW;
 
         //constructor
         public EmployeeVM()
@@ -24,6 +25,7 @@ namespace Festispec_WPF.ViewModel
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
             _werknemerTelefoonNummer = new Telefoonnummer();
+            UOW = new ViewModelLocator().UOW;
         }
 
         //public variables
@@ -82,10 +84,10 @@ namespace Festispec_WPF.ViewModel
         //TODO check with database
         public string TownName
         {
-            get => _nawWerknemer.plaatsnaam;
+            get => _nawWerknemer.Plaatsnaam;
             set
             {
-                _nawWerknemer.plaatsnaam = value;
+                _nawWerknemer.Plaatsnaam = value;
                 RaisePropertyChanged();
             }
         }
@@ -167,27 +169,30 @@ namespace Festispec_WPF.ViewModel
         //TODO handle double register click (program crash)
         private void HandleRegister()
         {
-            UnitOfWork UOW = new ViewModelLocator().UOW;
             IRepository<NAW_werknemer> naw_employees = new Repository<NAW_werknemer>(UOW.Context);
             IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
             IRepository<Werknemer> employee = new Repository<Werknemer>(UOW.Context);
+
             naw_employees.Add(_nawWerknemer);
             employee.Add(_werknemer);
             phonenumber.Add(_werknemerTelefoonNummer);
+
             UOW.Complete();
         }
 
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.
         private void GetAllRoles()
         {
+            IRepository<Rol_werknemer> roles = new Repository<Rol_werknemer>(UOW.Context);
+
+
             RolesCollection = new ObservableCollection<string>();
-            using (var context = new FestiSpecEntities())
+
+            foreach (var variable in roles.GetAll())
             {
-                foreach (var variable in context.Rol_werknemer)
-                {
-                    RolesCollection.Add(variable.Rol);
-                }
+                RolesCollection.Add(variable.Rol);
             }
+
         }
     }
 }

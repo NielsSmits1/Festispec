@@ -7,11 +7,10 @@ using Festispec_WPF.Model.Interface_Repositories;
 
 namespace Festispec_WPF.Model.Repositories
 {
-    public class EmployeeRepository : Repository<Werknemer>, IEmployeeRepository
+    public class RoleEmployeeRepository : Repository<Rol_werknemer>, IRoleEmployee
     {
-        public EmployeeRepository(FestiSpecEntities context) : base(context)
+        public RoleEmployeeRepository(FestiSpecEntities context) : base(context)
         {
-            
         }
     }
 }
