@@ -18,18 +18,15 @@ namespace Festispec_WPF.Model.UnitOfWork
             Inspectors = new InspectorRepository(_context);
             Employees = new EmployeeRepository(context);
             NawEmployee = new NAWEmployeeRepository(context);
+            Employee = new EmployeeRepository(context);
         }
 
-        public FestiSpecEntities Context
-        {
-            get
-            {
-                return _context;
-            }
-        }
+        public FestiSpecEntities Context => _context;
+
         public IInspectorRepository Inspectors { get; private set; }
         public IEmployeeRepository Employees { get; private set; }
         public INAWEmployeeRepository NawEmployee { get; private set; }
+        public IEmployeeRepository Employee { get; private set; }
 
         public int Complete()
         {

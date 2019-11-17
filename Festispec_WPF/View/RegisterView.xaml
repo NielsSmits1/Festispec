@@ -30,11 +30,13 @@
                     <TextBox Text="{Binding Postcode}" />
                     <TextBlock Text="Huisnummer" />
                     <TextBox Text="{Binding HouseNumber}" />
+                    <TextBlock Text="Plaatsnaam" />
+                    <TextBox Text="{Binding TownName}" />
                     <TextBlock Text="Geboortedatum" />
                     <TextBox Text="{Binding DoB}" />
                     <TextBlock Text="IBAN" />
                     <TextBox Text="{Binding Iban}" />
-                    <TextBlock Text="e-mail" />
+                    <TextBlock Text="E-mail" />
                     <TextBox Text="{Binding MailAdress}" />
                 </StackPanel>
 

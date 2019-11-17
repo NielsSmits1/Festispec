@@ -79,6 +79,16 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
+        //TODO check with database
+        public string TownName
+        {
+            get => _nawWerknemer.plaatsnaam;
+            set
+            {
+                _nawWerknemer.plaatsnaam = value;
+                RaisePropertyChanged();
+            }
+        }
 
         //TODO ADD DATEPICKER
         public DateTime DoB
@@ -160,12 +170,13 @@ namespace Festispec_WPF.ViewModel
             UnitOfWork UOW = new ViewModelLocator().UOW;
             IRepository<NAW_werknemer> naw_employees = new Repository<NAW_werknemer>(UOW.Context);
             IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
+            IRepository<Werknemer> employee = new Repository<Werknemer>(UOW.Context);
             naw_employees.Add(_nawWerknemer);
-            UOW.Employees.Add(_werknemer);
+            employee.Add(_werknemer);
             phonenumber.Add(_werknemerTelefoonNummer);
             UOW.Complete();
-
         }
+
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.
         private void GetAllRoles()
         {
