@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -82,7 +83,6 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
-        //TODO check with database
         public string TownName
         {
             get => _nawWerknemer.Plaatsnaam;
@@ -93,7 +93,6 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        //TODO ADD DATEPICKER
         public DateTime DoB
         {
             get => _nawWerknemer.GeboorteDatum;
@@ -167,14 +166,22 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
-        //TODO handle double register click (program crash)
         private void HandleRegister()
         {
-            IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
-            UOW.NawEmployee.Add(_nawWerknemer);
-            UOW.Employee.Add(_werknemer);
-            phonenumber.Add(_werknemerTelefoonNummer);
-            UOW.Complete();
+            try
+            {
+                IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
+                UOW.NawEmployee.Add(_nawWerknemer);
+                UOW.Employee.Add(_werknemer);
+                phonenumber.Add(_werknemerTelefoonNummer);
+                UOW.Complete();
+            }
+            catch
+            {
+                FailedRegisterView registerFailedView = new FailedRegisterView();
+                registerFailedView.Show();
+            }
+     
         }
 
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.

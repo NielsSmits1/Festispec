@@ -222,6 +222,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\FailedRegisterView.xaml.cs">
+      <DependentUpon>FailedRegisterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FailedLoginView.xaml.cs">
       <DependentUpon>FailedLoginView.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
     <Compile Include="View\WeekplanningView.xaml.cs">
       <DependentUpon>WeekplanningView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\FailedRegisterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\FailedLoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
