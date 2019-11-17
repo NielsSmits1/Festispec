@@ -27,6 +27,7 @@ namespace Festispec_WPF.Model
         public string Achternaam { get; set; }
         public string Postcode { get; set; }
         public string Huisnummer { get; set; }
+        public string Plaatsnaam { get; set; }
         public System.DateTime GeboorteDatum { get; set; }
         public string IBAN { get; set; }
         public string Email { get; set; }

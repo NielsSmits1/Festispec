@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.Repositories;
@@ -20,12 +21,12 @@ namespace Festispec_WPF.ViewModel
         //constructor
         public EmployeeVM()
         {
+            UOW = new ViewModelLocator().UOW;
             GetAllRoles();
             RegisterCommand = new RelayCommand(HandleRegister);
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
             _werknemerTelefoonNummer = new Telefoonnummer();
-            UOW = new ViewModelLocator().UOW;
         }
 
         //public variables
@@ -169,30 +170,17 @@ namespace Festispec_WPF.ViewModel
         //TODO handle double register click (program crash)
         private void HandleRegister()
         {
-            IRepository<NAW_werknemer> naw_employees = new Repository<NAW_werknemer>(UOW.Context);
             IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
-            IRepository<Werknemer> employee = new Repository<Werknemer>(UOW.Context);
-
-            naw_employees.Add(_nawWerknemer);
-            employee.Add(_werknemer);
+            UOW.NawEmployee.Add(_nawWerknemer);
+            UOW.Employee.Add(_werknemer);
             phonenumber.Add(_werknemerTelefoonNummer);
-
             UOW.Complete();
         }
 
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.
         private void GetAllRoles()
         {
-            IRepository<Rol_werknemer> roles = new Repository<Rol_werknemer>(UOW.Context);
-
-
-            RolesCollection = new ObservableCollection<string>();
-
-            foreach (var variable in roles.GetAll())
-            {
-                RolesCollection.Add(variable.Rol);
-            }
-
+            RolesCollection = new ObservableCollection<string>(UOW.RoleEmployee.GetAll().Select(e=> (e.Rol)));
         }
     }
 }

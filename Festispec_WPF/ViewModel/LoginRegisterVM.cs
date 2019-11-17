@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec_WPF.Model;
+using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -24,35 +25,35 @@ namespace Festispec_WPF.ViewModel
 
         //local variables
         private RegisterView _windowRegisterView;
+        private IUnitOfWork UOW;
 
         public LoginRegisterVM()
         {
             LoginCommand = new RelayCommand(HandleLogin);
             RegisterCommand = new RelayCommand(OpenRegisterWindow);
+            UOW = new ViewModelLocator().UOW;
         }
 
         private void HandleLogin()
         {
-            using (var context = new FestiSpecEntities())
-            {
-                var targetPerson = (from person in context.Werknemer.ToList()
-                                    where person.Username == Username && person.Wachtwoord == Password
-                                    select person).ToList();
+            var targetPerson = UOW.Employee.GetAll()
+                .FirstOrDefault(e => e.Wachtwoord == Password && e.Username == Username);
 
-                if (targetPerson.Count == 0)
-                {
-                    Console.WriteLine("failed to login");
-                    FailedLoginView failedLoginView = new FailedLoginView();
-                    failedLoginView.Show();
-                }
-                else
-                {
-                    Console.WriteLine("login ok");
-                    MenuView menuView = new MenuView();
-                    menuView.Show();
-                        
-                }
+            if (targetPerson == null)
+            {
+                Console.WriteLine("failed to login");
+                FailedLoginView failedLoginView = new FailedLoginView();
+                failedLoginView.Show();
             }
+            else
+            {
+                //TODO exit main window
+                Console.WriteLine("login ok");
+                MenuView menuView = new MenuView();
+                menuView.Show();
+
+            }
+
         }
 
         private void OpenRegisterWindow()

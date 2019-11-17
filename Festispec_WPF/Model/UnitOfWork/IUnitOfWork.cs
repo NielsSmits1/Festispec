@@ -10,7 +10,6 @@ namespace Festispec_WPF.Model.UnitOfWork
     interface IUnitOfWork : IDisposable
     {
         IInspectorRepository Inspectors { get; }
-        IEmployeeRepository Employees { get;}
         INAWEmployeeRepository NawEmployee { get; }
         IEmployeeRepository Employee { get;}
         IRoleEmployee RoleEmployee { get; }

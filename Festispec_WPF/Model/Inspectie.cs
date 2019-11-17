@@ -21,6 +21,7 @@ namespace Festispec_WPF.Model
             this.Inspectie_Wel_Ingevuld_Vragenlijst = new HashSet<Inspectie_Wel_Ingevuld_Vragenlijst>();
             this.Inspecteur = new HashSet<Inspecteur>();
             this.Vragenlijst = new HashSet<Vragenlijst>();
+            this.Certificaat = new HashSet<Certificaat>();
             this.Werknemer = new HashSet<Werknemer>();
         }
     
@@ -44,6 +45,8 @@ namespace Festispec_WPF.Model
         public virtual ICollection<Inspecteur> Inspecteur { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Vragenlijst> Vragenlijst { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Certificaat> Certificaat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Werknemer> Werknemer { get; set; }
     }
