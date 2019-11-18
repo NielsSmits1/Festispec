@@ -37,8 +37,9 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"></RowDefinition>
@@ -47,10 +48,13 @@
                 </Grid.RowDefinitions>
                 <Label Content="Woonplaats:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Postcode" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                <TextBox Width="150" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.ZipCode, Mode=TwoWay}"></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.ZipCode, Mode=TwoWay}"></TextBox>
 
                 <Label Content="Huisnummer" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.HomeNumber, Mode=TwoWay}"></TextBox>
+                <TextBox Width="50" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.HomeNumber, Mode=TwoWay}"></TextBox>
+
+                <Label Content="Straatnaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"/>
+                <TextBox Width="150" HorizontalAlignment="Left" Name="Streetname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedInspector.StreetName, Mode=TwoWay}"></TextBox>
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>

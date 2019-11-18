@@ -20,6 +20,7 @@ namespace Festispec_WPF.ViewModel
             _nawInspecteur = new NAW_inspecteur();
             _inspecteur = new Inspecteur();
             _phonenumber = new Telefoonnummer_inspecteur();
+            DateOfBirth = DateTime.Today;
         }
 
         public InspectorVM(NAW_inspecteur NAW)
@@ -188,6 +189,18 @@ namespace Festispec_WPF.ViewModel
         {
             get { return _phonenumber.NAW_Inspecteur_ID; }
             set { _phonenumber.NAW_Inspecteur_ID = NAWInspector_ID;RaisePropertyChanged("Phonenumber_NAWInspector_ID"); }
+        }
+
+        public void EmptyAll()
+        {
+            ChosenCertificates = new ObservableCollection<CertificateVM>();
+            _nawInspecteur = new NAW_inspecteur();
+            _inspecteur = new Inspecteur();
+            _phonenumber = new Telefoonnummer_inspecteur();
+            DateOfBirth = DateTime.Today;
+            RaisePropertyChanged(null);
+
+
         }
 
     }

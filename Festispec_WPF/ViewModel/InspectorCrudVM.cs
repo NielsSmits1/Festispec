@@ -128,6 +128,9 @@ namespace Festispec_WPF.ViewModel
 
             UOW.Complete();
 
+            Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
+            RaisePropertyChanged(() => Inspectors);
+            NewInspector.EmptyAll();
         }
     }
 }
