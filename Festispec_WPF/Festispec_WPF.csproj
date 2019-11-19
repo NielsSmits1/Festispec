@@ -183,6 +183,9 @@
     <Compile Include="Model\Rol_werknemer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Tabelvraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -206,10 +209,6 @@
     <Compile Include="Model\Verzoek.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ContactPersonVM.cs" />
-    <Compile Include="ViewModel\CRCustomerVM.cs" />
-    <Compile Include="ViewModel\CustomerVM.cs" />
-    <Compile Include="ViewModel\NAW_KlantVM.cs" />
     <Compile Include="Model\Vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -219,6 +218,10 @@
     <Compile Include="Model\Werknemer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ContactPersonVM.cs" />
+    <Compile Include="ViewModel\CRCustomerVM.cs" />
+    <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\NAW_KlantVM.cs" />
     <Compile Include="ViewModel\HomeScreenVM.cs" />
     <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="ViewModel\CertificateVM.cs" />
@@ -227,7 +230,11 @@
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuVM.cs" />
+    <Compile Include="ViewModel\EmployeeCrudVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\EmployeeCrudWindow.xaml.cs">
+      <DependentUpon>EmployeeCrudWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FailedRegisterView.xaml.cs">
       <DependentUpon>FailedRegisterView.xaml</DependentUpon>
     </Compile>
@@ -246,6 +253,10 @@
     <Compile Include="View\WeekplanningView.xaml.cs">
       <DependentUpon>WeekplanningView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\EmployeeCrudWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FailedRegisterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
