@@ -12,6 +12,9 @@ using System.Data.Entity;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.View;
+using System.Data.SqlClient;
+using System.Windows.Media;
+using System.Windows.Forms;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -29,6 +32,8 @@ namespace Festispec_WPF.ViewModel
         public ObservableCollection<InspectorVM> Inspectors { get; set; }
         public ICommand CreateNewInspectorCommand { get; set; }
         public InspectorVM NewInspector { get; set; }
+
+        public string ErrorProperty { get; set; }
 
         public InspectorVM SelectedInspector
         {
@@ -57,7 +62,7 @@ namespace Festispec_WPF.ViewModel
 
         public InspectorCrudVM()
         {
-            
+
             
             UOW = new ViewModelLocator().UOW;
             NewInspector = new InspectorVM();
@@ -116,17 +121,24 @@ namespace Festispec_WPF.ViewModel
             NAW.Add(NewInspector.NAWInspector);
             UOW.Context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
             UOW.Inspectors.Add(NewInspector.InspectorData);
-            //UOW.Complete();
-            
-            //var inspector = context.Inspecteur.Find(NewInspector.Inspector_ID);
             
             foreach (var item in NewInspector.ChosenCertificates)
             {
                 UOW.Inspectors.Get(NewInspector.Inspector_ID).Certificaat.Add(item.Certificate);
             }
 
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            UOW.Complete();
+            
 
             Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
             RaisePropertyChanged(() => Inspectors);

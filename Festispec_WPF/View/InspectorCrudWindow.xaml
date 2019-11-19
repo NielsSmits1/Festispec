@@ -240,7 +240,8 @@
         </StackPanel>
 
         <StackPanel Grid.Column="10" Background="AliceBlue">
-
+            <Label Content="Incorrecte gegevens:"></Label>
+            <Label Content="{Binding ErrorProperty}"/>
         </StackPanel>
     </Grid>
 </Window>
