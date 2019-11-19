@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Festispec_WPF.Model;
+using Festispec_WPF.Model.Repositories;
+using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -9,15 +13,16 @@ namespace Festispec_WPF.ViewModel
 {
     public class EmployeeVM : ViewModelBase
     {
-        private readonly NAW_werknemer _nawWerknemer;
-
         //private variables
-        private readonly Werknemer _werknemer;
-        private readonly Telefoonnummer _werknemerTelefoonNummer;
+        private NAW_werknemer _nawWerknemer;
+        private Werknemer _werknemer;
+        private Telefoonnummer _werknemerTelefoonNummer;
+        private UnitOfWork UOW;
 
         //constructor
         public EmployeeVM()
         {
+            UOW = new ViewModelLocator().UOW;
             GetAllRoles();
             RegisterCommand = new RelayCommand(HandleRegister);
             _werknemer = new Werknemer();
@@ -78,8 +83,16 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
+        public string TownName
+        {
+            get => _nawWerknemer.Plaatsnaam;
+            set
+            {
+                _nawWerknemer.Plaatsnaam = value;
+                RaisePropertyChanged();
+            }
+        }
 
-        //TODO ADD DATEPICKER
         public DateTime DoB
         {
             get => _nawWerknemer.GeboorteDatum;
@@ -153,28 +166,28 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
-        //TODO handle double register click (program crash)
         private void HandleRegister()
         {
-            using (var context = new FestiSpecEntities())
+            try
             {
-                context.NAW_werknemer.Add(_nawWerknemer);
-                context.Werknemer.Add(_werknemer);
-                context.Telefoonnummer.Add(_werknemerTelefoonNummer);
-                context.SaveChanges();
+                IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
+                UOW.NawEmployee.Add(_nawWerknemer);
+                UOW.Employee.Add(_werknemer);
+                phonenumber.Add(_werknemerTelefoonNummer);
+                UOW.Complete();
             }
+            catch
+            {
+                FailedRegisterView registerFailedView = new FailedRegisterView();
+                registerFailedView.Show();
+            }
+     
         }
+
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.
         private void GetAllRoles()
         {
-            RolesCollection = new ObservableCollection<string>();
-            using (var context = new FestiSpecEntities())
-            {
-                foreach (var variable in context.Rol_werknemer)
-                {
-                    RolesCollection.Add(variable.Rol);
-                }
-            }
+            RolesCollection = new ObservableCollection<string>(UOW.RoleEmployee.GetAll().Select(e=> (e.Rol)));
         }
     }
 }

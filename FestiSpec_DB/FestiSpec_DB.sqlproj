@@ -6,7 +6,7 @@
     <Name>FestiSpec_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{a60833ef-74ba-4c71-96ca-cdc55618aae0}</ProjectGuid>
+    <ProjectGuid>{48c50538-54c2-479a-85f2-9a267efa552c}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -62,11 +62,16 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="dbo\Tables\Tabelvraag_vragenlijst.sql" />
+    <Build Include="dbo\Tables\Telefoonnummer.sql" />
+    <Build Include="dbo\Tables\Telefoonnummer_inspecteur.sql" />
+    <Build Include="dbo\Tables\Template.sql" />
+    <Build Include="dbo\Tables\Vereiste_certificaten.sql" />
+    <Build Include="dbo\Tables\Verzoek.sql" />
     <Build Include="dbo\Tables\Vragenlijst.sql" />
     <Build Include="dbo\Tables\Vragenlijst_bijlage.sql" />
     <Build Include="dbo\Tables\Werknemer.sql" />
     <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
-    <Build Include="dbo\Tables\Telefoonnummer_inspecteur.sql" />
     <Build Include="dbo\Tables\Afspraak.sql" />
     <Build Include="dbo\Tables\Beschikbaarheid.sql" />
     <Build Include="dbo\Tables\Bijlagevraag.sql" />
@@ -96,9 +101,5 @@
     <Build Include="dbo\Tables\Rol_werknemer.sql" />
     <Build Include="dbo\Tables\Tabelvraag.sql" />
     <Build Include="dbo\Tables\Tabelvraag_antwoord.sql" />
-    <Build Include="dbo\Tables\Tabelvraag_vragenlijst.sql" />
-    <Build Include="dbo\Tables\Telefoonnummer.sql" />
-    <Build Include="dbo\Tables\Template.sql" />
-    <Build Include="dbo\Tables\Verzoek.sql" />
   </ItemGroup>
 </Project>

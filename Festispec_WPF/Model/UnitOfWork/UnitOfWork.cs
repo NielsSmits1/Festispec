@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Festispec_WPF.Model.Interface_Repositories;
 
 namespace Festispec_WPF.Model.UnitOfWork
 {
@@ -15,16 +16,17 @@ namespace Festispec_WPF.Model.UnitOfWork
         {
             _context = context;
             Inspectors = new InspectorRepository(_context);
+            NawEmployee = new NAWEmployeeRepository(context);
+            Employee = new EmployeeRepository(context);
+            RoleEmployee = new RoleEmployeeRepository(context);
         }
 
-        public FestiSpecEntities Context
-        {
-            get
-            {
-                return _context;
-            }
-        }
+        public FestiSpecEntities Context => _context;
+
         public IInspectorRepository Inspectors { get; private set; }
+        public INAWEmployeeRepository NawEmployee { get; private set; }
+        public IEmployeeRepository Employee { get; private set; }
+        public IRoleEmployee RoleEmployee { get; private set; }
 
         public int Complete()
         {

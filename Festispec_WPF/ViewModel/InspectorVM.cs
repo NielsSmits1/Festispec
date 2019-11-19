@@ -121,8 +121,8 @@ namespace Festispec_WPF.ViewModel
 
         public string UserName
         {
-            get { return _inspecteur.Gebruikersnaam; }
-            set { _inspecteur.Gebruikersnaam = value; RaisePropertyChanged("UserName"); }
+            get { return _inspecteur.Username; }
+            set { _inspecteur.Username = value; RaisePropertyChanged("UserName"); }
         }
 
         public string Password

@@ -6,6 +6,8 @@
     [Opmerking]   NTEXT         NULL,
     [Is_Ingevuld] BIT           NOT NULL,
     CONSTRAINT [PK_Vragenlijst] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [CHK_VragenlijstTitelNotNull] CHECK (datalength([Titel])>=(1)),
+    CONSTRAINT [CHK_VragenlijstVersieNotNull] CHECK (datalength([Versie])>=(1)),
     CONSTRAINT [FK_Vragenlijst_Template] FOREIGN KEY ([Template_ID]) REFERENCES [dbo].[Template] ([ID])
 );
 
