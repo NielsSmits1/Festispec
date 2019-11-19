@@ -21,5 +21,10 @@ namespace Festispec_WPF.Model.Repositories
         {
             return Context.Inspecteur.Include(a => a.Certificaat).SingleOrDefault(a => a.ID == id);
         }
+
+        public List<Certificaat> GetCertificatesInspector(int id)
+        {
+            return Context.Inspecteur.Find(id).Certificaat.ToList();
+        }
     }
 }

@@ -199,8 +199,6 @@ namespace Festispec_WPF.ViewModel
             _phonenumber = new Telefoonnummer_inspecteur();
             DateOfBirth = DateTime.Today;
             RaisePropertyChanged(null);
-
-
         }
 
     }

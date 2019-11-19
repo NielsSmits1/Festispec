@@ -14,10 +14,5 @@ namespace Festispec_WPF.Model.Repositories
 
         }
 
-        public List<Certificaat> GetCertificatesFromInspectorID(int id)
-        {
-            List<Certificaat> InspectorCertificates = new List<Certificaat>();
-            return InspectorCertificates;
-        }
     }
 }

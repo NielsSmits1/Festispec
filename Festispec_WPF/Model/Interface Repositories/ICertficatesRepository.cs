@@ -8,6 +8,5 @@ namespace Festispec_WPF.Model.Interface_Repositories
 {
     public interface ICertficatesRepository : IRepository<Certificaat>
     {
-        List<Certificaat> GetCertificatesFromInspectorID(int id);
     }
 }
