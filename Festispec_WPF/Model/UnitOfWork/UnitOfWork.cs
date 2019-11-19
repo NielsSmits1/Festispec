@@ -1,4 +1,5 @@
-﻿using Festispec_WPF.Model.Repositories;
+﻿using Festispec_WPF.Model.Interface_Repositories;
+using Festispec_WPF.Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Festispec_WPF.Model.UnitOfWork
             NawEmployee = new NAWEmployeeRepository(context);
             Employee = new EmployeeRepository(context);
             RoleEmployee = new RoleEmployeeRepository(context);
+            NAWInspectors = new NAWInspector_Repository(_context);
         }
 
         public FestiSpecEntities Context => _context;
@@ -27,6 +29,7 @@ namespace Festispec_WPF.Model.UnitOfWork
         public INAWEmployeeRepository NawEmployee { get; private set; }
         public IEmployeeRepository Employee { get; private set; }
         public IRoleEmployee RoleEmployee { get; private set; }
+        public INAWInspectorRepository NAWInspectors { get; private set; }
 
         public int Complete()
         {

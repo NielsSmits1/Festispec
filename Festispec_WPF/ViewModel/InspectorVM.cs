@@ -22,6 +22,11 @@ namespace Festispec_WPF.ViewModel
             _phonenumber = new Telefoonnummer_inspecteur();
         }
 
+        public InspectorVM(NAW_inspecteur NAW)
+        {
+            _nawInspecteur = NAW;
+        }
+
         //NAW data
         private NAW_inspecteur _nawInspecteur;
 
@@ -54,6 +59,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + InBetween + " " + LastName;
+            }
+        }
+
         public int NAWInspector_ID
         {
             get { return _nawInspecteur.ID; }
@@ -62,7 +75,7 @@ namespace Festispec_WPF.ViewModel
 
         public string FirstName
         {
-            get { return _nawInspecteur.Voornaam; }
+            get { return _nawInspecteur.Voornaam ; }
             set { _nawInspecteur.Voornaam = value; RaisePropertyChanged("FirstName"); }
         }
 

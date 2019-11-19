@@ -114,6 +114,7 @@
     <Compile Include="Model\Interface Repositories\IEmployeeRepository.cs" />
     <Compile Include="Model\Interface Repositories\IInspectorRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWEmployeeRepository.cs" />
+    <Compile Include="Model\Interface Repositories\INAWInspectorRepository.cs" />
     <Compile Include="Model\Interface Repositories\IRepository.cs" />
     <Compile Include="Model\Interface Repositories\IRoleEmployee.cs" />
     <Compile Include="Model\Kaartvraag.cs">
@@ -176,6 +177,7 @@
     <Compile Include="Model\Repositories\EmployeeRepository.cs" />
     <Compile Include="Model\Repositories\InspectorRepository.cs" />
     <Compile Include="Model\Repositories\NAWEmployeeRepository.cs" />
+    <Compile Include="Model\Repositories\NAWInspector_Repository.cs" />
     <Compile Include="Model\Repositories\Repository.cs" />
     <Compile Include="Model\Repositories\RoleEmployeeRepository.cs" />
     <Compile Include="Model\Rol_werknemer.cs">
@@ -204,6 +206,10 @@
     <Compile Include="Model\Verzoek.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ContactPersonVM.cs" />
+    <Compile Include="ViewModel\CRCustomerVM.cs" />
+    <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\NAW_KlantVM.cs" />
     <Compile Include="Model\Vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -248,6 +254,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\FailedLoginView.xaml">
+    <Compile Include="View\CustomerCrudWindow.xaml.cs">
+      <DependentUpon>CustomerCrudWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\CustomerCrudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
