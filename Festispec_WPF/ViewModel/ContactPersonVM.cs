@@ -23,13 +23,13 @@ namespace Festispec_WPF.ViewModel
         }
         public string LastName
         {
-            get { return _contactPerson.Achernaam; }
-            set { _contactPerson.Achernaam = value; }
+            get { return _contactPerson.Achternaam; }
+            set { _contactPerson.Achternaam = value; }
         }
         public string PhoneNumber
         {
-            get { return _contactPerson.Telefoonummer; }
-            set { _contactPerson.Telefoonummer = value; }
+            get { return _contactPerson.Telefoonnummer; }
+            set { _contactPerson.Telefoonnummer = value; }
         }
         public string Email
         {
