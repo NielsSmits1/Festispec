@@ -18,6 +18,7 @@ namespace Festispec_WPF.Model
         public Certificaat()
         {
             this.Inspecteur = new HashSet<Inspecteur>();
+            this.Inspectie = new HashSet<Inspectie>();
         }
     
         public int ID { get; set; }
@@ -25,5 +26,7 @@ namespace Festispec_WPF.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspecteur> Inspecteur { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inspectie> Inspectie { get; set; }
     }
 }

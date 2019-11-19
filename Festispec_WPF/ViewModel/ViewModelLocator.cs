@@ -109,6 +109,14 @@ namespace Festispec_WPF.ViewModel
                 return ServiceLocator.Current.GetInstance<HomeScreenVM>();
             }
         }
+
+        public MenuVM GetMenu
+        {
+            get
+            {
+                return new MenuVM();
+            }
+        }
         
         public UnitOfWork UOW
         {

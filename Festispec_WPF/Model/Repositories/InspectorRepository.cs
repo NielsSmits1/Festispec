@@ -11,7 +11,6 @@ namespace Festispec_WPF.Model.Repositories
     public class InspectorRepository : Repository<Inspecteur>, IInspectorRepository
     {
 
-
         public InspectorRepository(FestiSpecEntities context) : base(context)
         {
            
