@@ -1,6 +1,7 @@
-﻿using BingMapsRESTToolkit;
-using Microsoft.Maps.MapControl.WPF;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +10,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+<<<<<<< HEAD
+=======
+using System.Windows.Navigation;
+>>>>>>> parent of 498e2ec... Created the map with pushpins
 using System.Windows.Shapes;
 
 namespace Festispec_WPF
@@ -20,7 +25,7 @@ namespace Festispec_WPF
     {
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
     }
 }
