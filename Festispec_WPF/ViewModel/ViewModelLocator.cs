@@ -41,7 +41,7 @@ namespace Festispec_WPF.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-
+            SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
@@ -52,7 +52,86 @@ namespace Festispec_WPF.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        public InspectorVM Inspector
+        {
+            get
+            {
+                return new InspectorVM();
+            }
+        }
+
+        public InspectorCrudVM InspectorCrud
+        {
+            get
+            {
+                //if(ServiceLocator.Current.GetInstance<InspectorCrudVM>() == null)
+                //{
+                //    SimpleIoc.Default.Register<InspectorCrudVM>();
+                //}
+                return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
+            }
+        }
         
+        public LoginRegisterVM GetLoginRegisterVm
+        {
+            get
+            {
+                return new LoginRegisterVM();
+            }
+        }
+        public CRCustomerVM CRCustomer
+        {
+            get
+            {
+                return new CRCustomerVM();
+            }
+        }
+
+        public EmployeeVM GetRegisterVm
+        {
+            get
+            {
+                return new EmployeeVM();
+            }
+        }
+
+        public HomeScreenVM HomeScreen
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HomeScreenVM>();
+            }
+        }
+
+        public MenuVM GetMenu
+        {
+            get
+            {
+                return new MenuVM();
+            }
+        }
+        
+        public UnitOfWork UOW
+        {
+            get
+            {
+                if(_unitOfWork == null)
+                {
+                    _unitOfWork = new UnitOfWork(new FestiSpecEntities());
+                }
+                return _unitOfWork;
+              }
+        }
+      
+        public MapPocViewModel MapPoc
+        {
+            get
+            {
+                return new MapPocViewModel();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
