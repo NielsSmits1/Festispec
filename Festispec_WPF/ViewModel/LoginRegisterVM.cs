@@ -36,14 +36,15 @@ namespace Festispec_WPF.ViewModel
 
         private void HandleLogin()
         {
+            //Window was corrupt
             var targetPerson = UOW.Employee.GetAll()
                 .FirstOrDefault(e => e.Wachtwoord == Password && e.Username == Username);
 
             if (targetPerson == null)
             {
                 Console.WriteLine("failed to login");
-                FailedLoginView failedLoginView = new FailedLoginView();
-                failedLoginView.Show();
+               // FailedLoginView failedLoginView = new FailedLoginView();
+                //failedLoginView.Show();
             }
             else
             {
