@@ -127,6 +127,14 @@ namespace Festispec_WPF.ViewModel
                     _unitOfWork = new UnitOfWork(new FestiSpecEntities());
                 }
                 return _unitOfWork;
+              }
+        }
+      
+        public MapPocViewModel MapPoc
+        {
+            get
+            {
+                return new MapPocViewModel();
             }
         }
 
