@@ -50,7 +50,7 @@
                     </Button.RenderTransform>
                 </Button>
             </Grid>
-            <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" >
+            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" >
                 <DataGrid.Columns>
                     <!--<DataGridTextColumn Header="Inspecteur" Binding="{Binding FullName}" Width="*" />-->
                     <DataGridTemplateColumn Header="Inspecteur">

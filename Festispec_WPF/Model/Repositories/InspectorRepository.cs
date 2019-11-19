@@ -26,5 +26,27 @@ namespace Festispec_WPF.Model.Repositories
         {
             return Context.Inspecteur.Find(id).Certificaat.ToList();
         }
+
+        public List<Certificaat> GetMissingCertificates(int id)
+        {
+            var CertificatesInspector = Context.Inspecteur.Find(id).Certificaat;
+            List<Certificaat> certificates = Context.Certificaat.ToList();
+            List<Certificaat> final = new List<Certificaat>();
+            foreach(var certificate in certificates)
+            {
+                if (!CertificatesInspector.Contains(certificate))
+                {
+                    final.Add(certificate);
+                }
+            }
+
+            return final;
+        }
+
+        public override void Add(Inspecteur entity)
+        {
+            entity.Actief = true;
+            base.Add(entity);
+        }
     }
 }

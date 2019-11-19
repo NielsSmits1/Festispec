@@ -132,7 +132,7 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToAvailableCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToLeftoverCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -140,13 +140,13 @@
                 </DataGrid>
 
                 <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                <DataGrid Grid.Row="1" Grid.Column="3"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding AvailableCertificates}">
+                <DataGrid Grid.Row="1" Grid.Column="3"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding LeftoverCertificates}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToChosenCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToChosenSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -174,7 +174,7 @@
                 <TextBox Width="200" HorizontalAlignment="Left" Name="Username" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.UserName}"></TextBox>
                 <TextBox Width="200" HorizontalAlignment="Left" Name="Password" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedInspector.Password}"></TextBox>
             </Grid>
-            <Button Content="Inspecteur toevoegen" Command="{Binding AddInspectorCommand}"></Button>
+            <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditInspectorCommand}"></Button>
         </StackPanel>
     </Grid>
 </Window>
