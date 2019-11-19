@@ -42,7 +42,11 @@ namespace Festispec_WPF.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 <<<<<<< HEAD
+<<<<<<< HEAD
             SimpleIoc.Default.Register<InspectorCrudVM>();
+=======
+
+>>>>>>> parent of 498e2ec... Created the map with pushpins
 =======
 
 >>>>>>> parent of 498e2ec... Created the map with pushpins
@@ -56,6 +60,7 @@ namespace Festispec_WPF.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         public InspectorVM Inspector
@@ -137,6 +142,9 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+=======
+        
+>>>>>>> parent of 498e2ec... Created the map with pushpins
 =======
         
 >>>>>>> parent of 498e2ec... Created the map with pushpins

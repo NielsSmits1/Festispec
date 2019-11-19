@@ -60,10 +60,13 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
+=======
+>>>>>>> parent of 498e2ec... Created the map with pushpins
 =======
 >>>>>>> parent of 498e2ec... Created the map with pushpins
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -87,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <Compile Include="Model\Afspraak.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -270,6 +274,10 @@
 =======
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+=======
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+>>>>>>> parent of 498e2ec... Created the map with pushpins
     <Page Include="View\MainWindow.xaml">
 >>>>>>> parent of 498e2ec... Created the map with pushpins
       <Generator>MSBuild:Compile</Generator>
@@ -283,6 +291,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -306,6 +315,8 @@
     </Page>
 =======
 >>>>>>> parent of 498e2ec... Created the map with pushpins
+=======
+>>>>>>> parent of 498e2ec... Created the map with pushpins
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -326,6 +337,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <EntityDeploy Include="Model\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -333,6 +345,8 @@
     <None Include="Model\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
+=======
+>>>>>>> parent of 498e2ec... Created the map with pushpins
 =======
 >>>>>>> parent of 498e2ec... Created the map with pushpins
     <None Include="packages.config" />

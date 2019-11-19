@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+using System.Windows.Navigation;
+>>>>>>> parent of 498e2ec... Created the map with pushpins
 =======
 using System.Windows.Navigation;
 >>>>>>> parent of 498e2ec... Created the map with pushpins
