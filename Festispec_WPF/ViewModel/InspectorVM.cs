@@ -28,7 +28,18 @@ namespace Festispec_WPF.ViewModel
             _nawInspecteur = NAW;
         }
 
-        
+        public string ActiveText
+        {
+            get
+            {
+                if (Active)
+                {
+                    return "Inactief zetten";
+                }
+
+                return "Actief zetten";
+            }
+        }
 
         //NAW data
         private NAW_inspecteur _nawInspecteur;

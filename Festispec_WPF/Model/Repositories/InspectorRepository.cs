@@ -48,5 +48,21 @@ namespace Festispec_WPF.Model.Repositories
             entity.Actief = true;
             base.Add(entity);
         }
+
+        public void SetInspectorInactive(int id)
+        {
+            var spec = Find(ins => ins.NAW == id).FirstOrDefault();
+
+            if (spec.Actief)
+            {
+                spec.Actief = false;
+            }
+            else
+            {
+                spec.Actief = true;
+            }
+        }
+
+
     }
 }

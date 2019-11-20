@@ -50,6 +50,18 @@
                     </Button.RenderTransform>
                 </Button>
             </Grid>
+            <Grid Height="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Command="{Binding ListOfAllCommand}"  IsChecked="{Binding AllChecked, Mode=TwoWay}"  Content="Alles" Grid.Column="0"/>
+                <RadioButton Command="{Binding ListOfActiveCommand}"   Content="Actieve inspecteurs" Grid.Column="1"/>
+                <RadioButton Command="{Binding ListOfInactiveCommand}"  Content="Inactieve inspecteurs" Grid.Column="2"/>
+                <RadioButton Command="{Binding ListOfLicensedCommand}"  Content="Heeft certificaat" Grid.Column="3"/>
+            </Grid>
             <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" >
                 <DataGrid.Columns>
                     <!--<DataGridTextColumn Header="Inspecteur" Binding="{Binding FullName}" Width="*" />-->
@@ -61,8 +73,14 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Straatnaam" Binding="{Binding StreetName}" Width="*" />
-                    <DataGridTextColumn Header="Huisnummer" Binding="{Binding HomeNumber}" Width="*" />
-                    
+                    <DataGridTextColumn Header="Huisnr" Binding="{Binding HomeNumber}" Width="50" />
+                    <DataGridTemplateColumn Header="Inactief/actief">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Background="Red" Foreground="White" BorderThickness="1" Content="(in)actief zetten" Command="{Binding DataContext.SetInspectorInactiveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <!--<DataGridTextColumn Header="Woonplaats" Binding="{Binding Woonplaats}" Width="*" />-->
                     
                 </DataGrid.Columns>

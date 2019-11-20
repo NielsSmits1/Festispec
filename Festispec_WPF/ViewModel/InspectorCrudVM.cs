@@ -24,30 +24,14 @@ namespace Festispec_WPF.ViewModel
         private EditInspectorWindow _editInspectorWindow;
         private CertificateVM _selected;
         private InspectorVM _inspector;
+        private int _currentlist;
+        // Create Inspector Properties
         public ICommand AddInspectorCommand { get; set; }
         public ICommand MoveToAvailableCommand { get; set; }
         public ICommand MoveToChosenCommand { get; set; }
-        public ICommand OpenEditInspectorCommand { get; set; }
-        public ICommand MoveToLeftoverCommand { get; set; }
-        public ICommand MoveToChosenSelectedCommand { get; set; }
-        public ObservableCollection<InspectorVM> Inspectors { get; set; }
-        public ICommand CreateNewInspectorCommand { get; set; }
-        public ICommand SafeEditInspectorCommand { get; set; }
         public InspectorVM NewInspector { get; set; }
 
-        public string ErrorProperty { get; set; }
 
-        public InspectorVM SelectedInspector
-        {
-            get
-            {
-                return _inspector;
-            }
-            set
-            {
-                _inspector = value;
-            }
-        }
         public CertificateVM SelectedCertificate
         {
             get
@@ -61,36 +45,115 @@ namespace Festispec_WPF.ViewModel
         }
 
         public ObservableCollection<CertificateVM> AvailableCertificates { get; set; }
+        //
+
+        //Update Inspector Commands
+        public ICommand OpenEditInspectorCommand { get; set; }
+        public ICommand MoveToLeftoverCommand { get; set; }
+        public ICommand MoveToChosenSelectedCommand { get; set; }
+        public ICommand SafeEditInspectorCommand { get; set; }
         public ObservableCollection<CertificateVM> LeftoverCertificates { get; set; }
+        //
+
+        //Read Inspector Properties
+        public ObservableCollection<InspectorVM> Inspectors { get; set; }
+        public ICommand ListOfActiveCommand { get; set; }
+        public ICommand ListOfInactiveCommand { get; set; }
+        public ICommand ListOfLicensedCommand { get; set; }
+        public bool AllChecked { get; set; }
+        public ICommand ListOfAllCommand { get; set; }
+        public ICommand SetInspectorInactiveCommand { get; set; }
+
+        public InspectorVM SelectedInspector
+        {
+            get
+            {
+                return _inspector;
+            }
+            set
+            {
+                _inspector = value;
+            }
+        }
+
         public InspectorCrudVM()
         {
-
-            
+            //UOW
             UOW = new ViewModelLocator().UOW;
+
+            //New Inspector - Create
             NewInspector = new InspectorVM();
-            Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
+
+            //List of Inspectors - Read
+            LoadAll();
+            AllChecked = true;
+
+            //All Certificates - Create
             var list = UOW.Certificates.GetAll().Select(certificaat => new CertificateVM(certificaat));
             AvailableCertificates = new ObservableCollection<CertificateVM>(list);
+
+            //Save changes
             UOW.Complete();
 
 
+            ListOfAllCommand = new RelayCommand(LoadAll);
             MoveToAvailableCommand = new RelayCommand(MoveCertificateToAvailable);
             MoveToChosenCommand = new RelayCommand(MoveCertificateToChosen);
             MoveToLeftoverCommand = new RelayCommand(MoveCertificateToLeftover);
             MoveToChosenSelectedCommand = new RelayCommand(MoveCertificateToSelectedChosen);
             AddInspectorCommand = new RelayCommand(AddInspector);
-            CreateNewInspectorCommand = new RelayCommand(CreateNewInspector);
             OpenEditInspectorCommand = new RelayCommand(OpenEditInspector);
             SafeEditInspectorCommand = new RelayCommand(SafeEditInspector);
+            ListOfActiveCommand = new RelayCommand(LoadActive);
+            ListOfInactiveCommand = new RelayCommand(LoadInactive);
+            ListOfLicensedCommand = new RelayCommand(LoadLicensed);
+            SetInspectorInactiveCommand = new RelayCommand(SetInspectorInactive);
         }
 
+        // CREATE
+        public void AddInspector()
+        {
+
+            UOW.NAWInspectors.Add(NewInspector.NAWInspector);
+            UOW.Context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
+            UOW.Inspectors.Add(NewInspector.InspectorData);
+
+            foreach (var item in NewInspector.ChosenCertificates)
+            {
+                UOW.Inspectors.Get(NewInspector.Inspector_ID).Certificaat.Add(item.Certificate);
+            }
+
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+
+            Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
+            RaisePropertyChanged(() => Inspectors);
+            AvailableCertificates = new ObservableCollection<CertificateVM>(UOW.Certificates.GetAll().Select(certificaat => new CertificateVM(certificaat)));
+            RaisePropertyChanged(() => AvailableCertificates);
+            AllChecked = true;
+            RaisePropertyChanged(() => AllChecked);
+
+            NewInspector.EmptyAll();
+        }
+
+        // UPDATE 
         public void OpenEditInspector()
         {
             SelectedInspector.InspectorData = UOW.Inspectors.GetAll().FirstOrDefault(i => i.NAW == SelectedInspector.NAWInspector_ID);
             var NawPhonenumber = UOW.PhonenumberInspectors.GetAll().FirstOrDefault(t => t.NAW_Inspecteur_ID == SelectedInspector.NAWInspector_ID);
             //.Select(t => new Telefoonnummer_inspecteur { Telefoonnummer = t.Telefoonnummer, NAW_Inspecteur_ID = t.NAW_Inspecteur_ID}).ToList();
             // var certificates
-            if(NawPhonenumber == null)
+            if (NawPhonenumber == null)
             {
                 return;
             }
@@ -105,7 +168,7 @@ namespace Festispec_WPF.ViewModel
         {
             var NAW = UOW.NAWInspectors.GetAll().FirstOrDefault(ins => ins.ID == SelectedInspector.NAWInspector_ID);
             NAW = SelectedInspector.NAWInspector;
-           // UOW.Context.Telefoonnummer_inspecteur.Remove(UOW.Context.Telefoonnummer_inspecteur.ToList().FirstOrDefault(ins => ins.NAW_Inspecteur_ID == SelectedInspector.NAWInspector_ID));
+            // UOW.Context.Telefoonnummer_inspecteur.Remove(UOW.Context.Telefoonnummer_inspecteur.ToList().FirstOrDefault(ins => ins.NAW_Inspecteur_ID == SelectedInspector.NAWInspector_ID));
             //UOW.Context.Telefoonnummer_inspecteur.Add(SelectedInspector.PhonenumberModel);
             var inspector = UOW.Inspectors.GetAll().FirstOrDefault(ins => ins.ID == SelectedInspector.Inspector_ID);
             inspector = SelectedInspector.InspectorData;
@@ -129,6 +192,55 @@ namespace Festispec_WPF.ViewModel
                 return;
             }
         }
+        public void LoadAll()
+        {
+            Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
+            RaisePropertyChanged(() => Inspectors);
+            _currentlist = 1;
+        }
+        public void SetInspectorInactive()
+        {
+            UOW.Inspectors.SetInspectorInactive(SelectedInspector.NAWInspector_ID);
+            UOW.Complete();
+            switch (_currentlist)
+            {
+                case 1:
+                    LoadAll();
+                    break;
+                case 2:
+                    LoadActive();
+                    break;
+                case 3:
+                    LoadInactive();
+                    break;
+                case 4:
+                    LoadLicensed();
+                    break;
+            }
+        }
+
+        public void LoadActive()
+        {
+            Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.ListOfActiveInspectors.Select(ins => new InspectorVM(ins)));
+            RaisePropertyChanged(() => Inspectors);
+            _currentlist = 2;
+        }
+
+        public void LoadInactive()
+        {
+            Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.ListOfInactiveInspectors.Select(ins => new InspectorVM(ins)));
+            RaisePropertyChanged(() => Inspectors);
+            _currentlist = 3;
+        }
+
+        public void LoadLicensed()
+        {
+            Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.ListOfLicensedInspectors.Select(ins => new InspectorVM(ins)));
+            RaisePropertyChanged(() => Inspectors);
+            _currentlist = 4;
+        }
+
+  
 
         public void MoveCertificateToChosen()
         {
@@ -153,44 +265,6 @@ namespace Festispec_WPF.ViewModel
             SelectedInspector.ChosenCertificates.Remove(_selected);
         }
 
-
-
-
-        public void CreateNewInspector()
-        {
-            NewInspector = new InspectorVM();
-        }
-
-        public void AddInspector()
-        {
-   
-            UOW.NAWInspectors.Add(NewInspector.NAWInspector);
-            UOW.Context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
-            UOW.Inspectors.Add(NewInspector.InspectorData);
-            
-            foreach (var item in NewInspector.ChosenCertificates)
-            {
-                UOW.Inspectors.Get(NewInspector.Inspector_ID).Certificaat.Add(item.Certificate);
-            }
-
-            try
-            {
-                UOW.Complete();
-            }
-            catch
-            {
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            
-
-            Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
-            RaisePropertyChanged(() => Inspectors);
-            AvailableCertificates = new ObservableCollection<CertificateVM>(UOW.Certificates.GetAll().Select(certificaat => new CertificateVM(certificaat)));
-            RaisePropertyChanged(() => AvailableCertificates);
-            NewInspector.EmptyAll();
-        }
+       
     }
 }

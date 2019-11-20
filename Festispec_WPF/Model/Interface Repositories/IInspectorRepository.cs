@@ -14,6 +14,7 @@ namespace Festispec_WPF.Model
 
         List<Certificaat> GetMissingCertificates(int id);
 
-        
+        void SetInspectorInactive(int id);
+
     }
 }
