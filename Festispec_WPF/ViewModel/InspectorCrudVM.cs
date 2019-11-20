@@ -182,7 +182,7 @@ namespace Festispec_WPF.ViewModel
             try
             {
                 UOW.Complete();
-                MessageBox.Show("De aanpassingen zijn doorgevoerd", "Fout bij invoeren velden",
+                MessageBox.Show("De aanpassingen zijn doorgevoerd", "Het is gelukt!",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch

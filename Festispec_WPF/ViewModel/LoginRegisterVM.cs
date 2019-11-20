@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
@@ -43,8 +44,8 @@ namespace Festispec_WPF.ViewModel
             if (targetPerson == null)
             {
                 Console.WriteLine("failed to login");
-               // FailedLoginView failedLoginView = new FailedLoginView();
-                //failedLoginView.Show();
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                  MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
