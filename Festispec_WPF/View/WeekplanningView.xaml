@@ -1,11 +1,11 @@
-﻿<Window x:Class="Festispec_WPF.View.HomeScreenView"
+﻿<Window x:Class="Festispec_WPF.View.WeekplanningView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
-        Title="Home" 
+        Title="WeekplanningView" 
         WindowState="Maximized"
         Width="1920"
         Height="1080"
@@ -50,58 +50,23 @@
             </TextBlock>
         </Grid>
 
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Border BorderThickness="12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-    <Grid Grid.Column="1" Grid.Row="1">
-    <Border BorderThickness="200">
-        <StackPanel>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60">
+                        <Bold>Weekplanning</Bold>
+                    </TextBlock>
 
-                <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
-                        Foreground="White"
-                        Grid.Column="0" Command="{Binding ShowKlantenCommand}" Background="#FF6A6A6A">
-                    <Image Source="/Images/klanten.png"/>
-                </Button>
-
-                <Button x:Name="InplanButton" Width="150" Height="150" FontSize="16"
-                        Foreground="White"
-                        Grid.Column="1" Command="{Binding ShowInplanVerzoekenCommand}" Background="#FF6A6A6A">
-                    <Image Source="/Images/verzoeken_inplannen.png"/>
-                </Button>
-
-                <Button x:Name="InspecteursButton" Width="150" Height="150" FontSize="16"
-                        Foreground="White"  
-                        Grid.Column="2" Command="{Binding ShowInspecteursCommand}" Background="#FF6A6A6A">
-                    <Image Source="/Images/inspecteurs.png"/>
-                </Button>
-
-            </Grid>
-            <Border BorderThickness="15">
-                <Grid Width="920">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Button x:Name="VragenlijstButton" Width="150" Height="150" FontSize="16" 
-                        Foreground="White"  
-                        Grid.Column="0" Command="{Binding ShowVragenlijstCommand}" Background="#FF6A6A6A">
-                        <Image Source="/Images/vragenlijsten.png" Height="140" Width="136"/>
-                    </Button>
-
-                    <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
-                        Foreground="White"  
-                        Grid.Column="1" Command="{Binding ShowKalenderCommand}" Background="#FF6A6A6A">
-                        <Image Source="/Images/weekkalender.png" Width="134"/>
-                    </Button>
+                    <Grid Grid.Row="1" Background="Gray" Margin="10,11,10,-815">
+                        <TextBlock Text="Plek voor planner!" FontSize="80" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Grid>
                 </Grid>
             </Border>
-        </StackPanel>
-    </Border>
-    </Grid>
+        </Grid>
     </Grid>
 </Window>
