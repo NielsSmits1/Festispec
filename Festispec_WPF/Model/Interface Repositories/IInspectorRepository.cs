@@ -9,5 +9,12 @@ namespace Festispec_WPF.Model
     public interface IInspectorRepository : IRepository<Inspecteur>
     {
         Inspecteur GetValidatedInspector(int id);
+
+        List<Certificaat> GetCertificatesInspector(int id);
+
+        List<Certificaat> GetMissingCertificates(int id);
+
+        void SetInspectorInactive(int id);
+
     }
 }

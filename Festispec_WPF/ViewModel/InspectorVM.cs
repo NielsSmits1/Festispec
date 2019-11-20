@@ -20,11 +20,25 @@ namespace Festispec_WPF.ViewModel
             _nawInspecteur = new NAW_inspecteur();
             _inspecteur = new Inspecteur();
             _phonenumber = new Telefoonnummer_inspecteur();
+            DateOfBirth = DateTime.Today;
         }
 
         public InspectorVM(NAW_inspecteur NAW)
         {
             _nawInspecteur = NAW;
+        }
+
+        public string ActiveText
+        {
+            get
+            {
+                if (Active)
+                {
+                    return "Inactief zetten";
+                }
+
+                return "Actief zetten";
+            }
         }
 
         //NAW data
@@ -47,6 +61,10 @@ namespace Festispec_WPF.ViewModel
             {
                 return _inspecteur;
             }
+            set
+            {
+                _inspecteur = value;
+            }
         }
 
         private Telefoonnummer_inspecteur _phonenumber;
@@ -56,6 +74,10 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return _phonenumber;
+            }
+            set
+            {
+                _phonenumber = value;
             }
         }
 
@@ -103,6 +125,15 @@ namespace Festispec_WPF.ViewModel
                 return _nawInspecteur.Postcode;
             }
             set { _nawInspecteur.Postcode = value; RaisePropertyChanged("ZipCode"); }
+        }
+
+        public string StreetName
+        {
+            get
+            {
+                return _nawInspecteur.Plaatsnaam;
+            }
+            set { _nawInspecteur.Plaatsnaam = value; RaisePropertyChanged("StreetName"); }
         }
 
         public DateTime DateOfBirth
@@ -169,6 +200,16 @@ namespace Festispec_WPF.ViewModel
         {
             get { return _phonenumber.NAW_Inspecteur_ID; }
             set { _phonenumber.NAW_Inspecteur_ID = NAWInspector_ID;RaisePropertyChanged("Phonenumber_NAWInspector_ID"); }
+        }
+
+        public void EmptyAll()
+        {
+            ChosenCertificates = new ObservableCollection<CertificateVM>();
+            _nawInspecteur = new NAW_inspecteur();
+            _inspecteur = new Inspecteur();
+            _phonenumber = new Telefoonnummer_inspecteur();
+            DateOfBirth = DateTime.Today;
+            RaisePropertyChanged(null);
         }
 
     }
