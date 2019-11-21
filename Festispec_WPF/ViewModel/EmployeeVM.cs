@@ -31,13 +31,45 @@ namespace Festispec_WPF.ViewModel
             _werknemerTelefoonNummer = new Telefoonnummer();
         }
 
+        //public  EmployeeVM(Werknemer werknemer)
+        //{
+        //    UOW = new ViewModelLocator().UOW;
+        //    _werknemer = werknemer;
+        //    _nawWerknemer = new NAW_werknemer();
+        //    _werknemerTelefoonNummer = new Telefoonnummer();
+        //}
+
+        public EmployeeVM(NAW_werknemer ne)
+        {
+            UOW = new ViewModelLocator().UOW;
+            _nawWerknemer = ne;
+            _werknemer = UOW.Employee.GetEmployeeByNAW(NAWEmployee_iD);
+        }
+
         //public variables
         public ObservableCollection<string> RolesCollection { get; set; }
 
         //properties
+        public Werknemer Werknemer
+        {
+            get { return _werknemer; }
+        }
+
+        public NAW_werknemer NAWWerknemer
+        {
+            get { return _nawWerknemer; }
+        }
+
+        // NAW Employee
+        public int NAWEmployee_iD
+        {
+            get { return _nawWerknemer.ID; }
+            set { _nawWerknemer.ID = value; RaisePropertyChanged(); }
+        }
+
         public string FirstName
         {
-            get => _nawWerknemer.Voornaam;
+            get { return _nawWerknemer.Voornaam; }            
             set
             {
                 _nawWerknemer.Voornaam = value;
@@ -62,6 +94,14 @@ namespace Festispec_WPF.ViewModel
             {
                 _nawWerknemer.Achternaam = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        public string Fullname
+        {
+            get
+            {
+                return FirstName + " " + InfixName + " " + LastName;
             }
         }
 
@@ -123,10 +163,17 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
+        
+        // employee
+        public int Employee_ID
+        {
+            get { return _werknemer.ID; }
+            set { _werknemer.ID = value; }
+        }
 
         public string Role
         {
-            get => _werknemer.Rol;
+            get { return _werknemer.Rol; }
             set
             {
                 _werknemer.Rol = value;
@@ -151,6 +198,30 @@ namespace Festispec_WPF.ViewModel
             {
                 _werknemer.Wachtwoord = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        public Boolean Active
+        {
+            get => _werknemer.Actief;
+            set { _werknemer.Actief = value; }
+        }
+
+        public int NAW
+        {
+            get { return _werknemer.NAW; }
+            set { _werknemer.NAW = value; }
+        }
+
+        public Werknemer EmployeeData
+        {
+            get
+            {
+                return _werknemer;
+            }
+            set
+            {
+                _werknemer = value;
             }
         }
 

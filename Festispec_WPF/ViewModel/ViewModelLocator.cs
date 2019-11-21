@@ -46,6 +46,7 @@ namespace Festispec_WPF.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+            SimpleIoc.Default.Register<EmployeeCrudVM>();
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
@@ -78,7 +79,16 @@ namespace Festispec_WPF.ViewModel
                 return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
             }
         }
-        
+
+        public EmployeeCrudVM EmployeeCrud
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EmployeeCrudVM>();
+            }
+        }
+
+
         public LoginRegisterVM GetLoginRegisterVm
         {
             get
