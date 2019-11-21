@@ -6,16 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Forms;
-using Festispec_WPF.Model.UnitOfWork;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight;
 using Festispec_WPF.View;
 using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.Model;
+using Festispec_WPF.Model.UnitOfWork;
 
 namespace Festispec_WPF.ViewModel
 {
-    public class CRCustomerVM: ViewModelBase
+    public class CRCustomerVM : ViewModelBase
     {
 
         public ICommand CreateCustomer { get; set; }
@@ -41,6 +41,7 @@ namespace Festispec_WPF.ViewModel
         public ContactPersonVM SelectedContactPerson { get; set; }
         public ContactPersonVM NewcontactPerson { get; set; }
 
+        //public ObservableCollection<CustomerVM> Customers { get; set; }
 
 
         public ObservableCollection<CustomerVM> Customers
@@ -59,20 +60,16 @@ namespace Festispec_WPF.ViewModel
         {
             UOW = new ViewModelLocator().UOW;
             
+
             NewCustomer = new CustomerVM();
             NewcontactPerson = new ContactPersonVM();
 
-            NewcontactPerson.customer = NewCustomer;
-            Customers = new ObservableCollection<CustomerVM>();
-            var customerslist = UOW.Customers.GetAll().ToList();
-            foreach (var item in customerslist)
-            {
-                Customers.Add(new CustomerVM(item));
-            }
+            NewcontactPerson.customer = NewCustomer; 
 
-            NewcontactPerson.customer = NewCustomer;
             
             UOW.Complete();
+
+            Customers = new ObservableCollection<CustomerVM>(UOW.Customers.GetAll().ToList().Select(a => new CustomerVM(a)));
 
             AddCustomerCommand = new RelayCommand(AddCustomer);
             EditCustomerCommand = new RelayCommand(OpenEditCustomerWindow);
@@ -86,7 +83,8 @@ namespace Festispec_WPF.ViewModel
         private void EditContactPersonData()
         {
             var contactpersonid = SelectedContactPerson.ContactPersonData.ID;
-            var databaseCustomer = UOW.ContactPerson.Find(t => t.ID == contactpersonid).First();
+
+            var databaseCustomer = UOW.ContactPersons.Find(t => t.ID == contactpersonid).First();
 
             databaseCustomer = SelectedContactPerson.ContactPersonData;
 
@@ -130,7 +128,7 @@ namespace Festispec_WPF.ViewModel
         {
             NewcontactPerson.ContactPersonData.Klant = SelectedCustomer.CustomerData;
 
-            UOW.ContactPerson.Add(NewcontactPerson.ContactPersonData);
+            UOW.ContactPersons.Add(NewcontactPerson.ContactPersonData);
             try
             {
                 UOW.Complete();
@@ -206,7 +204,6 @@ namespace Festispec_WPF.ViewModel
             RaisePropertyChanged(() => NewCustomer.ContactPersons);
             RaisePropertyChanged(() => NewcontactPerson);
             
-
         }
 
     }

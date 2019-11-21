@@ -18,8 +18,7 @@ namespace Festispec_WPF.Model.UnitOfWork
             Inspectors = new InspectorRepository(_context);
             NAWInspectors = new NAWInspector_Repository(_context);
             Customers = new CustomerRepository(_context);
-            NAWCustomers = new NAWCustomer_Repository(_context);
-            ContactPerson = new ContactPersonRepository(_context);
+            ContactPersons = new ContactPersonRepository(_context);
         }
 
         public FestiSpecEntities Context
@@ -31,9 +30,8 @@ namespace Festispec_WPF.Model.UnitOfWork
         }
         public IInspectorRepository Inspectors { get; private set; }
         public INAWInspectorRepository NAWInspectors { get; private set; }
+        public IContactPersonRepository ContactPersons { get; private set; }
         public ICustomerRepository Customers { get; private set; }
-        public INAWCustomerRepository NAWCustomers { get; private set; }
-        public IContactPersonRepository ContactPerson { get; private set; }
 
         public int Complete()
         {

@@ -50,34 +50,46 @@
                     </Button.RenderTransform>
                 </Button>
             </Grid>
-
-                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" >
-                    <DataGrid.Columns >
-                    <DataGridTemplateColumn Header="Bedrijfsnaam" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Background="White" BorderThickness="0" Content="{Binding CompanyName}" Command="{Binding DataContext.EditCustomerCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Postcode" Binding="{Binding NAW_Klant.ZipCode}" Width="*" />
-                        <DataGridTextColumn Header="Huisnummer" Binding="{Binding NAW_Klant.HouseNumber}" Width="*" />
-                        <DataGridTextColumn Header="KVK nummer" Binding="{Binding NAW_Klant.KVKNumber}" Width="*" />
-                        <DataGridTextColumn Header="IBAN" Binding="{Binding NAW_Klant.IBAN}" Width="*" />
+            <ListView Background="AliceBlue">
+                <DataGrid RenderTransformOrigin="0.5,0.5" Width="586"  Height="auto" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" >
+                    <DataGrid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.085"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </DataGrid.RenderTransform>
+   
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Bedrijfsnaam">
+                            <DataGridTemplateColumn.CellTemplate >
+                                <DataTemplate >
+                                    <Button  Background="White" BorderThickness="0" Content="{Binding CompanyName}" Command="{Binding DataContext.EditCustomerCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         
+                        <DataGridTextColumn Header="Postcode" Binding="{Binding NAW_Klant.ZipCode,Mode=TwoWay}" Width="*" />
+                        <DataGridTextColumn Header="Huisnummer" Binding="{Binding NAW_Klant.HouseNumber,Mode=TwoWay}" Width="*" />
+                        <DataGridTextColumn Header="KVK nummer" Binding="{Binding NAW_Klant.KVKNumber,Mode=TwoWay}" Width="*" />
+                        <DataGridTextColumn Header="IBAN" Binding="{Binding NAW_Klant.IBAN,Mode=TwoWay}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
 
-            <!--LIST OF EXISTING CUSTOMERS-->
+                
+                
+            </ListView>
+            <!--LIST OF EXISTING INSPECTORS-->
 
         </StackPanel>
 
-        <StackPanel Grid.Column="7" Background="AliceBlue"  Grid.ColumnSpan="2" Margin="100.6,-4,0,3.4">
+        <StackPanel Grid.Column="7" Background="AliceBlue" DataContext="{Binding CRCustomer, Source={StaticResource Locator}}" Grid.ColumnSpan="2" Margin="100.6,-4,0,3.4">
             <Label Content="Nieuwe klant aanmaken" FontSize="30" Foreground="Black"></Label>
-            <Grid >
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition Width="150"></ColumnDefinition>
                     <ColumnDefinition Width="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
@@ -89,8 +101,13 @@
                 <Label Content="Bedrijfsnaam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <!--NAME-->
                 <Label Content="Bedrijfsnaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                <TextBox Width="200" HorizontalAlignment="Left" Name="CompanyName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewCustomer.CompanyName, Mode=OneWayToSource}"></TextBox>
-                
+
+
+                <TextBox Width="150" HorizontalAlignment="Left" Name="CompanyName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewCustomer.CompanyName, Mode=TwoWay}"></TextBox>
+
+                <Label Content="Vestigingsnummer" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
+                <TextBox Width="150" HorizontalAlignment="Left" Name="LocationNumber" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.NAW_Klant.LocationNumber, Mode=TwoWay}"></TextBox>
+
                 <!--END NAME-->
             </Grid>
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -98,20 +115,27 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
-                <Label Content="Adres:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Woonplaats:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Postcode" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                <TextBox Width="150" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewCustomer.NAW_Klant.ZipCode, Mode=OneWayToSource}"></TextBox>
 
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewCustomer.NAW_Klant.ZipCode, Mode=TwoWay}"></TextBox>
                 <Label Content="Huisnummer" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.NAW_Klant.HouseNumber, Mode=OneWayToSource}"></TextBox>
+                <TextBox Width="50" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.NAW_Klant.HouseNumber, Mode=TwoWay}"></TextBox>
+                
+
+
+                <Label Content="Straatnaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
+                <TextBox  Width="150" HorizontalAlignment="Left" Name="Straatnaam" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewCustomer.NAW_Klant.StreetName, Mode=TwoWay}"></TextBox>
+
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -127,7 +151,9 @@
                 </Grid.RowDefinitions>
                 <Label Content="KVK Nummer" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Nummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBox Width="150" HorizontalAlignment="Left" Name="KVk" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewCustomer.NAW_Klant.KVKNumber, Mode=OneWayToSource}"></TextBox>
+
+                <TextBox Width="150" HorizontalAlignment="Left" Name="KVk" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewCustomer.NAW_Klant.KVKNumber, Mode=TwoWay}"></TextBox>
+
             </Grid>
             <Border BorderThickness="1" BorderBrush="Black"></Border>
 
@@ -143,7 +169,10 @@
                 </Grid.RowDefinitions>
                 <Label Content="Financiële gegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="IBAN" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.NAW_Klant.IBAN, Mode=OneWayToSource}"></TextBox>
+
+
+                <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.NAW_Klant.IBAN, Mode=TwoWay}"></TextBox>
+
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -162,11 +191,11 @@
                 <Label Content="Contactpersoon:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <!--NAME-->
                 <Label Content="Voornaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewcontactPerson.FirstName, Mode=OneWayToSource}"></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewcontactPerson.FirstName, Mode=TwoWay}"></TextBox>
                 <Label Content="Tussenvoegsel" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewcontactPerson.Affix, Mode=OneWayToSource}"></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewcontactPerson.Affix, Mode=TwoWay}"></TextBox>
                 <Label Content="Achternaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewcontactPerson.LastName, Mode=OneWayToSource}"></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewcontactPerson.LastName, Mode=TwoWay}"></TextBox>
                 <!--END NAME-->
             </Grid>
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -183,10 +212,13 @@
                 </Grid.RowDefinitions>
                 <Label Content="Contactgegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Emailadres" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewcontactPerson.Email, Mode=OneWayToSource}"></TextBox>
+                <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewcontactPerson.Email, Mode=TwoWay}"></TextBox>
                 <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="2" ></Label>
+
                 <!-- New binding required-->
-                <TextBox Width="190" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewcontactPerson.PhoneNumber, Mode=OneWayToSource}"></TextBox>
+
+                <TextBox Width="190" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewcontactPerson.PhoneNumber, Mode=TwoWay}"></TextBox>
+
             </Grid>
 
 
@@ -195,7 +227,7 @@
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
 
-
+          
             <Button Content="Klant toevoegen" Command="{Binding AddCustomerCommand}"></Button>
         </StackPanel>
 

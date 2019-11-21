@@ -5,21 +5,25 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Festispec_WPF.ViewModel
 {
     public class CustomerVM
     {
         private Klant _customer;
+
+        private NAW_KlantVM _NAW_Klant;
+
         private NAW_KlantVM _NAW_Customer;
         private ObservableCollection<ContactPersonVM> _ContactPersons;
 
+
         public NAW_KlantVM NAW_Klant
         {
-            get { return _NAW_Customer; }
-            set { _NAW_Customer = value; }
+            get { return _NAW_Klant; }
+            set { _NAW_Klant = value; }
         }
+
         public ObservableCollection<ContactPersonVM> ContactPersons
         {
             get { return _ContactPersons; }
@@ -33,11 +37,14 @@ namespace Festispec_WPF.ViewModel
         public CustomerVM(Klant customer)
         {
             _customer = customer;
-            _NAW_Customer = new NAW_KlantVM(_customer.NAW_Klant);
+            _NAW_Klant = new NAW_KlantVM(_customer.NAW_Klant);
         }
         public CustomerVM()
         {
             _customer = new Klant();
+
+            _NAW_Klant = new NAW_KlantVM();
+
             _NAW_Customer = new NAW_KlantVM();
         }
         public Klant CustomerData
@@ -46,6 +53,13 @@ namespace Festispec_WPF.ViewModel
             {
                 return _customer;
             }
+            set
+            {
+                _customer = value;
+            }
+
         }
+
+
     }
 }

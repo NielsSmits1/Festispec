@@ -32,6 +32,24 @@ namespace Festispec_WPF.ViewModel
             set { _NAW_Klant.IBAN = value; }
         }
 
+        public string LocationNumber
+        {
+            get { return _NAW_Klant.Vestigingsnummer; }
+            set
+            {
+                if (value.Length == 12)
+                {
+                    _NAW_Klant.Vestigingsnummer = value;
+                }
+            }               
+        }
+
+        public string StreetName
+        {
+            get { return _NAW_Klant.Plaatsnaam; }
+            set { _NAW_Klant.Plaatsnaam = value; }
+        }
+
         public NAW_KlantVM(NAW_Klant nAW_Klant)
         {
             _NAW_Klant = nAW_Klant;
@@ -40,8 +58,7 @@ namespace Festispec_WPF.ViewModel
         {
             _NAW_Klant = new NAW_Klant();
         }
-
-        internal NAW_Klant toModel()
+        public NAW_Klant toModel()
         {
             return _NAW_Klant;
         }
