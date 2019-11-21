@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
-        Title="CustomerUpdateWindow" Height="1080" Width="1920">
+        Title="CustomerUpdateWindow" Height="1080" Width="1920"
+        DataContext="{Binding CRCustomer, Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0"/>
@@ -50,19 +51,19 @@
                 </Button>
             </Grid>
 
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" >
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding SelectedCustomer.ContactPersons}" SelectedItem="{Binding SelectedContactPerson}" >
                 <DataGrid.Columns >
-                    <DataGridTemplateColumn Header="Bedrijfsnaam" Width="*">
+                    <DataGridTemplateColumn Header="Voornaam" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Background="White" BorderThickness="0" Content="{Binding CompanyName}" Command="{Binding DataContext.OpenEditCustomerWindow, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                <Button Background="White" BorderThickness="0" Content="{Binding FirstName}" Command="{Binding DataContext.OpenEditCustomerWindow, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Postcode" Binding="{Binding NAW_Klant.ZipCode}" Width="*" />
-                    <DataGridTextColumn Header="Huisnummer" Binding="{Binding NAW_Klant.HouseNumber}" Width="*" />
-                    <DataGridTextColumn Header="KVK nummer" Binding="{Binding NAW_Klant.KVKNumber}" Width="*" />
-                    <DataGridTextColumn Header="IBAN" Binding="{Binding NAW_Klant.IBAN}" Width="*" />
+                    <DataGridTextColumn Header="Tussenvoegsel" Binding="{Binding Affix}" Width="*" />
+                    <DataGridTextColumn Header="Achternaam" Binding="{Binding  LastName}" Width="*" />
+                    <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding PhoneNumber}" Width="*" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
 
                 </DataGrid.Columns>
             </DataGrid>

@@ -1,6 +1,7 @@
 ﻿using Festispec_WPF.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,17 @@ namespace Festispec_WPF.ViewModel
     {
         private Klant _customer;
         private NAW_KlantVM _NAW_Customer;
-        
+        private ObservableCollection<ContactPersonVM> _ContactPersons;
 
         public NAW_KlantVM NAW_Klant
         {
             get { return _NAW_Customer; }
             set { _NAW_Customer = value; }
+        }
+        public ObservableCollection<ContactPersonVM> ContactPersons
+        {
+            get { return _ContactPersons; }
+            set { _ContactPersons = value; }
         }
         public string CompanyName
         {

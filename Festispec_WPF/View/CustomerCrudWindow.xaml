@@ -51,7 +51,7 @@
                 </Button>
             </Grid>
 
-                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Customers}" >
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" >
                     <DataGrid.Columns >
                     <DataGridTemplateColumn Header="Bedrijfsnaam" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
