@@ -21,67 +21,10 @@ namespace Festispec_WPF.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-
-        private CertificateVM _selected;
-        public ObservableCollection<CertificateVM> AvailableCertificates { get; set; }
-        public ObservableCollection<CertificateVM> ChosenCertificates { get; set; }
-  
-        public CertificateVM SelectedCertificate
-        {
-            get
-            {
-                return _selected;
-            }
-            set
-            {
-                _selected = value;
-            }
-        }
-
-        public ICommand MoveToAvailableCommand { get; set; }
-        public ICommand MoveToChosenCommand { get; set; }
         public MainViewModel()
         {
-            //ChosenCertificates = new ObservableCollection<CertificateVM>();
-            //using(var context = new FestiSpecEntities())
-            //{
-            //    certificateList = new BaseRepository<Certificaat>(context);
-            //    var list = certificateList.Get().Select(certificaat => new CertificateVM(certificaat)).ToList();
-            //    AvailableCertificates = new ObservableCollection<CertificateVM>(list);
-            //    context.SaveChanges();
-            //}
-
-            //MoveToAvailableCommand = new RelayCommand(MoveCertificateToAvailable);
-            //MoveToChosenCommand = new RelayCommand(MoveCertificateToChosen);
+   
             
-        }
-
-        public void MoveCertificateToChosen()
-        {
-            ChosenCertificates.Add(_selected);
-            AvailableCertificates.Remove(_selected);
-        }
-
-        public void MoveCertificateToAvailable()
-        {
-            AvailableCertificates.Add(_selected);
-            ChosenCertificates.Remove(_selected);
-        }
-
-        public void SaveCertificatesToInspector(int inspectorID, FestiSpecEntities context)
-        {
-            //To be found out
-            //    IRepository<Inspecteur> InspectorList = new BaseRepository<Inspecteur>(context);
-            //   // var inspector = context.Inspecteur.Include("Certificaat_inspecteur").Where(c => c.ID == inspectorID);
-            //    var inspector = InspectorList.GetByID(inspectorID);
-            //foreach (var item in ChosenCertificates)
-            //{
-            //    inspector.Certificaat.Add(item.Certificate);
-            //}
-            //context.SaveChanges();
-
-            //ChosenCertificates.Clear();
-            //AvailableCertificates.Clear();
         }
     }
 }

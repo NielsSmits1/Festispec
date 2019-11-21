@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.Repositories;
@@ -249,8 +250,8 @@ namespace Festispec_WPF.ViewModel
             }
             catch
             {
-                FailedRegisterView registerFailedView = new FailedRegisterView();
-                registerFailedView.Show();
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
      
         }

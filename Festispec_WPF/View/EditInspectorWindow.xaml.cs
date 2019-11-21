@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Festispec_WPF.View
 {
     /// <summary>
-    /// Interaction logic for FailedLoginView.xaml
+    /// Interaction logic for EditInspectorWindow.xaml
     /// </summary>
-    public partial class FailedRegisterView : Window
+    public partial class EditInspectorWindow : Window
     {
-        public FailedRegisterView()
+        public EditInspectorWindow()
         {
             InitializeComponent();
         }

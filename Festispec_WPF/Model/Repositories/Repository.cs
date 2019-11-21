@@ -27,7 +27,7 @@ namespace Festispec_WPF.Model.Repositories
             return Context.Set<TEntity>().ToList();
         }
 
-        public void Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
         }
