@@ -235,9 +235,6 @@
     <Compile Include="View\EditInspectorWindow.xaml.cs">
       <DependentUpon>EditInspectorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FailedRegisterView.xaml.cs">
-      <DependentUpon>FailedRegisterView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -257,10 +254,6 @@
     <Compile Include="View\WeekplanningView.xaml.cs">
       <DependentUpon>WeekplanningView.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\FailedRegisterView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="View\CustomerCrudWindow.xaml.cs">
       <DependentUpon>CustomerCrudWindow.xaml</DependentUpon>
     </Compile>
