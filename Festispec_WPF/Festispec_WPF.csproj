@@ -238,6 +238,7 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmployeeCrudWindow.xaml.cs">
       <DependentUpon>EmployeeCrudWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditInspectorWindow.xaml.cs">
       <DependentUpon>EditInspectorWindow.xaml</DependentUpon>
     </Compile>
@@ -263,10 +264,6 @@
     <Page Include="View\EmployeeCrudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\FailedRegisterView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="View\CustomerCrudWindow.xaml.cs">
       <DependentUpon>CustomerCrudWindow.xaml</DependentUpon>
