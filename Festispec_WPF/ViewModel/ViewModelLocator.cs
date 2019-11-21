@@ -15,6 +15,7 @@
 using CommonServiceLocator;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.ViewModel.QuestionnaireFolder;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -121,7 +122,14 @@ namespace Festispec_WPF.ViewModel
                 return _unitOfWork;
             }
         }
-
+        public CreateQuestionaireVM CreateQuestionnaire
+        {
+            get
+            {
+                return new CreateQuestionaireVM();
+            }
+            
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

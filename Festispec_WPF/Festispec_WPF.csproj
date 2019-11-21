@@ -84,120 +84,120 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Afspraak.cs">
+    <Compile Include="Afspraak.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Beschikbaarheid.cs">
+    <Compile Include="Beschikbaarheid.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Bijlagevraag.cs">
+    <Compile Include="Bijlagevraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Certificaat.cs">
+    <Compile Include="Certificaat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Contactpersoon.cs">
+    <Compile Include="Contactpersoon.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Interface Repositories\IInspectorRepository.cs" />
-    <Compile Include="Model\Inspecteur.cs">
+    <Compile Include="Inspecteur.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Inspectie.cs">
+    <Compile Include="Inspectie.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Inspectie_Rapportage.cs">
+    <Compile Include="Inspectie_Rapportage.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Inspectie_Wel_Ingevuld_Vragenlijst.cs">
+    <Compile Include="Inspectie_Wel_Ingevuld_Vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Interface Repositories\INAWInspectorRepository.cs" />
-    <Compile Include="Model\Interface Repositories\IRepository.cs" />
-    <Compile Include="Model\Kaartvraag.cs">
+    <Compile Include="Kaartvraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Kaartvraag_vragenlijst.cs">
+    <Compile Include="Kaartvraag_vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Klant.cs">
+    <Compile Include="Klant.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Locatie.cs">
+    <Compile Include="Locatie.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Meerkeuzevraag.cs">
+    <Compile Include="Meerkeuzevraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Meerkeuzevraag_antwoord.cs">
+    <Compile Include="Meerkeuzevraag_antwoord.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Meerkeuzevraag_vragenlijst.cs">
+    <Compile Include="Meerkeuzevraag_vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model1.Context.cs">
+    <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model1.cs">
+    <Compile Include="Model1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model1.Designer.cs">
+    <Compile Include="Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\NAW_inspecteur.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\NAW_Klant.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\NAW_werknemer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Offerte.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Openvraag.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Openvraag_vragenlijst.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Planning_werknemer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Model\Interface Repositories\IInspectorRepository.cs" />
+    <Compile Include="Model\Interface Repositories\INAWInspectorRepository.cs" />
+    <Compile Include="Model\Interface Repositories\IRepository.cs" />
     <Compile Include="Model\Repositories\InspectorRepository.cs" />
     <Compile Include="Model\Repositories\NAWInspector_Repository.cs" />
     <Compile Include="Model\Repositories\Repository.cs" />
-    <Compile Include="Model\Rol_werknemer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Tabelvraag.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Tabelvraag_antwoord.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Tabelvraag_vragenlijst.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Telefoonnummer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Telefoonnummer_inspecteur.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Template.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Model\UnitOfWork\UnitOfWork.cs" />
-    <Compile Include="Model\Verzoek.cs">
+    <Compile Include="NAW_inspecteur.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NAW_Klant.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NAW_werknemer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Offerte.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Openvraag.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Openvraag_vragenlijst.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Planning_werknemer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rol_werknemer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tabelvraag.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tabelvraag_antwoord.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tabelvraag_vragenlijst.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Telefoonnummer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Telefoonnummer_inspecteur.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Template.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Verzoek.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\HomeScreenVM.cs" />
@@ -205,24 +205,34 @@
     <Compile Include="ViewModel\ContactPersonVM.cs" />
     <Compile Include="ViewModel\CRCustomerVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\AddQuestionsClass.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\CreateQuestionaireVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\IQuestion.cs" />
     <Compile Include="ViewModel\NAW_KlantVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\MapQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\MultipleChoiceQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\OpenQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\QuestionnaireVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\QuestionTypes.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\TableQuestionVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Model\Vragenlijst.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Vragenlijst_bijlage.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Werknemer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\CertificateVM.cs" />
     <Compile Include="ViewModel\InspectorCrudVM.cs" />
     <Compile Include="ViewModel\InspectorVM.cs" />
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\CreateQuestionnaire.xaml.cs">
+      <DependentUpon>CreateQuestionnaire.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnairePages\MulitpleChoiceQuestionPage.xaml.cs">
+      <DependentUpon>MulitpleChoiceQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnairePages\OpenQuestionPage.xaml.cs">
+      <DependentUpon>OpenQuestionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
@@ -230,6 +240,19 @@
     <Compile Include="View\CustomerCrudWindow.xaml.cs">
       <DependentUpon>CustomerCrudWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vragenlijst.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vragenlijst_bijlage.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Werknemer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Page Include="View\CreateQuestionnaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CustomerCrudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -257,6 +280,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\QuestionnairePages\MulitpleChoiceQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnairePages\OpenQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\RegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -280,11 +311,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\Model1.edmx">
+    <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\Model1.edmx.diagram">
+    <None Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -302,19 +333,21 @@
     <Resource Include="Images\verzoeken_inplannen.PNG" />
     <Resource Include="Images\vragenlijsten.PNG" />
     <Resource Include="Images\weekkalender.PNG" />
-    <Content Include="Model\Model1.Context.tt">
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\Model1.tt">
+    <Content Include="Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
