@@ -8,5 +8,8 @@ namespace Festispec_WPF.Model.Interface_Repositories
 {
     public interface IEmployeeRepository : IRepository<Werknemer>
     {
+        Werknemer GetEmployeeByNAW(int id);
     }
+
+    
 }

@@ -13,27 +13,22 @@ namespace Festispec_WPF.ViewModel
     {
         private UnitOfWork UOW;
         private EmployeeVM _employee;
+        private EmployeeVM _nawEmployee;
 
         public ObservableCollection<EmployeeVM> Employees { get; set; }
-
-        public EmployeeVM SelectedEmployee
-        {
-            get
-            {
-                return _employee;
-            }
-            set
-            {
-                _employee = value;
-            }
-        }
+        public ObservableCollection<EmployeeVM> Employees1 { get; set; }
 
         public EmployeeCrudVM()
         {
             UOW = new ViewModelLocator().UOW;
-            Employees = new ObservableCollection<EmployeeVM>(UOW.Employee.GetAll().ToList().Select(a => new EmployeeVM(a)));
-            
-            var nawEmployee = UOW.NawEmployee.GetAll().FirstOrDefault(e => e.ID == 2);
+
+            //List of all Emmployees - Read
+            LoadAll();
+        }
+
+        private void LoadAll()
+        {
+            Employees = new ObservableCollection<EmployeeVM>(UOW.NawEmployee.GetAll().ToList().Select(e => new EmployeeVM(e)));
         }
     }
 }

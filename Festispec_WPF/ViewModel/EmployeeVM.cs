@@ -30,12 +30,19 @@ namespace Festispec_WPF.ViewModel
             _werknemerTelefoonNummer = new Telefoonnummer();
         }
 
-        public  EmployeeVM(Werknemer werknemer)
+        //public  EmployeeVM(Werknemer werknemer)
+        //{
+        //    UOW = new ViewModelLocator().UOW;
+        //    _werknemer = werknemer;
+        //    _nawWerknemer = new NAW_werknemer();
+        //    _werknemerTelefoonNummer = new Telefoonnummer();
+        //}
+
+        public EmployeeVM(NAW_werknemer ne)
         {
             UOW = new ViewModelLocator().UOW;
-            _werknemer = werknemer;
-            _nawWerknemer = new NAW_werknemer();
-            _werknemerTelefoonNummer = new Telefoonnummer();
+            _nawWerknemer = ne;
+            _werknemer = UOW.Employee.GetEmployeeByNAW(NAWEmployee_iD);
         }
 
         //public variables
@@ -47,6 +54,11 @@ namespace Festispec_WPF.ViewModel
             get { return _werknemer; }
         }
 
+        public NAW_werknemer NAWWerknemer
+        {
+            get { return _nawWerknemer; }
+        }
+
         // NAW Employee
         public int NAWEmployee_iD
         {
@@ -56,7 +68,7 @@ namespace Festispec_WPF.ViewModel
 
         public string FirstName
         {
-            get => _nawWerknemer.Voornaam;
+            get { return _nawWerknemer.Voornaam; }            
             set
             {
                 _nawWerknemer.Voornaam = value;
@@ -160,7 +172,7 @@ namespace Festispec_WPF.ViewModel
 
         public string Role
         {
-            get => _werknemer.Rol;
+            get { return _werknemer.Rol; }
             set
             {
                 _werknemer.Rol = value;

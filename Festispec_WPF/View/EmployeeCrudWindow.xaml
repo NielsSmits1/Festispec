@@ -44,7 +44,7 @@
 
         <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
-                Festspec
+                Festispec
             </TextBlock>
         </Grid>
 
@@ -92,16 +92,16 @@
                                 <DataGridTemplateColumn Header="Werknemer">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Background="White" BorderThickness="0" Content="{Binding FullName}"/>
+                                            <Button Background="White" BorderThickness="0" Content="{Binding Fullname}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <!--<DataGridTextColumn Header="Role" Binding="{Binding Role}"  Width="*"/>-->
+                                <DataGridTextColumn Header="Role" Binding="{Binding Role}"  Width="*"/>
                                 <DataGridTextColumn Header="E-Mail" Binding="{Binding MailAdress}" Width="*" />
-                                <DataGridTextColumn Header="Straatnaam" Binding="{Binding TownName}" Width="*" />
-                                <DataGridTextColumn Header="Huisnummer" Binding="{Binding HomeNumber}" Width="*" />
-                                <DataGridTextColumn Header="GeboorteDatum" Binding="{Binding DoB}" Width="*" />
-                                <!--<DataGridTextColumn Header="Actief" Binding="{Binding Active}" Width="*" />-->
+                                <DataGridTextColumn Header="Postcode" Binding="{Binding Postcode}" Width="*" />
+                                <DataGridTextColumn Header="Huisnummer" Binding="{Binding HouseNumber}" Width="*" />
+                                <DataGridTextColumn Header="Actief" Binding="{Binding Active}" Width="*" />
 
                                 <!--<DataGridTextColumn Header="Woonplaats" Binding="{Binding Woonplaats}" Width="*" />-->
 
@@ -112,7 +112,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="7" Background="AliceBlue">
-                        <Label Content="Nieuwe inspecteur aanmaken" FontSize="30" Foreground="Black"></Label>
+                        <Label Content="Nieuwe werknemer aanmaken" FontSize="30" Foreground="Black"></Label>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="150"></ColumnDefinition>
@@ -276,7 +276,7 @@
                             <TextBox Width="200" HorizontalAlignment="Left" Name="Username" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewInspector.UserName, Mode=TwoWay}"></TextBox>
                             <TextBox Width="200" HorizontalAlignment="Left" Name="Password" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewInspector.Password, Mode=TwoWay}"></TextBox>
                         </Grid>
-                        <Button Content="Inspecteur toevoegen" Command="{Binding AddInspectorCommand}"></Button>
+                        <Button Content="Werknemer toevoegen" Command="{Binding AddInspectorCommand}"></Button>
                     </StackPanel>
 
                     <StackPanel Grid.Column="10" Background="AliceBlue">
