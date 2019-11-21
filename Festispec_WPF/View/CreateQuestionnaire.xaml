@@ -12,8 +12,9 @@
     <Border Padding="10 10">
         <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <ColumnDefinition Width="0.4*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.6*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel>
             <ComboBox ItemsSource="{Binding _QuestionTypes}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding SelectedQuestionType}"></ComboBox>
