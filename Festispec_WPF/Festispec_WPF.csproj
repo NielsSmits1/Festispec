@@ -228,6 +228,9 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuestionnairePages\AppendixQuestionPage.xaml.cs">
+      <DependentUpon>AppendixQuestionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuestionnairePages\MulitpleChoiceQuestionPage.xaml.cs">
       <DependentUpon>MulitpleChoiceQuestionPage.xaml</DependentUpon>
     </Compile>
@@ -279,6 +282,10 @@
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuestionnairePages\AppendixQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuestionnairePages\MulitpleChoiceQuestionPage.xaml">
       <SubType>Designer</SubType>
