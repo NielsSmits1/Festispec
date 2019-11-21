@@ -29,6 +29,7 @@
         <EntityTypeShape EntityType="FestiSpecModel.Openvraag_vragenlijst" Width="1.5" PointX="15.75" PointY="17.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Planning_werknemer" Width="1.5" PointX="12.75" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Rol_werknemer" Width="1.5" PointX="8.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag" Width="1.5" PointX="16.5" PointY="20.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_antwoord" Width="1.5" PointX="18.75" PointY="20.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_vragenlijst" Width="1.5" PointX="18.75" PointY="14.5" IsExpanded="true" />

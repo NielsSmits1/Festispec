@@ -13,5 +13,10 @@ namespace Festispec_WPF.Model.Repositories
         {
             
         }
+
+        public Werknemer GetEmployeeByNAW(int id)
+        {
+            return Context.Werknemer.FirstOrDefault(w => w.NAW == id);
+        }
     }
 }
