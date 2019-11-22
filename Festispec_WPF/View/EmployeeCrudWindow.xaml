@@ -102,9 +102,6 @@
                                 <DataGridTextColumn Header="Postcode" Binding="{Binding Postcode, Mode=TwoWay}" Width="*" />
                                 <DataGridTextColumn Header="Huisnummer" Binding="{Binding HouseNumber, Mode=TwoWay}" Width="*" />
                                 <DataGridTextColumn Header="Actief" Binding="{Binding Active, Mode=TwoWay}" Width="*" />
-
-                                <!--<DataGridTextColumn Header="Woonplaats" Binding="{Binding Woonplaats}" Width="*" />-->
-
                             </DataGrid.Columns>
                         </DataGrid>
                         <!--LIST OF EXISTING INSPECTORS-->
@@ -146,7 +143,7 @@
                                 <!-- right row -->
                                 <StackPanel Grid.Column="2">
                                     <TextBlock Text="Rol" />
-                                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding Role}" ItemsSource="{Binding RolesCollection, Mode=TwoWay}"/>
+                                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding SelectedEmployee.Role}" ItemsSource="{Binding RolesCollection, Mode=TwoWay}"/>
                                     <TextBlock Text="Username" />
                                     <TextBox Text="{Binding SelectedEmployee.Username, Mode=TwoWay}" />
                                     <TextBlock Text="Wachtwoord" />
