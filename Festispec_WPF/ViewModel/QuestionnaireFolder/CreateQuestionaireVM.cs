@@ -13,7 +13,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
     public class CreateQuestionaireVM : ViewModelBase
     {
-
+        public QuestionnaireVM newQuestionnaireVM;
         private Page _currentPage;
         public Dictionary<QuestionTypes.QuestionsTypesEnum, string> _QuestionTypes
         {
@@ -32,8 +32,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 changeQuestionType(_SelectedQuestionType);
             }
         }
-        public ICommand Command1 { get; set; }
-        public ICommand Command2 { get; set; }
+
              
         public Page CurrentPage
         {
@@ -47,10 +46,8 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public CreateQuestionaireVM()
         {
-
             CurrentPage = new OpenQuestionPage();
-
-
+            newQuestionnaireVM = new QuestionnaireVM();
         }
 
 
@@ -65,8 +62,10 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                     CurrentPage = new MulitpleChoiceQuestionPage();
                     break;
                 case QuestionTypes.QuestionsTypesEnum.TableQuestion:
+                    CurrentPage = new TableQuestionPage();
                     break;
                 case QuestionTypes.QuestionsTypesEnum.MapQuestion:
+                    CurrentPage = new MapQuestionPage();
                     break;
                 case QuestionTypes.QuestionsTypesEnum.AppendixQuestion:
                     CurrentPage = new AppendixQuestionPage();
