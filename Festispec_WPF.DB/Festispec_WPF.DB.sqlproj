@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>FestiSpec_DB</Name>
+    <Name>Festispec_WPF.DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{494e9892-4708-4874-a7e1-5087502b9072}</ProjectGuid>
+    <ProjectGuid>{345ac86b-d1eb-49d5-b2ad-5a30627a0761}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>FestiSpec_DB</RootNamespace>
-    <AssemblyName>FestiSpec_DB</AssemblyName>
+    <RootNamespace>Festispec_WPF.DB</RootNamespace>
+    <AssemblyName>Festispec_WPF.DB</AssemblyName>
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>

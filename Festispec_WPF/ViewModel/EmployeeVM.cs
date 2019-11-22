@@ -97,14 +97,6 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        public string Fullname
-        {
-            get
-            {
-                return FirstName + " " + InfixName + " " + LastName;
-            }
-        }
-
         public string Postcode
         {
             get => _nawWerknemer.Postcode;
@@ -201,16 +193,23 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public int Employee_NAW_Id
+        {
+            get { return _werknemer.NAW; }
+            set 
+            { 
+                _werknemer.NAW = value;
+            }
+        }
+
         public Boolean Active
         {
             get => _werknemer.Actief;
-            set { _werknemer.Actief = value; }
-        }
-
-        public int NAW
-        {
-            get { return _werknemer.NAW; }
-            set { _werknemer.NAW = value; }
+            set
+            {
+                _werknemer.Actief = value;
+                RaisePropertyChanged();
+            }
         }
 
         public Werknemer EmployeeData
