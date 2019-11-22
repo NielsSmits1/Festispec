@@ -77,7 +77,7 @@
             <Border BorderThickness="1" BorderBrush="Black"></Border>
 
 
-            <Button Content="Contactpersoon updaten" Command="{Binding AddContactPersonCommand }" Width="auto"></Button>
+            <Button Content="Contactpersoon aanmaken" Command="{Binding AddContactPersonCommand }" Width="auto"></Button>
         </StackPanel>
     </Grid>
 </Window>
