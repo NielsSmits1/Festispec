@@ -24,5 +24,10 @@ namespace Festispec_WPF
         {
             InitializeComponent();
         }
+
+        private void DataGrid_SelectionChanged()
+        {
+
+        }
     }
 }

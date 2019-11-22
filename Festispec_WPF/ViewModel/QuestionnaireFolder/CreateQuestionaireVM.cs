@@ -13,8 +13,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
     public class CreateQuestionaireVM : ViewModelBase
     {
-        private Page MultipleChoiceQuestionPage;
-        private Page OpenQuestionPage;
+
         private Page _currentPage;
         public Dictionary<QuestionTypes.QuestionsTypesEnum, string> _QuestionTypes
         {
@@ -48,37 +47,29 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public CreateQuestionaireVM()
         {
-            MultipleChoiceQuestionPage = new MulitpleChoiceQuestionPage();
-            OpenQuestionPage = new OpenQuestionPage();
-            CurrentPage = OpenQuestionPage;
 
-            Command1 = new RelayCommand(ChangeToMultipleChoice);
-            Command2 = new RelayCommand(ChangeToOpenQuestion);
+            CurrentPage = new OpenQuestionPage();
+
+
         }
-        private void ChangeToMultipleChoice()
-        {
-            CurrentPage = MultipleChoiceQuestionPage;
-        }
-        private void ChangeToOpenQuestion()
-        {
-            CurrentPage = OpenQuestionPage;
-        }
+
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
         {
             switch (type)
             {
                 case QuestionTypes.QuestionsTypesEnum.OpenQuestion:
-                    CurrentPage = OpenQuestionPage;
+                    CurrentPage = new OpenQuestionPage();
                     break;
                 case QuestionTypes.QuestionsTypesEnum.MultipleChoiceQuestion:
-                    CurrentPage = MultipleChoiceQuestionPage;
+                    CurrentPage = new MulitpleChoiceQuestionPage();
                     break;
                 case QuestionTypes.QuestionsTypesEnum.TableQuestion:
                     break;
                 case QuestionTypes.QuestionsTypesEnum.MapQuestion:
                     break;
                 case QuestionTypes.QuestionsTypesEnum.AppendixQuestion:
+                    CurrentPage = new AppendixQuestionPage();
                     break;
                 default:
                     break;
