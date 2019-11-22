@@ -231,11 +231,17 @@
     <Compile Include="View\QuestionnairePages\AppendixQuestionPage.xaml.cs">
       <DependentUpon>AppendixQuestionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuestionnairePages\MapQuestionPage.xaml.cs">
+      <DependentUpon>MapQuestionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuestionnairePages\MulitpleChoiceQuestionPage.xaml.cs">
       <DependentUpon>MulitpleChoiceQuestionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuestionnairePages\OpenQuestionPage.xaml.cs">
       <DependentUpon>OpenQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnairePages\TableQuestionPage.xaml.cs">
+      <DependentUpon>TableQuestionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
@@ -287,11 +293,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\QuestionnairePages\MapQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\QuestionnairePages\MulitpleChoiceQuestionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuestionnairePages\OpenQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnairePages\TableQuestionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

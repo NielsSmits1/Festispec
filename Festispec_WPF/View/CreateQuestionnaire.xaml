@@ -20,6 +20,10 @@
             <ComboBox ItemsSource="{Binding _QuestionTypes}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding SelectedQuestionType}"></ComboBox>
         </StackPanel>
         <Frame NavigationUIVisibility="Hidden" Grid.Column="1" Opacity="1" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" />
+            
+            <DataGrid Grid.Column="3">
+                
+            </DataGrid>
     </Grid>
     </Border>
 </Window>
