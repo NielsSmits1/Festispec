@@ -212,6 +212,7 @@
     <Compile Include="ViewModel\NAW_KlantVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\MapQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\MultipleChoiceQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\OpenQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\OpenQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\QuestionnaireVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\QuestionTypes.cs" />

@@ -8,5 +8,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
     public class TableQuestionVM : IQuestion
     {
+        public string Question { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

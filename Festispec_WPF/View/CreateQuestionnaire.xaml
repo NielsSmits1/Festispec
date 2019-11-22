@@ -20,9 +20,11 @@
             <ComboBox ItemsSource="{Binding _QuestionTypes}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding SelectedQuestionType}"></ComboBox>
         </StackPanel>
         <Frame NavigationUIVisibility="Hidden" Grid.Column="1" Opacity="1" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" />
-            
-            <DataGrid Grid.Column="3" Margin="15,0,15,0">
-                
+
+            <DataGrid Grid.Column="3" CanUserSortColumns="False" Margin="15,0,15,0" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding newQuestionnaireVM.questions}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Vraag" Binding="{Binding Question, Mode=TwoWay}"></DataGridTextColumn>
+                </DataGrid.Columns>    
             </DataGrid>
     </Grid>
     </Border>

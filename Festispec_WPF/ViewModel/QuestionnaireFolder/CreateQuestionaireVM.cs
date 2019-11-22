@@ -1,6 +1,7 @@
 ﻿using Festispec_WPF.View.QuestionnairePages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
     public class CreateQuestionaireVM : ViewModelBase
     {
-        public QuestionnaireVM newQuestionnaireVM;
+        private QuestionnaireVM _newQuestionnaireVM;
+        public QuestionnaireVM newQuestionnaireVM 
+        {
+            get { return _newQuestionnaireVM; }
+            set { _newQuestionnaireVM = value;
+                
+            }
+        }
         private Page _currentPage;
         public Dictionary<QuestionTypes.QuestionsTypesEnum, string> _QuestionTypes
         {
@@ -46,8 +54,12 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public CreateQuestionaireVM()
         {
-            CurrentPage = new OpenQuestionPage();
             newQuestionnaireVM = new QuestionnaireVM();
+            CurrentPage = new OpenQuestionPage();
+            Messenger.Default.Register<IQuestion>(this, (newQuestion) =>
+            {
+                newQuestionnaireVM.questions.Add(newQuestion);
+            });
         }
 
 
@@ -56,7 +68,9 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             switch (type)
             {
                 case QuestionTypes.QuestionsTypesEnum.OpenQuestion:
+                    
                     CurrentPage = new OpenQuestionPage();
+                    
                     break;
                 case QuestionTypes.QuestionsTypesEnum.MultipleChoiceQuestion:
                     CurrentPage = new MulitpleChoiceQuestionPage();

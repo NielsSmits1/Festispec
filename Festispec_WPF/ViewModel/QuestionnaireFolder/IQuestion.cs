@@ -8,6 +8,6 @@ namespace Festispec_WPF.ViewModel
 {
     public interface IQuestion
     {
-        
+        string Question { get; set; }
     }
 }

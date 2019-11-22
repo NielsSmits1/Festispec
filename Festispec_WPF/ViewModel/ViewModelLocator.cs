@@ -131,14 +131,15 @@ namespace Festispec_WPF.ViewModel
             
         }
 
-        public OpenQuestionVM OpenQuestionVM
+        public OpenQuestionPageVM OpenQuestionPageVM
         {
             get
             {
-                return new OpenQuestionVM();
+                return new OpenQuestionPageVM();
             }
 
         }
+        
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

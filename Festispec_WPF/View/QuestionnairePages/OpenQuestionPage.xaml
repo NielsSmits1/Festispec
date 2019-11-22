@@ -6,12 +6,12 @@
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      DataContext="{Binding OpenQuestionVM, Source={StaticResource Locator}}"
+      DataContext="{Binding OpenQuestionPageVM, Source={StaticResource Locator}}"
       Title="OpenQuestionPage">
 
         <StackPanel HorizontalAlignment="Center">
             <TextBlock Text="Vraag:"></TextBlock>
-            <TextBox Text="{Binding OpenQuestion}"/>
-            <Button Command="{Binding OpenQuestion}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
+            <TextBox Text="{Binding NewOpenQuestion.Question, Mode=TwoWay}"/>
+            <Button Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
         </StackPanel>
 </Page>

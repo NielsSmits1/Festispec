@@ -10,22 +10,15 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
     public class OpenQuestionVM : IQuestion
     {
-        //reference commands
-        public ICommand OpenQuestionCommand { get; set; }
+        private Openvraag openQuestionModel;
 
-        //constructor
+
+        public string Question { get => openQuestionModel.Vraag; set =>  openQuestionModel.Vraag = value; }
+
         public OpenQuestionVM()
         {
-            OpenQuestionCommand = new RelayCommand(HandleOpenQuestionSubmit);
-
+            openQuestionModel = new Openvraag();
         }
 
-        private void HandleOpenQuestionSubmit()
-        {
-            
-        }
-
-        //properties
-        public string OpenQuestion { get; set; }
     }
 }
