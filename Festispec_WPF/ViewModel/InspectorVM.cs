@@ -1,6 +1,7 @@
-﻿using Festispec_WPF.Model;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Geocoding;
+using Geocoding.Microsoft;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Festispec_WPF.ViewModel
     public class InspectorVM : ViewModelBase
     {
         public ICommand AddInspectorCommand { get; set; }
+
         public InspectorVM()
         {
             _nawInspecteur = new NAW_inspecteur();
@@ -21,11 +23,16 @@ namespace Festispec_WPF.ViewModel
             AddInspectorCommand = new RelayCommand(AddInspector);
         }
 
+        public InspectorVM(Inspecteur inspector)
+        {
+            _inspecteur = inspector;
+        }
+
         public void AddInspector()
         {
             using(var context = new FestiSpecEntities())
             {
-                Active = true;
+                //Active = true;
                 context.NAW_inspecteur.Add(_nawInspecteur);
                 context.Inspecteur.Add(_inspecteur);
                 context.SaveChanges();
@@ -40,7 +47,7 @@ namespace Festispec_WPF.ViewModel
 
         private Telefoonnummer_inspecteur _phonenumber;
 
-        public int NAWInspector_ID
+        /*public int NAWInspector_ID
         {
             get { return _nawInspecteur.ID; }
             set { _nawInspecteur.ID = value; RaisePropertyChanged("NAWInspector_ID"); }
@@ -130,7 +137,41 @@ namespace Festispec_WPF.ViewModel
         {
             get { return _inspecteur.Actief; }
             set { _inspecteur.Actief = value; RaisePropertyChanged("Active"); }
+        }*/
+
+        public string Name
+        {
+            get { return _inspecteur.Gebruikersnaam; }
+            set { RaisePropertyChanged("Name"); }
         }
 
+        public int NAW
+        {
+            get { return _inspecteur.NAW; }
+            set { _inspecteur.NAW = value; RaisePropertyChanged("NAW"); }
+        }
+
+        public string Address
+        {
+            get
+            {
+                IGeocoder geocoder = new BingMapsGeocoder(ApiKeys.BING_MAPS_KEY);
+
+                using (var context = new FestiSpecEntities())
+                {
+                    var inspectorNAW = context.NAW_inspecteur.Where(n => n.ID == _inspecteur.NAW).FirstOrDefault();
+                    var location = geocoder.Geocode(inspectorNAW.Straatnaam + " " + inspectorNAW.Huisnummer, "", "", inspectorNAW.Postcode, "Netherlands").First();
+
+                    return location.FormattedAddress;
+                }
+            }
+        }
+
+        private double _travelDistance;
+        public double TravelDistance
+        {
+            get { return _travelDistance; }
+            set { _travelDistance = value; RaisePropertyChanged("TravelDistance"); }
+        }
     }
 }

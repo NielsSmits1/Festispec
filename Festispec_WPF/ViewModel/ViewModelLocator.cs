@@ -30,18 +30,6 @@ namespace Festispec_WPF.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
-
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
@@ -66,6 +54,14 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return new LoginRegisterVM();
+            }
+        }
+
+        public MapViewModel MapView
+        {
+            get
+            {
+                return new MapViewModel();
             }
         }
 
