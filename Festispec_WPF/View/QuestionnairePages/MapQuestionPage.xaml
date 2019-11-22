@@ -12,9 +12,9 @@
         <StackPanel HorizontalAlignment="Center">
             <TextBlock Text="Vraag:"></TextBlock>
             <TextBox Text="{}"/>
-            <Image Width="150" Height="150" Source="{Binding Equipment.Picture, UpdateSourceTrigger=PropertyChanged}" ></Image>
-            <Button Command="{Binding LoadImageCommand}" Width="300" Height="30">Load Afbeelding</Button>
+            <Button Command="{Binding LoadImageCommand}" Width="300" Height="30" Margin="0,20,0,0">Load Afbeelding</Button>
             <Button Command="{}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
+            <Image Width="300" Height="300" Source="{Binding Equipment.Picture, UpdateSourceTrigger=PropertyChanged}" ></Image>
         </StackPanel>
 
     </StackPanel>
