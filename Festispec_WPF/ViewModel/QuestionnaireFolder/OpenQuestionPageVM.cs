@@ -15,7 +15,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private OpenQuestionVM _newOpenQuestion;
         public OpenQuestionVM NewOpenQuestion
         {
-            get { return _newOpenQuestion; }
+            get => _newOpenQuestion;
             set { _newOpenQuestion = value;
                 RaisePropertyChanged();
             }
@@ -29,16 +29,11 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void Submit()
         {
-            if(NewOpenQuestion.Question != null)
-            {
-                IQuestion newQuestion = NewOpenQuestion;
-                NewOpenQuestion = new OpenQuestionVM();
-                Messenger.Default.Send(newQuestion);
-                
-
-            }
-            
-            
+            if (NewOpenQuestion.Question == null) 
+                return;
+            IQuestion newQuestion = NewOpenQuestion;
+            NewOpenQuestion = new OpenQuestionVM();
+            Messenger.Default.Send(newQuestion);
         }
     }
 }

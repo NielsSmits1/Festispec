@@ -15,18 +15,30 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public MapQuestionVM()
         {
             LoadImageCommand = new RelayCommand(OpenFileExplorer);
+            SubmitQuestionCommand = new RelayCommand(Submit);
 
         }
 
-   
-
         //references
         public ICommand LoadImageCommand { get; set; }
+        public ICommand SubmitQuestionCommand { get; set; }
+
+        
         private void OpenFileExplorer()
         {
             Process.Start("explorer.exe", @"C:\Users");
         }
 
-        public string Question { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Question
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        private void Submit()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
