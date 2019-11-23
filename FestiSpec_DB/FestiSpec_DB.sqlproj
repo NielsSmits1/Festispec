@@ -6,7 +6,7 @@
     <Name>FestiSpec_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{a60833ef-74ba-4c71-96ca-cdc55618aae0}</ProjectGuid>
+    <ProjectGuid>{494e9892-4708-4874-a7e1-5087502b9072}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -22,7 +22,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -62,11 +62,7 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Vragenlijst.sql" />
-    <Build Include="dbo\Tables\Vragenlijst_bijlage.sql" />
-    <Build Include="dbo\Tables\Werknemer.sql" />
     <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
-    <Build Include="dbo\Tables\Telefoonnummer_inspecteur.sql" />
     <Build Include="dbo\Tables\Afspraak.sql" />
     <Build Include="dbo\Tables\Beschikbaarheid.sql" />
     <Build Include="dbo\Tables\Bijlagevraag.sql" />
@@ -98,7 +94,12 @@
     <Build Include="dbo\Tables\Tabelvraag_antwoord.sql" />
     <Build Include="dbo\Tables\Tabelvraag_vragenlijst.sql" />
     <Build Include="dbo\Tables\Telefoonnummer.sql" />
+    <Build Include="dbo\Tables\Telefoonnummer_inspecteur.sql" />
     <Build Include="dbo\Tables\Template.sql" />
+    <Build Include="dbo\Tables\Vereiste_certificaten.sql" />
     <Build Include="dbo\Tables\Verzoek.sql" />
+    <Build Include="dbo\Tables\Vragenlijst.sql" />
+    <Build Include="dbo\Tables\Vragenlijst_bijlage.sql" />
+    <Build Include="dbo\Tables\Werknemer.sql" />
   </ItemGroup>
 </Project>

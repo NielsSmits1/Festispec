@@ -24,7 +24,7 @@ namespace Festispec_WPF.Model
         }
     
         public int ID { get; set; }
-        public string Gebruikersnaam { get; set; }
+        public string Username { get; set; }
         public string Wachtwoord { get; set; }
         public int NAW { get; set; }
         public bool Actief { get; set; }

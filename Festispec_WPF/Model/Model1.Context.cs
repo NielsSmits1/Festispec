@@ -60,6 +60,5 @@ namespace Festispec_WPF.Model
         public virtual DbSet<Vragenlijst> Vragenlijst { get; set; }
         public virtual DbSet<Vragenlijst_bijlage> Vragenlijst_bijlage { get; set; }
         public virtual DbSet<Werknemer> Werknemer { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }
