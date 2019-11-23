@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding MapQuestionVM, Source={StaticResource Locator}}"
+
       Title="MapQuestionPage">
 
     <StackPanel>

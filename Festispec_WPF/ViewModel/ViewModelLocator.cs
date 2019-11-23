@@ -139,6 +139,14 @@ namespace Festispec_WPF.ViewModel
             }
 
         }
+
+        public MapQuestionVM MapQuestionVM
+        {
+            get
+            {
+                return new MapQuestionVM();
+            }
+        }
         
         public static void Cleanup()
         {
