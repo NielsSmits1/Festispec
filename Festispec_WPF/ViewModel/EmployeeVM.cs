@@ -25,19 +25,10 @@ namespace Festispec_WPF.ViewModel
         {
             UOW = new ViewModelLocator().UOW;
             GetAllRoles();
-            RegisterCommand = new RelayCommand(HandleRegister);
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
             _werknemerTelefoonNummer = new Telefoonnummer();
         }
-
-        //public  EmployeeVM(Werknemer werknemer)
-        //{
-        //    UOW = new ViewModelLocator().UOW;
-        //    _werknemer = werknemer;
-        //    _nawWerknemer = new NAW_werknemer();
-        //    _werknemerTelefoonNummer = new Telefoonnummer();
-        //}
 
         public EmployeeVM(NAW_werknemer ne)
         {
@@ -217,8 +208,7 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        //command references
-        public ICommand RegisterCommand { get; set; }
+        public Telefoonnummer PhonenumberModel => _werknemerTelefoonNummer;
 
         public string Phonenumber
         {
@@ -229,23 +219,6 @@ namespace Festispec_WPF.ViewModel
                 _werknemerTelefoonNummer.Telefoonnummer1 = value;
                 RaisePropertyChanged();
             }
-        }
-        private void HandleRegister()
-        {
-            try
-            {
-                IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
-                UOW.NawEmployee.Add(_nawWerknemer);
-                UOW.Employee.Add(_werknemer);
-                phonenumber.Add(_werknemerTelefoonNummer);
-                UOW.Complete();
-            }
-            catch
-            {
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-     
         }
 
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.

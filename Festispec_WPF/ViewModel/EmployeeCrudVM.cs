@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Festispec_WPF.Model;
+using Festispec_WPF.Model.Repositories;
+using Festispec_WPF.View;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel
@@ -25,6 +28,8 @@ namespace Festispec_WPF.ViewModel
         //Update Employee Commands
         public ICommand LoadEditEmployeeCommand { get; set; }
         public ICommand SafeEditEmployeeCommand { get; set; }
+        public ICommand RegisterCommand { get; set; }
+        public ICommand OpenRegisterCommand { get; set; }
 
         public EmployeeVM SelectedEmployee
         {
@@ -36,16 +41,30 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public EmployeeVM NewEmployee { get; set; }
+
         public EmployeeCrudVM()
         {
             UOW = new ViewModelLocator().UOW;
+            NewEmployee = new EmployeeVM();
+
 
             //List of all Emmployees - Read
             LoadAll();
 
             LoadEditEmployeeCommand = new RelayCommand(LoadEditData);
             SafeEditEmployeeCommand = new RelayCommand(SaveEditEmployee);
+            RegisterCommand = new RelayCommand(HandleRegister);
+            OpenRegisterCommand = new RelayCommand(OpenRegister);
+
         }
+
+        private void OpenRegister()
+        {
+           RegisterView window = new RegisterView();
+           window.Show();
+        }
+
 
         private void LoadAll()
         {
@@ -79,6 +98,23 @@ namespace Festispec_WPF.ViewModel
             {
                 MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HandleRegister()
+        {
+            try
+            {
+                IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
+                UOW.NawEmployee.Add(NewEmployee.NAWWerknemer);
+                UOW.Employee.Add(NewEmployee.Werknemer);
+                phonenumber.Add(NewEmployee.PhonenumberModel);
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

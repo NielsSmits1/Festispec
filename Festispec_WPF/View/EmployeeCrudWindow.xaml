@@ -75,7 +75,7 @@
                             <!--SEARCH BAR-->
                             <TextBox Text="Zoek naar werknemer" FontSize="15" BorderBrush="Black"></TextBox>
                             <!--CREATE BUTTON-->
-                            <Button Grid.Column="1" Content="Nieuwe werknemer&#x0a; aanmaken" FontSize="15" Background="MediumPurple" Foreground="White" BorderBrush="Black" RenderTransformOrigin="0.5,0.5" Command="{Binding CreateNewEmployeeCommand}">
+                            <Button Grid.Column="1" Content="Nieuwe werknemer&#x0a; aanmaken" FontSize="15" Background="MediumPurple" Foreground="White" BorderBrush="Black" RenderTransformOrigin="0.5,0.5" Command="{Binding OpenRegisterCommand}">
                                 <Button.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -109,7 +109,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="7" Background="AliceBlue">
-                        <Label Content="Nieuwe werknemer aanmaken" FontSize="30" Foreground="Black"></Label>
+                        <Label Content="Updaten werknemer" FontSize="30" Foreground="Black"></Label>
                         <Border BorderThickness="10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
