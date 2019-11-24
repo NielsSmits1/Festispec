@@ -225,6 +225,8 @@
     <Compile Include="ViewModel\ContactPersonVM.cs" />
     <Compile Include="ViewModel\CRCustomerVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\InspectionCrudVM.cs" />
+    <Compile Include="ViewModel\InspectionVM.cs" />
     <Compile Include="ViewModel\NAW_KlantVM.cs" />
     <Compile Include="ViewModel\HomeScreenVM.cs" />
     <Compile Include="ViewModel\EmployeeVM.cs" />
@@ -236,15 +238,25 @@
     <Compile Include="ViewModel\MenuVM.cs" />
     <Compile Include="ViewModel\EmployeeCrudVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\CreateInspectionWindow.xaml.cs">
+      <DependentUpon>CreateInspectionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeeCrudWindow.xaml.cs">
       <DependentUpon>EmployeeCrudWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditInspectorWindow.xaml.cs">
       <DependentUpon>EditInspectorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InspectionWindow.xaml.cs">
+      <DependentUpon>InspectionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\CreateInspectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EditInspectorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -275,6 +287,10 @@
     <Page Include="View\HomeScreenView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InspectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\InspectorCrudWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
