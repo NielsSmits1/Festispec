@@ -50,26 +50,20 @@ namespace Festispec_WPF.ViewModel
         public ObservableCollection<string> RolesCollection { get; set; }
 
         //properties
-        public Werknemer Werknemer
-        {
-            get { return _werknemer; }
-        }
+        public Werknemer Werknemer => _werknemer;
 
-        public NAW_werknemer NAWWerknemer
-        {
-            get { return _nawWerknemer; }
-        }
+        public NAW_werknemer NAWWerknemer => _nawWerknemer;
 
         // NAW Employee
         public int NAWEmployee_iD
         {
-            get { return _nawWerknemer.ID; }
+            get => _nawWerknemer.ID;
             set { _nawWerknemer.ID = value; RaisePropertyChanged(); }
         }
 
         public string FirstName
         {
-            get { return _nawWerknemer.Voornaam; }            
+            get => _nawWerknemer.Voornaam;
             set
             {
                 _nawWerknemer.Voornaam = value;
@@ -159,13 +153,13 @@ namespace Festispec_WPF.ViewModel
         // employee
         public int Employee_ID
         {
-            get { return _werknemer.ID; }
-            set { _werknemer.ID = value; }
+            get => _werknemer.ID;
+            set { _werknemer.ID = value; RaisePropertyChanged(); }
         }
 
         public string Role
         {
-            get { return _werknemer.Rol; }
+            get => _werknemer.Rol;
             set
             {
                 _werknemer.Rol = value;
@@ -195,14 +189,15 @@ namespace Festispec_WPF.ViewModel
 
         public int Employee_NAW_Id
         {
-            get { return _werknemer.NAW; }
+            get => _werknemer.NAW;
             set 
             { 
                 _werknemer.NAW = value;
+                RaisePropertyChanged();
             }
         }
 
-        public Boolean Active
+        public bool Active
         {
             get => _werknemer.Actief;
             set
@@ -221,6 +216,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _werknemer = value;
+                RaisePropertyChanged();
             }
         }
 
