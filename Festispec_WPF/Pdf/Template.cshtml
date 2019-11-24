@@ -1,0 +1,62 @@
+﻿<div>
+    <img class="logo" src="~logo.png" />
+    <div>
+        Klant gegevens <br />
+        @Model.CustomerName
+    </div>
+    <br />
+    <div>
+        Inspectie gegevens<br />
+        @Model.InspectionTitle
+    </div>
+    <br />
+    <div>
+        Datum<br />
+        @Model.Date
+    </div>
+    <br />
+    <div>
+        @Model.Introduction
+    </div>
+    <br />
+    <div>
+        @Model.SummaryOfInspection
+    </div>
+    <br />
+    <div>
+        @Model.Advice
+    </div>
+    <br />
+    <div>
+        @foreach (var question in Model.Questions)
+        {
+            <div>
+                Vraag: @question.QuestionTitle
+            </div>
+            <div>
+                Antwoorden:<br />
+                @foreach (var awnser in question.GivenAwnsers)
+                {
+                    @awnser
+                    <br />
+                }
+            </div>
+            <div>
+                Chart: <br />
+                <img class="chart" src="@question.ChartHtml" />
+            </div>
+            <br />
+        }
+    </div>
+</div>
+<style>
+    .logo {
+        float: right;
+        width: 250px;
+    }
+
+    .chart{
+        width: 300px;
+        height: 300px;
+    }
+</style>
