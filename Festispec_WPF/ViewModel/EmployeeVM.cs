@@ -209,10 +209,7 @@ namespace Festispec_WPF.ViewModel
 
         public Werknemer EmployeeData
         {
-            get
-            {
-                return _werknemer;
-            }
+            get => _werknemer;
             set
             {
                 _werknemer = value;

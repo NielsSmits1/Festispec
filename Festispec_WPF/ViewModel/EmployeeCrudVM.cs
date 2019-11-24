@@ -28,10 +28,7 @@ namespace Festispec_WPF.ViewModel
 
         public EmployeeVM SelectedEmployee
         {
-            get
-            {
-                return _employee;
-            }
+            get => _employee;
             set
             {
                 _employee = value;
@@ -82,7 +79,6 @@ namespace Festispec_WPF.ViewModel
             {
                 MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
         }
     }
