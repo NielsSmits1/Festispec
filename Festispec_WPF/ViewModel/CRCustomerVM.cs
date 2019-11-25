@@ -119,9 +119,14 @@ namespace Festispec_WPF.ViewModel
             {
                 MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
                  MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SelectedCustomer = BeforeChangeCustomer;
-                return;
             }
+
+
+            UOW.Context.Entry<NAW_Klant>(SelectedCustomer.NAW_Klant.NawData).Reload();
+            UOW.Context.Entry<Klant>(SelectedCustomer.CustomerData).Reload();
+
+            RaisePropertyChanged(() => SelectedCustomer);
+
 
         }
         private void AddContactPerson()
@@ -165,7 +170,7 @@ namespace Festispec_WPF.ViewModel
         }
         private void EditContactPersonWindow()
         {
-            SelectedCustomer = new CustomerVM(UOW.Customers.Find(t => t.ID == SelectedCustomer.CustomerData.ID).First());
+            //SelectedCustomer = new CustomerVM(UOW.Customers.Find(t => t.ID == SelectedCustomer.CustomerData.ID).First());
             ContactPersonUpdateWindow contactPersonUpdateWindow = new ContactPersonUpdateWindow();
             contactPersonUpdateWindow.Show();
         }

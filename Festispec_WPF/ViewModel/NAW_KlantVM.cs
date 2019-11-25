@@ -37,10 +37,10 @@ namespace Festispec_WPF.ViewModel
             get { return _NAW_Klant.Vestigingsnummer; }
             set
             {
-                if (value.Length == 12)
-                {
+                //if (value.Length == 12)
+                //{
                     _NAW_Klant.Vestigingsnummer = value;
-                }
+                //}
             }               
         }
 
@@ -58,6 +58,14 @@ namespace Festispec_WPF.ViewModel
         {
             _NAW_Klant = new NAW_Klant();
         }
+
+
+        public NAW_Klant NawData
+        {
+            get { return _NAW_Klant; }
+            set { _NAW_Klant = value; }
+        }
+
         public NAW_Klant toModel()
         {
             return _NAW_Klant;
