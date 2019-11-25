@@ -10,7 +10,7 @@ namespace Festispec_WPF.Helpers
     {
 
         //TODO: parameter of asked servey to have a rapportage generated
-        public void GeneratePdf()
+        public string GeneratePdf(int selectedInspection)
         {
             //stub data
             string htmlCode;
@@ -91,10 +91,12 @@ namespace Festispec_WPF.Helpers
                 toBeParsed = reader.ReadToEnd();
             }
 
+            var saveLocation = @"~\poc.pdf";
             htmlCode = Razor.Parse(toBeParsed, parsingModel);
 
             IronPdf.HtmlToPdf Renderer = new IronPdf.HtmlToPdf();
-            Renderer.RenderHtmlAsPdf(htmlCode).SaveAs(@"~\poc.pdf");
+            Renderer.RenderHtmlAsPdf(htmlCode).SaveAs(saveLocation);
+            return saveLocation;
         }
     }
 }
