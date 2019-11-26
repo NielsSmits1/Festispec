@@ -22,6 +22,11 @@ namespace Festispec_WPF.ViewModel
             _location = loc;
         }
 
+        public Locatie Locatie
+        {
+            get => _location;
+        }
+
         public int ID
         {
             get => _location.ID;

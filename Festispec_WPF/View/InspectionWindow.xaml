@@ -86,22 +86,17 @@
                                 </Button.RenderTransform>
                             </Button>
                         </Grid>
-                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedEmployee}" ItemsSource="{Binding Employees}" >
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedEmployee}" ItemsSource="{Binding Inspection}" >
                             <DataGrid.Columns>
                                 <!--<DataGridTextColumn Header="Inspecteur" Binding="{Binding FullName}" Width="*" />-->
-                                <DataGridTemplateColumn Header="Inspectie Titel">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Background="White" BorderThickness="0" Content="{Binding Fullname}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+
+                                <DataGridTextColumn Header="Titel" Binding="{Binding Title}"  Width="*"/>
                                 <!--<DataGridTextColumn Header="Role" Binding="{Binding Role}"  Width="*"/>-->
-                                <DataGridTextColumn Header="Klant" Binding="{Binding Role}"  Width="*"/>
-                                <DataGridTextColumn Header="Postcode" Binding="{Binding MailAdress}" Width="*" />
-                                <DataGridTextColumn Header="Huisnummer" Binding="{Binding Postcode}" Width="*" />
-                                <DataGridTextColumn Header="Straatnaam" Binding="{Binding HouseNumber}" Width="*" />
-                                <DataGridTextColumn Header="Voltooid" Binding="{Binding Active}" Width="*" />
+                                <DataGridTextColumn Header="Klant" Binding="{Binding Customer.CompanyName}"  Width="*"/>
+                                <DataGridTextColumn Header="Postcode" Binding="{Binding Location.ZipCode}" Width="*" />
+                                <DataGridTextColumn Header="Huisnummer" Binding="{Binding Location.HomeNumber}" Width="*" />
+                                <DataGridTextColumn Header="Straatnaam" Binding="{Binding Location.StreetName}" Width="*" />
+                                <DataGridTextColumn Header="Voltooid" Binding="{Binding Accomplished}" Width="*" />
 
                                 <!--<DataGridTextColumn Header="Woonplaats" Binding="{Binding Woonplaats}" Width="*" />-->
 

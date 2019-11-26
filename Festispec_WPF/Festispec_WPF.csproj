@@ -246,6 +246,9 @@
     <Compile Include="View\CreateInspectionWindow.xaml.cs">
       <DependentUpon>CreateInspectionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CreateLocationWindow.xaml.cs">
+      <DependentUpon>CreateLocationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeeCrudWindow.xaml.cs">
       <DependentUpon>EmployeeCrudWindow.xaml</DependentUpon>
     </Compile>
@@ -259,6 +262,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\CreateInspectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateLocationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

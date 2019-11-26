@@ -1,4 +1,6 @@
 ﻿using Festispec_WPF.Model;
+using Festispec_WPF.Model.Repositories;
+using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace Festispec_WPF.ViewModel
         private Inspectie _inspection;
         private LocationVM _location;
         private CustomerVM _customer;
+        private UnitOfWork _UOW;
         public InspectionVM()
         {
             _inspection = new Inspectie();
@@ -21,6 +24,14 @@ namespace Festispec_WPF.ViewModel
             _customer = new CustomerVM();
             StartDate = DateTime.Now.Date;
             EndDate = DateTime.Now.Date.AddDays(1);
+        }
+
+        public InspectionVM(Inspectie inspectie)
+        {
+            _UOW = new ViewModelLocator().UOW;
+            _inspection = inspectie;
+            _location = new LocationVM(_UOW.InspectionLocations.Get(Location_ID));
+            _customer = new CustomerVM(new Repository<Klant>(_UOW.Context).Get(Customer_ID));
         }
 
         public Inspectie Inspection
