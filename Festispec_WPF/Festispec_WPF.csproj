@@ -231,6 +231,7 @@
     <Compile Include="ViewModel\CustomerVM.cs" />
     <Compile Include="ViewModel\InspectionCrudVM.cs" />
     <Compile Include="ViewModel\InspectionVM.cs" />
+    <Compile Include="ViewModel\LocationVM.cs" />
     <Compile Include="ViewModel\NAW_KlantVM.cs" />
     <Compile Include="ViewModel\HomeScreenVM.cs" />
     <Compile Include="ViewModel\EmployeeVM.cs" />

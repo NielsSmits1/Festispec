@@ -31,13 +31,12 @@ namespace Festispec_WPF.ViewModel
             _werknemerTelefoonNummer = new Telefoonnummer();
         }
 
-        //public  EmployeeVM(Werknemer werknemer)
-        //{
-        //    UOW = new ViewModelLocator().UOW;
-        //    _werknemer = werknemer;
-        //    _nawWerknemer = new NAW_werknemer();
-        //    _werknemerTelefoonNummer = new Telefoonnummer();
-        //}
+        public EmployeeVM(Werknemer werknemer)
+        {
+            UOW = new ViewModelLocator().UOW;
+            _werknemer = werknemer;
+            _nawWerknemer = UOW.NawEmployee.Get(werknemer.NAW);
+        }
 
         public EmployeeVM(NAW_werknemer ne)
         {
@@ -65,6 +64,14 @@ namespace Festispec_WPF.ViewModel
         {
             get { return _nawWerknemer.ID; }
             set { _nawWerknemer.ID = value; RaisePropertyChanged(); }
+        }
+
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + InfixName + " " + LastName;
+            }
         }
 
         public string FirstName

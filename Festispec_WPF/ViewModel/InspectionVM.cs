@@ -12,40 +12,45 @@ namespace Festispec_WPF.ViewModel
     {
 
         private Inspectie _inspection;
-        private Locatie _location;
+        private LocationVM _location;
         private CustomerVM _customer;
         public InspectionVM()
         {
             _inspection = new Inspectie();
-            _location = new Locatie();
+            _location = new LocationVM();
+            _customer = new CustomerVM();
+            StartDate = DateTime.Now.Date;
+            EndDate = DateTime.Now.Date.AddDays(1);
         }
 
-        public string ZipCode
+        public Inspectie Inspection
         {
-            get => _location.Postcode;
+            get => _inspection;
             set
             {
-                _location.Postcode = value; RaisePropertyChanged(() => ZipCode);
+                _inspection = value; RaisePropertyChanged(() => Inspection);
+            }
+        }
+        public LocationVM Location
+        {
+            get => _location;
+            set
+            {
+                _location = value; Location_ID = value.ID; RaisePropertyChanged(() => Location);
             }
         }
 
-        public string HomeNumber
+        public CustomerVM Customer
         {
-            get => _location.Huisnummer;
+            get => _customer;
             set
             {
-                _location.Huisnummer = value; RaisePropertyChanged(() => HomeNumber);
+                _customer = value; Customer_ID = Customer.ID; RaisePropertyChanged(() => Customer);
             }
+            
         }
 
-        public string StreetName
-        {
-            get => _location.Plaatsnaam;
-            set
-            {
-                _location.Plaatsnaam = value; RaisePropertyChanged(() => StreetName);
-            }
-        }
+       
 
         public DateTime StartDate
         {
@@ -119,5 +124,7 @@ namespace Festispec_WPF.ViewModel
                 _inspection.Voltooid = value; RaisePropertyChanged(() => Accomplished);
             }
         }
+
+        
     }
 }

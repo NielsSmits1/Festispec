@@ -18,5 +18,10 @@ namespace Festispec_WPF.Model.Repositories
         {
             return Context.Werknemer.FirstOrDefault(w => w.NAW == id);
         }
+
+        public List<Werknemer> GetAllManagers()
+        {
+            return GetAll().Where(emp => emp.Rol == "Manager").ToList();
+        }
     }
 }

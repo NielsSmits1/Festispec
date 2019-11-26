@@ -1,4 +1,4 @@
-﻿<Window x:Class="Festispec_WPF.View.EditInspectorWindow"
+﻿<Window x:Class="Festispec_WPF.View.CreateInspectionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
         Title="EditInspectorWindow" Height="1080" Width="1920"
-        DataContext="{Binding InspectorCrud, Source={StaticResource Locator}}">
+        DataContext="{Binding InspectionCrud, Source={StaticResource Locator}}">
     <Grid>
         <StackPanel Grid.Column="8" Background="AliceBlue" >
             <Label Content="Inspectie aanmaken" FontSize="30" Foreground="Black"></Label>
@@ -23,7 +23,7 @@
                 <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <!--NAME-->
                 <Label Content="Titel" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                <TextBox Width="450" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.FirstName, Mode=TwoWay}"></TextBox>
+                <TextBox Width="450" HorizontalAlignment="Left" Name="Title" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewInspection.Title, Mode=TwoWay}"></TextBox>
                 <!--END NAME-->
             </Grid>
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -31,24 +31,28 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="240"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
                 <Label Content="Locatie:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                <Label Content="Postcode" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.ZipCode, Mode=TwoWay}"></TextBox>
+                <Label Content="Gekozen locatie" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
+                <TextBlock Width="200" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewInspection.Location.FullAdress}" TextWrapping="Wrap"></TextBlock>
 
-                <Label Content="Huisnummer" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                <TextBox Width="50" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.HomeNumber, Mode=TwoWay}"></TextBox>
+                <Label Content="Locaties" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"/>
+                <DataGrid Grid.Row="1" Grid.Column="2"  AutoGenerateColumns="False"  CanUserAddRows="False" MaxWidth="250" SelectedItem="{Binding SelectedLocation}" ItemsSource="{Binding Locations}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding FullAdress}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-                <Label Content="Straatnaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"/>
-                <TextBox Width="150" HorizontalAlignment="Left" Name="Streetname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedInspector.StreetName, Mode=TwoWay}"></TextBox>
+                <Button Grid.Column="4" Grid.Row="1" Content="Nieuwe locatie aanmaken"></Button>
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
@@ -64,7 +68,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="StartDatum:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding SelectedInspector.DateOfBirth, Mode=TwoWay}"/>
+                <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding NewInspection.StartDate, Mode=TwoWay}"/>
             </Grid>
             <Border BorderThickness="1" BorderBrush="Black"></Border>
             <Grid>
@@ -79,7 +83,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="EindDatum:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding SelectedInspector.DateOfBirth, Mode=TwoWay}"/>
+                <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding NewInspection.EndDate, Mode=TwoWay}"/>
             </Grid>
             <Border BorderThickness="1" BorderBrush="Black"></Border>
             <Grid>
@@ -94,37 +98,17 @@
                 </Grid.RowDefinitions>
                 <Label Content="Versie:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Versienummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.IBAN, Mode=TwoWay}"></TextBox>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewInspection.Version, Mode=TwoWay}"></TextBox>
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="250"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="10"/>
-                </Grid.RowDefinitions>
-                <Label Content="Contactgegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                <Label Content="Emailadres" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.Email, Mode=TwoWay}"></TextBox>
-                <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="2" ></Label>
-                <!-- New binding required-->
-                <TextBox Width="200" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.Phonenumber, Mode=TwoWay}"></TextBox>
-            </Grid>
-
-            <Border BorderThickness="1" BorderBrush="Black"></Border>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition Width="50"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"></RowDefinition>
@@ -133,98 +117,16 @@
                 </Grid.RowDefinitions>
                 <Label Content="Klant:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Gekozen klant" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="Hoi" FontSize="20" TextWrapping="Wrap"></TextBlock>
-
-                <Label Content="Lijst van managers" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                <DataGrid Grid.Row="1" Grid.Column="3"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding LeftoverCertificates}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToChosenSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-
-            <Border BorderThickness="1" BorderBrush="Black"></Border>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="50"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="10"/>
-                </Grid.RowDefinitions>
-                <Label Content="Manager:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                <Label Content="Manager op inspectie" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="Hoi" FontSize="20" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding NewInspection.Customer.CompanyName}" FontSize="20" TextWrapping="Wrap"></TextBlock>
 
                 <Label Content="Lijst van klanten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                <DataGrid Grid.Row="1" Grid.Column="3"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding LeftoverCertificates}">
+                <DataGrid Grid.Row="1" Grid.Column="3"  AutoGenerateColumns="False" CanUserAddRows="False" MaxWidth="200" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToChosenSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding CompanyName}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-
-            <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="50"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="10"/>
-                </Grid.RowDefinitions>
-                <Label Content="Inspecteurs:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                <Label Content="Gekozen inspecteurs" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <Label Content="Lijst van inspecteurs" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                <DataGrid Grid.Row="1" Grid.Column="1"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding LeftoverCertificates}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToChosenSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <DataGrid Grid.Row="1" Grid.Column="3"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding LeftoverCertificates}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToChosenSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-            <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditInspectorCommand}"></Button>
+            <Button Content="Wijzigingen opslaan" Command="{Binding CreateNewInspectionCommand}"></Button>
         </StackPanel>
     </Grid>
 </Window>

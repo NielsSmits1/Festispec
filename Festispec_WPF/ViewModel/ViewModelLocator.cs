@@ -50,6 +50,7 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
+            SimpleIoc.Default.Register<InspectionCrudVM>();
         }
 
         public MainViewModel Main
@@ -137,6 +138,14 @@ namespace Festispec_WPF.ViewModel
                     _unitOfWork = new UnitOfWork(new FestiSpecEntities());
                 }
                 return _unitOfWork;
+            }
+        }
+
+        public InspectionCrudVM InspectionCrud
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InspectionCrudVM>();
             }
         }
 
