@@ -14,6 +14,7 @@ using Festispec_WPF.Model;
 using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.View;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.Windows.Data;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -23,7 +24,6 @@ namespace Festispec_WPF.ViewModel
         private EmployeeVM _employee;
 
         public ObservableCollection<EmployeeVM> Employees { get; set; }
-        public ObservableCollection<EmployeeVM> Employees1 { get; set; }
 
         //Update Employee Commands
         public ICommand LoadEditEmployeeCommand { get; set; }

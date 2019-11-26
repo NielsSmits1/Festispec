@@ -91,7 +91,7 @@
                                 <DataGridTemplateColumn Header="Voornaam">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Background="White" BorderThickness="0" Content="{Binding FirstName, Mode=TwoWay}" Command="{Binding DataContext.LoadEditEmployeeCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                            <Button Background="White" BorderThickness="0" Content="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Command="{Binding DataContext.LoadEditEmployeeCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -104,8 +104,6 @@
                                 <DataGridTextColumn Header="Actief" Binding="{Binding Active, Mode=TwoWay}" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <!--LIST OF EXISTING INSPECTORS-->
-
                     </StackPanel>
 
                     <StackPanel Grid.Column="7" Background="AliceBlue">
@@ -121,39 +119,37 @@
                                 <!-- left row -->
                                 <StackPanel Grid.Column="0">
                                     <TextBlock Text="Voornaam" />
-                                    <TextBox Text="{Binding SelectedEmployee.FirstName, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.FirstName, Mode=TwoWay}" />
                                     <TextBlock Text="Tussenvoegsel" />
-                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=TwoWay}" />
                                     <TextBlock Text="Achternaam" />
-                                    <TextBox Text="{Binding SelectedEmployee.LastName, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.LastName, Mode=TwoWay}" />
                                     <TextBlock Text="Postcode" />
-                                    <TextBox Text="{Binding SelectedEmployee.Postcode, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.Postcode, Mode=TwoWay}" />
                                     <TextBlock Text="Huisnummer" />
-                                    <TextBox Text="{Binding SelectedEmployee.HouseNumber, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.HouseNumber,Mode=TwoWay}" />
                                     <TextBlock Text="Plaatsnaam" />
-                                    <TextBox Text="{Binding SelectedEmployee.TownName, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.TownName, Mode=TwoWay}" />
                                     <TextBlock Text="Geboortedatum" />
                                     <DatePicker Text="{Binding DoB}"/>
                                     <TextBlock Text="IBAN" />
-                                    <TextBox Text="{Binding SelectedEmployee.Iban, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.Iban, Mode=TwoWay}" />
                                     <TextBlock Text="E-mail" />
-                                    <TextBox Text="{Binding SelectedEmployee.MailAdress, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.MailAdress, Mode=TwoWay}" />
                                 </StackPanel>
 
                                 <!-- right row -->
                                 <StackPanel Grid.Column="2">
                                     <TextBlock Text="Rol" />
-                                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding SelectedEmployee.Role}" ItemsSource="{Binding NewEmployee.RolesCollection, Mode=OneWay}"/>
+                                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding SelectedEmployee.Role}" ItemsSource="{Binding NewEmployee.RolesCollection, Mode=TwoWay}"/>
                                     <TextBlock Text="Username" />
-                                    <TextBox Text="{Binding SelectedEmployee.Username, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.Username, Mode=TwoWay}" />
                                     <TextBlock Text="Wachtwoord" />
-                                    <TextBox Text="{Binding SelectedEmployee.Password, Mode=OneWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.Password, Mode=TwoWay}" />
                                     <TextBlock Text="Telefoonnummer" />
-                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=OneWay}" />
-                                    <!--<TextBlock Text="Actief" />-->
-                                    <!--<TextBox Text="{Binding SelectedEmployee.Active, Mode=TwoWay}" />-->
+                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=TwoWay}" />
                                     <TextBlock Text="Actief" />
-                                    <CheckBox IsChecked="{Binding SelectedEmployee.Active, Mode=OneWay}"/>
+                                    <CheckBox IsChecked="{Binding SelectedEmployee.Active, Mode=TwoWay}"/>
                                 </StackPanel>
                             </Grid>
                         </Border>

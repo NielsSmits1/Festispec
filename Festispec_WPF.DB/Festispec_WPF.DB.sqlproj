@@ -6,7 +6,7 @@
     <Name>Festispec_WPF.DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{345ac86b-d1eb-49d5-b2ad-5a30627a0761}</ProjectGuid>
+    <ProjectGuid>{f3dae19d-b19e-4275-b7ef-f5da213ca919}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
