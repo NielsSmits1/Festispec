@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
-        Title="RapportageView" Height="450" Width="800">
+        Title="Rapportage" Height="1080" Width="1920"
+        DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" Margin="345,194,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
 

@@ -86,17 +86,17 @@ namespace Festispec_WPF.Helpers
                 }
             };
 
-            using (var reader = new StreamReader(@"~\Template.cshtml"))
+            using (var reader = new StreamReader(@"pdf/Template.cshtml"))
             {
                 toBeParsed = reader.ReadToEnd();
             }
 
-            var saveLocation = @"~\poc.pdf";
+            var saveLocation = @"poc.pdf";
             htmlCode = Razor.Parse(toBeParsed, parsingModel);
 
             IronPdf.HtmlToPdf Renderer = new IronPdf.HtmlToPdf();
             Renderer.RenderHtmlAsPdf(htmlCode).SaveAs(saveLocation);
-            return saveLocation;
+            return Environment.CurrentDirectory + "\\" + saveLocation;
         }
     }
 }

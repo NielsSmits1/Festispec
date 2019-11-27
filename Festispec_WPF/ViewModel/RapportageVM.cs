@@ -13,13 +13,15 @@ namespace Festispec_WPF.ViewModel
 
         public RapportageVM()
         {
-            GenerateCommand = new RelayCommand(GeneratePdf);
             UOW = new ViewModelLocator().UOW;
+
+            GenerateCommand = new RelayCommand(GeneratePdf);
         }
 
         public void GeneratePdf()
         {
-            var location = PdfHelper.GeneratePdf(selectedInspection);
+            var helper = new PdfHelper();
+            var location = helper.GeneratePdf(selectedInspection);
         }
 
     }
