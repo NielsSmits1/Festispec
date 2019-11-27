@@ -21,17 +21,8 @@
             <TextBlock Text="Password" Padding="0 5" />
             <TextBox Text="{Binding Password}" Padding="0 5" Margin="0 0 0 20"/>
 
-            <!-- Button layouts -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button Content="Login" Grid.Column="0" Height="30" Command="{Binding LoginCommand}"/>
-                <Button Content="Registreren" Grid.Column="2" Command="{Binding RegisterCommand}" Margin="4.2,0,-4.4,0.4"/>
-            </Grid>
+            <!-- Login button -->
+            <Button Content="Login" Width="200" HorizontalAlignment="Center" Height="30" Command="{Binding LoginCommand}"/>
 
         </StackPanel>
     </Border> 
