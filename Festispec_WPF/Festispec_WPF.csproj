@@ -56,9 +56,12 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -116,7 +119,6 @@
     <Compile Include="Model\Interface Repositories\IInspectorRepository.cs" />
     <Compile Include="Model\Interface Repositories\ICertficatesRepository.cs" />
     <Compile Include="Model\Interface Repositories\IEmployeeRepository.cs" />
-    <Compile Include="Model\Interface Repositories\IInspectorRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWEmployeeRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWInspectorRepository.cs" />
     <Compile Include="Model\Interface Repositories\IPhonenumberInspectorRepository.cs" />
@@ -192,9 +194,6 @@
     <Compile Include="Model\Rol_werknemer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\Tabelvraag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -234,29 +233,23 @@
     <Compile Include="ViewModel\HomeScreenVM.cs" />
     <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="ViewModel\CertificateVM.cs" />
-    <Compile Include="ViewModel\ContactPersonVM.cs" />
-    <Compile Include="ViewModel\CRCustomerVM.cs" />
-    <Compile Include="ViewModel\CustomerVM.cs" />
-    <Compile Include="ViewModel\EmployeeVM.cs" />
-    <Compile Include="ViewModel\HomeScreenVM.cs" />
     <Compile Include="ViewModel\InspectorCrudVM.cs" />
     <Compile Include="ViewModel\InspectorVM.cs" />
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\NAW_KlantVM.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ContactPersonCreateWindow.xaml.cs">
       <DependentUpon>ContactPersonCreateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ContactPersonUpdateWindow.xaml.cs">
       <DependentUpon>ContactPersonUpdateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MenuVM.cs" />
     <Compile Include="ViewModel\EmployeeCrudVM.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmployeeCrudWindow.xaml.cs">
       <DependentUpon>EmployeeCrudWindow.xaml</DependentUpon>
     </Compile>
@@ -386,14 +379,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\InspectorCrudWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\RegisterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -11,7 +11,6 @@
     CONSTRAINT [CHK_KlantHuisnummerNotNull] CHECK (datalength([Huisnummer])>=(1)),
     CONSTRAINT [CHK_KlantIBANNotNull] CHECK (datalength([IBAN])>=(1)),
     CONSTRAINT [CHK_KlantKvkNotNull] CHECK (datalength([KvkNummer])>=(1)),
-    CONSTRAINT [CHK_KlantPlaatsnaamNotNull] CHECK (datalength([Plaatsnaam])>=(1)),
-    CONSTRAINT [CHK_VestigingsNummerHas12Numbers] CHECK ([Vestigingsnummer] like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+    CONSTRAINT [CHK_KlantPlaatsnaamNotNull] CHECK (datalength([Plaatsnaam])>=(1))
 );
 

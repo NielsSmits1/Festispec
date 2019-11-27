@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>Festispec_WPF.DB</Name>
+    <Name>FestiSpec_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{f3dae19d-b19e-4275-b7ef-f5da213ca919}</ProjectGuid>
+    <ProjectGuid>{ce009162-8432-4d3a-b12b-2ffa65f0d5f6}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>Festispec_WPF.DB</RootNamespace>
-    <AssemblyName>Festispec_WPF.DB</AssemblyName>
+    <RootNamespace>FestiSpec_DB</RootNamespace>
+    <AssemblyName>FestiSpec_DB</AssemblyName>
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -22,7 +22,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -62,6 +62,15 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="dbo\Tables\Tabelvraag_vragenlijst.sql" />
+    <Build Include="dbo\Tables\Telefoonnummer.sql" />
+    <Build Include="dbo\Tables\Telefoonnummer_inspecteur.sql" />
+    <Build Include="dbo\Tables\Template.sql" />
+    <Build Include="dbo\Tables\Vereiste_certificaten.sql" />
+    <Build Include="dbo\Tables\Verzoek.sql" />
+    <Build Include="dbo\Tables\Vragenlijst.sql" />
+    <Build Include="dbo\Tables\Vragenlijst_bijlage.sql" />
+    <Build Include="dbo\Tables\Werknemer.sql" />
     <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
     <Build Include="dbo\Tables\Afspraak.sql" />
     <Build Include="dbo\Tables\Beschikbaarheid.sql" />
@@ -92,14 +101,5 @@
     <Build Include="dbo\Tables\Rol_werknemer.sql" />
     <Build Include="dbo\Tables\Tabelvraag.sql" />
     <Build Include="dbo\Tables\Tabelvraag_antwoord.sql" />
-    <Build Include="dbo\Tables\Tabelvraag_vragenlijst.sql" />
-    <Build Include="dbo\Tables\Telefoonnummer.sql" />
-    <Build Include="dbo\Tables\Telefoonnummer_inspecteur.sql" />
-    <Build Include="dbo\Tables\Template.sql" />
-    <Build Include="dbo\Tables\Vereiste_certificaten.sql" />
-    <Build Include="dbo\Tables\Verzoek.sql" />
-    <Build Include="dbo\Tables\Vragenlijst.sql" />
-    <Build Include="dbo\Tables\Vragenlijst_bijlage.sql" />
-    <Build Include="dbo\Tables\Werknemer.sql" />
   </ItemGroup>
 </Project>
