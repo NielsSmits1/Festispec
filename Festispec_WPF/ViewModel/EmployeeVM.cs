@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.Model;
+using Festispec_WPF.Model.Repositories;
+using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -9,26 +14,45 @@ namespace Festispec_WPF.ViewModel
 {
     public class EmployeeVM : ViewModelBase
     {
-        private readonly NAW_werknemer _nawWerknemer;
-
         //private variables
-        private readonly Werknemer _werknemer;
-        private readonly Telefoonnummer _werknemerTelefoonNummer;
+        private NAW_werknemer _nawWerknemer;
+        private Werknemer _werknemer;
+        private Telefoonnummer _werknemerTelefoonNummer;
+        private UnitOfWork UOW;
 
         //constructor
         public EmployeeVM()
         {
+            UOW = new ViewModelLocator().UOW;
             GetAllRoles();
-            RegisterCommand = new RelayCommand(HandleRegister);
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
             _werknemerTelefoonNummer = new Telefoonnummer();
+            DoB = DateTime.Now.Date;
+        }
+
+        public EmployeeVM(NAW_werknemer ne)
+        {
+            UOW = new ViewModelLocator().UOW;
+            _nawWerknemer = ne;
+            _werknemer = UOW.Employee.GetEmployeeByNAW(NAWEmployee_iD);
         }
 
         //public variables
         public ObservableCollection<string> RolesCollection { get; set; }
 
         //properties
+        public Werknemer Werknemer => _werknemer;
+
+        public NAW_werknemer NAWWerknemer => _nawWerknemer;
+
+        // NAW Employee
+        public int NAWEmployee_iD
+        {
+            get => _nawWerknemer.ID;
+            set { _nawWerknemer.ID = value; RaisePropertyChanged(); }
+        }
+
         public string FirstName
         {
             get => _nawWerknemer.Voornaam;
@@ -78,8 +102,16 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
+        public string TownName
+        {
+            get => _nawWerknemer.Plaatsnaam;
+            set
+            {
+                _nawWerknemer.Plaatsnaam = value;
+                RaisePropertyChanged();
+            }
+        }
 
-        //TODO ADD DATEPICKER
         public DateTime DoB
         {
             get => _nawWerknemer.GeboorteDatum;
@@ -108,6 +140,13 @@ namespace Festispec_WPF.ViewModel
                 _nawWerknemer.Email = value;
                 RaisePropertyChanged();
             }
+        }
+        
+        // employee
+        public int Employee_ID
+        {
+            get => _werknemer.ID;
+            set { _werknemer.ID = value; RaisePropertyChanged(); }
         }
 
         public string Role
@@ -140,8 +179,37 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        //command references
-        public ICommand RegisterCommand { get; set; }
+        public int Employee_NAW_Id
+        {
+            get => _werknemer.NAW;
+            set 
+            { 
+                _werknemer.NAW = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool Active
+        {
+            get => _werknemer.Actief;
+            set
+            {
+                _werknemer.Actief = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Werknemer EmployeeData
+        {
+            get => _werknemer;
+            set
+            {
+                _werknemer = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Telefoonnummer PhonenumberModel => _werknemerTelefoonNummer;
 
         public string Phonenumber
         {
@@ -153,28 +221,11 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
-        //TODO handle double register click (program crash)
-        private void HandleRegister()
-        {
-            using (var context = new FestiSpecEntities())
-            {
-                context.NAW_werknemer.Add(_nawWerknemer);
-                context.Werknemer.Add(_werknemer);
-                context.Telefoonnummer.Add(_werknemerTelefoonNummer);
-                context.SaveChanges();
-            }
-        }
+
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.
         private void GetAllRoles()
         {
-            RolesCollection = new ObservableCollection<string>();
-            using (var context = new FestiSpecEntities())
-            {
-                foreach (var variable in context.Rol_werknemer)
-                {
-                    RolesCollection.Add(variable.Rol);
-                }
-            }
+            RolesCollection = new ObservableCollection<string>(UOW.RoleEmployee.GetAll().Select(e=> (e.Rol)));
         }
     }
 }

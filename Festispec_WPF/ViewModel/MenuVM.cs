@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace Festispec_WPF.ViewModel
 {
-    public class HomeScreenVM
+    public class MenuVM
     {
         // Moeten nog instanties van schermen gemaakt worden 
         /*
@@ -18,18 +18,21 @@ namespace Festispec_WPF.ViewModel
         */
 
         private InspectorCrudWindow _inspecteursWindow;
+        private HomeScreenView _homeScreenWindow;
         private WeekplanningView _weekPlanningWindow;
         private VerzoekInplanView _verzoekInplanWindow;
 
         // commands
+        public ICommand ShowHomeCommand { get; set; }
         public ICommand ShowKlantenCommand { get; set; }
         public ICommand ShowInplanVerzoekenCommand { get; set; }
         public ICommand ShowInspecteursCommand { get; set; }
         public ICommand ShowVragenlijstCommand { get; set; }
         public ICommand ShowKalenderCommand { get; set; }
 
-        public HomeScreenVM()
+        public MenuVM()
         {
+            ShowHomeCommand = new RelayCommand(ShowHome);
             ShowKlantenCommand = new RelayCommand(ShowKlanten);
             ShowInplanVerzoekenCommand = new RelayCommand(ShowInplanVerzoeken);
             ShowInspecteursCommand = new RelayCommand(ShowInspecteurs);
@@ -37,6 +40,11 @@ namespace Festispec_WPF.ViewModel
             ShowKalenderCommand = new RelayCommand(ShowKalender);
         }
 
+        public void ShowHome()
+        {
+            _homeScreenWindow = new HomeScreenView();
+            _homeScreenWindow.Show();
+        }
         public void ShowKlanten()
         {
             throw new NotImplementedException();

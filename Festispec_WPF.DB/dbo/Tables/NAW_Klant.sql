@@ -4,7 +4,7 @@
     [Huisnummer]       NVARCHAR (10) NOT NULL,
     [Plaatsnaam]       NVARCHAR (50) NOT NULL,
     [KvkNummer]        NVARCHAR (50) NOT NULL,
-    [Vestigingsnummer] NVARCHAR (12) NOT NULL,
+    [Vestigingsnummer] INT           NOT NULL,
     [IBAN]             NVARCHAR (50) NOT NULL,
     CONSTRAINT [PK_NAW_Klant] PRIMARY KEY CLUSTERED ([ID] ASC),
     CONSTRAINT [CHK_IncorrectZipcodeCustomer] CHECK ([Postcode] like '[0-9][0-9][0-9][0-9][A-Z][A-Z]'),

@@ -25,7 +25,7 @@ namespace Festispec_WPF.Model
         public string Huisnummer { get; set; }
         public string Plaatsnaam { get; set; }
         public string KvkNummer { get; set; }
-        public string Vestigingsnummer { get; set; }
+        public int Vestigingsnummer { get; set; }
         public string IBAN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
