@@ -17,7 +17,6 @@ namespace Festispec_WPF.ViewModel
         //private variables
         private NAW_werknemer _nawWerknemer;
         private Werknemer _werknemer;
-        private Telefoonnummer _werknemerTelefoonNummer;
         private UnitOfWork UOW;
 
         //constructor
@@ -27,7 +26,6 @@ namespace Festispec_WPF.ViewModel
             GetAllRoles();
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
-            _werknemerTelefoonNummer = new Telefoonnummer();
             DoB = DateTime.Now.Date;
         }
 
@@ -102,12 +100,14 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
+
+        //Aanpassen naar straatnaam
         public string TownName
         {
-            get => _nawWerknemer.Plaatsnaam;
+            get => _nawWerknemer.Straatnaam;
             set
             {
-                _nawWerknemer.Plaatsnaam = value;
+                _nawWerknemer.Straatnaam = value;
                 RaisePropertyChanged();
             }
         }
@@ -209,15 +209,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        public Telefoonnummer PhonenumberModel => _werknemerTelefoonNummer;
 
         public string Phonenumber
         {
-            get => _werknemerTelefoonNummer.Telefoonnummer1;
+            get => _nawWerknemer.Telefoonnummer;
 
             set
             {
-                _werknemerTelefoonNummer.Telefoonnummer1 = value;
+                _nawWerknemer.Telefoonnummer = value;
                 RaisePropertyChanged();
             }
         }

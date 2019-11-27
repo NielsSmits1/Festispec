@@ -20,7 +20,8 @@ namespace Festispec_WPF.Model.UnitOfWork
             Employee = new EmployeeRepository(context);
             RoleEmployee = new RoleEmployeeRepository(context);
             NAWInspectors = new NAWInspector_Repository(_context);
-            PhonenumberInspectors = new PhonenumberInspectorRepository(_context);
+            Customers = new CustomerRepository(_context);
+            ContactPersons = new ContactPersonRepository(_context);
             Certificates = new CertificatesRepository(_context);
         }
 
@@ -31,7 +32,8 @@ namespace Festispec_WPF.Model.UnitOfWork
         public IEmployeeRepository Employee { get; private set; }
         public IRoleEmployee RoleEmployee { get; private set; }
         public INAWInspectorRepository NAWInspectors { get; private set; }
-        public IPhonenumberInspectorRepository PhonenumberInspectors { get; private set; }
+        public IContactPersonRepository ContactPersons { get; private set; }
+        public ICustomerRepository Customers { get; private set; }
         public ICertficatesRepository Certificates { get; private set; }
 
         public int Complete()

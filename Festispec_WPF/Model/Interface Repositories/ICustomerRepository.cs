@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Festispec_WPF.Model.Interface_Repositories
 {
-    public interface IPhonenumberInspectorRepository : IRepository<Telefoonnummer_inspecteur>
+    public interface ICustomerRepository : IRepository<Klant>
     {
+        List<Contactpersoon> GetContactPersons(int id);
     }
 }

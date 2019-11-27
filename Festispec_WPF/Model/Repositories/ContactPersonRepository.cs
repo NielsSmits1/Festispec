@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Festispec_WPF.Model.Repositories
 {
-    public class PhonenumberInspectorRepository : Repository<Telefoonnummer_inspecteur>, IPhonenumberInspectorRepository
+    public class ContactPersonRepository : Repository<Contactpersoon>, IContactPersonRepository
     {
-        public PhonenumberInspectorRepository(FestiSpecEntities context) : base(context)
+        public ContactPersonRepository(FestiSpecEntities context) : base(context)
         {
-
         }
     }
 }
