@@ -25,19 +25,11 @@ namespace Festispec_WPF.ViewModel
         {
             UOW = new ViewModelLocator().UOW;
             GetAllRoles();
-            RegisterCommand = new RelayCommand(HandleRegister);
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
             _werknemerTelefoonNummer = new Telefoonnummer();
+            DoB = DateTime.Now.Date;
         }
-
-        //public  EmployeeVM(Werknemer werknemer)
-        //{
-        //    UOW = new ViewModelLocator().UOW;
-        //    _werknemer = werknemer;
-        //    _nawWerknemer = new NAW_werknemer();
-        //    _werknemerTelefoonNummer = new Telefoonnummer();
-        //}
 
         public EmployeeVM(NAW_werknemer ne)
         {
@@ -50,26 +42,20 @@ namespace Festispec_WPF.ViewModel
         public ObservableCollection<string> RolesCollection { get; set; }
 
         //properties
-        public Werknemer Werknemer
-        {
-            get { return _werknemer; }
-        }
+        public Werknemer Werknemer => _werknemer;
 
-        public NAW_werknemer NAWWerknemer
-        {
-            get { return _nawWerknemer; }
-        }
+        public NAW_werknemer NAWWerknemer => _nawWerknemer;
 
         // NAW Employee
         public int NAWEmployee_iD
         {
-            get { return _nawWerknemer.ID; }
+            get => _nawWerknemer.ID;
             set { _nawWerknemer.ID = value; RaisePropertyChanged(); }
         }
 
         public string FirstName
         {
-            get { return _nawWerknemer.Voornaam; }            
+            get => _nawWerknemer.Voornaam;
             set
             {
                 _nawWerknemer.Voornaam = value;
@@ -94,14 +80,6 @@ namespace Festispec_WPF.ViewModel
             {
                 _nawWerknemer.Achternaam = value;
                 RaisePropertyChanged();
-            }
-        }
-
-        public string Fullname
-        {
-            get
-            {
-                return FirstName + " " + InfixName + " " + LastName;
             }
         }
 
@@ -167,13 +145,13 @@ namespace Festispec_WPF.ViewModel
         // employee
         public int Employee_ID
         {
-            get { return _werknemer.ID; }
-            set { _werknemer.ID = value; }
+            get => _werknemer.ID;
+            set { _werknemer.ID = value; RaisePropertyChanged(); }
         }
 
         public string Role
         {
-            get { return _werknemer.Rol; }
+            get => _werknemer.Rol;
             set
             {
                 _werknemer.Rol = value;
@@ -201,32 +179,37 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        public Boolean Active
+        public int Employee_NAW_Id
         {
-            get => _werknemer.Actief;
-            set { _werknemer.Actief = value; }
+            get => _werknemer.NAW;
+            set 
+            { 
+                _werknemer.NAW = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public int NAW
+        public bool Active
         {
-            get { return _werknemer.NAW; }
-            set { _werknemer.NAW = value; }
+            get => _werknemer.Actief;
+            set
+            {
+                _werknemer.Actief = value;
+                RaisePropertyChanged();
+            }
         }
 
         public Werknemer EmployeeData
         {
-            get
-            {
-                return _werknemer;
-            }
+            get => _werknemer;
             set
             {
                 _werknemer = value;
+                RaisePropertyChanged();
             }
         }
 
-        //command references
-        public ICommand RegisterCommand { get; set; }
+        public Telefoonnummer PhonenumberModel => _werknemerTelefoonNummer;
 
         public string Phonenumber
         {
@@ -237,23 +220,6 @@ namespace Festispec_WPF.ViewModel
                 _werknemerTelefoonNummer.Telefoonnummer1 = value;
                 RaisePropertyChanged();
             }
-        }
-        private void HandleRegister()
-        {
-            try
-            {
-                IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
-                UOW.NawEmployee.Add(_nawWerknemer);
-                UOW.Employee.Add(_werknemer);
-                phonenumber.Add(_werknemerTelefoonNummer);
-                UOW.Complete();
-            }
-            catch
-            {
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-     
         }
 
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.
