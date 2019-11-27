@@ -50,6 +50,7 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
+            SimpleIoc.Default.Register<CRCustomerVM>();
         }
 
         public MainViewModel Main
@@ -100,7 +101,7 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return new CRCustomerVM();
+                return ServiceLocator.Current.GetInstance<CRCustomerVM>();
             }
         }
 

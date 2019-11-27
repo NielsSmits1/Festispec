@@ -53,5 +53,17 @@ namespace Festispec_WPF.ViewModel
         }
 
 
+        public Contactpersoon ContactPersonData
+        {
+            get
+            {
+                return _contactPerson;
+            }
+            set
+            {
+                _contactPerson = value;
+            }
+        }
+
     }
 }

@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace Festispec_WPF.View
 {
     /// <summary>
-    /// Interaction logic for CustomerCrudWindow.xaml
+    /// Interaction logic for CustomerUpdateWindow.xaml
     /// </summary>
-    public partial class CustomerCrudWindow : Window
+    public partial class CustomerUpdateWindow : Window
     {
-        public CustomerCrudWindow()
+        public CustomerUpdateWindow()
         {
             InitializeComponent();
-        }
-
-        private void Postcode_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }
