@@ -20,6 +20,7 @@ namespace Festispec_WPF.ViewModel
 {
     public class EmployeeCrudVM : ViewModelBase
     {
+        private RegisterView _window;
         private UnitOfWork UOW;
         private EmployeeVM _employee;
 
@@ -61,14 +62,16 @@ namespace Festispec_WPF.ViewModel
 
         private void OpenRegister()
         {
-           RegisterView window = new RegisterView();
-           window.Show();
+            NewEmployee = new EmployeeVM();
+           _window = new RegisterView();
+           _window.Show();
         }
 
 
         private void LoadAll()
         {
             Employees = new ObservableCollection<EmployeeVM>(UOW.NawEmployee.GetAll().ToList().Select(e => new EmployeeVM(e)));
+            RaisePropertyChanged(() => Employees);
         }
 
         //update
@@ -90,7 +93,7 @@ namespace Festispec_WPF.ViewModel
             {
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "Het is gelukt!",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RaisePropertyChanged();
                 LoadAll();
             }
@@ -110,6 +113,9 @@ namespace Festispec_WPF.ViewModel
                 UOW.Employee.Add(NewEmployee.Werknemer);
                 phonenumber.Add(NewEmployee.PhonenumberModel);
                 UOW.Complete();
+                _window.Close();
+                LoadAll();
+
             }
             catch
             {

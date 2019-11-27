@@ -33,7 +33,7 @@
                     <TextBlock Text="Plaatsnaam" />
                     <TextBox Text="{Binding NewEmployee.TownName}" />
                     <TextBlock Text="Geboortedatum" />
-                    <DatePicker Text="{Binding NewEmployee.DoB}"/>
+                    <DatePicker SelectedDate="{Binding NewEmployee.DoB, Mode=TwoWay}"/>
                     <TextBlock Text="IBAN" />
                     <TextBox Text="{Binding NewEmployee.Iban}" />
                     <TextBlock Text="E-mail" />

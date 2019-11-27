@@ -28,6 +28,7 @@ namespace Festispec_WPF.ViewModel
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
             _werknemerTelefoonNummer = new Telefoonnummer();
+            DoB = DateTime.Now.Date;
         }
 
         public EmployeeVM(NAW_werknemer ne)
