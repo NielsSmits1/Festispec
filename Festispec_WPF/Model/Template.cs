@@ -17,13 +17,15 @@ namespace Festispec_WPF.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Template()
         {
-            this.Vragenlijst = new HashSet<Vragenlijst>();
+            this.Vragenlijst1 = new HashSet<Vragenlijst>();
         }
     
         public int ID { get; set; }
         public string Type { get; set; }
+        public int Vragenlijst_ID { get; set; }
     
+        public virtual Vragenlijst Vragenlijst { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vragenlijst> Vragenlijst { get; set; }
+        public virtual ICollection<Vragenlijst> Vragenlijst1 { get; set; }
     }
 }

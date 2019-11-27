@@ -108,10 +108,8 @@ namespace Festispec_WPF.ViewModel
         {
             try
             {
-                IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
                 UOW.NawEmployee.Add(NewEmployee.NAWWerknemer);
                 UOW.Employee.Add(NewEmployee.Werknemer);
-                phonenumber.Add(NewEmployee.PhonenumberModel);
                 UOW.Complete();
                 _window.Close();
                 LoadAll();

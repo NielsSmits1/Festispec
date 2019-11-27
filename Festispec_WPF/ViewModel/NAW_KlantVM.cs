@@ -32,7 +32,7 @@ namespace Festispec_WPF.ViewModel
             set { _NAW_Klant.IBAN = value; }
         }
 
-        public int LocationNumber
+        public string LocationNumber
         {
             get { return _NAW_Klant.Vestigingsnummer; }
             set
@@ -46,8 +46,8 @@ namespace Festispec_WPF.ViewModel
 
         public string StreetName
         {
-            get { return _NAW_Klant.Plaatsnaam; }
-            set { _NAW_Klant.Plaatsnaam = value; }
+            get { return _NAW_Klant.Straatnaam; }
+            set { _NAW_Klant.Straatnaam = value; }
         }
 
         public NAW_KlantVM(NAW_Klant nAW_Klant)

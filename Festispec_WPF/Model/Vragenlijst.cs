@@ -22,6 +22,7 @@ namespace Festispec_WPF.Model
             this.Meerkeuzevraag_vragenlijst = new HashSet<Meerkeuzevraag_vragenlijst>();
             this.Openvraag_vragenlijst = new HashSet<Openvraag_vragenlijst>();
             this.Tabelvraag_vragenlijst = new HashSet<Tabelvraag_vragenlijst>();
+            this.Template = new HashSet<Template>();
             this.Vragenlijst_bijlage = new HashSet<Vragenlijst_bijlage>();
             this.Inspectie = new HashSet<Inspectie>();
         }
@@ -43,7 +44,9 @@ namespace Festispec_WPF.Model
         public virtual ICollection<Openvraag_vragenlijst> Openvraag_vragenlijst { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tabelvraag_vragenlijst> Tabelvraag_vragenlijst { get; set; }
-        public virtual Template Template { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Template> Template { get; set; }
+        public virtual Template Template1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Vragenlijst_bijlage> Vragenlijst_bijlage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

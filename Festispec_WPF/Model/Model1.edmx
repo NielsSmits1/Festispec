@@ -80,7 +80,6 @@
           <Property Name="Inspectienummer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" Nullable="false" />
-          <Property Name="Werknemer_ID" Type="int" Nullable="false" />
           <Property Name="Klant_ID" Type="int" Nullable="false" />
           <Property Name="Titel" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Versie" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -149,7 +148,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Plaatsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Straatnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag">
           <Key>
@@ -186,10 +185,11 @@
           <Property Name="Achternaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Plaatsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Straatnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Geboortedatum" Type="date" Nullable="false" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="NAW_Klant">
           <Key>
@@ -198,9 +198,9 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Plaatsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Straatnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="KvkNummer" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Vestigingsnummer" Type="int" Nullable="false" />
+          <Property Name="Vestigingsnummer" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="NAW_werknemer">
@@ -213,10 +213,11 @@
           <Property Name="Achternaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Plaatsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Straatnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GeboorteDatum" Type="date" Nullable="false" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Offerte">
           <Key>
@@ -290,26 +291,13 @@
           <Property Name="Tabelvraag_ID" Type="int" Nullable="false" />
           <Property Name="Positie" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Telefoonnummer">
-          <Key>
-            <PropertyRef Name="Telefoonnummer" />
-          </Key>
-          <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NAW_Werknemer_ID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Telefoonnummer_inspecteur">
-          <Key>
-            <PropertyRef Name="Telefoonnummer" />
-          </Key>
-          <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NAW_Inspecteur_ID" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Template">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="ntext" Nullable="false" />
+          <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Vereiste_certificaten">
           <Key>
@@ -716,27 +704,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Telefoonnummer_NAW_inspecteur">
-          <End Role="NAW_inspecteur" Type="Self.NAW_inspecteur" Multiplicity="1" />
-          <End Role="Telefoonnummer_inspecteur" Type="Self.Telefoonnummer_inspecteur" Multiplicity="*" />
+        <Association Name="FK_Template_ID_vragenlijst">
+          <End Role="Vragenlijst" Type="Self.Vragenlijst" Multiplicity="1" />
+          <End Role="Template" Type="Self.Template" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="NAW_inspecteur">
+            <Principal Role="Vragenlijst">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Telefoonnummer_inspecteur">
-              <PropertyRef Name="NAW_Inspecteur_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Telefoonnummer_NAW_werknemer">
-          <End Role="NAW_werknemer" Type="Self.NAW_werknemer" Multiplicity="1" />
-          <End Role="Telefoonnummer" Type="Self.Telefoonnummer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NAW_werknemer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Telefoonnummer">
-              <PropertyRef Name="NAW_Werknemer_ID" />
+            <Dependent Role="Template">
+              <PropertyRef Name="Vragenlijst_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -891,8 +867,6 @@
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Telefoonnummer" EntityType="Self.Telefoonnummer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Telefoonnummer_inspecteur" EntityType="Self.Telefoonnummer_inspecteur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vereiste_certificaten" EntityType="Self.Vereiste_certificaten" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Verzoek" EntityType="Self.Verzoek" Schema="dbo" store:Type="Tables" />
@@ -1016,13 +990,9 @@
             <End Role="Vragenlijst" EntitySet="Vragenlijst" />
             <End Role="Tabelvraag_vragenlijst" EntitySet="Tabelvraag_vragenlijst" />
           </AssociationSet>
-          <AssociationSet Name="FK_Telefoonnummer_NAW_inspecteur" Association="Self.FK_Telefoonnummer_NAW_inspecteur">
-            <End Role="NAW_inspecteur" EntitySet="NAW_inspecteur" />
-            <End Role="Telefoonnummer_inspecteur" EntitySet="Telefoonnummer_inspecteur" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Telefoonnummer_NAW_werknemer" Association="Self.FK_Telefoonnummer_NAW_werknemer">
-            <End Role="NAW_werknemer" EntitySet="NAW_werknemer" />
-            <End Role="Telefoonnummer" EntitySet="Telefoonnummer" />
+          <AssociationSet Name="FK_Template_ID_vragenlijst" Association="Self.FK_Template_ID_vragenlijst">
+            <End Role="Vragenlijst" EntitySet="Vragenlijst" />
+            <End Role="Template" EntitySet="Template" />
           </AssociationSet>
           <AssociationSet Name="FK_Vereiste_certificaten_Certificaat" Association="Self.FK_Vereiste_certificaten_Certificaat">
             <End Role="Certificaat" EntitySet="Certificaat" />
@@ -1141,7 +1111,6 @@
           <Property Name="Inspectienummer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Werknemer_ID" Type="Int32" Nullable="false" />
           <Property Name="Klant_ID" Type="Int32" Nullable="false" />
           <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Versie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1221,7 +1190,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Plaatsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Straatnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Locatie" FromRole="Locatie" ToRole="Inspectie" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag">
@@ -1264,12 +1233,12 @@
           <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Plaatsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Straatnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Geboortedatum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inspecteur" Relationship="Self.FK_Inspecteur_NAW_inspecteur" FromRole="NAW_inspecteur" ToRole="Inspecteur" />
-          <NavigationProperty Name="Telefoonnummer_inspecteur" Relationship="Self.FK_Telefoonnummer_NAW_inspecteur" FromRole="NAW_inspecteur" ToRole="Telefoonnummer_inspecteur" />
         </EntityType>
         <EntityType Name="NAW_Klant">
           <Key>
@@ -1278,9 +1247,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Plaatsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Straatnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="KvkNummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Vestigingsnummer" Type="Int32" Nullable="false" />
+          <Property Name="Vestigingsnummer" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Klant" Relationship="Self.FK_Klant_NAW_Klant" FromRole="NAW_Klant" ToRole="Klant" />
         </EntityType>
@@ -1294,11 +1263,11 @@
           <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Plaatsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Straatnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GeboorteDatum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Telefoonnummer" Relationship="Self.FK_Telefoonnummer_NAW_werknemer" FromRole="NAW_werknemer" ToRole="Telefoonnummer" />
+          <Property Name="Telefoonnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Werknemer" Relationship="Self.FK_Werknemer_NAW_werknemer" FromRole="NAW_werknemer" ToRole="Werknemer" />
         </EntityType>
         <EntityType Name="Offerte">
@@ -1384,29 +1353,15 @@
           <NavigationProperty Name="Tabelvraag" Relationship="Self.FK_Tabelvraag_vragenlijst_Tabelvraag" FromRole="Tabelvraag_vragenlijst" ToRole="Tabelvraag" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Tabelvraag_vragenlijst_Vragenlijst" FromRole="Tabelvraag_vragenlijst" ToRole="Vragenlijst" />
         </EntityType>
-        <EntityType Name="Telefoonnummer">
-          <Key>
-            <PropertyRef Name="Telefoonnummer1" />
-          </Key>
-          <Property Name="Telefoonnummer1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NAW_Werknemer_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="NAW_werknemer" Relationship="Self.FK_Telefoonnummer_NAW_werknemer" FromRole="Telefoonnummer" ToRole="NAW_werknemer" />
-        </EntityType>
-        <EntityType Name="Telefoonnummer_inspecteur">
-          <Key>
-            <PropertyRef Name="Telefoonnummer" />
-          </Key>
-          <Property Name="Telefoonnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NAW_Inspecteur_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="NAW_inspecteur" Relationship="Self.FK_Telefoonnummer_NAW_inspecteur" FromRole="Telefoonnummer_inspecteur" ToRole="NAW_inspecteur" />
-        </EntityType>
         <EntityType Name="Template">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Vragenlijst_Template" FromRole="Template" ToRole="Vragenlijst" />
+          <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Template_ID_vragenlijst" FromRole="Template" ToRole="Vragenlijst" />
+          <NavigationProperty Name="Vragenlijst1" Relationship="Self.FK_Vragenlijst_Template" FromRole="Template" ToRole="Vragenlijst" />
         </EntityType>
         <EntityType Name="Verzoek">
           <Key>
@@ -1434,7 +1389,8 @@
           <NavigationProperty Name="Meerkeuzevraag_vragenlijst" Relationship="Self.FK_Meerkeuzevraag_vragenlijst_Vragenlijst" FromRole="Vragenlijst" ToRole="Meerkeuzevraag_vragenlijst" />
           <NavigationProperty Name="Openvraag_vragenlijst" Relationship="Self.FK_Openvraag_vragenlijst_Vragenlijst" FromRole="Vragenlijst" ToRole="Openvraag_vragenlijst" />
           <NavigationProperty Name="Tabelvraag_vragenlijst" Relationship="Self.FK_Tabelvraag_vragenlijst_Vragenlijst" FromRole="Vragenlijst" ToRole="Tabelvraag_vragenlijst" />
-          <NavigationProperty Name="Template" Relationship="Self.FK_Vragenlijst_Template" FromRole="Vragenlijst" ToRole="Template" />
+          <NavigationProperty Name="Template" Relationship="Self.FK_Template_ID_vragenlijst" FromRole="Vragenlijst" ToRole="Template" />
+          <NavigationProperty Name="Template1" Relationship="Self.FK_Vragenlijst_Template" FromRole="Vragenlijst" ToRole="Template" />
           <NavigationProperty Name="Vragenlijst_bijlage" Relationship="Self.FK_Vragenlijst_bijlage_Vragenlijst" FromRole="Vragenlijst" ToRole="Vragenlijst_bijlage" />
           <NavigationProperty Name="Inspectie" Relationship="Self.Inspectie_niet_ingevuld_vragenlijst" FromRole="Vragenlijst" ToRole="Inspectie" />
         </EntityType>
@@ -1681,30 +1637,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Telefoonnummer_NAW_inspecteur">
-          <End Role="NAW_inspecteur" Type="Self.NAW_inspecteur" Multiplicity="1" />
-          <End Role="Telefoonnummer_inspecteur" Type="Self.Telefoonnummer_inspecteur" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NAW_inspecteur">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Telefoonnummer_inspecteur">
-              <PropertyRef Name="NAW_Inspecteur_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Telefoonnummer_NAW_werknemer">
-          <End Role="NAW_werknemer" Type="Self.NAW_werknemer" Multiplicity="1" />
-          <End Role="Telefoonnummer" Type="Self.Telefoonnummer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NAW_werknemer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Telefoonnummer">
-              <PropertyRef Name="NAW_Werknemer_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Werknemer_NAW_werknemer">
           <End Role="NAW_werknemer" Type="Self.NAW_werknemer" Multiplicity="1" />
           <End Role="Werknemer" Type="Self.Werknemer" Multiplicity="*" />
@@ -1813,6 +1745,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Template_ID_vragenlijst">
+          <End Role="Vragenlijst" Type="Self.Vragenlijst" Multiplicity="1" />
+          <End Role="Template" Type="Self.Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vragenlijst">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Template">
+              <PropertyRef Name="Vragenlijst_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Vragenlijst_Template">
           <End Role="Template" Type="Self.Template" Multiplicity="0..1" />
           <End Role="Vragenlijst" Type="Self.Vragenlijst" Multiplicity="*" />
@@ -1885,8 +1829,6 @@
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" />
-          <EntitySet Name="Telefoonnummer" EntityType="Self.Telefoonnummer" />
-          <EntitySet Name="Telefoonnummer_inspecteur" EntityType="Self.Telefoonnummer_inspecteur" />
           <EntitySet Name="Template" EntityType="Self.Template" />
           <EntitySet Name="Verzoek" EntityType="Self.Verzoek" />
           <EntitySet Name="Vragenlijst" EntityType="Self.Vragenlijst" />
@@ -1964,14 +1906,6 @@
             <End Role="Vragenlijst" EntitySet="Vragenlijst" />
             <End Role="Meerkeuzevraag_vragenlijst" EntitySet="Meerkeuzevraag_vragenlijst" />
           </AssociationSet>
-          <AssociationSet Name="FK_Telefoonnummer_NAW_inspecteur" Association="Self.FK_Telefoonnummer_NAW_inspecteur">
-            <End Role="NAW_inspecteur" EntitySet="NAW_inspecteur" />
-            <End Role="Telefoonnummer_inspecteur" EntitySet="Telefoonnummer_inspecteur" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Telefoonnummer_NAW_werknemer" Association="Self.FK_Telefoonnummer_NAW_werknemer">
-            <End Role="NAW_werknemer" EntitySet="NAW_werknemer" />
-            <End Role="Telefoonnummer" EntitySet="Telefoonnummer" />
-          </AssociationSet>
           <AssociationSet Name="FK_Werknemer_NAW_werknemer" Association="Self.FK_Werknemer_NAW_werknemer">
             <End Role="NAW_werknemer" EntitySet="NAW_werknemer" />
             <End Role="Werknemer" EntitySet="Werknemer" />
@@ -2007,6 +1941,10 @@
           <AssociationSet Name="FK_Tabelvraag_vragenlijst_Vragenlijst" Association="Self.FK_Tabelvraag_vragenlijst_Vragenlijst">
             <End Role="Vragenlijst" EntitySet="Vragenlijst" />
             <End Role="Tabelvraag_vragenlijst" EntitySet="Tabelvraag_vragenlijst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Template_ID_vragenlijst" Association="Self.FK_Template_ID_vragenlijst">
+            <End Role="Vragenlijst" EntitySet="Vragenlijst" />
+            <End Role="Template" EntitySet="Template" />
           </AssociationSet>
           <AssociationSet Name="FK_Vragenlijst_Template" Association="Self.FK_Vragenlijst_Template">
             <End Role="Template" EntitySet="Template" />
@@ -2107,7 +2045,6 @@
                 <ScalarProperty Name="Inspectienummer" ColumnName="Inspectienummer" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Werknemer_ID" ColumnName="Werknemer_ID" />
                 <ScalarProperty Name="Klant_ID" ColumnName="Klant_ID" />
                 <ScalarProperty Name="Titel" ColumnName="Titel" />
                 <ScalarProperty Name="Versie" ColumnName="Versie" />
@@ -2171,7 +2108,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
                 <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
-                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
+                <ScalarProperty Name="Straatnaam" ColumnName="Straatnaam" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2210,10 +2147,11 @@
                 <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
                 <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
-                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
+                <ScalarProperty Name="Straatnaam" ColumnName="Straatnaam" />
                 <ScalarProperty Name="Geboortedatum" ColumnName="Geboortedatum" />
                 <ScalarProperty Name="IBAN" ColumnName="IBAN" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2223,7 +2161,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
                 <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
-                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
+                <ScalarProperty Name="Straatnaam" ColumnName="Straatnaam" />
                 <ScalarProperty Name="KvkNummer" ColumnName="KvkNummer" />
                 <ScalarProperty Name="Vestigingsnummer" ColumnName="Vestigingsnummer" />
                 <ScalarProperty Name="IBAN" ColumnName="IBAN" />
@@ -2239,10 +2177,11 @@
                 <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
                 <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
-                <ScalarProperty Name="Plaatsnaam" ColumnName="Plaatsnaam" />
+                <ScalarProperty Name="Straatnaam" ColumnName="Straatnaam" />
                 <ScalarProperty Name="GeboorteDatum" ColumnName="GeboorteDatum" />
                 <ScalarProperty Name="IBAN" ColumnName="IBAN" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2320,27 +2259,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Telefoonnummer">
-            <EntityTypeMapping TypeName="FestiSpecModel.Telefoonnummer">
-              <MappingFragment StoreEntitySet="Telefoonnummer">
-                <ScalarProperty Name="Telefoonnummer1" ColumnName="Telefoonnummer" />
-                <ScalarProperty Name="NAW_Werknemer_ID" ColumnName="NAW_Werknemer_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Telefoonnummer_inspecteur">
-            <EntityTypeMapping TypeName="FestiSpecModel.Telefoonnummer_inspecteur">
-              <MappingFragment StoreEntitySet="Telefoonnummer_inspecteur">
-                <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
-                <ScalarProperty Name="NAW_Inspecteur_ID" ColumnName="NAW_Inspecteur_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Template">
             <EntityTypeMapping TypeName="FestiSpecModel.Template">
               <MappingFragment StoreEntitySet="Template">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Vragenlijst_ID" ColumnName="Vragenlijst_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

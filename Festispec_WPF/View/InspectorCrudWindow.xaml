@@ -72,8 +72,10 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Postcode" Binding="{Binding ZipCode}" Width="60"/>
                     <DataGridTextColumn Header="Straatnaam" Binding="{Binding StreetName}" Width="*" />
                     <DataGridTextColumn Header="Huisnr" Binding="{Binding HomeNumber}" Width="50" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
                     <DataGridTemplateColumn Header="Inactief/actief">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
