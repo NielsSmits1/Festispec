@@ -56,12 +56,9 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
-    <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -114,11 +111,11 @@
     <Compile Include="Model\Inspectie_Wel_Ingevuld_Vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Interface Repositories\ICertficatesRepository.cs" />
     <Compile Include="Model\Interface Repositories\IContactPersonRepository.cs" />
     <Compile Include="Model\Interface Repositories\ICustomerRepository.cs" />
-    <Compile Include="Model\Interface Repositories\IInspectorRepository.cs" />
-    <Compile Include="Model\Interface Repositories\ICertficatesRepository.cs" />
     <Compile Include="Model\Interface Repositories\IEmployeeRepository.cs" />
+    <Compile Include="Model\Interface Repositories\IInspectorRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWEmployeeRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWInspectorRepository.cs" />
     <Compile Include="Model\Interface Repositories\IRepository.cs" />
@@ -180,9 +177,9 @@
     <Compile Include="Model\Planning_werknemer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Repositories\CertificatesRepository.cs" />
     <Compile Include="Model\Repositories\ContactPersonRepository.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
-    <Compile Include="Model\Repositories\CertificatesRepository.cs" />
     <Compile Include="Model\Repositories\EmployeeRepository.cs" />
     <Compile Include="Model\Repositories\InspectorRepository.cs" />
     <Compile Include="Model\Repositories\NAWEmployeeRepository.cs" />
@@ -229,10 +226,8 @@
     <Compile Include="ViewModel\InspectorVM.cs" />
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="ViewModel\MenuVM.cs" />
+    <Compile Include="ViewModel\EmployeeCrudVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ContactPersonCreateWindow.xaml.cs">
       <DependentUpon>ContactPersonCreateWindow.xaml</DependentUpon>
@@ -240,8 +235,9 @@
     <Compile Include="View\ContactPersonUpdateWindow.xaml.cs">
       <DependentUpon>ContactPersonUpdateWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MenuVM.cs" />
-    <Compile Include="ViewModel\EmployeeCrudVM.cs" />
+    <Compile Include="View\CustomerUpdateWindow.xaml.cs">
+      <DependentUpon>CustomerUpdateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeeCrudWindow.xaml.cs">
       <DependentUpon>EmployeeCrudWindow.xaml</DependentUpon>
     </Compile>
@@ -251,6 +247,18 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ContactPersonCreateWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ContactPersonUpdateWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerUpdateWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\EditInspectorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -274,14 +282,28 @@
     <Compile Include="View\CustomerCrudWindow.xaml.cs">
       <DependentUpon>CustomerCrudWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomerUpdateWindow.xaml.cs">
-      <DependentUpon>CustomerUpdateWindow.xaml</DependentUpon>
+    <Page Include="View\CustomerCrudWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HomeScreenView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InspectorCrudWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\HomeScreenView.xaml.cs">
       <DependentUpon>HomeScreenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectorCrudWindow.xaml.cs">
       <DependentUpon>InspectorCrudWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -348,32 +370,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="View\ContactPersonCreateWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ContactPersonUpdateWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\CustomerCrudWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\CustomerUpdateWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\HomeScreenView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\InspectorCrudWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
