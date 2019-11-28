@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FestiSpec.Domain.Model;
 
 namespace FestiSpecWebsite.Controllers
 {
@@ -14,6 +15,10 @@ namespace FestiSpecWebsite.Controllers
         }
 
         public ActionResult Applicant()
+        {
+            return View();
+        }
+        public ActionResult Applicant1()
         {
             return View();
         }
