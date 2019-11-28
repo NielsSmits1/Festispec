@@ -118,7 +118,6 @@
     <Compile Include="Model\Interface Repositories\ILocationRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWEmployeeRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWInspectorRepository.cs" />
-    <Compile Include="Model\Interface Repositories\IPhonenumberInspectorRepository.cs" />
     <Compile Include="Model\Interface Repositories\IRepository.cs" />
     <Compile Include="Model\Interface Repositories\IRoleEmployee.cs" />
     <Compile Include="Model\Kaartvraag.cs">
@@ -185,13 +184,9 @@
     <Compile Include="Model\Repositories\LocationRepository.cs" />
     <Compile Include="Model\Repositories\NAWEmployeeRepository.cs" />
     <Compile Include="Model\Repositories\NAWInspector_Repository.cs" />
-    <Compile Include="Model\Repositories\PhonenumberInspectorRepository.cs" />
     <Compile Include="Model\Repositories\Repository.cs" />
     <Compile Include="Model\Repositories\RoleEmployeeRepository.cs" />
     <Compile Include="Model\Rol_werknemer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Tabelvraag.cs">
@@ -201,12 +196,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Tabelvraag_vragenlijst.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Telefoonnummer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Telefoonnummer_inspecteur.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Template.cs">

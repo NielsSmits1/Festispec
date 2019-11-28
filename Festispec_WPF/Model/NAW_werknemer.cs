@@ -17,7 +17,6 @@ namespace Festispec_WPF.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NAW_werknemer()
         {
-            this.Telefoonnummer = new HashSet<Telefoonnummer>();
             this.Werknemer = new HashSet<Werknemer>();
         }
     
@@ -27,13 +26,12 @@ namespace Festispec_WPF.Model
         public string Achternaam { get; set; }
         public string Postcode { get; set; }
         public string Huisnummer { get; set; }
-        public string Plaatsnaam { get; set; }
+        public string Straatnaam { get; set; }
         public System.DateTime GeboorteDatum { get; set; }
         public string IBAN { get; set; }
         public string Email { get; set; }
+        public string Telefoonnummer { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Telefoonnummer> Telefoonnummer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Werknemer> Werknemer { get; set; }
     }

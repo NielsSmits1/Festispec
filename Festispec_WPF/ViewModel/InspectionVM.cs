@@ -81,14 +81,6 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        public int WerkNemerId
-        {
-            get => 1;
-            set
-            {
-                _inspection.Werknemer_ID = value; RaisePropertyChanged(() => WerkNemerId);
-            }
-        }
 
         public int Customer_ID
         {

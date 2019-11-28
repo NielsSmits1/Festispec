@@ -22,11 +22,21 @@ namespace Festispec_WPF.ViewModel
         private UnitOfWork _UOW;
         private CustomerVM _selectedCustomer;
         private LocationVM _selectedLocation;
+        private InspectionVM _selectedInspection;
         public ObservableCollection<InspectionVM> Inspection { get; set; }
 
         public InspectionVM NewInspection { get; set; }
 
         public LocationVM NewLocation { get; set; }
+
+        public InspectionVM SelectedInspection
+        {
+            get => _selectedInspection;
+            set
+            {
+                _selectedInspection = value; RaisePropertyChanged(() => SelectedInspection);
+            }
+        }
 
         public ObservableCollection<LocationVM> Locations { get; set; }
         public ObservableCollection<CustomerVM> Customers { get; set; }
@@ -54,12 +64,22 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public LocationVM SelectedUpdateLocation
+        {
+            get => _selectedLocation;
+            set
+            {
+                _selectedLocation = value; SelectedInspection.Location = value; RaisePropertyChanged(() => SelectedUpdateLocation);
+            }
+        }
+
         public InspectionCrudVM()
         {
             
             _UOW = new ViewModelLocator().UOW;
             Inspection = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
-            OpenCreateWindowCommand = new RelayCommand(OpenCreateWindow);
+            Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
+            Customers = new ObservableCollection<CustomerVM>(new Repository<Klant>(_UOW.Context).GetAll().ToList().Select(cus => new CustomerVM(cus)));
             CreateNewInspectionCommand = new RelayCommand(AddNewInspector);
             OpenCreateLocationWindowCommand = new RelayCommand(OpenCreateLocationWindow);
             CreateNewLocationCommand = new RelayCommand(AddNewLocation);

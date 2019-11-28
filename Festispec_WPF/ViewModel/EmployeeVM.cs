@@ -17,7 +17,6 @@ namespace Festispec_WPF.ViewModel
         //private variables
         private NAW_werknemer _nawWerknemer;
         private Werknemer _werknemer;
-        private Telefoonnummer _werknemerTelefoonNummer;
         private UnitOfWork UOW;
 
         //constructor
@@ -28,7 +27,6 @@ namespace Festispec_WPF.ViewModel
             RegisterCommand = new RelayCommand(HandleRegister);
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
-            _werknemerTelefoonNummer = new Telefoonnummer();
         }
 
         public EmployeeVM(Werknemer werknemer)
@@ -133,10 +131,10 @@ namespace Festispec_WPF.ViewModel
         }
         public string TownName
         {
-            get => _nawWerknemer.Plaatsnaam;
+            get => _nawWerknemer.Straatnaam;
             set
             {
-                _nawWerknemer.Plaatsnaam = value;
+                _nawWerknemer.Straatnaam = value;
                 RaisePropertyChanged();
             }
         }
@@ -237,11 +235,11 @@ namespace Festispec_WPF.ViewModel
 
         public string Phonenumber
         {
-            get => _werknemerTelefoonNummer.Telefoonnummer1;
+            get => _nawWerknemer.Telefoonnummer;
 
             set
             {
-                _werknemerTelefoonNummer.Telefoonnummer1 = value;
+                _nawWerknemer.Telefoonnummer = value;
                 RaisePropertyChanged();
             }
         }
@@ -249,10 +247,8 @@ namespace Festispec_WPF.ViewModel
         {
             try
             {
-                IRepository<Telefoonnummer> phonenumber = new Repository<Telefoonnummer>(UOW.Context);
                 UOW.NawEmployee.Add(_nawWerknemer);
                 UOW.Employee.Add(_werknemer);
-                phonenumber.Add(_werknemerTelefoonNummer);
                 UOW.Complete();
             }
             catch

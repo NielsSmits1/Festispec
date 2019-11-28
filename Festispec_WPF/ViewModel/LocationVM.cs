@@ -56,10 +56,10 @@ namespace Festispec_WPF.ViewModel
 
         public string StreetName
         {
-            get => _location.Plaatsnaam;
+            get => _location.Straatnaam;
             set
             {
-                _location.Plaatsnaam = value; RaisePropertyChanged(() => StreetName);
+                _location.Straatnaam = value; RaisePropertyChanged(() => StreetName);
             }
         }
         public string FullAdress

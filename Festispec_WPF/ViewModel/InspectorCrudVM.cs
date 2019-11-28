@@ -115,7 +115,6 @@ namespace Festispec_WPF.ViewModel
         {
 
             UOW.NAWInspectors.Add(NewInspector.NAWInspector);
-            UOW.Context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
             UOW.Inspectors.Add(NewInspector.InspectorData);
 
             foreach (var item in NewInspector.ChosenCertificates)
@@ -150,14 +149,7 @@ namespace Festispec_WPF.ViewModel
         public void OpenEditInspector()
         {
             SelectedInspector.InspectorData = UOW.Inspectors.GetAll().FirstOrDefault(i => i.NAW == SelectedInspector.NAWInspector_ID);
-            var NawPhonenumber = UOW.PhonenumberInspectors.GetAll().FirstOrDefault(t => t.NAW_Inspecteur_ID == SelectedInspector.NAWInspector_ID);
-            //.Select(t => new Telefoonnummer_inspecteur { Telefoonnummer = t.Telefoonnummer, NAW_Inspecteur_ID = t.NAW_Inspecteur_ID}).ToList();
-            // var certificates
-            if (NawPhonenumber == null)
-            {
-                return;
-            }
-            SelectedInspector.PhonenumberModel = NawPhonenumber;
+
             SelectedInspector.ChosenCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetCertificatesInspector(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
             LeftoverCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetMissingCertificates(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
             _editInspectorWindow = new EditInspectorWindow();

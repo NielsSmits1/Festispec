@@ -49,12 +49,9 @@ namespace Festispec_WPF.Model
         public virtual DbSet<Openvraag_vragenlijst> Openvraag_vragenlijst { get; set; }
         public virtual DbSet<Planning_werknemer> Planning_werknemer { get; set; }
         public virtual DbSet<Rol_werknemer> Rol_werknemer { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tabelvraag> Tabelvraag { get; set; }
         public virtual DbSet<Tabelvraag_antwoord> Tabelvraag_antwoord { get; set; }
         public virtual DbSet<Tabelvraag_vragenlijst> Tabelvraag_vragenlijst { get; set; }
-        public virtual DbSet<Telefoonnummer> Telefoonnummer { get; set; }
-        public virtual DbSet<Telefoonnummer_inspecteur> Telefoonnummer_inspecteur { get; set; }
         public virtual DbSet<Template> Template { get; set; }
         public virtual DbSet<Verzoek> Verzoek { get; set; }
         public virtual DbSet<Vragenlijst> Vragenlijst { get; set; }
