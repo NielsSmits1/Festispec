@@ -13,6 +13,7 @@
 */
 
 using CommonServiceLocator;
+using FestiSpec.Domain.Model;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;

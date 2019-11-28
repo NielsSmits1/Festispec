@@ -1,4 +1,6 @@
-﻿using Festispec_WPF.Model.Interface_Repositories;
+﻿using FestiSpec.Domain.Model;
+using FestiSpec.Domain.Model.Interface_Repositories;
+using FestiSpec.Domain.Model.Repositories;
 using Festispec_WPF.Model.Repositories;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,7 @@ namespace Festispec_WPF.Model.UnitOfWork
             Customers = new CustomerRepository(_context);
             ContactPersons = new ContactPersonRepository(_context);
             Certificates = new CertificatesRepository(_context);
+            NAWCustomers = new NAWCustomerRepository(_context);
         }
 
         public FestiSpecEntities Context => _context;
@@ -35,6 +38,7 @@ namespace Festispec_WPF.Model.UnitOfWork
         public IContactPersonRepository ContactPersons { get; private set; }
         public ICustomerRepository Customers { get; private set; }
         public ICertficatesRepository Certificates { get; private set; }
+        public INAWCustomerRepository NAWCustomers { get; private set; }
 
         public int Complete()
         {

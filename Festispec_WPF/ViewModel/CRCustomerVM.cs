@@ -9,9 +9,8 @@ using System.Windows.Forms;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight;
 using Festispec_WPF.View;
-using Festispec_WPF.Model.Repositories;
-using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using FestiSpec.Domain.Model;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -178,14 +177,11 @@ namespace Festispec_WPF.ViewModel
         private void AddCustomer()
         {
 
-            Repository<NAW_Klant> NAW = new Repository<NAW_Klant>(UOW.Context);
-
-            NAW.Add(NewCustomer.NAW_Klant.toModel());
+            UOW.NAWCustomers.Add(NewCustomer.NAW_Klant.toModel());
             
             UOW.Customers.Add(NewCustomer.CustomerData);
 
-            Repository<Contactpersoon> ContactPerson = new Repository<Contactpersoon>(UOW.Context);
-            ContactPerson.Add(NewcontactPerson.ContactPersonData);
+            UOW.ContactPersons.Add(NewcontactPerson.ContactPersonData);
 
 
             try

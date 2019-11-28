@@ -9,6 +9,7 @@ using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using FestiSpec.Domain.Model;
 
 namespace Festispec_WPF.ViewModel
 {
