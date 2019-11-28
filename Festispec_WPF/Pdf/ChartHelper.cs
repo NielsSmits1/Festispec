@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -26,19 +24,35 @@ namespace Festispec_WPF.Helpers
                 values.Add(GivenAwnsers.Where(x => x.Equals(l)).Count());
             }
 
-            Series chart;
-
+            CartesianChart myChart;
             if (chartType == "Bar")
-                chart = new ColumnSeries()
-                {
-                    Values = values
-                };
+               myChart = GenerateBar(awn, values);
+            else if (chartType == "Row")
+               myChart = GenerateRow(awn, values);
             else
-                chart = new RowSeries()
-                {
-                    Values = values
-                };
+                myChart = GeneratePie(awn, values);
 
+
+            var viewbox = new Viewbox();
+            viewbox.Child = myChart;
+            viewbox.Measure(myChart.RenderSize);
+            viewbox.Arrange(new Rect(new Point(0, 0), myChart.RenderSize));
+            myChart.Update(true, true); //force chart redraw
+            viewbox.UpdateLayout();
+
+            var name = DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss-fff") + ".png";
+            SaveToPng(myChart, name);
+
+
+            return Location + name;
+        }
+
+        private static CartesianChart GenerateRow(string[] awn, ChartValues<int> values)
+        {
+            Series chart = new RowSeries()
+            {
+                Values = values
+            };
 
             var myChart = new CartesianChart
             {
@@ -72,32 +86,79 @@ namespace Festispec_WPF.Helpers
                 }
             };
 
-            if (chartType == "Bar")
+
+            myChart.AxisX.Add(countAxis);
+            myChart.AxisY.Add(awnsersAxis);
+
+            return myChart;
+        }
+
+        private static CartesianChart GenerateBar(string[] awn, ChartValues<int> values)
+        {
+            Series chart = new ColumnSeries()
             {
-                myChart.AxisX.Add(awnsersAxis);
-                myChart.AxisY.Add(countAxis);
-            }
-            else
+                Values = values
+            };
+
+            var myChart = new CartesianChart
             {
-                myChart.AxisX.Add(countAxis);
-                myChart.AxisY.Add(awnsersAxis);
-            }
-               
+                DisableAnimations = true,
+                Width = 500,
+                Height = 500,
 
-            
+                // based on new paramter switch around the charts
+                Series = new SeriesCollection
+                    {
+                       chart
+                    }
+            };
 
-            var viewbox = new Viewbox();
-            viewbox.Child = myChart;
-            viewbox.Measure(myChart.RenderSize);
-            viewbox.Arrange(new Rect(new Point(0, 0), myChart.RenderSize));
-            myChart.Update(true, true); //force chart redraw
-            viewbox.UpdateLayout();
+            var awnsersAxis = new Axis
+            {
+                Labels = awn,
+                Separator = new Separator // force the separator step to 1, so it always display all labels
+                {
+                    Step = 1,
+                    IsEnabled = false //disable it to make it invisible.
+                }
+            };
 
-            var name = DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss-fff") + ".png";
-            SaveToPng(myChart, name);
+            var countAxis = new Axis
+            {
+                Separator = new Separator // force the separator step to 1, so it always display all labels
+                {
+                    Step = 1,
+                    IsEnabled = false //disable it to make it invisible.
+                }
+            };
 
+            myChart.AxisX.Add(awnsersAxis);
+            myChart.AxisY.Add(countAxis);
 
-            return Location + name;
+            return myChart;
+        }
+
+        private static CartesianChart GeneratePie(string[] awn, ChartValues<int> values)
+        {
+            Series chart = new ColumnSeries()
+            {
+                Values = values
+            };
+
+            var myChart = new CartesianChart
+            {
+                DisableAnimations = true,
+                Width = 500,
+                Height = 500,
+
+                // based on new paramter switch around the charts
+                Series = new SeriesCollection
+                    {
+                       chart
+                    }
+            };
+
+            return myChart;
         }
 
         private static void SaveToPng(FrameworkElement visual, string fileName)
