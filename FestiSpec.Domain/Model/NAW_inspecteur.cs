@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace FestiSpec.Domain.Model
 {
     using System;
@@ -20,6 +22,7 @@ namespace FestiSpec.Domain.Model
             this.Inspecteur = new HashSet<Inspecteur>();
         }
     
+        [Key]
         public int ID { get; set; }
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }

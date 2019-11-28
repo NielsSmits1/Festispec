@@ -13,10 +13,8 @@ namespace FestiSpecWebsite.Controllers
             return View();
         }
 
-        public ActionResult Application()
+        public ActionResult Applicant()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
