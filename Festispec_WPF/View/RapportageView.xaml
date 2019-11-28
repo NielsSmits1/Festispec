@@ -9,6 +9,6 @@
         DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" Margin="345,194,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
-
+        <ComboBox  SelectedIndex="0" SelectedItem="{Binding Chart}" ItemsSource="{Binding Charts, Mode=TwoWay}" Margin="304,146,1434,860"/>
     </Grid>
 </Window>

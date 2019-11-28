@@ -10,7 +10,7 @@ namespace Festispec_WPF.Helpers
     {
 
         //TODO: parameter of asked servey to have a rapportage generated
-        public string GeneratePdf(int selectedInspection)
+        public string GeneratePdf(int selectedInspection, string chart)
         {
             //stub data
             string htmlCode;
