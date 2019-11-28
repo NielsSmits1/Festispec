@@ -13,7 +13,7 @@ namespace FestiSpecWebsite.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Application()
         {
             ViewBag.Message = "Your application description page.";
 
@@ -26,5 +26,7 @@ namespace FestiSpecWebsite.Controllers
 
             return View();
         }
+
+
     }
 }
