@@ -22,7 +22,7 @@ namespace Festispec_WPF.ViewModel
             Charts = new ObservableCollection<string>()
             {
                 "Bar",
-                "Pie"
+                "Row"
             };
             GenerateCommand = new RelayCommand(GeneratePdf);
         }

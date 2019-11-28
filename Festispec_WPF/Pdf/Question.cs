@@ -12,13 +12,22 @@ namespace Festispec_WPF.Pdf
         public int Id { get; set; }
         public string QuestionTitle { get; set; }
         public List<string> GivenAwnsers { get; set; }
+        public string chartType { get; set; }
+
+        public Question(string _chartType = "")
+        {
+            chartType = _chartType;
+        }
 
         public string ChartHtml
         {
             get
             {
                 // Let user set property for generatring diffrent types of charts
-                return ChartHelper.GenerateChart(GivenAwnsers);
+                if(chartType != "")
+                    return ChartHelper.GenerateChart(GivenAwnsers, chartType);
+
+                return chartType;
             }
         }
     }

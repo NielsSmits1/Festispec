@@ -17,7 +17,7 @@ namespace Festispec_WPF.Helpers
     public static class ChartHelper
     {
         private const string Location = "D:/documents/temp/";
-        public static string GenerateChart(List<string> GivenAwnsers)
+        public static string GenerateChart(List<string> GivenAwnsers, string chartType)
         {
             var awn = GivenAwnsers.Distinct().OrderBy(a => a).ToArray();
             ChartValues<int> values = new ChartValues<int>();
@@ -25,6 +25,20 @@ namespace Festispec_WPF.Helpers
             {
                 values.Add(GivenAwnsers.Where(x => x.Equals(l)).Count());
             }
+
+            Series chart;
+
+            if (chartType == "Bar")
+                chart = new ColumnSeries()
+                {
+                    Values = values
+                };
+            else
+                chart = new RowSeries()
+                {
+                    Values = values
+                };
+
 
             var myChart = new CartesianChart
             {
@@ -35,14 +49,11 @@ namespace Festispec_WPF.Helpers
                 // based on new paramter switch around the charts
                 Series = new SeriesCollection
                     {
-                        new ColumnSeries
-                        {
-                            Values = values
-                        }
+                       chart
                     }
             };
 
-            myChart.AxisX.Add(new Axis
+            var awnsersAxis = new Axis
             {
                 Labels = awn,
                 Separator = new Separator // force the separator step to 1, so it always display all labels
@@ -50,16 +61,30 @@ namespace Festispec_WPF.Helpers
                     Step = 1,
                     IsEnabled = false //disable it to make it invisible.
                 }
-            });
+            };
 
-            myChart.AxisY.Add(new Axis
+            var countAxis = new Axis
             {
                 Separator = new Separator // force the separator step to 1, so it always display all labels
                 {
                     Step = 1,
                     IsEnabled = false //disable it to make it invisible.
                 }
-            });
+            };
+
+            if (chartType == "Bar")
+            {
+                myChart.AxisX.Add(awnsersAxis);
+                myChart.AxisY.Add(countAxis);
+            }
+            else
+            {
+                myChart.AxisX.Add(countAxis);
+                myChart.AxisY.Add(awnsersAxis);
+            }
+               
+
+            
 
             var viewbox = new Viewbox();
             viewbox.Child = myChart;

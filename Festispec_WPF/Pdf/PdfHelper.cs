@@ -50,7 +50,7 @@ namespace Festispec_WPF.Helpers
                 SummaryOfInspection = "Er was niet genoeg bier de man.",
                 Questions = new List<Question>()
                 {
-                    new Question()
+                    new Question(chart)
                     {
                         Id = 1,
                         GivenAwnsers = new List<string>()
@@ -61,7 +61,7 @@ namespace Festispec_WPF.Helpers
                         },
                         QuestionTitle = "Hoeveel bier was er?"
                     },
-                    new Question()
+                    new Question(chart)
                     {
                         Id = 2,
                         GivenAwnsers = new List<string>()
@@ -72,7 +72,7 @@ namespace Festispec_WPF.Helpers
                         },
                         QuestionTitle = "Hoeveel bier was er verspilt?"
                     },
-                    new Question()
+                    new Question(chart)
                     {
                         Id = 3,
                         GivenAwnsers = new List<string>()
