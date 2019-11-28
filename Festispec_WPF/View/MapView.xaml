@@ -93,7 +93,7 @@
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
-                                        <Button Grid.Column="0" Content="Inspecteurs" Width="175" Height="50" FontSize="28"/>
+                                        <Button Command="{Binding ShowInspectorListCommand}" Grid.Column="0" Content="Inspecteurs" Width="175" Height="50" FontSize="28"/>
                                         <Button Grid.Column="1" Content="Details" Width="175" Height="50" FontSize="28"/>
                                     </Grid>
 
@@ -111,7 +111,11 @@
                                                         <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <TextBox Grid.Column="0" Text="Zoek" TextAlignment="Left" FontSize="20"/>
+                                                    <TextBox Grid.Column="0" Text="{Binding searchText , UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" FontSize="20">
+                                                        <TextBox.InputBindings>
+                                                            <KeyBinding Command="{Binding SearchDataGrid}" Key="Enter" />
+                                                        </TextBox.InputBindings>
+                                                    </TextBox>
                                                     <Button Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0"/>
                                                 </Grid>
                                             </Border>
@@ -178,11 +182,13 @@
                                                             </StackPanel>
                                                         </DataTemplate>
                                                     </Grid.Resources>
-                                                    <DataGrid ItemsSource="{Binding ViewSource.View}" SelectedItem="{Binding SelectedInspector, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
-                                                        <DataGrid.Columns>
-                                                            <DataGridTemplateColumn Width="*" CellTemplate="{StaticResource DateTemplate}" />
-                                                        </DataGrid.Columns>
-                                                    </DataGrid>
+                                                    <ScrollViewer VerticalScrollBarVisibility="Visible" Height="350">
+                                                        <DataGrid CanUserAddRows="false" ItemsSource="{Binding ViewSource.View}" SelectedItem="{Binding SelectedInspector, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
+                                                            <DataGrid.Columns>
+                                                                <DataGridTemplateColumn Width="*" CellTemplate="{StaticResource DateTemplate}" />
+                                                            </DataGrid.Columns>
+                                                        </DataGrid>
+                                                    </ScrollViewer>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -205,7 +211,7 @@
                                                                     <TextBlock Text="{Binding EndDate, StringFormat=hh:mm}" FontSize="12" />
                                                                 </StackPanel>
                                                                 <DockPanel>
-                                                                    <Button Command="{Binding DataContext.ShowInspectorCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" HorizontalAlignment="Left" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="#8000FF" Background="White" FontWeight="ExtraBold" Margin="4" Width="80" Height="25" Content="Details" Cursor="Hand">
+                                                                    <Button HorizontalAlignment="Left" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="#8000FF" Background="White" FontWeight="ExtraBold" Margin="4" Width="80" Height="25" Content="Details" Cursor="Hand">
                                                                         <Button.Style>
                                                                             <Style TargetType="{x:Type Button}">
                                                                                 <Setter Property="Background" Value="Green"/>
@@ -251,12 +257,85 @@
                                                             </StackPanel>
                                                         </DataTemplate>
                                                     </Grid.Resources>
-                                                    <DataGrid ItemsSource="{Binding Festivals}" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
+                                                    <ScrollViewer VerticalScrollBarVisibility="Visible" Height="350">
+                                                        <DataGrid CanUserAddRows="false" ItemsSource="{Binding Festivals}" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
+                                                            <DataGrid.Columns>
+                                                                <DataGridTemplateColumn Width="*" CellTemplate="{StaticResource DateTemplate}" />
+                                                            </DataGrid.Columns>
+                                                        </DataGrid>
+                                                    </ScrollViewer>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        
+                                        <!--Single inspector Grid-->
+                                        <Grid Grid.Row="1" Visibility="{Binding SingleInspectorVisibility}">
+                                            <Grid>
+                                                <Grid.Resources>
+                                                    <DataTemplate x:Key="DateTemplate" >
+                                                        <StackPanel Margin="10,0,0,0">
+                                                            <DockPanel>
+                                                                <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="ExtraBold" />
+                                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                                    <TextBlock Text="{Binding TravelDistance, StringFormat=N2}" FontSize="16" FontWeight="ExtraBold" />
+                                                                    <TextBlock Text=" km" FontSize="16" FontWeight="ExtraBold" />
+                                                                </StackPanel>
+                                                            </DockPanel>
+                                                            <TextBlock Text="{Binding Address}" FontSize="14" />
+                                                            <DockPanel>
+                                                                <Button Command="{Binding DataContext.ShowInspectorCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" HorizontalAlignment="Left" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="#8000FF" Background="White" FontWeight="ExtraBold" Margin="4" Width="80" Height="25" Content="Route" Cursor="Hand" Visibility="{Binding DataContext.ButtonControlVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                                                    <Button.Style>
+                                                                        <Style TargetType="{x:Type Button}">
+                                                                            <Setter Property="Background" Value="Green"/>
+                                                                            <Setter Property="Template">
+                                                                                <Setter.Value>
+                                                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                                                        </Border>
+                                                                                    </ControlTemplate>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                            <Style.Triggers>
+                                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                                    <Setter Property="Opacity" Value="0.8" />
+                                                                                </Trigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Button.Style>
+                                                                </Button>
+                                                                <Button Command="{Binding DataContext.ShowNinjaCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Margin="4" Width="75" Height="25" Cursor="Hand" Content="Show">
+                                                                    <Button.Style>
+                                                                        <Style TargetType="{x:Type Button}">
+                                                                            <Setter Property="Background" Value="Green"/>
+                                                                            <Setter Property="Template">
+                                                                                <Setter.Value>
+                                                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                                                        </Border>
+                                                                                    </ControlTemplate>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                            <Style.Triggers>
+                                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                                    <Setter Property="Opacity" Value="0.8" />
+                                                                                </Trigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Button.Style>
+                                                                </Button>
+                                                            </DockPanel>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </Grid.Resources>
+                                                <ScrollViewer VerticalScrollBarVisibility="Visible" Height="350">
+                                                    <DataGrid CanUserAddRows="false" ItemsSource="{Binding SingleInspector}" SelectedItem="{Binding SelectedInspector, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
                                                         <DataGrid.Columns>
                                                             <DataGridTemplateColumn Width="*" CellTemplate="{StaticResource DateTemplate}" />
                                                         </DataGrid.Columns>
                                                     </DataGrid>
-                                                </Grid>
+                                                </ScrollViewer>
                                             </Grid>
                                         </Grid>
                                     </Grid>

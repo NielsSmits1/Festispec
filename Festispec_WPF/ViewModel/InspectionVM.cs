@@ -18,28 +18,39 @@ namespace Festispec_WPF.ViewModel
             _inspectie = inspection;
         }
 
+        public InspectionVM()
+        {
+            _inspectie = new Inspectie();
+        }
+
+        public int ID
+        {
+            get { return _inspectie.Inspectienummer; }
+            set { RaisePropertyChanged("ID"); }
+        }
+
         public DateTime StartDate
         {
             get { return _inspectie.StartDate; }
-            set { RaisePropertyChanged("Name"); }
+            set { RaisePropertyChanged("StartDate"); }
         }
 
         public DateTime EndDate
         {
             get { return _inspectie.EndDate; }
-            set { RaisePropertyChanged("Name"); }
+            set { RaisePropertyChanged("EndDate"); }
         }
 
         public int Locatie_ID
         {
             get { return _inspectie.Locatie_ID; }
-            set { RaisePropertyChanged("Name"); }
+            set { RaisePropertyChanged("Locatie_ID"); }
         }
 
         public string Title
         {
             get { return _inspectie.Titel; }
-            set { RaisePropertyChanged("Name"); }
+            set { RaisePropertyChanged("Title"); }
         }
 
         public string Address

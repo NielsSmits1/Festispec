@@ -139,6 +139,12 @@ namespace Festispec_WPF.ViewModel
             set { _inspecteur.Actief = value; RaisePropertyChanged("Active"); }
         }*/
 
+        public int ID
+        {
+            get { return _inspecteur.ID; }
+            set { RaisePropertyChanged("ID"); }
+        }
+
         public string Name
         {
             get { return _inspecteur.Gebruikersnaam; }
