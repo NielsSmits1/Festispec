@@ -1,5 +1,6 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
+using LiveCharts.Wpf.Charts.Base;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +25,7 @@ namespace Festispec_WPF.Helpers
                 values.Add(GivenAwnsers.Where(x => x.Equals(l)).Count());
             }
 
-            CartesianChart myChart;
+            Chart myChart;
             if (chartType == "Bar")
                myChart = GenerateBar(awn, values);
             else if (chartType == "Row")
@@ -47,11 +48,12 @@ namespace Festispec_WPF.Helpers
             return Location + name;
         }
 
-        private static CartesianChart GenerateRow(string[] awn, ChartValues<int> values)
+        private static Chart GenerateRow(string[] awn, ChartValues<int> values)
         {
             Series chart = new RowSeries()
             {
-                Values = values
+                Values = values,
+                FontSize = 25
             };
 
             var myChart = new CartesianChart
@@ -74,7 +76,8 @@ namespace Festispec_WPF.Helpers
                 {
                     Step = 1,
                     IsEnabled = false //disable it to make it invisible.
-                }
+                },
+                FontSize = 25
             };
 
             var countAxis = new Axis
@@ -83,21 +86,24 @@ namespace Festispec_WPF.Helpers
                 {
                     Step = 1,
                     IsEnabled = false //disable it to make it invisible.
-                }
+                },
+                FontSize = 25
             };
 
 
             myChart.AxisX.Add(countAxis);
             myChart.AxisY.Add(awnsersAxis);
+            myChart.FontSize = 25;
 
             return myChart;
         }
 
-        private static CartesianChart GenerateBar(string[] awn, ChartValues<int> values)
+        private static Chart GenerateBar(string[] awn, ChartValues<int> values)
         {
             Series chart = new ColumnSeries()
             {
-                Values = values
+                Values = values,
+                FontSize = 25
             };
 
             var myChart = new CartesianChart
@@ -120,7 +126,8 @@ namespace Festispec_WPF.Helpers
                 {
                     Step = 1,
                     IsEnabled = false //disable it to make it invisible.
-                }
+                },
+                FontSize = 25
             };
 
             var countAxis = new Axis
@@ -129,34 +136,50 @@ namespace Festispec_WPF.Helpers
                 {
                     Step = 1,
                     IsEnabled = false //disable it to make it invisible.
-                }
+                },
+                FontSize = 25
             };
 
             myChart.AxisX.Add(awnsersAxis);
             myChart.AxisY.Add(countAxis);
+            myChart.FontSize = 25;
 
             return myChart;
         }
 
-        private static CartesianChart GeneratePie(string[] awn, ChartValues<int> values)
+        private static Chart GeneratePie(string[] awn, ChartValues<int> values)
         {
-            Series chart = new ColumnSeries()
-            {
-                Values = values
-            };
+            Func<ChartPoint, string> labelPoint = chartPoint =>
+                                    string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
 
-            var myChart = new CartesianChart
+            var collection = new SeriesCollection();
+            var count = 0;
+            foreach(var val in values)
+            {
+                collection.Add(new PieSeries
+                {
+                    Title = awn[count],
+                    Values = new ChartValues<int>{ val },
+                    PushOut = 15,
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    FontSize = 25
+                });
+                count++;
+            }
+
+            var myChart = new PieChart
             {
                 DisableAnimations = true,
                 Width = 500,
                 Height = 500,
 
                 // based on new paramter switch around the charts
-                Series = new SeriesCollection
-                    {
-                       chart
-                    }
+                Series = collection
             };
+
+            myChart.LegendLocation = LegendLocation.Bottom;
+            myChart.FontSize = 25;
 
             return myChart;
         }
