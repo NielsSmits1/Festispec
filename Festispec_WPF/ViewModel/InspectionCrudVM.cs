@@ -17,6 +17,9 @@ namespace Festispec_WPF.ViewModel
 {
     public class InspectionCrudVM : ViewModelBase
     {
+        //KNOW BUG(S):
+        // 1.Can't create inspection if you attempt to create a location with wrong zipcode format and then close the create window, 
+        //   DB will try to save this wrong location as well in the next complete
         private CreateInspectionWindow _createWindow;
         private CreateLocationWindow _createLocation;
         private UnitOfWork _UOW;
@@ -46,12 +49,22 @@ namespace Festispec_WPF.ViewModel
 
         public ICommand OpenCreateLocationWindowCommand { get; set; }
         public ICommand CreateNewLocationCommand { get; set; }
+        public ICommand SafeEditCommand { get; set; }
         public CustomerVM SelectedCustomer
         {
             get => _selectedCustomer;
             set
             {
                 _selectedCustomer = value; NewInspection.Customer = value; RaisePropertyChanged(() => SelectedCustomer);
+            }
+        }
+
+        public CustomerVM SelectedUpdateCustomer
+        {
+            get => _selectedCustomer;
+            set
+            {
+                _selectedCustomer = value; SelectedInspection.Customer = value; RaisePropertyChanged(() => SelectedUpdateCustomer);
             }
         }
 
@@ -80,9 +93,11 @@ namespace Festispec_WPF.ViewModel
             Inspection = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
             Customers = new ObservableCollection<CustomerVM>(new Repository<Klant>(_UOW.Context).GetAll().ToList().Select(cus => new CustomerVM(cus)));
-            CreateNewInspectionCommand = new RelayCommand(AddNewInspector);
+            CreateNewInspectionCommand = new RelayCommand(AddNewInspection);
             OpenCreateLocationWindowCommand = new RelayCommand(OpenCreateLocationWindow);
             CreateNewLocationCommand = new RelayCommand(AddNewLocation);
+            OpenCreateWindowCommand = new RelayCommand(OpenCreateWindow);
+            SafeEditCommand = new RelayCommand(SafeEditInspection);
         }
 
         private void OpenCreateWindow()
@@ -122,7 +137,7 @@ namespace Festispec_WPF.ViewModel
             RaisePropertyChanged(() => Locations);
         }
 
-        private void AddNewInspector()
+        private void AddNewInspection()
         {
             _UOW.Inspections.Add(NewInspection.Inspection);
 
@@ -135,6 +150,22 @@ namespace Festispec_WPF.ViewModel
             {
                 MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void SafeEditInspection()
+        {
+            try
+            {
+                _UOW.Complete();
+                MessageBox.Show("De aanpassingen zijn doorgevoerd", "Het is gelukt!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }

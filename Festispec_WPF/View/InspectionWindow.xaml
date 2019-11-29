@@ -144,7 +144,7 @@
                             <TextBlock Width="200" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspection.Location.FullAdress}" TextWrapping="Wrap"></TextBlock>
 
                             <Label Content="Locaties" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"/>
-                            <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedLocation}" ItemsSource="{Binding Locations}">
+                            <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedUpdateLocation}" ItemsSource="{Binding Locations}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding FullAdress}"></TextBlock>
@@ -222,7 +222,7 @@
                             <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedInspection.Customer.CompanyName}" FontSize="20" TextWrapping="Wrap"></TextBlock>
 
                             <Label Content="Lijst van klanten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                            <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}">
+                            <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedUpdateCustomer}" ItemsSource="{Binding Customers}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding CompanyName}"></TextBlock>
@@ -230,7 +230,7 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         </Grid>
-                        <Button Content="Wijzigingen opslaan" Command="{Binding AddInspectorCommand}"></Button>
+                        <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditCommand}"></Button>
                     </StackPanel>
 
                     <StackPanel Grid.Column="10" Background="AliceBlue">
