@@ -51,9 +51,8 @@ namespace Festispec_WPF.ViewModel
             {
                 //TODO exit main window
                 Console.WriteLine("login ok");
-                MenuView menuView = new MenuView();
-                menuView.Show();
-
+                HomeScreenView home = new HomeScreenView();
+                home.Show();
             }
         }
 

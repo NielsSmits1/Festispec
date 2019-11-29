@@ -20,6 +20,7 @@ namespace Festispec_WPF.ViewModel
         private InspectorCrudWindow _inspecteursWindow;
         private WeekplanningView _weekPlanningWindow;
         private VerzoekInplanView _verzoekInplanWindow;
+        private CustomerCrudWindow _customerCrudWindow;
 
         // commands
         public ICommand ShowKlantenCommand { get; set; }
@@ -39,7 +40,8 @@ namespace Festispec_WPF.ViewModel
 
         public void ShowKlanten()
         {
-            throw new NotImplementedException();
+            _customerCrudWindow = new CustomerCrudWindow();
+            _customerCrudWindow.Show();
         }
         public void ShowInplanVerzoeken()
         {

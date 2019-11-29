@@ -52,20 +52,14 @@
             <Border BorderThickness="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="134"/>
-                        <ColumnDefinition Width="263"/>
-                        <ColumnDefinition Width="126"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="600"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="630"/>
                     </Grid.ColumnDefinitions>
 
 
-                    <StackPanel Grid.Column="2" Grid.ColumnSpan="4" Width="600">
+                    <StackPanel Grid.Column="1" Width="600">
                         <Label Content="Werknemers" Grid.Column="2" FontSize="20" Background="AliceBlue"></Label>
                         <Grid  Height="50">
                             <Grid.ColumnDefinitions>
@@ -106,7 +100,7 @@
                         </DataGrid>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="7" Background="AliceBlue">
+                    <StackPanel Grid.Column="3" Background="AliceBlue">
                         <Label Content="Updaten werknemer" FontSize="30" Foreground="Black"></Label>
                         <Border BorderThickness="10">
                             <Grid>
@@ -156,10 +150,6 @@
                         <Grid>
                             <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditEmployeeCommand}" Width="200" Height="40"></Button>
                         </Grid>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="10" Background="AliceBlue">
-
                     </StackPanel>
                 </Grid>
             </Border>

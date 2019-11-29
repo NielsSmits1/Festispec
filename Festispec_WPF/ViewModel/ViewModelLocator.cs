@@ -46,6 +46,7 @@ namespace Festispec_WPF.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+            SimpleIoc.Default.Register<MenuVM>();
             SimpleIoc.Default.Register<EmployeeCrudVM>();
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
