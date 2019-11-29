@@ -16,11 +16,8 @@ namespace FestiSpecWebsite.Controllers
 
         public ActionResult Applicant()
         {
-            return View();
-        }
-        public ActionResult Applicant1()
-        {
-            return View();
+            var ins = new NAW_inspecteur();
+            return View(ins);
         }
 
         public ActionResult Contact()
