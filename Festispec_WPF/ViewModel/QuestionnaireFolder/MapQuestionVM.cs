@@ -34,11 +34,16 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             get => throw new NotImplementedException();
             set => throw new NotImplementedException();
         }
+        public int Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private void Submit()
         {
             throw new NotImplementedException();
         }
 
+        public void toDatabase(int questionnaireId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

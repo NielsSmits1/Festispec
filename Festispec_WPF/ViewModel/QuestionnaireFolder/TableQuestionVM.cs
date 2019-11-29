@@ -9,5 +9,11 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
     public class TableQuestionVM : IQuestion
     {
         public string Question { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void toDatabase(int questionnaireId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

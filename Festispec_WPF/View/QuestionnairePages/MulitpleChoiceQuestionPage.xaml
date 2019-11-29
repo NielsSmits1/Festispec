@@ -25,7 +25,7 @@
             </StackPanel>
             <Button Grid.Column="0" Content="Submit vraag" VerticalAlignment="Bottom" />
 
-            <DataGrid Grid.Column="1" ItemsSource="">
+            <DataGrid Grid.Column="1">
             </DataGrid>
 
         </Grid>

@@ -16,8 +16,16 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="0.6*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel>
+        <StackPanel Orientation="Vertical">
             <ComboBox ItemsSource="{Binding _QuestionTypes}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding SelectedQuestionType}"></ComboBox>
+                <Label> Titel </Label>
+                <TextBox Text="{Binding newQuestionnaireVM.Title, Mode=TwoWay}"> </TextBox>
+                <Label>Versie</Label>
+                <TextBox Text="{Binding newQuestionnaireVM.Version, Mode=TwoWay}"></TextBox>
+                <Label>Opmerking</Label>
+                <TextBox Text="{Binding newQuestionnaireVM.Note, Mode=TwoWay}"></TextBox>
+
+                <Button Content="Submit" Margin="0,50,0,0" Command="{Binding SubmitCommand}"></Button>
         </StackPanel>
         <Frame NavigationUIVisibility="Hidden" Grid.Column="1" Opacity="1" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" />
 

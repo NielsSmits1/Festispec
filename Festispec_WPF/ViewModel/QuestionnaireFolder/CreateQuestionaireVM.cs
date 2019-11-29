@@ -1,4 +1,5 @@
-﻿using Festispec_WPF.View.QuestionnairePages;
+﻿using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View.QuestionnairePages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -7,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
@@ -15,6 +18,8 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
     public class CreateQuestionaireVM : ViewModelBase
     {
         private QuestionnaireVM _newQuestionnaireVM;
+        private UnitOfWork UOW;
+        public ICommand SubmitCommand { get; set; }
         public QuestionnaireVM newQuestionnaireVM 
         {
             get { return _newQuestionnaireVM; }
@@ -54,14 +59,39 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public CreateQuestionaireVM()
         {
+            UOW = new ViewModelLocator().UOW;
             newQuestionnaireVM = new QuestionnaireVM();
             CurrentPage = new OpenQuestionPage();
             Messenger.Default.Register<IQuestion>(this, (newQuestion) =>
             {
                 newQuestionnaireVM.questions.Add(newQuestion);
             });
+            SubmitCommand = new RelayCommand(SubmitQuestionnaire);
         }
 
+        private void SubmitQuestionnaire()
+        {
+            newQuestionnaireVM.IsFilled = false;
+            UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            foreach (IQuestion question in newQuestionnaireVM.questions)
+            {
+                question.Position = newQuestionnaireVM.questions.IndexOf(question);
+                question.toDatabase(newQuestionnaireVM.ID);
+            }
+
+
+
+        }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
         {

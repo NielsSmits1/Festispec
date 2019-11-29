@@ -13,6 +13,7 @@ namespace Festispec_WPF.ViewModel
 {
     public class QuestionnaireVM: ViewModelBase
     {
+        private Vragenlijst _questionnaire;
         //variables
         private ObservableCollection<IQuestion> _questions;
         public ObservableCollection<IQuestion> questions 
@@ -22,6 +23,11 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
+        public string Title { get { return _questionnaire.Titel; } set { _questionnaire.Titel = value; } }
+        public string Version { get { return _questionnaire.Versie; } set { _questionnaire.Versie = value; } }
+        public string Note { get { return _questionnaire.Opmerking; } set { _questionnaire.Opmerking = value; } }
+        public bool IsFilled { get { return _questionnaire.Is_Ingevuld;  } set { _questionnaire.Is_Ingevuld = value; } }
+        public int ID { get { return _questionnaire.ID; } }
         public ICommand CreateNewQuestionnaireCommand { get; set; }
 
 
@@ -29,13 +35,18 @@ namespace Festispec_WPF.ViewModel
         {
             questions = new ObservableCollection<IQuestion>();
             CreateNewQuestionnaireCommand = new RelayCommand(OpenCreateQuestionnaire);
-
+            _questionnaire = new Vragenlijst();
         }
 
         private void OpenCreateQuestionnaire()
         {
             CreateQuestionnaire window = new CreateQuestionnaire();
             window.Show();
+        }
+
+        public Vragenlijst ToModel()
+        {
+            return _questionnaire;
         }
     }
 }

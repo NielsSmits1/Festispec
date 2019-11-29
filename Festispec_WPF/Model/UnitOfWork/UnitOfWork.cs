@@ -17,6 +17,7 @@ namespace Festispec_WPF.Model.UnitOfWork
             _context = context;
             Inspectors = new InspectorRepository(_context);
             NAWInspectors = new NAWInspector_Repository(_context);
+            Questionnaires = new QuestionnaireRepository(_context);
         }
 
         public FestiSpecEntities Context
@@ -28,6 +29,7 @@ namespace Festispec_WPF.Model.UnitOfWork
         }
         public IInspectorRepository Inspectors { get; private set; }
         public INAWInspectorRepository NAWInspectors { get; private set; }
+        public IQuestionnaireRepository Questionnaires { get; private set; }
 
         public int Complete()
         {
