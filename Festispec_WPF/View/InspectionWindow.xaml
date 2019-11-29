@@ -106,7 +106,7 @@
 
                     </StackPanel>
 
-                    <StackPanel Grid.Column="7" Background="AliceBlue">
+                    <StackPanel Grid.Column="7" Background="AliceBlue" IsEnabled="{Binding EnableUpdate}">
                         <Label Content="inspectie bewerken" FontSize="30" Foreground="Black"></Label>
                         <Grid>
                             <Grid.ColumnDefinitions>

@@ -37,7 +37,17 @@ namespace Festispec_WPF.ViewModel
             get => _selectedInspection;
             set
             {
-                _selectedInspection = value; RaisePropertyChanged(() => SelectedInspection);
+                _selectedInspection = value;
+                if(value == null)
+                {
+                    EnableUpdate = false;
+                }
+                else
+                {
+                    EnableUpdate = true; 
+                }
+                RaisePropertyChanged(() => EnableUpdate);
+                RaisePropertyChanged(() => SelectedInspection);
             }
         }
 
@@ -50,6 +60,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand OpenCreateLocationWindowCommand { get; set; }
         public ICommand CreateNewLocationCommand { get; set; }
         public ICommand SafeEditCommand { get; set; }
+        public bool EnableUpdate { get; set; }
         public CustomerVM SelectedCustomer
         {
             get => _selectedCustomer;
@@ -139,12 +150,15 @@ namespace Festispec_WPF.ViewModel
 
         private void AddNewInspection()
         {
+            NewLocation = null;
             _UOW.Inspections.Add(NewInspection.Inspection);
 
             try
             {
                 _UOW.Complete();
                 _createWindow.Close();
+                Inspection = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
+
             }
             catch
             {
