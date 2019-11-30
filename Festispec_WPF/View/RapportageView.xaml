@@ -15,7 +15,7 @@
                 <DataGridTemplateColumn Header="Chart type">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox  SelectedIndex="1" SelectedItem="{Binding Chart}" ItemsSource="{Binding DataContext.Charts, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=DataGrid}}" Width="238"/>
+                            <ComboBox  SelectedIndex="1"  SelectedItem="{Binding Chart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding DataContext.Charts, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=DataGrid}}" Width="238"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

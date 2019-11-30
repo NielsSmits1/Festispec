@@ -15,11 +15,22 @@ namespace Festispec_WPF.ViewModel
         public ICommand GenerateCommand { get; set; }
         private IUnitOfWork UOW;
         public RapportageInfo selectedInspection { get; set; }
-
+        private string _chart;
         //public variables
         public ObservableCollection<Question> questions { get; set; }
         public ObservableCollection<string> Charts { get; set; }
 
+        public string Chart
+        {
+            get
+            {
+                return _chart;
+            }
+            set
+            {
+                _chart = value; RaisePropertyChanged(() => Chart);
+            }
+        }
         public RapportageVM()
         {
             UOW = new ViewModelLocator().UOW;
@@ -102,6 +113,7 @@ namespace Festispec_WPF.ViewModel
 
             questions = new ObservableCollection<Question>(selectedInspection.Questions);
             selectedInspection.Questions = new List<Question>();
+            Chart = "Bar";
         }
 
         public void GeneratePdf()
