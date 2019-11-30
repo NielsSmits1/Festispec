@@ -8,7 +8,18 @@
         Title="Rapportage" Height="1080" Width="1920"
         DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="345,194,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
-        <ComboBox  SelectedIndex="0" SelectedItem="{Binding Chart}" ItemsSource="{Binding Charts, Mode=TwoWay}" Margin="304,146,1434,860"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="1155,13,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
+        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="20,10,800,10" SelectionChanged="DataGrid_SelectionChanged" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding QuestionTitle}"  Width="*"/>
+                <DataGridTemplateColumn Header="Chart type">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox  SelectedIndex="1" SelectedItem="{Binding Chart}" ItemsSource="{Binding Charts, Mode=TwoWay}" Width="238"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

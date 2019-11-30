@@ -1,7 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Festispec_WPF.Helpers;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.Pdf;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -11,37 +14,101 @@ namespace Festispec_WPF.ViewModel
     {
         public ICommand GenerateCommand { get; set; }
         private IUnitOfWork UOW;
-        public int selectedInspection { get; set; }
-        private string _chart { get; set; }
+        public RapportageInfo selectedInspection { get; set; }
+
         //public variables
+        public ObservableCollection<Question> questions { get; set; }
         public ObservableCollection<string> Charts { get; set; }
 
         public RapportageVM()
         {
             UOW = new ViewModelLocator().UOW;
+            GenerateCommand = new RelayCommand(GeneratePdf);
             Charts = new ObservableCollection<string>()
             {
                 "Bar",
                 "Row",
                 "Pie"
             };
-            GenerateCommand = new RelayCommand(GeneratePdf);
+            
+            selectedInspection = new RapportageInfo()
+            {
+                Advice = "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja.",
+                CustomerName = "Beunhaas BV",
+                Date = DateTime.Now,
+                InspectionTitle = "Is er genoeg bier op het festival?",
+                Introduction = "Wij Gaan kijken of er genoeg bier is.",
+                SummaryOfInspection = "Er was niet genoeg bier de man.",
+                Questions = new List<Question>()
+                {
+                    new Question()
+                    {
+                        Id = 1,
+                        GivenAwnsers = new List<string>()
+                        {
+                            "A",
+                            "A",
+                            "B"
+                        },
+                        QuestionTitle = "Hoeveel bier was er?"
+                    },
+                    new Question()
+                    {
+                        Id = 2,
+                        GivenAwnsers = new List<string>()
+                        {
+                            "A",
+                            "B",
+                            "C"
+                        },
+                        QuestionTitle = "Hoeveel bier was er verspilt?"
+                    },
+                    new Question()
+                    {
+                        Id = 3,
+                        GivenAwnsers = new List<string>()
+                        {
+                            "A",
+                            "B",
+                            "C"
+                        },
+                        QuestionTitle = "Hoeveel bier had je op?"
+                    }
+                }
+            };
+
+            questions = new ObservableCollection<Question>(selectedInspection.Questions);
+            selectedInspection.Questions = new List<Question>();
         }
 
         public void GeneratePdf()
         {
             var helper = new PdfHelper();
-            var location = helper.GeneratePdf(selectedInspection, _chart);
-        }
-
-        public string Chart
-        {
-            get { return _chart; }
-            set
-            {
-                _chart = value;
-                RaisePropertyChanged();
-            }
+            selectedInspection.Questions.AddRange(questions);
+            var location = helper.GeneratePdf(selectedInspection);
         }
     }
 }

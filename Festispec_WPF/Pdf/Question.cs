@@ -1,4 +1,5 @@
 ﻿using Festispec_WPF.Helpers;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Festispec_WPF.Pdf
 {
-    public class Question
+    public class Question : ViewModelBase
     {
         public int Id { get; set; }
         public string QuestionTitle { get; set; }
         public List<string> GivenAwnsers { get; set; }
-        public string chartType { get; set; }
+        public string _chart { get; set; }
 
-        public Question(string _chartType = "")
+        public Question(string chart = "")
         {
-            chartType = _chartType;
+            _chart = chart;
         }
 
         public string ChartHtml
@@ -24,10 +25,20 @@ namespace Festispec_WPF.Pdf
             get
             {
                 // Let user set property for generatring diffrent types of charts
-                if(chartType != "")
-                    return ChartHelper.GenerateChart(GivenAwnsers, chartType);
+                if (_chart != "")
+                    return ChartHelper.GenerateChart(GivenAwnsers, _chart);
 
-                return chartType;
+                return _chart;
+            }
+        }
+
+        public string Chart
+        {
+            get { return _chart; }
+            set
+            {
+                _chart = value;
+                RaisePropertyChanged();
             }
         }
     }
