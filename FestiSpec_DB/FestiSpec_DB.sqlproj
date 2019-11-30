@@ -6,7 +6,7 @@
     <Name>FestiSpec_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{666b99d4-8ab7-4f73-83e2-eaa8647a72ef}</ProjectGuid>
+    <ProjectGuid>{7c73a8c0-4df3-4047-b7bc-d76f745a8453}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -62,7 +62,6 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
     <Build Include="dbo\Tables\Afspraak.sql" />
     <Build Include="dbo\Tables\Beschikbaarheid.sql" />
     <Build Include="dbo\Tables\Bijlagevraag.sql" />
@@ -80,6 +79,7 @@
     <Build Include="dbo\Tables\Klant.sql" />
     <Build Include="dbo\Tables\Locatie.sql" />
     <Build Include="dbo\Tables\Meerkeuzevraag.sql" />
+    <Build Include="dbo\Tables\Bijlagevraag_Vragenlijst.sql" />
     <Build Include="dbo\Tables\Meerkeuzevraag_antwoord.sql" />
     <Build Include="dbo\Tables\Meerkeuzevraag_vragenlijst.sql" />
     <Build Include="dbo\Tables\NAW_inspecteur.sql" />
@@ -93,13 +93,11 @@
     <Build Include="dbo\Tables\Tabelvraag.sql" />
     <Build Include="dbo\Tables\Tabelvraag_antwoord.sql" />
     <Build Include="dbo\Tables\Tabelvraag_vragenlijst.sql" />
-    <Build Include="dbo\Tables\Telefoonnummer.sql" />
-    <Build Include="dbo\Tables\Telefoonnummer_inspecteur.sql" />
     <Build Include="dbo\Tables\Template.sql" />
     <Build Include="dbo\Tables\Vereiste_certificaten.sql" />
     <Build Include="dbo\Tables\Verzoek.sql" />
     <Build Include="dbo\Tables\Vragenlijst.sql" />
-    <Build Include="dbo\Tables\Vragenlijst_bijlage.sql" />
     <Build Include="dbo\Tables\Werknemer.sql" />
+    <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
   </ItemGroup>
 </Project>

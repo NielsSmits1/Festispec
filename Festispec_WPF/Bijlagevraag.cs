@@ -17,13 +17,13 @@ namespace Festispec_WPF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Bijlagevraag()
         {
-            this.Vragenlijst_bijlage = new HashSet<Vragenlijst_bijlage>();
+            this.Bijlagevraag_Vragenlijst = new HashSet<Bijlagevraag_Vragenlijst>();
         }
     
         public int ID { get; set; }
         public string Vraag { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vragenlijst_bijlage> Vragenlijst_bijlage { get; set; }
+        public virtual ICollection<Bijlagevraag_Vragenlijst> Bijlagevraag_Vragenlijst { get; set; }
     }
 }

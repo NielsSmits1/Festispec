@@ -6,11 +6,12 @@
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AppendixQuestionPage">
+      Title="AppendixQuestionPage"
+      DataContext="{Binding AppendixQuestionPageVM, Source={StaticResource Locator}}">
 
     <StackPanel HorizontalAlignment="Center">
         <TextBlock Text="Vraag:"></TextBlock>
-        <TextBox Text="{Binding OpenQuestion}"/>
-        <Button Command="{Binding OpenQuestion}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
+        <TextBox Text="{Binding NewAppendixQuestion.Question}"/>
+        <Button Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
     </StackPanel>
 </Page>

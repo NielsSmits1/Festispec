@@ -13,7 +13,7 @@ namespace Festispec_WPF.ViewModel
 
         //private variables
         private readonly Werknemer _werknemer;
-        private readonly Telefoonnummer _werknemerTelefoonNummer;
+        //private readonly Telefoonnummer _werknemerTelefoonNummer;
 
         //constructor
         public EmployeeVM()
@@ -22,7 +22,7 @@ namespace Festispec_WPF.ViewModel
             RegisterCommand = new RelayCommand(HandleRegister);
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
-            _werknemerTelefoonNummer = new Telefoonnummer();
+            //_werknemerTelefoonNummer = new Telefoonnummer();
         }
 
         //public variables
@@ -143,16 +143,16 @@ namespace Festispec_WPF.ViewModel
         //command references
         public ICommand RegisterCommand { get; set; }
 
-        public string Phonenumber
-        {
-            get => _werknemerTelefoonNummer.Telefoonnummer1;
+        //public string Phonenumber
+        //{
+        //    get => _werknemerTelefoonNummer.Telefoonnummer1;
 
-            set
-            {
-                _werknemerTelefoonNummer.Telefoonnummer1 = value;
-                RaisePropertyChanged();
-            }
-        }
+        //    set
+        //    {
+        //        _werknemerTelefoonNummer.Telefoonnummer1 = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
         //TODO handle double register click (program crash)
         private void HandleRegister()
         {
@@ -160,7 +160,7 @@ namespace Festispec_WPF.ViewModel
             {
                 context.NAW_werknemer.Add(_nawWerknemer);
                 context.Werknemer.Add(_werknemer);
-                context.Telefoonnummer.Add(_werknemerTelefoonNummer);
+                //context.Telefoonnummer.Add(_werknemerTelefoonNummer);
                 context.SaveChanges();
             }
         }

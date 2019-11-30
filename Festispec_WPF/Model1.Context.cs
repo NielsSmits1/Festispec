@@ -28,6 +28,7 @@ namespace Festispec_WPF
         public virtual DbSet<Afspraak> Afspraak { get; set; }
         public virtual DbSet<Beschikbaarheid> Beschikbaarheid { get; set; }
         public virtual DbSet<Bijlagevraag> Bijlagevraag { get; set; }
+        public virtual DbSet<Bijlagevraag_Vragenlijst> Bijlagevraag_Vragenlijst { get; set; }
         public virtual DbSet<Certificaat> Certificaat { get; set; }
         public virtual DbSet<Contactpersoon> Contactpersoon { get; set; }
         public virtual DbSet<Inspecteur> Inspecteur { get; set; }
@@ -52,12 +53,9 @@ namespace Festispec_WPF
         public virtual DbSet<Tabelvraag> Tabelvraag { get; set; }
         public virtual DbSet<Tabelvraag_antwoord> Tabelvraag_antwoord { get; set; }
         public virtual DbSet<Tabelvraag_vragenlijst> Tabelvraag_vragenlijst { get; set; }
-        public virtual DbSet<Telefoonnummer> Telefoonnummer { get; set; }
-        public virtual DbSet<Telefoonnummer_inspecteur> Telefoonnummer_inspecteur { get; set; }
         public virtual DbSet<Template> Template { get; set; }
         public virtual DbSet<Verzoek> Verzoek { get; set; }
         public virtual DbSet<Vragenlijst> Vragenlijst { get; set; }
-        public virtual DbSet<Vragenlijst_bijlage> Vragenlijst_bijlage { get; set; }
         public virtual DbSet<Werknemer> Werknemer { get; set; }
     }
 }

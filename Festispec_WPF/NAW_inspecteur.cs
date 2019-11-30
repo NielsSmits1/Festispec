@@ -18,7 +18,6 @@ namespace Festispec_WPF
         public NAW_inspecteur()
         {
             this.Inspecteur = new HashSet<Inspecteur>();
-            this.Telefoonnummer_inspecteur = new HashSet<Telefoonnummer_inspecteur>();
         }
     
         public int ID { get; set; }
@@ -27,14 +26,13 @@ namespace Festispec_WPF
         public string Achternaam { get; set; }
         public string Postcode { get; set; }
         public string Huisnummer { get; set; }
-        public string Plaatsnaam { get; set; }
+        public string Straatnaam { get; set; }
         public System.DateTime Geboortedatum { get; set; }
         public string IBAN { get; set; }
         public string Email { get; set; }
+        public string Telefoonnummer { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspecteur> Inspecteur { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Telefoonnummer_inspecteur> Telefoonnummer_inspecteur { get; set; }
     }
 }

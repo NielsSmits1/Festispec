@@ -19,7 +19,7 @@ namespace Festispec_WPF.ViewModel
             ChosenCertificates = new ObservableCollection<CertificateVM>();
             _nawInspecteur = new NAW_inspecteur();
             _inspecteur = new Inspecteur();
-            _phonenumber = new Telefoonnummer_inspecteur();
+            //_phonenumber = new Telefoonnummer_inspecteur();
         }
 
         public InspectorVM(NAW_inspecteur NAW)
@@ -49,15 +49,15 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        private Telefoonnummer_inspecteur _phonenumber;
+        //private Telefoonnummer_inspecteur _phonenumber;
 
-        public Telefoonnummer_inspecteur PhonenumberModel
-        {
-            get
-            {
-                return _phonenumber;
-            }
-        }
+        //public Telefoonnummer_inspecteur PhonenumberModel
+        //{
+        //    get
+        //    {
+        //        return _phonenumber;
+        //    }
+        //}
 
         public string FullName
         {
@@ -159,17 +159,17 @@ namespace Festispec_WPF.ViewModel
             set { _inspecteur.Actief = value; RaisePropertyChanged("Active"); }
         }
 
-        public string Phonenumber
-        {
-            get { return _phonenumber.Telefoonnummer; }
-            set { _phonenumber.Telefoonnummer = value; Phonenumber_NAWInspector_ID = 0; RaisePropertyChanged("Phonenuber");  }
-        }
+        //public string Phonenumber
+        //{
+        //    get { return _phonenumber.Telefoonnummer; }
+        //    set { _phonenumber.Telefoonnummer = value; Phonenumber_NAWInspector_ID = 0; RaisePropertyChanged("Phonenuber");  }
+        //}
 
-        public int Phonenumber_NAWInspector_ID
-        {
-            get { return _phonenumber.NAW_Inspecteur_ID; }
-            set { _phonenumber.NAW_Inspecteur_ID = NAWInspector_ID;RaisePropertyChanged("Phonenumber_NAWInspector_ID"); }
-        }
+        //public int Phonenumber_NAWInspector_ID
+        //{
+        //    get { return _phonenumber.NAW_Inspecteur_ID; }
+        //    set { _phonenumber.NAW_Inspecteur_ID = NAWInspector_ID;RaisePropertyChanged("Phonenumber_NAWInspector_ID"); }
+        //}
 
     }
 }

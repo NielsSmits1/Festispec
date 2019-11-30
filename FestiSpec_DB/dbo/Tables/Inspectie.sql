@@ -2,7 +2,6 @@
     [Inspectienummer] INT           IDENTITY (1, 1) NOT NULL,
     [StartDate]       DATETIME      NOT NULL,
     [EndDate]         DATETIME      NOT NULL,
-    [Werknemer_ID]    INT           NOT NULL,
     [Klant_ID]        INT           NOT NULL,
     [Titel]           NVARCHAR (50) NOT NULL,
     [Versie]          NVARCHAR (50) NOT NULL,

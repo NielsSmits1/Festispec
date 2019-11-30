@@ -65,6 +65,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             Messenger.Default.Register<IQuestion>(this, (newQuestion) =>
             {
                 newQuestionnaireVM.questions.Add(newQuestion);
+                newQuestion.Position = newQuestionnaireVM.questions.IndexOf(newQuestion);
             });
             SubmitCommand = new RelayCommand(SubmitQuestionnaire);
         }

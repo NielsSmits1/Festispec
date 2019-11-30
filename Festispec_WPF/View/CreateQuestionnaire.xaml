@@ -29,10 +29,11 @@
         </StackPanel>
         <Frame NavigationUIVisibility="Hidden" Grid.Column="1" Opacity="1" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" />
 
-            <DataGrid Grid.Column="3" CanUserSortColumns="False" Margin="15,0,15,0" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding newQuestionnaireVM.questions}">
+            <DataGrid Grid.Column="3" CanUserSortColumns="False" Margin="15,0,15,0" AutoGenerateColumns="False" ItemsSource="{Binding newQuestionnaireVM.questions}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Vraag" Binding="{Binding Question, Mode=TwoWay}"></DataGridTextColumn>
-                </DataGrid.Columns>    
+                    <DataGridTextColumn Width="*" Header="Vraag" Binding="{Binding Question, Mode=TwoWay}" IsReadOnly="True"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Positie" Binding="{Binding Position, Mode=TwoWay}" IsReadOnly="False"></DataGridTextColumn>
+                </DataGrid.Columns>
             </DataGrid>
     </Grid>
     </Border>

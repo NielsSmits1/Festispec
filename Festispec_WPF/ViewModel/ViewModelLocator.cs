@@ -95,6 +95,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public AppendixQuestionPageVM AppendixQuestionPageVM
+        {
+            get
+            {
+                return new AppendixQuestionPageVM();
+            }
+        }
+        
         public EmployeeVM GetRegisterVm
         {
             get
@@ -136,6 +144,14 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return new OpenQuestionPageVM();
+            }
+
+        }
+        public MultipleChoiceQuestionPageVM MultipleChoiceQuestionPageVM
+        {
+            get
+            {
+                return new MultipleChoiceQuestionPageVM();
             }
 
         }

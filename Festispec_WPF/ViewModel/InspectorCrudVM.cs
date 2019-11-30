@@ -82,7 +82,7 @@ namespace Festispec_WPF.ViewModel
             Repository<NAW_inspecteur> NAW = new Repository<NAW_inspecteur>(UOW.Context);
             
             NAW.Add(NewInspector.NAWInspector);
-            UOW.Context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
+            //UOW.Context.Telefoonnummer_inspecteur.Add(NewInspector.PhonenumberModel);
             UOW.Inspectors.Add(NewInspector.InspectorData);
             //UOW.Complete();
             

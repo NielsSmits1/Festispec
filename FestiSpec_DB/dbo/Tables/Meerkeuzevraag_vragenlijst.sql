@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Meerkeuzevraag_vragenlijst] (
-    [Vragenlijst_ID]    INT           IDENTITY (1, 1) NOT NULL,
+    [Vragenlijst_ID]    INT           NOT NULL,
     [Meerkeuzevraag_ID] INT           NOT NULL,
     [Antwoord]          NVARCHAR (50) NULL,
     [Positie]           INT           NOT NULL,

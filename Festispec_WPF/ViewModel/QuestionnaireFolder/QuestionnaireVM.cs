@@ -22,6 +22,7 @@ namespace Festispec_WPF.ViewModel
             set { _questions = value;
                 RaisePropertyChanged();
             }
+
         }
         public string Title { get { return _questionnaire.Titel; } set { _questionnaire.Titel = value; } }
         public string Version { get { return _questionnaire.Versie; } set { _questionnaire.Versie = value; } }

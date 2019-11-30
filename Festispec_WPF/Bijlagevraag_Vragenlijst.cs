@@ -12,12 +12,13 @@ namespace Festispec_WPF
     using System;
     using System.Collections.Generic;
     
-    public partial class Vragenlijst_bijlage
+    public partial class Bijlagevraag_Vragenlijst
     {
         public int Bijlage_ID { get; set; }
         public int Vragenlijst_ID { get; set; }
         public byte[] FileBytes { get; set; }
         public string MimeType { get; set; }
+        public int Position { get; set; }
     
         public virtual Bijlagevraag Bijlagevraag { get; set; }
         public virtual Vragenlijst Vragenlijst { get; set; }

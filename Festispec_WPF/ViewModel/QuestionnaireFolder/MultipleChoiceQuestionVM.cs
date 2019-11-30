@@ -1,19 +1,59 @@
-﻿using System;
+﻿using Festispec_WPF.Model.UnitOfWork;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
     public class MultipleChoiceQuestionVM : IQuestion
     {
-        public string Question { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private UnitOfWork UOW;
+        private Meerkeuzevraag MultipleChoiceQuestionModel;
+        private int position;
+        public ObservableCollection<string> AnwserOptions { get; set; }
+
+        public string Question { get => MultipleChoiceQuestionModel.Vraag; set => MultipleChoiceQuestionModel.Vraag = value; }
+        public int Position { get => position; set => position = value; }
+
+        public MultipleChoiceQuestionVM()
+        {
+            AnwserOptions = new ObservableCollection<string>();
+            UOW = new ViewModelLocator().UOW;
+            MultipleChoiceQuestionModel = new Meerkeuzevraag();
+        }
 
         public void toDatabase(int questionnaireId)
         {
-            throw new NotImplementedException();
+            UOW.Context.Meerkeuzevraag.Add(MultipleChoiceQuestionModel);
+
+            Meerkeuzevraag_vragenlijst Link = new Meerkeuzevraag_vragenlijst();
+            Link.Meerkeuzevraag_ID = MultipleChoiceQuestionModel.ID;
+            Link.Vragenlijst_ID = questionnaireId;
+            Link.Positie = Position;
+            UOW.Context.Meerkeuzevraag_vragenlijst.Add(Link);
+
+            foreach (var Anwseroption in AnwserOptions)
+            {
+                Meerkeuzevraag_antwoord anwserOptionmodel = new Meerkeuzevraag_antwoord();
+                anwserOptionmodel.Meerkeuzevraag_ID = MultipleChoiceQuestionModel.ID;
+                anwserOptionmodel.Antwoord = Anwseroption;
+                UOW.Context.Meerkeuzevraag_antwoord.Add(anwserOptionmodel);
+            }
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
         }
 
     }

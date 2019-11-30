@@ -23,7 +23,7 @@ namespace Festispec_WPF
         public int ID { get; set; }
         public string Postcode { get; set; }
         public string Huisnummer { get; set; }
-        public string Plaatsnaam { get; set; }
+        public string Straatnaam { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectie> Inspectie { get; set; }

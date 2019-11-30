@@ -28,7 +28,6 @@ namespace Festispec_WPF
         public int Inspectienummer { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
-        public int Werknemer_ID { get; set; }
         public int Klant_ID { get; set; }
         public string Titel { get; set; }
         public string Versie { get; set; }
