@@ -58,7 +58,26 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" 
+                @{
+                    try {
+                        WebMail.SmtpServer = "587";
+                        WebMail.SmtpPort = 25;
+                        WebMail.UserName = "q";
+                        WebMail.Password = "q";
+                        WebMail.From = "zetronelol@hotmail.com";
+
+                      
+                        WebMail.Send(to: "kennethgerrits@gmail.com",
+                            subject: "onderwerp ",
+                            body: "test"
+                            );
+                    }
+                    catch (Exception ex ) {
+                        Console.WriteLine(ex);
+                    }
+                }
+                />
             </div>
         </div>
     </div>
