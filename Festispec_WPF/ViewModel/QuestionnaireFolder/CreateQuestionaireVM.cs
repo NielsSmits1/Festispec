@@ -24,7 +24,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         {
             get { return _newQuestionnaireVM; }
             set { _newQuestionnaireVM = value;
-                
+                RaisePropertyChanged("newQuestionnaireVM");
             }
         }
         private Page _currentPage;
@@ -89,6 +89,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 question.Position = newQuestionnaireVM.questions.IndexOf(question);
                 question.toDatabase(newQuestionnaireVM.ID);
             }
+            newQuestionnaireVM = new QuestionnaireVM();
 
 
 

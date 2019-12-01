@@ -6,16 +6,17 @@
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TableQuestionPage">
+      Title="TableQuestionPage"
+      DataContext="{Binding TableQuestionPageVM, Source={StaticResource Locator}}">
     <StackPanel HorizontalAlignment="Center">
         <TextBlock Text="Vraag:"></TextBlock>
-        <TextBox Text="{Binding OpenQuestion}"/>
+        <TextBox Text="{Binding NewTableQuestion.Question,Mode=TwoWay}"/>
 
         <TextBlock Margin="0,20,0,0" Text="VraagKop:"></TextBlock>
-        <TextBox Text="{}"/>
+        <TextBox Text="{Binding NewTableQuestion.QuestionHead,Mode=TwoWay}"/>
 
         <TextBlock Margin="0,20,0,0" Text="AntwoordKop:"></TextBlock>
-        <TextBox Text="{}"/>
-        <Button Command="{}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
+        <TextBox Text="{Binding NewTableQuestion.AnswerHead, Mode=TwoWay}"/>
+        <Button Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
     </StackPanel>
 </Page>

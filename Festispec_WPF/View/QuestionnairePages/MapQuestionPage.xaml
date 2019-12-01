@@ -6,17 +6,17 @@
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      DataContext="{Binding MapQuestionVM, Source={StaticResource Locator}}"
+      DataContext="{Binding MapQuestionPageVM, Source={StaticResource Locator}}"
 
       Title="MapQuestionPage">
 
     <StackPanel>
         <StackPanel HorizontalAlignment="Center">
             <TextBlock Text="Vraag:"></TextBlock>
-            <TextBox Text="{}"/>
-            <Button Command="{Binding LoadImageCommand}" Width="300" Height="30" Margin="0,20,0,0">Load Afbeelding</Button>
-            <Button Command="{Binding SubmitQuestionCommand}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
-            <Image Width="300" Height="300" Source="{Binding Equipment.Picture, UpdateSourceTrigger=PropertyChanged}" ></Image>
+            <TextBox Text= "{Binding NewMapQuestion.Question, Mode=TwoWay}"/>
+            <Button Command="{Binding LoadPicture}" Width="300" Height="30" Margin="0,20,0,0">Load Afbeelding</Button>
+            <Button Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
+            <Image Width="300" Height="300" Source="{Binding NewMapQuestion.Picture, UpdateSourceTrigger=PropertyChanged}" ></Image>
         </StackPanel>
 
     </StackPanel>

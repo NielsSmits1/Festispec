@@ -207,8 +207,10 @@
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\CreateQuestionaireVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\FileLoader.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\IQuestion.cs" />
     <Compile Include="ViewModel\NAW_KlantVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\MapQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\MapQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\MultipleChoiceQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\MultipleChoiceQuestionVM.cs" />
@@ -216,6 +218,7 @@
     <Compile Include="ViewModel\QuestionnaireFolder\OpenQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\QuestionnaireVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\QuestionTypes.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\TableQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\TableQuestionVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\CertificateVM.cs" />

@@ -1,49 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using Festispec_WPF.Model.UnitOfWork;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
-    public class MapQuestionVM : IQuestion
+    public class MapQuestionVM :ViewModelBase, IQuestion
     {
+        private UnitOfWork UOW;
+        private Kaartvraag mapQuestionModel;
+        private int position;
         //constructor
         public MapQuestionVM()
         {
-            LoadImageCommand = new RelayCommand(OpenFileExplorer);
-            SubmitQuestionCommand = new RelayCommand(Submit);
-
+            UOW = new ViewModelLocator().UOW;
+            mapQuestionModel = new Kaartvraag();
         }
 
-        //references
-        public ICommand LoadImageCommand { get; set; }
-        public ICommand SubmitQuestionCommand { get; set; }
-
-        
-        private void OpenFileExplorer()
+        public int Position { get => position; set => position = value; }
+        public string Question { get => mapQuestionModel.Vraag; set => mapQuestionModel.Vraag = value; }
+        public BitmapImage Picture
         {
-            Process.Start("explorer.exe", @"C:\Users");
-        }
+            get
+            {
+                if (mapQuestionModel.FileBytes != null)
+                {
 
-        public string Question
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
-        public int Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+                    using (var ms = new MemoryStream(mapQuestionModel.FileBytes))
+                    {
+                        var image = new BitmapImage();
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad; // here
+                        image.StreamSource = ms;
+                        image.EndInit();
+                        return image;
+                    }
+                }
+                return null;
 
-        private void Submit()
-        {
-            throw new NotImplementedException();
-        }
+            }
+            set
+            {
+                byte[] data;
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                if (value != null)
+                {
+                    encoder.Frames.Add(BitmapFrame.Create(value));
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        encoder.Save(ms);
+                        data = ms.ToArray();
+                        mapQuestionModel.FileBytes = data;
+                        RaisePropertyChanged("Picture");
+                    }
+                }
 
+
+            }
+        }
         public void toDatabase(int questionnaireId)
         {
-            throw new NotImplementedException();
+            mapQuestionModel.MimeType = "pdf";
+            UOW.Context.Kaartvraag.Add(mapQuestionModel);
+            Kaartvraag_vragenlijst Link = new Kaartvraag_vragenlijst();
+            Link.Kaartvraag_ID = mapQuestionModel.ID;
+            Link.Vragenlijst_ID = questionnaireId;
+            Link.Positie = Position;
+            UOW.Context.Kaartvraag_vragenlijst.Add(Link);
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
     }
 }

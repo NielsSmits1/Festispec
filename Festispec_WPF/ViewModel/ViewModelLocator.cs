@@ -156,14 +156,20 @@ namespace Festispec_WPF.ViewModel
 
         }
 
-        public MapQuestionVM MapQuestionVM
+        public MapQuestionPageVM MapQuestionPageVM
         {
             get
             {
-                return new MapQuestionVM();
+                return new MapQuestionPageVM();
             }
         }
-
+        public TableQuestionPageVM TableQuestionPageVM
+        {
+            get
+            {
+                return new TableQuestionPageVM();
+            }
+        }
         public QuestionnaireVM QuestionnaireVM
         {
             get
@@ -171,6 +177,7 @@ namespace Festispec_WPF.ViewModel
                 return new QuestionnaireVM();
             }
         }
+        
         
         public static void Cleanup()
         {
