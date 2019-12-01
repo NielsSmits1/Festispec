@@ -24,7 +24,7 @@ namespace FestiSpecWebsite.Controllers
         {
             return View();
         }
-
+        
 
     }
 }
