@@ -50,6 +50,7 @@ namespace Festispec_WPF.ViewModel
             ////}
             SimpleIoc.Default.Register<EmployeeCrudVM>();
             SimpleIoc.Default.Register<InspectorCrudVM>();
+            SimpleIoc.Default.Register<RapportageVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
@@ -81,6 +82,14 @@ namespace Festispec_WPF.ViewModel
                 //    SimpleIoc.Default.Register<InspectorCrudVM>();
                 //}
                 return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
+            }
+        }
+
+        public RapportageVM Rapportage
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RapportageVM>();
             }
         }
 
