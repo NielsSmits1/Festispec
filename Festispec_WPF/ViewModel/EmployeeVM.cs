@@ -27,6 +27,15 @@ namespace Festispec_WPF.ViewModel
             GetAllRoles();
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
+        }
+
+        public EmployeeVM(Werknemer werknemer)
+        {
+            UOW = new ViewModelLocator().UOW;
+            _werknemer = werknemer;
+            _nawWerknemer = UOW.NawEmployee.Get(werknemer.NAW);
+        }
+
             DoB = DateTime.Now.Date;
         }
 
@@ -50,6 +59,14 @@ namespace Festispec_WPF.ViewModel
         {
             get => _nawWerknemer.ID;
             set { _nawWerknemer.ID = value; RaisePropertyChanged(); }
+        }
+
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + InfixName + " " + LastName;
+            }
         }
 
         public string FirstName
