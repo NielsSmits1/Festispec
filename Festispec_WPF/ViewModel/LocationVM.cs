@@ -1,4 +1,5 @@
-﻿using Festispec_WPF.Model;
+﻿using FestiSpec.Domain.Model;
+using Festispec_WPF.Model;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;

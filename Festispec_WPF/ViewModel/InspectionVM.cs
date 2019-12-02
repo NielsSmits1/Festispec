@@ -1,4 +1,5 @@
-﻿using Festispec_WPF.Model;
+﻿using FestiSpec.Domain.Model;
+using Festispec_WPF.Model;
 using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
@@ -31,7 +32,7 @@ namespace Festispec_WPF.ViewModel
             _UOW = new ViewModelLocator().UOW;
             _inspection = inspectie;
             _location = new LocationVM(_UOW.InspectionLocations.Get(Location_ID));
-            _customer = new CustomerVM(new Repository<Klant>(_UOW.Context).Get(Customer_ID));
+            _customer = new CustomerVM(_UOW.Customers.Get(Customer_ID));
         }
 
         public Inspectie Inspection

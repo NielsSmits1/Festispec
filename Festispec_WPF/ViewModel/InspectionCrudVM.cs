@@ -103,7 +103,7 @@ namespace Festispec_WPF.ViewModel
             _UOW = new ViewModelLocator().UOW;
             Inspection = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
-            Customers = new ObservableCollection<CustomerVM>(new Repository<Klant>(_UOW.Context).GetAll().ToList().Select(cus => new CustomerVM(cus)));
+            Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));
             CreateNewInspectionCommand = new RelayCommand(AddNewInspection);
             OpenCreateLocationWindowCommand = new RelayCommand(OpenCreateLocationWindow);
             CreateNewLocationCommand = new RelayCommand(AddNewLocation);
@@ -116,7 +116,7 @@ namespace Festispec_WPF.ViewModel
             NewInspection = new InspectionVM();
             //Managers = new ObservableCollection<EmployeeVM>(_UOW.Employee.GetAllManagers().Select(emp => new EmployeeVM(emp)));
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
-            Customers = new ObservableCollection<CustomerVM>(new Repository<Klant>(_UOW.Context).GetAll().ToList().Select(cus => new CustomerVM(cus)));
+            Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));
             _createWindow = new CreateInspectionWindow();
             _createWindow.Show();
         }

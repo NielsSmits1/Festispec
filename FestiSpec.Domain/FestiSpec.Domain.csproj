@@ -94,7 +94,9 @@
     <Compile Include="Model\Interface Repositories\IContactPersonRepository.cs" />
     <Compile Include="Model\Interface Repositories\ICustomerRepository.cs" />
     <Compile Include="Model\Interface Repositories\IEmployeeRepository.cs" />
+    <Compile Include="Model\Interface Repositories\IInspectionRepository.cs" />
     <Compile Include="Model\Interface Repositories\IInspectorRepository.cs" />
+    <Compile Include="Model\Interface Repositories\ILocationRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWCustomerRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWEmployeeRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWInspectorRepository.cs" />
@@ -161,7 +163,9 @@
     <Compile Include="Model\Repositories\ContactPersonRepository.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
     <Compile Include="Model\Repositories\EmployeeRepository.cs" />
+    <Compile Include="Model\Repositories\InspectionRepository.cs" />
     <Compile Include="Model\Repositories\InspectorRepository.cs" />
+    <Compile Include="Model\Repositories\LocationRepository.cs" />
     <Compile Include="Model\Repositories\NAWCustomerRepository.cs" />
     <Compile Include="Model\Repositories\NAWEmployeeRepository.cs" />
     <Compile Include="Model\Repositories\NAWInspector_Repository.cs" />

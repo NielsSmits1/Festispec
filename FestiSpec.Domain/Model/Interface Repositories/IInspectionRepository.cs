@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festispec_WPF.Model.Interface_Repositories
+namespace FestiSpec.Domain.Model.Interface_Repositories
 {
     public interface IInspectionRepository : IRepository<Inspectie>
     {

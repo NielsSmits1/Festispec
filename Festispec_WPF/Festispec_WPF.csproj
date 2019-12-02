@@ -165,7 +165,6 @@
     <Compile Include="View\CustomerCrudWindow.xaml.cs">
       <DependentUpon>CustomerCrudWindow.xaml</DependentUpon>
     </Compile>
-
     <Page Include="View\InspectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -260,10 +259,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HomeScreenView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\InspectorCrudWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

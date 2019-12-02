@@ -52,6 +52,7 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
+            SimpleIoc.Default.Register<InspectionCrudVM>();
         }
 
         public MainViewModel Main
