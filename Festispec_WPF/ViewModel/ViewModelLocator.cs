@@ -18,6 +18,7 @@ using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using System.Configuration;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -146,6 +147,7 @@ namespace Festispec_WPF.ViewModel
             {
                 if(_unitOfWork == null)
                 {
+                    //var connection = ConfigurationManager.AppSettings["UsedConnection"] ?? "FestiSpecEntities";
                     _unitOfWork = new UnitOfWork(new FestiSpecEntities());
                 }
                 return _unitOfWork;
