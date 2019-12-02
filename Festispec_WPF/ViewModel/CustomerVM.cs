@@ -1,3 +1,5 @@
+
+using GalaSoft.MvvmLight;
 ﻿using FestiSpec.Domain.Model;
 using Festispec_WPF.Model;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Festispec_WPF.ViewModel
 {
-    public class CustomerVM
+    public class CustomerVM : ViewModelBase
     {
         private Klant _customer;
 
@@ -25,6 +27,15 @@ namespace Festispec_WPF.ViewModel
             set { _NAW_Klant = value; }
         }
 
+        public int ID
+        {
+            get => _customer.ID;
+            set
+            {
+                _customer.ID = value; RaisePropertyChanged(() => ID);
+            }
+
+        }
         public ObservableCollection<ContactPersonVM> ContactPersons
         {
             get { return _ContactPersons; }

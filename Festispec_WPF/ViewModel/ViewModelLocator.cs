@@ -142,6 +142,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public InspectionCrudVM InspectionCrud
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InspectionCrudVM>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
