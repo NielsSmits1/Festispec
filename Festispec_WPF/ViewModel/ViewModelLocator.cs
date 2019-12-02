@@ -13,6 +13,7 @@
 */
 
 using CommonServiceLocator;
+using FestiSpec.Domain.Model;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
@@ -50,7 +51,7 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
-            SimpleIoc.Default.Register<InspectionCrudVM>();
+            SimpleIoc.Default.Register<CRCustomerVM>();
         }
 
         public MainViewModel Main
@@ -101,7 +102,7 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return new CRCustomerVM();
+                return ServiceLocator.Current.GetInstance<CRCustomerVM>();
             }
         }
 

@@ -1,5 +1,4 @@
-﻿using Festispec_WPF.Model;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -10,11 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Data.Entity;
 using Festispec_WPF.Model.UnitOfWork;
-using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.View;
 using System.Data.SqlClient;
 using System.Windows.Media;
 using System.Windows.Forms;
+using FestiSpec.Domain.Model;
 
 namespace Festispec_WPF.ViewModel
 {

@@ -6,7 +6,7 @@
     <Name>FestiSpec_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{e31c4cd8-e9ec-49cf-9b31-15268d71b1f3}</ProjectGuid>
+    <ProjectGuid>{8191555f-43fa-4a66-977d-de20375cd3d4}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>

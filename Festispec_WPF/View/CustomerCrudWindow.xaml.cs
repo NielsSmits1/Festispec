@@ -23,5 +23,10 @@ namespace Festispec_WPF.View
         {
             InitializeComponent();
         }
+
+        private void Postcode_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
