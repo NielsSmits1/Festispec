@@ -20,6 +20,7 @@ namespace FestiSpecWebsite.Controllers
             return View(ins);
         }
 
+        [Authorize]
         public ActionResult Contact()
         {
             return View();

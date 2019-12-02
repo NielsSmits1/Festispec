@@ -25,6 +25,7 @@ namespace FestiSpecWebsite.Controllers
         // GET: Vragenlijst/Details/5
         public ActionResult Details(int? id)
         {
+            var userId = (int)(HttpContext.Session["userId"]);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
