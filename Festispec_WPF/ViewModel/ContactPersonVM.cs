@@ -1,4 +1,5 @@
-﻿using Festispec_WPF.Model;
+﻿using FestiSpec.Domain.Model;
+using Festispec_WPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,18 @@ namespace Festispec_WPF.ViewModel
             _customer = new CustomerVM();
         }
 
+
+        public Contactpersoon ContactPersonData
+        {
+            get
+            {
+                return _contactPerson;
+            }
+            set
+            {
+                _contactPerson = value;
+            }
+        }
 
     }
 }

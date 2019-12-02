@@ -1,5 +1,4 @@
-﻿using Festispec_WPF.Model;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+using FestiSpec.Domain.Model;
 namespace Festispec_WPF.ViewModel
 {
     public class InspectorVM : ViewModelBase
@@ -19,7 +18,6 @@ namespace Festispec_WPF.ViewModel
             ChosenCertificates = new ObservableCollection<CertificateVM>();
             _nawInspecteur = new NAW_inspecteur();
             _inspecteur = new Inspecteur();
-            _phonenumber = new Telefoonnummer_inspecteur();
             DateOfBirth = DateTime.Today;
         }
 
@@ -67,19 +65,6 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        private Telefoonnummer_inspecteur _phonenumber;
-
-        public Telefoonnummer_inspecteur PhonenumberModel
-        {
-            get
-            {
-                return _phonenumber;
-            }
-            set
-            {
-                _phonenumber = value;
-            }
-        }
 
         public string FullName
         {
@@ -131,9 +116,9 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return _nawInspecteur.Plaatsnaam;
+                return _nawInspecteur.Straatnaam;
             }
-            set { _nawInspecteur.Plaatsnaam = value; RaisePropertyChanged("StreetName"); }
+            set { _nawInspecteur.Straatnaam = value; RaisePropertyChanged("StreetName"); }
         }
 
         public DateTime DateOfBirth
@@ -192,22 +177,16 @@ namespace Festispec_WPF.ViewModel
 
         public string Phonenumber
         {
-            get { return _phonenumber.Telefoonnummer; }
-            set { _phonenumber.Telefoonnummer = value; Phonenumber_NAWInspector_ID = 0; RaisePropertyChanged("Phonenuber");  }
+            get { return _nawInspecteur.Telefoonnummer; }
+            set { _nawInspecteur.Telefoonnummer = value; RaisePropertyChanged("Phonenuber");  }
         }
 
-        public int Phonenumber_NAWInspector_ID
-        {
-            get { return _phonenumber.NAW_Inspecteur_ID; }
-            set { _phonenumber.NAW_Inspecteur_ID = NAWInspector_ID;RaisePropertyChanged("Phonenumber_NAWInspector_ID"); }
-        }
 
         public void EmptyAll()
         {
             ChosenCertificates = new ObservableCollection<CertificateVM>();
             _nawInspecteur = new NAW_inspecteur();
             _inspecteur = new Inspecteur();
-            _phonenumber = new Telefoonnummer_inspecteur();
             DateOfBirth = DateTime.Today;
             RaisePropertyChanged(null);
         }
