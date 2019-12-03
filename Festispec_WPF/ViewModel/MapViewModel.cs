@@ -319,10 +319,7 @@ namespace Festispec_WPF.ViewModel
                 calculateSingleRoute(inspectorLocation, festivalLocation, inspector);
             }
 
-            var r = Inspectors.OrderByDescending(ins => ins.TravelDistance);
-            Inspectors = new ObservableCollection<InspectorVM>(r);
-
-            //ViewSource.SortDescriptions.Add(new SortDescription("TravelDistance", ListSortDirection.Ascending));
+            ViewSource.SortDescriptions.Add(new SortDescription("TravelDistance", ListSortDirection.Ascending));
             ViewSource.View.Refresh();
 
             PlanInspectorVisibility = "Visible";
