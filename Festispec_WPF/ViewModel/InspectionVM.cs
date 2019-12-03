@@ -1,6 +1,11 @@
-﻿using GalaSoft.MvvmLight;
+
 using Geocoding;
 using Geocoding.Microsoft;
+﻿using FestiSpec.Domain.Model;
+using Festispec_WPF.Model;
+using Festispec_WPF.Model.Repositories;
+using Festispec_WPF.Model.UnitOfWork;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,46 +16,93 @@ namespace Festispec_WPF.ViewModel
 {
     public class InspectionVM : ViewModelBase
     {
-        private Inspectie _inspectie;
 
-        public InspectionVM(Inspectie inspection)
-        {
-            _inspectie = inspection;
-        }
-
+        private Inspectie _inspection;
+        private LocationVM _location;
+        private CustomerVM _customer;
+        private UnitOfWork _UOW;
         public InspectionVM()
         {
-            _inspectie = new Inspectie();
+            _inspection = new Inspectie();
+            _location = new LocationVM();
+            _customer = new CustomerVM();
+            StartDate = DateTime.Now.Date;
+            EndDate = DateTime.Now.Date.AddDays(1);
         }
 
-        public int ID
+        public InspectionVM(Inspectie inspectie)
         {
-            get { return _inspectie.Inspectienummer; }
-            set { RaisePropertyChanged("ID"); }
+            _UOW = new ViewModelLocator().UOW;
+            _inspection = inspectie;
+            _location = new LocationVM(_UOW.InspectionLocations.Get(Location_ID));
+            _customer = new CustomerVM(_UOW.Customers.Get(Customer_ID));
         }
+
+        public Inspectie Inspection
+        {
+            get => _inspection;
+            set
+            {
+                _inspection = value; RaisePropertyChanged(() => Inspection);
+            }
+        }
+        public LocationVM Location
+        {
+            get => _location;
+            set
+            {
+                _location = value; Location_ID = value.ID; RaisePropertyChanged(() => Location);
+            }
+        }
+
+        public CustomerVM Customer
+        {
+            get => _customer;
+            set
+            {
+                _customer = value; Customer_ID = Customer.ID; RaisePropertyChanged(() => Customer);
+            }
+            
+        }
+
+       
 
         public DateTime StartDate
         {
-            get { return _inspectie.StartDate; }
-            set { RaisePropertyChanged("StartDate"); }
+            get => _inspection.StartDate;
+            set
+            {
+                _inspection.StartDate = value; RaisePropertyChanged(() => StartDate);
+            }
         }
 
         public DateTime EndDate
         {
-            get { return _inspectie.EndDate; }
-            set { RaisePropertyChanged("EndDate"); }
+            get => _inspection.EndDate;
+            set
+            {
+                _inspection.EndDate = value; RaisePropertyChanged(() => EndDate);
+            }
         }
 
-        public int Locatie_ID
+
+        public int Customer_ID
         {
-            get { return _inspectie.Locatie_ID; }
-            set { RaisePropertyChanged("Locatie_ID"); }
+            get => _inspection.Klant_ID;
+            set
+            {
+                _inspection.Klant_ID = value; RaisePropertyChanged(() => Customer_ID);
+            }
+
         }
 
         public string Title
-        {
-            get { return _inspectie.Titel; }
-            set { RaisePropertyChanged("Title"); }
+        {     
+            get => _inspection.Titel;
+            set
+            {
+                _inspection.Titel = value;RaisePropertyChanged(() => Title);
+            }
         }
 
         public string Address
@@ -68,5 +120,35 @@ namespace Festispec_WPF.ViewModel
                 }
             }
         }
+       
+
+        public string Version
+        {
+            get => _inspection.Versie;
+            set
+            {
+                _inspection.Versie = value; RaisePropertyChanged(() => Version);
+            }
+        }
+
+        public int Location_ID
+        {
+            get => _inspection.Locatie_ID;
+            set
+            {
+                _inspection.Locatie_ID = value; RaisePropertyChanged(() => Location_ID);
+            }
+        }
+
+        public bool Accomplished
+        {
+            get => _inspection.Voltooid;
+            set
+            {
+                _inspection.Voltooid = value; RaisePropertyChanged(() => Accomplished);
+            }
+        }
+
+        
     }
 }

@@ -5,41 +5,103 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
-        Title="HomeScreenView" Height="450" Width="800">
-    <StackPanel>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        Title="Home" 
+        WindowState="Maximized"
+        Width="1920"
+        Height="1080"
+        DataContext="{Binding HomeScreen, Source={StaticResource Locator}}">
 
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="0" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="1" />
-
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="2" />
-
+        <Grid Grid.Column="0" >
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowHomeCommand}">
+                <Image Source="/Images/Home.png" />
+            </Button>
         </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKlantenCommand}">
+                <Image Source="/Images/klanten.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInplanVerzoekenCommand}">
+                <Image Source="/Images/verzoeken_inplannen.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInspecteursCommand}">
+                <Image Source="/Images/inspecteurs.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowVragenlijstCommand}">
+                <Image Source="/Images/vragenlijsten.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKalenderCommand}">
+                <Image Source="/Images/weekkalender.PNG" />
+            </Button>
+        </StackPanel>
 
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="0" />
-
-            <Button Width="100" Height="100" FontSize="16" Content="Play" 
-                        Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="1" />
+        <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
+                Festspec
+            </TextBlock>
         </Grid>
-    </StackPanel>
+
+
+    <Grid Grid.Column="1" Grid.Row="1">
+    <Border BorderThickness="200">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
+                        Foreground="White"
+                        Grid.Column="0" Command="{Binding ShowKlantenCommand}" Background="#FF6A6A6A">
+                    <Image Source="/Images/klanten.png"/>
+                </Button>
+
+                <Button x:Name="InplanButton" Width="150" Height="150" FontSize="16"
+                        Foreground="White"
+                        Grid.Column="1" Command="{Binding ShowInplanVerzoekenCommand}" Background="#FF6A6A6A">
+                    <Image Source="/Images/verzoeken_inplannen.png"/>
+                </Button>
+
+                <Button x:Name="InspecteursButton" Width="150" Height="150" FontSize="16"
+                        Foreground="White"  
+                        Grid.Column="2" Command="{Binding ShowInspecteursCommand}" Background="#FF6A6A6A">
+                    <Image Source="/Images/inspecteurs.png"/>
+                </Button>
+
+            </Grid>
+            <Border BorderThickness="15">
+                <Grid Width="920">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="VragenlijstButton" Width="150" Height="150" FontSize="16" 
+                        Foreground="White"  
+                        Grid.Column="0" Command="{Binding ShowVragenlijstCommand}" Background="#FF6A6A6A">
+                        <Image Source="/Images/vragenlijsten.png" Height="140" Width="136"/>
+                    </Button>
+
+                    <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
+                        Foreground="White"  
+                        Grid.Column="1" Command="{Binding ShowKalenderCommand}" Background="#FF6A6A6A">
+                        <Image Source="/Images/weekkalender.png" Width="134"/>
+                    </Button>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Border>
+    </Grid>
+    </Grid>
 </Window>

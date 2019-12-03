@@ -1,4 +1,5 @@
-﻿using Festispec_WPF;
+﻿using FestiSpec.Domain.Model;
+using Festispec_WPF.Model;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,14 @@ namespace Festispec_WPF.ViewModel
         public CertificateVM(Certificaat newCertificate)
         {
             _certificate = newCertificate;
+        }
+
+        public Certificaat Certificate
+        {
+            get
+            {
+                return _certificate;
+            }
         }
 
         public int ID
