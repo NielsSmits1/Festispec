@@ -1,5 +1,6 @@
 ﻿using BingMapsRESTToolkit;
 using FestiSpec.Domain.Model;
+using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Geocoding;
@@ -31,6 +32,8 @@ namespace Festispec_WPF.ViewModel
         public ObservableCollection<InspectorVM> SingleInspector { get; set; }
         public ObservableCollection<InspectionVM> Festivals { get; set; }
         public CollectionViewSource ViewSource { get; set; }
+
+        private UnitOfWork _UOW;
 
         #region VisibilityProperties
 
@@ -110,7 +113,8 @@ namespace Festispec_WPF.ViewModel
 
         private string _searchText;
 
-        public string searchText {
+        public string searchText
+        {
             get
             {
                 return _searchText;
@@ -140,7 +144,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _selectedFestival = value;
-                base.RaisePropertyChanged();
+                RaisePropertyChanged(() => SelectedFestival);
             }
         }
 
@@ -153,6 +157,7 @@ namespace Festispec_WPF.ViewModel
 
         public MapViewModel()
         {
+            _UOW = new ViewModelLocator().UOW;
             ShowInspectorCommand = new RelayCommand<object>(showInspectorRoute);
             ShowInspectorListCommand = new RelayCommand(showInspectorList);
             ShowInspectionListCommand = new RelayCommand(showInspectionList);
@@ -169,57 +174,53 @@ namespace Festispec_WPF.ViewModel
 
             //---INSPECTORS
 
-            using (var context = new FestiSpecEntities())
-            {
-                var inspectorList = context.Inspecteur.ToList().Select(i => new InspectorVM(i));
-                Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
 
-                var InspectionList = context.Inspectie.ToList().Select(i => new InspectionVM(i));
-                Festivals = new ObservableCollection<InspectionVM>(InspectionList);
-            }
+            var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i));
+            Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
+
+            var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
+            Festivals = new ObservableCollection<InspectionVM>(InspectionList);
+
 
             ViewSource = new CollectionViewSource();
             ViewSource.Source = Inspectors;
 
             foreach (var inspector in Inspectors)
             {
-                using (var context = new FestiSpecEntities())
-                {
-                    var location = getInspectorLocation(inspector);
 
-                    Pushpin pin = new Pushpin();
+                var location = getInspectorLocation(inspector);
 
-                    Button button = new Button();
-                    button.Width = 45;
-                    button.Height = 45;
-                    button.Opacity = 0;
-                    button.Cursor = Cursors.Hand;
-                    button.Command = ShowInspectorCommand;
-                    button.CommandParameter = inspector.Inspector_ID;
+                Pushpin pin = new Pushpin();
 
-                    pin.Content = button;
-                    pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+                Button button = new Button();
+                button.Width = 45;
+                button.Height = 45;
+                button.Opacity = 0;
+                button.Cursor = Cursors.Hand;
+                button.Command = ShowInspectorCommand;
+                button.CommandParameter = inspector.Inspector_ID;
 
-                    MapElements.Add(pin);
-                }
+                pin.Content = button;
+                pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+
+                MapElements.Add(pin);
+
             }
 
             //---INSPECTIONS
             foreach (var festival in Festivals)
             {
-                using (var context = new FestiSpecEntities())
-                {
-                    var location = getFestivalLocation(festival);
+                var location = getFestivalLocation(festival);
 
-                    Pushpin pin = new Pushpin();
+                Pushpin pin = new Pushpin();
 
-                    pin.Background = new SolidColorBrush(Color.FromArgb(100,100,100,100));
-                    pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+                pin.Background = new SolidColorBrush(Color.FromArgb(100, 100, 100, 100));
+                pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
 
-                    MapElements.Add(pin);
-                }
+                MapElements.Add(pin);
             }
         }
+    
 
         private void searchDatagrid()
         {
@@ -227,19 +228,18 @@ namespace Festispec_WPF.ViewModel
             {
                 Festivals = null;
 
-                using (var context = new FestiSpecEntities())
-                {
+                
                     if(searchText == "")
                     {
-                        var InspectionList = context.Inspectie.ToList().Select(i => new InspectionVM(i));
+                        var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
                         Festivals = new ObservableCollection<InspectionVM>(InspectionList);
                     }
                     else
                     {
-                        var InspectionList = context.Inspectie.ToList().Select(f => new InspectionVM(f)).Where(f => f.Title.ToLower().Contains(searchText.ToLower()));
+                        var InspectionList = _UOW.Inspections.GetAll().ToList().Select(f => new InspectionVM(f)).Where(f => f.Title.ToLower().Contains(searchText.ToLower()));
                         Festivals = new ObservableCollection<InspectionVM>(InspectionList);
                     }
-                }
+                
 
                 if(Festivals.Count == 0 && searchText != "")
                 {
@@ -255,16 +255,14 @@ namespace Festispec_WPF.ViewModel
                 Inspectors = null;
                 ViewSource.Source = null;
 
-                using (var context = new FestiSpecEntities())
-                {
                     if (searchText == "")
                     {
-                        var inspectorList = context.Inspecteur.ToList().Select(i => new InspectorVM(i));
+                        var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i));
                         Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
                     }
                     else
                     {
-                        var inspectorList = context.Inspecteur.ToList().Select(i => new InspectorVM(i)).Where(i => i.UserName.ToLower().Contains(searchText.ToLower()));
+                        var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i)).Where(i => i.UserName.ToLower().Contains(searchText.ToLower()));
                         Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
                     }   
                 }
@@ -283,7 +281,7 @@ namespace Festispec_WPF.ViewModel
                     calculateDistances();
                 }
             }
-        }
+        
 
         private async Task calculateRoute(object inpsector_id)
         {
@@ -291,13 +289,10 @@ namespace Festispec_WPF.ViewModel
 
             var festivalLocation = getFestivalLocation(null);
 
-            using (var context = new FestiSpecEntities())
-            {
                 if(inpsector_id != null)
                 {
-                    SelectedInspector = new InspectorVM(context.Inspecteur.Where(i => i.ID == (int)inpsector_id).FirstOrDefault());
+                    SelectedInspector = new InspectorVM(_UOW.Inspectors.Find(i => i.ID == (int)inpsector_id).FirstOrDefault());
                 }
-            }
 
             var inspectorLocation = getInspectorLocation(null);
 
@@ -306,12 +301,9 @@ namespace Festispec_WPF.ViewModel
 
         public void selectSingleInspector(object inspector_id)
         {
-            using (var context = new FestiSpecEntities())
-            {
-                var inspectorList = context.Inspecteur.ToList().Select(i => new InspectorVM(i)).Where(i => i.Inspector_ID == (int)inspector_id);
+                var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i)).Where(i => i.Inspector_ID == (int)inspector_id);
                 SingleInspector = new ObservableCollection<InspectorVM>(inspectorList);
                 calculateSingleRoute(getInspectorLocation(inspectorList.First()), getFestivalLocation(SelectedFestival), SingleInspector.First());
-            }
 
             RaisePropertyChanged("SingleInspector");
         }
@@ -327,7 +319,10 @@ namespace Festispec_WPF.ViewModel
                 calculateSingleRoute(inspectorLocation, festivalLocation, inspector);
             }
 
-            ViewSource.SortDescriptions.Add(new SortDescription("TravelDistance", ListSortDirection.Ascending));
+            var r = Inspectors.OrderByDescending(ins => ins.TravelDistance);
+            Inspectors = new ObservableCollection<InspectorVM>(r);
+
+            //ViewSource.SortDescriptions.Add(new SortDescription("TravelDistance", ListSortDirection.Ascending));
             ViewSource.View.Refresh();
 
             PlanInspectorVisibility = "Visible";
@@ -398,38 +393,32 @@ namespace Festispec_WPF.ViewModel
         {
             Locatie festivalNAW;
 
-            using (var context = new FestiSpecEntities())
-            {
                 if (festival != null)
                 {
-                    festivalNAW = context.Locatie.Where(l => l.ID == festival.Location_ID).FirstOrDefault();
+                    festivalNAW = _UOW.InspectionLocations.Find(l => l.ID == festival.Location_ID).FirstOrDefault();
                 }
                 else
                 {
-                    festivalNAW = context.Locatie.Where(l => l.ID == _selectedFestival.Location_ID).FirstOrDefault();
+                    festivalNAW = _UOW.InspectionLocations.Find(l => l.ID == _selectedFestival.Location_ID).FirstOrDefault();
                 }
 
                 return geocoder.Geocode(festivalNAW.Straatnaam + " " + festivalNAW.Huisnummer, "", "", festivalNAW.Postcode, "Netherlands").First();
-            }
         }
 
         private Geocoding.Address getInspectorLocation(InspectorVM inspector)
         {
             NAW_inspecteur inspectorNAW;
 
-            using (var context = new FestiSpecEntities())
-            {
                 if(inspector != null)
                 {
-                    inspectorNAW = context.NAW_inspecteur.Where(n => n.ID == inspector.InspectorForeignNAWID).FirstOrDefault();
+                    inspectorNAW = _UOW.NAWInspectors.Find(n => n.ID == inspector.InspectorForeignNAWID).FirstOrDefault();
                 }
                 else
                 {
-                    inspectorNAW = context.NAW_inspecteur.Where(n => n.ID == _selectedInspector.InspectorForeignNAWID).FirstOrDefault();
+                    inspectorNAW = _UOW.NAWInspectors.Find(n => n.ID == _selectedInspector.InspectorForeignNAWID).FirstOrDefault();
                 }
                 
                 return geocoder.Geocode(inspectorNAW.Straatnaam + " " + inspectorNAW.Huisnummer, "", "", inspectorNAW.Postcode, "Netherlands").First();
-            }
         }
 
         private void showInspectorRoute(object inspector_id)

@@ -111,13 +111,10 @@ namespace Festispec_WPF.ViewModel
             {
                 IGeocoder geocoder = new BingMapsGeocoder(ApiKeys.BING_MAPS_KEY);
 
-                using (var context = new FestiSpecEntities())
-                {
-                    var inspectionNAW = context.Locatie.Where(l => l.ID == _inspection.Locatie_ID).FirstOrDefault();
+                    var inspectionNAW = _UOW.InspectionLocations.Find(l => l.ID == _inspection.Locatie_ID).FirstOrDefault();
                     var location = geocoder.Geocode(inspectionNAW.Straatnaam + " " + inspectionNAW.Huisnummer, "", "", inspectionNAW.Postcode, "Netherlands").First();
 
                     return location.FormattedAddress;
-                }
             }
         }
        
