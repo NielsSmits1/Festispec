@@ -84,7 +84,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -221,6 +220,7 @@
     </Compile>
     <Compile Include="View\InspectorCrudWindow.xaml.cs">
       <DependentUpon>InspectorCrudWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
