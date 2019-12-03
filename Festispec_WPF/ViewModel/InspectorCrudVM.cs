@@ -1,5 +1,4 @@
-﻿using Festispec_WPF.Model;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -10,11 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Data.Entity;
 using Festispec_WPF.Model.UnitOfWork;
-using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.View;
 using System.Data.SqlClient;
 using System.Windows.Media;
 using System.Windows.Forms;
+using FestiSpec.Domain.Model;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -149,6 +148,7 @@ namespace Festispec_WPF.ViewModel
         public void OpenEditInspector()
         {
             SelectedInspector.InspectorData = UOW.Inspectors.GetAll().FirstOrDefault(i => i.NAW == SelectedInspector.NAWInspector_ID);
+
             SelectedInspector.ChosenCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetCertificatesInspector(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
             LeftoverCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetMissingCertificates(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
             _editInspectorWindow = new EditInspectorWindow();

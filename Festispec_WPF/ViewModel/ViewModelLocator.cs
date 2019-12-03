@@ -13,10 +13,12 @@
 */
 
 using CommonServiceLocator;
+using FestiSpec.Domain.Model;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using System.Configuration;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -48,9 +50,11 @@ namespace Festispec_WPF.ViewModel
             ////}
             SimpleIoc.Default.Register<EmployeeCrudVM>();
             SimpleIoc.Default.Register<InspectorCrudVM>();
+            SimpleIoc.Default.Register<RapportageVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
+            SimpleIoc.Default.Register<InspectionCrudVM>();
         }
 
         public MainViewModel Main
@@ -78,6 +82,14 @@ namespace Festispec_WPF.ViewModel
                 //    SimpleIoc.Default.Register<InspectorCrudVM>();
                 //}
                 return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
+            }
+        }
+
+        public RapportageVM Rapportage
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RapportageVM>();
             }
         }
 
@@ -135,9 +147,26 @@ namespace Festispec_WPF.ViewModel
             {
                 if(_unitOfWork == null)
                 {
+                    //var connection = ConfigurationManager.AppSettings["UsedConnection"] ?? "FestiSpecEntities";
                     _unitOfWork = new UnitOfWork(new FestiSpecEntities());
                 }
                 return _unitOfWork;
+            }
+        }
+
+        public InspectionCrudVM InspectionCrud
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InspectionCrudVM>();
+            }
+        }
+
+        public MapViewModel MapView
+        {
+            get
+            {
+                return new MapViewModel();
             }
         }
 
