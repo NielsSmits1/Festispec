@@ -1,3 +1,6 @@
+
+using Geocoding;
+using Geocoding.Microsoft;
 ﻿using FestiSpec.Domain.Model;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.Repositories;
@@ -94,13 +97,27 @@ namespace Festispec_WPF.ViewModel
         }
 
         public string Title
-        {
+        {     
             get => _inspection.Titel;
             set
             {
                 _inspection.Titel = value;RaisePropertyChanged(() => Title);
             }
         }
+
+        public string Address
+        {
+            get
+            {
+                IGeocoder geocoder = new BingMapsGeocoder(ApiKeys.BING_MAPS_KEY);
+
+                    var inspectionNAW = _UOW.InspectionLocations.Find(l => l.ID == _inspection.Locatie_ID).FirstOrDefault();
+                    var location = geocoder.Geocode(inspectionNAW.Straatnaam + " " + inspectionNAW.Huisnummer, "", "", inspectionNAW.Postcode, "Netherlands").First();
+
+                    return location.FormattedAddress;
+            }
+        }
+       
 
         public string Version
         {

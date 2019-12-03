@@ -162,6 +162,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public MapViewModel MapView
+        {
+            get
+            {
+                return new MapViewModel();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

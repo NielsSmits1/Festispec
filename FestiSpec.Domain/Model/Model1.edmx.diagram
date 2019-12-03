@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7afdf768b4d9444b8a686c8b57b16c34" Name="Diagram1">
+      <Diagram DiagramId="c6853f589e5044d88cea84e9b0e74ec9" Name="Diagram1">
         <EntityTypeShape EntityType="FestiSpecModel.Afspraak" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Beschikbaarheid" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Bijlagevraag" Width="1.5" PointX="16.5" PointY="9.75" IsExpanded="true" />
