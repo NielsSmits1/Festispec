@@ -113,7 +113,7 @@ namespace Festispec_WPF.ViewModel
 
                 using (var context = new FestiSpecEntities())
                 {
-                    var inspectionNAW = context.Locatie.Where(l => l.ID == _inspectie.Locatie_ID).FirstOrDefault();
+                    var inspectionNAW = context.Locatie.Where(l => l.ID == _inspection.Locatie_ID).FirstOrDefault();
                     var location = geocoder.Geocode(inspectionNAW.Straatnaam + " " + inspectionNAW.Huisnummer, "", "", inspectionNAW.Postcode, "Netherlands").First();
 
                     return location.FormattedAddress;

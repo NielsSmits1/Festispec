@@ -7,11 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD:Festispec_WPF/Meerkeuzevraag_antwoord.cs
-namespace Festispec_WPF
-=======
 namespace FestiSpec.Domain.Model
->>>>>>> developer:FestiSpec.Domain/Model/Meerkeuzevraag_antwoord.cs
 {
     using System;
     using System.Collections.Generic;

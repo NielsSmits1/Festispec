@@ -7,11 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD:Festispec_WPF/NAW_inspecteur.cs
-namespace Festispec_WPF
-=======
 namespace FestiSpec.Domain.Model
->>>>>>> developer:FestiSpec.Domain/Model/NAW_inspecteur.cs
 {
     using System;
     using System.Collections.Generic;
@@ -34,11 +30,7 @@ namespace FestiSpec.Domain.Model
         public System.DateTime Geboortedatum { get; set; }
         public string IBAN { get; set; }
         public string Email { get; set; }
-<<<<<<< HEAD:Festispec_WPF/NAW_inspecteur.cs
-        public string Straatnaam { get; set; }
-=======
         public string Telefoonnummer { get; set; }
->>>>>>> developer:FestiSpec.Domain/Model/NAW_inspecteur.cs
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspecteur> Inspecteur { get; set; }

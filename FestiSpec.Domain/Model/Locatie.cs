@@ -7,11 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD:Festispec_WPF/Locatie.cs
-namespace Festispec_WPF
-=======
 namespace FestiSpec.Domain.Model
->>>>>>> developer:FestiSpec.Domain/Model/Locatie.cs
 {
     using System;
     using System.Collections.Generic;

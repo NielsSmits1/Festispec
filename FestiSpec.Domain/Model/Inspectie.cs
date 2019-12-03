@@ -7,11 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD:Festispec_WPF/Inspectie.cs
-namespace Festispec_WPF
-=======
 namespace FestiSpec.Domain.Model
->>>>>>> developer:FestiSpec.Domain/Model/Inspectie.cs
 {
     using System;
     using System.Collections.Generic;
@@ -23,7 +19,6 @@ namespace FestiSpec.Domain.Model
         {
             this.Inspectie_Rapportage = new HashSet<Inspectie_Rapportage>();
             this.Inspectie_Wel_Ingevuld_Vragenlijst = new HashSet<Inspectie_Wel_Ingevuld_Vragenlijst>();
-            this.Vereiste_certificaten = new HashSet<Vereiste_certificaten>();
             this.Inspecteur = new HashSet<Inspecteur>();
             this.Vragenlijst = new HashSet<Vragenlijst>();
             this.Certificaat = new HashSet<Certificaat>();
@@ -45,8 +40,6 @@ namespace FestiSpec.Domain.Model
         public virtual ICollection<Inspectie_Rapportage> Inspectie_Rapportage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectie_Wel_Ingevuld_Vragenlijst> Inspectie_Wel_Ingevuld_Vragenlijst { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vereiste_certificaten> Vereiste_certificaten { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspecteur> Inspecteur { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

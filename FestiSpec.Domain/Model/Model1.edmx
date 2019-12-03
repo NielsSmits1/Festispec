@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Afspraak">
           <Key>
             <PropertyRef Name="ID" />
@@ -147,13 +147,8 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-<<<<<<< HEAD:Festispec_WPF/Model1.edmx
-          <Property Name="Huisnummer" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="Straatnaam" Type="varchar" MaxLength="255" />
-=======
           <Property Name="Huisnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Straatnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
->>>>>>> developer:FestiSpec.Domain/Model/Model1.edmx
         </EntityType>
         <EntityType Name="Meerkeuzevraag">
           <Key>
@@ -194,11 +189,7 @@
           <Property Name="Geboortedatum" Type="date" Nullable="false" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-<<<<<<< HEAD:Festispec_WPF/Model1.edmx
-          <Property Name="Straatnaam" Type="varchar" MaxLength="255" />
-=======
           <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="50" Nullable="false" />
->>>>>>> developer:FestiSpec.Domain/Model/Model1.edmx
         </EntityType>
         <EntityType Name="NAW_Klant">
           <Key>
@@ -307,14 +298,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="ntext" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Vereiste_certificaten">
-          <Key>
-            <PropertyRef Name="Inspectienummer" />
-            <PropertyRef Name="Certificaat_ID" />
-          </Key>
-          <Property Name="Inspectienummer" Type="int" Nullable="false" />
-          <Property Name="Certificaat_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Vereiste_certificaten">
           <Key>
@@ -757,18 +740,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Vereiste_certificaten_Inspectie">
-          <End Role="Inspectie" Type="Self.Inspectie" Multiplicity="1" />
-          <End Role="Vereiste_certificaten" Type="Self.Vereiste_certificaten" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inspectie">
-              <PropertyRef Name="Inspectienummer" />
-            </Principal>
-            <Dependent Role="Vereiste_certificaten">
-              <PropertyRef Name="Inspectienummer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Verzoek_Klant">
           <End Role="Klant" Type="Self.Klant" Multiplicity="1" />
           <End Role="Verzoek" Type="Self.Verzoek" Multiplicity="*" />
@@ -1031,10 +1002,6 @@
             <End Role="Inspectie" EntitySet="Inspectie" />
             <End Role="Vereiste_certificaten" EntitySet="Vereiste_certificaten" />
           </AssociationSet>
-          <AssociationSet Name="FK_Vereiste_certificaten_Inspectie" Association="Self.FK_Vereiste_certificaten_Inspectie">
-            <End Role="Inspectie" EntitySet="Inspectie" />
-            <End Role="Vereiste_certificaten" EntitySet="Vereiste_certificaten" />
-          </AssociationSet>
           <AssociationSet Name="FK_Verzoek_Klant" Association="Self.FK_Verzoek_Klant">
             <End Role="Klant" EntitySet="Klant" />
             <End Role="Verzoek" EntitySet="Verzoek" />
@@ -1153,7 +1120,6 @@
           <NavigationProperty Name="Locatie" Relationship="Self.FK_Inspectie_Locatie" FromRole="Inspectie" ToRole="Locatie" />
           <NavigationProperty Name="Inspectie_Rapportage" Relationship="Self.FK_Inspectie_Rapportage_Inspectie" FromRole="Inspectie" ToRole="Inspectie_Rapportage" />
           <NavigationProperty Name="Inspectie_Wel_Ingevuld_Vragenlijst" Relationship="Self.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Inspectie" FromRole="Inspectie" ToRole="Inspectie_Wel_Ingevuld_Vragenlijst" />
-          <NavigationProperty Name="Vereiste_certificaten" Relationship="Self.FK_Vereiste_certificaten_Inspectie" FromRole="Inspectie" ToRole="Vereiste_certificaten" />
           <NavigationProperty Name="Inspecteur" Relationship="Self.Inspecteurs_inspectie" FromRole="Inspectie" ToRole="Inspecteur" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.Inspectie_niet_ingevuld_vragenlijst" FromRole="Inspectie" ToRole="Vragenlijst" />
           <NavigationProperty Name="Certificaat" Relationship="Self.Vereiste_certificaten" FromRole="Inspectie" ToRole="Certificaat" />
@@ -1223,13 +1189,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-<<<<<<< HEAD:Festispec_WPF/Model1.edmx
-          <Property Name="Huisnummer" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Straatnaam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-=======
           <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Straatnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
->>>>>>> developer:FestiSpec.Domain/Model/Model1.edmx
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Locatie" FromRole="Locatie" ToRole="Inspectie" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag">
@@ -1276,11 +1237,7 @@
           <Property Name="Geboortedatum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-<<<<<<< HEAD:Festispec_WPF/Model1.edmx
-          <Property Name="Straatnaam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-=======
           <Property Name="Telefoonnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
->>>>>>> developer:FestiSpec.Domain/Model/Model1.edmx
           <NavigationProperty Name="Inspecteur" Relationship="Self.FK_Inspecteur_NAW_inspecteur" FromRole="NAW_inspecteur" ToRole="Inspecteur" />
         </EntityType>
         <EntityType Name="NAW_Klant">
@@ -1405,15 +1362,6 @@
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Template_ID_vragenlijst" FromRole="Template" ToRole="Vragenlijst" />
           <NavigationProperty Name="Vragenlijst1" Relationship="Self.FK_Vragenlijst_Template" FromRole="Template" ToRole="Vragenlijst" />
-        </EntityType>
-        <EntityType Name="Vereiste_certificaten">
-          <Key>
-            <PropertyRef Name="Inspectienummer" />
-            <PropertyRef Name="Certificaat_ID" />
-          </Key>
-          <Property Name="Inspectienummer" Type="Int32" Nullable="false" />
-          <Property Name="Certificaat_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inspectie" Relationship="Self.FK_Vereiste_certificaten_Inspectie" FromRole="Vereiste_certificaten" ToRole="Inspectie" />
         </EntityType>
         <EntityType Name="Verzoek">
           <Key>
@@ -1589,18 +1537,6 @@
               <PropertyRef Name="Inspectienummer" />
             </Principal>
             <Dependent Role="Inspectie_Wel_Ingevuld_Vragenlijst">
-              <PropertyRef Name="Inspectienummer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Vereiste_certificaten_Inspectie">
-          <End Role="Inspectie" Type="Self.Inspectie" Multiplicity="1" />
-          <End Role="Vereiste_certificaten" Type="Self.Vereiste_certificaten" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inspectie">
-              <PropertyRef Name="Inspectienummer" />
-            </Principal>
-            <Dependent Role="Vereiste_certificaten">
               <PropertyRef Name="Inspectienummer" />
             </Dependent>
           </ReferentialConstraint>
@@ -1894,7 +1830,6 @@
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" />
           <EntitySet Name="Template" EntityType="Self.Template" />
-          <EntitySet Name="Vereiste_certificaten" EntityType="Self.Vereiste_certificaten" />
           <EntitySet Name="Verzoek" EntityType="Self.Verzoek" />
           <EntitySet Name="Vragenlijst" EntityType="Self.Vragenlijst" />
           <EntitySet Name="Vragenlijst_bijlage" EntityType="Self.Vragenlijst_bijlage" />
@@ -1938,10 +1873,6 @@
           <AssociationSet Name="FK_Inspectie_Wel_Ingevuld_Vragenlijst_Inspectie" Association="Self.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Inspectie">
             <End Role="Inspectie" EntitySet="Inspectie" />
             <End Role="Inspectie_Wel_Ingevuld_Vragenlijst" EntitySet="Inspectie_Wel_Ingevuld_Vragenlijst" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Vereiste_certificaten_Inspectie" Association="Self.FK_Vereiste_certificaten_Inspectie">
-            <End Role="Inspectie" EntitySet="Inspectie" />
-            <End Role="Vereiste_certificaten" EntitySet="Vereiste_certificaten" />
           </AssociationSet>
           <AssociationSet Name="FK_Inspectie_Wel_Ingevuld_Vragenlijst_Vragenlijst" Association="Self.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Vragenlijst">
             <End Role="Vragenlijst" EntitySet="Vragenlijst" />
@@ -2220,11 +2151,7 @@
                 <ScalarProperty Name="Geboortedatum" ColumnName="Geboortedatum" />
                 <ScalarProperty Name="IBAN" ColumnName="IBAN" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-<<<<<<< HEAD:Festispec_WPF/Model1.edmx
-                <ScalarProperty Name="Straatnaam" ColumnName="Straatnaam" />
-=======
                 <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
->>>>>>> developer:FestiSpec.Domain/Model/Model1.edmx
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2338,14 +2265,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Vragenlijst_ID" ColumnName="Vragenlijst_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vereiste_certificaten">
-            <EntityTypeMapping TypeName="FestiSpecModel.Vereiste_certificaten">
-              <MappingFragment StoreEntitySet="Vereiste_certificaten">
-                <ScalarProperty Name="Inspectienummer" ColumnName="Inspectienummer" />
-                <ScalarProperty Name="Certificaat_ID" ColumnName="Certificaat_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

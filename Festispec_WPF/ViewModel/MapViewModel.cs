@@ -1,4 +1,5 @@
 ﻿using BingMapsRESTToolkit;
+using FestiSpec.Domain.Model;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Geocoding;
@@ -194,7 +195,7 @@ namespace Festispec_WPF.ViewModel
                     button.Opacity = 0;
                     button.Cursor = Cursors.Hand;
                     button.Command = ShowInspectorCommand;
-                    button.CommandParameter = inspector.ID;
+                    button.CommandParameter = inspector.Inspector_ID;
 
                     pin.Content = button;
                     pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
@@ -263,7 +264,7 @@ namespace Festispec_WPF.ViewModel
                     }
                     else
                     {
-                        var inspectorList = context.Inspecteur.ToList().Select(i => new InspectorVM(i)).Where(i => i.Name.ToLower().Contains(searchText.ToLower()));
+                        var inspectorList = context.Inspecteur.ToList().Select(i => new InspectorVM(i)).Where(i => i.UserName.ToLower().Contains(searchText.ToLower()));
                         Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
                     }   
                 }
@@ -271,7 +272,7 @@ namespace Festispec_WPF.ViewModel
                 if (Inspectors.Count == 0 && searchText != "")
                 {
                     var inspector = new InspectorVM();
-                    inspector.Name = "Geen zoekresultaten";
+                    inspector.UserName = "Geen zoekresultaten";
                     Inspectors.Add(inspector);
                 }
 
@@ -307,7 +308,7 @@ namespace Festispec_WPF.ViewModel
         {
             using (var context = new FestiSpecEntities())
             {
-                var inspectorList = context.Inspecteur.ToList().Select(i => new InspectorVM(i)).Where(i => i.ID == (int)inspector_id);
+                var inspectorList = context.Inspecteur.ToList().Select(i => new InspectorVM(i)).Where(i => i.Inspector_ID == (int)inspector_id);
                 SingleInspector = new ObservableCollection<InspectorVM>(inspectorList);
                 calculateSingleRoute(getInspectorLocation(inspectorList.First()), getFestivalLocation(SelectedFestival), SingleInspector.First());
             }
@@ -401,11 +402,11 @@ namespace Festispec_WPF.ViewModel
             {
                 if (festival != null)
                 {
-                    festivalNAW = context.Locatie.Where(l => l.ID == festival.Locatie_ID).FirstOrDefault();
+                    festivalNAW = context.Locatie.Where(l => l.ID == festival.Location_ID).FirstOrDefault();
                 }
                 else
                 {
-                    festivalNAW = context.Locatie.Where(l => l.ID == _selectedFestival.Locatie_ID).FirstOrDefault();
+                    festivalNAW = context.Locatie.Where(l => l.ID == _selectedFestival.Location_ID).FirstOrDefault();
                 }
 
                 return geocoder.Geocode(festivalNAW.Straatnaam + " " + festivalNAW.Huisnummer, "", "", festivalNAW.Postcode, "Netherlands").First();
@@ -420,11 +421,11 @@ namespace Festispec_WPF.ViewModel
             {
                 if(inspector != null)
                 {
-                    inspectorNAW = context.NAW_inspecteur.Where(n => n.ID == inspector.NAW).FirstOrDefault();
+                    inspectorNAW = context.NAW_inspecteur.Where(n => n.ID == inspector.InspectorForeignNAWID).FirstOrDefault();
                 }
                 else
                 {
-                    inspectorNAW = context.NAW_inspecteur.Where(n => n.ID == _selectedInspector.NAW).FirstOrDefault();
+                    inspectorNAW = context.NAW_inspecteur.Where(n => n.ID == _selectedInspector.InspectorForeignNAWID).FirstOrDefault();
                 }
                 
                 return geocoder.Geocode(inspectorNAW.Straatnaam + " " + inspectorNAW.Huisnummer, "", "", inspectorNAW.Postcode, "Netherlands").First();

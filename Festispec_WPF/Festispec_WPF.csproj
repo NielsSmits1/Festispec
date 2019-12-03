@@ -67,7 +67,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      </Reference>
+    </Reference>
     <Reference Include="IronPdf, Version=2019.7.0.21100, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
       <HintPath>..\packages\IronPdf.2019.7.0\lib\net40\IronPdf.dll</HintPath>
     </Reference>
@@ -114,12 +114,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApiKeys.cs" />
     <Compile Include="Pdf\ChartHelper.cs" />
     <Compile Include="Pdf\PdfHelper.cs" />
-    <Compile Include="Model\UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="Model\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Pdf\Question.cs" />
     <Compile Include="Pdf\RapportageInfo.cs" />
+    <Compile Include="Model\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Model\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="ViewModel\ContactPersonVM.cs" />
     <Compile Include="ViewModel\CRCustomerVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />

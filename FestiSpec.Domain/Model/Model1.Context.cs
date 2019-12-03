@@ -7,11 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD:Festispec_WPF/Model1.Context.cs
-namespace Festispec_WPF
-=======
 namespace FestiSpec.Domain.Model
->>>>>>> developer:FestiSpec.Domain/Model/Model1.Context.cs
 {
     using System;
     using System.Data.Entity;
@@ -57,7 +53,6 @@ namespace FestiSpec.Domain.Model
         public virtual DbSet<Tabelvraag_antwoord> Tabelvraag_antwoord { get; set; }
         public virtual DbSet<Tabelvraag_vragenlijst> Tabelvraag_vragenlijst { get; set; }
         public virtual DbSet<Template> Template { get; set; }
-        public virtual DbSet<Vereiste_certificaten> Vereiste_certificaten { get; set; }
         public virtual DbSet<Verzoek> Verzoek { get; set; }
         public virtual DbSet<Vragenlijst> Vragenlijst { get; set; }
         public virtual DbSet<Vragenlijst_bijlage> Vragenlijst_bijlage { get; set; }

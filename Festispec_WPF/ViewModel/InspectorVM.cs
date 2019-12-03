@@ -10,11 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FestiSpec.Domain.Model;
+using Festispec_WPF.Model.UnitOfWork;
+
 namespace Festispec_WPF.ViewModel
 {
     public class InspectorVM : ViewModelBase
     {
         public ObservableCollection<CertificateVM> ChosenCertificates { get; set;}
+        private UnitOfWork _UOW;
         public InspectorVM()
         {
             ChosenCertificates = new ObservableCollection<CertificateVM>();
@@ -30,7 +33,9 @@ namespace Festispec_WPF.ViewModel
 
         public InspectorVM(Inspecteur inspector)
         {
+            _UOW = new ViewModelLocator().UOW;
             _inspecteur = inspector;
+            _nawInspecteur =  _UOW.NAWInspectors.Find(ins => ins.ID == _inspecteur.NAW).FirstOrDefault();
         }
 
         public string ActiveText
@@ -189,14 +194,10 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 IGeocoder geocoder = new BingMapsGeocoder(ApiKeys.BING_MAPS_KEY);
-
-                using (var context = new FestiSpecEntities())
-                {
-                    var inspectorNAW = context.NAW_inspecteur.Where(n => n.ID == _inspecteur.NAW).FirstOrDefault();
+                    var inspectorNAW = _UOW.NAWInspectors.Find(n => n.ID == _inspecteur.NAW).FirstOrDefault();
                     var location = geocoder.Geocode(inspectorNAW.Straatnaam + " " + inspectorNAW.Huisnummer, "", "", inspectorNAW.Postcode, "Netherlands").First();
 
                     return location.FormattedAddress;
-                }
             }
         }
 

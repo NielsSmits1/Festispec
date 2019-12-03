@@ -128,7 +128,7 @@
                                                         <DataTemplate x:Key="DateTemplate" >
                                                             <StackPanel Margin="10,0,0,0">
                                                                 <DockPanel>
-                                                                    <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="ExtraBold" />
+                                                                    <TextBlock Text="{Binding FullName}" FontSize="16" FontWeight="ExtraBold" />
                                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                                                         <TextBlock Text="{Binding TravelDistance, StringFormat=N2}" FontSize="16" FontWeight="ExtraBold" />
                                                                         <TextBlock Text=" km" FontSize="16" FontWeight="ExtraBold" />
