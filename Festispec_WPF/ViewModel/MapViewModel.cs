@@ -1,6 +1,7 @@
 ﻿using BingMapsRESTToolkit;
 using FestiSpec.Domain.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Geocoding;
@@ -26,7 +27,6 @@ namespace Festispec_WPF.ViewModel
     {
         private IGeocoder geocoder = new BingMapsGeocoder(ApiKeys.BING_MAPS_KEY);
         private MapPolyline lastLine;
-
         private ObservableCollection<UIElement> mapElements = new ObservableCollection<UIElement>();
         public ObservableCollection<InspectorVM> Inspectors { get; set; }
         public ObservableCollection<InspectorVM> SingleInspector { get; set; }
@@ -219,6 +219,7 @@ namespace Festispec_WPF.ViewModel
 
                 MapElements.Add(pin);
             }
+
         }
     
 
@@ -459,5 +460,8 @@ namespace Festispec_WPF.ViewModel
             SelectedFestival = null;
             MapElements.Remove(lastLine);
         }
+
+        
+
     }
 }

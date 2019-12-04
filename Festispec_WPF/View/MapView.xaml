@@ -116,7 +116,13 @@
                                                             <KeyBinding Command="{Binding SearchDataGrid}" Key="Enter" />
                                                         </TextBox.InputBindings>
                                                     </TextBox>
-                                                    <Button Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0"/>
+                                                    <StackPanel Grid.Column="1" Visibility="{Binding InspectionVisibility}">
+                                                    <Button Name="InspectionNew" DataContext="{Binding InspectionCrud, Source={StaticResource Locator}}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0" Command="{Binding OpenCreateWindowCommand}"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1" Visibility="{Binding InspectorVisibility}">
+                                                    <Button Name="InspectorNew" DataContext="{Binding InspectorCrud, Source={StaticResource Locator}}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0" Command="{Binding OpenCreateCommand}">
+                                                    </Button>
+                                                    </StackPanel>
                                                 </Grid>
                                             </Border>
                                         </Grid>
