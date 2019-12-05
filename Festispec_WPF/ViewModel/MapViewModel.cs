@@ -308,7 +308,7 @@ namespace Festispec_WPF.ViewModel
             RaisePropertyChanged("SingleInspector");
         }
 
-        private void calculateDistances()
+        private async void calculateDistances()
         {
             var festivalLocation = getFestivalLocation(null);
 
@@ -316,7 +316,7 @@ namespace Festispec_WPF.ViewModel
             {
                 var inspectorLocation = getInspectorLocation(inspector);
 
-                calculateSingleRoute(inspectorLocation, festivalLocation, inspector);
+                await calculateSingleRoute(inspectorLocation, festivalLocation, inspector);
             }
 
             ViewSource.SortDescriptions.Add(new SortDescription("TravelDistance", ListSortDirection.Ascending));
@@ -328,7 +328,7 @@ namespace Festispec_WPF.ViewModel
             InspectionVisibility = "Hidden";
         }
 
-        private async void calculateSingleRoute(Geocoding.Address inspectorLocation, Geocoding.Address festivalLocation, InspectorVM inspector)
+        private async Task calculateSingleRoute(Geocoding.Address inspectorLocation, Geocoding.Address festivalLocation, InspectorVM inspector)
         {
             var r = new RouteRequest()
             {
