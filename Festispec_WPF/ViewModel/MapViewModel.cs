@@ -154,6 +154,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand PlanInspectorCommand { get; set; }
         public ICommand CancelPlanningCommand { get; set; }
         public ICommand SearchDataGrid { get; set; }
+        public ICommand RefreshFestivalsCommand { get; set; }
+        public ICommand RefreshInspectorsCommand { get; set; }
 
         public MapViewModel()
         {
@@ -164,6 +166,8 @@ namespace Festispec_WPF.ViewModel
             PlanInspectorCommand = new RelayCommand(planInspector);
             CancelPlanningCommand = new RelayCommand(cancelPlanning);
             SearchDataGrid = new RelayCommand(searchDatagrid);
+            RefreshFestivalsCommand = new RelayCommand(LoadFestivals);
+            RefreshInspectorsCommand = new RelayCommand(LoadInspectors);
 
             InspectorVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
@@ -175,11 +179,9 @@ namespace Festispec_WPF.ViewModel
             //---INSPECTORS
 
 
-            var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i));
-            Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
+            LoadInspectors();
 
-            var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
-            Festivals = new ObservableCollection<InspectionVM>(InspectionList);
+            LoadFestivals();
 
 
             ViewSource = new CollectionViewSource();
@@ -459,6 +461,24 @@ namespace Festispec_WPF.ViewModel
             SingleInspectorVisibility = "Hidden";
             SelectedFestival = null;
             MapElements.Remove(lastLine);
+        }
+
+        private void LoadFestivals()
+        {
+            Festivals = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
+            RaisePropertyChanged(() => Festivals);
+            
+        }
+
+        private void LoadInspectors()
+        {
+            Inspectors = new ObservableCollection<InspectorVM>(_UOW.Inspectors.GetAll().Select(ins => new InspectorVM(ins)));
+            RaisePropertyChanged(() => Inspectors);
+            //if(ViewSource != null)
+            //{
+            //    ViewSource.View.Refresh();
+            //}
+            
         }
 
         

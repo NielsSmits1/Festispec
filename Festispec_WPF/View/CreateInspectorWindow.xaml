@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
-        Title="CreateInspectorWindow" Height="571.584" Width="800"
+        Title="CreateInspectorWindow" Height="621.287" Width="800" WindowStyle="None"
         DataContext="{Binding InspectorCrud, Source={StaticResource Locator}}">
     <StackPanel Grid.Column="8" Background="AliceBlue">
         <Grid>

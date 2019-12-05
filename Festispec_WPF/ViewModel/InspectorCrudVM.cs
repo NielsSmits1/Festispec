@@ -112,7 +112,7 @@ namespace Festispec_WPF.ViewModel
             ListOfLicensedCommand = new RelayCommand(LoadLicensed);
             SetInspectorInactiveCommand = new RelayCommand(SetInspectorInactive);
             OpenCreateCommand = new RelayCommand(OpenCreate);
-            CloseCreateCommand = new RelayCommand(CloseCreate);
+            CloseCreateCommand = new RelayCommand(CloseCreate); 
         }
 
         // CREATE
@@ -148,6 +148,11 @@ namespace Festispec_WPF.ViewModel
             RaisePropertyChanged(() => AllChecked);
 
             NewInspector.EmptyAll();
+
+            if(_createInspectorWindow != null)
+            {
+                _createInspectorWindow.Close();
+            }
         }
 
         // UPDATE 
