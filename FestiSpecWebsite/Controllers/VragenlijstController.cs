@@ -56,27 +56,6 @@ namespace FestiSpecWebsite.Controllers
             {
                 db.Vragenlijst.Add(vragenlijst);
                 db.SaveChanges();
-
-                MailMessage msg = new MailMessage { From = new MailAddress("zetronelol@hotmail.com") };
-
-                msg.To.Add("kennethgerrits@gmail.com");
-                msg.Subject = "Welcome To REBAR Mobile Showcase";
-                msg.Body = "Hi," + Environment.NewLine + @"Bedankt voor je mail! Je verzoek wordt verwerkt."
-                           + Environment.NewLine + "Groeten," + Environment.NewLine + "IT4J";
-                msg.Priority = MailPriority.High;
-
-                SmtpClient client = new SmtpClient
-                {
-                    Credentials = new NetworkCredential("abc", "password", "Dir"),
-                    Host = "zetronelol@hotmail.com",
-                    Port = 587,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    EnableSsl = true,
-                    UseDefaultCredentials = true
-                };
-
-                client.Send(msg);
-
                 return RedirectToAction("Index");
             }
 

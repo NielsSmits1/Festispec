@@ -44,9 +44,8 @@ namespace FestiSpecWebsite.Controllers
 
                 if (targetPerson == null)
                 {
+                    //todo give error
                     Console.WriteLine("failed to login");
-                    /*      MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                              MessageBoxButtons.OK, MessageBoxIcon.Error);*/
                 }
                 else
                 {
@@ -60,13 +59,8 @@ namespace FestiSpecWebsite.Controllers
                     string enTicket = FormsAuthentication.Encrypt(authTicket);
                     HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
                     Response.Cookies.Add(faCookie);
-
-                    /*        MenuView menuView = new MenuView();
-                            menuView.Show();*/
-
                 }
             }
-            //  HttpContext.Session["userId"] = user.usersid;
         }
 
 
