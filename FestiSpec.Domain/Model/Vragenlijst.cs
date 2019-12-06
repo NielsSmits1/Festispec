@@ -17,13 +17,13 @@ namespace FestiSpec.Domain.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Vragenlijst()
         {
+            this.Bijlagevraag_vragenlijst = new HashSet<Bijlagevraag_vragenlijst>();
             this.Inspectie_Wel_Ingevuld_Vragenlijst = new HashSet<Inspectie_Wel_Ingevuld_Vragenlijst>();
             this.Kaartvraag_vragenlijst = new HashSet<Kaartvraag_vragenlijst>();
             this.Meerkeuzevraag_vragenlijst = new HashSet<Meerkeuzevraag_vragenlijst>();
             this.Openvraag_vragenlijst = new HashSet<Openvraag_vragenlijst>();
             this.Tabelvraag_vragenlijst = new HashSet<Tabelvraag_vragenlijst>();
             this.Template = new HashSet<Template>();
-            this.Vragenlijst_bijlage = new HashSet<Vragenlijst_bijlage>();
             this.Inspectie = new HashSet<Inspectie>();
         }
     
@@ -34,6 +34,8 @@ namespace FestiSpec.Domain.Model
         public string Opmerking { get; set; }
         public bool Is_Ingevuld { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bijlagevraag_vragenlijst> Bijlagevraag_vragenlijst { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectie_Wel_Ingevuld_Vragenlijst> Inspectie_Wel_Ingevuld_Vragenlijst { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -47,8 +49,6 @@ namespace FestiSpec.Domain.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Template> Template { get; set; }
         public virtual Template Template1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vragenlijst_bijlage> Vragenlijst_bijlage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectie> Inspectie { get; set; }
     }

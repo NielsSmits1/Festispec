@@ -12,18 +12,27 @@ namespace FestiSpec.Domain.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Bijlagevraag
+    public partial class Applicant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Bijlagevraag()
+        public Applicant()
         {
-            this.Bijlagevraag_vragenlijst = new HashSet<Bijlagevraag_vragenlijst>();
+            this.Certificaat = new HashSet<Certificaat>();
         }
     
         public int ID { get; set; }
-        public string Vraag { get; set; }
+        public string Voornaam { get; set; }
+        public string Tussenvoegsel { get; set; }
+        public string Achternaam { get; set; }
+        public string Postcode { get; set; }
+        public string Huisnummer { get; set; }
+        public string Straatnaam { get; set; }
+        public System.DateTime Geboortedatum { get; set; }
+        public string IBAN { get; set; }
+        public string Email { get; set; }
+        public string Telefoonnummer { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bijlagevraag_vragenlijst> Bijlagevraag_vragenlijst { get; set; }
+        public virtual ICollection<Certificaat> Certificaat { get; set; }
     }
 }

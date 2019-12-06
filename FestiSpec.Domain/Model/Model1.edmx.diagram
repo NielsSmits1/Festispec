@@ -4,42 +4,45 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c6853f589e5044d88cea84e9b0e74ec9" Name="Diagram1">
-        <EntityTypeShape EntityType="FestiSpecModel.Afspraak" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Beschikbaarheid" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Bijlagevraag" Width="1.5" PointX="16.5" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Certificaat" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Contactpersoon" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Inspecteur" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Inspectie" Width="1.5" PointX="8.25" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Inspectie_Rapportage" Width="1.5" PointX="10.5" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Inspectie_Wel_Ingevuld_Vragenlijst" Width="1.5" PointX="10.5" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Kaartvraag" Width="1.5" PointX="13.5" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Kaartvraag_vragenlijst" Width="1.5" PointX="15.75" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Klant" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Locatie" Width="1.5" PointX="6" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Meerkeuzevraag" Width="1.5" PointX="13.5" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Meerkeuzevraag_antwoord" Width="1.5" PointX="15.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Meerkeuzevraag_vragenlijst" Width="1.5" PointX="15.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.NAW_inspecteur" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.NAW_Klant" Width="1.5" PointX="3.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.NAW_werknemer" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Offerte" Width="1.5" PointX="10.5" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Openvraag" Width="1.5" PointX="13.5" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Openvraag_vragenlijst" Width="1.5" PointX="15.75" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Planning_werknemer" Width="1.5" PointX="12.75" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Rol_werknemer" Width="1.5" PointX="8.25" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag" Width="1.5" PointX="16.5" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_antwoord" Width="1.5" PointX="18.75" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_vragenlijst" Width="1.5" PointX="18.75" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Template" Width="1.5" PointX="15.75" PointY="27.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Verzoek" Width="1.5" PointX="8.25" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Vragenlijst" Width="1.5" PointX="13.5" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Vragenlijst_bijlage" Width="1.5" PointX="18.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Werknemer" Width="1.5" PointX="10.5" PointY="11" IsExpanded="true" />
+      <Diagram DiagramId="156630ed7fbe4149965c1792335c328b" Name="Diagram1">
+        <EntityTypeShape EntityType="FestiSpecModel.Afspraak" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Applicant" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Beschikbaarheid" Width="1.5" PointX="7.5" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Bijlagevraag" Width="1.5" PointX="15.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Bijlagevraag_vragenlijst" Width="1.5" PointX="18" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Certificaat" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Contactpersoon" Width="1.5" PointX="10.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Inspecteur" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Inspectie" Width="1.5" PointX="10.5" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Inspectie_Rapportage" Width="1.5" PointX="12.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Inspectie_Wel_Ingevuld_Vragenlijst" Width="1.5" PointX="12.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Kaartvraag" Width="1.5" PointX="15.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Kaartvraag_vragenlijst" Width="1.5" PointX="18" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Klant" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Locatie" Width="1.5" PointX="8.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Meerkeuzevraag" Width="1.5" PointX="15.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Meerkeuzevraag_antwoord" Width="1.5" PointX="18" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Meerkeuzevraag_vragenlijst" Width="1.5" PointX="18" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.NAW_inspecteur" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.NAW_Klant" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.NAW_werknemer" Width="1.5" PointX="10.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Offerte" Width="1.5" PointX="12.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Openvraag" Width="1.5" PointX="18.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Openvraag_vragenlijst" Width="1.5" PointX="21" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Planning_werknemer" Width="1.5" PointX="15" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Rol_werknemer" Width="1.5" PointX="10.5" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag" Width="1.5" PointX="18.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_antwoord" Width="1.5" PointX="21" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_vragenlijst" Width="1.5" PointX="21" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Template" Width="1.5" PointX="18" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Verzoek" Width="1.5" PointX="10.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Vragenlijst" Width="1.5" PointX="15.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Werknemer" Width="1.5" PointX="12.75" PointY="11" IsExpanded="true" />
         <AssociationConnector Association="FestiSpecModel.FK_Afspraak_Contactpersoon" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.FK_Beschikbaarheid_Inspecteur" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpecModel.FK_Vragenlijst_bijlage_Bijlagevraag" ManuallyRouted="false" />
+        <AssociationConnector Association="FestiSpecModel.FK_Bijlagevraag_vragenlijst_Bijlagevraag" ManuallyRouted="false" />
+        <AssociationConnector Association="FestiSpecModel.FK_Bijlagevraag_vragenlijst_Vragenlijst" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.FK_Contactpersoon_Klant" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.FK_Inspecteur_NAW_inspecteur" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Inspecteur" ManuallyRouted="false" />
@@ -66,7 +69,7 @@
         <AssociationConnector Association="FestiSpecModel.FK_Tabelvraag_vragenlijst_Vragenlijst" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.FK_Template_ID_vragenlijst" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.FK_Vragenlijst_Template" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpecModel.FK_Vragenlijst_bijlage_Vragenlijst" ManuallyRouted="false" />
+        <AssociationConnector Association="FestiSpecModel.Applicant_certificaat" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.Certificaat_inspecteur" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.Inspecteurs_inspectie" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.Inspectie_niet_ingevuld_vragenlijst" ManuallyRouted="false" />
