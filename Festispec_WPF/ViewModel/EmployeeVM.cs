@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.Model;
-using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
@@ -27,8 +26,18 @@ namespace Festispec_WPF.ViewModel
             GetAllRoles();
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
+        }
+
+        public EmployeeVM(Werknemer werknemer)
+        {
+            UOW = new ViewModelLocator().UOW;
+            _werknemer = werknemer;
+            _nawWerknemer = UOW.NawEmployee.Get(werknemer.NAW);
             DoB = DateTime.Now.Date;
         }
+
+
+
 
         public EmployeeVM(NAW_werknemer ne)
         {
@@ -50,6 +59,14 @@ namespace Festispec_WPF.ViewModel
         {
             get => _nawWerknemer.ID;
             set { _nawWerknemer.ID = value; RaisePropertyChanged(); }
+        }
+
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + InfixName + " " + LastName;
+            }
         }
 
         public string FirstName
@@ -142,7 +159,7 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged();
             }
         }
-        
+
         // employee
         public int Employee_ID
         {
@@ -183,8 +200,8 @@ namespace Festispec_WPF.ViewModel
         public int Employee_NAW_Id
         {
             get => _werknemer.NAW;
-            set 
-            { 
+            set
+            {
                 _werknemer.NAW = value;
                 RaisePropertyChanged();
             }
@@ -225,7 +242,7 @@ namespace Festispec_WPF.ViewModel
         //Gets all roles from the database (Rol_werknemers) in which he adds it do the RegisterView dropdown combobox.
         private void GetAllRoles()
         {
-            RolesCollection = new ObservableCollection<string>(UOW.RoleEmployee.GetAll().Select(e=> (e.Rol)));
+            RolesCollection = new ObservableCollection<string>(UOW.RoleEmployee.GetAll().Select(e => (e.Rol)));
         }
     }
 }

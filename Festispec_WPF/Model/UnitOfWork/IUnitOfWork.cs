@@ -17,6 +17,10 @@ namespace Festispec_WPF.Model.UnitOfWork
         ICustomerRepository Customers { get; }
         IContactPersonRepository ContactPersons { get; }
         ICertficatesRepository Certificates { get; }
+
+        IInspectionRepository Inspections { get; }
+
+        ILocationRepository InspectionLocations { get; }
         INAWCustomerRepository NAWCustomers { get; }
         int Complete();
     }
