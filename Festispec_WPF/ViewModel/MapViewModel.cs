@@ -96,6 +96,23 @@ namespace Festispec_WPF.ViewModel
                 base.RaisePropertyChanged();
             }
         }
+
+        private string _mapVisibility;
+
+        public string MapVisibility
+        {
+            get => _mapVisibility;
+            set { _mapVisibility = value; RaisePropertyChanged(() => MapVisibility); }
+        }
+
+        private string _editVisibility;
+
+        public string EditVisibility
+        {
+            get => _editVisibility;
+            set { _editVisibility = value; RaisePropertyChanged(() => EditVisibility); }
+        }
+
         #endregion
 
         public ObservableCollection<UIElement> MapElements
@@ -154,6 +171,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand PlanInspectorCommand { get; set; }
         public ICommand CancelPlanningCommand { get; set; }
         public ICommand SearchDataGrid { get; set; }
+        public ICommand ShowDetailsFestivalCommand { get; set; }
+
 
         public MapViewModel()
         {
@@ -164,11 +183,14 @@ namespace Festispec_WPF.ViewModel
             PlanInspectorCommand = new RelayCommand(planInspector);
             CancelPlanningCommand = new RelayCommand(cancelPlanning);
             SearchDataGrid = new RelayCommand(searchDatagrid);
+            ShowDetailsFestivalCommand = new RelayCommand(showDetailsFestival);
 
             InspectorVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
             ButtonControlVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
+            MapVisibility = "Visible";
+            EditVisibility = "Hidden";
 
             searchText = "Zoek naam";
 
@@ -458,6 +480,22 @@ namespace Festispec_WPF.ViewModel
             SingleInspectorVisibility = "Hidden";
             SelectedFestival = null;
             MapElements.Remove(lastLine);
+        }
+
+        private void switchVisibility()
+        {
+            var temp = EditVisibility;
+            EditVisibility = MapVisibility;
+            MapVisibility = temp;
+        }
+
+        private void showDetailsFestival()
+        {
+            //if (EditVisibility.Equals("Hidden"))
+            //{
+                switchVisibility();
+            //}
+
         }
     }
 }
