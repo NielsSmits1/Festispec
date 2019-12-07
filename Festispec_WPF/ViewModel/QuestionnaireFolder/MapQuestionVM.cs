@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
@@ -19,15 +20,30 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private UnitOfWork UOW;
         private Kaartvraag mapQuestionModel;
         private int position;
+        private string questiontype;
         //constructor
         public MapQuestionVM()
         {
             UOW = new ViewModelLocator().UOW;
             mapQuestionModel = new Kaartvraag();
+            
         }
-
-        public int Position { get => position; set => position = value; }
+        public string QuestionType { get => questiontype; set => questiontype = value; }
+        public int Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+                IQuestion changedPositionQuestion = this;
+                Messenger.Default.Send(changedPositionQuestion);
+            }
+        }
         public string Question { get => mapQuestionModel.Vraag; set => mapQuestionModel.Vraag = value; }
+        
         public BitmapImage Picture
         {
             get
@@ -67,6 +83,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
             }
         }
+
         public void toDatabase(int questionnaireId)
         {
             mapQuestionModel.MimeType = "pdf";

@@ -1,4 +1,5 @@
 ﻿using Festispec_WPF.Model.UnitOfWork;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,16 +15,28 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private UnitOfWork UOW;
         private Meerkeuzevraag MultipleChoiceQuestionModel;
         private int position;
+        private string questiontype;
         public ObservableCollection<string> AnwserOptions { get; set; }
 
         public string Question { get => MultipleChoiceQuestionModel.Vraag; set => MultipleChoiceQuestionModel.Vraag = value; }
-        public int Position { get => position; set => position = value; }
-
+        public int Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+            }
+        }
+        public string QuestionType { get => questiontype; set => questiontype = value; }
         public MultipleChoiceQuestionVM()
         {
             AnwserOptions = new ObservableCollection<string>();
             UOW = new ViewModelLocator().UOW;
             MultipleChoiceQuestionModel = new Meerkeuzevraag();
+            questiontype = "Meerkeuzevraag";
         }
 
         public void toDatabase(int questionnaireId)

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -24,6 +25,7 @@ namespace Festispec_WPF.ViewModel
             }
 
         }
+
         public string Title { get { return _questionnaire.Titel; } set { _questionnaire.Titel = value; } }
         public string Version { get { return _questionnaire.Versie; } set { _questionnaire.Versie = value; } }
         public string Note { get { return _questionnaire.Opmerking; } set { _questionnaire.Opmerking = value; } }
@@ -49,5 +51,6 @@ namespace Festispec_WPF.ViewModel
         {
             return _questionnaire;
         }
+
     }
 }

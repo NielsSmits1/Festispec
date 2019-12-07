@@ -19,7 +19,27 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
     {
         private QuestionnaireVM _newQuestionnaireVM;
         private UnitOfWork UOW;
+        private IQuestion _selectedItem;
+        public IQuestion SelectedItem {
+            get
+            {
+                return _selectedItem;
+            }
+        set
+            {
+                if (value != null)
+                {
+                    _selectedItem = value;
+                }
+            }
+        }
         public ICommand SubmitCommand { get; set; }
+        public ICommand PositionUpCommand { get; set; }
+        public ICommand PositionDownCommand { get; set; }
+
+        public string TemplateType { get; set; }
+
+        public ICommand CreateTemplateCommand { get; set; }
         public QuestionnaireVM newQuestionnaireVM 
         {
             get { return _newQuestionnaireVM; }
@@ -67,9 +87,53 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 newQuestionnaireVM.questions.Add(newQuestion);
                 newQuestion.Position = newQuestionnaireVM.questions.IndexOf(newQuestion);
             });
+
             SubmitCommand = new RelayCommand(SubmitQuestionnaire);
+            CreateTemplateCommand = new RelayCommand(CreateTemplate);
+
+            PositionUpCommand = new RelayCommand(changePositionUP);
+            PositionDownCommand = new RelayCommand(changePositionDOWN);
         }
 
+        private void CreateTemplate()
+        {
+            newQuestionnaireVM.IsFilled = false;
+            UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
+
+
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Template newTemplate = new Template();
+            newTemplate.Vragenlijst_ID = newQuestionnaireVM.ID;
+            newTemplate.Type = TemplateType;
+            UOW.Context.Template.Add(newTemplate);
+
+            var temp = UOW.Questionnaires.Get(newQuestionnaireVM.ID);
+            temp.Template_ID = newTemplate.ID;
+
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            newQuestionnaireVM = new QuestionnaireVM();
+            TemplateType = null;
+            RaisePropertyChanged("TemplateType");
+        }
         private void SubmitQuestionnaire()
         {
             newQuestionnaireVM.IsFilled = false;
@@ -121,5 +185,19 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
         }
 
+        private void changePositionUP()
+        {
+            changePosition("UP");
+        }
+
+        private void changePositionDOWN()
+        {
+            changePosition("DOWN");
+        }
+
+        private void changePosition(string upordown)
+        {
+            int currentPosition = SelectedItem.Position;
+        }
     }
 }

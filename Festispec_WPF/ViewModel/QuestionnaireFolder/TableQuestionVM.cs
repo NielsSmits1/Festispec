@@ -1,4 +1,5 @@
 ﻿using Festispec_WPF.Model.UnitOfWork;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,29 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private UnitOfWork UOW;
         private Tabelvraag tableQuestionModel;
         private int position;
+        private string questiontype;
         public string Question { get => tableQuestionModel.Vraag; set => tableQuestionModel.Vraag = value; }
         public string QuestionHead { get => tableQuestionModel.VraagKop; set => tableQuestionModel.VraagKop = value; }
         public string AnswerHead { get => tableQuestionModel.AntwoordKop; set => tableQuestionModel.AntwoordKop = value; }
-        public int Position { get => position; set => position = value; }
-
+        public int Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+                IQuestion changedPositionQuestion = this;
+                Messenger.Default.Send(changedPositionQuestion);
+            }
+        }
+        public string QuestionType { get => questiontype; set => questiontype = value; }
         public TableQuestionVM()
         {
             UOW = new ViewModelLocator().UOW;
             tableQuestionModel = new Tabelvraag();
+            questiontype = "Tabelvraag";
         }
 
         public void toDatabase(int questionnaireId)

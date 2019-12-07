@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
@@ -15,15 +16,26 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private UnitOfWork UOW;
         private Openvraag openQuestionModel;
         private int position;
-
+        private string questiontype;
 
         public string Question { get => openQuestionModel.Vraag; set =>  openQuestionModel.Vraag = value; }
-        public int Position { get => position; set => position = value; }
-
+        public int Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+            }
+        }
+        public string QuestionType { get => questiontype; set => questiontype = value; }
         public OpenQuestionVM()
         {
             UOW = new ViewModelLocator().UOW;
             openQuestionModel = new Openvraag();
+            questiontype = "Openvraag";
         }
 
         public void toDatabase(int questionnaireId)

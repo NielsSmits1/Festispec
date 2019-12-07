@@ -24,11 +24,11 @@
                 <TextBox Text="{Binding newAnwserOption, Mode=TwoWay}"/>
                 <Button  Content="Submit vraag optie" Margin="0 10"  Command="{Binding SubmitAnwserOption}"/>
             </StackPanel>
-            <Button Command="{Binding SubmitQuestion}" Grid.Column="0" Content="Submit vraag" VerticalAlignment="Bottom" />
+            <Button Command="{Binding SubmitQuestion}" Grid.Column="0" Content="Submit vraag" VerticalAlignment="Center" />
 
             <DataGrid Grid.Column="1" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding}" 
+                    <DataGridTextColumn Binding="{Binding}" Width="*"
                                 Foreground="Black" Header="Vraag opties" IsReadOnly="True" />
                 </DataGrid.Columns>
             </DataGrid>

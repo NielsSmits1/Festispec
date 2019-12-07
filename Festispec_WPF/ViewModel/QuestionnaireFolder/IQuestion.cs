@@ -9,6 +9,7 @@ namespace Festispec_WPF.ViewModel
     public interface IQuestion
     {
         string Question { get; set; }
+        string QuestionType { get; set; }
         int Position { get;set; }
         void toDatabase(int questionnaireId);
     }

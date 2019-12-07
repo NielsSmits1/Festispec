@@ -24,15 +24,46 @@
                 <TextBox Text="{Binding newQuestionnaireVM.Version, Mode=TwoWay}"></TextBox>
                 <Label>Opmerking</Label>
                 <TextBox Text="{Binding newQuestionnaireVM.Note, Mode=TwoWay}"></TextBox>
-
-                <Button Content="Submit" Margin="0,50,0,0" Command="{Binding SubmitCommand}"></Button>
-        </StackPanel>
+                <Button Content="Submit" Margin="0,20,0,0" Command="{Binding SubmitCommand}"></Button>
+                <Label>Template Type (optioneel)</Label>
+                <TextBox Text="{Binding TemplateType, Mode=TwoWay}"></TextBox>
+                <Button Content="Maak template" Margin="0,20,0,0" Command="{Binding CreateTemplateCommand }"></Button>
+            </StackPanel>
         <Frame NavigationUIVisibility="Hidden" Grid.Column="1" Opacity="1" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" />
 
-            <DataGrid Grid.Column="3" CanUserSortColumns="False" Margin="15,0,15,0" AutoGenerateColumns="False" ItemsSource="{Binding newQuestionnaireVM.questions}">
+            <DataGrid Grid.Column="3" CanUserSortColumns="False" Margin="15,0,15,0" AutoGenerateColumns="False" ItemsSource="{Binding newQuestionnaireVM.questions}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Vraag" Binding="{Binding Question, Mode=TwoWay}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Positie" Binding="{Binding Position, Mode=TwoWay}" IsReadOnly="False"></DataGridTextColumn>
+                   
+                    <DataGridTemplateColumn Header="Vraag" Width="*">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Question}" TextWrapping="Wrap"> </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Vraagtype" Width="*">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                               <TextBlock VerticalAlignment="Center" Text="{Binding QuestionType}"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Positie" Width="*" IsReadOnly="False" >
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Margin="10,10,10,10" VerticalAlignment="Center" Text="{Binding Position}"></TextBlock>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                                        <Button Command="{Binding CreateQuestionnaire.PositionUpCommand, Source={StaticResource Locator} }" Height="20">^</Button>
+                                        <Button Command="{Binding CreateQuestionnaire.PositionDownCommand, Source={StaticResource Locator} }" Height="20" >v</Button>
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
     </Grid>
