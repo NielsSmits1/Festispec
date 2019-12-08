@@ -173,7 +173,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Applicant.cshtml" />
     <Content Include="Views\Vragenlijst\Create.cshtml" />
     <Content Include="Views\Vragenlijst\Delete.cshtml" />
     <Content Include="Views\Vragenlijst\Details.cshtml" />
