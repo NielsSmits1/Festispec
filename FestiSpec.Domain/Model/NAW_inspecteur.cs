@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace FestiSpec.Domain.Model
 {
     using System;
@@ -20,17 +22,54 @@ namespace FestiSpec.Domain.Model
             this.Inspecteur = new HashSet<Inspecteur>();
         }
     
+        [Key]
         public int ID { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        [MaxLength(30)]
         public string Voornaam { get; set; }
+
         public string Tussenvoegsel { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        [MaxLength(30)]
         public string Achternaam { get; set; }
+
+        [Required]
+        [MinLength(4)]
+        [MaxLength(6)]
         public string Postcode { get; set; }
+
+        [Required]
+        [MaxLength(6)]
         public string Huisnummer { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        [MaxLength(30)]
         public string Straatnaam { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
         public System.DateTime Geboortedatum { get; set; }
+
+        [Required]
+        [MinLength(10)]
+        [MaxLength(35)]
         public string IBAN { get; set; }
+        
+        [Required]
+        [MinLength(5)]
+        [MaxLength(35)]
         public string Email { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        [MaxLength(15)]
         public string Telefoonnummer { get; set; }
+
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspecteur> Inspecteur { get; set; }

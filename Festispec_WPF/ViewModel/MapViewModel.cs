@@ -96,6 +96,23 @@ namespace Festispec_WPF.ViewModel
                 base.RaisePropertyChanged();
             }
         }
+
+        private string _mapVisibility;
+
+        public string MapVisibility
+        {
+            get => _mapVisibility;
+            set { _mapVisibility = value; RaisePropertyChanged(() => MapVisibility); }
+        }
+
+        private string _editVisibility;
+
+        public string EditVisibility
+        {
+            get => _editVisibility;
+            set { _editVisibility = value; RaisePropertyChanged(() => EditVisibility); }
+        }
+
         #endregion
 
         public ObservableCollection<UIElement> MapElements
@@ -154,6 +171,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand PlanInspectorCommand { get; set; }
         public ICommand CancelPlanningCommand { get; set; }
         public ICommand SearchDataGrid { get; set; }
+        public ICommand ShowDetailsFestivalCommand { get; set; }
         public ICommand RefreshFestivalsCommand { get; set; }
         public ICommand RefreshInspectorsCommand { get; set; }
 
@@ -166,6 +184,7 @@ namespace Festispec_WPF.ViewModel
             PlanInspectorCommand = new RelayCommand(planInspector);
             CancelPlanningCommand = new RelayCommand(cancelPlanning);
             SearchDataGrid = new RelayCommand(searchDatagrid);
+            ShowDetailsFestivalCommand = new RelayCommand(showDetailsFestival);
             RefreshFestivalsCommand = new RelayCommand(LoadFestivals);
             RefreshInspectorsCommand = new RelayCommand(LoadInspectors);
 
@@ -173,6 +192,8 @@ namespace Festispec_WPF.ViewModel
             PlanInspectorVisibility = "Hidden";
             ButtonControlVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
+            MapVisibility = "Visible";
+            EditVisibility = "Hidden";
 
             searchText = "Zoek naam";
 
@@ -463,6 +484,21 @@ namespace Festispec_WPF.ViewModel
             MapElements.Remove(lastLine);
         }
 
+        private void switchVisibility()
+        {
+            var temp = EditVisibility;
+            EditVisibility = MapVisibility;
+            MapVisibility = temp;
+        }
+
+        private void showDetailsFestival()
+        {
+            //if (EditVisibility.Equals("Hidden"))
+            //{
+                switchVisibility();
+            //}
+
+        }
         private void LoadFestivals()
         {
             Festivals = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
@@ -480,8 +516,6 @@ namespace Festispec_WPF.ViewModel
             //}
             
         }
-
-        
 
     }
 }

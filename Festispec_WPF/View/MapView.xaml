@@ -218,7 +218,7 @@
                                                                     <TextBlock Text="{Binding EndDate, StringFormat=hh:mm}" FontSize="12" />
                                                                 </StackPanel>
                                                                 <DockPanel>
-                                                                    <Button HorizontalAlignment="Left" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="#8000FF" Background="White" FontWeight="ExtraBold" Margin="4" Width="80" Height="25" Content="Details" Cursor="Hand">
+                                                                    <Button HorizontalAlignment="Left" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="#8000FF" Background="White" FontWeight="ExtraBold" Margin="4" Width="80" Height="25" Content="Details" Cursor="Hand" Command="{Binding DataContext.ShowDetailsFestivalCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
                                                                         <Button.Style>
                                                                             <Style TargetType="{x:Type Button}">
                                                                                 <Setter Property="Background" Value="Green"/>
@@ -402,8 +402,136 @@
                             </Grid>
                         </Border>
 
-                        <Grid Grid.Column="2" Background="Gray">
-                            <Border BorderBrush="Black" BorderThickness="5">
+                        <Grid Grid.Column="2" Background="Gray" >
+                            <StackPanel Grid.Column="7" Background="AliceBlue" IsEnabled="false" Visibility="{Binding EditVisibility}">
+                                
+                                <Label Content="inspectie bewerken" FontSize="30" Foreground="Black"></Label>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="450"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="10"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                    <!--NAME-->
+                                    <Label Content="Titel" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
+                                    <TextBox Width="450" HorizontalAlignment="Left" Name="Title" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedFestival.Title, Mode=TwoWay}"></TextBox>
+                                    <!--END NAME-->
+                                </Grid>
+                                <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="240"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="10"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="Locatie:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                    <Label Content="Gekozen locatie" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
+                                    <TextBlock Width="200" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedFestival.Location.FullAdress}" TextWrapping="Wrap"></TextBlock>
+
+                                    <Label Content="Locaties" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"/>
+                                    <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedUpdateLocation}" ItemsSource="{Binding Locations}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding FullAdress}"></TextBlock>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+
+                                    <Button Grid.Column="4" Grid.Row="1" Height="25" Content="Nieuwe locatie aanmaken" Command="{Binding OpenCreateLocationWindowCommand}"></Button>
+                                </Grid>
+
+                                <Border BorderThickness="1" BorderBrush="Black"></Border>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
+                                        <ColumnDefinition Width="67*"/>
+                                        <ColumnDefinition Width="183*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="10"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="StartDatum:" FontSize="15" Foreground="Black" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,199,0"></Label>
+                                    <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="1,0,65,0" ></Label>
+                                    <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding SelectedFestival.StartDate, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="1,0,65,0"/>
+                                </Grid>
+                                <Border BorderThickness="1" BorderBrush="Black"></Border>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="10"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="EindDatum:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                    <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                                    <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding SelectedFestival.EndDate, Mode=TwoWay}"/>
+                                </Grid>
+                                <Border BorderThickness="1" BorderBrush="Black"></Border>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="10"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="Versie:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                    <Label Content="Versienummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                                    <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedFestival.Version, Mode=TwoWay}"></TextBox>
+                                </Grid>
+
+                                <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="10"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="Klant:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                    <Label Content="Gekozen klant" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedFestival.Customer.CompanyName}" FontSize="20" TextWrapping="Wrap"></TextBlock>
+
+                                    <Label Content="Lijst van klanten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedUpdateCustomer}" ItemsSource="{Binding Customers}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding CompanyName}"></TextBlock>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Grid>
+                                <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditCommand}"></Button>
+                            </StackPanel>
+                            <!--MAP-->
+                            <Border BorderBrush="Black" BorderThickness="5" Visibility="{Binding MapVisibility}">
                                 <m:Map Center="51.7,5.5" ZoomLevel="8" CredentialsProvider="y9hnZxzeFbanowjRfwhq~QWOfrctUka_a19PmxVHotQ~As2wF_8SrcXbm2udFzP2wlDINKErT2AFPoA_bSzfTnPVEYm5rqni2C30NJwMO7tW" Margin="2,0,-2,0">
                                     <m:MapItemsControl ItemsSource="{Binding MapElements}"/>
                                 </m:Map>
