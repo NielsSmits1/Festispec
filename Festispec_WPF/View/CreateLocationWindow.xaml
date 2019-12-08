@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
         Title="Nieuwe locatie aanmaken" Height="308" Width="400"
-        DataContext="{Binding InspectionCrud, Source={StaticResource Locator}}">
+        DataContext="{Binding MapView, Source={StaticResource Locator}}">
     <Grid>
         <StackPanel Grid.Column="8" Background="AliceBlue" >
             <Label Content="Locatie aanmaken" FontSize="30" Foreground="Black"></Label>

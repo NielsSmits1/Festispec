@@ -55,6 +55,7 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<HomeScreenVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
             SimpleIoc.Default.Register<InspectionCrudVM>();
+            SimpleIoc.Default.Register<MapViewModel>();
         }
 
         public MainViewModel Main
@@ -166,7 +167,7 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return new MapViewModel();
+                return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
         }
 

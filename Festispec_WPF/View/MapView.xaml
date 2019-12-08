@@ -403,7 +403,7 @@
                         </Border>
 
                         <Grid Grid.Column="2" Background="Gray" >
-                            <StackPanel Grid.Column="7" Background="AliceBlue" IsEnabled="false" Visibility="{Binding EditVisibility}">
+                            <StackPanel Grid.Column="7" Background="AliceBlue" Visibility="{Binding EditVisibility}">
                                 
                                 <Label Content="inspectie bewerken" FontSize="30" Foreground="Black"></Label>
                                 <Grid>
@@ -442,7 +442,7 @@
                                     <TextBlock Width="200" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedFestival.Location.FullAdress}" TextWrapping="Wrap"></TextBlock>
 
                                     <Label Content="Locaties" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"/>
-                                    <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedUpdateLocation}" ItemsSource="{Binding Locations}">
+                                    <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedLocation}" ItemsSource="{Binding Locations}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding FullAdress}"></TextBlock>
@@ -520,7 +520,7 @@
                                     <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedFestival.Customer.CompanyName}" FontSize="20" TextWrapping="Wrap"></TextBlock>
 
                                     <Label Content="Lijst van klanten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedUpdateCustomer}" ItemsSource="{Binding Customers}">
+                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding CompanyName}"></TextBlock>
