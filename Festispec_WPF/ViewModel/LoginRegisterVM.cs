@@ -22,16 +22,13 @@ namespace Festispec_WPF.ViewModel
 
         //reference commands
         public ICommand LoginCommand { get; set; }
-        public ICommand RegisterCommand { get; set; }
 
         //local variables
-        private RegisterView _windowRegisterView;
         private IUnitOfWork UOW;
 
         public LoginRegisterVM()
         {
             LoginCommand = new RelayCommand(HandleLogin);
-            RegisterCommand = new RelayCommand(OpenRegisterWindow);
             UOW = new ViewModelLocator().UOW;
         }
 
@@ -54,12 +51,6 @@ namespace Festispec_WPF.ViewModel
                 HomeScreenView home = new HomeScreenView();
                 home.Show();
             }
-        }
-
-        private void OpenRegisterWindow()
-        {
-            _windowRegisterView = new RegisterView();
-            _windowRegisterView.Show();
         }
     }
 }

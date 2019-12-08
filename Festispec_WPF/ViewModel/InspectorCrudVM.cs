@@ -32,6 +32,7 @@ namespace Festispec_WPF.ViewModel
         public InspectorVM NewInspector { get; set; }
 
 
+
         public CertificateVM SelectedCertificate
         {
             get
@@ -45,7 +46,6 @@ namespace Festispec_WPF.ViewModel
         }
 
         public ObservableCollection<CertificateVM> AvailableCertificates { get; set; }
-        //
 
         //Update Inspector Commands
         public ICommand OpenEditInspectorCommand { get; set; }
@@ -108,6 +108,7 @@ namespace Festispec_WPF.ViewModel
             ListOfInactiveCommand = new RelayCommand(LoadInactive);
             ListOfLicensedCommand = new RelayCommand(LoadLicensed);
             SetInspectorInactiveCommand = new RelayCommand(SetInspectorInactive);
+
         }
 
         // CREATE
@@ -179,7 +180,7 @@ namespace Festispec_WPF.ViewModel
             catch
             {
                 MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
@@ -188,6 +189,8 @@ namespace Festispec_WPF.ViewModel
             Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
             RaisePropertyChanged(() => Inspectors);
             _currentlist = 1;
+
+
         }
         public void SetInspectorInactive()
         {
@@ -231,7 +234,7 @@ namespace Festispec_WPF.ViewModel
             _currentlist = 4;
         }
 
-  
+
 
         public void MoveCertificateToChosen()
         {
@@ -256,6 +259,6 @@ namespace Festispec_WPF.ViewModel
             SelectedInspector.ChosenCertificates.Remove(_selected);
         }
 
-       
+
     }
 }

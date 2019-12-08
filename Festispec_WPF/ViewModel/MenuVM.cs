@@ -11,14 +11,9 @@ namespace Festispec_WPF.ViewModel
 {
     public class MenuVM
     {
-        // Moeten nog instanties van schermen gemaakt worden 
-        /*
-        private KlantWindow _klantWindow;
-        private VragenlijstWindow _vragenlijstWindow;
-        */
-
-        private InspectorCrudWindow _inspecteursWindow;
         private HomeScreenView _homeScreenWindow;
+        private CustomerCrudWindow _customerCrudWindow;
+        private InspectorCrudWindow _inspecteursWindow;
         private WeekplanningView _weekPlanningWindow;
         private VerzoekInplanView _verzoekInplanWindow;
 
@@ -47,7 +42,8 @@ namespace Festispec_WPF.ViewModel
         }
         public void ShowKlanten()
         {
-            throw new NotImplementedException();
+            _customerCrudWindow = new CustomerCrudWindow();
+            _customerCrudWindow.Show();
         }
         public void ShowInplanVerzoeken()
         {

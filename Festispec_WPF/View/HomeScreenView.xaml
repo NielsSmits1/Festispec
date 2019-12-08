@@ -9,7 +9,7 @@
         WindowState="Maximized"
         Width="1920"
         Height="1080"
-        DataContext="{Binding HomeScreen, Source={StaticResource Locator}}">
+        DataContext="{Binding Menu, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
+        
         <Grid Grid.Column="0" >
             <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowHomeCommand}">
                 <Image Source="/Images/Home.png" />

@@ -50,7 +50,6 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<EmployeeCrudVM>();
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<HomeScreenVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
         }
 
@@ -114,15 +113,7 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        public HomeScreenVM HomeScreen
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<HomeScreenVM>();
-            }
-        }
-
-        public MenuVM GetMenu
+        public MenuVM Menu
         {
             get
             {
