@@ -116,7 +116,14 @@
                                                             <KeyBinding Command="{Binding SearchDataGrid}" Key="Enter" />
                                                         </TextBox.InputBindings>
                                                     </TextBox>
-                                                    <Button Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0"/>
+                                                    <StackPanel Grid.Column="1" Visibility="{Binding InspectionVisibility}" Orientation="Horizontal">
+                                                    <Button Name="InspectionNew" DataContext="{Binding InspectionCrud, Source={StaticResource Locator}}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0" Command="{Binding OpenCreateWindowCommand}"/>
+                                                        <Button Name="RefreshInspections" Content="Ververs" Command="{Binding RefreshFestivalsCommand}"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1" Visibility="{Binding InspectorVisibility}" Orientation="Horizontal">
+                                                        <Button Name="InspectorNew" DataContext="{Binding InspectorCrud, Source={StaticResource Locator}}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0" Command="{Binding OpenCreateCommand}"/>
+                                                        <Button Name="RefreshInspectors" Content="Ververs" Command="{Binding RefreshInspectorsCommand}"/>
+                                                    </StackPanel>
                                                 </Grid>
                                             </Border>
                                         </Grid>
@@ -183,7 +190,7 @@
                                                         </DataTemplate>
                                                     </Grid.Resources>
                                                     <ScrollViewer VerticalScrollBarVisibility="Visible" Height="350">
-                                                        <DataGrid CanUserAddRows="false" ItemsSource="{Binding ViewSource.View}" SelectedItem="{Binding SelectedInspector, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
+                                                        <DataGrid CanUserAddRows="false" ItemsSource="{Binding Inspectors}" SelectedItem="{Binding SelectedInspector, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
                                                             <DataGrid.Columns>
                                                                 <DataGridTemplateColumn Width="*" CellTemplate="{StaticResource DateTemplate}" />
                                                             </DataGrid.Columns>

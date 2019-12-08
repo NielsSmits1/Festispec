@@ -1,6 +1,7 @@
 ﻿using BingMapsRESTToolkit;
 using FestiSpec.Domain.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Geocoding;
@@ -26,7 +27,6 @@ namespace Festispec_WPF.ViewModel
     {
         private IGeocoder geocoder = new BingMapsGeocoder(ApiKeys.BING_MAPS_KEY);
         private MapPolyline lastLine;
-
         private ObservableCollection<UIElement> mapElements = new ObservableCollection<UIElement>();
         public ObservableCollection<InspectorVM> Inspectors { get; set; }
         public ObservableCollection<InspectorVM> SingleInspector { get; set; }
@@ -172,7 +172,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand CancelPlanningCommand { get; set; }
         public ICommand SearchDataGrid { get; set; }
         public ICommand ShowDetailsFestivalCommand { get; set; }
-
+        public ICommand RefreshFestivalsCommand { get; set; }
+        public ICommand RefreshInspectorsCommand { get; set; }
 
         public MapViewModel()
         {
@@ -184,6 +185,8 @@ namespace Festispec_WPF.ViewModel
             CancelPlanningCommand = new RelayCommand(cancelPlanning);
             SearchDataGrid = new RelayCommand(searchDatagrid);
             ShowDetailsFestivalCommand = new RelayCommand(showDetailsFestival);
+            RefreshFestivalsCommand = new RelayCommand(LoadFestivals);
+            RefreshInspectorsCommand = new RelayCommand(LoadInspectors);
 
             InspectorVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
@@ -197,11 +200,9 @@ namespace Festispec_WPF.ViewModel
             //---INSPECTORS
 
 
-            var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i));
-            Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
+            LoadInspectors();
 
-            var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
-            Festivals = new ObservableCollection<InspectionVM>(InspectionList);
+            LoadFestivals();
 
 
             ViewSource = new CollectionViewSource();
@@ -241,6 +242,7 @@ namespace Festispec_WPF.ViewModel
 
                 MapElements.Add(pin);
             }
+
         }
     
 
@@ -497,5 +499,23 @@ namespace Festispec_WPF.ViewModel
             //}
 
         }
+        private void LoadFestivals()
+        {
+            Festivals = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
+            RaisePropertyChanged(() => Festivals);
+            
+        }
+
+        private void LoadInspectors()
+        {
+            Inspectors = new ObservableCollection<InspectorVM>(_UOW.Inspectors.GetAll().Select(ins => new InspectorVM(ins)));
+            RaisePropertyChanged(() => Inspectors);
+            //if(ViewSource != null)
+            //{
+            //    ViewSource.View.Refresh();
+            //}
+            
+        }
+
     }
 }
