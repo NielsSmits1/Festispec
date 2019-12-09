@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>FestiSpec_DB</Name>
+    <Name>Festispec_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{7c73a8c0-4df3-4047-b7bc-d76f745a8453}</ProjectGuid>
+    <ProjectGuid>{86b0c509-76b5-4702-be8c-360d6b699e66}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>FestiSpec_DB</RootNamespace>
-    <AssemblyName>FestiSpec_DB</AssemblyName>
+    <RootNamespace>Festispec_DB</RootNamespace>
+    <AssemblyName>Festispec_DB</AssemblyName>
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -22,7 +22,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -62,9 +62,6 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Afspraak.sql" />
-    <Build Include="dbo\Tables\Beschikbaarheid.sql" />
-    <Build Include="dbo\Tables\Bijlagevraag.sql" />
     <Build Include="dbo\Tables\Certificaat.sql" />
     <Build Include="dbo\Tables\Certificaat_inspecteur.sql" />
     <Build Include="dbo\Tables\Contactpersoon.sql" />
@@ -79,7 +76,6 @@
     <Build Include="dbo\Tables\Klant.sql" />
     <Build Include="dbo\Tables\Locatie.sql" />
     <Build Include="dbo\Tables\Meerkeuzevraag.sql" />
-    <Build Include="dbo\Tables\Bijlagevraag_Vragenlijst.sql" />
     <Build Include="dbo\Tables\Meerkeuzevraag_antwoord.sql" />
     <Build Include="dbo\Tables\Meerkeuzevraag_vragenlijst.sql" />
     <Build Include="dbo\Tables\NAW_inspecteur.sql" />
@@ -98,6 +94,12 @@
     <Build Include="dbo\Tables\Verzoek.sql" />
     <Build Include="dbo\Tables\Vragenlijst.sql" />
     <Build Include="dbo\Tables\Werknemer.sql" />
+    <Build Include="dbo\Tables\Applicant.sql" />
+    <Build Include="dbo\Tables\Applicant_certificaat.sql" />
     <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
+    <Build Include="dbo\Tables\Afspraak.sql" />
+    <Build Include="dbo\Tables\Beschikbaarheid.sql" />
+    <Build Include="dbo\Tables\Bijlagevraag.sql" />
+    <Build Include="dbo\Tables\Bijlagevraag_vragenlijst.sql" />
   </ItemGroup>
 </Project>

@@ -56,6 +56,8 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 return;
             IQuestion newQuestion = NewMultipleChoiceQuestion;
             NewMultipleChoiceQuestion = new MultipleChoiceQuestionVM();
+            AnwserOptions = new ObservableCollection<string>();
+            RaisePropertyChanged("AnwserOptions");
             Messenger.Default.Send(newQuestion);
         }
 

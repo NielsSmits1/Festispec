@@ -17,7 +17,7 @@ namespace Festispec_WPF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Vragenlijst()
         {
-            this.Bijlagevraag_Vragenlijst = new HashSet<Bijlagevraag_Vragenlijst>();
+            this.Bijlagevraag_vragenlijst = new HashSet<Bijlagevraag_vragenlijst>();
             this.Inspectie_Wel_Ingevuld_Vragenlijst = new HashSet<Inspectie_Wel_Ingevuld_Vragenlijst>();
             this.Kaartvraag_vragenlijst = new HashSet<Kaartvraag_vragenlijst>();
             this.Meerkeuzevraag_vragenlijst = new HashSet<Meerkeuzevraag_vragenlijst>();
@@ -35,7 +35,7 @@ namespace Festispec_WPF
         public bool Is_Ingevuld { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bijlagevraag_Vragenlijst> Bijlagevraag_Vragenlijst { get; set; }
+        public virtual ICollection<Bijlagevraag_vragenlijst> Bijlagevraag_vragenlijst { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectie_Wel_Ingevuld_Vragenlijst> Inspectie_Wel_Ingevuld_Vragenlijst { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

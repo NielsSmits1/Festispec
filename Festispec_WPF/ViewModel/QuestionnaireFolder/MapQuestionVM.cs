@@ -38,8 +38,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             set
             {
                 position = value;
-                IQuestion changedPositionQuestion = this;
-                Messenger.Default.Send(changedPositionQuestion);
             }
         }
         public string Question { get => mapQuestionModel.Vraag; set => mapQuestionModel.Vraag = value; }

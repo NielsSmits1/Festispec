@@ -27,8 +27,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             set
             {
                 position = value;
-                IQuestion changedPositionQuestion = this;
-                Messenger.Default.Send(changedPositionQuestion);
             }
         }
         public string QuestionType { get => questiontype; set => questiontype = value; }
@@ -41,11 +39,11 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public void toDatabase(int questionnaireId)
         {
             UOW.Context.Bijlagevraag.Add(appendixQuestionModel);
-            Bijlagevraag_Vragenlijst Link = new Bijlagevraag_Vragenlijst();
-            Link.Bijlage_ID = appendixQuestionModel.ID;
+            Bijlagevraag_vragenlijst Link = new Bijlagevraag_vragenlijst();
+            Link.Bijlagevraag_ID = appendixQuestionModel.ID;
             Link.Vragenlijst_ID = questionnaireId;
-            Link.Position = Position;
-            UOW.Context.Bijlagevraag_Vragenlijst.Add(Link);
+            Link.Positie = Position;
+            UOW.Context.Bijlagevraag_vragenlijst.Add(Link);
             try
             {
                 UOW.Complete();
