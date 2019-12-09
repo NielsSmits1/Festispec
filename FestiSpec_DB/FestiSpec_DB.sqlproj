@@ -6,14 +6,14 @@
     <Name>FestiSpec_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{20b70e73-5d6c-488d-9f84-8fd60949d19a}</ProjectGuid>
+    <ProjectGuid>{d3852a60-525c-407e-8d10-f3293aa00a9c}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
     <RootNamespace>FestiSpec_DB</RootNamespace>
     <AssemblyName>FestiSpec_DB</AssemblyName>
-    <ModelCollation>1033,CI</ModelCollation>
+    <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -22,8 +22,6 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
-    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -58,48 +56,5 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="dbo\Tables\Certificaat.sql" />
-    <Build Include="dbo\Tables\Certificaat_inspecteur.sql" />
-    <Build Include="dbo\Tables\Contactpersoon.sql" />
-    <Build Include="dbo\Tables\Inspecteur.sql" />
-    <Build Include="dbo\Tables\Inspecteurs_inspectie.sql" />
-    <Build Include="dbo\Tables\Inspectie.sql" />
-    <Build Include="dbo\Tables\Inspectie_niet_ingevuld_vragenlijst.sql" />
-    <Build Include="dbo\Tables\Inspectie_Rapportage.sql" />
-    <Build Include="dbo\Tables\Inspectie_Wel_Ingevuld_Vragenlijst.sql" />
-    <Build Include="dbo\Tables\Kaartvraag.sql" />
-    <Build Include="dbo\Tables\Kaartvraag_vragenlijst.sql" />
-    <Build Include="dbo\Tables\Klant.sql" />
-    <Build Include="dbo\Tables\Locatie.sql" />
-    <Build Include="dbo\Tables\Meerkeuzevraag.sql" />
-    <Build Include="dbo\Tables\Meerkeuzevraag_antwoord.sql" />
-    <Build Include="dbo\Tables\Meerkeuzevraag_vragenlijst.sql" />
-    <Build Include="dbo\Tables\NAW_inspecteur.sql" />
-    <Build Include="dbo\Tables\NAW_Klant.sql" />
-    <Build Include="dbo\Tables\NAW_werknemer.sql" />
-    <Build Include="dbo\Tables\Offerte.sql" />
-    <Build Include="dbo\Tables\Openvraag.sql" />
-    <Build Include="dbo\Tables\Openvraag_vragenlijst.sql" />
-    <Build Include="dbo\Tables\Planning_werknemer.sql" />
-    <Build Include="dbo\Tables\Rol_werknemer.sql" />
-    <Build Include="dbo\Tables\Tabelvraag.sql" />
-    <Build Include="dbo\Tables\Tabelvraag_antwoord.sql" />
-    <Build Include="dbo\Tables\Tabelvraag_vragenlijst.sql" />
-    <Build Include="dbo\Tables\Template.sql" />
-    <Build Include="dbo\Tables\Vereiste_certificaten.sql" />
-    <Build Include="dbo\Tables\Verzoek.sql" />
-    <Build Include="dbo\Tables\Vragenlijst.sql" />
-    <Build Include="dbo\Tables\Werknemer.sql" />
-    <Build Include="dbo\Tables\Applicant.sql" />
-    <Build Include="dbo\Tables\Applicant_certificaat.sql" />
-    <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
-    <Build Include="dbo\Tables\Afspraak.sql" />
-    <Build Include="dbo\Tables\Beschikbaarheid.sql" />
-    <Build Include="dbo\Tables\Bijlagevraag.sql" />
-    <Build Include="dbo\Tables\Bijlagevraag_vragenlijst.sql" />
   </ItemGroup>
 </Project>
