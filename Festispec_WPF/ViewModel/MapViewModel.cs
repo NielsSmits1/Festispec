@@ -36,10 +36,14 @@ namespace Festispec_WPF.ViewModel
         public ObservableCollection<CustomerVM> Customers { get; set; }
         public ObservableCollection<InspectorVM> SingleInspector { get; set; }
         public ObservableCollection<InspectionVM> Festivals { get; set; }
+
+        public ObservableCollection<CertificateVM> AvailableCertificates { get; set; }
         public CollectionViewSource ViewSource { get; set; }
 
         private CreateLocationWindow _createLocation;
+        private CreateInspectionWindow _createWindow;
         public LocationVM NewLocation { get; set; }
+        public InspectionVM NewInspection { get; set; }
 
         private UnitOfWork _UOW;
 
@@ -162,6 +166,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public CustomerVM NewSelectedCustomer
+        {
+            get => _selectedCustomer;
+            set
+            {
+                _selectedCustomer = value; NewInspection.Customer = value; RaisePropertyChanged(() => NewSelectedCustomer); RaisePropertyChanged(() => NewInspection.Customer);
+            }
+        }
         private LocationVM _selectedLocation;
 
         public LocationVM SelectedLocation
@@ -170,6 +182,15 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _selectedLocation = value; SelectedFestival.Location = value; RaisePropertyChanged(() => SelectedLocation); RaisePropertyChanged(() => SelectedFestival.Location);
+            }
+        }
+
+        public LocationVM NewSelectedLocation
+        {
+            get => _selectedLocation;
+            set
+            {
+                _selectedLocation = value; NewInspection.Location = value; RaisePropertyChanged(() => NewSelectedLocation); RaisePropertyChanged(() => NewInspection.Location);
             }
         }
 
@@ -195,6 +216,25 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        private CertificateVM _selectedCertificate;
+
+       public CertificateVM SelectedCertificate
+        {
+            get => _selectedCertificate;
+            set
+            {
+                if (AvailableCertificates.Contains(value))
+                {
+                    NewInspection.ChosenCertificates.Add(value); AvailableCertificates.Remove(value);
+                }
+                else
+                {
+                    AvailableCertificates.Add(value); NewInspection.ChosenCertificates.Remove(value);
+                }
+                
+            }
+        }
+
         public ICommand ShowInspectorCommand { get; set; }
         public ICommand ShowInspectorListCommand { get; set; }
         public ICommand ShowInspectionListCommand { get; set; }
@@ -206,6 +246,9 @@ namespace Festispec_WPF.ViewModel
         public ICommand RefreshInspectorsCommand { get; set; }
         public ICommand SafeEditCommand { get; set; }
         public ICommand CreateNewLocationCommand { get; set; }
+        public ICommand CloseCreateCommand { get; set; }
+        public ICommand OpenCreateWindowCommand { get; set; }
+        public ICommand CreateNewInspectionCommand { get; set; }
 
         public ICommand OpenCreateLocationWindowCommand { get; set; }
 
@@ -224,6 +267,9 @@ namespace Festispec_WPF.ViewModel
             SafeEditCommand = new RelayCommand(complete);
             CreateNewLocationCommand = new RelayCommand(AddNewLocation);
             OpenCreateLocationWindowCommand = new RelayCommand(OpenCreateLocationWindow);
+            CreateNewInspectionCommand = new RelayCommand(AddNewInspection);
+            OpenCreateWindowCommand = new RelayCommand(OpenCreateWindow);
+            CloseCreateCommand = new RelayCommand(CloseCreate);
             InspectorVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
             ButtonControlVisibility = "Hidden";
@@ -569,6 +615,48 @@ namespace Festispec_WPF.ViewModel
             {
                 MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void OpenCreateWindow()
+        {
+            NewInspection = new InspectionVM();
+            //Managers = new ObservableCollection<EmployeeVM>(_UOW.Employee.GetAllManagers().Select(emp => new EmployeeVM(emp)));
+            Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
+            Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));
+            AvailableCertificates = new ObservableCollection<CertificateVM>(_UOW.Certificates.GetAll().Select(cert => new CertificateVM(cert)));
+            _createWindow = new CreateInspectionWindow();
+            _createWindow.Show();
+        }
+
+        private void CloseCreate()
+        {
+            NewInspection = null;
+            NewLocation = null;
+            _createWindow.Close();
+        }
+        private void AddNewInspection()
+        {
+            NewLocation = null;
+            _UOW.Inspections.Add(NewInspection.Inspection);
+
+            foreach (var item in NewInspection.ChosenCertificates)
+            {
+                _UOW.Inspections.Get(NewInspection.Inspection_ID).Certificaat.Add(item.Certificate);
+            }
+
+            try
+            {
+                _UOW.Complete();
+                _createWindow.Close();
+                LoadFestivals();
+
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }

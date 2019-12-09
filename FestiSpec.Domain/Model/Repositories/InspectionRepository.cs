@@ -20,5 +20,10 @@ namespace FestiSpec.Domain.Model.Repositories
         {
             Get(inspection.Inspectienummer).Inspecteur.Add(inspecteur);
         }
+
+        public IEnumerable<Certificaat> GetCertificatesByInspection(int id)
+        {
+            return GetAll().FirstOrDefault(ins => ins.Inspectienummer == id).Certificaat;
+        }
     }
 }
