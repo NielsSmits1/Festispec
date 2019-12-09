@@ -116,14 +116,7 @@
                                                             <KeyBinding Command="{Binding SearchDataGrid}" Key="Enter" />
                                                         </TextBox.InputBindings>
                                                     </TextBox>
-                                                    <StackPanel Grid.Column="1" Visibility="{Binding InspectionVisibility}" Orientation="Horizontal">
-                                                    <Button Name="InspectionNew" DataContext="{Binding InspectionCrud, Source={StaticResource Locator}}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0" Command="{Binding OpenCreateWindowCommand}"/>
-                                                        <Button Name="RefreshInspections" Content="Ververs" Command="{Binding RefreshFestivalsCommand}"/>
-                                                    </StackPanel>
-                                                    <StackPanel Grid.Column="1" Visibility="{Binding InspectorVisibility}" Orientation="Horizontal">
-                                                        <Button Name="InspectorNew" DataContext="{Binding InspectorCrud, Source={StaticResource Locator}}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0" Command="{Binding OpenCreateCommand}"/>
-                                                        <Button Name="RefreshInspectors" Content="Ververs" Command="{Binding RefreshInspectorsCommand}"/>
-                                                    </StackPanel>
+                                                    <Button Name="InspectionNew" Visibility="{Binding InspectionVisibility}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0" Command="{Binding OpenCreateWindowCommand}"/>
                                                 </Grid>
                                             </Border>
                                         </Grid>
@@ -403,7 +396,7 @@
                         </Border>
 
                         <Grid Grid.Column="2" Background="Gray" >
-                            <StackPanel Grid.Column="7" Background="AliceBlue" IsEnabled="false" Visibility="{Binding EditVisibility}">
+                            <StackPanel Grid.Column="7" Background="AliceBlue" Visibility="{Binding EditVisibility}">
                                 
                                 <Label Content="inspectie bewerken" FontSize="30" Foreground="Black"></Label>
                                 <Grid>
@@ -442,7 +435,7 @@
                                     <TextBlock Width="200" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedFestival.Location.FullAdress}" TextWrapping="Wrap"></TextBlock>
 
                                     <Label Content="Locaties" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"/>
-                                    <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedUpdateLocation}" ItemsSource="{Binding Locations}">
+                                    <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedLocation}" ItemsSource="{Binding Locations}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding FullAdress}"></TextBlock>
@@ -520,10 +513,44 @@
                                     <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedFestival.Customer.CompanyName}" FontSize="20" TextWrapping="Wrap"></TextBlock>
 
                                     <Label Content="Lijst van klanten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedUpdateCustomer}" ItemsSource="{Binding Customers}">
+                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding CompanyName}"></TextBlock>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                    
+                                </Grid>
+
+                                <Border BorderThickness="1" BorderBrush="Black"></Border>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="10"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                    <Label Content="Gekozen certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                                    <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding NewInspection.ChosenCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+
+                                    <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding AvailableCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"></TextBlock>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>
