@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using FestiSpec.Domain.Model;
 
 namespace FestiSpecWebsite.Controllers
@@ -18,8 +19,9 @@ namespace FestiSpecWebsite.Controllers
         // GET: Availability
         public ActionResult Index()
         {
-            var beschikbaarheid = db.Beschikbaarheid.Include(b => b.Inspecteur);
-            return View(beschikbaarheid.ToList());
+            var id = Convert.ToInt32(FormsAuthentication.Decrypt(Request.Cookies["Cookie1"].Value).Name);
+            var beschikbaarheid = db.Beschikbaarheid.Where(b => b.Inspecteur_ID == id).ToList();
+            return View(beschikbaarheid);
         }
 
         // GET: Availability/Details/5
@@ -40,7 +42,8 @@ namespace FestiSpecWebsite.Controllers
         // GET: Availability/Create
         public ActionResult Create()
         {
-            ViewBag.Inspecteur_ID = new SelectList(db.Inspecteur, "ID", "Username");
+            var id = Convert.ToInt32(FormsAuthentication.Decrypt(Request.Cookies["Cookie1"].Value).Name);
+            ViewBag.Inspecteur_ID = new SelectList(db.Inspecteur.Where(b => b.ID == id).ToList(), "ID", "Username");
             return View();
         }
 

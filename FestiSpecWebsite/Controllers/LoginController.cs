@@ -52,7 +52,7 @@ namespace FestiSpecWebsite.Controllers
                     string userData = JsonConvert.SerializeObject(targetPerson.Username);
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
                     (
-                        1, targetPerson.Username, DateTime.Now, DateTime.Now.AddMinutes(120), false, userData
+                        1, targetPerson.ID.ToString(), DateTime.Now, DateTime.Now.AddMinutes(120), false, userData
                     );
 
                     string enTicket = FormsAuthentication.Encrypt(authTicket);
