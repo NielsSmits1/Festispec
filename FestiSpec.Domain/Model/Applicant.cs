@@ -40,6 +40,7 @@ namespace FestiSpec.Domain.Model
         [Required]
         [MinLength(4)]
         [MaxLength(6)]
+        [DataType(DataType.PostalCode)]
         public string Postcode { get; set; }
 
         [Required]
@@ -63,11 +64,14 @@ namespace FestiSpec.Domain.Model
         [Required]
         [MinLength(5)]
         [MaxLength(35)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
         [MinLength(2)]
         [MaxLength(15)]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Telefoonnummer voldoet niet aan het format. Klopt hij wel?")]
         public string Telefoonnummer { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
