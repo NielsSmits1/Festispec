@@ -9,105 +9,65 @@
         Title="ContactPersonUpdateWindow" Height="1080" Width="1920"
         DataContext="{Binding CRCustomer, Source={StaticResource Locator}}">
 
-    <Grid>
+    <Grid Grid.Column="1" Grid.Row="1">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="630"/>
+            <ColumnDefinition Width="*"/>
+
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" >
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowHomeCommand, Source={StaticResource Locator}}" >
-                <Image Source="/Images/Home.png" />
-            </Button>
-        </Grid>
-        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/klanten.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/verzoeken_inplannen.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/inspecteurs.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/vragenlijsten.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/weekkalender.PNG" />
-            </Button>
+        <StackPanel Grid.Column="1" Width="630" Background="AliceBlue">
+            <Label Content="Aanpassen Contactpersoon" FontSize="30" Foreground="Black"></Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <!--NAME-->
+                <Label Content="Voornaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedContactPerson.FirstName, Mode=TwoWay}"></TextBox>
+                <Label Content="Tussenvoegsel" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedContactPerson.Affix, Mode=TwoWay}"></TextBox>
+                <Label Content="Achternaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedContactPerson.LastName, Mode=TwoWay}"></TextBox>
+
+            </Grid>
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Contactgegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Emailadres" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedContactPerson.Email, Mode=TwoWay}"></TextBox>
+                <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                <!-- New binding required-->
+                <TextBox Width="190" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedContactPerson.PhoneNumber, Mode=TwoWay}"></TextBox>
+            </Grid>
+
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+
+            <Button Content="Contactpersoon updaten" Command="{Binding EditContactPersonDataCommand }" Width="auto"></Button>
         </StackPanel>
-
-        <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
-                Festispec
-            </TextBlock>
-        </Grid>
-
-        <Grid Grid.Column="1" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="630"/>
-                <ColumnDefinition Width="*"/>
-
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="1" Width="630" Background="AliceBlue">
-                <Label Content="Aanpassen Contactpersoon" FontSize="30" Foreground="Black"></Label>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <!--NAME-->
-                    <Label Content="Voornaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedContactPerson.FirstName, Mode=TwoWay}"></TextBox>
-                    <Label Content="Tussenvoegsel" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedContactPerson.Affix, Mode=TwoWay}"></TextBox>
-                    <Label Content="Achternaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedContactPerson.LastName, Mode=TwoWay}"></TextBox>
-
-                </Grid>
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="150"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Contactgegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Emailadres" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedContactPerson.Email, Mode=TwoWay}"></TextBox>
-                    <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                    <!-- New binding required-->
-                    <TextBox Width="190" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedContactPerson.PhoneNumber, Mode=TwoWay}"></TextBox>
-                </Grid>
-
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-
-                <Button Content="Contactpersoon updaten" Command="{Binding EditContactPersonDataCommand }" Width="auto"></Button>
-            </StackPanel>
-        </Grid>
     </Grid>
 </Window>

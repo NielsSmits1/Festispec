@@ -109,7 +109,7 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return new EmployeeVM();
+                return new EmployeeVM(EmployeeCrud);
             }
         }
 

@@ -42,6 +42,14 @@
             <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKalenderCommand}">
                 <Image Source="/Images/weekkalender.PNG" />
             </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowWerknemerCommand}"
+                    Content="Werknemers">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding LogOutCommand}"
+                    Content="Log out">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            </Button>
         </StackPanel>
 
         <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">

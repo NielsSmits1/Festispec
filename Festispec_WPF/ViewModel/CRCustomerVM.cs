@@ -17,6 +17,8 @@ namespace Festispec_WPF.ViewModel
 {
     public class CRCustomerVM : ViewModelBase
     {
+        private ContactPersonUpdateWindow _contactPersonUpdateWindow;
+        private ContactPersonCreateWindow _contactPersonCreateWindow;
 
         public ICommand CreateCustomer { get; set; }
         public ICommand EditCustomer { get; set; }
@@ -93,6 +95,7 @@ namespace Festispec_WPF.ViewModel
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "De aanpassingen zijn doorgevoerd",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _contactPersonUpdateWindow.Close();
             }
             catch
             {
@@ -139,6 +142,7 @@ namespace Festispec_WPF.ViewModel
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "De aanpassingen zijn doorgevoerd",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _contactPersonCreateWindow.Close();
             }
             catch
             {
@@ -152,8 +156,8 @@ namespace Festispec_WPF.ViewModel
         }
         private void AddContactPersonWindow()
         {
-            ContactPersonCreateWindow contactPersonCreateWindow = new ContactPersonCreateWindow();
-            contactPersonCreateWindow.Show();
+            _contactPersonCreateWindow = new ContactPersonCreateWindow();
+            _contactPersonCreateWindow.Show();
         }
         private void OpenEditCustomerWindow()
         {
@@ -171,8 +175,8 @@ namespace Festispec_WPF.ViewModel
         private void EditContactPersonWindow()
         {
             //SelectedCustomer = new CustomerVM(UOW.Customers.Find(t => t.ID == SelectedCustomer.CustomerData.ID).First());
-            ContactPersonUpdateWindow contactPersonUpdateWindow = new ContactPersonUpdateWindow();
-            contactPersonUpdateWindow.Show();
+            _contactPersonUpdateWindow = new ContactPersonUpdateWindow();
+            _contactPersonUpdateWindow.Show();
         }
 
         private void AddCustomer()

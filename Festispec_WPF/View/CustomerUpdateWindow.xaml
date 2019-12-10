@@ -40,6 +40,14 @@
             <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/weekkalender.PNG" />
             </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}"
+                    Content="Werknemers">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}"
+                    Content="Log out">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            </Button>
         </StackPanel>
 
         <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
