@@ -10,213 +10,173 @@
         DataContext="{Binding InspectorCrud, Source={StaticResource Locator}}">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <StackPanel Background="AliceBlue">
+            <Label Content="Inspecteur aanpassen" FontSize="30" Foreground="Black"></Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <!--NAME-->
+                <Label Content="Voornaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.FirstName, Mode=TwoWay}"></TextBox>
+                <Label Content="Tussenvoegsel" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.InBetween, Mode=TwoWay}"></TextBox>
+                <Label Content="Achternaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedInspector.LastName, Mode=TwoWay}"></TextBox>
+                <!--END NAME-->
+            </Grid>
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
 
-        <Grid Grid.Column="0" >
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowHomeCommand, Source={StaticResource Locator}}" >
-                <Image Source="/Images/Home.png" />
-            </Button>
-        </Grid>
-        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/klanten.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/verzoeken_inplannen.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/inspecteurs.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/vragenlijsten.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/weekkalender.PNG" />
-            </Button>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Woonplaats:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Postcode" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.ZipCode, Mode=TwoWay}"></TextBox>
+
+                <Label Content="Huisnummer" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
+                <TextBox Width="50" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.HomeNumber, Mode=TwoWay}"></TextBox>
+
+                <Label Content="Straatnaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"/>
+                <TextBox Width="150" HorizontalAlignment="Left" Name="Streetname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedInspector.StreetName, Mode=TwoWay}"></TextBox>
+            </Grid>
+
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Geboortedatum:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding SelectedInspector.DateOfBirth, Mode=TwoWay}"/>
+            </Grid>
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Financiële gegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="IBAN" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.IBAN, Mode=TwoWay}"></TextBox>
+            </Grid>
+
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="250"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Contactgegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Emailadres" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.Email, Mode=TwoWay}"></TextBox>
+                <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="2" ></Label>
+                <!-- New binding required-->
+                <TextBox Width="200" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.Phonenumber, Mode=TwoWay}"></TextBox>
+            </Grid>
+
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Certificaten inspecteur" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <DataGrid  Grid.Row="1" Grid.Column="1" AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding SelectedInspector.ChosenCertificates}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToLeftoverCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                <DataGrid Grid.Row="1" Grid.Column="3"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding LeftoverCertificates}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToChosenSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Inloggegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Gebruikersnaam" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <Label Content="Wachtwoord" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="Username" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.UserName}"></TextBox>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="Password" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedInspector.Password}"></TextBox>
+            </Grid>
+            <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditInspectorCommand}"></Button>
         </StackPanel>
-
-        <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
-                Festspec
-            </TextBlock>
-        </Grid>
-
-        <Grid Grid.Column="1" Grid.Row="1">
-            <StackPanel Background="AliceBlue">
-                <Label Content="Inspecteur aanpassen" FontSize="30" Foreground="Black"></Label>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <!--NAME-->
-                    <Label Content="Voornaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.FirstName, Mode=TwoWay}"></TextBox>
-                    <Label Content="Tussenvoegsel" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.InBetween, Mode=TwoWay}"></TextBox>
-                    <Label Content="Achternaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedInspector.LastName, Mode=TwoWay}"></TextBox>
-                    <!--END NAME-->
-                </Grid>
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="150"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Woonplaats:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Postcode" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.ZipCode, Mode=TwoWay}"></TextBox>
-
-                    <Label Content="Huisnummer" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                    <TextBox Width="50" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.HomeNumber, Mode=TwoWay}"></TextBox>
-
-                    <Label Content="Straatnaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"/>
-                    <TextBox Width="150" HorizontalAlignment="Left" Name="Streetname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedInspector.StreetName, Mode=TwoWay}"></TextBox>
-                </Grid>
-
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Geboortedatum:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding SelectedInspector.DateOfBirth, Mode=TwoWay}"/>
-                </Grid>
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Financiële gegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="IBAN" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.IBAN, Mode=TwoWay}"></TextBox>
-                </Grid>
-
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="250"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Contactgegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Emailadres" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.Email, Mode=TwoWay}"></TextBox>
-                    <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="2" ></Label>
-                    <!-- New binding required-->
-                    <TextBox Width="200" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedInspector.Phonenumber, Mode=TwoWay}"></TextBox>
-                </Grid>
-
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="50"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Certificaten inspecteur" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <DataGrid  Grid.Row="1" Grid.Column="1" AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding SelectedInspector.ChosenCertificates}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToLeftoverCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                    <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                    <DataGrid Grid.Row="1" Grid.Column="3"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding LeftoverCertificates}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Name}"></DataGridTextColumn>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Naar andere veld" Command="{Binding DataContext.MoveToChosenSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="50"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Inloggegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Gebruikersnaam" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <Label Content="Wachtwoord" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                    <TextBox Width="200" HorizontalAlignment="Left" Name="Username" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedInspector.UserName}"></TextBox>
-                    <TextBox Width="200" HorizontalAlignment="Left" Name="Password" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedInspector.Password}"></TextBox>
-                </Grid>
-                <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditInspectorCommand}"></Button>
-            </StackPanel>
-        </Grid>
     </Grid>
 </Window>

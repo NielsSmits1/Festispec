@@ -25,13 +25,12 @@ namespace Festispec_WPF.ViewModel
         private CertificateVM _selected;
         private InspectorVM _inspector;
         private int _currentlist;
+
         // Create Inspector Properties
         public ICommand AddInspectorCommand { get; set; }
         public ICommand MoveToAvailableCommand { get; set; }
         public ICommand MoveToChosenCommand { get; set; }
         public InspectorVM NewInspector { get; set; }
-
-
 
         public CertificateVM SelectedCertificate
         {
@@ -53,7 +52,6 @@ namespace Festispec_WPF.ViewModel
         public ICommand MoveToChosenSelectedCommand { get; set; }
         public ICommand SafeEditInspectorCommand { get; set; }
         public ObservableCollection<CertificateVM> LeftoverCertificates { get; set; }
-        //
 
         //Read Inspector Properties
         public ObservableCollection<InspectorVM> Inspectors { get; set; }
@@ -108,7 +106,6 @@ namespace Festispec_WPF.ViewModel
             ListOfInactiveCommand = new RelayCommand(LoadInactive);
             ListOfLicensedCommand = new RelayCommand(LoadLicensed);
             SetInspectorInactiveCommand = new RelayCommand(SetInspectorInactive);
-
         }
 
         // CREATE
@@ -176,6 +173,7 @@ namespace Festispec_WPF.ViewModel
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "Het is gelukt!",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _editInspectorWindow.Close();
             }
             catch
             {
@@ -189,8 +187,6 @@ namespace Festispec_WPF.ViewModel
             Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
             RaisePropertyChanged(() => Inspectors);
             _currentlist = 1;
-
-
         }
         public void SetInspectorInactive()
         {

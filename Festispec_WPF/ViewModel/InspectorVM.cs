@@ -14,19 +14,7 @@ namespace Festispec_WPF.ViewModel
     public class InspectorVM : ViewModelBase
     {
         public ObservableCollection<CertificateVM> ChosenCertificates { get; set; }
-        private string _activeColor;
-        public string ActiveColor
-        {
-            get
-            {
-                return _activeColor;                
-            }
-            set
-            {
-                _activeColor = value;
-                RaisePropertyChanged("ActiveColor");
-            }
-        }
+
         public InspectorVM()
         {
             ChosenCertificates = new ObservableCollection<CertificateVM>();
