@@ -40,6 +40,21 @@ namespace Festispec_WPF.ViewModel
             _nawInspecteur =  _UOW.NAWInspectors.Find(ins => ins.ID == _inspecteur.NAW).FirstOrDefault();
         }
 
+        public void FillNAW(ApplicantVM applicant)
+        {
+            _nawInspecteur = new NAW_inspecteur();
+            FirstName = applicant.FirstName;
+            InBetween = applicant.InBetween;
+            LastName = applicant.LastName;
+            Email = applicant.Email;
+            DateOfBirth = applicant.DateOfBirth;
+            IBAN = applicant.IBAN;
+            ZipCode = applicant.ZipCode;
+            StreetName = applicant.StreetName;
+            HomeNumber = applicant.HomeNumber;
+            Phonenumber = applicant.Phonenumber;
+        }
+
         public string ActiveText
         {
             get

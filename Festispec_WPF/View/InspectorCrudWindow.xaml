@@ -288,7 +288,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Certificaten inspecteur" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <ListView Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding NewInspector.ChosenCertificates}">
+                <ListView Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SelectedAppCertificate}" ItemsSource="{Binding NewAppInspector.ChosenCertificates}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"></TextBlock>
@@ -297,7 +297,7 @@
                 </ListView>
 
                 <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                <ListView Grid.Row="1" Grid.Column="3" SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding AvailableCertificates}">
+                <ListView Grid.Row="1" Grid.Column="3" SelectedItem="{Binding SelectedAppCertificate}" ItemsSource="{Binding AvailableAppCertificates}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"></TextBlock>
@@ -323,10 +323,10 @@
                 <Label Content="Inloggegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Gebruikersnaam" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
                 <Label Content="Wachtwoord" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="UsernameApp" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewInspector.UserName, Mode=TwoWay}"></TextBox>
-                <TextBox Width="100" HorizontalAlignment="Left" Name="PasswordApp" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewInspector.Password, Mode=TwoWay}"></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="UsernameApp" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewAppInspector.UserName, Mode=TwoWay}"></TextBox>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="PasswordApp" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewAppInspector.Password, Mode=TwoWay}"></TextBox>
             </Grid>
-            <Button Content="Inspecteur toevoegen" Command="{Binding AddInspectorCommand}"></Button>
+            <Button Content="Inspecteur toevoegen" Command="{Binding RecruitApplicantCommand}"></Button>
 
         </StackPanel>
     </Grid>

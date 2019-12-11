@@ -19,6 +19,11 @@ namespace Festispec_WPF.ViewModel
         }
 
 
+        public Applicant ApplicantModel
+        {
+            get => _applicant;
+        }
+
         public string FullName
         {
             get
