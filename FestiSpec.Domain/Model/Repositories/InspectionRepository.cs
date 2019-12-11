@@ -25,5 +25,26 @@ namespace FestiSpec.Domain.Model.Repositories
         {
             return GetAll().FirstOrDefault(ins => ins.Inspectienummer == id).Certificaat;
         }
+
+        public List<Certificaat> GetMissingCertificates(int id)
+        {
+            var CertificatesInspection = Context.Inspectie.Find(id).Certificaat;
+            List<Certificaat> certificates = Context.Certificaat.ToList();
+            List<Certificaat> final = new List<Certificaat>();
+            foreach (var certificate in certificates)
+            {
+                if (!CertificatesInspection.Contains(certificate))
+                {
+                    final.Add(certificate);
+                }
+            }
+
+            return final;
+        }
+
+        public List<Certificaat> GetCertificatesInspection(int id)
+        {
+            return Context.Inspectie.Find(id).Certificaat.ToList();
+        }
     }
 }
