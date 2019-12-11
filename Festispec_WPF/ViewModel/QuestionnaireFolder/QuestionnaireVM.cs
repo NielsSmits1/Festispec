@@ -31,14 +31,18 @@ namespace Festispec_WPF.ViewModel
         public string Note { get { return _questionnaire.Opmerking; } set { _questionnaire.Opmerking = value; } }
         public bool IsFilled { get { return _questionnaire.Is_Ingevuld;  } set { _questionnaire.Is_Ingevuld = value; } }
         public int ID { get { return _questionnaire.ID; } }
-        public ICommand CreateNewQuestionnaireCommand { get; set; }
+        public bool IsActive { get { return _questionnaire.Actief; } set { _questionnaire.Actief = value; } }
 
 
         public QuestionnaireVM()
         {
             questions = new ObservableCollection<IQuestion>();
-            CreateNewQuestionnaireCommand = new RelayCommand(OpenCreateQuestionnaire);
             _questionnaire = new Vragenlijst();
+        }
+
+        public QuestionnaireVM(Vragenlijst questionnaire)
+        {
+            _questionnaire = questionnaire;
         }
 
         private void OpenCreateQuestionnaire()

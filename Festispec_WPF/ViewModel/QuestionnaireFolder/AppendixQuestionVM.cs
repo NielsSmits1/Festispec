@@ -1,4 +1,5 @@
 ﻿using Festispec_WPF.Model.UnitOfWork;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
-    public class AppendixQuestionVM : IQuestion
+    public class AppendixQuestionVM : ViewModelBase, IQuestion
     {
 
         private UnitOfWork UOW;
@@ -27,6 +28,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             set
             {
                 position = value;
+                RaisePropertyChanged();
             }
         }
         public string QuestionType { get => questiontype; set => questiontype = value; }

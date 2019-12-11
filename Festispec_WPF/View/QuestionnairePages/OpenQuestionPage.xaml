@@ -10,8 +10,9 @@
       Title="OpenQuestionPage">
 
         <StackPanel HorizontalAlignment="Center">
-            <TextBlock Text="Vraag:"></TextBlock>
+        <Label  FontSize="13" FontWeight="Bold">Aanmaken open vraag</Label>
+        <TextBlock Text="Vraag:"></TextBlock>
             <TextBox Text="{Binding NewOpenQuestion.Question, Mode=TwoWay}"/>
-            <Button Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
+        <Button  Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" FontSize="15" Padding="10,10,10,10" Margin="0 50" />
         </StackPanel>
 </Page>

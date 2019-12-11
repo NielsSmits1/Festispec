@@ -24,6 +24,7 @@ namespace Festispec_WPF
             this.Openvraag_vragenlijst = new HashSet<Openvraag_vragenlijst>();
             this.Tabelvraag_vragenlijst = new HashSet<Tabelvraag_vragenlijst>();
             this.Template = new HashSet<Template>();
+            this.Vragenlijst1 = new HashSet<Vragenlijst>();
             this.Inspectie = new HashSet<Inspectie>();
         }
     
@@ -31,8 +32,10 @@ namespace Festispec_WPF
         public string Titel { get; set; }
         public string Versie { get; set; }
         public Nullable<int> Template_ID { get; set; }
+        public Nullable<int> Stamt_af_van_ID { get; set; }
         public string Opmerking { get; set; }
         public bool Is_Ingevuld { get; set; }
+        public bool Actief { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bijlagevraag_vragenlijst> Bijlagevraag_vragenlijst { get; set; }
@@ -49,6 +52,9 @@ namespace Festispec_WPF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Template> Template { get; set; }
         public virtual Template Template1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vragenlijst> Vragenlijst1 { get; set; }
+        public virtual Vragenlijst Vragenlijst2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectie> Inspectie { get; set; }
     }

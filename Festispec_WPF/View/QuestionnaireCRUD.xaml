@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
-        DataContext="{Binding QuestionnaireVM, Source={StaticResource Locator}}"
+        WindowState="Maximized"
+        DataContext="{Binding QuestionaireCrud, Source={StaticResource Locator}}"
     Title="QuestionnaireCRUD" Height="450" Width="800">
     <Border BorderThickness="12">
         <StackPanel>
@@ -20,15 +21,38 @@
 
                 <Button Width="50" Height="50" FontSize="28" Content="+" 
                         Foreground="White" FontWeight="Bold" Background="#FF44AE3F" 
-                        Grid.Column="2"  Command="{Binding CreateNewQuestionnaireCommand}">
+                        Grid.Column="2"  Command="{Binding OpenCreateQuestionnaireWindowCommand}">
                 </Button>
             </Grid>
 
-            <DataGrid AutoGenerateColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionnaire, Mode=TwoWay}" ItemsSource="{Binding Questionnaires}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionnaire, Mode=TwoWay}" ItemsSource="{Binding Questionnaires}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
-                    <DataGridTextColumn Header="Questionnare Name" Binding="{Binding QuestionnareName}" Width="*" />
-                    <DataGridTextColumn Header="Used by" Binding="{Binding FestivalName}" Width="*" />
+
+                    <DataGridTemplateColumn Header="Naam" Width="*">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Title}"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Versie" Width="*">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Version}"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Notitie" Width="*">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Note}"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

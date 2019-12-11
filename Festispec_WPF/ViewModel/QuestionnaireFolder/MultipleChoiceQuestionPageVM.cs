@@ -52,6 +52,10 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void Submit()
         {
+            if (AnwserOptions.Count < 2)
+            {
+                return;
+            }
             if (NewMultipleChoiceQuestion.Question == null)
                 return;
             IQuestion newQuestion = NewMultipleChoiceQuestion;
@@ -63,12 +67,12 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void SubmitNewAnwserOption()
         {
-            if (newAnwserOption == "")
+            if (newAnwserOption == null)
             {
                 return;
             }
             NewMultipleChoiceQuestion.AnwserOptions.Add(newAnwserOption);
-            newAnwserOption = "";
+            newAnwserOption = null;
             RaisePropertyChanged("newAnwserOption");
         }
     }

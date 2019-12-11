@@ -10,8 +10,9 @@
       DataContext="{Binding AppendixQuestionPageVM, Source={StaticResource Locator}}">
 
     <StackPanel HorizontalAlignment="Center">
+        <Label  FontSize="13" FontWeight="Bold">Aanmaken bijlagevraag</Label>
         <TextBlock Text="Vraag:"></TextBlock>
         <TextBox Text="{Binding NewAppendixQuestion.Question}"/>
-        <Button Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
+        <Button FontSize="15" Padding="10,10,10,10" Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300"  Margin="0 50" />
     </StackPanel>
 </Page>

@@ -26,7 +26,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         {
             UOW = new ViewModelLocator().UOW;
             mapQuestionModel = new Kaartvraag();
-            
+            questiontype = "Kaartvraag";
         }
         public string QuestionType { get => questiontype; set => questiontype = value; }
         public int Position
@@ -38,6 +38,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             set
             {
                 position = value;
+                RaisePropertyChanged();
             }
         }
         public string Question { get => mapQuestionModel.Vraag; set => mapQuestionModel.Vraag = value; }
@@ -84,7 +85,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public void toDatabase(int questionnaireId)
         {
-            mapQuestionModel.MimeType = "pdf";
             UOW.Context.Kaartvraag.Add(mapQuestionModel);
             Kaartvraag_vragenlijst Link = new Kaartvraag_vragenlijst();
             Link.Kaartvraag_ID = mapQuestionModel.ID;

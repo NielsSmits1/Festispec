@@ -9,6 +9,8 @@
       Title="TableQuestionPage"
       DataContext="{Binding TableQuestionPageVM, Source={StaticResource Locator}}">
     <StackPanel HorizontalAlignment="Center">
+
+        <Label FontSize="13" FontWeight="Bold">Aanmaken tabel vraag</Label>
         <TextBlock Text="Vraag:"></TextBlock>
         <TextBox Text="{Binding NewTableQuestion.Question,Mode=TwoWay}"/>
 
@@ -17,6 +19,6 @@
 
         <TextBlock Margin="0,20,0,0" Text="AntwoordKop:"></TextBlock>
         <TextBox Text="{Binding NewTableQuestion.AnswerHead, Mode=TwoWay}"/>
-        <Button Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" Height="30" Margin="0 50" />
+        <Button Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" FontSize="15" Padding="10,10,10,10" Margin="0 50" />
     </StackPanel>
 </Page>

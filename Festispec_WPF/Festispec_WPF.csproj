@@ -210,6 +210,7 @@
     <Compile Include="ViewModel\ContactPersonVM.cs" />
     <Compile Include="ViewModel\CRCustomerVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\CreateQuestionaireVM.cs" />

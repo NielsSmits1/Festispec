@@ -27,15 +27,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
         set
             {
-                if (value != null)
-                {
                     _selectedItem = value;
-                }
             }
         }
         public ICommand SubmitCommand { get; set; }
         public ICommand PositionUpCommand { get; set; }
         public ICommand PositionDownCommand { get; set; }
+
+        public ICommand DeleteQuestionCommand { get; set; }
 
         public string TemplateType { get; set; }
 
@@ -93,24 +92,13 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
             PositionUpCommand = new RelayCommand(changePositionUP);
             PositionDownCommand = new RelayCommand(changePositionDOWN);
+
+            DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
         }
 
         private void CreateTemplate()
         {
-            newQuestionnaireVM.IsFilled = false;
-            UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
-
-
-            try
-            {
-                UOW.Complete();
-            }
-            catch
-            {
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            SubmitQuestionnaire();
 
             Template newTemplate = new Template();
             newTemplate.Vragenlijst_ID = newQuestionnaireVM.ID;
@@ -137,6 +125,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private void SubmitQuestionnaire()
         {
             newQuestionnaireVM.IsFilled = false;
+            newQuestionnaireVM.IsActive = true;
             UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
             try
             {
@@ -197,7 +186,43 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void changePosition(string upordown)
         {
+
+            int newPosition = -1;
             int currentPosition = SelectedItem.Position;
+
+            if(upordown == "DOWN")
+            {
+                newPosition = SelectedItem.Position + 1;
+            }
+            if (upordown == "UP")
+            {
+                newPosition = SelectedItem.Position - 1;
+            }
+
+            
+            if (newPosition >= 0 && newPosition < _newQuestionnaireVM.questions.Count)
+            {
+                IQuestion newposQuestion = _newQuestionnaireVM.questions[newPosition];
+                IQuestion oldposQuestion = SelectedItem;
+
+                _newQuestionnaireVM.questions[SelectedItem.Position] = newposQuestion;
+                _newQuestionnaireVM.questions[newPosition] = oldposQuestion;
+
+                newposQuestion.Position = _newQuestionnaireVM.questions.IndexOf(newposQuestion);
+                oldposQuestion.Position = _newQuestionnaireVM.questions.IndexOf(oldposQuestion);
+               
+            }
+        }
+
+        private void DeleteQuestion()
+        {
+            int selecteditemPos = SelectedItem.Position;
+            _newQuestionnaireVM.questions.Remove(SelectedItem);
+
+            for (int i = selecteditemPos; i < _newQuestionnaireVM.questions.Count; i++)
+            {
+                _newQuestionnaireVM.questions[i].Position = _newQuestionnaireVM.questions.IndexOf(_newQuestionnaireVM.questions[i]);
+            }
         }
     }
 }

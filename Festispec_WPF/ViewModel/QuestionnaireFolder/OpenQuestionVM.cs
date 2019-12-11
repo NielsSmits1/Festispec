@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.Model.UnitOfWork;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
-    public class OpenQuestionVM : IQuestion
+    public class OpenQuestionVM : ViewModelBase, IQuestion
     {
         private UnitOfWork UOW;
         private Openvraag openQuestionModel;
@@ -28,6 +29,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             set
             {
                 position = value;
+                RaisePropertyChanged();
             }
         }
         public string QuestionType { get => questiontype; set => questiontype = value; }

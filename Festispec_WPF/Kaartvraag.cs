@@ -23,7 +23,6 @@ namespace Festispec_WPF
         public int ID { get; set; }
         public string Vraag { get; set; }
         public byte[] FileBytes { get; set; }
-        public string MimeType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kaartvraag_vragenlijst> Kaartvraag_vragenlijst { get; set; }
