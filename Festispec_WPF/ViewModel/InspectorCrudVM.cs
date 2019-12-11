@@ -59,6 +59,7 @@ namespace Festispec_WPF.ViewModel
 
         //Read Inspector Properties
         public ObservableCollection<InspectorVM> Inspectors { get; set; }
+        public ObservableCollection<ApplicantVM> Applicants { get; set; }
         public ICommand ListOfActiveCommand { get; set; }
         public ICommand ListOfInactiveCommand { get; set; }
         public ICommand ListOfLicensedCommand { get; set; }
@@ -76,6 +77,21 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _inspector = value;
+            }
+        }
+
+        private ApplicantVM _selectedApplicant;
+
+        public ApplicantVM SelectedApplicant
+        {
+            get
+            {
+                return _selectedApplicant;
+            }
+            set
+            {
+                _selectedApplicant = value;
+                RaisePropertyChanged(() => SelectedApplicant);
             }
         }
 
@@ -199,6 +215,9 @@ namespace Festispec_WPF.ViewModel
             Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
             RaisePropertyChanged(() => Inspectors);
             _currentlist = 1;
+
+            Applicants = new ObservableCollection<ApplicantVM>(UOW.Context.Applicant.ToList().Select(a => new ApplicantVM(a)));
+            RaisePropertyChanged(() => Applicants);
         }
         public void SetInspectorInactive()
         {
