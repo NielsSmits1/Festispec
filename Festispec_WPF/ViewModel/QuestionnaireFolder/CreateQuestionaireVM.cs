@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private QuestionnaireVM _newQuestionnaireVM;
         private UnitOfWork UOW;
         private IQuestion _selectedItem;
+        public ObservableCollection<QuestionnaireVM> templates { get; set; }
         public IQuestion SelectedItem {
             get
             {
@@ -87,13 +89,15 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 newQuestion.Position = newQuestionnaireVM.questions.IndexOf(newQuestion);
             });
 
-            SubmitCommand = new RelayCommand(SubmitQuestionnaire);
+            SubmitCommand = new RelayCommand(SubmitCreatedQuestionnaire);
             CreateTemplateCommand = new RelayCommand(CreateTemplate);
 
             PositionUpCommand = new RelayCommand(changePositionUP);
             PositionDownCommand = new RelayCommand(changePositionDOWN);
 
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
+
+            templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
         }
 
         private void CreateTemplate()
@@ -121,6 +125,8 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             newQuestionnaireVM = new QuestionnaireVM();
             TemplateType = null;
             RaisePropertyChanged("TemplateType");
+            templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
+            RaisePropertyChanged("templates");
         }
         private void SubmitQuestionnaire()
         {
@@ -142,10 +148,13 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 question.Position = newQuestionnaireVM.questions.IndexOf(question);
                 question.toDatabase(newQuestionnaireVM.ID);
             }
+            
+        }
+
+        private void SubmitCreatedQuestionnaire()
+        {
+            SubmitQuestionnaire();
             newQuestionnaireVM = new QuestionnaireVM();
-
-
-
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
