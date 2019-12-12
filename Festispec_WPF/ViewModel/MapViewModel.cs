@@ -38,6 +38,7 @@ namespace Festispec_WPF.ViewModel
         public ObservableCollection<InspectionVM> Festivals { get; set; }
 
         public ObservableCollection<CertificateVM> AvailableCertificates { get; set; }
+        public ObservableCollection<CertificateVM> LeftoverCertificates { get; set; }
         public CollectionViewSource ViewSource { get; set; }
 
         private CreateLocationWindow _createLocation;
@@ -212,6 +213,13 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _selectedFestival = value;
+                
+                if(EditVisibility == "Visible" )
+                {
+                    _selectedFestival.ChosenCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetCertificatesInspection(_selectedFestival.Inspection_ID).Select(c => new CertificateVM(c)));
+                    LeftoverCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetMissingCertificates(_selectedFestival.Inspection_ID).Select(cert => new CertificateVM(cert)));
+                    RaisePropertyChanged(() => LeftoverCertificates);
+                }
                 RaisePropertyChanged(() => SelectedFestival);
             }
         }
@@ -232,6 +240,22 @@ namespace Festispec_WPF.ViewModel
                     AvailableCertificates.Add(value); NewInspection.ChosenCertificates.Remove(value);
                 }
                 
+            }
+        }
+
+        public CertificateVM SelectedUpdateCertificate
+        {
+            get => _selectedCertificate;
+            set
+            {
+                if (LeftoverCertificates.Contains(value))
+                {
+                    SelectedFestival.ChosenCertificates.Add(value); LeftoverCertificates.Remove(value);
+                }
+                else
+                {
+                    LeftoverCertificates.Add(value); SelectedFestival.ChosenCertificates.Remove(value);
+                }
             }
         }
 
@@ -571,6 +595,8 @@ namespace Festispec_WPF.ViewModel
             var temp = EditVisibility;
             EditVisibility = MapVisibility;
             MapVisibility = temp;
+            LeftoverCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetMissingCertificates(_selectedFestival.Inspection_ID).Select(cert => new CertificateVM(cert)));
+            RaisePropertyChanged(() => LeftoverCertificates);
         }
 
         private void showDetailsFestival()
@@ -578,6 +604,7 @@ namespace Festispec_WPF.ViewModel
             //if (EditVisibility.Equals("Hidden"))
             //{
                 switchVisibility();
+            
             //}
 
         }
@@ -603,6 +630,11 @@ namespace Festispec_WPF.ViewModel
 
         private void complete()
         {
+            _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Certificaat.Clear();
+            foreach (var item in SelectedFestival.ChosenCertificates)
+            {
+                _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Certificaat.Add(item.Certificate);
+            }
 
             try
             {

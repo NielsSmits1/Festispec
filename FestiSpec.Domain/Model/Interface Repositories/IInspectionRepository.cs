@@ -11,5 +11,8 @@ namespace FestiSpec.Domain.Model.Interface_Repositories
         void AddInspectorToInspection(Inspectie inspection, Inspecteur inspecteur);
 
         IEnumerable<Certificaat> GetCertificatesByInspection(int id);
+        List<Certificaat> GetMissingCertificates(int id);
+        List<Certificaat> GetCertificatesInspection(int id);
+
     }
 }

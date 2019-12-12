@@ -538,7 +538,7 @@
                                     </Grid.RowDefinitions>
                                     <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                                     <Label Content="Gekozen certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                                    <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding NewInspection.ChosenCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                    <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedUpdateCertificate}" ItemsSource="{Binding SelectedFestival.ChosenCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Name}"></TextBlock>
@@ -547,7 +547,7 @@
                                     </ListBox>
 
                                     <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding AvailableCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedUpdateCertificate}" ItemsSource="{Binding LeftoverCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Name}"></TextBlock>
