@@ -531,6 +531,12 @@
                                 <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditCommand}"></Button>
                             </StackPanel>
                             <!--MAP-->
+                            <Border BorderBrush="Black" BorderThickness="5" Panel.ZIndex="1" Visibility="{Binding MapErrorVisibility}">
+                                <StackPanel VerticalAlignment="Center">
+                                    <Label HorizontalAlignment="Center" FontSize="50" Content="Geen internet" />
+                                    <Label HorizontalAlignment="Center" FontSize="50" Content="Kan kaart niet laden" />
+                                </StackPanel>
+                            </Border>
                             <Border BorderBrush="Black" BorderThickness="5" Visibility="{Binding MapVisibility}">
                                 <m:Map Center="51.7,5.5" ZoomLevel="8" CredentialsProvider="y9hnZxzeFbanowjRfwhq~QWOfrctUka_a19PmxVHotQ~As2wF_8SrcXbm2udFzP2wlDINKErT2AFPoA_bSzfTnPVEYm5rqni2C30NJwMO7tW" Margin="2,0,-2,0">
                                     <m:MapItemsControl ItemsSource="{Binding MapElements}"/>

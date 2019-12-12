@@ -113,6 +113,13 @@ namespace Festispec_WPF.ViewModel
             set { _editVisibility = value; RaisePropertyChanged(() => EditVisibility); }
         }
 
+        private string _mapErrorVisibility;
+        public string MapErrorVisibility
+        {
+            get => _mapErrorVisibility;
+            set { _mapErrorVisibility = value; RaisePropertyChanged(() => MapErrorVisibility); }
+        }
+
         #endregion
 
         public ObservableCollection<UIElement> MapElements
@@ -194,55 +201,59 @@ namespace Festispec_WPF.ViewModel
             SingleInspectorVisibility = "Hidden";
             MapVisibility = "Visible";
             EditVisibility = "Hidden";
+            MapErrorVisibility = "Hidden";
 
             searchText = "Zoek naam";
 
             //---INSPECTORS
-
-
-            LoadInspectors();
-
-            LoadFestivals();
-
-
-            ViewSource = new CollectionViewSource();
-            ViewSource.Source = Inspectors;
-
-            foreach (var inspector in Inspectors)
+            try
             {
+                LoadInspectors();
 
-                var location = getInspectorLocation(inspector);
+                LoadFestivals();
 
-                Pushpin pin = new Pushpin();
+                ViewSource = new CollectionViewSource();
+                ViewSource.Source = Inspectors;
 
-                Button button = new Button();
-                button.Width = 45;
-                button.Height = 45;
-                button.Opacity = 0;
-                button.Cursor = Cursors.Hand;
-                button.Command = ShowInspectorCommand;
-                button.CommandParameter = inspector.Inspector_ID;
+                foreach (var inspector in Inspectors)
+                {
 
-                pin.Content = button;
-                pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+                    var location = getInspectorLocation(inspector);
 
-                MapElements.Add(pin);
+                    Pushpin pin = new Pushpin();
 
+                    Button button = new Button();
+                    button.Width = 45;
+                    button.Height = 45;
+                    button.Opacity = 0;
+                    button.Cursor = Cursors.Hand;
+                    button.Command = ShowInspectorCommand;
+                    button.CommandParameter = inspector.Inspector_ID;
+
+                    pin.Content = button;
+                    pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+
+                    MapElements.Add(pin);
+
+                }
+
+                //---INSPECTIONS
+                foreach (var festival in Festivals)
+                {
+                    var location = getFestivalLocation(festival);
+
+                    Pushpin pin = new Pushpin();
+
+                    pin.Background = new SolidColorBrush(Color.FromArgb(100, 100, 100, 100));
+                    pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+
+                    MapElements.Add(pin);
+                }
             }
-
-            //---INSPECTIONS
-            foreach (var festival in Festivals)
+            catch (Exception)
             {
-                var location = getFestivalLocation(festival);
-
-                Pushpin pin = new Pushpin();
-
-                pin.Background = new SolidColorBrush(Color.FromArgb(100, 100, 100, 100));
-                pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
-
-                MapElements.Add(pin);
+                MapErrorVisibility = "Visible";
             }
-
         }
     
 
@@ -253,16 +264,16 @@ namespace Festispec_WPF.ViewModel
                 Festivals = null;
 
                 
-                    if(searchText == "")
-                    {
-                        var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
-                        Festivals = new ObservableCollection<InspectionVM>(InspectionList);
-                    }
-                    else
-                    {
-                        var InspectionList = _UOW.Inspections.GetAll().ToList().Select(f => new InspectionVM(f)).Where(f => f.Title.ToLower().Contains(searchText.ToLower()));
-                        Festivals = new ObservableCollection<InspectionVM>(InspectionList);
-                    }
+                if(searchText == "")
+                {
+                    var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
+                    Festivals = new ObservableCollection<InspectionVM>(InspectionList);
+                }
+                else
+                {
+                    var InspectionList = _UOW.Inspections.GetAll().ToList().Select(f => new InspectionVM(f)).Where(f => f.Title.ToLower().Contains(searchText.ToLower()));
+                    Festivals = new ObservableCollection<InspectionVM>(InspectionList);
+                }
                 
 
                 if(Festivals.Count == 0 && searchText != "")
@@ -279,32 +290,32 @@ namespace Festispec_WPF.ViewModel
                 Inspectors = null;
                 ViewSource.Source = null;
 
-                    if (searchText == "")
-                    {
-                        var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i));
-                        Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
-                    }
-                    else
-                    {
-                        var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i)).Where(i => i.UserName.ToLower().Contains(searchText.ToLower()));
-                        Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
-                    }   
-                }
-
-                if (Inspectors.Count == 0 && searchText != "")
+                if (searchText == "")
                 {
-                    var inspector = new InspectorVM();
-                    inspector.UserName = "Geen zoekresultaten";
-                    Inspectors.Add(inspector);
+                    var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i));
+                    Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
                 }
-
-                ViewSource.Source = Inspectors;
-
-                if (SelectedFestival != null)
+                else
                 {
-                    calculateDistances();
-                }
+                    var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i)).Where(i => i.UserName.ToLower().Contains(searchText.ToLower()));
+                    Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
+                }   
             }
+
+            if (Inspectors.Count == 0 && searchText != "")
+            {
+                var inspector = new InspectorVM();
+                inspector.UserName = "Geen zoekresultaten";
+                Inspectors.Add(inspector);
+            }
+
+            ViewSource.Source = Inspectors;
+
+            if (SelectedFestival != null)
+            {
+                calculateDistances();
+            }
+        }
         
 
         private async Task calculateRoute(object inpsector_id)
