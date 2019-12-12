@@ -184,7 +184,7 @@ namespace Festispec_WPF.ViewModel
 
         public MapViewModel()
         {
-            _UOW = new ViewModelLocator().UOW;
+            
             ShowInspectorCommand = new RelayCommand<object>(showInspectorRoute);
             ShowInspectorListCommand = new RelayCommand(showInspectorList);
             ShowInspectionListCommand = new RelayCommand(showInspectionList);
@@ -208,6 +208,7 @@ namespace Festispec_WPF.ViewModel
             //---INSPECTORS
             try
             {
+                _UOW = new ViewModelLocator().UOW;
                 LoadInspectors();
 
                 LoadFestivals();
