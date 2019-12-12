@@ -120,6 +120,7 @@
     <Compile Include="Pdf\RapportageInfo.cs" />
     <Compile Include="Model\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Model\UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="ViewModel\ApplicantVM.cs" />
     <Compile Include="ViewModel\ContactPersonVM.cs" />
     <Compile Include="ViewModel\CRCustomerVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
@@ -135,6 +136,9 @@
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MapViewModel.cs" />
+    <Compile Include="View\CreateInspectorWindow.xaml.cs">
+      <DependentUpon>CreateInspectorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
@@ -171,6 +175,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\CreateInspectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateInspectorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

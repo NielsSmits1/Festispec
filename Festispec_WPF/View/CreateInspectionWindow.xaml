@@ -5,11 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
-        Title="EditInspectionWindow" Height="1080" Width="1920"
-        DataContext="{Binding InspectionCrud, Source={StaticResource Locator}}">
+        Title="EditInspectionWindow" Height="800" Width="800" WindowStyle="None"
+        DataContext="{Binding MapView, Source={StaticResource Locator}}">
     <Grid>
         <StackPanel Grid.Column="8" Background="AliceBlue" >
-            <Label Content="Inspectie aanmaken" FontSize="30" Foreground="Black"></Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="700"/>
+                    <ColumnDefinition Width="85"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Inspectie aanmaken" FontSize="30" Foreground="Black"></Label>
+                <Button Content="X" FontSize="25" Foreground="White" Grid.Column="1" Background="Red" Command="{Binding CloseCreateCommand}"></Button>
+            </Grid>
+            
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"></ColumnDefinition>
@@ -46,7 +54,7 @@
                 <TextBlock Width="200" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewInspection.Location.FullAdress}" TextWrapping="Wrap"></TextBlock>
 
                 <Label Content="Locaties" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"/>
-                <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedLocation}" ItemsSource="{Binding Locations}">
+                <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" MaxHeight="100" SelectedItem="{Binding NewSelectedLocation}" ItemsSource="{Binding Locations}" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding FullAdress}"></TextBlock>
@@ -122,10 +130,76 @@
                 <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding NewInspection.Customer.CompanyName}" FontSize="20" TextWrapping="Wrap"></TextBlock>
 
                 <Label Content="Lijst van klanten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}">
+                <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" MaxHeight="50" SelectedItem="{Binding NewSelectedCustomer}" ItemsSource="{Binding Customers}" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding CompanyName}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Gekozen certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding NewInspection.ChosenCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedCertificate}" ItemsSource="{Binding AvailableCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Vragenlijsten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Gekozen Vragenlijsten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Label Content="Beschikbare vragenlijsten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" MaxHeight="100" SelectedItem=""  ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

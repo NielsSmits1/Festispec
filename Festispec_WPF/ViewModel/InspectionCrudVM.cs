@@ -60,6 +60,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand OpenCreateLocationWindowCommand { get; set; }
         public ICommand CreateNewLocationCommand { get; set; }
         public ICommand SafeEditCommand { get; set; }
+        public ICommand CloseCreateCommand { get; set; }
         public bool EnableUpdate { get; set; }
         public CustomerVM SelectedCustomer
         {
@@ -109,6 +110,7 @@ namespace Festispec_WPF.ViewModel
             CreateNewLocationCommand = new RelayCommand(AddNewLocation);
             OpenCreateWindowCommand = new RelayCommand(OpenCreateWindow);
             SafeEditCommand = new RelayCommand(SafeEditInspection);
+            CloseCreateCommand = new RelayCommand(CloseCreate);
         }
 
         private void OpenCreateWindow()
@@ -182,6 +184,13 @@ namespace Festispec_WPF.ViewModel
                  MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        private void CloseCreate()
+        {
+            NewInspection = null;
+            NewLocation = null;
+            _createWindow.Close();
         }
     }
 }

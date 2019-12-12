@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace FestiSpec.Domain.Model
 {
     using System;
@@ -25,7 +23,6 @@ namespace FestiSpec.Domain.Model
         public int ID { get; set; }
 
         public string Voornaam { get; set; }
-
         public string Tussenvoegsel { get; set; }
 
         public string Achternaam { get; set; }
