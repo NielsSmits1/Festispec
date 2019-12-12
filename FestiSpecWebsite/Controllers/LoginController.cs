@@ -19,11 +19,10 @@ namespace FestiSpecWebsite.Controllers
         }
 
         [HttpPost]
-        public void Login()
+        public ActionResult Login()
         {
             NameValueCollection nvc = Request.Form;
-            var test = "test";
-            test = "";
+
 
             string userName = "", password = "";
             if (!string.IsNullOrEmpty(nvc["Username"]))
@@ -38,22 +37,22 @@ namespace FestiSpecWebsite.Controllers
 
             using (var context = new FestiSpecEntities())
             {
-                //Window was corrupt
                 var targetPerson = context.Inspecteur
                     .FirstOrDefault(e => e.Wachtwoord == password && e.Username == userName);
 
                 if (targetPerson == null)
                 {
                     //todo give error
-                    Console.WriteLine("failed to login");
+                    //failed to login
+                    return RedirectToAction("Index", "Login", null);
                 }
                 else
                 {
-                    Console.WriteLine("login ok");
+                    //login ok
                     string userData = JsonConvert.SerializeObject(targetPerson.Username);
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
                     (
-                        1, targetPerson.Username, DateTime.Now, DateTime.Now.AddMinutes(120), false, userData
+                        1, targetPerson.ID.ToString(), DateTime.Now, DateTime.Now.AddMinutes(120), false, userData
                     );
 
                     string enTicket = FormsAuthentication.Encrypt(authTicket);
@@ -61,8 +60,17 @@ namespace FestiSpecWebsite.Controllers
                     Response.Cookies.Add(faCookie);
                 }
             }
+            return RedirectToAction("Index", "Home", null);
         }
 
+        [Authorize]
+        public ActionResult Logout()
+        {
+            HttpCookie cookie = new HttpCookie("Cookie1", "") { Expires = DateTime.Now.AddYears(-1) };
+            Response.Cookies.Add(cookie);
 
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home", null);
+        }
     }
 }

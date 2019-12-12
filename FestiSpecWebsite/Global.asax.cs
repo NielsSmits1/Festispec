@@ -29,9 +29,7 @@ namespace FestiSpecWebsite
 
                 var serializeModel = JsonConvert.DeserializeObject<string>(authTicket.UserData);
 
-                FestispecPrincipal principal = new FestispecPrincipal(serializeModel);
-                principal.UserId = serializeModel;
-                
+                FestispecPrincipal principal = new FestispecPrincipal(serializeModel) {UserId = serializeModel};
 
                 HttpContext.Current.User = principal;
             }
