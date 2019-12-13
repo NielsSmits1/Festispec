@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
@@ -102,9 +103,11 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void Submit()
         {
-            var updatetQuestionnaire = UOW.Context.Vragenlijst.FirstOrDefault(q => q.ID == EditetQuestionnaireVM.ID);
-            updatetQuestionnaire = EditetQuestionnaireVM.ToModel();
- 
+            var updateQuestionnaire = UOW.Context.Vragenlijst.FirstOrDefault(q => q.ID == EditetQuestionnaireVM.ID);
+            updateQuestionnaire = EditetQuestionnaireVM.questionnaireData;
+            UOW.Complete();
+     
+
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)

@@ -68,6 +68,11 @@ namespace Festispec_WPF.ViewModel
         {
             return _questionnaire;
         }
+        public Vragenlijst questionnaireData
+        {
+            get { return _questionnaire; }
+            set { _questionnaire = value; }
+        }
 
         private void LoadOpenQuestions(Dictionary<int,IQuestion> d)
         {
