@@ -333,7 +333,7 @@ namespace Festispec_WPF.ViewModel
                     button.Width = 45;
                     button.Height = 45;
                     button.Opacity = 0;
-                    button.Cursor = Cursors.Hand;
+                    button.Cursor = System.Windows.Input.Cursors.Hand;
                     button.Command = ShowInspectorCommand;
                     button.CommandParameter = inspector.Inspector_ID;
 
