@@ -81,5 +81,16 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         }
 
+        public void deleteConnection(int questionnaireId)
+        {
+            var connection = UOW.Context.Meerkeuzevraag_vragenlijst.Find(questionnaireId, MultipleChoiceQuestionModel.ID);
+            UOW.Context.Meerkeuzevraag_vragenlijst.Remove(connection);
+        }
+
+        public void updateLink(int questionnaireId)
+        {
+            var connection = UOW.Context.Meerkeuzevraag_vragenlijst.Find(questionnaireId, MultipleChoiceQuestionModel.ID );
+            connection.Positie = position;
+        }
     }
 }

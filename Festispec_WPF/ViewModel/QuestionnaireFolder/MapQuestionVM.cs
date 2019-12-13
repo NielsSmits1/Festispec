@@ -15,7 +15,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
-    public class MapQuestionVM :ViewModelBase, IQuestion
+    public class MapQuestionVM : ViewModelBase, IQuestion
     {
         private UnitOfWork UOW;
         private Kaartvraag mapQuestionModel;
@@ -92,6 +92,12 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
         }
 
+        public void deleteConnection(int questionnaireId)
+        {
+            var connection = UOW.Context.Kaartvraag_vragenlijst.Find(questionnaireId,mapQuestionModel.ID);
+            UOW.Context.Kaartvraag_vragenlijst.Remove(connection);
+        }
+
         public void toDatabase(int questionnaireId)
         {
             UOW.Context.Kaartvraag.Add(mapQuestionModel);
@@ -110,6 +116,12 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        public void updateLink(int questionnaireId)
+        {
+            var connection = UOW.Context.Kaartvraag_vragenlijst.Find(questionnaireId, mapQuestionModel.ID);
+            connection.Positie = position;
         }
     }
 }

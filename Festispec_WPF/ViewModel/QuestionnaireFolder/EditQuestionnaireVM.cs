@@ -105,7 +105,29 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         {
             var updateQuestionnaire = UOW.Context.Vragenlijst.FirstOrDefault(q => q.ID == EditetQuestionnaireVM.ID);
             updateQuestionnaire = EditetQuestionnaireVM.questionnaireData;
-            UOW.Complete();
+            foreach(IQuestion q in newQuestions)
+            {
+                EditetQuestionnaireVM.questions.Remove(q);
+                q.toDatabase(EditetQuestionnaireVM.ID);
+            }
+            foreach(IQuestion q in deleteQuestions)
+            {
+                q.deleteConnection(EditetQuestionnaireVM.ID);
+            }
+            foreach(IQuestion q in EditetQuestionnaireVM.questions)
+            {
+                q.updateLink(EditetQuestionnaireVM.ID);
+            }
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
 
         }

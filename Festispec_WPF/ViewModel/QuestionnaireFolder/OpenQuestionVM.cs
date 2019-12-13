@@ -66,5 +66,16 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
 
         }
+        public void deleteConnection(int questionnaireId)
+        {
+            var connection = UOW.Context.Openvraag_vragenlijst.Find(questionnaireId, openQuestionModel.ID);
+            UOW.Context.Openvraag_vragenlijst.Remove(connection);
+        }
+
+        public void updateLink(int questionnaireId)
+        {
+            var connection = UOW.Context.Openvraag_vragenlijst.Find(questionnaireId,openQuestionModel.ID);
+            connection.Positie = position;
+        }
     }
 }
