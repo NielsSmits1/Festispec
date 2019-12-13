@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec_WPF.ViewModel
@@ -35,8 +36,10 @@ namespace Festispec_WPF.ViewModel
 
         private void OpenCreateQuestionnaireWindow()
         {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             var temp = new CreateQuestionnaire();
             temp.Show();
+            currentWindow.Close();
         }
         private void OpenEditQuestionnaireWindow()
         {

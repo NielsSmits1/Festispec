@@ -1,4 +1,5 @@
 ﻿using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using Festispec_WPF.View.QuestionnairePages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -121,10 +123,15 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             try
             {
                 UOW.Complete();
+                var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                var crud = new QuestionnaireCRUD();
+                crud.Show();
+                currentWindow.Close();
+
             }
             catch
             {
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                System.Windows.Forms.MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
