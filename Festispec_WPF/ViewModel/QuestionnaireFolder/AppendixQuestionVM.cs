@@ -34,13 +34,13 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public string QuestionType { get => questiontype; set => questiontype = value; }
         public AppendixQuestionVM()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             appendixQuestionModel = new Bijlagevraag();
             questiontype = "Bijlagevraag";
         }
         public AppendixQuestionVM(Bijlagevraag appendixQuestionModel)
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             this.appendixQuestionModel = appendixQuestionModel;
             questiontype = "Bijlagevraag";
         }

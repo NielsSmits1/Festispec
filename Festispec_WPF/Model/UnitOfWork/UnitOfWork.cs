@@ -12,9 +12,13 @@ namespace Festispec_WPF.Model.UnitOfWork
     {
         private readonly FestiSpecEntities _context;
 
-        public UnitOfWork(FestiSpecEntities context)
+        public UnitOfWork()
         {
-            _context = context;
+            if(_context == null)
+            {
+                _context = new FestiSpecEntities();
+            }
+            
             Inspectors = new InspectorRepository(_context);
             NAWInspectors = new NAWInspector_Repository(_context);
             Questionnaires = new QuestionnaireRepository(_context);

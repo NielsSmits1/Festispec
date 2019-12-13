@@ -51,7 +51,7 @@ namespace Festispec_WPF.ViewModel
 
         public void loadQuestions()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             Dictionary<int, IQuestion> questionDictionary = new Dictionary<int, IQuestion>();
             LoadOpenQuestions(questionDictionary);
             LoadMapQuestions(questionDictionary);

@@ -25,7 +25,7 @@ namespace Festispec_WPF.ViewModel
             OpenCreateQuestionnaireWindowCommand = new RelayCommand(OpenCreateQuestionnaireWindow);
             OpenEditQuestionnaireCommand = new RelayCommand(OpenEditQuestionnaireWindow);
             Questionnaires = new ObservableCollection<QuestionnaireVM>();
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             foreach (var item in UOW.Context.Vragenlijst)
             {
                 Questionnaires.Add(new QuestionnaireVM(item));

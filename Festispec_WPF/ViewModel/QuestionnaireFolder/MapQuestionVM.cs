@@ -25,14 +25,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         //constructor
         public MapQuestionVM()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             mapQuestionModel = new Kaartvraag();
             questiontype = "Kaartvraag";
         }
 
         public MapQuestionVM(Kaartvraag mapQuestionModel)
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             this.mapQuestionModel = mapQuestionModel;
             questiontype = "Kaartvraag";
         }

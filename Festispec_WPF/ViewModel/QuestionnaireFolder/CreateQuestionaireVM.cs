@@ -80,7 +80,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public CreateQuestionaireVM()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             newQuestionnaireVM = new QuestionnaireVM();
             CurrentPage = new OpenQuestionPage();
             Messenger.Default.Register<IQuestion>(this, (newQuestion) =>

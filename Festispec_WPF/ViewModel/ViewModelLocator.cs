@@ -32,7 +32,7 @@ namespace Festispec_WPF.ViewModel
         /// </summary>
         /// 
 
-        private UnitOfWork _unitOfWork;
+        static UnitOfWork _unitOfWork;
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -47,6 +47,7 @@ namespace Festispec_WPF.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+            _unitOfWork = new UnitOfWork();
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
@@ -129,18 +130,22 @@ namespace Festispec_WPF.ViewModel
             }
         }
         
-        public UnitOfWork UOW
-        {
-            get
-            {
-                if(_unitOfWork == null)
-                {
-                    _unitOfWork = new UnitOfWork(new FestiSpecEntities());
-                }
-                return _unitOfWork;
-            }
-        }
-        public CreateQuestionaireVM CreateQuestionnaire
+        //public UnitOfWork UOW
+        //{
+        //    get
+        //    {
+        //        if(_unitOfWork == null)
+        //        {
+        //            _unitOfWork = new UnitOfWork(new FestiSpecEntities());
+        //        }
+        //        return _unitOfWork;
+        //    }
+        //}
+
+        public static UnitOfWork UOW => _unitOfWork;
+
+
+    public CreateQuestionaireVM CreateQuestionnaire
         {
             get
             {

@@ -35,13 +35,13 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public string QuestionType { get => questiontype; set => questiontype = value; }
         public OpenQuestionVM()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             openQuestionModel = new Openvraag();
             questiontype = "Openvraag";
         }
         public OpenQuestionVM(Openvraag openQuestionModel)
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             this.openQuestionModel = openQuestionModel;
             questiontype = "Openvraag";
         }

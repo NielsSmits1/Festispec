@@ -41,9 +41,9 @@ namespace Festispec_WPF.ViewModel
 
         public InspectorCrudVM()
         {
-            
-            
-            UOW = new ViewModelLocator().UOW;
+
+
+            UOW = ViewModelLocator.UOW;
             NewInspector = new InspectorVM();
             Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
             Certificates = new Repository<Certificaat>(UOW.Context);

@@ -36,14 +36,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public string QuestionType { get => questiontype; set => questiontype = value; }
         public TableQuestionVM()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             tableQuestionModel = new Tabelvraag();
             questiontype = "Tabelvraag";
         }
 
         public TableQuestionVM(Tabelvraag tableQuestionModel)
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             this.tableQuestionModel = tableQuestionModel;
             questiontype = "Tabelvraag";
         }

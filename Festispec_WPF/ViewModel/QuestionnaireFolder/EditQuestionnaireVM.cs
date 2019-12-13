@@ -76,7 +76,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         }
         public EditQuestionnaireVM()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             newQuestions = new List<IQuestion>();
             deleteQuestions = new List<IQuestion>();
             CurrentPage = new OpenQuestionPage();
@@ -106,7 +106,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             var updateQuestionnaire = UOW.Context.Vragenlijst.FirstOrDefault(q => q.ID == EditetQuestionnaireVM.ID);
             updateQuestionnaire = EditetQuestionnaireVM.questionnaireData;
             UOW.Complete();
-     
+
 
         }
 
