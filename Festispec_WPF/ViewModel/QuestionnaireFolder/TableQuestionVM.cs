@@ -16,6 +16,8 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private Tabelvraag tableQuestionModel;
         private int position;
         private string questiontype;
+
+
         public string Question { get => tableQuestionModel.Vraag; set => tableQuestionModel.Vraag = value; }
         public string QuestionHead { get => tableQuestionModel.VraagKop; set => tableQuestionModel.VraagKop = value; }
         public string AnswerHead { get => tableQuestionModel.AntwoordKop; set => tableQuestionModel.AntwoordKop = value; }
@@ -36,6 +38,13 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         {
             UOW = new ViewModelLocator().UOW;
             tableQuestionModel = new Tabelvraag();
+            questiontype = "Tabelvraag";
+        }
+
+        public TableQuestionVM(Tabelvraag tableQuestionModel)
+        {
+            UOW = new ViewModelLocator().UOW;
+            this.tableQuestionModel = tableQuestionModel;
             questiontype = "Tabelvraag";
         }
 

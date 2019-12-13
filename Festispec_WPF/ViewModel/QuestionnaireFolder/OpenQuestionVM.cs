@@ -39,6 +39,12 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             openQuestionModel = new Openvraag();
             questiontype = "Openvraag";
         }
+        public OpenQuestionVM(Openvraag openQuestionModel)
+        {
+            UOW = new ViewModelLocator().UOW;
+            this.openQuestionModel = openQuestionModel;
+            questiontype = "Openvraag";
+        }
 
         public void toDatabase(int questionnaireId)
         {

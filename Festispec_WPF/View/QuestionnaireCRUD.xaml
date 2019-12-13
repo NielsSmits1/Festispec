@@ -56,7 +56,7 @@
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding DataContext.ShowEditQuestionnaireCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                <Button Command="{Binding DataContext.OpenEditQuestionnaireCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="30" Background="#FF6F9BDA">Edit</Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

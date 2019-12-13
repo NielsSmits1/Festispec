@@ -38,6 +38,12 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             appendixQuestionModel = new Bijlagevraag();
             questiontype = "Bijlagevraag";
         }
+        public AppendixQuestionVM(Bijlagevraag appendixQuestionModel)
+        {
+            UOW = new ViewModelLocator().UOW;
+            this.appendixQuestionModel = appendixQuestionModel;
+            questiontype = "Bijlagevraag";
+        }
         public void toDatabase(int questionnaireId)
         {
             UOW.Context.Bijlagevraag.Add(appendixQuestionModel);

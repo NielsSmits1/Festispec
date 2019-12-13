@@ -9,12 +9,15 @@ using System.Windows.Input;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.ViewModel.QuestionnaireFolder;
 
 namespace Festispec_WPF.ViewModel
 {
     public class QuestionnaireVM: ViewModelBase
     {
         private Vragenlijst _questionnaire;
+        private UnitOfWork UOW;
         //variables
         private ObservableCollection<IQuestion> _questions;
         public ObservableCollection<IQuestion> questions 
@@ -42,13 +45,23 @@ namespace Festispec_WPF.ViewModel
 
         public QuestionnaireVM(Vragenlijst questionnaire)
         {
+            questions = new ObservableCollection<IQuestion>();
             _questionnaire = questionnaire;
         }
 
-        private void OpenCreateQuestionnaire()
+        public void loadQuestions()
         {
-            CreateQuestionnaire window = new CreateQuestionnaire();
-            window.Show();
+            UOW = new ViewModelLocator().UOW;
+            Dictionary<int, IQuestion> questionDictionary = new Dictionary<int, IQuestion>();
+            LoadOpenQuestions(questionDictionary);
+            LoadMapQuestions(questionDictionary);
+            LoadTableQuestions(questionDictionary);
+            LoadMultilpleChoiceQuestions(questionDictionary);
+            LoadAppendixQuestions(questionDictionary);
+            for (int i = 0; i < questionDictionary.Count; i++)
+            {
+                questions.Add(questionDictionary[i]);
+            }
         }
 
         public Vragenlijst ToModel()
@@ -56,5 +69,58 @@ namespace Festispec_WPF.ViewModel
             return _questionnaire;
         }
 
+        private void LoadOpenQuestions(Dictionary<int,IQuestion> d)
+        {
+            var OpenQuestionsConnections = UOW.Context.Openvraag_vragenlijst.Where(q => q.Vragenlijst_ID == ID).ToList();
+            foreach (Openvraag_vragenlijst ov in OpenQuestionsConnections)
+            {
+                int id = ov.Openvraag_ID;
+                IQuestion question = new OpenQuestionVM(UOW.Context.Openvraag.Find(id));
+                d.Add(ov.Positie, question);
+            }
+        }
+        private void LoadMapQuestions(Dictionary<int, IQuestion> d)
+        {
+            var MapQuestionsConnections = UOW.Context.Kaartvraag_vragenlijst.Where(q => q.Vragenlijst_ID == ID).ToList();
+            foreach (Kaartvraag_vragenlijst ov in MapQuestionsConnections)
+            {
+                int id = ov.Kaartvraag_ID;
+                IQuestion question = new MapQuestionVM(UOW.Context.Kaartvraag.Find(id));
+                d.Add(ov.Positie, question);
+            }
+        }
+        private void LoadTableQuestions(Dictionary<int, IQuestion> d)
+        {
+            var TableQuestionsConnections = UOW.Context.Tabelvraag_vragenlijst.Where(q => q.Vragenlijst_ID == ID).ToList();
+            foreach (Tabelvraag_vragenlijst ov in TableQuestionsConnections)
+            {
+                int id = ov.Tabelvraag_ID;
+                IQuestion question = new TableQuestionVM(UOW.Context.Tabelvraag.Find(id));
+                d.Add(ov.Positie, question);
+            }
+            
+        }
+        private void LoadMultilpleChoiceQuestions(Dictionary<int, IQuestion> d)
+        {
+            var MultipleChoiceQuestionsConnections = UOW.Context.Meerkeuzevraag_vragenlijst.Where(q => q.Vragenlijst_ID == ID).ToList();
+            foreach (Meerkeuzevraag_vragenlijst ov in MultipleChoiceQuestionsConnections)
+            {
+                int id = ov.Meerkeuzevraag_ID;
+                IQuestion question = new MultipleChoiceQuestionVM(UOW.Context.Meerkeuzevraag.Find(id));
+                d.Add(ov.Positie, question);
+            }
+
+        }
+        private void LoadAppendixQuestions(Dictionary<int, IQuestion> d)
+        {
+            var AppendixQuestionsConnections = UOW.Context.Bijlagevraag_vragenlijst.Where(q => q.Vragenlijst_ID == ID).ToList();
+            foreach (Bijlagevraag_vragenlijst ov in AppendixQuestionsConnections)
+            {
+                int id = ov.Bijlagevraag_ID;
+                IQuestion question = new AppendixQuestionVM(UOW.Context.Bijlagevraag.Find(id));
+                d.Add(ov.Positie, question);
+            }
+
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace Festispec_WPF.Model.Interface_Repositories
     public interface IQuestionnaireRepository  : IRepository<Vragenlijst>
     {
         List<Vragenlijst> getTemplates();
+
     }
 }

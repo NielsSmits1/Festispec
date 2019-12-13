@@ -214,6 +214,7 @@
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\CreateQuestionaireVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\EditQuestionnaireVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\FileLoader.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\IQuestion.cs" />
     <Compile Include="ViewModel\NAW_KlantVM.cs" />
@@ -235,6 +236,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\CreateQuestionnaire.xaml.cs">
       <DependentUpon>CreateQuestionnaire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditQuestionnaireWindow.xaml.cs">
+      <DependentUpon>EditQuestionnaireWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -274,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomerCrudWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditQuestionnaireWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

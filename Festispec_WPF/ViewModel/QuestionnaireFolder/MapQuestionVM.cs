@@ -21,6 +21,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private Kaartvraag mapQuestionModel;
         private int position;
         private string questiontype;
+
         //constructor
         public MapQuestionVM()
         {
@@ -28,6 +29,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             mapQuestionModel = new Kaartvraag();
             questiontype = "Kaartvraag";
         }
+
+        public MapQuestionVM(Kaartvraag mapQuestionModel)
+        {
+            UOW = new ViewModelLocator().UOW;
+            this.mapQuestionModel = mapQuestionModel;
+            questiontype = "Kaartvraag";
+        }
+
         public string QuestionType { get => questiontype; set => questiontype = value; }
         public int Position
         {

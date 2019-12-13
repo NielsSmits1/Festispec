@@ -51,6 +51,7 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
             SimpleIoc.Default.Register<CreateQuestionaireVM>();
+            SimpleIoc.Default.Register<EditQuestionnaireVM>();
         }
 
         public MainViewModel Main
@@ -187,7 +188,13 @@ namespace Festispec_WPF.ViewModel
             }
         }
         
-        
+        public EditQuestionnaireVM EditQuestionnaireVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditQuestionnaireVM>();
+            }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

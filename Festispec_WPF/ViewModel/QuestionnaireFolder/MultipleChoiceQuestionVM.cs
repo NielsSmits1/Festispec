@@ -17,6 +17,8 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private Meerkeuzevraag MultipleChoiceQuestionModel;
         private int position;
         private string questiontype;
+
+
         public ObservableCollection<string> AnwserOptions { get; set; }
 
         public string Question { get => MultipleChoiceQuestionModel.Vraag; set => MultipleChoiceQuestionModel.Vraag = value; }
@@ -38,6 +40,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             AnwserOptions = new ObservableCollection<string>();
             UOW = new ViewModelLocator().UOW;
             MultipleChoiceQuestionModel = new Meerkeuzevraag();
+            questiontype = "Meerkeuzevraag";
+        }
+
+        public MultipleChoiceQuestionVM(Meerkeuzevraag MultipleChoiceQuestionModel)
+        {
+            AnwserOptions = new ObservableCollection<string>();
+            UOW = new ViewModelLocator().UOW;
+            this.MultipleChoiceQuestionModel = MultipleChoiceQuestionModel;
             questiontype = "Meerkeuzevraag";
         }
 
