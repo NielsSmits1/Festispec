@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="EditInspectorWindow" Height="1080" Width="1920"
         DataContext="{Binding InspectorCrud, Source={StaticResource Locator}}">
+
     <Grid>
-        <StackPanel Grid.Column="8" Background="AliceBlue">
+        <StackPanel Background="AliceBlue">
             <Label Content="Inspecteur aanpassen" FontSize="30" Foreground="Black"></Label>
             <Grid>
                 <Grid.ColumnDefinitions>

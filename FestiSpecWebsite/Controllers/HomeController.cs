@@ -13,14 +13,7 @@ namespace FestiSpecWebsite.Controllers
         {
             return View();
         }
-
-        public ActionResult Applicant()
-        {
-            var ins = new NAW_inspecteur();
-            return View(ins);
-        }
-
-        [Authorize]
+        
         public ActionResult Contact()
         {
             return View();

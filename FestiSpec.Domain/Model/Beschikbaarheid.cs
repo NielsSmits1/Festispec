@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace FestiSpec.Domain.Model
 {
     using System;
@@ -14,8 +16,14 @@ namespace FestiSpec.Domain.Model
     
     public partial class Beschikbaarheid
     {
+        [Key]
         public int ID { get; set; }
+
+        [Required]
         public int Inspecteur_ID { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
         public System.DateTime Datum { get; set; }
     
         public virtual Inspecteur Inspecteur { get; set; }

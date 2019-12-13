@@ -22,6 +22,18 @@ namespace Festispec_WPF.ViewModel
         private RegisterView _window;
         private UnitOfWork UOW;
         private EmployeeVM _employee;
+        private bool isSelected;
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                RaisePropertyChanged("IsSelected");
+            }
+        }
+
 
         public ObservableCollection<EmployeeVM> Employees { get; set; }
 
@@ -37,6 +49,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _employee = value;
+                IsSelected = true;
                 RaisePropertyChanged();
             }
         }
@@ -45,6 +58,7 @@ namespace Festispec_WPF.ViewModel
 
         public EmployeeCrudVM()
         {
+            IsSelected = false;
             UOW = new ViewModelLocator().UOW;
             NewEmployee = new EmployeeVM();
 
@@ -62,8 +76,8 @@ namespace Festispec_WPF.ViewModel
         private void OpenRegister()
         {
             NewEmployee = new EmployeeVM();
-           _window = new RegisterView();
-           _window.Show();
+            _window = new RegisterView();
+            _window.Show();
         }
 
 

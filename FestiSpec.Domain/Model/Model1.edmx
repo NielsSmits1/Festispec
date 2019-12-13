@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Afspraak">
           <Key>
             <PropertyRef Name="ID" />
@@ -151,10 +151,9 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Vraag" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FileBytes" Type="varbinary(max)" Nullable="false" />
-          <Property Name="MimeType" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Kaartvraag_vragenlijst">
           <Key>
@@ -368,8 +367,10 @@
           <Property Name="Titel" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Versie" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Template_ID" Type="int" />
+          <Property Name="Stamt_af_van_ID" Type="int" />
           <Property Name="Opmerking" Type="ntext" />
           <Property Name="Is_Ingevuld" Type="bit" Nullable="false" />
+          <Property Name="Actief" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Werknemer">
           <Key>
@@ -750,6 +751,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SelfReference_Vragenlijst">
+          <End Role="Vragenlijst" Type="Self.Vragenlijst" Multiplicity="0..1" />
+          <End Role="Vragenlijst1" Type="Self.Vragenlijst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vragenlijst">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vragenlijst1">
+              <PropertyRef Name="Stamt_af_van_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tabelvraag_antwoord_Tabelvraag">
           <End Role="Tabelvraag" Type="Self.Tabelvraag" Multiplicity="1" />
           <End Role="Tabelvraag_antwoord" Type="Self.Tabelvraag_antwoord" Multiplicity="*" />
@@ -1055,6 +1068,10 @@
             <End Role="Werknemer" EntitySet="Werknemer" />
             <End Role="Planning_werknemer" EntitySet="Planning_werknemer" />
           </AssociationSet>
+          <AssociationSet Name="FK_SelfReference_Vragenlijst" Association="Self.FK_SelfReference_Vragenlijst">
+            <End Role="Vragenlijst" EntitySet="Vragenlijst" />
+            <End Role="Vragenlijst1" EntitySet="Vragenlijst" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tabelvraag_antwoord_Tabelvraag" Association="Self.FK_Tabelvraag_antwoord_Tabelvraag">
             <End Role="Tabelvraag" EntitySet="Tabelvraag" />
             <End Role="Tabelvraag_antwoord" EntitySet="Tabelvraag_antwoord" />
@@ -1251,10 +1268,9 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FileBytes" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="MimeType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Kaartvraag_vragenlijst" Relationship="Self.FK_Kaartvraag_vragenlijst_Kaartvraag" FromRole="Kaartvraag" ToRole="Kaartvraag_vragenlijst" />
         </EntityType>
         <EntityType Name="Kaartvraag_vragenlijst">
@@ -1491,8 +1507,10 @@
           <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Versie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Template_ID" Type="Int32" />
+          <Property Name="Stamt_af_van_ID" Type="Int32" />
           <Property Name="Opmerking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Is_Ingevuld" Type="Boolean" Nullable="false" />
+          <Property Name="Actief" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Bijlagevraag_vragenlijst" Relationship="Self.FK_Bijlagevraag_vragenlijst_Vragenlijst" FromRole="Vragenlijst" ToRole="Bijlagevraag_vragenlijst" />
           <NavigationProperty Name="Inspectie_Wel_Ingevuld_Vragenlijst" Relationship="Self.FK_Inspectie_Wel_Ingevuld_Vragenlijst_Vragenlijst" FromRole="Vragenlijst" ToRole="Inspectie_Wel_Ingevuld_Vragenlijst" />
           <NavigationProperty Name="Kaartvraag_vragenlijst" Relationship="Self.FK_Kaartvraag_vragenlijst_Vragenlijst" FromRole="Vragenlijst" ToRole="Kaartvraag_vragenlijst" />
@@ -1501,6 +1519,8 @@
           <NavigationProperty Name="Tabelvraag_vragenlijst" Relationship="Self.FK_Tabelvraag_vragenlijst_Vragenlijst" FromRole="Vragenlijst" ToRole="Tabelvraag_vragenlijst" />
           <NavigationProperty Name="Template" Relationship="Self.FK_Template_ID_vragenlijst" FromRole="Vragenlijst" ToRole="Template" />
           <NavigationProperty Name="Template1" Relationship="Self.FK_Vragenlijst_Template" FromRole="Vragenlijst" ToRole="Template" />
+          <NavigationProperty Name="Vragenlijst1" Relationship="Self.FK_SelfReference_Vragenlijst" FromRole="Vragenlijst" ToRole="Vragenlijst1" />
+          <NavigationProperty Name="Vragenlijst2" Relationship="Self.FK_SelfReference_Vragenlijst" FromRole="Vragenlijst1" ToRole="Vragenlijst" />
           <NavigationProperty Name="Inspectie" Relationship="Self.Inspectie_niet_ingevuld_vragenlijst" FromRole="Vragenlijst" ToRole="Inspectie" />
         </EntityType>
         <EntityType Name="Werknemer">
@@ -1878,6 +1898,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SelfReference_Vragenlijst">
+          <End Role="Vragenlijst" Type="Self.Vragenlijst" Multiplicity="0..1" />
+          <End Role="Vragenlijst1" Type="Self.Vragenlijst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vragenlijst">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vragenlijst1">
+              <PropertyRef Name="Stamt_af_van_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Applicant_certificaat">
           <End Role="Applicant" Type="Self.Applicant" Multiplicity="*" />
           <End Role="Certificaat" Type="Self.Certificaat" Multiplicity="*" />
@@ -2057,6 +2089,10 @@
             <End Role="Template" EntitySet="Template" />
             <End Role="Vragenlijst" EntitySet="Vragenlijst" />
           </AssociationSet>
+          <AssociationSet Name="FK_SelfReference_Vragenlijst" Association="Self.FK_SelfReference_Vragenlijst">
+            <End Role="Vragenlijst" EntitySet="Vragenlijst" />
+            <End Role="Vragenlijst1" EntitySet="Vragenlijst" />
+          </AssociationSet>
           <AssociationSet Name="Applicant_certificaat" Association="Self.Applicant_certificaat">
             <End Role="Applicant" EntitySet="Applicant" />
             <End Role="Certificaat" EntitySet="Certificaat" />
@@ -2212,7 +2248,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Vraag" ColumnName="Vraag" />
                 <ScalarProperty Name="FileBytes" ColumnName="FileBytes" />
-                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2430,8 +2465,10 @@
                 <ScalarProperty Name="Titel" ColumnName="Titel" />
                 <ScalarProperty Name="Versie" ColumnName="Versie" />
                 <ScalarProperty Name="Template_ID" ColumnName="Template_ID" />
+                <ScalarProperty Name="Stamt_af_van_ID" ColumnName="Stamt_af_van_ID" />
                 <ScalarProperty Name="Opmerking" ColumnName="Opmerking" />
                 <ScalarProperty Name="Is_Ingevuld" ColumnName="Is_Ingevuld" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

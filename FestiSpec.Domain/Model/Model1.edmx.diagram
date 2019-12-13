@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="156630ed7fbe4149965c1792335c328b" Name="Diagram1">
+      <Diagram DiagramId="45267f1023bf46f08f790aedaa284554" Name="Diagram1">
         <EntityTypeShape EntityType="FestiSpecModel.Afspraak" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Applicant" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Beschikbaarheid" Width="1.5" PointX="7.5" PointY="15.625" IsExpanded="true" />
@@ -16,7 +16,7 @@
         <EntityTypeShape EntityType="FestiSpecModel.Inspectie" Width="1.5" PointX="10.5" PointY="14.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Inspectie_Rapportage" Width="1.5" PointX="12.75" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Inspectie_Wel_Ingevuld_Vragenlijst" Width="1.5" PointX="12.75" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Kaartvraag" Width="1.5" PointX="15.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Kaartvraag" Width="1.5" PointX="15.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Kaartvraag_vragenlijst" Width="1.5" PointX="18" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Klant" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Locatie" Width="1.5" PointX="8.25" PointY="18.125" IsExpanded="true" />
@@ -37,7 +37,7 @@
         <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_vragenlijst" Width="1.5" PointX="21" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Template" Width="1.5" PointX="18" PointY="30.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Verzoek" Width="1.5" PointX="10.5" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpecModel.Vragenlijst" Width="1.5" PointX="15.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Vragenlijst" Width="1.5" PointX="15.75" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Werknemer" Width="1.5" PointX="12.75" PointY="11" IsExpanded="true" />
         <AssociationConnector Association="FestiSpecModel.FK_Afspraak_Contactpersoon" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.FK_Beschikbaarheid_Inspecteur" ManuallyRouted="false" />
@@ -69,6 +69,7 @@
         <AssociationConnector Association="FestiSpecModel.FK_Tabelvraag_vragenlijst_Vragenlijst" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.FK_Template_ID_vragenlijst" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.FK_Vragenlijst_Template" ManuallyRouted="false" />
+        <AssociationConnector Association="FestiSpecModel.FK_SelfReference_Vragenlijst" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.Applicant_certificaat" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.Certificaat_inspecteur" ManuallyRouted="false" />
         <AssociationConnector Association="FestiSpecModel.Inspecteurs_inspectie" ManuallyRouted="false" />

@@ -47,7 +47,7 @@
 
         <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
-                Festspec
+                Festispec
             </TextBlock>
         </Grid>
     </Grid>

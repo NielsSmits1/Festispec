@@ -22,31 +22,39 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0" >
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowHomeCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowHomeCommand, Source={StaticResource Locator}}" >
                 <Image Source="/Images/Home.png" />
             </Button>
         </Grid>
         <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKlantenCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/klanten.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInplanVerzoekenCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/verzoeken_inplannen.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInspecteursCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/inspecteurs.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowVragenlijstCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/vragenlijsten.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKalenderCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/weekkalender.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}"
+                    Content="Werknemers">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}"
+                    Content="Log out">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
             </Button>
         </StackPanel>
 
         <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
-                Festspec
+                Festispec
             </TextBlock>
         </Grid>
 
@@ -116,7 +124,7 @@
                                                             <KeyBinding Command="{Binding SearchDataGrid}" Key="Enter" />
                                                         </TextBox.InputBindings>
                                                     </TextBox>
-                                                    
+                                                    <Button Name="InspectionNew" Visibility="{Binding InspectionVisibility}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0" Command="{Binding OpenCreateWindowCommand}"/>
                                                 </Grid>
                                             </Border>
                                         </Grid>
@@ -396,7 +404,7 @@
                         </Border>
 
                         <Grid Grid.Column="2" Background="Gray" >
-                            <StackPanel Grid.Column="7" Background="AliceBlue" IsEnabled="false" Visibility="{Binding EditVisibility}">
+                            <StackPanel Grid.Column="7" Background="AliceBlue" Visibility="{Binding EditVisibility}">
                                 
                                 <Label Content="inspectie bewerken" FontSize="30" Foreground="Black"></Label>
                                 <Grid>
@@ -435,7 +443,7 @@
                                     <TextBlock Width="200" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedFestival.Location.FullAdress}" TextWrapping="Wrap"></TextBlock>
 
                                     <Label Content="Locaties" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"/>
-                                    <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedUpdateLocation}" ItemsSource="{Binding Locations}">
+                                    <ListBox Grid.Row="1" Grid.Column="2" MaxWidth="250" SelectedItem="{Binding SelectedLocation}" ItemsSource="{Binding Locations}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding FullAdress}"></TextBlock>
@@ -513,10 +521,44 @@
                                     <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedFestival.Customer.CompanyName}" FontSize="20" TextWrapping="Wrap"></TextBlock>
 
                                     <Label Content="Lijst van klanten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedUpdateCustomer}" ItemsSource="{Binding Customers}">
+                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding CompanyName}"></TextBlock>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                    
+                                </Grid>
+
+                                <Border BorderThickness="1" BorderBrush="Black"></Border>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="10"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                    <Label Content="Gekozen certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                                    <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedUpdateCertificate}" ItemsSource="{Binding SelectedFestival.ChosenCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+
+                                    <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                                    <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedUpdateCertificate}" ItemsSource="{Binding LeftoverCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"></TextBlock>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>
