@@ -48,6 +48,10 @@ namespace Festispec_WPF.ViewModel
             {
                 //TODO exit main window
                 Console.WriteLine("login ok");
+                Username = "";
+                Password = "";
+                RaisePropertyChanged(() => Username);
+                RaisePropertyChanged(() => Password);
                 HomeScreenView home = new HomeScreenView();
                 home.Show();
             }

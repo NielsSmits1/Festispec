@@ -16,7 +16,7 @@ namespace Festispec_WPF.ViewModel
         private CustomerCrudWindow _customerCrudWindow;
         private InspectorCrudWindow _inspecteursWindow;
         private WeekplanningView _weekPlanningWindow;
-        private VerzoekInplanView _verzoekInplanWindow;
+        private MapView _planWindow;
         private EmployeeView _employeeView;
         private MainWindow _mainWindow;
 
@@ -59,8 +59,8 @@ namespace Festispec_WPF.ViewModel
         public void ShowInplanVerzoeken()
         {
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _verzoekInplanWindow = new VerzoekInplanView();
-            _verzoekInplanWindow.Show();
+            _planWindow = new MapView();
+            _planWindow.Show();
             currentWindow.Close();
         }
         public void ShowInspecteurs()
@@ -91,8 +91,8 @@ namespace Festispec_WPF.ViewModel
         public void LogOut()
         {
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _mainWindow = new MainWindow();
-            _mainWindow.Show();
+            //_mainWindow = new MainWindow();
+            //_mainWindow.Show();
             currentWindow.Close();
         }
     }
