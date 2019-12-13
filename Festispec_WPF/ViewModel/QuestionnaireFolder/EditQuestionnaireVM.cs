@@ -1,4 +1,5 @@
-﻿using Festispec_WPF.View.QuestionnairePages;
+﻿using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View.QuestionnairePages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -14,12 +15,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
     public class EditQuestionnaireVM: ViewModelBase
     {
+        private UnitOfWork UOW;
         private List<IQuestion> newQuestions;
         private List<IQuestion> deleteQuestions;
         private QuestionnaireVM _editetQuestionnaireVM;
         public ICommand PositionUpCommand { get; set; }
         public ICommand PositionDownCommand { get; set; }
         public ICommand DeleteQuestionCommand { get; set; }
+        public ICommand SubmitCommand { get; set; }
         public IQuestion SelectedItem
         {
             get
@@ -72,6 +75,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         }
         public EditQuestionnaireVM()
         {
+            UOW = new ViewModelLocator().UOW;
             newQuestions = new List<IQuestion>();
             deleteQuestions = new List<IQuestion>();
             CurrentPage = new OpenQuestionPage();
@@ -93,6 +97,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             PositionUpCommand = new RelayCommand(changePositionUP);
             PositionDownCommand = new RelayCommand(changePositionDOWN);
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
+            SubmitCommand = new RelayCommand(Submit);
+        }
+
+        private void Submit()
+        {
+            var updatetQuestionnaire = UOW.Context.Vragenlijst.FirstOrDefault(q => q.ID == EditetQuestionnaireVM.ID);
+            updatetQuestionnaire = EditetQuestionnaireVM.ToModel();
+ 
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
