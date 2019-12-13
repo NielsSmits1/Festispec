@@ -97,7 +97,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="" Binding="{Binding InflixName, Mode=TwoWay}"  Width="50"/>
+                                <DataGridTextColumn Header="" Binding="{Binding InfixName, Mode=TwoWay}"  Width="50"/>
                                 <DataGridTextColumn Header="Achternaam" Binding="{Binding LastName, Mode=TwoWay}"  Width="*"/>
                                 <DataGridTextColumn Header="Rol" Binding="{Binding Role, Mode=TwoWay}"  Width="*"/>
                                 <DataGridTextColumn Header="E-Mail" Binding="{Binding MailAdress, Mode=TwoWay}" Width="*" />
