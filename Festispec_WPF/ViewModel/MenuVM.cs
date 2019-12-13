@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using FestiSpec.Domain.Model;
+using System.Net;
+
 namespace Festispec_WPF.ViewModel
 {
     public class MenuVM
@@ -16,6 +18,7 @@ namespace Festispec_WPF.ViewModel
         private CustomerCrudWindow _customerCrudWindow;
         private InspectorCrudWindow _inspecteursWindow;
         private WeekplanningView _weekPlanningWindow;
+        public string ErrorVisibility { get; set; }
         private MapView _planWindow;
         private EmployeeView _employeeView;
         private MainWindow _mainWindow;
@@ -38,6 +41,8 @@ namespace Festispec_WPF.ViewModel
             ShowInspecteursCommand = new RelayCommand(ShowInspecteurs);
             ShowVragenlijstCommand = new RelayCommand(ShowVragenlijst);
             ShowKalenderCommand = new RelayCommand(ShowKalender);
+
+            CheckInternetConnection();
             ShowWerknemerCommand = new RelayCommand(ShowWerknemer);
             LogOutCommand = new RelayCommand(LogOut);
         }
@@ -94,6 +99,20 @@ namespace Festispec_WPF.ViewModel
             //_mainWindow = new MainWindow();
             //_mainWindow.Show();
             currentWindow.Close();
+        }
+
+        private void CheckInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                using (client.OpenRead("http://google.com/generate_204")) 
+                    ErrorVisibility = "Hidden";
+            }
+            catch
+            {
+                ErrorVisibility = "Visible";
+            }
         }
     }
 }
