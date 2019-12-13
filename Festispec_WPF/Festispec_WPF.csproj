@@ -128,7 +128,6 @@
     <Compile Include="ViewModel\InspectionVM.cs" />
     <Compile Include="ViewModel\LocationVM.cs" />
     <Compile Include="ViewModel\NAW_KlantVM.cs" />
-    <Compile Include="ViewModel\HomeScreenVM.cs" />
     <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="ViewModel\CertificateVM.cs" />
     <Compile Include="ViewModel\InspectorCrudVM.cs" />

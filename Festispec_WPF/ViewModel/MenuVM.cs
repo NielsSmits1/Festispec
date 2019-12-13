@@ -5,22 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using FestiSpec.Domain.Model;
 namespace Festispec_WPF.ViewModel
 {
     public class MenuVM
     {
-        // Moeten nog instanties van schermen gemaakt worden 
-        /*
-        private KlantWindow _klantWindow;
-        private VragenlijstWindow _vragenlijstWindow;
-        */
-
-        private InspectorCrudWindow _inspecteursWindow;
         private HomeScreenView _homeScreenWindow;
+        private CustomerCrudWindow _customerCrudWindow;
+        private InspectorCrudWindow _inspecteursWindow;
         private WeekplanningView _weekPlanningWindow;
-        private VerzoekInplanView _verzoekInplanWindow;
+        private MapView _planWindow;
+        private EmployeeView _employeeView;
+        private MainWindow _mainWindow;
 
         // commands
         public ICommand ShowHomeCommand { get; set; }
@@ -29,6 +27,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand ShowInspecteursCommand { get; set; }
         public ICommand ShowVragenlijstCommand { get; set; }
         public ICommand ShowKalenderCommand { get; set; }
+        public ICommand ShowWerknemerCommand { get; set; }
+        public ICommand LogOutCommand { get; set; }
 
         public MenuVM()
         {
@@ -38,26 +38,37 @@ namespace Festispec_WPF.ViewModel
             ShowInspecteursCommand = new RelayCommand(ShowInspecteurs);
             ShowVragenlijstCommand = new RelayCommand(ShowVragenlijst);
             ShowKalenderCommand = new RelayCommand(ShowKalender);
+            ShowWerknemerCommand = new RelayCommand(ShowWerknemer);
+            LogOutCommand = new RelayCommand(LogOut);
         }
 
         public void ShowHome()
         {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             _homeScreenWindow = new HomeScreenView();
             _homeScreenWindow.Show();
+            currentWindow.Close();
         }
         public void ShowKlanten()
         {
-            throw new NotImplementedException();
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            _customerCrudWindow = new CustomerCrudWindow();
+            _customerCrudWindow.Show();
+            currentWindow.Close();
         }
         public void ShowInplanVerzoeken()
         {
-            _verzoekInplanWindow = new VerzoekInplanView();
-            _verzoekInplanWindow.Show();
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            _planWindow = new MapView();
+            _planWindow.Show();
+            currentWindow.Close();
         }
         public void ShowInspecteurs()
         {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             _inspecteursWindow = new InspectorCrudWindow();
             _inspecteursWindow.Show();
+            currentWindow.Close();
         }
         public void ShowVragenlijst()
         {
@@ -65,8 +76,24 @@ namespace Festispec_WPF.ViewModel
         }
         public void ShowKalender()
         {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             _weekPlanningWindow = new WeekplanningView();
             _weekPlanningWindow.Show();
+            currentWindow.Close();
+        }
+        public void ShowWerknemer()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            _employeeView = new EmployeeView();
+            _employeeView.Show();
+            currentWindow.Close();
+        }
+        public void LogOut()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            //_mainWindow = new MainWindow();
+            //_mainWindow.Show();
+            currentWindow.Close();
         }
     }
 }

@@ -111,7 +111,7 @@ namespace Festispec_WPF.ViewModel
 
         public string FirstName
         {
-            get { return _nawInspecteur.Voornaam ; }
+            get { return _nawInspecteur.Voornaam; }
             set { _nawInspecteur.Voornaam = value; RaisePropertyChanged("FirstName"); }
         }
 
@@ -195,7 +195,7 @@ namespace Festispec_WPF.ViewModel
         public int InspectorForeignNAWID
         {
             get { return _inspecteur.NAW; }
-            set { _inspecteur.NAW = NAWInspector_ID;RaisePropertyChanged("InspectorForeignNAWID"); }
+            set { _inspecteur.NAW = NAWInspector_ID; RaisePropertyChanged("InspectorForeignNAWID"); }
         }
 
         public bool Active
@@ -227,7 +227,7 @@ namespace Festispec_WPF.ViewModel
         public string Phonenumber
         {
             get { return _nawInspecteur.Telefoonnummer; }
-            set { _nawInspecteur.Telefoonnummer = value; RaisePropertyChanged("Phonenuber");  }
+            set { _nawInspecteur.Telefoonnummer = value; RaisePropertyChanged("Phonenuber"); }
         }
 
 

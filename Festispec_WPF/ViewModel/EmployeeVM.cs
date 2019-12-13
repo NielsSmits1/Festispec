@@ -18,6 +18,7 @@ namespace Festispec_WPF.ViewModel
         private NAW_werknemer _nawWerknemer;
         private Werknemer _werknemer;
         private UnitOfWork UOW;
+        private EmployeeCrudVM _employeeCrud;
 
         //constructor
         public EmployeeVM()
@@ -44,6 +45,11 @@ namespace Festispec_WPF.ViewModel
             UOW = new ViewModelLocator().UOW;
             _nawWerknemer = ne;
             _werknemer = UOW.Employee.GetEmployeeByNAW(NAWEmployee_iD);
+        }
+
+        public EmployeeVM(EmployeeCrudVM employeeCrud)
+        {
+            this._employeeCrud = employeeCrud;
         }
 
         //public variables

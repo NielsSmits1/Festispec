@@ -26,6 +26,7 @@ namespace Festispec_WPF.ViewModel
         private CertificateVM _appSelected;
         private InspectorVM _inspector;
         private int _currentlist;
+
         // Create Inspector Properties
         public ICommand AddInspectorCommand { get; set; }
         public ICommand MoveToAvailableCommand { get; set; }
@@ -34,7 +35,6 @@ namespace Festispec_WPF.ViewModel
         public ICommand CloseCreateCommand { get; set; }
         public ICommand RecruitApplicantCommand { get; set; }
         public InspectorVM NewInspector { get; set; }
-
 
         public CertificateVM SelectedCertificate
         {
@@ -74,7 +74,6 @@ namespace Festispec_WPF.ViewModel
         public ICommand MoveToChosenSelectedCommand { get; set; }
         public ICommand SafeEditInspectorCommand { get; set; }
         public ObservableCollection<CertificateVM> LeftoverCertificates { get; set; }
-        //
 
         //Read Inspector Properties
         public ObservableCollection<InspectorVM> Inspectors { get; set; }
@@ -265,11 +264,12 @@ namespace Festispec_WPF.ViewModel
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "Het is gelukt!",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _editInspectorWindow.Close();
             }
             catch
             {
                 MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
@@ -324,7 +324,7 @@ namespace Festispec_WPF.ViewModel
             _currentlist = 4;
         }
 
-  
+
 
         public void MoveCertificateToChosen()
         {
