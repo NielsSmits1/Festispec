@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using Festispec_WPF.Model;
-using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.View;
 using MessageBox = System.Windows.Forms.MessageBox;
 using System.Windows.Data;
+using FestiSpec.Domain.Model;
 
 namespace Festispec_WPF.ViewModel
 {

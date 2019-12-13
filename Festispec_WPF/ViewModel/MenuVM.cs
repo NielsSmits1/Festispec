@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-
+using FestiSpec.Domain.Model;
 namespace Festispec_WPF.ViewModel
 {
     public class MenuVM

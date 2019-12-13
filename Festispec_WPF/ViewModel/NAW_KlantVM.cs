@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using FestiSpec.Domain.Model;
 namespace Festispec_WPF.ViewModel
 {
     public class NAW_KlantVM
