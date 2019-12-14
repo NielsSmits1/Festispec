@@ -22,6 +22,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public ObservableCollection<string> AnwserOptions { get; set; }
 
         public string Question { get => MultipleChoiceQuestionModel.Vraag; set => MultipleChoiceQuestionModel.Vraag = value; }
+        public int ID { get => MultipleChoiceQuestionModel.ID; }
         public int Position
         {
             get
@@ -91,6 +92,26 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         {
             var connection = UOW.Context.Meerkeuzevraag_vragenlijst.Find(questionnaireId, MultipleChoiceQuestionModel.ID );
             connection.Positie = position;
+        }
+
+        public void addNewLink(int questionnaireId)
+        {
+            Meerkeuzevraag_vragenlijst Link = new Meerkeuzevraag_vragenlijst();
+            Link.Meerkeuzevraag_ID = MultipleChoiceQuestionModel.ID;
+            Link.Vragenlijst_ID = questionnaireId;
+            Link.Positie = Position;
+            UOW.Context.Meerkeuzevraag_vragenlijst.Add(Link);
+
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
     }
 }

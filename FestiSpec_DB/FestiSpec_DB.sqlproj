@@ -6,7 +6,7 @@
     <Name>Festispec_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{79a490cb-4ef4-4e97-b717-c155ec5451ca}</ProjectGuid>
+    <ProjectGuid>{4d25bbad-088c-40d4-a0c5-761fb863d16e}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -22,7 +22,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -62,6 +62,18 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="dbo\Tables\sysdiagrams.sql" />
+    <Build Include="dbo\Tables\Tabelvraag.sql" />
+    <Build Include="dbo\Tables\Tabelvraag_antwoord.sql" />
+    <Build Include="dbo\Tables\Tabelvraag_vragenlijst.sql" />
+    <Build Include="dbo\Tables\Template.sql" />
+    <Build Include="dbo\Tables\Vereiste_certificaten.sql" />
+    <Build Include="dbo\Tables\Verzoek.sql" />
+    <Build Include="dbo\Tables\Vragenlijst.sql" />
+    <Build Include="dbo\Tables\Werknemer.sql" />
+    <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
+    <Build Include="dbo\Tables\Afspraak.sql" />
+    <Build Include="dbo\Tables\Applicant.sql" />
     <Build Include="dbo\Tables\Applicant_certificaat.sql" />
     <Build Include="dbo\Tables\Beschikbaarheid.sql" />
     <Build Include="dbo\Tables\Bijlagevraag.sql" />
@@ -90,17 +102,5 @@
     <Build Include="dbo\Tables\Openvraag_vragenlijst.sql" />
     <Build Include="dbo\Tables\Planning_werknemer.sql" />
     <Build Include="dbo\Tables\Rol_werknemer.sql" />
-    <Build Include="dbo\Tables\sysdiagrams.sql" />
-    <Build Include="dbo\Tables\Tabelvraag.sql" />
-    <Build Include="dbo\Tables\Tabelvraag_antwoord.sql" />
-    <Build Include="dbo\Tables\Tabelvraag_vragenlijst.sql" />
-    <Build Include="dbo\Tables\Template.sql" />
-    <Build Include="dbo\Tables\Vereiste_certificaten.sql" />
-    <Build Include="dbo\Tables\Verzoek.sql" />
-    <Build Include="dbo\Tables\Vragenlijst.sql" />
-    <Build Include="dbo\Tables\Werknemer.sql" />
-    <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
-    <Build Include="dbo\Tables\Afspraak.sql" />
-    <Build Include="dbo\Tables\Applicant.sql" />
   </ItemGroup>
 </Project>

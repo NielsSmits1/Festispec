@@ -10,9 +10,14 @@ namespace Festispec_WPF.ViewModel
     {
         string Question { get; set; }
         string QuestionType { get; set; }
-        int Position { get;set; }
+        int Position { get; set; }
         void toDatabase(int questionnaireId);
+
+        void addNewLink(int questionnaireId);
         void deleteConnection(int questionnaireId);
         void updateLink(int questionnaireId);
+
+        int ID { get; }
+
     }
 }

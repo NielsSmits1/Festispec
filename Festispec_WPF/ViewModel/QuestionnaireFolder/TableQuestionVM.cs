@@ -21,6 +21,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public string Question { get => tableQuestionModel.Vraag; set => tableQuestionModel.Vraag = value; }
         public string QuestionHead { get => tableQuestionModel.VraagKop; set => tableQuestionModel.VraagKop = value; }
         public string AnswerHead { get => tableQuestionModel.AntwoordKop; set => tableQuestionModel.AntwoordKop = value; }
+        public int ID { get => tableQuestionModel.ID; }
         public int Position
         {
             get
@@ -51,6 +52,23 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public void toDatabase(int questionnaireId)
         {
             UOW.Context.Tabelvraag.Add(tableQuestionModel);
+            addNewLink(questionnaireId);
+        }
+
+        public void deleteConnection(int questionnaireId)
+        {
+            var connection = UOW.Context.Tabelvraag_vragenlijst.Find(questionnaireId, tableQuestionModel.ID);
+            UOW.Context.Tabelvraag_vragenlijst.Remove(connection);
+        }
+
+        public void updateLink(int questionnaireId)
+        {
+            var connection = UOW.Context.Tabelvraag_vragenlijst.Find(questionnaireId, tableQuestionModel.ID);
+            connection.Positie = position;
+        }
+
+        public void addNewLink(int questionnaireId)
+        {
             Tabelvraag_vragenlijst Link = new Tabelvraag_vragenlijst();
             Link.Tabelvraag_ID = tableQuestionModel.ID;
             Link.Vragenlijst_ID = questionnaireId;
@@ -66,19 +84,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-        }
-
-        public void deleteConnection(int questionnaireId)
-        {
-            var connection = UOW.Context.Tabelvraag_vragenlijst.Find(questionnaireId, tableQuestionModel.ID);
-            UOW.Context.Tabelvraag_vragenlijst.Remove(connection);
-        }
-
-        public void updateLink(int questionnaireId)
-        {
-            var connection = UOW.Context.Tabelvraag_vragenlijst.Find(questionnaireId, tableQuestionModel.ID);
-            connection.Positie = position;
         }
     }
 }

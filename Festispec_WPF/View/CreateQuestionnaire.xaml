@@ -34,7 +34,7 @@
                 <TextBox Text="{Binding TemplateType, Mode=TwoWay}"></TextBox>
                 <Button Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Padding="5,5,5,5" Content="Maak template"  Margin="0,20,0,0" Command="{Binding CreateTemplateCommand }"></Button>
                 <Label Margin="0,15,0,0" FontSize="13" FontWeight="Bold">Template gebruiken voor vragenlijst</Label>
-                <DataGrid IsReadOnly="True" Margin="0,5,0,0" ItemsSource="{Binding templates}" Height="550" AutoGenerateColumns="False">
+                <DataGrid IsReadOnly="True" Margin="0,5,0,0" ItemsSource="{Binding templates}" SelectedItem="{Binding selectedTemplate}" Height="550" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Title" Width="*">
                         <DataGridTemplateColumn.CellTemplate >
@@ -64,7 +64,7 @@
                     <DataGridTemplateColumn Header="Positie" Width="*">
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate >
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Position}"></TextBlock>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Position, Mode=TwoWay}"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -73,7 +73,7 @@
                     <DataGridTemplateColumn Header="Vraag" Width="*">
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate >
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Question}" TextWrapping="Wrap"> </TextBlock>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Question, Mode=TwoWay}" TextWrapping="Wrap"> </TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -81,7 +81,7 @@
                     <DataGridTemplateColumn Header="Vraagtype" Width="*">
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate >
-                                <TextBlock VerticalAlignment="Center" Text="{Binding QuestionType}"></TextBlock>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding QuestionType, Mode=TwoWay}"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -32,6 +32,9 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
         }
         public string QuestionType { get => questiontype; set => questiontype = value; }
+
+        public int ID { get => appendixQuestionModel.ID; }
+
         public AppendixQuestionVM()
         {
             UOW = ViewModelLocator.UOW;
@@ -47,6 +50,23 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public void toDatabase(int questionnaireId)
         {
             UOW.Context.Bijlagevraag.Add(appendixQuestionModel);
+            addNewLink(questionnaireId);
+        }
+
+        public void deleteConnection(int questionnaireId)
+        {
+            var connection = UOW.Context.Bijlagevraag_vragenlijst.Find(appendixQuestionModel.ID, questionnaireId);
+            UOW.Context.Bijlagevraag_vragenlijst.Remove(connection);
+        }
+
+        public void updateLink(int questionnaireId)
+        {
+            var connection = UOW.Context.Bijlagevraag_vragenlijst.Find(appendixQuestionModel.ID, questionnaireId);
+            connection.Positie = position;
+        }
+
+        public void addNewLink(int questionnaireId)
+        {
             Bijlagevraag_vragenlijst Link = new Bijlagevraag_vragenlijst();
             Link.Bijlagevraag_ID = appendixQuestionModel.ID;
             Link.Vragenlijst_ID = questionnaireId;
@@ -62,19 +82,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-        }
-
-        public void deleteConnection(int questionnaireId)
-        {
-            var connection = UOW.Context.Bijlagevraag_vragenlijst.Find(appendixQuestionModel.ID, questionnaireId);
-            UOW.Context.Bijlagevraag_vragenlijst.Remove(connection);
-        }
-
-        public void updateLink(int questionnaireId)
-        {
-            var connection = UOW.Context.Bijlagevraag_vragenlijst.Find(appendixQuestionModel.ID, questionnaireId);
-            connection.Positie = position;
         }
     }
 }

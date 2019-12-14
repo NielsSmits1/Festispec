@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec_WPF", "Festispec_WPF\Festispec_WPF.csproj", "{EE7EC1E1-D253-4B1B-B038-211A27AD9ABC}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Festispec_DB", "Festispec_DB\Festispec_DB.sqlproj", "{79A490CB-4EF4-4E97-B717-C155EC5451CA}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Festispec_DB", "Festispec_DB\Festispec_DB.sqlproj", "{4D25BBAD-088C-40D4-A0C5-761FB863D16E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +17,12 @@ Global
 		{EE7EC1E1-D253-4B1B-B038-211A27AD9ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE7EC1E1-D253-4B1B-B038-211A27AD9ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE7EC1E1-D253-4B1B-B038-211A27AD9ABC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79A490CB-4EF4-4E97-B717-C155EC5451CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79A490CB-4EF4-4E97-B717-C155EC5451CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79A490CB-4EF4-4E97-B717-C155EC5451CA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{79A490CB-4EF4-4E97-B717-C155EC5451CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79A490CB-4EF4-4E97-B717-C155EC5451CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79A490CB-4EF4-4E97-B717-C155EC5451CA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4D25BBAD-088C-40D4-A0C5-761FB863D16E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D25BBAD-088C-40D4-A0C5-761FB863D16E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D25BBAD-088C-40D4-A0C5-761FB863D16E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4D25BBAD-088C-40D4-A0C5-761FB863D16E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D25BBAD-088C-40D4-A0C5-761FB863D16E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D25BBAD-088C-40D4-A0C5-761FB863D16E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

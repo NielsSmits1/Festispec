@@ -38,6 +38,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         }
 
         public string QuestionType { get => questiontype; set => questiontype = value; }
+        public int ID { get => mapQuestionModel.ID; }
         public int Position
         {
             get
@@ -92,15 +93,8 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
         }
 
-        public void deleteConnection(int questionnaireId)
+        public void addNewLink(int questionnaireId)
         {
-            var connection = UOW.Context.Kaartvraag_vragenlijst.Find(questionnaireId,mapQuestionModel.ID);
-            UOW.Context.Kaartvraag_vragenlijst.Remove(connection);
-        }
-
-        public void toDatabase(int questionnaireId)
-        {
-            UOW.Context.Kaartvraag.Add(mapQuestionModel);
             Kaartvraag_vragenlijst Link = new Kaartvraag_vragenlijst();
             Link.Kaartvraag_ID = mapQuestionModel.ID;
             Link.Vragenlijst_ID = questionnaireId;
@@ -116,6 +110,18 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        public void deleteConnection(int questionnaireId)
+        {
+            var connection = UOW.Context.Kaartvraag_vragenlijst.Find(questionnaireId,mapQuestionModel.ID);
+            UOW.Context.Kaartvraag_vragenlijst.Remove(connection);
+        }
+
+        public void toDatabase(int questionnaireId)
+        {
+            UOW.Context.Kaartvraag.Add(mapQuestionModel);
+            addNewLink(questionnaireId);
         }
 
         public void updateLink(int questionnaireId)

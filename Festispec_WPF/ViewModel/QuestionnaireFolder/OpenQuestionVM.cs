@@ -20,6 +20,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private string questiontype;
 
         public string Question { get => openQuestionModel.Vraag; set =>  openQuestionModel.Vraag = value; }
+        public int ID { get => openQuestionModel.ID; }
         public int Position
         {
             get
@@ -49,6 +50,23 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public void toDatabase(int questionnaireId)
         {
             UOW.Context.Openvraag.Add(openQuestionModel);
+            addNewLink(questionnaireId);
+
+        }
+        public void deleteConnection(int questionnaireId)
+        {
+            var connection = UOW.Context.Openvraag_vragenlijst.Find(questionnaireId, openQuestionModel.ID);
+            UOW.Context.Openvraag_vragenlijst.Remove(connection);
+        }
+
+        public void updateLink(int questionnaireId)
+        {
+            var connection = UOW.Context.Openvraag_vragenlijst.Find(questionnaireId,openQuestionModel.ID);
+            connection.Positie = position;
+        }
+
+        public void addNewLink(int questionnaireId)
+        {
             Openvraag_vragenlijst Link = new Openvraag_vragenlijst();
             Link.Openvraag_ID = openQuestionModel.ID;
             Link.Vragenlijst_ID = questionnaireId;
@@ -64,18 +82,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-        }
-        public void deleteConnection(int questionnaireId)
-        {
-            var connection = UOW.Context.Openvraag_vragenlijst.Find(questionnaireId, openQuestionModel.ID);
-            UOW.Context.Openvraag_vragenlijst.Remove(connection);
-        }
-
-        public void updateLink(int questionnaireId)
-        {
-            var connection = UOW.Context.Openvraag_vragenlijst.Find(questionnaireId,openQuestionModel.ID);
-            connection.Positie = position;
         }
     }
 }
