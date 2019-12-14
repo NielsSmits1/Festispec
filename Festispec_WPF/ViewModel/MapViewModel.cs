@@ -7,14 +7,17 @@ using GalaSoft.MvvmLight.Command;
 using Geocoding;
 using Geocoding.Microsoft;
 using Microsoft.Maps.MapControl.WPF;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -181,6 +184,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand ShowDetailsFestivalCommand { get; set; }
         public ICommand RefreshFestivalsCommand { get; set; }
         public ICommand RefreshInspectorsCommand { get; set; }
+        public ICommand testFunction { get; set; }
 
         public MapViewModel()
         {
@@ -194,6 +198,7 @@ namespace Festispec_WPF.ViewModel
             ShowDetailsFestivalCommand = new RelayCommand(showDetailsFestival);
             RefreshFestivalsCommand = new RelayCommand(LoadFestivals);
             RefreshInspectorsCommand = new RelayCommand(LoadInspectors);
+            testFunction = new RelayCommand(downloadInspection);
 
             InspectorVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
@@ -254,9 +259,37 @@ namespace Festispec_WPF.ViewModel
             catch (Exception)
             {
                 MapErrorVisibility = "Visible";
+                LoadOfflineFestival();
             }
         }
     
+        private void downloadInspection()
+        {
+            var location = new Locatie
+            {
+                Huisnummer = _selectedFestival.Location.HomeNumber,
+                Straatnaam = _selectedFestival.Location.StreetName,
+                Postcode = _selectedFestival.Location.ZipCode
+            };
+
+            var customer = new Klant
+            {
+                Bedrijfsnaam = _selectedFestival.Customer.CompanyName,
+            };
+
+            var obj = new Inspectie
+            {
+                Titel = _selectedFestival.Title,
+                Locatie = location,
+                Klant = customer,
+                StartDate = _selectedFestival.StartDate,
+                EndDate = _selectedFestival.EndDate,
+                Versie = _selectedFestival.Version
+            };
+
+            var json = new JavaScriptSerializer().Serialize(obj);
+            System.IO.File.WriteAllText(@"../../inspection.json", json);
+        }
 
         private void searchDatagrid()
         {
@@ -515,7 +548,15 @@ namespace Festispec_WPF.ViewModel
         {
             Festivals = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
             RaisePropertyChanged(() => Festivals);
-            
+        }
+
+        private void LoadOfflineFestival()
+        {
+            Festivals = new ObservableCollection<InspectionVM>();
+            string json = File.ReadAllText(@"../../inspection.json");
+            var test = JsonConvert.DeserializeObject<Inspectie>((json));
+            Festivals.Add(new InspectionVM(test));
+            RaisePropertyChanged(() => Festivals);
         }
 
         private void LoadInspectors()

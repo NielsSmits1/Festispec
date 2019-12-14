@@ -23,6 +23,7 @@ namespace Festispec_WPF.ViewModel
         private UnitOfWork _UOW;
         public InspectionVM()
         {
+            _UOW = new ViewModelLocator().UOW;
             _inspection = new Inspectie();
             _location = new LocationVM();
             _customer = new CustomerVM();
@@ -34,8 +35,17 @@ namespace Festispec_WPF.ViewModel
         {
             _UOW = new ViewModelLocator().UOW;
             _inspection = inspectie;
-            _location = new LocationVM(_UOW.InspectionLocations.Get(Location_ID));
-            _customer = new CustomerVM(_UOW.Customers.Get(Customer_ID));
+
+            if(_inspection.Klant_ID != 0)
+            {
+                _location = new LocationVM(_UOW.InspectionLocations.Get(Location_ID));
+                _customer = new CustomerVM(_UOW.Customers.Get(Customer_ID));
+            }   
+            else
+            {
+                _location = new LocationVM(_inspection.Locatie);
+                _customer = new CustomerVM(_inspection.Klant);
+            }
         }
 
         public Inspectie Inspection
@@ -111,10 +121,18 @@ namespace Festispec_WPF.ViewModel
             {
                 IGeocoder geocoder = new BingMapsGeocoder(ApiKeys.BING_MAPS_KEY);
 
+                if (_inspection.Klant_ID != 0)
+                {
                     var inspectionNAW = _UOW.InspectionLocations.Find(l => l.ID == _inspection.Locatie_ID).FirstOrDefault();
                     var location = geocoder.Geocode(inspectionNAW.Straatnaam + " " + inspectionNAW.Huisnummer, "", "", inspectionNAW.Postcode, "Netherlands").First();
 
                     return location.FormattedAddress;
+                }
+                else
+                {
+                    var location = _location.StreetName + " " + _location.HomeNumber + ", " + _location.ZipCode;
+                    return location;
+                }
             }
         }
        
@@ -145,7 +163,5 @@ namespace Festispec_WPF.ViewModel
                 _inspection.Voltooid = value; RaisePropertyChanged(() => Accomplished);
             }
         }
-
-        
     }
 }
