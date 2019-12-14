@@ -22,16 +22,13 @@ namespace Festispec_WPF.ViewModel
 
         //reference commands
         public ICommand LoginCommand { get; set; }
-        public ICommand RegisterCommand { get; set; }
 
         //local variables
-        private RegisterView _windowRegisterView;
         private IUnitOfWork UOW;
 
         public LoginRegisterVM()
         {
             LoginCommand = new RelayCommand(HandleLogin);
-            RegisterCommand = new RelayCommand(OpenRegisterWindow);
             UOW = new ViewModelLocator().UOW;
         }
 
@@ -51,16 +48,13 @@ namespace Festispec_WPF.ViewModel
             {
                 //TODO exit main window
                 Console.WriteLine("login ok");
-                MenuView menuView = new MenuView();
-                menuView.Show();
-
+                Username = "";
+                Password = "";
+                RaisePropertyChanged(() => Username);
+                RaisePropertyChanged(() => Password);
+                HomeScreenView home = new HomeScreenView();
+                home.Show();
             }
-        }
-
-        private void OpenRegisterWindow()
-        {
-            _windowRegisterView = new RegisterView();
-            _windowRegisterView.Show();
         }
     }
 }

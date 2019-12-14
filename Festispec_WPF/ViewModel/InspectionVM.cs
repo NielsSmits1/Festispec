@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -21,12 +22,15 @@ namespace Festispec_WPF.ViewModel
         private LocationVM _location;
         private CustomerVM _customer;
         private UnitOfWork _UOW;
+
+        public ObservableCollection<CertificateVM> ChosenCertificates { get; set; }
         public InspectionVM()
         {
             _UOW = new ViewModelLocator().UOW;
             _inspection = new Inspectie();
             _location = new LocationVM();
             _customer = new CustomerVM();
+            ChosenCertificates = new ObservableCollection<CertificateVM>();
             StartDate = DateTime.Now.Date;
             EndDate = DateTime.Now.Date.AddDays(1);
         }
@@ -40,6 +44,7 @@ namespace Festispec_WPF.ViewModel
             {
                 _location = new LocationVM(_UOW.InspectionLocations.Get(Location_ID));
                 _customer = new CustomerVM(_UOW.Customers.Get(Customer_ID));
+                ChosenCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetCertificatesByInspection(Inspection_ID).Select(cert => new CertificateVM(cert)));
             }   
             else
             {
@@ -73,6 +78,15 @@ namespace Festispec_WPF.ViewModel
                 _customer = value; Customer_ID = Customer.ID; RaisePropertyChanged(() => Customer);
             }
             
+        }
+
+        public int Inspection_ID
+        {
+            get => _inspection.Inspectienummer;
+            set
+            {
+                _inspection.Inspectienummer = value; RaisePropertyChanged(() => Inspection_ID);
+            }
         }
 
        

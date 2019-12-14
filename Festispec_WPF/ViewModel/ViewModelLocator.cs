@@ -48,13 +48,14 @@ namespace Festispec_WPF.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+            SimpleIoc.Default.Register<MenuVM>();
             SimpleIoc.Default.Register<EmployeeCrudVM>();
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<RapportageVM>();
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<HomeScreenVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
             SimpleIoc.Default.Register<InspectionCrudVM>();
+            SimpleIoc.Default.Register<MapViewModel>();
         }
 
         public MainViewModel Main
@@ -121,19 +122,11 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return new EmployeeVM();
+                return new EmployeeVM(EmployeeCrud);
             }
         }
 
-        public HomeScreenVM HomeScreen
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<HomeScreenVM>();
-            }
-        }
-
-        public MenuVM GetMenu
+        public MenuVM Menu
         {
             get
             {
@@ -166,7 +159,7 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return new MapViewModel();
+                return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
         }
 
