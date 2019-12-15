@@ -29,7 +29,7 @@ namespace Festispec_WPF.ViewModel
         public LoginRegisterVM()
         {
             LoginCommand = new RelayCommand(HandleLogin);
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
         }
 
         private void HandleLogin()

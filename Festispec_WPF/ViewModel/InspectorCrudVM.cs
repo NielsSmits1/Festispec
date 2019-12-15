@@ -123,7 +123,7 @@ namespace Festispec_WPF.ViewModel
         public InspectorCrudVM()
         {
             //UOW
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
 
             //New Inspector - Create
             NewInspector = new InspectorVM();

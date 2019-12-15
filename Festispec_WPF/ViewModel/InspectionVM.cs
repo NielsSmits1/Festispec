@@ -36,7 +36,7 @@ namespace Festispec_WPF.ViewModel
 
         public InspectionVM(Inspectie inspectie)
         {
-            _UOW = new ViewModelLocator().UOW;
+            _UOW = ViewModelLocator.UOW;
             _inspection = inspectie;
             _location = new LocationVM(_UOW.InspectionLocations.Get(Location_ID));
             _customer = new CustomerVM(_UOW.Customers.Get(Customer_ID));

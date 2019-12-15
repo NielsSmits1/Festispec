@@ -32,8 +32,7 @@ namespace Festispec_WPF.ViewModel
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
         /// 
-
-        private UnitOfWork _unitOfWork;
+        public static UnitOfWork UOW;
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -48,6 +47,7 @@ namespace Festispec_WPF.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+            UOW = new UnitOfWork();
             SimpleIoc.Default.Register<MenuVM>();
             SimpleIoc.Default.Register<EmployeeCrudVM>();
             SimpleIoc.Default.Register<InspectorCrudVM>();
@@ -133,19 +133,7 @@ namespace Festispec_WPF.ViewModel
                 return new MenuVM();
             }
         }
-        
-        public UnitOfWork UOW
-        {
-            get
-            {
-                if(_unitOfWork == null)
-                {
-                    //var connection = ConfigurationManager.AppSettings["UsedConnection"] ?? "FestiSpecEntities";
-                    _unitOfWork = new UnitOfWork(new FestiSpecEntities());
-                }
-                return _unitOfWork;
-            }
-        }
+       
 
         public InspectionCrudVM InspectionCrud
         {

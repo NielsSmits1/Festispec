@@ -23,7 +23,7 @@ namespace Festispec_WPF.ViewModel
         //constructor
         public EmployeeVM()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             GetAllRoles();
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
@@ -31,7 +31,7 @@ namespace Festispec_WPF.ViewModel
 
         public EmployeeVM(Werknemer werknemer)
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             _werknemer = werknemer;
             _nawWerknemer = UOW.NawEmployee.Get(werknemer.NAW);
             DoB = DateTime.Now.Date;
@@ -42,7 +42,7 @@ namespace Festispec_WPF.ViewModel
 
         public EmployeeVM(NAW_werknemer ne)
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             _nawWerknemer = ne;
             _werknemer = UOW.Employee.GetEmployeeByNAW(NAWEmployee_iD);
         }

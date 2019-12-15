@@ -59,7 +59,7 @@ namespace Festispec_WPF.ViewModel
         public EmployeeCrudVM()
         {
             IsSelected = false;
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             NewEmployee = new EmployeeVM();
 
 

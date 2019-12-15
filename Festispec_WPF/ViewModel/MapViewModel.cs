@@ -314,7 +314,7 @@ namespace Festispec_WPF.ViewModel
             //---INSPECTORS
             try
             {
-                _UOW = new ViewModelLocator().UOW;
+                _UOW =  ViewModelLocator.UOW;
                 LoadInspectors();
 
                 LoadFestivals();

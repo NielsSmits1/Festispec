@@ -14,13 +14,16 @@ namespace Festispec_WPF.Model.UnitOfWork
     {
         private readonly FestiSpecEntities _context;
 
-        public UnitOfWork(FestiSpecEntities context)
+        public UnitOfWork()
         {
-            _context = context;
+            if(_context == null)
+            {
+                _context = new FestiSpecEntities();
+            }
             Inspectors = new InspectorRepository(_context);
-            NawEmployee = new NAWEmployeeRepository(context);
-            Employee = new EmployeeRepository(context);
-            RoleEmployee = new RoleEmployeeRepository(context);
+            NawEmployee = new NAWEmployeeRepository(_context);
+            Employee = new EmployeeRepository(_context);
+            RoleEmployee = new RoleEmployeeRepository(_context);
             NAWInspectors = new NAWInspector_Repository(_context);
             Inspections = new InspectionRepository(_context);
             InspectionLocations = new LocationRepository(_context);
