@@ -7,27 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD:Festispec_WPF/Beschikbaarheid.cs
-namespace Festispec_WPF
-=======
-using System.ComponentModel.DataAnnotations;
-
 namespace FestiSpec.Domain.Model
->>>>>>> developer:FestiSpec.Domain/Model/Beschikbaarheid.cs
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Beschikbaarheid
     {
-        [Key]
         public int ID { get; set; }
-
-        [Required]
         public int Inspecteur_ID { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
         public System.DateTime Datum { get; set; }
     
         public virtual Inspecteur Inspecteur { get; set; }

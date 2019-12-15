@@ -1,4 +1,5 @@
-﻿using Festispec_WPF.Model.UnitOfWork;
+﻿using FestiSpec.Domain.Model;
+using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View.QuestionnairePages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

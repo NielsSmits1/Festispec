@@ -7,11 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD:Festispec_WPF/Inspectie_Wel_Ingevuld_Vragenlijst.cs
-namespace Festispec_WPF
-=======
 namespace FestiSpec.Domain.Model
->>>>>>> developer:FestiSpec.Domain/Model/Inspectie_Wel_Ingevuld_Vragenlijst.cs
 {
     using System;
     using System.Collections.Generic;

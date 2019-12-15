@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.ViewModel.QuestionnaireFolder;
+using FestiSpec.Domain.Model;
 
 namespace Festispec_WPF.ViewModel
 {

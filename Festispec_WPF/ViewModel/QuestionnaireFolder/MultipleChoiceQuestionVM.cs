@@ -1,4 +1,5 @@
-﻿using Festispec_WPF.Model.UnitOfWork;
+﻿using FestiSpec.Domain.Model;
+using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using System;

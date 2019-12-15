@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Afspraak">
           <Key>
             <PropertyRef Name="ID" />
@@ -907,6 +907,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Getqualifiedinspector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IsQualified" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="Inspection" Type="int" Mode="In" />
+          <Parameter Name="Inspector" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="FestiSpecModelStoreContainer">
           <EntitySet Name="Afspraak" EntityType="Self.Afspraak" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Applicant" EntityType="Self.Applicant" Schema="dbo" store:Type="Tables" />
@@ -2117,6 +2124,9 @@
             <End Role="Inspectie" EntitySet="Inspectie" />
             <End Role="Werknemer" EntitySet="Werknemer" />
           </AssociationSet>
+          <FunctionImport Name="Getqualifiedinspector" ReturnType="Collection(Int32)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -2532,6 +2542,7 @@
               <ScalarProperty Name="ID" ColumnName="Werknemer_ID" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Getqualifiedinspector" FunctionName="FestiSpecModel.Store.Getqualifiedinspector" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

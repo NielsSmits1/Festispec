@@ -156,6 +156,7 @@
     </Compile>
     <Compile Include="View\EditQuestionnaireWindow.xaml.cs">
       <DependentUpon>EditQuestionnaireWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MapViewModel.cs" />
     <Compile Include="View\CreateInspectorWindow.xaml.cs">
       <DependentUpon>CreateInspectorWindow.xaml</DependentUpon>
@@ -212,6 +213,7 @@
     </Compile>
     <Compile Include="View\QuestionnairePages\TableQuestionPage.xaml.cs">
       <DependentUpon>TableQuestionPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\CreateInspectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -302,6 +304,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuestionnairePages\TableQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -373,10 +378,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ContactPersonUpdateWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\CustomerCrudWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

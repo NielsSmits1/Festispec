@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using FestiSpec.Domain.Model;
 using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;

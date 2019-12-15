@@ -54,7 +54,6 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<RapportageVM>();
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<HomeScreenVM>();
             SimpleIoc.Default.Register<CreateQuestionaireVM>();
             SimpleIoc.Default.Register<EditQuestionnaireVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
@@ -162,6 +161,8 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<CreateQuestionaireVM>();
+            }
+        }
        
 
         public InspectionCrudVM InspectionCrud

@@ -7,13 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD:Festispec_WPF/Inspecteur.cs
-namespace Festispec_WPF
-=======
-using System.ComponentModel.DataAnnotations;
-
 namespace FestiSpec.Domain.Model
->>>>>>> developer:FestiSpec.Domain/Model/Inspecteur.cs
 {
     using System;
     using System.Collections.Generic;
@@ -29,26 +23,12 @@ namespace FestiSpec.Domain.Model
             this.Inspectie = new HashSet<Inspectie>();
         }
     
-        [Key]
         public int ID { get; set; }
-<<<<<<< HEAD:Festispec_WPF/Inspecteur.cs
         public string Username { get; set; }
-=======
-
-        [Required]
-        public string Username { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
->>>>>>> developer:FestiSpec.Domain/Model/Inspecteur.cs
         public string Wachtwoord { get; set; }
-
-
         public int NAW { get; set; }
-
-
         public bool Actief { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Beschikbaarheid> Beschikbaarheid { get; set; }
         public virtual NAW_inspecteur NAW_inspecteur { get; set; }

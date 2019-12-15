@@ -7,15 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD:Festispec_WPF/Model1.Context.cs
-namespace Festispec_WPF
-=======
 namespace FestiSpec.Domain.Model
->>>>>>> developer:FestiSpec.Domain/Model/Model1.Context.cs
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class FestiSpecEntities : DbContext
     {
@@ -63,5 +61,14 @@ namespace FestiSpec.Domain.Model
         public virtual DbSet<Verzoek> Verzoek { get; set; }
         public virtual DbSet<Vragenlijst> Vragenlijst { get; set; }
         public virtual DbSet<Werknemer> Werknemer { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> Getqualifiedinspector(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Getqualifiedinspector", idParameter);
+        }
     }
 }
