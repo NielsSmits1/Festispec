@@ -12,12 +12,12 @@ namespace FestiSpec.Domain.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Vragenlijst_bijlage
+    public partial class Bijlagevraag_vragenlijst
     {
-        public int Bijlage_ID { get; set; }
+        public int Bijlagevraag_ID { get; set; }
         public int Vragenlijst_ID { get; set; }
         public byte[] FileBytes { get; set; }
-        public string MimeType { get; set; }
+        public int Positie { get; set; }
     
         public virtual Bijlagevraag Bijlagevraag { get; set; }
         public virtual Vragenlijst Vragenlijst { get; set; }

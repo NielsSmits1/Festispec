@@ -12,6 +12,8 @@ namespace FestiSpec.Domain.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class FestiSpecEntities : DbContext
     {
@@ -26,8 +28,10 @@ namespace FestiSpec.Domain.Model
         }
     
         public virtual DbSet<Afspraak> Afspraak { get; set; }
+        public virtual DbSet<Applicant> Applicant { get; set; }
         public virtual DbSet<Beschikbaarheid> Beschikbaarheid { get; set; }
         public virtual DbSet<Bijlagevraag> Bijlagevraag { get; set; }
+        public virtual DbSet<Bijlagevraag_vragenlijst> Bijlagevraag_vragenlijst { get; set; }
         public virtual DbSet<Certificaat> Certificaat { get; set; }
         public virtual DbSet<Contactpersoon> Contactpersoon { get; set; }
         public virtual DbSet<Inspecteur> Inspecteur { get; set; }
@@ -49,13 +53,22 @@ namespace FestiSpec.Domain.Model
         public virtual DbSet<Openvraag_vragenlijst> Openvraag_vragenlijst { get; set; }
         public virtual DbSet<Planning_werknemer> Planning_werknemer { get; set; }
         public virtual DbSet<Rol_werknemer> Rol_werknemer { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tabelvraag> Tabelvraag { get; set; }
         public virtual DbSet<Tabelvraag_antwoord> Tabelvraag_antwoord { get; set; }
         public virtual DbSet<Tabelvraag_vragenlijst> Tabelvraag_vragenlijst { get; set; }
         public virtual DbSet<Template> Template { get; set; }
         public virtual DbSet<Verzoek> Verzoek { get; set; }
         public virtual DbSet<Vragenlijst> Vragenlijst { get; set; }
-        public virtual DbSet<Vragenlijst_bijlage> Vragenlijst_bijlage { get; set; }
         public virtual DbSet<Werknemer> Werknemer { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> Getqualifiedinspector(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Getqualifiedinspector", idParameter);
+        }
     }
 }

@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -24,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +36,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -66,10 +73,16 @@
     <Compile Include="Model\Afspraak.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Applicant.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Beschikbaarheid.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Bijlagevraag.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Bijlagevraag_vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Certificaat.cs">
@@ -100,6 +113,7 @@
     <Compile Include="Model\Interface Repositories\INAWCustomerRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWEmployeeRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWInspectorRepository.cs" />
+    <Compile Include="Model\Interface Repositories\IQuestionnaireRepository.cs" />
     <Compile Include="Model\Interface Repositories\IRepository.cs" />
     <Compile Include="Model\Interface Repositories\IRoleEmployee.cs" />
     <Compile Include="Model\Kaartvraag.cs">
@@ -169,9 +183,13 @@
     <Compile Include="Model\Repositories\NAWCustomerRepository.cs" />
     <Compile Include="Model\Repositories\NAWEmployeeRepository.cs" />
     <Compile Include="Model\Repositories\NAWInspector_Repository.cs" />
+    <Compile Include="Model\Repositories\QuestionnaireRepository.cs" />
     <Compile Include="Model\Repositories\Repository.cs" />
     <Compile Include="Model\Repositories\RoleEmployeeRepository.cs" />
     <Compile Include="Model\Rol_werknemer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Tabelvraag.cs">
@@ -190,9 +208,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Vragenlijst.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Vragenlijst_bijlage.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Werknemer.cs">
@@ -232,6 +247,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -242,9 +260,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,18 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec_WPF.View
+namespace Festispec_WPF.View.QuestionnairePages
 {
     /// <summary>
-    /// Interaction logic for VerzoekInplanView.xaml
+    /// Interaction logic for MulitpleChoiceQuestionPage.xaml
     /// </summary>
-    public partial class VerzoekInplanView : Window
+    public partial class MulitpleChoiceQuestionPage : Page
     {
-        public VerzoekInplanView()
+        public MulitpleChoiceQuestionPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

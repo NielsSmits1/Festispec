@@ -113,6 +113,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\CreateQuestionaireVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\EditQuestionnaireVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\FileLoader.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\IQuestion.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\MapQuestionPageVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\MapQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\MultipleChoiceQuestionPageVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\MultipleChoiceQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\OpenQuestionPageVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\OpenQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\QuestionnaireVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\QuestionTypes.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\TableQuestionPageVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireFolder\TableQuestionVM.cs" />
     <Compile Include="ApiKeys.cs" />
     <Compile Include="Pdf\ChartHelper.cs" />
     <Compile Include="Pdf\PdfHelper.cs" />
@@ -120,6 +137,7 @@
     <Compile Include="Pdf\RapportageInfo.cs" />
     <Compile Include="Model\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Model\UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="ViewModel\ApplicantVM.cs" />
     <Compile Include="ViewModel\ContactPersonVM.cs" />
     <Compile Include="ViewModel\CRCustomerVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
@@ -127,14 +145,22 @@
     <Compile Include="ViewModel\InspectionVM.cs" />
     <Compile Include="ViewModel\LocationVM.cs" />
     <Compile Include="ViewModel\NAW_KlantVM.cs" />
-    <Compile Include="ViewModel\HomeScreenVM.cs" />
     <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="ViewModel\CertificateVM.cs" />
     <Compile Include="ViewModel\InspectorCrudVM.cs" />
     <Compile Include="ViewModel\InspectorVM.cs" />
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\CreateQuestionnaire.xaml.cs">
+      <DependentUpon>CreateQuestionnaire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditQuestionnaireWindow.xaml.cs">
+      <DependentUpon>EditQuestionnaireWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MapViewModel.cs" />
+    <Compile Include="View\CreateInspectorWindow.xaml.cs">
+      <DependentUpon>CreateInspectorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
@@ -170,7 +196,29 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuestionnaireCRUD.xaml.cs">
+      <DependentUpon>QuestionnaireCRUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnairePages\AppendixQuestionPage.xaml.cs">
+      <DependentUpon>AppendixQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnairePages\MapQuestionPage.xaml.cs">
+      <DependentUpon>MapQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnairePages\MulitpleChoiceQuestionPage.xaml.cs">
+      <DependentUpon>MulitpleChoiceQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnairePages\OpenQuestionPage.xaml.cs">
+      <DependentUpon>OpenQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnairePages\TableQuestionPage.xaml.cs">
+      <DependentUpon>TableQuestionPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\CreateInspectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateInspectorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,12 +239,21 @@
     <Compile Include="View\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VerzoekInplanView.xaml.cs">
-      <DependentUpon>VerzoekInplanView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\WeekplanningView.xaml.cs">
       <DependentUpon>WeekplanningView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\CreateQuestionnaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomerCrudWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditQuestionnaireWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EmployeeCrudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,6 +283,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\QuestionnaireCRUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnairePages\AppendixQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnairePages\MapQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnairePages\MulitpleChoiceQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnairePages\OpenQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnairePages\TableQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,10 +316,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\VerzoekInplanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,10 +381,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\CustomerCrudWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\CustomerUpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,6 +395,9 @@
       <Project>{544C3E8C-76FF-44DA-B6DE-DB8F310E01E5}</Project>
       <Name>FestiSpec.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\attention.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

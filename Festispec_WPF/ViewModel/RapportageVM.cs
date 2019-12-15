@@ -41,7 +41,7 @@ namespace Festispec_WPF.ViewModel
 
         public RapportageVM()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;
             GenerateCommand = new RelayCommand(GeneratePdf);
             Charts = new ObservableCollection<string>()
             {

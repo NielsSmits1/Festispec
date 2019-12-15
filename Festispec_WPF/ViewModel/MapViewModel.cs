@@ -1,6 +1,7 @@
 ﻿using BingMapsRESTToolkit;
 using FestiSpec.Domain.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Geocoding;
@@ -17,8 +18,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using Button = System.Windows.Controls.Button;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -26,12 +30,21 @@ namespace Festispec_WPF.ViewModel
     {
         private IGeocoder geocoder = new BingMapsGeocoder(ApiKeys.BING_MAPS_KEY);
         private MapPolyline lastLine;
-
         private ObservableCollection<UIElement> mapElements = new ObservableCollection<UIElement>();
         public ObservableCollection<InspectorVM> Inspectors { get; set; }
+        public ObservableCollection<LocationVM> Locations { get; set; }
+        public ObservableCollection<CustomerVM> Customers { get; set; }
         public ObservableCollection<InspectorVM> SingleInspector { get; set; }
         public ObservableCollection<InspectionVM> Festivals { get; set; }
+
+        public ObservableCollection<CertificateVM> AvailableCertificates { get; set; }
+        public ObservableCollection<CertificateVM> LeftoverCertificates { get; set; }
         public CollectionViewSource ViewSource { get; set; }
+
+        private CreateLocationWindow _createLocation;
+        private CreateInspectionWindow _createWindow;
+        public LocationVM NewLocation { get; set; }
+        public InspectionVM NewInspection { get; set; }
 
         private UnitOfWork _UOW;
 
@@ -96,6 +109,30 @@ namespace Festispec_WPF.ViewModel
                 base.RaisePropertyChanged();
             }
         }
+
+        private string _mapVisibility;
+
+        public string MapVisibility
+        {
+            get => _mapVisibility;
+            set { _mapVisibility = value; RaisePropertyChanged(() => MapVisibility); }
+        }
+
+        private string _editVisibility;
+
+        public string EditVisibility
+        {
+            get => _editVisibility;
+            set { _editVisibility = value; RaisePropertyChanged(() => EditVisibility); }
+        }
+
+        private string _mapErrorVisibility;
+        public string MapErrorVisibility
+        {
+            get => _mapErrorVisibility;
+            set { _mapErrorVisibility = value; RaisePropertyChanged(() => MapErrorVisibility); }
+        }
+
         #endregion
 
         public ObservableCollection<UIElement> MapElements
@@ -126,6 +163,45 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        private CustomerVM _selectedCustomer;
+
+        public CustomerVM SelectedCustomer
+        {
+            get => _selectedCustomer;
+            set
+            {
+                _selectedCustomer = value; SelectedFestival.Customer = value; RaisePropertyChanged(() => SelectedCustomer); RaisePropertyChanged(() => SelectedFestival.Customer);
+            }
+        }
+
+        public CustomerVM NewSelectedCustomer
+        {
+            get => _selectedCustomer;
+            set
+            {
+                _selectedCustomer = value; NewInspection.Customer = value; RaisePropertyChanged(() => NewSelectedCustomer); RaisePropertyChanged(() => NewInspection.Customer);
+            }
+        }
+        private LocationVM _selectedLocation;
+
+        public LocationVM SelectedLocation
+        {
+            get => _selectedLocation;
+            set
+            {
+                _selectedLocation = value; SelectedFestival.Location = value; RaisePropertyChanged(() => SelectedLocation); RaisePropertyChanged(() => SelectedFestival.Location);
+            }
+        }
+
+        public LocationVM NewSelectedLocation
+        {
+            get => _selectedLocation;
+            set
+            {
+                _selectedLocation = value; NewInspection.Location = value; RaisePropertyChanged(() => NewSelectedLocation); RaisePropertyChanged(() => NewInspection.Location);
+            }
+        }
+
         private InspectorVM _selectedInspector;
         public InspectorVM SelectedInspector
         {
@@ -144,7 +220,49 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _selectedFestival = value;
+                
+                if(EditVisibility == "Visible" )
+                {
+                    _selectedFestival.ChosenCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetCertificatesInspection(_selectedFestival.Inspection_ID).Select(c => new CertificateVM(c)));
+                    LeftoverCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetMissingCertificates(_selectedFestival.Inspection_ID).Select(cert => new CertificateVM(cert)));
+                    RaisePropertyChanged(() => LeftoverCertificates);
+                }
                 RaisePropertyChanged(() => SelectedFestival);
+            }
+        }
+
+        private CertificateVM _selectedCertificate;
+
+       public CertificateVM SelectedCertificate
+        {
+            get => _selectedCertificate;
+            set
+            {
+                if (AvailableCertificates.Contains(value))
+                {
+                    NewInspection.ChosenCertificates.Add(value); AvailableCertificates.Remove(value);
+                }
+                else
+                {
+                    AvailableCertificates.Add(value); NewInspection.ChosenCertificates.Remove(value);
+                }
+                
+            }
+        }
+
+        public CertificateVM SelectedUpdateCertificate
+        {
+            get => _selectedCertificate;
+            set
+            {
+                if (LeftoverCertificates.Contains(value))
+                {
+                    SelectedFestival.ChosenCertificates.Add(value); LeftoverCertificates.Remove(value);
+                }
+                else
+                {
+                    LeftoverCertificates.Add(value); SelectedFestival.ChosenCertificates.Remove(value);
+                }
             }
         }
 
@@ -154,70 +272,94 @@ namespace Festispec_WPF.ViewModel
         public ICommand PlanInspectorCommand { get; set; }
         public ICommand CancelPlanningCommand { get; set; }
         public ICommand SearchDataGrid { get; set; }
+        public ICommand ShowDetailsFestivalCommand { get; set; }
+        public ICommand RefreshFestivalsCommand { get; set; }
+        public ICommand RefreshInspectorsCommand { get; set; }
+        public ICommand SafeEditCommand { get; set; }
+        public ICommand CreateNewLocationCommand { get; set; }
+        public ICommand CloseCreateCommand { get; set; }
+        public ICommand OpenCreateWindowCommand { get; set; }
+        public ICommand CreateNewInspectionCommand { get; set; }
+
+        public ICommand OpenCreateLocationWindowCommand { get; set; }
 
         public MapViewModel()
         {
-            _UOW = new ViewModelLocator().UOW;
+            
             ShowInspectorCommand = new RelayCommand<object>(showInspectorRoute);
             ShowInspectorListCommand = new RelayCommand(showInspectorList);
             ShowInspectionListCommand = new RelayCommand(showInspectionList);
             PlanInspectorCommand = new RelayCommand(planInspector);
             CancelPlanningCommand = new RelayCommand(cancelPlanning);
             SearchDataGrid = new RelayCommand(searchDatagrid);
-
+            ShowDetailsFestivalCommand = new RelayCommand(showDetailsFestival);
+            RefreshFestivalsCommand = new RelayCommand(LoadFestivals);
+            RefreshInspectorsCommand = new RelayCommand(LoadInspectors);
+            SafeEditCommand = new RelayCommand(complete);
+            CreateNewLocationCommand = new RelayCommand(AddNewLocation);
+            OpenCreateLocationWindowCommand = new RelayCommand(OpenCreateLocationWindow);
+            CreateNewInspectionCommand = new RelayCommand(AddNewInspection);
+            OpenCreateWindowCommand = new RelayCommand(OpenCreateWindow);
+            CloseCreateCommand = new RelayCommand(CloseCreate);
             InspectorVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
             ButtonControlVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
+            MapVisibility = "Visible";
+            EditVisibility = "Hidden";
+            MapErrorVisibility = "Hidden";
 
             searchText = "Zoek naam";
 
             //---INSPECTORS
-
-
-            var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i));
-            Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
-
-            var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
-            Festivals = new ObservableCollection<InspectionVM>(InspectionList);
-
-
-            ViewSource = new CollectionViewSource();
-            ViewSource.Source = Inspectors;
-
-            foreach (var inspector in Inspectors)
+            try
             {
+                _UOW =  ViewModelLocator.UOW;
+                LoadInspectors();
 
-                var location = getInspectorLocation(inspector);
+                LoadFestivals();
 
-                Pushpin pin = new Pushpin();
+                ViewSource = new CollectionViewSource();
+                ViewSource.Source = Inspectors;
 
-                Button button = new Button();
-                button.Width = 45;
-                button.Height = 45;
-                button.Opacity = 0;
-                button.Cursor = Cursors.Hand;
-                button.Command = ShowInspectorCommand;
-                button.CommandParameter = inspector.Inspector_ID;
+                foreach (var inspector in Inspectors)
+                {
 
-                pin.Content = button;
-                pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+                    var location = getInspectorLocation(inspector);
 
-                MapElements.Add(pin);
+                    Pushpin pin = new Pushpin();
 
+                    Button button = new Button();
+                    button.Width = 45;
+                    button.Height = 45;
+                    button.Opacity = 0;
+                    button.Cursor = System.Windows.Input.Cursors.Hand;
+                    button.Command = ShowInspectorCommand;
+                    button.CommandParameter = inspector.Inspector_ID;
+
+                    pin.Content = button;
+                    pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+
+                    MapElements.Add(pin);
+
+                }
+
+                //---INSPECTIONS
+                foreach (var festival in Festivals)
+                {
+                    var location = getFestivalLocation(festival);
+
+                    Pushpin pin = new Pushpin();
+
+                    pin.Background = new SolidColorBrush(Color.FromArgb(100, 100, 100, 100));
+                    pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+
+                    MapElements.Add(pin);
+                }
             }
-
-            //---INSPECTIONS
-            foreach (var festival in Festivals)
+            catch (Exception)
             {
-                var location = getFestivalLocation(festival);
-
-                Pushpin pin = new Pushpin();
-
-                pin.Background = new SolidColorBrush(Color.FromArgb(100, 100, 100, 100));
-                pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
-
-                MapElements.Add(pin);
+                MapErrorVisibility = "Visible";
             }
         }
     
@@ -229,16 +371,16 @@ namespace Festispec_WPF.ViewModel
                 Festivals = null;
 
                 
-                    if(searchText == "")
-                    {
-                        var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
-                        Festivals = new ObservableCollection<InspectionVM>(InspectionList);
-                    }
-                    else
-                    {
-                        var InspectionList = _UOW.Inspections.GetAll().ToList().Select(f => new InspectionVM(f)).Where(f => f.Title.ToLower().Contains(searchText.ToLower()));
-                        Festivals = new ObservableCollection<InspectionVM>(InspectionList);
-                    }
+                if(searchText == "")
+                {
+                    var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
+                    Festivals = new ObservableCollection<InspectionVM>(InspectionList);
+                }
+                else
+                {
+                    var InspectionList = _UOW.Inspections.GetAll().ToList().Select(f => new InspectionVM(f)).Where(f => f.Title.ToLower().Contains(searchText.ToLower()));
+                    Festivals = new ObservableCollection<InspectionVM>(InspectionList);
+                }
                 
 
                 if(Festivals.Count == 0 && searchText != "")
@@ -255,32 +397,32 @@ namespace Festispec_WPF.ViewModel
                 Inspectors = null;
                 ViewSource.Source = null;
 
-                    if (searchText == "")
-                    {
-                        var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i));
-                        Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
-                    }
-                    else
-                    {
-                        var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i)).Where(i => i.UserName.ToLower().Contains(searchText.ToLower()));
-                        Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
-                    }   
-                }
-
-                if (Inspectors.Count == 0 && searchText != "")
+                if (searchText == "")
                 {
-                    var inspector = new InspectorVM();
-                    inspector.UserName = "Geen zoekresultaten";
-                    Inspectors.Add(inspector);
+                    var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i));
+                    Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
                 }
-
-                ViewSource.Source = Inspectors;
-
-                if (SelectedFestival != null)
+                else
                 {
-                    calculateDistances();
-                }
+                    var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i)).Where(i => i.UserName.ToLower().Contains(searchText.ToLower()));
+                    Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
+                }   
             }
+
+            if (Inspectors.Count == 0 && searchText != "")
+            {
+                var inspector = new InspectorVM();
+                inspector.UserName = "Geen zoekresultaten";
+                Inspectors.Add(inspector);
+            }
+
+            ViewSource.Source = Inspectors;
+
+            if (SelectedFestival != null)
+            {
+                calculateDistances();
+            }
+        }
         
 
         private async Task calculateRoute(object inpsector_id)
@@ -459,5 +601,136 @@ namespace Festispec_WPF.ViewModel
             SelectedFestival = null;
             MapElements.Remove(lastLine);
         }
+
+        private void switchVisibility()
+        {
+            var temp = EditVisibility;
+            EditVisibility = MapVisibility;
+            MapVisibility = temp;
+            LeftoverCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetMissingCertificates(_selectedFestival.Inspection_ID).Select(cert => new CertificateVM(cert)));
+            RaisePropertyChanged(() => LeftoverCertificates);
+        }
+
+        private void showDetailsFestival()
+        {
+            //if (EditVisibility.Equals("Hidden"))
+            //{
+                switchVisibility();
+            
+            //}
+
+        }
+        private void LoadFestivals()
+        {
+            Festivals = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
+            Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(l => new LocationVM(l)));
+            Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().Select(c => new CustomerVM(c)));
+            RaisePropertyChanged(() => Festivals);
+            
+        }
+
+        private void LoadInspectors()
+        {
+            Inspectors = new ObservableCollection<InspectorVM>(_UOW.Inspectors.GetAll().Select(ins => new InspectorVM(ins)));
+            RaisePropertyChanged(() => Inspectors);
+            //if(ViewSource != null)
+            //{
+            //    ViewSource.View.Refresh();
+            //}
+            
+        }
+
+        private void complete()
+        {
+            _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Certificaat.Clear();
+            foreach (var item in SelectedFestival.ChosenCertificates)
+            {
+                _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Certificaat.Add(item.Certificate);
+            }
+
+            try
+            {
+                _UOW.Complete();
+                MessageBox.Show("De aanpassingen zijn doorgevoerd", "Het is gelukt!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                switchVisibility();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void OpenCreateWindow()
+        {
+            NewInspection = new InspectionVM();
+            //Managers = new ObservableCollection<EmployeeVM>(_UOW.Employee.GetAllManagers().Select(emp => new EmployeeVM(emp)));
+            Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
+            Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));
+            AvailableCertificates = new ObservableCollection<CertificateVM>(_UOW.Certificates.GetAll().Select(cert => new CertificateVM(cert)));
+            _createWindow = new CreateInspectionWindow();
+            _createWindow.Show();
+        }
+
+        private void CloseCreate()
+        {
+            NewInspection = null;
+            NewLocation = null;
+            _createWindow.Close();
+        }
+        private void AddNewInspection()
+        {
+            NewLocation = null;
+            _UOW.Inspections.Add(NewInspection.Inspection);
+
+            foreach (var item in NewInspection.ChosenCertificates)
+            {
+                _UOW.Inspections.Get(NewInspection.Inspection_ID).Certificaat.Add(item.Certificate);
+            }
+
+            try
+            {
+                _UOW.Complete();
+                _createWindow.Close();
+                LoadFestivals();
+
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void AddNewLocation()
+        {
+            _UOW.InspectionLocations.Add(NewLocation.Locatie);
+
+            try
+            {
+                _UOW.Complete();
+                _createLocation.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
+            RaisePropertyChanged(() => Locations);
+        }
+
+        private void OpenCreateLocationWindow()
+        {
+            NewLocation = new LocationVM();
+            _createLocation = new CreateLocationWindow();
+            _createLocation.Show();
+        }
+
     }
 }

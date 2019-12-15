@@ -20,25 +20,33 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0" >
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowHomeCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowHomeCommand, Source={StaticResource Locator}}" >
                 <Image Source="/Images/Home.png" />
             </Button>
         </Grid>
         <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKlantenCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/klanten.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInplanVerzoekenCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/verzoeken_inplannen.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInspecteursCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/inspecteurs.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowVragenlijstCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/vragenlijsten.PNG" />
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKalenderCommand}">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
                 <Image Source="/Images/weekkalender.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}"
+                    Content="Werknemers">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}"
+                    Content="Log out">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
             </Button>
         </StackPanel>
 
@@ -52,20 +60,14 @@
             <Border BorderThickness="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="134"/>
-                        <ColumnDefinition Width="263"/>
-                        <ColumnDefinition Width="126"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="600"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="630"/>
                     </Grid.ColumnDefinitions>
 
 
-                    <StackPanel Grid.Column="2" Grid.ColumnSpan="4" Width="600">
+                    <StackPanel Grid.Column="1" Width="600">
                         <Label Content="Werknemers" Grid.Column="2" FontSize="20" Background="AliceBlue"></Label>
                         <Grid  Height="50">
                             <Grid.ColumnDefinitions>
@@ -95,7 +97,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="" Binding="{Binding InflixName, Mode=TwoWay}"  Width="50"/>
+                                <DataGridTextColumn Header="" Binding="{Binding InfixName, Mode=TwoWay}"  Width="50"/>
                                 <DataGridTextColumn Header="Achternaam" Binding="{Binding LastName, Mode=TwoWay}"  Width="*"/>
                                 <DataGridTextColumn Header="Rol" Binding="{Binding Role, Mode=TwoWay}"  Width="*"/>
                                 <DataGridTextColumn Header="E-Mail" Binding="{Binding MailAdress, Mode=TwoWay}" Width="*" />
@@ -106,7 +108,7 @@
                         </DataGrid>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="7" Background="AliceBlue">
+                    <StackPanel Grid.Column="3" Background="AliceBlue">
                         <Label Content="Updaten werknemer" FontSize="30" Foreground="Black"></Label>
                         <Border BorderThickness="10">
                             <Grid>
@@ -119,47 +121,43 @@
                                 <!-- left row -->
                                 <StackPanel Grid.Column="0">
                                     <TextBlock Text="Voornaam" />
-                                    <TextBox Text="{Binding SelectedEmployee.FirstName, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.FirstName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Tussenvoegsel" />
-                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Achternaam" />
-                                    <TextBox Text="{Binding SelectedEmployee.LastName, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.LastName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Postcode" />
-                                    <TextBox Text="{Binding SelectedEmployee.Postcode, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.Postcode, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Huisnummer" />
-                                    <TextBox Text="{Binding SelectedEmployee.HouseNumber,Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.HouseNumber,Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Plaatsnaam" />
-                                    <TextBox Text="{Binding SelectedEmployee.TownName, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.TownName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Geboortedatum" />
-                                    <DatePicker Text="{Binding DoB}"/>
+                                    <DatePicker Text="{Binding DoB, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="IBAN" />
-                                    <TextBox Text="{Binding SelectedEmployee.Iban, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.Iban, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="E-mail" />
-                                    <TextBox Text="{Binding SelectedEmployee.MailAdress, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.MailAdress, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
 
                                 <!-- right row -->
                                 <StackPanel Grid.Column="2">
                                     <TextBlock Text="Rol" />
-                                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding SelectedEmployee.Role}" ItemsSource="{Binding NewEmployee.RolesCollection, Mode=TwoWay}"/>
+                                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding SelectedEmployee.Role}" ItemsSource="{Binding NewEmployee.RolesCollection, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Username" />
-                                    <TextBox Text="{Binding SelectedEmployee.Username, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.Username, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Wachtwoord" />
-                                    <TextBox Text="{Binding SelectedEmployee.Password, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.Password, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Telefoonnummer" />
-                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Text="Actief" />
-                                    <CheckBox IsChecked="{Binding SelectedEmployee.Active, Mode=TwoWay}"/>
+                                    <CheckBox IsChecked="{Binding SelectedEmployee.Active, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </Grid>
                         </Border>
                         <Grid>
                             <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditEmployeeCommand}" Width="200" Height="40"></Button>
                         </Grid>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="10" Background="AliceBlue">
-
                     </StackPanel>
                 </Grid>
             </Border>
