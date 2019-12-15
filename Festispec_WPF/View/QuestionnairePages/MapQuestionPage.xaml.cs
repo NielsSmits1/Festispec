@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec_WPF
+namespace Festispec_WPF.View.QuestionnairePages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MapQuestionPage.xaml
     /// </summary>
-    public partial class InspectorCrudWindow : Window
+    public partial class MapQuestionPage : Page
     {
-        public InspectorCrudWindow()
+        public MapQuestionPage()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_SelectionChanged()
-        {
-
         }
     }
 }

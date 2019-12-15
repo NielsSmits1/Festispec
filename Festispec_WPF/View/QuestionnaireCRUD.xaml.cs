@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec_WPF
+namespace Festispec_WPF.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for QuestionnaireCRUD.xaml
     /// </summary>
-    public partial class InspectorCrudWindow : Window
+    public partial class QuestionnaireCRUD : Window
     {
-        public InspectorCrudWindow()
+        public QuestionnaireCRUD()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_SelectionChanged()
-        {
-
         }
     }
 }

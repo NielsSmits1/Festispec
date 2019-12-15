@@ -16,6 +16,7 @@ using CommonServiceLocator;
 using FestiSpec.Domain.Model;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.ViewModel.QuestionnaireFolder;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using System.Configuration;
@@ -53,6 +54,8 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<RapportageVM>();
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CreateQuestionaireVM>();
+            SimpleIoc.Default.Register<EditQuestionnaireVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
             SimpleIoc.Default.Register<InspectionCrudVM>();
             SimpleIoc.Default.Register<MapViewModel>();
@@ -71,6 +74,14 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return new InspectorVM();
+            }
+        }
+
+        public QuestionaireCrudVM QuestionaireCrud
+        {
+            get
+            {
+                return new QuestionaireCrudVM();
             }
         }
 
@@ -118,6 +129,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public AppendixQuestionPageVM AppendixQuestionPageVM
+        {
+            get
+            {
+                return new AppendixQuestionPageVM();
+            }
+        }
+        
         public EmployeeVM GetRegisterVm
         {
             get
@@ -131,6 +150,17 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return new MenuVM();
+            }
+        }
+        
+
+
+
+    public CreateQuestionaireVM CreateQuestionnaire
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CreateQuestionaireVM>();
             }
         }
        
@@ -149,8 +179,55 @@ namespace Festispec_WPF.ViewModel
             {
                 return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
+            
         }
 
+        public OpenQuestionPageVM OpenQuestionPageVM
+        {
+            get
+            {
+                return new OpenQuestionPageVM();
+            }
+
+        }
+        public MultipleChoiceQuestionPageVM MultipleChoiceQuestionPageVM
+        {
+            get
+            {
+                return new MultipleChoiceQuestionPageVM();
+            }
+
+        }
+
+        public MapQuestionPageVM MapQuestionPageVM
+        {
+            get
+            {
+                return new MapQuestionPageVM();
+            }
+        }
+        public TableQuestionPageVM TableQuestionPageVM
+        {
+            get
+            {
+                return new TableQuestionPageVM();
+            }
+        }
+        public QuestionnaireVM QuestionnaireVM
+        {
+            get
+            {
+                return new QuestionnaireVM();
+            }
+        }
+        
+        public EditQuestionnaireVM EditQuestionnaireVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditQuestionnaireVM>();
+            }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

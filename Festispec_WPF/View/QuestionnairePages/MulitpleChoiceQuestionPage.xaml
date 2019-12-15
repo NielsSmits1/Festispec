@@ -1,0 +1,40 @@
+﻿<Page x:Class="Festispec_WPF.View.QuestionnairePages.MulitpleChoiceQuestionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding MultipleChoiceQuestionPageVM, Source={StaticResource Locator}}"
+      Title="MulitpleChoiceQuestionPage">
+
+    <Border Margin="10 0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <Label  FontSize="13" FontWeight="Bold">Aanmaken meerkeuzevraag</Label>
+                
+                <Label> Vraag:</Label>
+                <TextBox Text="{Binding NewMultipleChoiceQuestion.Question, Mode=TwoWay}"/>
+
+                <Label>Vraag optie:</Label>
+                <TextBox Text="{Binding newAnwserOption, Mode=TwoWay}"/>
+                <Button  Background="DarkGreen" FontWeight="Bold" Foreground="White" Padding="8,8,8,8" Content="Submit vraag optie" Margin="0 10"  Command="{Binding SubmitAnwserOption}" Click="Button_Click"/>
+            </StackPanel>
+            <Button Background="#FF44AE3F" FontWeight="Bold" Foreground="White" FontSize="15" Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Grid.Column="0" Content="Submit vraag" VerticalAlignment="Center" />
+
+            <DataGrid Grid.Column="1" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding}" Width="*"
+                                Foreground="Black" Header="Vraag opties" IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+    </Border>
+</Page>
