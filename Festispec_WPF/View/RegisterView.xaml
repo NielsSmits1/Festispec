@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
-        DataContext="{Binding GetRegisterVm, Source={StaticResource Locator}}"
+        DataContext="{Binding EmployeeCrud, Source={StaticResource Locator}}"
         WindowState="Maximized"
         Title="RegisterView">
 
@@ -21,33 +21,35 @@
                 <!-- left row -->
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="Voornaam" />
-                    <TextBox Text="{Binding FirstName}" />
+                    <TextBox Text="{Binding NewEmployee.FirstName}" />
                     <TextBlock Text="Tussenvoegsel" />
-                    <TextBox Text="{Binding InfixName}" />
+                    <TextBox Text="{Binding NewEmployee.InfixName}" />
                     <TextBlock Text="Achternaam" />
-                    <TextBox Text="{Binding LastName}" />
+                    <TextBox Text="{Binding NewEmployee.LastName}" />
                     <TextBlock Text="Postcode" />
-                    <TextBox Text="{Binding Postcode}" />
+                    <TextBox Text="{Binding NewEmployee.Postcode}" />
                     <TextBlock Text="Huisnummer" />
-                    <TextBox Text="{Binding HouseNumber}" />
+                    <TextBox Text="{Binding NewEmployee.HouseNumber}" />
+                    <TextBlock Text="Plaatsnaam" />
+                    <TextBox Text="{Binding NewEmployee.TownName}" />
                     <TextBlock Text="Geboortedatum" />
-                    <TextBox Text="{Binding DoB}" />
+                    <DatePicker SelectedDate="{Binding NewEmployee.DoB, Mode=TwoWay}"/>
                     <TextBlock Text="IBAN" />
-                    <TextBox Text="{Binding Iban}" />
-                    <TextBlock Text="e-mail" />
-                    <TextBox Text="{Binding MailAdress}" />
+                    <TextBox Text="{Binding NewEmployee.Iban}" />
+                    <TextBlock Text="E-mail" />
+                    <TextBox Text="{Binding NewEmployee.MailAdress}" />
                 </StackPanel>
 
                 <!-- right row -->
                 <StackPanel Grid.Column="2">
                     <TextBlock Text="Rol" />
-                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding Role}" ItemsSource="{Binding RolesCollection, Mode=TwoWay}"/>
+                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding NewEmployee.Role}" ItemsSource="{Binding NewEmployee.RolesCollection, Mode=TwoWay}"/>
                     <TextBlock Text="Username" />
-                    <TextBox Text="{Binding Username}" />
+                    <TextBox Text="{Binding NewEmployee.Username}" />
                     <TextBlock Text="Wachtwoord" />
-                    <TextBox Text="{Binding Password}" />
+                    <TextBox Text="{Binding NewEmployee.Password}" />
                     <TextBlock Text="Telefoonnummer" />
-                    <TextBox Text="{Binding Phonenumber}" />
+                    <TextBox Text="{Binding NewEmployee.Phonenumber}" />
 
                 </StackPanel>
             </Grid>

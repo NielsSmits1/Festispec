@@ -13,11 +13,13 @@
 */
 
 using CommonServiceLocator;
+using FestiSpec.Domain.Model;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.ViewModel.QuestionnaireFolder;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using System.Configuration;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -31,8 +33,7 @@ namespace Festispec_WPF.ViewModel
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
         /// 
-
-        static UnitOfWork _unitOfWork;
+        public static UnitOfWork UOW;
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -47,12 +48,18 @@ namespace Festispec_WPF.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-            _unitOfWork = new UnitOfWork();
+            UOW = new UnitOfWork();
+            SimpleIoc.Default.Register<MenuVM>();
+            SimpleIoc.Default.Register<EmployeeCrudVM>();
             SimpleIoc.Default.Register<InspectorCrudVM>();
+            SimpleIoc.Default.Register<RapportageVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<HomeScreenVM>();
             SimpleIoc.Default.Register<CreateQuestionaireVM>();
             SimpleIoc.Default.Register<EditQuestionnaireVM>();
+            SimpleIoc.Default.Register<CRCustomerVM>();
+            SimpleIoc.Default.Register<InspectionCrudVM>();
+            SimpleIoc.Default.Register<MapViewModel>();
         }
 
         public MainViewModel Main
@@ -90,7 +97,24 @@ namespace Festispec_WPF.ViewModel
                 return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
             }
         }
-        
+
+        public RapportageVM Rapportage
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RapportageVM>();
+            }
+        }
+
+        public EmployeeCrudVM EmployeeCrud
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EmployeeCrudVM>();
+            }
+        }
+
+
         public LoginRegisterVM GetLoginRegisterVm
         {
             get
@@ -102,7 +126,7 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return new CRCustomerVM();
+                return ServiceLocator.Current.GetInstance<CRCustomerVM>();
             }
         }
 
@@ -118,31 +142,19 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return new EmployeeVM();
+                return new EmployeeVM(EmployeeCrud);
             }
         }
 
-        public HomeScreenVM HomeScreen
+        public MenuVM Menu
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<HomeScreenVM>();
+                return new MenuVM();
             }
         }
         
-        //public UnitOfWork UOW
-        //{
-        //    get
-        //    {
-        //        if(_unitOfWork == null)
-        //        {
-        //            _unitOfWork = new UnitOfWork(new FestiSpecEntities());
-        //        }
-        //        return _unitOfWork;
-        //    }
-        //}
 
-        public static UnitOfWork UOW => _unitOfWork;
 
 
     public CreateQuestionaireVM CreateQuestionnaire
@@ -150,6 +162,21 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<CreateQuestionaireVM>();
+       
+
+        public InspectionCrudVM InspectionCrud
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InspectionCrudVM>();
+            }
+        }
+
+        public MapViewModel MapView
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
             
         }

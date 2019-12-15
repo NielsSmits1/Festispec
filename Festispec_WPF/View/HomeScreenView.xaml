@@ -7,81 +7,108 @@
         mc:Ignorable="d"
         Title="Home" 
         WindowState="Maximized"
-        DataContext="{Binding HomeScreen, Source={StaticResource Locator}}">
+        Width="1920"
+        Height="1080"
+        DataContext="{Binding Menu, Source={StaticResource Locator}}">
 
-    <Border Padding="50">
-        <StackPanel Margin="3,14,-3,-3">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Column="0" >
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowHomeCommand}">
+                <Image Source="/Images/Home.png" />
+            </Button>
+        </Grid>
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKlantenCommand}">
+                <Image Source="/Images/klanten.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInplanVerzoekenCommand}">
+                <Image Source="/Images/verzoeken_inplannen.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInspecteursCommand}">
+                <Image Source="/Images/inspecteurs.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowVragenlijstCommand}">
+                <Image Source="/Images/vragenlijsten.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKalenderCommand}">
+                <Image Source="/Images/weekkalender.PNG" />
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowWerknemerCommand}"
+                    Content="Werknemers">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            </Button>
+            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding LogOutCommand}"
+                    Content="Log out">
+                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            </Button>
+        </StackPanel>
 
-                <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
+        <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
+                Festispec
+            </TextBlock>
+        </Grid>
+
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Border BorderThickness="100">
+                <StackPanel>
+                    <Grid Margin="0, 0, 0, 100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"
                         Grid.Column="0" Command="{Binding ShowKlantenCommand}" Background="#FF6A6A6A">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10" />
-                        </Style>
-                    </Button.Resources>
-                    <Image Source="/Images/klanten.png"/>
-                </Button>
+                            <Image Source="/Images/klanten.png"/>
+                        </Button>
 
-                <Button x:Name="InplanButton" Width="150" Height="150" FontSize="16"
+                        <Button x:Name="InplanButton" Width="150" Height="150" FontSize="16"
                         Foreground="White"
                         Grid.Column="1" Command="{Binding ShowInplanVerzoekenCommand}" Background="#FF6A6A6A">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10" />
-                        </Style>
-                    </Button.Resources>
-                    <Image Source="/Images/verzoeken_inplannen.png"/>
-                </Button>
+                            <Image Source="/Images/verzoeken_inplannen.png"/>
+                        </Button>
 
-                <Button x:Name="InspecteursButton" Width="150" Height="150" FontSize="16"
+                        <Button x:Name="InspecteursButton" Width="150" Height="150" FontSize="16"
                         Foreground="White"  
                         Grid.Column="2" Command="{Binding ShowInspecteursCommand}" Background="#FF6A6A6A">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10" />
-                        </Style>
-                    </Button.Resources>
-                    <Image Source="/Images/inspecteurs.png"/>
-                </Button>
+                            <Image Source="/Images/inspecteurs.png"/>
+                        </Button>
 
-            </Grid>
-            <Border Margin="75">
-                <Grid RenderTransformOrigin="0.5,0.783" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    </Grid>
 
-                    <Button x:Name="VragenlijstButton" Width="150" Height="150" FontSize="16" 
+                    <Grid Width="900" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="VragenlijstButton" Width="150" Height="150" FontSize="16" 
                         Foreground="White"  
                         Grid.Column="0" Command="{Binding ShowVragenlijstCommand}" Background="#FF6A6A6A">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10" />
-                            </Style>
-                        </Button.Resources>
-                        <Image Source="/Images/vragenlijsten.png" Height="140" Width="136"/>
-                    </Button>
+                            <Image Source="/Images/vragenlijsten.png" Height="140" Width="136"/>
+                        </Button>
 
-                    <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
+                        <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"  
                         Grid.Column="1" Command="{Binding ShowKalenderCommand}" Background="#FF6A6A6A">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10" />
-                            </Style>
-                        </Button.Resources>
-                        <Image Source="/Images/weekkalender.png" Width="134"/>
-                    </Button>
-                </Grid>
+                            <Image Source="/Images/weekkalender.png" Width="134"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
             </Border>
-        </StackPanel>
-    </Border>
+        </Grid>
+    </Grid>
 </Window>

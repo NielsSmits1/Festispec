@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.Model;
+using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-
+using FestiSpec.Domain.Model;
 namespace Festispec_WPF.ViewModel
 {
     public class LoginRegisterVM : ViewModelBase
@@ -20,42 +22,39 @@ namespace Festispec_WPF.ViewModel
 
         //reference commands
         public ICommand LoginCommand { get; set; }
-        public ICommand RegisterCommand { get; set; }
 
         //local variables
-        private RegisterView _windowRegisterView;
+        private IUnitOfWork UOW;
 
         public LoginRegisterVM()
         {
             LoginCommand = new RelayCommand(HandleLogin);
-            RegisterCommand = new RelayCommand(OpenRegisterWindow);
+            UOW = ViewModelLocator.UOW;
         }
 
         private void HandleLogin()
         {
-            using (var context = new FestiSpecEntities())
+            //Window was corrupt
+            var targetPerson = UOW.Employee.GetAll()
+                .FirstOrDefault(e => e.Wachtwoord == Password && e.Username == Username);
+
+            if (targetPerson == null)
             {
-                var targetPerson = (from person in context.Werknemer.ToList()
-                                    where person.Username == Username && person.Wachtwoord == Password
-                                    select person).ToList();
-
-                if (targetPerson.Count == 0) 
-                {
-                    Console.WriteLine("Invalid login");
-                    //TODO give error message
-                }
-                else
-                {
-                    Console.WriteLine("Valid login");
-                    //TODO send to next screen
-                }
+                Console.WriteLine("failed to login");
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                  MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void OpenRegisterWindow()
-        {
-            _windowRegisterView = new RegisterView();
-            _windowRegisterView.Show();
+            else
+            {
+                //TODO exit main window
+                Console.WriteLine("login ok");
+                Username = "";
+                Password = "";
+                RaisePropertyChanged(() => Username);
+                RaisePropertyChanged(() => Password);
+                HomeScreenView home = new HomeScreenView();
+                home.Show();
+            }
         }
     }
 }
