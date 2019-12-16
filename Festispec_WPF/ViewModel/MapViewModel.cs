@@ -693,7 +693,7 @@ namespace Festispec_WPF.ViewModel
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
             Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));
             AvailableCertificates = new ObservableCollection<CertificateVM>(_UOW.Certificates.GetAll().Select(cert => new CertificateVM(cert)));
-            AvailableQuestionnaires = new ObservableCollection<QuestionnaireVM>(_UOW.Questionnaires.GetAll().Select(vr => new QuestionnaireVM(vr)));
+            AvailableQuestionnaires = new ObservableCollection<QuestionnaireVM>(_UOW.Questionnaires.GetAll().Where(vr => vr.Actief == true).Select(vr => new QuestionnaireVM(vr)));
             _createWindow = new CreateInspectionWindow();
             _createWindow.Show();
         }

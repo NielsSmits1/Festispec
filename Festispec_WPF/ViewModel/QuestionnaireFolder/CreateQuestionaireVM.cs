@@ -1,5 +1,6 @@
 ﻿using FestiSpec.Domain.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using Festispec_WPF.View.QuestionnairePages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -10,10 +11,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
@@ -227,9 +229,13 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void SubmitCreatedQuestionnaire()
         {
+            var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             SubmitQuestionnaire();
             newQuestionnaireVM = new QuestionnaireVM();
             selectedTemplate = new QuestionnaireVM() ;
+            var newWindow = new QuestionnaireCRUD();
+            currentWindow.Close();
+            newWindow.Show();
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
