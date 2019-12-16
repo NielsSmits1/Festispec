@@ -58,10 +58,6 @@ namespace Festispec_WPF.ViewModel
             UOW.Questionnaires.Get(SelectedQuestionnaire.ID).Actief = false;
 
             saveToDatabase();
-            //foreach (var item in UOW.Context.Vragenlijst.Where(v => v.Actief == true))
-            //{
-            //    Questionnaires.Add(new QuestionnaireVM(item));
-            //}
 
             Questionnaires = new ObservableCollection<QuestionnaireVM>();
             foreach (var item in UOW.Context.Vragenlijst.Where(v => v.Actief == true))
