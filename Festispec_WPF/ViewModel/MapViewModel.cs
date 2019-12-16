@@ -734,5 +734,11 @@ namespace Festispec_WPF.ViewModel
             _createLocation.Show();
         }
 
+        private void PlanInspector()
+        {
+            SelectedFestival.Inspection.Inspecteur.Add(SelectedInspector.InspectorData);
+            _UOW.Complete();
+        }
+
     }
 }
