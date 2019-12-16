@@ -138,6 +138,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void CreateTemplate()
         {
+            basedOfTemplate = true;
             SubmitQuestionnaire();
 
             Template newTemplate = new Template();
@@ -177,7 +178,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             {
 
             newQuestionnaireVM.IsFilled = false;
-            newQuestionnaireVM.IsActive = true;
+                if (basedOfTemplate)
+                {
+                    newQuestionnaireVM.IsActive = false;
+                }
+                else
+                {
+                    newQuestionnaireVM.IsActive = true;
+                }
             UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
 
             saveToDatabase();
@@ -225,6 +233,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            basedOfTemplate = false;
         }
 
         private void SubmitCreatedQuestionnaire()
