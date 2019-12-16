@@ -769,6 +769,9 @@ namespace Festispec_WPF.ViewModel
             InspectionVisibility = "Visible";
             InspectorVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
+            ButtonControlVisibility = "Hidden";
+            PlanInspectorVisibility = "Hidden";
+            SelectedFestival = null;
         }
 
     }
