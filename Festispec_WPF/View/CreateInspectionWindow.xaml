@@ -187,19 +187,19 @@
                 </Grid.RowDefinitions>
                 <Label Content="Vragenlijsten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
                 <Label Content="Gekozen Vragenlijsten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedQuestionnaire}" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding NewInspection.ChosenQuestionnaires}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="{Binding Title}"></TextBlock>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
 
                 <Label Content="Beschikbare vragenlijsten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" MaxHeight="100" SelectedItem=""  ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListBox Grid.Row="1" Grid.Column="3" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding SelectedQuestionnaire}"  ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableQuestionnaires}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="{Binding Title}"></TextBlock>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

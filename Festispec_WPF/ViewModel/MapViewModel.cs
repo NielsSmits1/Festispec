@@ -39,6 +39,8 @@ namespace Festispec_WPF.ViewModel
 
         public ObservableCollection<CertificateVM> AvailableCertificates { get; set; }
         public ObservableCollection<CertificateVM> LeftoverCertificates { get; set; }
+
+        public ObservableCollection<QuestionnaireVM> AvailableQuestionnaires { get; set; }
         public CollectionViewSource ViewSource { get; set; }
 
         private CreateLocationWindow _createLocation;
@@ -249,6 +251,23 @@ namespace Festispec_WPF.ViewModel
                 
             }
         }
+        private QuestionnaireVM _selectedQuestionnaire;
+
+        public QuestionnaireVM SelectedQuestionnaire
+        {
+            get => _selectedQuestionnaire;
+            set
+            {
+                if (AvailableQuestionnaires.Contains(value))
+                {
+                    NewInspection.ChosenQuestionnaires.Add(value); AvailableQuestionnaires.Remove(value);
+                }
+                else
+                {
+                    AvailableQuestionnaires.Add(value); NewInspection.ChosenQuestionnaires.Remove(value);
+                }
+            }
+        }
 
         public CertificateVM SelectedUpdateCertificate
         {
@@ -282,6 +301,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand CreateNewInspectionCommand { get; set; }
 
         public ICommand OpenCreateLocationWindowCommand { get; set; }
+        public ICommand AddToInspectionCommand { get; set; }
 
         public MapViewModel()
         {
@@ -301,6 +321,7 @@ namespace Festispec_WPF.ViewModel
             CreateNewInspectionCommand = new RelayCommand(AddNewInspection);
             OpenCreateWindowCommand = new RelayCommand(OpenCreateWindow);
             CloseCreateCommand = new RelayCommand(CloseCreate);
+            AddToInspectionCommand = new RelayCommand(addInspectorToInspection);
             InspectorVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
             ButtonControlVisibility = "Hidden";
@@ -672,6 +693,7 @@ namespace Festispec_WPF.ViewModel
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
             Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));
             AvailableCertificates = new ObservableCollection<CertificateVM>(_UOW.Certificates.GetAll().Select(cert => new CertificateVM(cert)));
+            AvailableQuestionnaires = new ObservableCollection<QuestionnaireVM>(_UOW.Questionnaires.GetAll().Select(vr => new QuestionnaireVM(vr)));
             _createWindow = new CreateInspectionWindow();
             _createWindow.Show();
         }
@@ -690,6 +712,11 @@ namespace Festispec_WPF.ViewModel
             foreach (var item in NewInspection.ChosenCertificates)
             {
                 _UOW.Inspections.Get(NewInspection.Inspection_ID).Certificaat.Add(item.Certificate);
+            }
+
+            foreach (var item in NewInspection.ChosenQuestionnaires)
+            {
+                _UOW.Inspections.Get(NewInspection.Inspection_ID).Vragenlijst.Add(item.ToModel());
             }
 
             try
@@ -734,10 +761,14 @@ namespace Festispec_WPF.ViewModel
             _createLocation.Show();
         }
 
-        private void PlanInspector()
+        private void addInspectorToInspection()
         {
             SelectedFestival.Inspection.Inspecteur.Add(SelectedInspector.InspectorData);
             _UOW.Complete();
+
+            InspectionVisibility = "Visible";
+            InspectorVisibility = "Hidden";
+            SingleInspectorVisibility = "Hidden";
         }
 
     }
