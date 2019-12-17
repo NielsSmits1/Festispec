@@ -136,8 +136,12 @@
     <Compile Include="ViewModel\LoginRegisterVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MapViewModel.cs" />
+    <Compile Include="ViewModel\OfflineMapVM.cs" />
     <Compile Include="View\CreateInspectorWindow.xaml.cs">
       <DependentUpon>CreateInspectorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OfflineMapView.xaml.cs">
+      <DependentUpon>OfflineMapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
@@ -228,6 +232,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OfflineMapView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

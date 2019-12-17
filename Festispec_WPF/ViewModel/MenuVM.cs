@@ -42,7 +42,7 @@ namespace Festispec_WPF.ViewModel
             ShowVragenlijstCommand = new RelayCommand(ShowVragenlijst);
             ShowKalenderCommand = new RelayCommand(ShowKalender);
 
-            CheckInternetConnection();
+            HasInternet();
             ShowWerknemerCommand = new RelayCommand(ShowWerknemer);
             LogOutCommand = new RelayCommand(LogOut);
         }
@@ -56,62 +56,111 @@ namespace Festispec_WPF.ViewModel
         }
         public void ShowKlanten()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _customerCrudWindow = new CustomerCrudWindow();
-            _customerCrudWindow.Show();
-            currentWindow.Close();
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                _customerCrudWindow = new CustomerCrudWindow();
+                _customerCrudWindow.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowInplanVerzoeken()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _planWindow = new MapView();
-            _planWindow.Show();
-            currentWindow.Close();
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                _planWindow = new MapView();
+                _planWindow.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowInspecteurs()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _inspecteursWindow = new InspectorCrudWindow();
-            _inspecteursWindow.Show();
-            currentWindow.Close();
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                _inspecteursWindow = new InspectorCrudWindow();
+                _inspecteursWindow.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowVragenlijst()
         {
-            throw new NotImplementedException();
+            if (HasInternet())
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowKalender()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _weekPlanningWindow = new WeekplanningView();
-            _weekPlanningWindow.Show();
-            currentWindow.Close();
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                _weekPlanningWindow = new WeekplanningView();
+                _weekPlanningWindow.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowWerknemer()
-        {
+        { 
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _employeeView = new EmployeeView();
-            _employeeView.Show();
-            currentWindow.Close();
-        }
-        public void LogOut()
-        {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            //_mainWindow = new MainWindow();
-            //_mainWindow.Show();
+
+            if (HasInternet())
+            {
+                _employeeView = new EmployeeView();
+                _employeeView.Show();
+            }
+            else
+            {
+                LogOut();
+            }
+
             currentWindow.Close();
         }
 
-        private void CheckInternetConnection()
+        public void LogOut()
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
+
+            _mainWindow = new MainWindow();
+            _mainWindow.Show();
+        }
+
+        private bool HasInternet()
         {
             try
             {
                 using (var client = new WebClient())
                 using (client.OpenRead("http://google.com/generate_204")) 
                     ErrorVisibility = "Hidden";
+
+                return true;
             }
             catch
             {
-                ErrorVisibility = "Visible";
+                ErrorVisibility = "Visible";             
+                return false;
             }
         }
     }

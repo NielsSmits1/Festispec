@@ -163,6 +163,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public OfflineMapVM OfflineMapView
+        {
+            get
+            {
+                return new OfflineMapVM();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

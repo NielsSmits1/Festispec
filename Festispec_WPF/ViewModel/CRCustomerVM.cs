@@ -53,14 +53,14 @@ namespace Festispec_WPF.ViewModel
         }
         public CRCustomerVM()
         {
-            UOW = new ViewModelLocator().UOW;         
+            UOW = new ViewModelLocator().UOW;
 
             NewCustomer = new CustomerVM();
             NewcontactPerson = new ContactPersonVM();
 
-            NewcontactPerson.customer = NewCustomer; 
+            NewcontactPerson.customer = NewCustomer;
 
-            
+
             UOW.Complete();
 
             Customers = new ObservableCollection<CustomerVM>(UOW.Customers.GetAll().ToList().Select(a => new CustomerVM(a)));

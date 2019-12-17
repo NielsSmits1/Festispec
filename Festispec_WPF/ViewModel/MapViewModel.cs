@@ -12,14 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -259,7 +256,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 if (LeftoverCertificates.Contains(value))
-                {
+                {  
                     SelectedFestival.ChosenCertificates.Add(value); LeftoverCertificates.Remove(value);
                 }
                 else
@@ -384,6 +381,15 @@ namespace Festispec_WPF.ViewModel
                 Bedrijfsnaam = _selectedFestival.Customer.CompanyName,
             };
 
+            var certifcateList = new List<Certificaat>();
+            foreach(var certificate in _selectedFestival.ChosenCertificates.Select(cert => cert.Certificate).ToList())
+            {
+                certifcateList.Add(new Certificaat
+                {
+                    Name = certificate.Name
+                });
+            }
+
             var obj = new Inspectie
             {
                 Titel = _selectedFestival.Title,
@@ -391,7 +397,8 @@ namespace Festispec_WPF.ViewModel
                 Klant = customer,
                 StartDate = _selectedFestival.StartDate,
                 EndDate = _selectedFestival.EndDate,
-                Versie = _selectedFestival.Version
+                Versie = _selectedFestival.Version,
+                Certificaat = certifcateList
             };
 
             var json = new JavaScriptSerializer().Serialize(obj);
@@ -666,8 +673,8 @@ namespace Festispec_WPF.ViewModel
         {
             Festivals = new ObservableCollection<InspectionVM>();
             string json = File.ReadAllText(@"../../inspection.json");
-            var test = JsonConvert.DeserializeObject<Inspectie>((json));
-            Festivals.Add(new InspectionVM(test));
+            var festivalData = JsonConvert.DeserializeObject<Inspectie>((json));
+            Festivals.Add(new InspectionVM(festivalData));
             RaisePropertyChanged(() => Festivals);
         }
 
