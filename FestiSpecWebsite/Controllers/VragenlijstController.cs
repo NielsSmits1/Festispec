@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using FestiSpec.Domain.Model;
 
 namespace FestiSpecWebsite.Controllers
@@ -25,12 +26,20 @@ namespace FestiSpecWebsite.Controllers
         // GET: Vragenlijst/Details/5
         public ActionResult Details(int? id)
         {
-            var userId = (int)(HttpContext.Session["userId"]);
+            var userId = Convert.ToInt32(FormsAuthentication.Decrypt(Request.Cookies["Cookie1"].Value).Name);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Vragenlijst vragenlijst = db.Vragenlijst.Find(id);
+
+            vragenlijst.Bijlagevraag_vragenlijst = db.Bijlagevraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
+            vragenlijst.Kaartvraag_vragenlijst = db.Kaartvraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
+            vragenlijst.Meerkeuzevraag_vragenlijst = db.Meerkeuzevraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
+            vragenlijst.Openvraag_vragenlijst = db.Openvraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
+            vragenlijst.Tabelvraag_vragenlijst = db.Tabelvraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
+
             if (vragenlijst == null)
             {
                 return HttpNotFound();

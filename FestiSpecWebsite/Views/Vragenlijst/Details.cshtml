@@ -4,53 +4,74 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>
+    @Model.Titel
+</h2>
 
 <div>
     <h4>Vragenlijst</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Titel)
-        </dt>
+    <form action="" method="post">
+        @foreach (var vraag in Model.Meerkeuzevraag_vragenlijst)
+        {
+            <div>
+                <label>
+                    @vraag.Meerkeuzevraag.Vraag
+                </label>
+                <span>
+                    Show meerkeuze
+                </span>
+            </div>
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Titel)
-        </dd>
+        @foreach (var vraag in Model.Openvraag_vragenlijst)
+        {
+            <div>
+                <label>
+                    @vraag.Openvraag.Vraag
+                </label>
+                <input type="text" name="@vraag.Openvraag.ID" />
+            </div>
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Versie)
-        </dt>
+        @foreach (var vraag in Model.Bijlagevraag_vragenlijst)
+        {
+            <div>
+                <label>
+                    @vraag.Bijlagevraag.Vraag
+                </label>
+                <span>
+                    Show bijlage
+                </span>
+            </div>
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Versie)
-        </dd>
+        @foreach (var vraag in Model.Kaartvraag_vragenlijst)
+        {
+            <div>
+                <label>
+                    @vraag.Kaartvraag.Vraag
+                </label>
+                <span>
+                    Show kaart
+                </span>
+            </div>
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Opmerking)
-        </dt>
+        @foreach (var vraag in Model.Tabelvraag_vragenlijst)
+        {
+            <div>
+                <label>
+                    @vraag.Tabelvraag.Vraag
+                </label>
+                <span>
+                    Show tabel
+                </span>
+            </div>
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Opmerking)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Is_Ingevuld)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Is_Ingevuld)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Template1.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Template1.Type)
-        </dd>
-
-    </dl>
+        <input type="submit" value="Verstuur" />
+    </form>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
