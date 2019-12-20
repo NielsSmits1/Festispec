@@ -88,6 +88,7 @@
           <Property Name="Achternaam" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Telefoonnummer" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Actief" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspecteur">
           <Key>
@@ -341,6 +342,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="ntext" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+          <Property Name="Actief" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Vereiste_certificaten">
           <Key>
@@ -1209,6 +1211,7 @@
           <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telefoonnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Actief" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Afspraak" Relationship="Self.FK_Afspraak_Contactpersoon" FromRole="Contactpersoon" ToRole="Afspraak" />
           <NavigationProperty Name="Klant" Relationship="Self.FK_Contactpersoon_Klant" FromRole="Contactpersoon" ToRole="Klant" />
         </EntityType>
@@ -1492,6 +1495,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
+          <Property Name="Actief" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Template_ID_vragenlijst" FromRole="Template" ToRole="Vragenlijst" />
           <NavigationProperty Name="Vragenlijst1" Relationship="Self.FK_Vragenlijst_Template" FromRole="Template" ToRole="Vragenlijst" />
         </EntityType>
@@ -2205,6 +2209,7 @@
                 <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
                 <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2455,6 +2460,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Vragenlijst_ID" ColumnName="Vragenlijst_ID" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
