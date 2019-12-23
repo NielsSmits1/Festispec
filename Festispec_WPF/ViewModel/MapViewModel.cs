@@ -3,7 +3,7 @@ using FestiSpec.Domain.Model;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using Geocoding;
 using Geocoding.Microsoft;
 using Microsoft.Maps.MapControl.WPF;
@@ -41,6 +41,7 @@ namespace Festispec_WPF.ViewModel
         public ObservableCollection<CertificateVM> LeftoverCertificates { get; set; }
 
         public ObservableCollection<QuestionnaireVM> AvailableQuestionnaires { get; set; }
+        public ObservableCollection<QuestionnaireVM> LeftoverQuestionnaires { get; set; }
         public CollectionViewSource ViewSource { get; set; }
 
         private CreateLocationWindow _createLocation;
@@ -135,6 +136,14 @@ namespace Festispec_WPF.ViewModel
             set { _mapErrorVisibility = value; RaisePropertyChanged(() => MapErrorVisibility); }
         }
 
+        private string _confirmVisibility;
+
+        public string ConfirmVisibility
+        {
+            get => _confirmVisibility;
+            set { _confirmVisibility = value; RaisePropertyChanged(() => ConfirmVisibility); }
+        }
+
         #endregion
 
         public ObservableCollection<UIElement> MapElements
@@ -222,12 +231,14 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _selectedFestival = value;
-                
-                if(EditVisibility == "Visible" )
+                CommandManager.InvalidateRequerySuggested();
+                if(EditVisibility == "Visible" && _selectedFestival != null)
                 {
                     _selectedFestival.ChosenCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetCertificatesInspection(_selectedFestival.Inspection_ID).Select(c => new CertificateVM(c)));
                     LeftoverCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetMissingCertificates(_selectedFestival.Inspection_ID).Select(cert => new CertificateVM(cert)));
+                    LeftoverQuestionnaires = new ObservableCollection<QuestionnaireVM>(_UOW.Inspections.GetMissingQuestionnaires(_selectedFestival.Inspection_ID).Select(q => new QuestionnaireVM(q)));
                     RaisePropertyChanged(() => LeftoverCertificates);
+                    RaisePropertyChanged(() => LeftoverQuestionnaires);
                 }
                 RaisePropertyChanged(() => SelectedFestival);
             }
@@ -269,6 +280,22 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public QuestionnaireVM SelectedUpdateQuestionnaire
+        {
+            get => _selectedQuestionnaire;
+            set
+            {
+                if (LeftoverQuestionnaires.Contains(value))
+                {
+                    SelectedFestival.ChosenQuestionnaires.Add(value); LeftoverQuestionnaires.Remove(value);
+                }
+                else
+                {
+                    LeftoverQuestionnaires.Add(value); SelectedFestival.ChosenQuestionnaires.Remove(value);
+                }
+            }
+        }
+
         public CertificateVM SelectedUpdateCertificate
         {
             get => _selectedCertificate;
@@ -303,6 +330,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand OpenCreateLocationWindowCommand { get; set; }
         public ICommand AddToInspectionCommand { get; set; }
 
+        public ICommand ShowConfirmationDetailsCommand { get; set; }
+
         public MapViewModel()
         {
             
@@ -312,7 +341,7 @@ namespace Festispec_WPF.ViewModel
             PlanInspectorCommand = new RelayCommand(planInspector);
             CancelPlanningCommand = new RelayCommand(cancelPlanning);
             SearchDataGrid = new RelayCommand(searchDatagrid);
-            ShowDetailsFestivalCommand = new RelayCommand(showDetailsFestival);
+            ShowDetailsFestivalCommand = new RelayCommand(showDetailsFestival, canShowDetails);
             RefreshFestivalsCommand = new RelayCommand(LoadFestivals);
             RefreshInspectorsCommand = new RelayCommand(LoadInspectors);
             SafeEditCommand = new RelayCommand(complete);
@@ -322,6 +351,7 @@ namespace Festispec_WPF.ViewModel
             OpenCreateWindowCommand = new RelayCommand(OpenCreateWindow);
             CloseCreateCommand = new RelayCommand(CloseCreate);
             AddToInspectionCommand = new RelayCommand(addInspectorToInspection);
+            ShowConfirmationDetailsCommand = new RelayCommand(showConfirmation);
             InspectorVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
             ButtonControlVisibility = "Hidden";
@@ -606,9 +636,14 @@ namespace Festispec_WPF.ViewModel
 
         private void showInspectionList()
         {
+            LoadFestivals();
+            LoadInspectors();
             InspectionVisibility = "Visible";
+            MapVisibility = "Visible";
             InspectorVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
+            EditVisibility = "Hidden";
+            
         }
 
         private void planInspector()
@@ -631,7 +666,9 @@ namespace Festispec_WPF.ViewModel
             EditVisibility = MapVisibility;
             MapVisibility = temp;
             LeftoverCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetMissingCertificates(_selectedFestival.Inspection_ID).Select(cert => new CertificateVM(cert)));
+            LeftoverQuestionnaires = new ObservableCollection<QuestionnaireVM>(_UOW.Inspections.GetMissingQuestionnaires(_selectedFestival.Inspection_ID).Select(q => new QuestionnaireVM(q)));
             RaisePropertyChanged(() => LeftoverCertificates);
+            RaisePropertyChanged(() => LeftoverQuestionnaires);
         }
 
         private void showDetailsFestival()
@@ -642,6 +679,11 @@ namespace Festispec_WPF.ViewModel
             
             //}
 
+        }
+
+        private bool canShowDetails()
+        {
+            return _selectedFestival != null;
         }
         private void LoadFestivals()
         {
@@ -670,7 +712,11 @@ namespace Festispec_WPF.ViewModel
             {
                 _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Certificaat.Add(item.Certificate);
             }
-
+            _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Vragenlijst.Clear();
+            foreach (var item in SelectedFestival.ChosenQuestionnaires)
+            {
+                _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Vragenlijst.Add(item.questionnaireData);
+            }
             try
             {
                 _UOW.Complete();
@@ -772,6 +818,19 @@ namespace Festispec_WPF.ViewModel
             ButtonControlVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
             SelectedFestival = null;
+        }
+
+        private void showConfirmation()
+        {
+            ConfirmVisibility = "Visible";
+            EditVisibility = "Hidden";
+            MapVisibility = "Hidden";
+        }
+
+        private void cancelConfirmation()
+        {
+            ConfirmVisibility = "Hidden";
+            MapVisibility = "Visible";
         }
 
     }
