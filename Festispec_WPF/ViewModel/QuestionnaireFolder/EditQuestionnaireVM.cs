@@ -26,6 +26,48 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public ICommand PositionDownCommand { get; set; }
         public ICommand DeleteQuestionCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
+        public ICommand ShowQuestionnaire { get; set; }
+        public ICommand ShowQuestions { get; set; }
+        public ICommand ShowOrder { get; set; }
+
+        #region visibility Properties
+        private string _questionVisibility;
+
+        public string QuestionVisibility
+        {
+            get { return _questionVisibility; }
+            set
+            {
+                _questionVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _questionaireVisibility;
+
+        public string QuestionaireVisibility
+        {
+            get { return _questionaireVisibility; }
+            set
+            {
+                _questionaireVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _orderVisibility;
+
+        public string OrderVisibility
+        {
+            get { return _orderVisibility; }
+            set
+            {
+                _orderVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
         public IQuestion SelectedItem
         {
             get
@@ -101,6 +143,32 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             PositionDownCommand = new RelayCommand(changePositionDOWN);
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
             SubmitCommand = new RelayCommand(Submit);
+            ShowQuestionnaire = new RelayCommand(showQuestionnaire);
+            ShowQuestions = new RelayCommand(showQuestions);
+            ShowOrder = new RelayCommand(showOrder);
+
+            showQuestionnaire();
+        }
+
+        public void showQuestionnaire()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Visible";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showQuestions()
+        {
+            QuestionVisibility = "Visible";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showOrder()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Visible";
         }
 
         private void Submit()

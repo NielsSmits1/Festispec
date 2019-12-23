@@ -5,21 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="250" d:DesignWidth="800"
       DataContext="{Binding MapQuestionPageVM, Source={StaticResource Locator}}"
 
       Title="MapQuestionPage">
 
-    <StackPanel>
-        <StackPanel HorizontalAlignment="Center">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Center" Margin="70,0">
             <Label  FontSize="13" FontWeight="Bold">Aanmaken kaartvraag</Label>
             
             <TextBlock Text="Vraag:"></TextBlock>
             <TextBox Text= "{Binding NewMapQuestion.Question, Mode=TwoWay}"/>
-            <Button  Background="DarkGreen" FontWeight="Bold" Foreground="White" Padding="8,8,8,8" Command="{Binding LoadPicture}" Width="300" Margin="0,20,0,0">Load Afbeelding</Button>
-            <Button Background="#FF44AE3F" FontWeight="Bold" FontSize="15" Foreground="White" Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" Margin="0 50" />
-            <Image Width="300" Height="300" Source="{Binding NewMapQuestion.Picture, UpdateSourceTrigger=PropertyChanged}" ></Image>
+            <StackPanel Orientation="Horizontal">
+                <Button Background="DarkGreen" FontWeight="Bold" Foreground="White" Padding="8,8,8,8" Command="{Binding LoadPicture}" Width="200" Margin="20,20" Height="45">Load Afbeelding</Button>
+                <Button Background="#FF44AE3F" FontWeight="Bold" FontSize="15" Foreground="White" Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="200" Margin="20, 50" />
+            </StackPanel>
         </StackPanel>
-
+        <Image Width="300" Height="200" Source="{Binding NewMapQuestion.Picture, UpdateSourceTrigger=PropertyChanged}" ></Image>
     </StackPanel>
 </Page>

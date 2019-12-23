@@ -12,75 +12,111 @@
     <Border Padding="10 10">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Vertical">
-                <Label  FontSize="13" FontWeight="Bold">Aanmaken vragenlijst</Label>
-                <Label>Titel</Label>
-                <TextBox Text="{Binding EditetQuestionnaireVM.Title, Mode=TwoWay}"></TextBox>
-                <Label>Versie</Label>
-                <TextBox Text="{Binding EditetQuestionnaireVM.Version, Mode=TwoWay}"></TextBox>
-                <Label>Opmerking</Label>
-                <TextBox Text="{Binding EditetQuestionnaireVM.Note, Mode=TwoWay}"></TextBox>
-                <Button Background="#176CEB" FontSize="15"  FontWeight="Bold" Foreground="White" Content="Submit" Padding="10,10,10,10" Margin="0,20,0,0" Command="{Binding SubmitCommand}"></Button>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Background="#8000FF">
+                <Button Command="{Binding ShowHomeCommand}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
+                    Festispec
+                </Button>
+            </Grid>
+            <Label Grid.Column="1" Grid.Row="1" Foreground="Gray" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Content="Vragenlijst edit" />
+            <StackPanel Grid.Row="2" Grid.Column="1" Background="Gray">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30,30,0,0">
+                        <Button Command="{Binding ShowQuestionnaire}" Cursor="Hand" Content="Vragenlijst" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
+                        <Button Command="{Binding ShowQuestions}" Cursor="Hand" Content="Vragen" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
+                        <Button Command="{Binding ShowOrder}" Cursor="Hand" Content="Volgorde" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
+                    </StackPanel>
+                    <Border Visibility="Hidden" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20">
+                            <Label  FontSize="25" FontWeight="Bold" Foreground="White">Aanmaken vragenlijst</Label>
+                            <Border BorderBrush="White" BorderThickness="2"/>
+                            <Label>Titel</Label>
+                            <TextBox Text="{Binding EditetQuestionnaireVM.Title, Mode=TwoWay}"></TextBox>
+                            <Label>Versie</Label>
+                            <TextBox Text="{Binding EditetQuestionnaireVM.Version, Mode=TwoWay}"></TextBox>
+                            <Label>Opmerking</Label>
+                            <TextBox Text="{Binding EditetQuestionnaireVM.Note, Mode=TwoWay}"></TextBox>
+                        </StackPanel>
+                    </Border>
+                    <Border Visibility="Visible" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                        <StackPanel Margin="10">
+                            <Label FontSize="25" FontWeight="Bold" Foreground="White">Aanmaken vragen</Label>
+                            <Border BorderBrush="White" BorderThickness="2"/>
+                            <Label Margin="0,15,0,0" FontSize="13" FontWeight="Bold">Type toevoegen vraag</Label>
+                            <ComboBox ItemsSource="{Binding _QuestionTypes}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding SelectedQuestionType}"></ComboBox>
+                            <Frame Margin="0,20,0,0" NavigationUIVisibility="Hidden" Grid.Column="1" Opacity="1" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </Border>
+                    <Border Visibility="{Binding OrderVisibility}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                        <StackPanel>
+                            <Label Margin="15,0,0,0" FontSize="13" FontWeight="Bold">Vragenlijst</Label>
+                            <ScrollViewer Height="300">
+                                <DataGrid CanUserSortColumns="False" Margin="15,30,15,0" AutoGenerateColumns="False" ItemsSource="{Binding EditetQuestionnaireVM.questions}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Positie" Width="*">
+                                            <DataGridTemplateColumn.CellTemplate >
+                                                <DataTemplate >
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding Position}"></TextBlock>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
 
-                <Label Margin="0,15,0,0" FontSize="13" FontWeight="Bold">Type toevoegen vraag</Label>
-                <ComboBox ItemsSource="{Binding _QuestionTypes}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding SelectedQuestionType}"></ComboBox>
+
+                                        <DataGridTemplateColumn Header="Vraag" Width="*">
+                                            <DataGridTemplateColumn.CellTemplate >
+                                                <DataTemplate >
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding Question}" TextWrapping="Wrap"></TextBlock>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+
+                                        <DataGridTemplateColumn Header="Vraagtype" Width="*">
+                                            <DataGridTemplateColumn.CellTemplate >
+                                                <DataTemplate >
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding QuestionType}"></TextBlock>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="1,1,1,1">
+                                                        <Button BorderBrush="Black" Foreground="Black" Background="#439EE8" Command="{Binding EditQuestionnaireVM.PositionUpCommand, Source={StaticResource Locator} }" Height="20">^</Button>
+                                                        <Button BorderBrush="Black" Foreground="Black" Background="#439EE8"  Command="{Binding EditQuestionnaireVM.PositionDownCommand, Source={StaticResource Locator} }" Height="20" >v</Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Foreground="White" Content="X" FontWeight="Bold" Background="#EB0D00" Command="{Binding EditQuestionnaireVM.DeleteQuestionCommand, Source={StaticResource Locator} }"></Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Border>
+
+                </Grid>
+                <Button HorizontalAlignment="Right" Margin="0,20,50,0" Background="#176CEB" FontSize="15" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitCommand}"></Button>
             </StackPanel>
-            <Frame NavigationUIVisibility="Hidden" Grid.Column="1" Opacity="1" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" />
-
-
-
-            <Label Grid.Column="3" Margin="15,0,0,0" FontSize="13" FontWeight="Bold">Vragenlijst</Label>
-            <DataGrid Grid.Column="3" CanUserSortColumns="False" Margin="15,30,15,0" AutoGenerateColumns="False" ItemsSource="{Binding EditetQuestionnaireVM.questions}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Positie" Width="*">
-                        <DataGridTemplateColumn.CellTemplate >
-                            <DataTemplate >
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Position}"></TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-
-                    <DataGridTemplateColumn Header="Vraag" Width="*">
-                        <DataGridTemplateColumn.CellTemplate >
-                            <DataTemplate >
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Question}" TextWrapping="Wrap"></TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <DataGridTemplateColumn Header="Vraagtype" Width="*">
-                        <DataGridTemplateColumn.CellTemplate >
-                            <DataTemplate >
-                                <TextBlock VerticalAlignment="Center" Text="{Binding QuestionType}"></TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="1,1,1,1">
-                                    <Button BorderBrush="Black" Foreground="Black" Background="#439EE8" Command="{Binding EditQuestionnaireVM.PositionUpCommand, Source={StaticResource Locator} }" Height="20">^</Button>
-                                    <Button BorderBrush="Black" Foreground="Black" Background="#439EE8"  Command="{Binding EditQuestionnaireVM.PositionDownCommand, Source={StaticResource Locator} }" Height="20" >v</Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Foreground="White" Content="X" FontWeight="Bold" Background="#EB0D00" Command="{Binding EditQuestionnaireVM.DeleteQuestionCommand, Source={StaticResource Locator} }"></Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
         </Grid>
     </Border>
 </Window>

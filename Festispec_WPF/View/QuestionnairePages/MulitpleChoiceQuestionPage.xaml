@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="250" d:DesignWidth="800"
       DataContext="{Binding MultipleChoiceQuestionPageVM, Source={StaticResource Locator}}"
       Title="MulitpleChoiceQuestionPage">
 
@@ -15,8 +15,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="61" />
+            </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="0">
+            <StackPanel Grid.Column="0" Grid.Row="0" Margin="10,0">
                 <Label  FontSize="13" FontWeight="Bold">Aanmaken meerkeuzevraag</Label>
                 
                 <Label> Vraag:</Label>
@@ -24,11 +28,13 @@
 
                 <Label>Vraag optie:</Label>
                 <TextBox Text="{Binding newAnwserOption, Mode=TwoWay}"/>
-                <Button  Background="DarkGreen" FontWeight="Bold" Foreground="White" Padding="8,8,8,8" Content="Submit vraag optie" Margin="0 10"  Command="{Binding SubmitAnwserOption}" Click="Button_Click"/>
             </StackPanel>
-            <Button Background="#FF44AE3F" FontWeight="Bold" Foreground="White" FontSize="15" Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Grid.Column="0" Content="Submit vraag" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Button  Background="DarkGreen" FontWeight="Bold" Foreground="White" Padding="8,8,8,8" Content="Submit vraag optie" Margin="50 10"  Command="{Binding SubmitAnwserOption}"/>
+                <Button Background="#FF44AE3F" FontWeight="Bold" Foreground="White" FontSize="15" Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Content="Submit vraag" VerticalAlignment="Center" />
+            </StackPanel>
 
-            <DataGrid Grid.Column="1" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False">
+            <DataGrid Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding}" Width="*"
                                 Foreground="Black" Header="Vraag opties" IsReadOnly="True" />

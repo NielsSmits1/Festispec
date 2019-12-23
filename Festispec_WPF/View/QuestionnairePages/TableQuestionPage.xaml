@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="250" d:DesignWidth="800"
       Title="TableQuestionPage"
       DataContext="{Binding TableQuestionPageVM, Source={StaticResource Locator}}">
     <StackPanel HorizontalAlignment="Center">
@@ -19,6 +19,6 @@
 
         <TextBlock Margin="0,20,0,0" Text="AntwoordKop:"></TextBlock>
         <TextBox Text="{Binding NewTableQuestion.AnswerHead, Mode=TwoWay}"/>
-        <Button Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" FontSize="15" Padding="10,10,10,10" Margin="0 50" />
+        <Button Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" FontSize="15" Padding="10,10,10,10" Margin="0 30" />
     </StackPanel>
 </Page>

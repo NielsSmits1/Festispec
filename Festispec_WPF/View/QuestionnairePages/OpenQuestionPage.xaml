@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="250" d:DesignWidth="800"
       DataContext="{Binding OpenQuestionPageVM, Source={StaticResource Locator}}"
       Title="OpenQuestionPage">
 
         <StackPanel HorizontalAlignment="Center">
-        <Label  FontSize="13" FontWeight="Bold">Aanmaken open vraag</Label>
-        <TextBlock Text="Vraag:"></TextBlock>
-            <TextBox Text="{Binding NewOpenQuestion.Question, Mode=TwoWay}"/>
-        <Button  Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" FontSize="15" Padding="10,10,10,10" Margin="0 50" />
+            <Label  FontSize="13" FontWeight="Bold">Aanmaken open vraag</Label>
+            <TextBlock Text="Vraag:"></TextBlock>
+                <TextBox Text="{Binding NewOpenQuestion.Question, Mode=TwoWay}"/>
+            <Button  Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" FontSize="15" Padding="10,10,10,10" Margin="0 50" />
         </StackPanel>
 </Page>

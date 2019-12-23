@@ -24,10 +24,5 @@ namespace Festispec_WPF.View.QuestionnairePages
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

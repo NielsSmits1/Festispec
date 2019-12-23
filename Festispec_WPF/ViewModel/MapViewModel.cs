@@ -324,7 +324,6 @@ namespace Festispec_WPF.ViewModel
 
                 foreach (var inspector in Inspectors)
                 {
-
                     var location = getInspectorLocation(inspector);
 
                     Pushpin pin = new Pushpin();
