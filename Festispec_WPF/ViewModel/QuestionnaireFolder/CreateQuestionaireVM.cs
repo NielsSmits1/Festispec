@@ -1,5 +1,6 @@
 ﻿using FestiSpec.Domain.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using Festispec_WPF.View.QuestionnairePages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -10,10 +11,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
@@ -136,18 +138,22 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void CreateTemplate()
         {
+            basedOfTemplate = true;
             SubmitQuestionnaire();
 
             Template newTemplate = new Template();
             newTemplate.Vragenlijst_ID = newQuestionnaireVM.ID;
             newTemplate.Type = TemplateType;
+
+            if (newTemplate.Type != null)
+            {
+
             UOW.Context.Template.Add(newTemplate);
 
             var temp = UOW.Questionnaires.Get(newQuestionnaireVM.ID);
             temp.Template_ID = newTemplate.ID;
-
             saveToDatabase();
-            newQuestionnaireVM = new QuestionnaireVM();
+
             TemplateType = null;
             RaisePropertyChanged("TemplateType");
             templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
@@ -157,11 +163,29 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             {
                 clearSelectedTemplate(selectedTemplate);
             }
+            }
+            else
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            newQuestionnaireVM = new QuestionnaireVM();
         }
         private void SubmitQuestionnaire()
         {
+
+            if(newQuestionnaireVM.Title != null & newQuestionnaireVM.Version != null)
+            {
+
             newQuestionnaireVM.IsFilled = false;
-            newQuestionnaireVM.IsActive = true;
+                if (basedOfTemplate)
+                {
+                    newQuestionnaireVM.IsActive = false;
+                }
+                else
+                {
+                    newQuestionnaireVM.IsActive = true;
+                }
             UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
 
             saveToDatabase();
@@ -202,16 +226,25 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 clearSelectedTemplate(selectedTemplate);
 
                 saveToDatabase();
-
             }
-
+            }
+            else
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            basedOfTemplate = false;
         }
 
         private void SubmitCreatedQuestionnaire()
         {
+            var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             SubmitQuestionnaire();
             newQuestionnaireVM = new QuestionnaireVM();
-            basedOfTemplate = false;
+            selectedTemplate = new QuestionnaireVM() ;
+            var newWindow = new QuestionnaireCRUD();
+            currentWindow.Close();
+            newWindow.Show();
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
@@ -312,8 +345,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
             catch
             {
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }

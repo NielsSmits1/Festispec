@@ -165,7 +165,8 @@
                                                                             </Style>
                                                                         </Button.Style>
                                                                     </Button>
-                                                                    <Button Command="{Binding DataContext.ShowNinjaCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Margin="4" Width="75" Height="25" Cursor="Hand" Content="Show">
+                                                                    <!-- Adding here-->
+                                                                    <Button Command="{Binding DataContext.AddToInspectionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Margin="4" Width="75" Height="25" Cursor="Hand" Content="Toevoegen">
                                                                         <Button.Style>
                                                                             <Style TargetType="{x:Type Button}">
                                                                                 <Setter Property="Background" Value="Green"/>
