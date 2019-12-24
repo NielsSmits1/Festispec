@@ -61,6 +61,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _inspectorVisibility = value;
+                CommandManager.InvalidateRequerySuggested();
                 base.RaisePropertyChanged();
             }
         }
@@ -73,6 +74,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _singleInspectorVisibility = value;
+                CommandManager.InvalidateRequerySuggested();
                 base.RaisePropertyChanged();
             }
         }
@@ -85,6 +87,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _buttonControlVisibility = value;
+                CommandManager.InvalidateRequerySuggested();
                 base.RaisePropertyChanged();
             }
         }
@@ -97,6 +100,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _inspectionVisibility = value;
+                CommandManager.InvalidateRequerySuggested();
                 base.RaisePropertyChanged();
             }
         }
@@ -109,6 +113,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _planInspectorVisibility = value;
+                CommandManager.InvalidateRequerySuggested();
                 base.RaisePropertyChanged();
             }
         }
@@ -118,7 +123,7 @@ namespace Festispec_WPF.ViewModel
         public string MapVisibility
         {
             get => _mapVisibility;
-            set { _mapVisibility = value; RaisePropertyChanged(() => MapVisibility); }
+            set { _mapVisibility = value; CommandManager.InvalidateRequerySuggested(); RaisePropertyChanged(() => MapVisibility); }
         }
 
         private string _editVisibility;
@@ -126,14 +131,14 @@ namespace Festispec_WPF.ViewModel
         public string EditVisibility
         {
             get => _editVisibility;
-            set { _editVisibility = value; RaisePropertyChanged(() => EditVisibility); }
+            set { _editVisibility = value; CommandManager.InvalidateRequerySuggested(); RaisePropertyChanged(() => EditVisibility); }
         }
 
         private string _mapErrorVisibility;
         public string MapErrorVisibility
         {
             get => _mapErrorVisibility;
-            set { _mapErrorVisibility = value; RaisePropertyChanged(() => MapErrorVisibility); }
+            set { _mapErrorVisibility = value; CommandManager.InvalidateRequerySuggested(); RaisePropertyChanged(() => MapErrorVisibility); }
         }
 
         private string _confirmVisibility;
@@ -141,7 +146,7 @@ namespace Festispec_WPF.ViewModel
         public string ConfirmVisibility
         {
             get => _confirmVisibility;
-            set { _confirmVisibility = value; RaisePropertyChanged(() => ConfirmVisibility); }
+            set { _confirmVisibility = value; CommandManager.InvalidateRequerySuggested(); RaisePropertyChanged(() => ConfirmVisibility); }
         }
 
         #endregion
@@ -331,13 +336,14 @@ namespace Festispec_WPF.ViewModel
         public ICommand AddToInspectionCommand { get; set; }
 
         public ICommand ShowConfirmationDetailsCommand { get; set; }
+        public ICommand CancelConfirmationCommand { get; set; }
 
         public MapViewModel()
         {
             
             ShowInspectorCommand = new RelayCommand<object>(showInspectorRoute);
-            ShowInspectorListCommand = new RelayCommand(showInspectorList);
-            ShowInspectionListCommand = new RelayCommand(showInspectionList);
+            ShowInspectorListCommand = new RelayCommand(showInspectorList, CanShowInspectors);
+            ShowInspectionListCommand = new RelayCommand(showInspectionList, CanShowInspections);
             PlanInspectorCommand = new RelayCommand(planInspector);
             CancelPlanningCommand = new RelayCommand(cancelPlanning);
             SearchDataGrid = new RelayCommand(searchDatagrid);
@@ -352,15 +358,8 @@ namespace Festispec_WPF.ViewModel
             CloseCreateCommand = new RelayCommand(CloseCreate);
             AddToInspectionCommand = new RelayCommand(addInspectorToInspection);
             ShowConfirmationDetailsCommand = new RelayCommand(showConfirmation);
-            InspectorVisibility = "Hidden";
-            PlanInspectorVisibility = "Hidden";
-            ButtonControlVisibility = "Hidden";
-            SingleInspectorVisibility = "Hidden";
-            MapVisibility = "Visible";
-            EditVisibility = "Hidden";
-            MapErrorVisibility = "Hidden";
-
-            searchText = "Zoek naam";
+            CancelConfirmationCommand = new RelayCommand(cancelConfirmation);
+           
 
             //---INSPECTORS
             try
@@ -412,6 +411,16 @@ namespace Festispec_WPF.ViewModel
             {
                 MapErrorVisibility = "Visible";
             }
+
+            InspectorVisibility = "Hidden";
+            PlanInspectorVisibility = "Hidden";
+            ButtonControlVisibility = "Hidden";
+            SingleInspectorVisibility = "Hidden";
+            MapVisibility = "Visible";
+            EditVisibility = "Hidden";
+            MapErrorVisibility = "Hidden";
+            InspectionVisibility = "Visible";
+            searchText = "Zoek naam";
         }
     
 
@@ -625,10 +634,15 @@ namespace Festispec_WPF.ViewModel
                 selectSingleInspector(inspector_id);
                 SingleInspectorVisibility = "Visible";
             }
+
+            ConfirmVisibility = "Hidden";
+            MapVisibility = "Visible";
         }
 
         private void showInspectorList()
         {
+            Inspectors = new ObservableCollection<InspectorVM>(_UOW.Inspectors.GetActiveInspectors().Select(ins => new InspectorVM(ins)));
+            RaisePropertyChanged(() => Inspectors);
             InspectorVisibility = "Visible";
             InspectionVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
@@ -656,6 +670,10 @@ namespace Festispec_WPF.ViewModel
             ButtonControlVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
+            ConfirmVisibility = "Hidden";
+            MapVisibility = "Visible";
+            InspectionVisibility = "Visible";
+            InspectorVisibility = "Hidden";
             SelectedFestival = null;
             MapElements.Remove(lastLine);
         }
@@ -696,7 +714,7 @@ namespace Festispec_WPF.ViewModel
 
         private void LoadInspectors()
         {
-            Inspectors = new ObservableCollection<InspectorVM>(_UOW.Inspectors.GetAll().Select(ins => new InspectorVM(ins)));
+            Inspectors = new ObservableCollection<InspectorVM>(_UOW.Inspectors.GetActiveInspectors().Select(ins => new InspectorVM(ins)));
             RaisePropertyChanged(() => Inspectors);
             //if(ViewSource != null)
             //{
@@ -831,6 +849,16 @@ namespace Festispec_WPF.ViewModel
         {
             ConfirmVisibility = "Hidden";
             MapVisibility = "Visible";
+        }
+
+        private bool CanShowInspections()
+        {
+            return InspectionVisibility != "Visible";
+        }
+
+        private bool CanShowInspectors()
+        {
+            return InspectorVisibility != "Visible";
         }
 
     }

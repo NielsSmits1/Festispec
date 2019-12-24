@@ -84,7 +84,7 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    
+
                                     <Grid Grid.Row="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -97,16 +97,6 @@
                                         <Button Content="Gedetailleerde weergave" Grid.Row="0" Grid.ColumnSpan="2" Height="50" FontSize="28" Background="Purple" Foreground="White" Command="{Binding ShowDetailsFestivalCommand}" Visibility="{Binding InspectionVisibility}"></Button>
                                         <Button Command="{Binding ShowInspectionListCommand}" Grid.Column="0" Grid.Row="1" Content="Inspecties" Width="175" Height="50" FontSize="28"/>
                                         <Button Command="{Binding ShowInspectorListCommand}" Grid.Column="1" Grid.Row="1" Content="Inspecteurs" Width="175" Height="50" FontSize="28"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="0" Visibility="{Binding PlanInspectorVisibility}">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Button Command="{Binding ShowInspectorListCommand}" Grid.Column="0" Content="Inspecteurs" Width="175" Height="50" FontSize="28"/>
-                                        <Button Grid.Column="1" Content="Details" Width="175" Height="50" FontSize="28"/>
                                     </Grid>
 
                                     <Grid Background="Gray" Grid.Row="1">
@@ -170,7 +160,7 @@
                                                                         </Button.Style>
                                                                     </Button>
                                                                     <!-- Adding here-->
-                                                                    <Button Command="{Binding DataContext.ShowConfirmationDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Margin="4" Width="75" Height="25" Cursor="Hand" Content="Toevoegen">
+                                                                    <Button Command="{Binding DataContext.ShowConfirmationDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Margin="4" Width="75" Height="25" Cursor="Hand" Content="Toevoegen" Visibility="{Binding DataContext.ButtonControlVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}">
                                                                         <Button.Style>
                                                                             <Style TargetType="{x:Type Button}">
                                                                                 <Setter Property="Background" Value="Green"/>
@@ -383,33 +373,14 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-
-                                <Button Content="Volgende" Background="#8000FF" Foreground="White" FontSize="20" Width="125" HorizontalAlignment="Right" Cursor="Hand" Grid.Column="1">
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Setter Property="Background" Value="Green"/>
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Opacity" Value="0.8" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
                             </Grid>
                         </Border>
 
                         <Grid Grid.Column="2" Background="Gray" >
-                            <Grid Visibility="{Binding ConfirmVisibility}">
+                            
+                            <!--Confirm section-->
+                            <Grid Visibility="{Binding ConfirmVisibility}" Background="LightCyan">
+                                
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="5"/>
@@ -438,7 +409,7 @@
                                     </ListBox>
                                     <TextBlock Width="150"></TextBlock>
                                     <Label Content="Locatie inspectie:" HorizontalAlignment="Center"/>
-                                    <TextBlock Width="150" Text="{Binding SelectedFestival.Address}"></TextBlock>
+                                    <TextBlock Width="150" Text="{Binding SelectedFestival.Address}" TextWrapping="Wrap"></TextBlock>
                                     <Label Content="Opdrachtgever:" HorizontalAlignment="Center"/>
                                     <TextBlock Width="150" Text="{Binding SelectedFestival.Customer.CompanyName}"></TextBlock>
                                 </StackPanel>
@@ -461,11 +432,11 @@
                                     </ListBox>
                                     <TextBlock Width="150"></TextBlock>
                                     <Label Content="Woonplaats:" HorizontalAlignment="Center"/>
-                                    <TextBlock Width="150" Text="{Binding SelectedInspector.Address}"></TextBlock>
+                                    <TextBlock Width="150" Text="{Binding SelectedInspector.Address}" TextWrapping="Wrap"></TextBlock>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" >
-                                    <Button Content="Annuleer bevestiging" Width="145" Margin="5,0,0,0" Background="IndianRed" BorderBrush="Black"></Button>
+                                    <Button Content="Annuleer bevestiging" Width="145" Margin="5,0,0,0" Background="IndianRed" BorderBrush="Black" Command="{Binding CancelConfirmationCommand}"></Button>
                                     <Button Content="Bevestig Inspecteur" Width="145" Margin="95,0,0,0" Background="ForestGreen" Foreground="White" BorderBrush="Black" Command="{Binding AddToInspectionCommand}"/>
                                 </StackPanel>
                             </Grid>
