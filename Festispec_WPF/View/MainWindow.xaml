@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF"
+        xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
         WindowState="Maximized"
         DataContext="{Binding GetLoginRegisterVm, Source={StaticResource Locator}}"
@@ -17,9 +18,9 @@
                 <StackPanel Margin="20">
                     <!-- Login fields-->
                     <TextBlock Text="Username" Padding="0 5"/>
-                    <TextBox Text="{Binding Username}" Padding="0 5" />
+                    <TextBox Padding="0 5" Name="firstName" Text="{Binding Username}" />
 
-                    <TextBlock Text="Password" Padding="0 5" />
+                    <TextBlock Text="Password" Padding="0 5" Name="password"/>
                     <TextBox Text="{Binding Password}" Padding="0 5" Margin="0 0 0 20"/>
 
                     <!-- Login button -->

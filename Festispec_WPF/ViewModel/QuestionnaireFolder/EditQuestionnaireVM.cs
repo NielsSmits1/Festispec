@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Application = System.Windows.Application;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
@@ -26,6 +27,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public ICommand PositionDownCommand { get; set; }
         public ICommand DeleteQuestionCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
         public ICommand ShowQuestionnaire { get; set; }
         public ICommand ShowQuestions { get; set; }
         public ICommand ShowOrder { get; set; }
@@ -146,8 +148,15 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             ShowQuestionnaire = new RelayCommand(showQuestionnaire);
             ShowQuestions = new RelayCommand(showQuestions);
             ShowOrder = new RelayCommand(showOrder);
+            CancelCommand = new RelayCommand(cancelQuestionnaire);
 
             showQuestionnaire();
+        }
+
+        private void cancelQuestionnaire()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            currentWindow.Close();
         }
 
         public void showQuestionnaire()

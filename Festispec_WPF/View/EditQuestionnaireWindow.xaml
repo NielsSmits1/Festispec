@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
+        xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         WindowState="Maximized"
         mc:Ignorable="d"
         Title="EditQuestionnaireWindow" Height="1080" Width="1920"
-        DataContext="{Binding EditQuestionnaireVM, Source={StaticResource Locator}}">
+      DataContext="{Binding EditQuestionnaireVM, Source={StaticResource Locator}}">
 
     <Border Padding="10 10">
         <Grid>
@@ -21,12 +22,13 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Background="#8000FF">
-                <Button Command="{Binding ShowHomeCommand}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
-                    Festispec
-                </Button>
+
+            <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Background="#8000FF">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
+                Festispec
+                </TextBlock>
             </Grid>
-            <Label Grid.Column="1" Grid.Row="1" Foreground="Gray" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Content="Vragenlijst edit" />
+            <Label Grid.Column="1" Grid.Row="1" Foreground="Gray" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Content="Vragenlijst aanpassen" />
             <StackPanel Grid.Row="2" Grid.Column="1" Background="Gray">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -38,19 +40,28 @@
                         <Button Command="{Binding ShowQuestions}" Cursor="Hand" Content="Vragen" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
                         <Button Command="{Binding ShowOrder}" Cursor="Hand" Content="Volgorde" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
                     </StackPanel>
-                    <Border Visibility="Hidden" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
-                        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20">
+                    <Border Visibility="{Binding QuestionaireVisibility}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
                             <Label  FontSize="25" FontWeight="Bold" Foreground="White">Aanmaken vragenlijst</Label>
                             <Border BorderBrush="White" BorderThickness="2"/>
                             <Label>Titel</Label>
-                            <TextBox Text="{Binding EditetQuestionnaireVM.Title, Mode=TwoWay}"></TextBox>
+                            <TextBox Name="title">
+                                <TextBox.Text>
+                                    <Binding Path="EditetQuestionnaireVM.Title" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=title}" Foreground="Red"/>
                             <Label>Versie</Label>
                             <TextBox Text="{Binding EditetQuestionnaireVM.Version, Mode=TwoWay}"></TextBox>
                             <Label>Opmerking</Label>
                             <TextBox Text="{Binding EditetQuestionnaireVM.Note, Mode=TwoWay}"></TextBox>
                         </StackPanel>
                     </Border>
-                    <Border Visibility="Visible" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                    <Border Visibility="{Binding QuestionVisibility}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
                         <StackPanel Margin="10">
                             <Label FontSize="25" FontWeight="Bold" Foreground="White">Aanmaken vragen</Label>
                             <Border BorderBrush="White" BorderThickness="2"/>
@@ -60,10 +71,18 @@
                         </StackPanel>
                     </Border>
                     <Border Visibility="{Binding OrderVisibility}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
-                        <StackPanel>
-                            <Label Margin="15,0,0,0" FontSize="13" FontWeight="Bold">Vragenlijst</Label>
+                        <StackPanel Margin="10,0">
+                            <Label FontSize="25" FontWeight="Bold" Foreground="White">Vragenlijst volgorde</Label>
+                            <Border BorderBrush="White" BorderThickness="2"/>
                             <ScrollViewer Height="300">
-                                <DataGrid CanUserSortColumns="False" Margin="15,30,15,0" AutoGenerateColumns="False" ItemsSource="{Binding EditetQuestionnaireVM.questions}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                                <DataGrid RowHeaderWidth="0" CanUserSortColumns="False" Margin="0,10,0,0" AutoGenerateColumns="False" ItemsSource="{Binding EditetQuestionnaireVM.questions}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                                    <DataGrid.Resources>
+                                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                                            <Setter Property="Background" Value="#565656"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Height" Value="30" />
+                                        </Style>
+                                    </DataGrid.Resources>
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Positie" Width="*">
                                             <DataGridTemplateColumn.CellTemplate >
@@ -115,7 +134,50 @@
                     </Border>
 
                 </Grid>
-                <Button HorizontalAlignment="Right" Margin="0,20,50,0" Background="#176CEB" FontSize="15" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitCommand}"></Button>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Margin="0,30,40,0" FontSize="24" Width="150" FontWeight="Bold" Foreground="White" Content="Annuleren" Padding="10,10,10,10" Command="{Binding CancelCommand}" Height="40" Background="#CE3131">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.8" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitCommand}" Height="50" Background="#8000FF">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.8" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Border>

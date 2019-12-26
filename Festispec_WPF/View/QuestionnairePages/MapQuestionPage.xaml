@@ -17,8 +17,47 @@
             <TextBlock Text="Vraag:"></TextBlock>
             <TextBox Text= "{Binding NewMapQuestion.Question, Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal">
-                <Button Background="DarkGreen" FontWeight="Bold" Foreground="White" Padding="8,8,8,8" Command="{Binding LoadPicture}" Width="200" Margin="20,20" Height="45">Load Afbeelding</Button>
-                <Button Background="#FF44AE3F" FontWeight="Bold" FontSize="15" Foreground="White" Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="200" Margin="20, 50" />
+                <Button Padding="8,8,8,8" Command="{Binding LoadPicture}" Width="200" Margin="20,20" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="3" BorderBrush="#8000FF" Foreground="#8000FF" Background="Transparent" FontWeight="ExtraBold" Cursor="Hand" Content="Laad afbeelding">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0.8" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="200" Margin="20, 50" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Green"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0.8" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
         </StackPanel>
         <Image Width="300" Height="200" Source="{Binding NewMapQuestion.Picture, UpdateSourceTrigger=PropertyChanged}" ></Image>

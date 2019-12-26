@@ -18,23 +18,66 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="150" />
                 <RowDefinition Height="61" />
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="17*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="0" Grid.Row="0" Margin="10,0">
+            <StackPanel Grid.Column="0" Grid.Row="0" Margin="10,0,10,60" Grid.RowSpan="2">
                 <Label  FontSize="13" FontWeight="Bold">Aanmaken meerkeuzevraag</Label>
-                
-                <Label> Vraag:</Label>
+
+                <Label>Vraag:</Label>
                 <TextBox Text="{Binding NewMultipleChoiceQuestion.Question, Mode=TwoWay}"/>
 
                 <Label>Vraag optie:</Label>
                 <TextBox Text="{Binding newAnwserOption, Mode=TwoWay}"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <Button  Background="DarkGreen" FontWeight="Bold" Foreground="White" Padding="8,8,8,8" Content="Submit vraag optie" Margin="50 10"  Command="{Binding SubmitAnwserOption}"/>
-                <Button Background="#FF44AE3F" FontWeight="Bold" Foreground="White" FontSize="15" Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Content="Submit vraag" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,1,0,13" Grid.RowSpan="2">
+                <Button  Padding="8,8,8,8" Height="40" Command="{Binding SubmitAnwserOption}" Margin="50 10" VerticalAlignment="Center" FontSize="12" BorderBrush="#8000FF" BorderThickness="3" Foreground="#8000FF" Background="Transparent" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag optie toevoegen">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Green"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0.8" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Padding="10,10,10,10" Height="40" Command="{Binding SubmitQuestion}" VerticalAlignment="Center" FontSize="14" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Green"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0.8" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
 
-            <DataGrid Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False">
+            <DataGrid Grid.Column="1" Grid.RowSpan="3" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False" Margin="0,0,0,13">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding}" Width="*"
                                 Foreground="Black" Header="Vraag opties" IsReadOnly="True" />

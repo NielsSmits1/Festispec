@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace Festispec_WPF.View
 {
     /// <summary>
-    /// Interaction logic for EditQuestionnaireWindow.xaml
+    /// Interaction logic for QuestionnaireWindow.xaml
     /// </summary>
     public partial class EditQuestionnaireWindow : Window
     {

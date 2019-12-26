@@ -13,6 +13,26 @@
             <Label  FontSize="13" FontWeight="Bold">Aanmaken open vraag</Label>
             <TextBlock Text="Vraag:"></TextBlock>
                 <TextBox Text="{Binding NewOpenQuestion.Question, Mode=TwoWay}"/>
-            <Button  Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Command="{Binding SubmitQuestion}" Content="Submit vraag" Width="300" FontSize="15" Padding="10,10,10,10" Margin="0 50" />
-        </StackPanel>
+        <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="300" Margin="0, 50" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Green"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.8" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </StackPanel>
 </Page>

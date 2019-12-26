@@ -18,6 +18,7 @@ namespace Festispec_WPF.ViewModel
         private CustomerCrudWindow _customerCrudWindow;
         private InspectorCrudWindow _inspecteursWindow;
         private WeekplanningView _weekPlanningWindow;
+        private QuestionnaireCRUD _questionnaireView;
         public string ErrorVisibility { get; set; }
         private MapView _planWindow;
         private EmployeeView _employeeView;
@@ -77,7 +78,10 @@ namespace Festispec_WPF.ViewModel
         }
         public void ShowVragenlijst()
         {
-            throw new NotImplementedException();
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            _questionnaireView = new QuestionnaireCRUD();
+            _questionnaireView.Show();
+            currentWindow.Close();
         }
         public void ShowKalender()
         {

@@ -1,5 +1,6 @@
 ﻿using FestiSpec.Domain.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.View;
 using Festispec_WPF.View.QuestionnairePages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -10,10 +11,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
@@ -53,6 +56,42 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
         }
 
+        private string _questionVisibility;
+
+        public string QuestionVisibility
+        {
+            get { return _questionVisibility; }
+            set
+            {
+                _questionVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _questionaireVisibility;
+
+        public string QuestionaireVisibility
+        {
+            get { return _questionaireVisibility; }
+            set
+            {
+                _questionaireVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _orderVisibility;
+
+        public string OrderVisibility
+        {
+            get { return _orderVisibility; }
+            set
+            {
+                _orderVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
         public IQuestion SelectedItem
         {
             get
@@ -69,6 +108,10 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public ICommand PositionDownCommand { get; set; }
 
         public ICommand DeleteQuestionCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public ICommand ShowQuestionnaire { get; set; }
+        public ICommand ShowQuestions { get; set; }
+        public ICommand ShowOrder { get; set; }
 
         public string TemplateType { get; set; }
 
@@ -82,6 +125,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 RaisePropertyChanged("newQuestionnaireVM");
             }
         }
+
         private Page _currentPage;
         public Dictionary<QuestionTypes.QuestionsTypesEnum, string> _QuestionTypes
         {
@@ -130,8 +174,43 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             PositionDownCommand = new RelayCommand(changePositionDOWN);
 
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
+            ShowQuestionnaire = new RelayCommand(showQuestionnaire);
+            ShowQuestions = new RelayCommand(showQuestions);
+            ShowOrder = new RelayCommand(showOrder);
+            CancelCommand = new RelayCommand(cancelQuestionnaire);
 
             templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
+
+            showQuestionnaire();
+        }
+
+        private void cancelQuestionnaire()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            var _questionnaireView = new QuestionnaireCRUD();
+            _questionnaireView.Show();
+            currentWindow.Close();
+        }
+
+        public void showQuestionnaire()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Visible";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showQuestions()
+        {
+            QuestionVisibility = "Visible";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showOrder()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Visible";
         }
 
         private void CreateTemplate()
@@ -212,6 +291,8 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             SubmitQuestionnaire();
             newQuestionnaireVM = new QuestionnaireVM();
             basedOfTemplate = false;
+
+            cancelQuestionnaire();
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
