@@ -277,7 +277,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             if (selectedTemplate != null)
             {
                 UOW.Context.Vragenlijst.Find(_newQuestionnaireVM.ID).Stamt_af_van_ID = UOW.Context.Template.Where(t => t.Vragenlijst_ID == selectedTemplate.ID).Select(t => t.ID).FirstOrDefault();
-                
+
                 clearSelectedTemplate(selectedTemplate);
 
                 saveToDatabase();

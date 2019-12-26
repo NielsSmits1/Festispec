@@ -10,17 +10,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Festispec_WPF.ViewModel
 {
     public class QuestionaireCrudVM : ViewModelBase
     {
-        public ObservableCollection<QuestionnaireVM> Questionnaires {get;set;}
+        public ObservableCollection<QuestionnaireVM> Questionnaires { get; set; }
         private UnitOfWork UOW;
         public QuestionnaireVM SelectedQuestionnaire { get; set; }
         public ICommand OpenCreateQuestionnaireWindowCommand { get; set; }
         public ICommand OpenEditQuestionnaireCommand { get; set; }
+        public ICommand DeleteQuestionnaireCommand { get; set; }
         public ICommand SearchDataGrid { get; set; }
 
         private string _searchText;
@@ -37,19 +39,63 @@ namespace Festispec_WPF.ViewModel
                 base.RaisePropertyChanged();
             }
         }
-
         public QuestionaireCrudVM()
         {
             OpenCreateQuestionnaireWindowCommand = new RelayCommand(OpenCreateQuestionnaireWindow);
             OpenEditQuestionnaireCommand = new RelayCommand(OpenEditQuestionnaireWindow);
+            DeleteQuestionnaireCommand = new RelayCommand(DeleteQuestionnaire);
             SearchDataGrid = new RelayCommand(searchDatagrid);
             Questionnaires = new ObservableCollection<QuestionnaireVM>();
             UOW = ViewModelLocator.UOW;
-            foreach (var item in UOW.Context.Vragenlijst)
+            foreach (var item in UOW.Context.Vragenlijst.Where(v => v.Actief == true))
             {
                 Questionnaires.Add(new QuestionnaireVM(item));
             }
             searchText = "Zoek naam";
+        }
+
+        private void OpenCreateQuestionnaireWindow()
+        {
+            var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            var temp = new CreateQuestionnaire();
+            temp.Show();
+            currentWindow.Close();
+        }
+        private void OpenEditQuestionnaireWindow()
+        {
+            var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            var temp = new EditQuestionnaireWindow();
+            Messenger.Default.Send(SelectedQuestionnaire);
+            temp.Show();
+            currentWindow.Close();
+        }
+
+        private void DeleteQuestionnaire()
+        {
+            UOW.Questionnaires.Get(SelectedQuestionnaire.ID).Actief = false;
+
+            saveToDatabase();
+
+            Questionnaires = new ObservableCollection<QuestionnaireVM>();
+            foreach (var item in UOW.Context.Vragenlijst.Where(v => v.Actief == true))
+            {
+                Questionnaires.Add(new QuestionnaireVM(item));
+            }
+            RaisePropertyChanged("Questionnaires");
+        }
+
+        private void saveToDatabase()
+        {
+            try
+            {
+                UOW.Context.SaveChanges();
+            }
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void searchDatagrid()
@@ -76,20 +122,6 @@ namespace Festispec_WPF.ViewModel
             }
 
             RaisePropertyChanged("Questionnaires");
-        }
-
-        private void OpenCreateQuestionnaireWindow()
-        {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            var temp = new CreateQuestionnaire();
-            temp.Show();
-            currentWindow.Close();
-        }
-        private void OpenEditQuestionnaireWindow()
-        {
-            var temp = new EditQuestionnaireWindow();
-            Messenger.Default.Send(SelectedQuestionnaire);
-            temp.Show();
         }
     }
 }

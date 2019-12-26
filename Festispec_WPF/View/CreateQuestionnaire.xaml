@@ -174,8 +174,8 @@
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="1,1,1,1">
-                                                        <Button BorderBrush="Black" Foreground="Black" Background="#439EE8" Command="{Binding EditQuestionnaireVM.PositionUpCommand, Source={StaticResource Locator} }" Height="20">^</Button>
-                                                        <Button BorderBrush="Black" Foreground="Black" Background="#439EE8"  Command="{Binding EditQuestionnaireVM.PositionDownCommand, Source={StaticResource Locator} }" Height="20" >v</Button>
+                                                        <Button BorderBrush="Black" Foreground="Black" Background="#439EE8" Command="{Binding CreateQuestionnaire.PositionUpCommand, Source={StaticResource Locator} }" Height="20">^</Button>
+                                                        <Button BorderBrush="Black" Foreground="Black" Background="#439EE8"  Command="{Binding CreateQuestionnaire.PositionDownCommand, Source={StaticResource Locator} }" Height="20" >v</Button>
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
@@ -184,7 +184,7 @@
                                         <DataGridTemplateColumn>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button Foreground="White" Content="X" FontWeight="Bold" Background="#EB0D00" Command="{Binding EditQuestionnaireVM.DeleteQuestionCommand, Source={StaticResource Locator} }"></Button>
+                                                    <Button Foreground="White" Content="X" FontWeight="Bold" Background="#EB0D00" Command="{Binding CreateQuestionnaire.DeleteQuestionCommand, Source={StaticResource Locator} }"></Button>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
