@@ -12,15 +12,39 @@ using FestiSpec.Domain.Model;
 
 namespace FestiSpecWebsite.Controllers
 {
-    public class VragenlijstController : Controller
+    [Authorize]
+    public class QuestionnaireController : Controller
     {
         private FestiSpecEntities db = new FestiSpecEntities();
 
         // GET: Vragenlijst
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var vragenlijst = db.Vragenlijst.Include(v => v.Template1);
-            return View(vragenlijst.ToList());
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            var Userid = Convert.ToInt32(FormsAuthentication.Decrypt(Request.Cookies["Cookie1"].Value).Name);
+            if (!db.Inspectie.Include("Inspecteur").Any( i => i.Inspecteur.Any(k => k.ID == Userid)&& i.Inspectienummer == id ))
+            {
+                return View("NotPlannedInInspection");
+            }
+            var AnsweredQuestionnairse = db.Inspectie_Wel_Ingevuld_Vragenlijst.Include("Vragenlijst").Where(i => i.Inspecteur_ID == Userid && i.Inspectienummer == id);
+            List<Vragenlijst> Questionnaires = db.Vragenlijst.Include("Inspectie").Where( i=> i.Inspectie.Any(k => k.Inspectienummer == id)).ToList();
+            foreach(var item in AnsweredQuestionnairse)
+            {
+                int index = Questionnaires.FindIndex(i => i.ID == item.Vragenlijst.Stamt_af_van_ID);
+                if(index >= 0)
+                {
+                    Questionnaires.RemoveAt(index);
+                }
+            }
+            if(Questionnaires.Count == 0)
+            {
+                return View("AllQuestionnairesAnswered");
+            }
+            return View(Questionnaires);
         }
 
         // GET: Vragenlijst/Details/5
