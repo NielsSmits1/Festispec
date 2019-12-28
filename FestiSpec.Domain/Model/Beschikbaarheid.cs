@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace FestiSpec.Domain.Model
@@ -20,10 +21,12 @@ namespace FestiSpec.Domain.Model
         public int ID { get; set; }
 
         [Required]
+        [DisplayName("Gebruikersnaam")]
         public int Inspecteur_ID { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
+        [DisplayName("Datum")]
         public System.DateTime Datum { get; set; }
     
         public virtual Inspecteur Inspecteur { get; set; }

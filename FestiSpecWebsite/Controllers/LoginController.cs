@@ -72,5 +72,6 @@ namespace FestiSpecWebsite.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home", null);
         }
+
     }
 }

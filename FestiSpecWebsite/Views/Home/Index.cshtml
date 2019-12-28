@@ -5,9 +5,10 @@
 <!-- Landing page information -->
 <div class="jumbotron">
     <h1>FestiSpec</h1>
+    <h2 class="">@ViewBag.Name</h2>
     <p class="lead">Houd jij van geld én van festivals? Overweeg een baan als inspecteur bij FestiSpec en verdien je geld op festivals!</p>
     <h4 class="btn-block">
-        @Html.ActionLink("Aanmelden →", "Index", "Login")
+        @Html.ActionLink("Aanmelden →", "Create", "Applicant")
     </h4>
 </div>
 
@@ -15,26 +16,29 @@
 <!-- Column 1 -->
 <div class="row">
     <div class="col-md-4">
-        <h2>Column 1</h2>
+        <h2>Recenties</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            <strong>10/10</strong> : Geweldige in-depth inspecties. Zeer tevreden. <br /> - Hans Klok <br/> <br />
+            <strong>9/10</strong> : Verstand van zaken. <br /> - Kees van der Spek<br /> <br />
+            <strong>9.5/10</strong> : Toffe mensen met ruime kennis. <br /> - Harrie IV
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
 
     <!-- Column 2 -->
     <div class="col-md-4">
-        <h2>Column 2</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Over ons</h2>
+        <p> Loopt de doorstroom niet lekker? <br/>
+            Zijn er problemen met wetgeving? <br />
+            Of wilt u simpelweg de klanttevredenheid verhogen? <br />
+            <br/>
+            Wij geven u de data en de handvaten om deze doelen te behalen! <br /> <br />
+            We are Festispec <br />
+        </p>
     </div>
 
     <!-- Column 3 -->
     <div class="col-md-4">
-        <h2>Column 3</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Wat doen wij? </h2>
+        <p>Wij voeren namens u bedrijf inspecties uit op evenementen en presenteren de bevonden resultaten in een overzichtelijk rapportage. </p>
     </div>
 </div>
