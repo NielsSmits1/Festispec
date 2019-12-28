@@ -59,6 +59,7 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<CRCustomerVM>();
             SimpleIoc.Default.Register<InspectionCrudVM>();
             SimpleIoc.Default.Register<MapViewModel>();
+            SimpleIoc.Default.Register<HomeVM>();
         }
 
         public MainViewModel Main
@@ -226,6 +227,14 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<EditQuestionnaireVM>();
+            }
+        }
+
+        public HomeVM Home
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HomeVM>();
             }
         }
         public static void Cleanup()

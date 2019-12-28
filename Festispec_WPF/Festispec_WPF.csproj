@@ -113,6 +113,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\HomeVM.cs" />
     <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
