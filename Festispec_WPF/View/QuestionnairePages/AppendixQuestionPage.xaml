@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
+      xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
       mc:Ignorable="d" 
       d:DesignHeight="250" d:DesignWidth="800"
       Title="AppendixQuestionPage"
@@ -12,7 +13,16 @@
     <StackPanel HorizontalAlignment="Center">
         <Label  FontSize="13" FontWeight="Bold">Aanmaken bijlagevraag</Label>
         <TextBlock Text="Vraag:"></TextBlock>
-        <TextBox Text="{Binding NewAppendixQuestion.Question}"/>
+        <TextBox Name="question" LostFocus="Question_LostFocus">
+            <TextBox.Text>
+                <Binding Path="NewAppendixQuestion.Question}">
+                    <Binding.ValidationRules>
+                        <validationrules:EmptyValidator />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=question}" Foreground="Red"/>
         <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="300" Margin="0, 50" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">

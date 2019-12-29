@@ -18,13 +18,32 @@
                 <StackPanel Margin="20">
                     <!-- Login fields-->
                     <TextBlock Text="Username" Padding="0 5"/>
-                    <TextBox Padding="0 5" Name="firstName" Text="{Binding Username}" />
+                    <TextBox Padding="0 5" Name="username" LostFocus="Username_LostFocus">
+                        <TextBox.Text>
+                            <Binding Path="Username">
+                                <Binding.ValidationRules>
+                                    <validationrules:EmptyValidator />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=username}" Foreground="Red"/>
 
-                    <TextBlock Text="Password" Padding="0 5" Name="password"/>
-                    <TextBox Text="{Binding Password}" Padding="0 5" Margin="0 0 0 20"/>
+                    <TextBlock Text="Password" Padding="0 5"/>
+                    <TextBox Padding="0 5" Margin="0 0 0 20" Name="password" LostFocus="Password_LostFocus">
+                        <TextBox.Text>
+                            <Binding Path="Password">
+                                <Binding.ValidationRules>
+                                    <validationrules:EmptyValidator />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=password}" Foreground="Red"/>
+
 
                     <!-- Login button -->
-                    <Button Content="Login" Width="150" Cursor="Hand" Background="#8000FF" FontSize="20" Foreground="White" HorizontalAlignment="Center" Height="35" Command="{Binding LoginCommand}">
+                    <Button Content="Login" Width="150" Cursor="Hand" Background="#8000FF" FontSize="20" Foreground="White" HorizontalAlignment="Center" Height="35" Command="{Binding LoginCommand}" Click="Button_Click">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Green"/>

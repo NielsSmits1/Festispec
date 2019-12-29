@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
+      xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
       mc:Ignorable="d" 
       d:DesignHeight="250" d:DesignWidth="800"
       DataContext="{Binding MapQuestionPageVM, Source={StaticResource Locator}}"
@@ -15,7 +16,16 @@
             <Label  FontSize="13" FontWeight="Bold">Aanmaken kaartvraag</Label>
             
             <TextBlock Text="Vraag:"></TextBlock>
-            <TextBox Text= "{Binding NewMapQuestion.Question, Mode=TwoWay}"/>
+            <TextBox Name="question" LostFocus="Question_LostFocus">
+                <TextBox.Text>
+                    <Binding Path="NewMapQuestion.Question" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <validationrules:EmptyValidator />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=question}" Foreground="Red"/>
             <StackPanel Orientation="Horizontal">
                 <Button Padding="8,8,8,8" Command="{Binding LoadPicture}" Width="200" Margin="20,20" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="3" BorderBrush="#8000FF" Foreground="#8000FF" Background="Transparent" FontWeight="ExtraBold" Cursor="Hand" Content="Laad afbeelding">
                     <Button.Style>

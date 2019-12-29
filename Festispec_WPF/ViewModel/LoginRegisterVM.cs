@@ -41,7 +41,7 @@ namespace Festispec_WPF.ViewModel
             if (targetPerson == null)
             {
                 Console.WriteLine("failed to login");
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBox.Show("Incorrecte login gegevens", "Fout bij invoeren velden",
                   MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else

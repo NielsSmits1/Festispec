@@ -47,7 +47,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Width="250">
                                     <Label>Titel</Label>
-                                    <TextBox Name="title">
+                                    <TextBox Name="title" LostFocus="Title_LostFocus">
                                         <TextBox.Text>
                                             <Binding Path="newQuestionnaireVM.Title" Mode="TwoWay">
                                                 <Binding.ValidationRules>
@@ -58,9 +58,30 @@
                                     </TextBox>
                                     <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=title}" Foreground="Red"/>
                                     <Label>Versie</Label>
-                                    <TextBox Text="{Binding newQuestionnaireVM.Version, Mode=TwoWay}"></TextBox>
+                                    <TextBox Name="version" LostFocus="Version_LostFocus">
+                                        <TextBox.Text>
+                                            <Binding Path="newQuestionnaireVM.Version" Mode="TwoWay">
+                                                <Binding.ValidationRules>
+                                                    <validationrules:EmptyValidator />
+                                                    <validationrules:NumberValidationRule />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=version}" Foreground="Red"/>
+
                                     <Label>Opmerking</Label>
-                                    <TextBox Text="{Binding newQuestionnaireVM.Note, Mode=TwoWay}"></TextBox>
+                                    <TextBox Name="notes" LostFocus="Notes_LostFocus">
+                                        <TextBox.Text>
+                                            <Binding Path="newQuestionnaireVM.Note" Mode="TwoWay">
+                                                <Binding.ValidationRules>
+                                                    <validationrules:EmptyValidator />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=notes}" Foreground="Red"/>
+
                                 </StackPanel>
                                 <StackPanel Width="250" Margin="30,0,0,0">
                                     <Label Margin="0,15,0,0" FontSize="13" FontWeight="Bold">Template gebruiken voor vragenlijst</Label>
