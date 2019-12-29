@@ -404,6 +404,10 @@
   <ItemGroup>
     <Resource Include="Images\festispec.PNG" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logout.png" />
+    <Resource Include="Images\werknemer.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
