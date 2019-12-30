@@ -261,7 +261,7 @@
                                                         </DataTemplate>
                                                     </Grid.Resources>
                                                     <ScrollViewer VerticalScrollBarVisibility="Visible" Height="350">
-                                                        <DataGrid CanUserAddRows="false" ItemsSource="{Binding Festivals}" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
+                                                        <DataGrid IsSynchronizedWithCurrentItem="True" CanUserAddRows="false" ItemsSource="{Binding Festivals}" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
                                                             <DataGrid.Columns>
                                                                 <DataGridTemplateColumn Width="*" CellTemplate="{StaticResource DateTemplate}" />
                                                             </DataGrid.Columns>
