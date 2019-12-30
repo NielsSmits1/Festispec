@@ -110,7 +110,7 @@
                         <DataGridTemplateColumn Width="50">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Command="{Binding DataContext.DeleteQuestionnaireCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    <Button Command="{Binding DeleteTemplate, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="30" Background="#FFD45134">Delete</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
