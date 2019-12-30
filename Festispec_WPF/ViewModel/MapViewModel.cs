@@ -229,6 +229,19 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        private InspectorVM _selectedDeleteInspector;
+        public InspectorVM SelectedDeleteInspector
+        {
+            get
+            {
+                return _selectedDeleteInspector;
+            }
+            set
+            {
+                _selectedDeleteInspector = value; RaisePropertyChanged(() => SelectedDeleteInspector);
+            }
+        }
+
         private InspectionVM _selectedFestival;
         public InspectionVM SelectedFestival
         {
@@ -337,6 +350,7 @@ namespace Festispec_WPF.ViewModel
 
         public ICommand ShowConfirmationDetailsCommand { get; set; }
         public ICommand CancelConfirmationCommand { get; set; }
+        public ICommand RemoveInspectorFromInspectionCommand { get; set; }
 
         public MapViewModel()
         {
@@ -359,7 +373,7 @@ namespace Festispec_WPF.ViewModel
             AddToInspectionCommand = new RelayCommand(addInspectorToInspection);
             ShowConfirmationDetailsCommand = new RelayCommand(showConfirmation);
             CancelConfirmationCommand = new RelayCommand(cancelConfirmation);
-           
+            RemoveInspectorFromInspectionCommand = new RelayCommand(RemoveInspectorFromInspection);
 
             //---INSPECTORS
             try
@@ -880,6 +894,14 @@ namespace Festispec_WPF.ViewModel
         private bool CanShowInspectors()
         {
             return InspectorVisibility != "Visible";
+        }
+
+        private void RemoveInspectorFromInspection()
+        {
+            _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Inspecteur.Remove(SelectedDeleteInspector.InspectorData);
+            SelectedFestival.RefreshInspectors();
+            _UOW.Complete();
+            SelectedDeleteInspector = null;
         }
 
     }
