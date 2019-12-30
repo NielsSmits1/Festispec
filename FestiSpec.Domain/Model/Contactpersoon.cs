@@ -27,6 +27,7 @@ namespace FestiSpec.Domain.Model
         public string Achternaam { get; set; }
         public string Telefoonnummer { get; set; }
         public string Email { get; set; }
+        public bool Actief { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Afspraak> Afspraak { get; set; }

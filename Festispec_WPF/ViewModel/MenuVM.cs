@@ -24,6 +24,7 @@ namespace Festispec_WPF.ViewModel
         private MainWindow _mainWindow;
         private QuestionnaireCRUD _questionnaireView;
 
+
         // commands
         public ICommand ShowHomeCommand { get; set; }
         public ICommand ShowKlantenCommand { get; set; }

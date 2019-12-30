@@ -23,6 +23,7 @@ namespace FestiSpec.Domain.Model
         public int ID { get; set; }
         public string Type { get; set; }
         public int Vragenlijst_ID { get; set; }
+        public bool Actief { get; set; }
     
         public virtual Vragenlijst Vragenlijst { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
