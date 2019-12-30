@@ -12,6 +12,9 @@ using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using FestiSpec.Domain.Model;
+using System.Windows;
+using Application = System.Windows.Application;
+
 namespace Festispec_WPF.ViewModel
 {
     public class LoginRegisterVM : ViewModelBase
@@ -41,19 +44,20 @@ namespace Festispec_WPF.ViewModel
             if (targetPerson == null)
             {
                 Console.WriteLine("failed to login");
-                MessageBox.Show("Incorrecte login gegevens", "Fout bij invoeren velden",
+                System.Windows.Forms.MessageBox.Show("Incorrecte login gegevens", "Fout bij invoeren velden",
                   MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                //TODO exit main window
                 Console.WriteLine("login ok");
                 Username = "";
                 Password = "";
                 RaisePropertyChanged(() => Username);
                 RaisePropertyChanged(() => Password);
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
                 HomeScreenView home = new HomeScreenView();
                 home.Show();
+                currentWindow.Close();
             }
         }
     }
