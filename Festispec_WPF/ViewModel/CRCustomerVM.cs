@@ -32,6 +32,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand AddContactPersonCommand { get; set; }
         public ICommand EditContactPersonDataCommand { get; set; }
         public ICommand OpenContactPersonCreateWindow { get; set; }
+        public ICommand DeleteContactPersonCommand { get; set; }
 
         public CustomerVM NewCustomer { get; set; }
         public CustomerVM BeforeChangeCustomer { get; set; }
@@ -51,6 +52,7 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged("Customers");
             }
         }
+
         public CRCustomerVM()
         {
             UOW = ViewModelLocator.UOW;       
@@ -72,6 +74,7 @@ namespace Festispec_WPF.ViewModel
             OpenContactPersonCreateWindow = new RelayCommand(AddContactPersonWindow);
             EditContactPersonWindowCommand = new RelayCommand(EditContactPersonWindow);
             EditContactPersonDataCommand = new RelayCommand(EditContactPersonData);
+            DeleteContactPersonCommand = new RelayCommand(DeleteContactPerson);
         }
 
         private void EditContactPersonData()
@@ -127,7 +130,7 @@ namespace Festispec_WPF.ViewModel
         private void AddContactPerson()
         {
             NewcontactPerson.ContactPersonData.Klant = SelectedCustomer.CustomerData;
-
+            NewcontactPerson.ContactPersonData.Actief = true;
             UOW.ContactPersons.Add(NewcontactPerson.ContactPersonData);
             try
             {
@@ -153,6 +156,7 @@ namespace Festispec_WPF.ViewModel
         }
         private void OpenEditCustomerWindow()
         {
+
             var customerid = SelectedCustomer.CustomerData.ID;
             var list = UOW.Customers.GetContactPersons(customerid).Select(Contactpersoon => new ContactPersonVM(Contactpersoon));
             SelectedCustomer.ContactPersons = new ObservableCollection<ContactPersonVM>(list);
@@ -202,5 +206,24 @@ namespace Festispec_WPF.ViewModel
             
         }
 
+        public void DeleteContactPerson()
+        {
+            UOW.Context.Contactpersoon.Find(SelectedContactPerson.ContactPersonData.ID).Actief = false;
+
+            try
+            {
+                UOW.Complete();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var list = UOW.Customers.GetContactPersons(SelectedCustomer.ID).Select(Contactpersoon => new ContactPersonVM(Contactpersoon));
+            SelectedCustomer.ContactPersons = new ObservableCollection<ContactPersonVM>(list);
+            RaisePropertyChanged("SelectedCustomer");
+        }
     }
 }

@@ -100,6 +100,17 @@
                         <DataGridTextColumn Header="Achternaam" Binding="{Binding LastName}" Width="*" />
                         <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding PhoneNumber}" Width="*" />
                         <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+                        
+                        <DataGridTemplateColumn Width="70">
+                            <DataGridTemplateColumn.CellTemplate >
+                                <DataTemplate>
+                                    <Button Command="{Binding DataContext.DeleteContactPersonCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="30" Background="#FFD45134">Delete</Button>
+
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
                     </DataGrid.Columns>
                 </DataGrid>
 
