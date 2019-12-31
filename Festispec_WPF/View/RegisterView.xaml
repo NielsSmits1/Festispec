@@ -4,57 +4,233 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
+        xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
         DataContext="{Binding EmployeeCrud, Source={StaticResource Locator}}"
         WindowState="Maximized"
-        Title="RegisterView">
+        Title="RegisterView" Height="1080" Width="1920">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="#8000FF">
+            <Button Command="{Binding ShowHomeCommand}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
+                Festispec
+            </Button>
+        </Grid>
+        <StackPanel Grid.Row="1" Grid.Column="1" Width="1000" HorizontalAlignment="Center" Background="Gray">
+            <StackPanel Margin="25">
+                <TextBlock Text="Werknemer aanmaken" FontSize="35" HorizontalAlignment="Right" Foreground="White" FontWeight="Bold" Margin="0,26,380,26"/>
+                <Border BorderBrush="White" BorderThickness="2" Margin="0,0,0,20"/>
+                <Border BorderThickness="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-    <Border Padding="100 10">
-        <StackPanel VerticalAlignment="Center">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="0.5*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                        <!-- left row -->
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Voornaam" />
+                            <TextBox LostFocus="FirstName_LostFocus" Name="firstName">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.FirstName" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=firstName}" Foreground="Red"/>
 
-                <!-- left row -->
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="Voornaam" />
-                    <TextBox Text="{Binding NewEmployee.FirstName}" />
-                    <TextBlock Text="Tussenvoegsel" />
-                    <TextBox Text="{Binding NewEmployee.InfixName}" />
-                    <TextBlock Text="Achternaam" />
-                    <TextBox Text="{Binding NewEmployee.LastName}" />
-                    <TextBlock Text="Postcode" />
-                    <TextBox Text="{Binding NewEmployee.Postcode}" />
-                    <TextBlock Text="Huisnummer" />
-                    <TextBox Text="{Binding NewEmployee.HouseNumber}" />
-                    <TextBlock Text="Plaatsnaam" />
-                    <TextBox Text="{Binding NewEmployee.TownName}" />
-                    <TextBlock Text="Geboortedatum" />
-                    <DatePicker SelectedDate="{Binding NewEmployee.DoB, Mode=TwoWay}"/>
-                    <TextBlock Text="IBAN" />
-                    <TextBox Text="{Binding NewEmployee.Iban}" />
-                    <TextBlock Text="E-mail" />
-                    <TextBox Text="{Binding NewEmployee.MailAdress}" />
+                            <TextBlock Text="Tussenvoegsel" />
+                            <TextBox LostFocus="Prefix_LostFocus" Name="prefix">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.InfixName" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=prefix}" Foreground="Red"/>
+
+                            <TextBlock Text="Achternaam" />
+                            <TextBox LostFocus="LastName_LostFocus" Name="lastName">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.LastName" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=lastName}" Foreground="Red"/>
+
+                            <TextBlock Text="Postcode" />
+                            <TextBox LostFocus="PostalCode_LostFocus" Name="postalCode">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.Postcode" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=postalCode}" Foreground="Red"/>
+
+                            <TextBlock Text="Huisnummer" />
+                            <TextBox LostFocus="HouseNumber_LostFocus" Name="houseNumber">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.HouseNumber" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=houseNumber}" Foreground="Red"/>
+
+                            <TextBlock Text="Plaatsnaam" />
+                            <TextBox LostFocus="CityName_LostFocus" Name="cityName">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.TownName" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=cityName}" Foreground="Red"/>
+
+                            <TextBlock Text="Geboortedatum" />
+                            <DatePicker Text="{Binding NewEmployee.DoB, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                        <!-- right row -->
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="IBAN" />
+                            <TextBox LostFocus="IBAN_LostFocus" Name="IBAN">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.Iban" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=IBAN}" Foreground="Red"/>
+
+                            <TextBlock Text="E-mail" />
+                            <TextBox LostFocus="Email_LostFocus" Name="email">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.MailAdress" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                            <validationrules:EmailValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=email}" Foreground="Red"/>
+
+                            <TextBlock Text="Rol" />
+                            <ComboBox  SelectedIndex="0" SelectedItem="{Binding NewEmployee.Role}" ItemsSource="{Binding NewEmployee.RolesCollection, Mode=TwoWay}" />
+
+                            <TextBlock Text="Username" />
+                            <TextBox LostFocus="Username_LostFocus" Name="username">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.Username" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=username}" Foreground="Red"/>
+
+                            <TextBlock Text="Wachtwoord" />
+                            <TextBox LostFocus="Password_LostFocus" Name="password">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.Password" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=password}" Foreground="Red"/>
+
+                            <TextBlock Text="Telefoonnummer" />
+                            <TextBox LostFocus="PhoneNumber_LostFocus" Name="phoneNumber">
+                                <TextBox.Text>
+                                    <Binding Path="NewEmployee.InfixName" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=phoneNumber}" Foreground="Red"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Width="150" Height="30" FontSize="18" Content="Annuleren" 
+                            Foreground="White" FontWeight="Bold" Margin="0,0,20,20" Background="#CE3131" 
+                            VerticalAlignment="Bottom" Command="{Binding CancelEdit}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.8" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Click="Button_Click" Width="300" Height="35" FontSize="22" 
+                            Foreground="White" FontWeight="Bold" Margin="0,20" Background="#8000FF" 
+                            Content="Registreren" Command="{Binding RegisterCommand}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.8" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </StackPanel>
-
-                <!-- right row -->
-                <StackPanel Grid.Column="2">
-                    <TextBlock Text="Rol" />
-                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding NewEmployee.Role}" ItemsSource="{Binding NewEmployee.RolesCollection, Mode=TwoWay}"/>
-                    <TextBlock Text="Username" />
-                    <TextBox Text="{Binding NewEmployee.Username}" />
-                    <TextBlock Text="Wachtwoord" />
-                    <TextBox Text="{Binding NewEmployee.Password}" />
-                    <TextBlock Text="Telefoonnummer" />
-                    <TextBox Text="{Binding NewEmployee.Phonenumber}" />
-
-                </StackPanel>
-            </Grid>
-            <Button Height="30" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="30 50 30 0" Content="Registreren" Command="{Binding RegisterCommand}"/>
-
+            </StackPanel>
         </StackPanel>
-    </Border>
+    </Grid>
 </Window>

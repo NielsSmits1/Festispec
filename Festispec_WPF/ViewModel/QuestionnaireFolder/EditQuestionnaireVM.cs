@@ -205,15 +205,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 crud.Show();
                 currentWindow.Close();
 
+                cancelQuestionnaire();
             }
             catch
             {
-                System.Windows.Forms.MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                System.Windows.Forms.MessageBox.Show("Fout bij invoeren velden", "Er is iets fout gegaan",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)

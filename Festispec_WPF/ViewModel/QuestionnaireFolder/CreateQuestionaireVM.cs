@@ -281,18 +281,24 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 clearSelectedTemplate(selectedTemplate);
 
                 saveToDatabase();
-
             }
-
         }
 
         private void SubmitCreatedQuestionnaire()
         {
-            SubmitQuestionnaire();
-            newQuestionnaireVM = new QuestionnaireVM();
-            basedOfTemplate = false;
+            try
+            {
+                SubmitQuestionnaire();
+                newQuestionnaireVM = new QuestionnaireVM();
+                basedOfTemplate = false;
 
-            cancelQuestionnaire();
+                cancelQuestionnaire();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fout bij invoeren velden", "Er is iets fout gegaan",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
@@ -393,9 +399,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
             catch
             {
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                throw new Exception();
             }
         }
     }

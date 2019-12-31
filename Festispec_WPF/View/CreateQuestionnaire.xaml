@@ -238,7 +238,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitCommand}" Height="50" Background="#8000FF">
+                    <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitCommand}" Height="50" Background="#8000FF" Click="Button_Click">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Green"/>

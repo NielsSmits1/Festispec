@@ -113,7 +113,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Validation rules\EmailValidator.cs" />
     <Compile Include="Validation rules\EmptyValidator.cs" />
+    <Compile Include="Validation rules\LengthValidator.cs" />
     <Compile Include="Validation rules\NumberValidationRule.cs" />
     <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />

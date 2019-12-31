@@ -109,9 +109,6 @@ namespace Festispec_WPF.ViewModel
         public ICommand SetInspectorInactiveCommand { get; set; }
         public ICommand CreateNewInspectorCommand { get; set; }
         public ICommand CancelCreate { get; set; }
-
-
-
         public InspectorVM SelectedInspector
         {
             get
@@ -187,7 +184,7 @@ namespace Festispec_WPF.ViewModel
             RecruitApplicantCommand = new RelayCommand(RecruitApplicant, CanRecruit);
             CreateNewInspectorCommand = new RelayCommand(OpenAddInspectorWindow);
             CancelCreate = new RelayCommand(MakeInspectorVisible);
-    }
+        }
 
         // CREATE
         public void AddInspector()
@@ -211,8 +208,6 @@ namespace Festispec_WPF.ViewModel
                  MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
 
             Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
             RaisePropertyChanged(() => Inspectors);

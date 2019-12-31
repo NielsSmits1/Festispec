@@ -38,5 +38,12 @@ namespace Festispec_WPF.View
         {
             ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            version.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            title.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            notes.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
     }
 }

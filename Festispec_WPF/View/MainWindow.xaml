@@ -30,7 +30,7 @@
                     <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=username}" Foreground="Red"/>
 
                     <TextBlock Text="Password" Padding="0 5"/>
-                    <TextBox Padding="0 5" Margin="0 0 0 20" Name="password" LostFocus="Password_LostFocus">
+                    <TextBox Padding="0 5" Name="password" LostFocus="Password_LostFocus">
                         <TextBox.Text>
                             <Binding Path="Password">
                                 <Binding.ValidationRules>
