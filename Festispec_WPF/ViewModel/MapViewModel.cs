@@ -898,10 +898,14 @@ namespace Festispec_WPF.ViewModel
 
         private void RemoveInspectorFromInspection()
         {
-            _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Inspecteur.Remove(SelectedDeleteInspector.InspectorData);
-            SelectedFestival.RefreshInspectors();
-            _UOW.Complete();
-            SelectedDeleteInspector = null;
+            if(SelectedDeleteInspector != null)
+            {
+                _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Inspecteur.Remove(SelectedDeleteInspector.InspectorData);
+                SelectedFestival.RefreshInspectors();
+                _UOW.Complete();
+                SelectedDeleteInspector = null;
+            }
+            
         }
 
     }

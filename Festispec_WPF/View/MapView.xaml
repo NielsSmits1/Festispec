@@ -440,13 +440,13 @@
                                     <Button Content="Bevestig Inspecteur" Width="145" Margin="95,0,0,0" Background="ForestGreen" Foreground="White" BorderBrush="Black" Command="{Binding AddToInspectionCommand}"/>
                                 </StackPanel>
                             </Grid>
-                            <Grid Grid.Column="7">
+                            <Grid Grid.Column="7" Visibility="{Binding EditVisibility}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="800"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" Background="AliceBlue" Visibility="{Binding EditVisibility}">
+                                <StackPanel Grid.Column="0" Background="AliceBlue" >
 
                                     <Label Content="inspectie bewerken" FontSize="30" Foreground="Black"></Label>
                                     
@@ -617,12 +617,12 @@
                                 <!--LIST OF PLANNED INSPECTORS OF THE SELECTED INSPECTION-->
                                 <StackPanel Background="AliceBlue" Grid.Column="1">
                                     <Label Content="Lijst ingeplande inspecteurs" FontSize="25"/>
-                                    <ListView Width="300" HorizontalAlignment="Left" SelectedItem="{Binding SelectedDeleteInspector}" ItemsSource="{Binding SelectedFestival.PlannedInspectors}">
+                                    <ListView Width="300" HorizontalAlignment="Left" SelectedItem="{Binding SelectedDeleteInspector}" ItemsSource="{Binding SelectedFestival.PlannedInspectors}" >
                                         <ListView.ItemTemplate>
-                                            <DataTemplate>
+                                            <DataTemplate >
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="{Binding FullName}"></TextBlock>
-                                                    <Button Content=" X " BorderBrush="Black" BorderThickness="1" Background="PaleVioletRed" HorizontalAlignment="Right" Command="{Binding RemoveInspectorFromInspectionCommand}"></Button>
+                                                    <Button Content=" X " BorderBrush="Black" BorderThickness="1" Background="PaleVioletRed" HorizontalAlignment="Right" Command="{Binding DataContext.RemoveInspectorFromInspectionCommand, RelativeSource={RelativeSource FindAncestor ,AncestorType={x:Type ListView}}}"></Button>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
