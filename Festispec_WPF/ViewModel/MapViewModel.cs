@@ -54,7 +54,7 @@ namespace Festispec_WPF.ViewModel
         #region VisibilityProperties
         private string _availibleInspectorsVisibility;
 
-        public string AvailibleInspectorsVisibility
+        public string AvailableInspectorsVisibility
         {
             get { return _availibleInspectorsVisibility; }
             set
@@ -436,8 +436,9 @@ namespace Festispec_WPF.ViewModel
             EditVisibility = "Hidden";
             MapErrorVisibility = "Hidden";
             InspectionVisibility = "Visible";
-            AvailibleInspectorsVisibility = "Hidden";
+            AvailableInspectorsVisibility = "Hidden";
             PlannedInspectorVisibility = "Hidden";
+            ConfirmVisibility = "Hidden";
             searchText = "Zoek naam";
         }
 
@@ -745,7 +746,7 @@ namespace Festispec_WPF.ViewModel
         private void planInspector()
         {
             calculateDistances();
-            AvailibleInspectorsVisibility = "Visible";
+            AvailableInspectorsVisibility = "Visible";
         }
 
         private void cancelPlanning()
@@ -753,7 +754,7 @@ namespace Festispec_WPF.ViewModel
             ButtonControlVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
-            AvailibleInspectorsVisibility = "Hidden";
+            AvailableInspectorsVisibility = "Hidden";
             ConfirmVisibility = "Hidden";
             MapVisibility = "Visible";
             InspectionVisibility = "Visible";
@@ -912,12 +913,17 @@ namespace Festispec_WPF.ViewModel
             SelectedFestival.Inspection.Inspecteur.Add(SelectedInspector.InspectorData);
             _UOW.Complete();
 
-            InspectionVisibility = "Visible";
             InspectorVisibility = "Hidden";
-            SingleInspectorVisibility = "Hidden";
-            ButtonControlVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
-            SelectedFestival = null;
+            ButtonControlVisibility = "Hidden";
+            SingleInspectorVisibility = "Hidden";
+            MapVisibility = "Visible";
+            EditVisibility = "Hidden";
+            MapErrorVisibility = "Hidden";
+            InspectionVisibility = "Visible";
+            AvailableInspectorsVisibility = "Hidden";
+            PlannedInspectorVisibility = "Hidden";
+            ConfirmVisibility = "Hidden";
         }
 
         private void showConfirmation()
