@@ -113,6 +113,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\HomeVM.cs" />
     <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
@@ -239,6 +240,9 @@
     <Compile Include="View\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WeekplanningView.xaml.cs">
       <DependentUpon>WeekplanningView.xaml</DependentUpon>
     </Compile>
@@ -316,6 +320,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

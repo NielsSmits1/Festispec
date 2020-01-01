@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
+        xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="Home" 
         WindowState="Maximized"
@@ -61,52 +62,25 @@
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Border BorderThickness="100">
-                <StackPanel>
-                    <Grid Margin="0, 0, 0, 100">
+                <StackPanel DataContext="{Binding Home, Source={StaticResource Locator}}">
+                    <wpf:PieChart LegendLocation="Bottom" Hoverable="True" Series="{Binding SeriesCollection}" DataTooltip="{x:Null}" Width="200" Height="200"  >
+                       
+                    </wpf:PieChart>
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-
-                        <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
-                        Foreground="White"
-                        Grid.Column="0" Command="{Binding ShowKlantenCommand}" Background="#FF6A6A6A">
-                            <Image Source="/Images/klanten.png"/>
-                        </Button>
-
-                        <Button x:Name="InplanButton" Width="150" Height="150" FontSize="16"
-                        Foreground="White"
-                        Grid.Column="1" Command="{Binding ShowInplanVerzoekenCommand}" Background="#FF6A6A6A">
-                            <Image Source="/Images/verzoeken_inplannen.png"/>
-                        </Button>
-
-                        <Button x:Name="InspecteursButton" Width="150" Height="150" FontSize="16"
-                        Foreground="White"  
-                        Grid.Column="2" Command="{Binding ShowInspecteursCommand}" Background="#FF6A6A6A">
-                            <Image Source="/Images/inspecteurs.png"/>
-                        </Button>
-
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Aantal inspecties afgelopen maand" FontSize="20" />
+                        <Label Content="Voltooide inspecties afgelopen maand " FontSize="20" Grid.Column="1"/>
+                        <TextBlock Text="{Binding AmountOfInspectionsLastMonth}" Grid.Column="0" Grid.Row="1" FontSize="18"/>
+                        <TextBlock Text="{Binding AmountOfInspectionsCompletedLastMonth}" Grid.Column="1" Grid.Row="1" FontSize="18"/>
                     </Grid>
-
-                    <Grid Width="900" HorizontalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button x:Name="VragenlijstButton" Width="150" Height="150" FontSize="16" 
-                        Foreground="White"  
-                        Grid.Column="0" Command="{Binding ShowVragenlijstCommand}" Background="#FF6A6A6A">
-                            <Image Source="/Images/vragenlijsten.png" Height="140" Width="136"/>
-                        </Button>
-
-                        <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
-                        Foreground="White"  
-                        Grid.Column="1" Command="{Binding ShowKalenderCommand}" Background="#FF6A6A6A">
-                            <Image Source="/Images/weekkalender.png" Width="134"/>
-                        </Button>
-                    </Grid>
+                    
                 </StackPanel>
             </Border>
         </Grid>

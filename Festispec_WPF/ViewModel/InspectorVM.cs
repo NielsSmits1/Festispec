@@ -38,6 +38,7 @@ namespace Festispec_WPF.ViewModel
             _UOW = ViewModelLocator.UOW;
             _inspecteur = inspector;
             _nawInspecteur =  _UOW.NAWInspectors.Find(ins => ins.ID == _inspecteur.NAW).FirstOrDefault();
+            ChosenCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspectors.GetCertificatesInspector(Inspector_ID).Select(ct => new CertificateVM(ct)));
         }
 
         public void FillNAW(ApplicantVM applicant)
