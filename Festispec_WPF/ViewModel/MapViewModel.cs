@@ -480,6 +480,7 @@ namespace Festispec_WPF.ViewModel
 
         private void DrawInspections(bool selectSingle)
         {
+            try { 
             if (selectSingle)
             {
                 var location = getFestivalLocation(SelectedFestival);
@@ -504,6 +505,7 @@ namespace Festispec_WPF.ViewModel
 
                     MapElements.Add(pin);
                 }
+            }
             }
             catch (Exception)
             {

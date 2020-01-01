@@ -170,9 +170,7 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                if(ServiceLocator.Current.GetInstance<InspectionCrudVM>() != null){
-                    ServiceLocator.Current.GetInstance<InspectionCrudVM>().Init();
-                }
+                
                 return ServiceLocator.Current.GetInstance<InspectionCrudVM>();
             }
         }
