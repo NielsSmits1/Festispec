@@ -375,10 +375,14 @@ namespace Festispec_WPF.ViewModel
             CancelConfirmationCommand = new RelayCommand(cancelConfirmation);
             RemoveInspectorFromInspectionCommand = new RelayCommand(RemoveInspectorFromInspection);
 
-            //---INSPECTORS
+            Init();
+        }
+
+        public void Init()
+        {
             try
             {
-                _UOW =  ViewModelLocator.UOW;
+                _UOW = ViewModelLocator.UOW;
                 LoadInspectors();
 
                 LoadFestivals();

@@ -90,10 +90,10 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                //if(ServiceLocator.Current.GetInstance<InspectorCrudVM>() == null)
-                //{
-                //    SimpleIoc.Default.Register<InspectorCrudVM>();
-                //}
+                if (ServiceLocator.Current.GetInstance<InspectorCrudVM>() != null)
+                {
+                    ServiceLocator.Current.GetInstance<InspectorCrudVM>().Init();
+                }
                 return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
             }
         }
@@ -178,6 +178,10 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
+                if(ServiceLocator.Current.GetInstance<MapViewModel>() != null)
+                {
+                    ServiceLocator.Current.GetInstance<MapViewModel>().Init();
+                }
                 return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
             
