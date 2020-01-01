@@ -25,6 +25,8 @@ namespace Festispec_WPF.ViewModel
 
         public ObservableCollection<CertificateVM> ChosenCertificates { get; set; }
         public ObservableCollection<QuestionnaireVM> ChosenQuestionnaires { get; set; }
+
+        public ObservableCollection<InspectorVM> PlannedInspectors { get; set; }
         public InspectionVM()
         {
             _UOW = new ViewModelLocator().UOW;
@@ -48,12 +50,18 @@ namespace Festispec_WPF.ViewModel
                 _customer = new CustomerVM(_UOW.Customers.Get(Customer_ID));
                 ChosenCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetCertificatesByInspection(Inspection_ID).Select(cert => new CertificateVM(cert)));
                 ChosenQuestionnaires = new ObservableCollection<QuestionnaireVM>(_UOW.Inspections.Get(Inspection_ID).Vragenlijst.Select(vr => new QuestionnaireVM(vr)).ToList());
+                RefreshInspectors();
             }   
             else
             {
                 _location = new LocationVM(_inspection.Locatie);
                 _customer = new CustomerVM(_inspection.Klant);
             }
+
+        public void RefreshInspectors()
+        {
+            PlannedInspectors = new ObservableCollection<InspectorVM>(_UOW.Inspections.Get(Inspection_ID).Inspecteur.Select(vr => new InspectorVM(vr)).ToList());
+            RaisePropertyChanged(() => PlannedInspectors);
         }
 
         public Inspectie Inspection

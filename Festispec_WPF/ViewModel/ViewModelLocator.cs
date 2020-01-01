@@ -59,6 +59,7 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<CRCustomerVM>();
             SimpleIoc.Default.Register<InspectionCrudVM>();
             SimpleIoc.Default.Register<MapViewModel>();
+            SimpleIoc.Default.Register<HomeVM>();
         }
 
         public MainViewModel Main
@@ -180,6 +181,10 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
+                if(ServiceLocator.Current.GetInstance<MapViewModel>() != null)
+                {
+                    ServiceLocator.Current.GetInstance<MapViewModel>().Init();
+                }
                 return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
             
@@ -239,6 +244,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+
+        public HomeVM Home
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HomeVM>();
+            }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
