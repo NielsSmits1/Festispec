@@ -167,7 +167,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <RadioButton Command="{Binding ListOfAllCommand}"  IsChecked="{Binding AllChecked, Mode=TwoWay}"  Content="Alles" Grid.Column="0"/>
-                    <RadioButton Command="{Binding ListOfActiveCommand}"   Content="Actieve inspecteurs" Grid.Column="1"/>
+                    <RadioButton Command="{Binding ListOfActiveCommand}"  IsChecked="{Binding ActiveChecked, Mode=TwoWay}"  Content="Actieve inspecteurs" Grid.Column="1"/>
                     <RadioButton Command="{Binding ListOfInactiveCommand}"  Content="Inactieve inspecteurs" Grid.Column="2"/>
                     <RadioButton Command="{Binding ListOfLicensedCommand}"  Content="Heeft certificaat" Grid.Column="3"/>
                 </Grid>

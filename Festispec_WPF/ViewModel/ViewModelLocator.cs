@@ -16,6 +16,7 @@ using CommonServiceLocator;
 using FestiSpec.Domain.Model;
 using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
+using Festispec_WPF.ViewModel.QuestionnaireFolder;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using System.Configuration;
@@ -32,8 +33,7 @@ namespace Festispec_WPF.ViewModel
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
         /// 
-
-        private UnitOfWork _unitOfWork;
+        public static UnitOfWork UOW;
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -48,14 +48,18 @@ namespace Festispec_WPF.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+            UOW = new UnitOfWork();
             SimpleIoc.Default.Register<MenuVM>();
             SimpleIoc.Default.Register<EmployeeCrudVM>();
             SimpleIoc.Default.Register<InspectorCrudVM>();
             SimpleIoc.Default.Register<RapportageVM>();
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CreateQuestionaireVM>();
+            SimpleIoc.Default.Register<EditQuestionnaireVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
             SimpleIoc.Default.Register<InspectionCrudVM>();
             SimpleIoc.Default.Register<MapViewModel>();
+            SimpleIoc.Default.Register<HomeVM>();
         }
 
         public MainViewModel Main
@@ -74,14 +78,22 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public QuestionaireCrudVM QuestionaireCrud
+        {
+            get
+            {
+                return new QuestionaireCrudVM();
+            }
+        }
+
         public InspectorCrudVM InspectorCrud
         {
             get
             {
-                //if(ServiceLocator.Current.GetInstance<InspectorCrudVM>() == null)
-                //{
-                //    SimpleIoc.Default.Register<InspectorCrudVM>();
-                //}
+                if(ServiceLocator.Current.GetInstance<InspectorCrudVM>() != null)
+                {
+                   ServiceLocator.Current.GetInstance<InspectorCrudVM>().Init();
+                }
                 return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
             }
         }
@@ -118,6 +130,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public AppendixQuestionPageVM AppendixQuestionPageVM
+        {
+            get
+            {
+                return new AppendixQuestionPageVM();
+            }
+        }
+        
         public EmployeeVM GetRegisterVm
         {
             get
@@ -134,23 +154,23 @@ namespace Festispec_WPF.ViewModel
             }
         }
         
-        public UnitOfWork UOW
+
+
+
+    public CreateQuestionaireVM CreateQuestionnaire
         {
             get
             {
-                if(_unitOfWork == null)
-                {
-                    //var connection = ConfigurationManager.AppSettings["UsedConnection"] ?? "FestiSpecEntities";
-                    _unitOfWork = new UnitOfWork(new FestiSpecEntities());
-                }
-                return _unitOfWork;
+                return ServiceLocator.Current.GetInstance<CreateQuestionaireVM>();
             }
         }
+       
 
         public InspectionCrudVM InspectionCrud
         {
             get
             {
+                
                 return ServiceLocator.Current.GetInstance<InspectionCrudVM>();
             }
         }
@@ -159,10 +179,61 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
+                if(ServiceLocator.Current.GetInstance<MapViewModel>() != null)
+                {
+                    ServiceLocator.Current.GetInstance<MapViewModel>().Init();
+                }
                 return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
+            
         }
 
+        public OpenQuestionPageVM OpenQuestionPageVM
+        {
+            get
+            {
+                return new OpenQuestionPageVM();
+            }
+
+        }
+        public MultipleChoiceQuestionPageVM MultipleChoiceQuestionPageVM
+        {
+            get
+            {
+                return new MultipleChoiceQuestionPageVM();
+            }
+
+        }
+
+        public MapQuestionPageVM MapQuestionPageVM
+        {
+            get
+            {
+                return new MapQuestionPageVM();
+            }
+        }
+        public TableQuestionPageVM TableQuestionPageVM
+        {
+            get
+            {
+                return new TableQuestionPageVM();
+            }
+        }
+        public QuestionnaireVM QuestionnaireVM
+        {
+            get
+            {
+                return new QuestionnaireVM();
+            }
+        }
+        
+        public EditQuestionnaireVM EditQuestionnaireVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditQuestionnaireVM>();
+            }
+        }
         public OfflineMapVM OfflineMapView
         {
             get
@@ -171,6 +242,14 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+
+        public HomeVM Home
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HomeVM>();
+            }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

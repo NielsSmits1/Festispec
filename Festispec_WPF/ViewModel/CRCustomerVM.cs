@@ -53,7 +53,7 @@ namespace Festispec_WPF.ViewModel
         }
         public CRCustomerVM()
         {
-            UOW = new ViewModelLocator().UOW;
+            UOW = ViewModelLocator.UOW;       
 
             NewCustomer = new CustomerVM();
             NewcontactPerson = new ContactPersonVM();

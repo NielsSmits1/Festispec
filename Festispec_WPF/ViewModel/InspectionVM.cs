@@ -24,33 +24,45 @@ namespace Festispec_WPF.ViewModel
         private UnitOfWork _UOW;
 
         public ObservableCollection<CertificateVM> ChosenCertificates { get; set; }
+        public ObservableCollection<QuestionnaireVM> ChosenQuestionnaires { get; set; }
+
+        public ObservableCollection<InspectorVM> PlannedInspectors { get; set; }
         public InspectionVM()
         {
-            _UOW = new ViewModelLocator().UOW;
+            _UOW = ViewModelLocator.UOW;
             _inspection = new Inspectie();
             _location = new LocationVM();
             _customer = new CustomerVM();
             ChosenCertificates = new ObservableCollection<CertificateVM>();
+            ChosenQuestionnaires = new ObservableCollection<QuestionnaireVM>();
             StartDate = DateTime.Now.Date;
             EndDate = DateTime.Now.Date.AddDays(1);
         }
 
         public InspectionVM(Inspectie inspectie)
         {
-            _UOW = new ViewModelLocator().UOW;
+            _UOW = ViewModelLocator.UOW;
             _inspection = inspectie;
 
-            if(_inspection.Klant_ID != 0)
+            if (_inspection.Klant_ID != 0)
             {
                 _location = new LocationVM(_UOW.InspectionLocations.Get(Location_ID));
                 _customer = new CustomerVM(_UOW.Customers.Get(Customer_ID));
                 ChosenCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetCertificatesByInspection(Inspection_ID).Select(cert => new CertificateVM(cert)));
-            }   
+                ChosenQuestionnaires = new ObservableCollection<QuestionnaireVM>(_UOW.Inspections.Get(Inspection_ID).Vragenlijst.Select(vr => new QuestionnaireVM(vr)).ToList());
+                RefreshInspectors();
+            }
             else
             {
                 _location = new LocationVM(_inspection.Locatie);
                 _customer = new CustomerVM(_inspection.Klant);
             }
+        }
+
+        public void RefreshInspectors()
+        {
+            PlannedInspectors = new ObservableCollection<InspectorVM>(_UOW.Inspections.Get(Inspection_ID).Inspecteur.Select(vr => new InspectorVM(vr)).ToList());
+            RaisePropertyChanged(() => PlannedInspectors);
         }
 
         public Inspectie Inspection

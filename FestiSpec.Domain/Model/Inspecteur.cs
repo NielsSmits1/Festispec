@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace FestiSpec.Domain.Model
 {
     using System;
@@ -25,22 +23,12 @@ namespace FestiSpec.Domain.Model
             this.Inspectie = new HashSet<Inspectie>();
         }
     
-        [Key]
         public int ID { get; set; }
-
-        [Required]
         public string Username { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
         public string Wachtwoord { get; set; }
-
-
         public int NAW { get; set; }
-
-
         public bool Actief { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Beschikbaarheid> Beschikbaarheid { get; set; }
         public virtual NAW_inspecteur NAW_inspecteur { get; set; }

@@ -82,9 +82,10 @@ namespace Festispec_WPF.ViewModel
         public ICommand ListOfInactiveCommand { get; set; }
         public ICommand ListOfLicensedCommand { get; set; }
         public bool AllChecked { get; set; }
+        public bool ActiveChecked { get; set; }
         public ICommand ListOfAllCommand { get; set; }
         public ICommand SetInspectorInactiveCommand { get; set; }
-   
+
 
         public InspectorVM SelectedInspector
         {
@@ -109,7 +110,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _selectedApplicant = value;
-                if(value != null)
+                if (value != null)
                 {
                     NewAppInspector.FillNAW(value);
                 }
@@ -122,24 +123,6 @@ namespace Festispec_WPF.ViewModel
 
         public InspectorCrudVM()
         {
-            //UOW
-            UOW = new ViewModelLocator().UOW;
-
-            //New Inspector - Create
-            NewInspector = new InspectorVM();
-            NewAppInspector = new InspectorVM();
-            //List of Inspectors - Read
-            LoadAll();
-            AllChecked = true;
-
-            //All Certificates - Create
-            var list = UOW.Certificates.GetAll().Select(certificaat => new CertificateVM(certificaat));
-            AvailableCertificates = new ObservableCollection<CertificateVM>(list);
-            AvailableAppCertificates = new ObservableCollection<CertificateVM>(list);
-
-            //Save changes
-            UOW.Complete();
-
 
             ListOfAllCommand = new RelayCommand(LoadAll);
             MoveToAvailableCommand = new RelayCommand(MoveCertificateToAvailable);
@@ -156,7 +139,38 @@ namespace Festispec_WPF.ViewModel
             OpenCreateCommand = new RelayCommand(OpenCreate);
             CloseCreateCommand = new RelayCommand(CloseCreate);
             RecruitApplicantCommand = new RelayCommand(RecruitApplicant, CanRecruit);
-    }
+
+
+            Init();
+
+        }
+
+        public void Init()
+        {
+            try
+            {
+                //UOW
+                UOW = ViewModelLocator.UOW;
+
+                //New Inspector - Create
+                NewInspector = new InspectorVM();
+                NewAppInspector = new InspectorVM();
+                //List of Inspectors - Read
+                LoadActive();
+                ActiveChecked = true;
+                RaisePropertyChanged(() => ActiveChecked);
+                _currentlist = 2;
+
+                //All Certificates - Create
+                var list = UOW.Certificates.GetAll().Select(certificaat => new CertificateVM(certificaat));
+                AvailableCertificates = new ObservableCollection<CertificateVM>(list);
+                AvailableAppCertificates = new ObservableCollection<CertificateVM>(list);
+            }
+            catch (Exception)
+            {
+                //Ja yoo offline
+            }
+        }
 
         // CREATE
         public void AddInspector()
@@ -192,7 +206,7 @@ namespace Festispec_WPF.ViewModel
 
             NewInspector.EmptyAll();
 
-            if(_createInspectorWindow != null)
+            if (_createInspectorWindow != null)
             {
                 _createInspectorWindow.Close();
             }
@@ -360,8 +374,8 @@ namespace Festispec_WPF.ViewModel
             _createInspectorWindow.Close();
         }
 
-        
 
-       
+
+
     }
 }

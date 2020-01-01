@@ -22,6 +22,8 @@ namespace Festispec_WPF.ViewModel
         private MapView _planWindow;
         private EmployeeView _employeeView;
         private MainWindow _mainWindow;
+        private QuestionnaireCRUD _questionnaireView;
+
 
         // commands
         public ICommand ShowHomeCommand { get; set; }
@@ -100,7 +102,10 @@ namespace Festispec_WPF.ViewModel
         {
             if (HasInternet())
             {
-                throw new NotImplementedException();
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            _questionnaireView = new QuestionnaireCRUD();
+            _questionnaireView.Show();
+            currentWindow.Close();
             }
             else
             {

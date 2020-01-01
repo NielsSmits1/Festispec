@@ -39,8 +39,8 @@ namespace Festispec_WPF.ViewModel
         {
             HasInternet();
             LoginCommand = new RelayCommand(HandleLogin);
+            UOW = ViewModelLocator.UOW;
             OfflineCommand = new RelayCommand(HandleOffline);
-            UOW = new ViewModelLocator().UOW;
         }
 
         private void HandleLogin()
