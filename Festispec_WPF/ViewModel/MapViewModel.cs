@@ -52,6 +52,18 @@ namespace Festispec_WPF.ViewModel
         private UnitOfWork _UOW;
 
         #region VisibilityProperties
+        private string _availibleInspectorsVisibility;
+
+        public string AvailibleInspectorsVisibility
+        {
+            get { return _availibleInspectorsVisibility; }
+            set
+            {
+                _availibleInspectorsVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
 
         private string _inspectorVisibility;
 
@@ -114,6 +126,18 @@ namespace Festispec_WPF.ViewModel
             {
                 _planInspectorVisibility = value;
                 CommandManager.InvalidateRequerySuggested();
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _plannedInspectorVisibility;
+
+        public string PlannedInspectorVisibility
+        {
+            get { return _plannedInspectorVisibility; }
+            set
+            {
+                _plannedInspectorVisibility = value;
                 base.RaisePropertyChanged();
             }
         }
@@ -351,6 +375,9 @@ namespace Festispec_WPF.ViewModel
         public ICommand ShowConfirmationDetailsCommand { get; set; }
         public ICommand CancelConfirmationCommand { get; set; }
         public ICommand RemoveInspectorFromInspectionCommand { get; set; }
+        public ICommand openDetailsCommand { get; set; }
+        public ICommand openPlannedInspectorsCommand { get; set; }
+
 
         public MapViewModel()
         {
@@ -374,6 +401,8 @@ namespace Festispec_WPF.ViewModel
             ShowConfirmationDetailsCommand = new RelayCommand(showConfirmation);
             CancelConfirmationCommand = new RelayCommand(cancelConfirmation);
             RemoveInspectorFromInspectionCommand = new RelayCommand(RemoveInspectorFromInspection);
+            openPlannedInspectorsCommand = new RelayCommand(openPlannedInspectors);
+            openDetailsCommand = new RelayCommand(openDetails);
 
             Init();
         }
@@ -407,9 +436,21 @@ namespace Festispec_WPF.ViewModel
             EditVisibility = "Hidden";
             MapErrorVisibility = "Hidden";
             InspectionVisibility = "Visible";
+            AvailibleInspectorsVisibility = "Hidden";
+            PlannedInspectorVisibility = "Hidden";
             searchText = "Zoek naam";
         }
-    
+
+        private void openPlannedInspectors()
+        {
+            PlannedInspectorVisibility = "Visible";
+        }
+
+        private void openDetails()
+        {
+            PlannedInspectorVisibility = "Hidden";
+        }
+
         private void DrawInspectors()
         {
             foreach (var inspector in Inspectors)
@@ -698,12 +739,13 @@ namespace Festispec_WPF.ViewModel
             InspectorVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
             EditVisibility = "Hidden";
-            
+            MapVisibility = "Visible";
         }
 
         private void planInspector()
         {
             calculateDistances();
+            AvailibleInspectorsVisibility = "Visible";
         }
 
         private void cancelPlanning()
@@ -711,6 +753,7 @@ namespace Festispec_WPF.ViewModel
             ButtonControlVisibility = "Hidden";
             PlanInspectorVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
+            AvailibleInspectorsVisibility = "Hidden";
             ConfirmVisibility = "Hidden";
             MapVisibility = "Visible";
             InspectionVisibility = "Visible";
