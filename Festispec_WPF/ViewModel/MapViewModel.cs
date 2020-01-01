@@ -7,16 +7,16 @@ using GalaSoft.MvvmLight.Command;
 using Geocoding;
 using Geocoding.Microsoft;
 using Microsoft.Maps.MapControl.WPF;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.Entity;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -275,7 +275,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 if (LeftoverCertificates.Contains(value))
-                {
+                {  
                     SelectedFestival.ChosenCertificates.Add(value); LeftoverCertificates.Remove(value);
                 }
                 else
@@ -294,6 +294,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand ShowDetailsFestivalCommand { get; set; }
         public ICommand RefreshFestivalsCommand { get; set; }
         public ICommand RefreshInspectorsCommand { get; set; }
+        public ICommand testFunction { get; set; }
         public ICommand SafeEditCommand { get; set; }
         public ICommand CreateNewLocationCommand { get; set; }
         public ICommand CloseCreateCommand { get; set; }
@@ -315,6 +316,8 @@ namespace Festispec_WPF.ViewModel
             ShowDetailsFestivalCommand = new RelayCommand(showDetailsFestival);
             RefreshFestivalsCommand = new RelayCommand(LoadFestivals);
             RefreshInspectorsCommand = new RelayCommand(LoadInspectors);
+            testFunction = new RelayCommand(downloadInspection);
+
             SafeEditCommand = new RelayCommand(complete);
             CreateNewLocationCommand = new RelayCommand(AddNewLocation);
             OpenCreateLocationWindowCommand = new RelayCommand(OpenCreateLocationWindow);
@@ -381,9 +384,47 @@ namespace Festispec_WPF.ViewModel
             catch (Exception)
             {
                 MapErrorVisibility = "Visible";
+                LoadOfflineFestival();
             }
         }
     
+        private void downloadInspection()
+        {
+            var location = new Locatie
+            {
+                Huisnummer = _selectedFestival.Location.HomeNumber,
+                Straatnaam = _selectedFestival.Location.StreetName,
+                Postcode = _selectedFestival.Location.ZipCode
+            };
+
+            var customer = new Klant
+            {
+                Bedrijfsnaam = _selectedFestival.Customer.CompanyName,
+            };
+
+            var certifcateList = new List<Certificaat>();
+            foreach(var certificate in _selectedFestival.ChosenCertificates.Select(cert => cert.Certificate).ToList())
+            {
+                certifcateList.Add(new Certificaat
+                {
+                    Name = certificate.Name
+                });
+            }
+
+            var obj = new Inspectie
+            {
+                Titel = _selectedFestival.Title,
+                Locatie = location,
+                Klant = customer,
+                StartDate = _selectedFestival.StartDate,
+                EndDate = _selectedFestival.EndDate,
+                Versie = _selectedFestival.Version,
+                Certificaat = certifcateList
+            };
+
+            var json = new JavaScriptSerializer().Serialize(obj);
+            System.IO.File.WriteAllText(@"../../inspection.json", json);
+        }
 
         private void searchDatagrid()
         {
@@ -649,7 +690,15 @@ namespace Festispec_WPF.ViewModel
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(l => new LocationVM(l)));
             Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().Select(c => new CustomerVM(c)));
             RaisePropertyChanged(() => Festivals);
-            
+        }
+
+        private void LoadOfflineFestival()
+        {
+            Festivals = new ObservableCollection<InspectionVM>();
+            string json = File.ReadAllText(@"../../inspection.json");
+            var festivalData = JsonConvert.DeserializeObject<Inspectie>((json));
+            Festivals.Add(new InspectionVM(festivalData));
+            RaisePropertyChanged(() => Festivals);
         }
 
         private void LoadInspectors()

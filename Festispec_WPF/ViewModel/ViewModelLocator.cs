@@ -89,10 +89,10 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                //if(ServiceLocator.Current.GetInstance<InspectorCrudVM>() == null)
-                //{
-                //    SimpleIoc.Default.Register<InspectorCrudVM>();
-                //}
+                if(ServiceLocator.Current.GetInstance<InspectorCrudVM>() != null)
+                {
+                   ServiceLocator.Current.GetInstance<InspectorCrudVM>().Init();
+                }
                 return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
             }
         }
@@ -169,6 +169,9 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
+                if(ServiceLocator.Current.GetInstance<InspectionCrudVM>() != null){
+                    ServiceLocator.Current.GetInstance<InspectionCrudVM>().Init();
+                }
                 return ServiceLocator.Current.GetInstance<InspectionCrudVM>();
             }
         }
@@ -228,6 +231,14 @@ namespace Festispec_WPF.ViewModel
                 return ServiceLocator.Current.GetInstance<EditQuestionnaireVM>();
             }
         }
+        public OfflineMapVM OfflineMapView
+        {
+            get
+            {
+                return new OfflineMapVM();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
