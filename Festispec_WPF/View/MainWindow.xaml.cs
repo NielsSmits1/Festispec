@@ -23,5 +23,21 @@ namespace Festispec_WPF.View
         {
             InitializeComponent();
         }
+
+        private void Username_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Password_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            username.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            password.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
     }
 }

@@ -113,7 +113,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Validation rules\EmailValidator.cs" />
     <Compile Include="Validation rules\EmptyValidator.cs" />
+    <Compile Include="Validation rules\LengthValidator.cs" />
     <Compile Include="Validation rules\NumberValidationRule.cs" />
     <Compile Include="ViewModel\CustomerFolder\CustomerUpdateVM.cs" />
     <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
@@ -404,6 +406,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\festispec.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logout.png" />
+    <Resource Include="Images\werknemer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

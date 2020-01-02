@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
+      xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
       mc:Ignorable="d" 
       d:DesignHeight="250" d:DesignWidth="800"
       DataContext="{Binding MultipleChoiceQuestionPageVM, Source={StaticResource Locator}}"
@@ -27,10 +28,28 @@
                 <Label  FontSize="13" FontWeight="Bold">Aanmaken meerkeuzevraag</Label>
 
                 <Label>Vraag:</Label>
-                <TextBox Text="{Binding NewMultipleChoiceQuestion.Question, Mode=TwoWay}"/>
+                <TextBox Name="question" LostFocus="TextBox_LostFocus">
+                    <TextBox.Text>
+                        <Binding Path="NewMultipleChoiceQuestion.Question" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validationrules:EmptyValidator />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=question}" Foreground="Red"/>
 
                 <Label>Vraag optie:</Label>
-                <TextBox Text="{Binding newAnwserOption, Mode=TwoWay}"/>
+                <TextBox Name="option" LostFocus="TextBox_LostFocus_1">
+                    <TextBox.Text>
+                        <Binding Path="newAnwserOption" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validationrules:EmptyValidator />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=option}" Foreground="Red"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,1,0,13" Grid.RowSpan="2">
                 <Button  Padding="8,8,8,8" Height="40" Command="{Binding SubmitAnwserOption}" Margin="50 10" VerticalAlignment="Center" FontSize="12" BorderBrush="#8000FF" BorderThickness="3" Foreground="#8000FF" Background="Transparent" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag optie toevoegen">

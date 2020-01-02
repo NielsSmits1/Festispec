@@ -34,6 +34,40 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        private string _editVisibility;
+
+        public string EditVisibility
+        {
+            get { return _editVisibility; }
+            set
+            {
+                _editVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _enableEdit;
+        public string EnableEdit
+        {
+            get { return _enableEdit; }
+            set
+            {
+                _enableEdit = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _employeeVisibility;
+
+        public string EmployeeVisibility
+        {
+            get { return _employeeVisibility; }
+            set
+            {
+                _employeeVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
 
         public ObservableCollection<EmployeeVM> Employees { get; set; }
 
@@ -42,6 +76,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand SafeEditEmployeeCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
         public ICommand OpenRegisterCommand { get; set; }
+        public ICommand ChangeViewToEdit { get; set; }
+        public ICommand CancelEdit { get; set; }
 
         public EmployeeVM SelectedEmployee
         {
@@ -50,6 +86,7 @@ namespace Festispec_WPF.ViewModel
             {
                 _employee = value;
                 IsSelected = true;
+                EnableEdit = "Visible";
                 RaisePropertyChanged();
             }
         }
@@ -62,6 +99,9 @@ namespace Festispec_WPF.ViewModel
             UOW = ViewModelLocator.UOW;
             NewEmployee = new EmployeeVM();
 
+            EmployeeVisibility = "Visible";
+            EditVisibility = "Hidden";
+            EnableEdit = "Hidden";
 
             //List of all Emmployees - Read
             LoadAll();
@@ -70,7 +110,20 @@ namespace Festispec_WPF.ViewModel
             SafeEditEmployeeCommand = new RelayCommand(SaveEditEmployee);
             RegisterCommand = new RelayCommand(HandleRegister);
             OpenRegisterCommand = new RelayCommand(OpenRegister);
+            ChangeViewToEdit = new RelayCommand(OpenEditView);
+            CancelEdit = new RelayCommand(MakeEmployeeVisible);
+        }
+        
+        private void MakeEmployeeVisible()
+        {
+            EditVisibility = "Hidden";
+            EmployeeVisibility = "Visible";
+        }
 
+        private void OpenEditView()
+        {
+            EditVisibility = "Visible";
+            EmployeeVisibility = "Hidden";
         }
 
         private void OpenRegister()
@@ -109,10 +162,11 @@ namespace Festispec_WPF.ViewModel
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RaisePropertyChanged();
                 LoadAll();
+                MakeEmployeeVisible();
             }
             catch
             {
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                MessageBox.Show("Fout bij invoeren velden", "Er is iets fout gegaan",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

@@ -45,7 +45,7 @@
                             <Label  FontSize="25" FontWeight="Bold" Foreground="White">Aanmaken vragenlijst</Label>
                             <Border BorderBrush="White" BorderThickness="2"/>
                             <Label>Titel</Label>
-                            <TextBox Name="title">
+                            <TextBox Name="title" LostFocus="Title_LostFocus">
                                 <TextBox.Text>
                                     <Binding Path="EditetQuestionnaireVM.Title" Mode="TwoWay">
                                         <Binding.ValidationRules>
@@ -56,9 +56,28 @@
                             </TextBox>
                             <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=title}" Foreground="Red"/>
                             <Label>Versie</Label>
-                            <TextBox Text="{Binding EditetQuestionnaireVM.Version, Mode=TwoWay}"></TextBox>
+                            <TextBox Name="version" LostFocus="Version_LostFocus">
+                                <TextBox.Text>
+                                    <Binding Path="EditetQuestionnaireVM.Version" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                            <validationrules:NumberValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=version}" Foreground="Red"/>
                             <Label>Opmerking</Label>
-                            <TextBox Text="{Binding EditetQuestionnaireVM.Note, Mode=TwoWay}"></TextBox>
+                            <TextBox Name="note" LostFocus="Note_LostFocus">
+                                <TextBox.Text>
+                                    <Binding Path="EditetQuestionnaireVM.Note" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validationrules:EmptyValidator />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=note}" Foreground="Red"/>
                         </StackPanel>
                     </Border>
                     <Border Visibility="{Binding QuestionVisibility}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
@@ -156,7 +175,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitCommand}" Height="50" Background="#8000FF">
+                    <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitCommand}" Height="50" Background="#8000FF" Click="Button_Click">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Green"/>

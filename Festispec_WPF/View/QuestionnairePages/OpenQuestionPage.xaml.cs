@@ -24,5 +24,10 @@ namespace Festispec_WPF.View.QuestionnairePages
         {
             InitializeComponent();
         }
+
+        private void Question_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
     }
 }

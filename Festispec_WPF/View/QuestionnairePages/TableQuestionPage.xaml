@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec_WPF.View.QuestionnairePages"
+      xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
       mc:Ignorable="d" 
       d:DesignHeight="250" d:DesignWidth="1200"
       Title="TableQuestionPage"
@@ -12,16 +13,43 @@
 
         <Label FontSize="13" FontWeight="Bold">Aanmaken tabel vraag</Label>
         <TextBlock Text="Vraag:"></TextBlock>
-        <TextBox Text="{Binding NewTableQuestion.Question,Mode=TwoWay}"/>
+        <TextBox Name="question" LostFocus="TextBox_LostFocus">
+            <TextBox.Text>
+                <Binding Path="NewTableQuestion.Question" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <validationrules:EmptyValidator />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=question}" Foreground="Red"/>
 
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Width="200">
                 <TextBlock Margin="0,20,0,0" Text="VraagKop:"></TextBlock>
-                <TextBox Text="{Binding NewTableQuestion.QuestionHead,Mode=TwoWay}"/>
+                <TextBox Name="head" LostFocus="TextBox_LostFocus_1">
+                    <TextBox.Text>
+                        <Binding Path="NewTableQuestion.QuestionHead" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validationrules:EmptyValidator />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=head}" Foreground="Red"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Width="200" Margin="100,0,0,0">
                 <TextBlock Margin="0,20,0,0" Text="AntwoordKop:"></TextBlock>
-                <TextBox Text="{Binding NewTableQuestion.AnswerHead, Mode=TwoWay}"/>
+                <TextBox Name="head2" LostFocus="TextBox_LostFocus_2">
+                    <TextBox.Text>
+                        <Binding Path="NewTableQuestion.AnswerHead" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validationrules:EmptyValidator />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=head2}" Foreground="Red"/>
             </StackPanel>
         </StackPanel>
         <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="500" Margin="0, 30" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen">

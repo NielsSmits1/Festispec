@@ -17,25 +17,48 @@
             <RowDefinition Height="75" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="1" Background="Gray">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKlantenCommand}">
-                <Image Source="/Images/klanten.PNG" />
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="#565656">
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Wheat" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/klanten.PNG" Height="40"/>
+                    <Label Content="Klanten" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Border BorderBrush="White" BorderThickness="4" Height="5" Width="75" Margin="0,15"/>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInplanVerzoekenCommand}">
-                <Image Source="/Images/verzoeken_inplannen.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/verzoeken_inplannen.PNG" Height="40"/>
+                    <Label Content="Inplannen" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Border BorderBrush="White" BorderThickness="4" Height="5" Width="75" Margin="0,15"/>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInspecteursCommand}">
-                <Image Source="/Images/inspecteurs.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/inspecteurs.PNG" Height="40"/>
+                    <Label Content="Inspecteur" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Border BorderBrush="White" BorderThickness="4" Height="5" Width="75" Margin="0,15"/>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowVragenlijstCommand}">
-                <Image Source="/Images/vragenlijsten.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/vragenlijsten.PNG" Height="40"/>
+                    <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Border BorderBrush="White" BorderThickness="4" Height="5" Width="75" Margin="0,15"/>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKalenderCommand}">
-                <Image Source="/Images/weekkalender.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="white" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/weekkalender.PNG" Height="40"/>
+                    <Label Content="Kalender" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
+            </Button>
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="Transparent" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/werknemer.PNG"/>
+                    <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
+            </Button>
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/logout.PNG"/>
+                    <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
             </Button>
         </StackPanel>
 
@@ -59,7 +82,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Vragenlijsten" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" Grid.Column="0"/>
+                        <TextBlock Text="Vragenlijsten" FontSize="35" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" Grid.Column="0" Margin="0,26,634,26"/>
 
                         <Button Width="150" Height="50" FontSize="28" Content="Toevoegen" 
                         Foreground="White" FontWeight="Bold" Background="#8000FF" 
@@ -184,7 +207,8 @@
                                                             </Trigger>
                                                         </Style.Triggers>
                                                     </Style>
-                                                </Button.Style>Delete</Button>
+                                                </Button.Style> Delete
+                                            </Button>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

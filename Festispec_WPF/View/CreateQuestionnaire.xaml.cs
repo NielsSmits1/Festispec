@@ -23,5 +23,27 @@ namespace Festispec_WPF.View
         {
             InitializeComponent();
         }
+
+        private void Version_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Title_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Notes_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            version.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            title.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            notes.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
     }
 }
