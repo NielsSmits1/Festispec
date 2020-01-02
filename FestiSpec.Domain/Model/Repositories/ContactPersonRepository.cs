@@ -9,7 +9,7 @@ namespace FestiSpec.Domain.Model.Repositories
 {
     public class ContactPersonRepository : Repository<Contactpersoon>, IContactPersonRepository
     {
-        public ContactPersonRepository(FestiSpecEntities context) : base(context)
+        public ContactPersonRepository(FestiSpecEntities1 context) : base(context)
         {
         }
     }

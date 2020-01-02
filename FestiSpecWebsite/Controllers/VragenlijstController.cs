@@ -13,7 +13,7 @@ namespace FestiSpecWebsite.Controllers
 {
     public class VragenlijstController : Controller
     {
-        private FestiSpecEntities db = new FestiSpecEntities();
+        private FestiSpecEntities1 db = new FestiSpecEntities1();
 
         // GET: Vragenlijst
         public ActionResult Index()

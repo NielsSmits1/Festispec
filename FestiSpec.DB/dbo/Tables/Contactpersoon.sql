@@ -6,6 +6,7 @@
     [Achternaam]     VARCHAR (50) NOT NULL,
     [Telefoonnummer] VARCHAR (50) NOT NULL,
     [Email]          VARCHAR (50) NOT NULL,
+    [Actief]         BIT          NOT NULL,
     CONSTRAINT [PK_Contactpersoon] PRIMARY KEY CLUSTERED ([ID] ASC),
     CONSTRAINT [CHK_AchternaamNotNull] CHECK (datalength([Achternaam])>=(1)),
     CONSTRAINT [CHK_ContactpersoonNotNull] CHECK (datalength([Voornaam])>=(1)),

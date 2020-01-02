@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>Festispec_DB</Name>
+    <Name>FestiSpec_DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{d3852a60-525c-407e-8d10-f3293aa00a9c}</ProjectGuid>
+    <ProjectGuid>{ec9a3155-d35c-4fc6-b9bd-4ca4fabc38f5}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>Festispec_DB</RootNamespace>
-    <AssemblyName>Festispec_DB</AssemblyName>
+    <RootNamespace>FestiSpec.DB</RootNamespace>
+    <AssemblyName>FestiSpec.DB</AssemblyName>
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -60,8 +60,13 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
+    <Build Include="dbo\Tables\Afspraak.sql" />
+    <Build Include="dbo\Tables\Applicant.sql" />
     <Build Include="dbo\Tables\Applicant_certificaat.sql" />
     <Build Include="dbo\Tables\Beschikbaarheid.sql" />
     <Build Include="dbo\Tables\Bijlagevraag.sql" />
@@ -99,8 +104,7 @@
     <Build Include="dbo\Tables\Verzoek.sql" />
     <Build Include="dbo\Tables\Vragenlijst.sql" />
     <Build Include="dbo\Tables\Werknemer.sql" />
-    <Build Include="dbo\Tables\Werknemers_inspectie.sql" />
-    <Build Include="dbo\Tables\Afspraak.sql" />
-    <Build Include="dbo\Tables\Applicant.sql" />
+    <Build Include="dbo\Functions\IsQualified.sql" />
+    <Build Include="dbo\Stored Procedures\Getqualifiedinspector.sql" />
   </ItemGroup>
 </Project>

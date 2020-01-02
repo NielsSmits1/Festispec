@@ -13,13 +13,9 @@
 */
 
 using CommonServiceLocator;
-using FestiSpec.Domain.Model;
-using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.ViewModel.QuestionnaireFolder;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using System.Configuration;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -121,11 +117,19 @@ namespace Festispec_WPF.ViewModel
                 return new LoginRegisterVM();
             }
         }
+
         public CRCustomerVM CRCustomer
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<CRCustomerVM>();
+            }
+        }
+        public CustomerUpdateVM CustomerUpdateVM
+        {
+            get
+            {
+                return new CustomerUpdateVM(CRCustomer);
             }
         }
 

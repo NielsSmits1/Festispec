@@ -9,7 +9,7 @@ namespace FestiSpec.Domain.Model.Repositories
 {
     public class EmployeeRepository : Repository<Werknemer>, IEmployeeRepository
     {
-        public EmployeeRepository(FestiSpecEntities context) : base(context)
+        public EmployeeRepository(FestiSpecEntities1 context) : base(context)
         {
             
         }

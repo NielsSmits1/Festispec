@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Festispec_WPF.View
 {
     /// <summary>
-    /// Interaction logic for ContactPersonUpdateWindow.xaml
+    /// Interaction logic for CustomerCreateWindow.xaml
     /// </summary>
-    public partial class ContactPersonUpdateWindow : Window
+    public partial class CustomerCreateWindow : Window
     {
-        public ContactPersonUpdateWindow()
+        public CustomerCreateWindow()
         {
             InitializeComponent();
         }

@@ -10,7 +10,7 @@ namespace FestiSpec.Domain.Model.Repositories
     public class NAWInspector_Repository : Repository<NAW_inspecteur>, INAWInspectorRepository
     {
 
-        public NAWInspector_Repository(FestiSpecEntities context) : base(context)
+        public NAWInspector_Repository(FestiSpecEntities1 context) : base(context)
         {
 
         }

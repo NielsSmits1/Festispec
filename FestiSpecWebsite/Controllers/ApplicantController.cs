@@ -12,7 +12,7 @@ namespace FestiSpecWebsite.Controllers
 {
     public class ApplicantController : Controller
     {
-        private FestiSpecEntities db = new FestiSpecEntities();
+        private FestiSpecEntities1 db = new FestiSpecEntities1();
 
         // GET: Applicant/Create
         public ActionResult Create()

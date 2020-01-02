@@ -115,6 +115,7 @@
     </ApplicationDefinition>
     <Compile Include="Validation rules\EmptyValidator.cs" />
     <Compile Include="Validation rules\NumberValidationRule.cs" />
+    <Compile Include="ViewModel\CustomerFolder\CustomerUpdateVM.cs" />
     <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
@@ -140,9 +141,9 @@
     <Compile Include="Model\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Model\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="ViewModel\ApplicantVM.cs" />
-    <Compile Include="ViewModel\ContactPersonVM.cs" />
-    <Compile Include="ViewModel\CRCustomerVM.cs" />
-    <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\ContactPersonFolder\ContactPersonVM.cs" />
+    <Compile Include="ViewModel\CustomerFolder\CRCustomerVM.cs" />
+    <Compile Include="ViewModel\CustomerFolder\CustomerVM.cs" />
     <Compile Include="ViewModel\InspectionCrudVM.cs" />
     <Compile Include="ViewModel\InspectionVM.cs" />
     <Compile Include="ViewModel\LocationVM.cs" />
@@ -160,6 +161,9 @@
     <Compile Include="View\CreateInspectorWindow.xaml.cs">
       <DependentUpon>CreateInspectorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomerCreateWindow.xaml.cs">
+      <DependentUpon>CustomerCreateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
@@ -170,9 +174,6 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ContactPersonCreateWindow.xaml.cs">
       <DependentUpon>ContactPersonCreateWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ContactPersonUpdateWindow.xaml.cs">
-      <DependentUpon>ContactPersonUpdateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MenuVM.cs" />
     <Compile Include="ViewModel\EmployeeCrudVM.cs" />
@@ -222,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CreateLocationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomerCreateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -376,10 +381,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Page Include="View\ContactPersonCreateWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ContactPersonUpdateWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

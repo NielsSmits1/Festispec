@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Afspraak">
           <Key>
             <PropertyRef Name="ID" />
@@ -88,6 +88,7 @@
           <Property Name="Achternaam" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Telefoonnummer" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Actief" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspecteur">
           <Key>
@@ -341,6 +342,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="ntext" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+          <Property Name="Actief" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Vereiste_certificaten">
           <Key>
@@ -907,13 +909,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="Getqualifiedinspector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="IsQualified" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
-          <Parameter Name="Inspection" Type="int" Mode="In" />
-          <Parameter Name="Inspector" Type="int" Mode="In" />
-        </Function>
         <EntityContainer Name="FestiSpecModelStoreContainer">
           <EntitySet Name="Afspraak" EntityType="Self.Afspraak" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Applicant" EntityType="Self.Applicant" Schema="dbo" store:Type="Tables" />
@@ -1209,6 +1204,7 @@
           <Property Name="Achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telefoonnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Actief" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Afspraak" Relationship="Self.FK_Afspraak_Contactpersoon" FromRole="Contactpersoon" ToRole="Afspraak" />
           <NavigationProperty Name="Klant" Relationship="Self.FK_Contactpersoon_Klant" FromRole="Contactpersoon" ToRole="Klant" />
         </EntityType>
@@ -1492,6 +1488,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
+          <Property Name="Actief" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Template_ID_vragenlijst" FromRole="Template" ToRole="Vragenlijst" />
           <NavigationProperty Name="Vragenlijst1" Relationship="Self.FK_Vragenlijst_Template" FromRole="Template" ToRole="Vragenlijst" />
         </EntityType>
@@ -1941,7 +1938,7 @@
           <End Role="Inspectie" Type="Self.Inspectie" Multiplicity="*" />
           <End Role="Werknemer" Type="Self.Werknemer" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="FestiSpecEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FestiSpecEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Afspraak" EntityType="Self.Afspraak" />
           <EntitySet Name="Applicant" EntityType="Self.Applicant" />
           <EntitySet Name="Beschikbaarheid" EntityType="Self.Beschikbaarheid" />
@@ -2124,16 +2121,13 @@
             <End Role="Inspectie" EntitySet="Inspectie" />
             <End Role="Werknemer" EntitySet="Werknemer" />
           </AssociationSet>
-          <FunctionImport Name="Getqualifiedinspector" ReturnType="Collection(Int32)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FestiSpecModelStoreContainer" CdmEntityContainer="FestiSpecEntities">
+        <EntityContainerMapping StorageEntityContainer="FestiSpecModelStoreContainer" CdmEntityContainer="FestiSpecEntities1">
           <EntitySetMapping Name="Afspraak">
             <EntityTypeMapping TypeName="FestiSpecModel.Afspraak">
               <MappingFragment StoreEntitySet="Afspraak">
@@ -2205,6 +2199,7 @@
                 <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
                 <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2455,6 +2450,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Vragenlijst_ID" ColumnName="Vragenlijst_ID" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2542,7 +2538,6 @@
               <ScalarProperty Name="ID" ColumnName="Werknemer_ID" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="Getqualifiedinspector" FunctionName="FestiSpecModel.Store.Getqualifiedinspector" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
