@@ -100,8 +100,8 @@ namespace Festispec_WPF.ViewModel
         public void LogOut()
         {
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            //_mainWindow = new MainWindow();
-            //_mainWindow.Show();
+            _mainWindow = new MainWindow();
+            _mainWindow.Show();
             currentWindow.Close();
         }
 

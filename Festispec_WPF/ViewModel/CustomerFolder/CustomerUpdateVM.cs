@@ -24,6 +24,7 @@ namespace Festispec_WPF.ViewModel
         private CustomerCrudWindow _customerCrudWindow;
         private UnitOfWork UOW;
         private ContactPersonCreateWindow _contactPersonCreateWindow;
+        private CustomerUpdateWindow _customerUpdateWindow;
 
         public CustomerVM SelectedCustomer { get; set; }
         public ObservableCollection<ContactPersonVM> ContactPersons { get; set; }
@@ -176,6 +177,8 @@ namespace Festispec_WPF.ViewModel
         private void CloseCreateContactPerson()
         {
             var currentWindow = System.Windows.Application.Current.Windows.OfType<System.Windows.Window>().SingleOrDefault(x => x.IsActive);
+            _customerUpdateWindow = new CustomerUpdateWindow();
+            _customerUpdateWindow.Show();
             currentWindow.Close();
         }
 
@@ -204,8 +207,10 @@ namespace Festispec_WPF.ViewModel
 
         private void ShowCreateContactPerson()
         {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             _contactPersonCreateWindow = new ContactPersonCreateWindow();
             _contactPersonCreateWindow.Show();
+            currentWindow.Close();
         }
 
         private void SubmitCustomer()

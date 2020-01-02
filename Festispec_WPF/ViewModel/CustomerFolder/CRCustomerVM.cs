@@ -11,6 +11,8 @@ using GalaSoft.MvvmLight;
 using Festispec_WPF.View;
 using Festispec_WPF.Model.UnitOfWork;
 using FestiSpec.Domain.Model;
+using System.Windows;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -19,6 +21,7 @@ namespace Festispec_WPF.ViewModel
         private UnitOfWork UOW;
         private ObservableCollection<CustomerVM> _customers;
         private CustomerCreateWindow _customerCreateWindow;
+        private CustomerCrudWindow _customerCrudWindow;
 
         public ICommand CustomerCreateCommand { get; set; }
         public ICommand ViewCreateCustomer { get; set; }
@@ -127,6 +130,8 @@ namespace Festispec_WPF.ViewModel
         private void CloseCreateCustomerWindow()
         {
             var currentWindow = System.Windows.Application.Current.Windows.OfType<System.Windows.Window>().SingleOrDefault(x => x.IsActive);
+            _customerCrudWindow = new CustomerCrudWindow();
+            _customerCrudWindow.Show();
             currentWindow.Close();
         }
 
@@ -162,6 +167,8 @@ namespace Festispec_WPF.ViewModel
             RaisePropertyChanged(() => NewcontactPerson);
 
             var currentWindow = System.Windows.Application.Current.Windows.OfType<System.Windows.Window>().SingleOrDefault(x => x.IsActive);
+            _customerCrudWindow = new CustomerCrudWindow();
+            _customerCrudWindow.Show();
             currentWindow.Close();
         }
 
@@ -179,8 +186,10 @@ namespace Festispec_WPF.ViewModel
 
         private void OpenCustomerCreateWindow()
         {
+            var currentWindow = System.Windows.Application.Current.Windows.OfType<System.Windows.Window>().SingleOrDefault(x => x.IsActive);
             _customerCreateWindow = new CustomerCreateWindow();
             _customerCreateWindow.Show();
+            currentWindow.Close();
         }
     }
 }
