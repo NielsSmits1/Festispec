@@ -79,7 +79,7 @@
                                 <TextBox Text="{Binding NewcontactPerson.Affix, Mode=TwoWay}" />
                                 <Label>Achternaam</Label>
                                 <TextBox Text="{Binding NewcontactPerson.LastName, Mode=TwoWay}" />
-                                <Label>E-maik</Label>
+                                <Label>E-mail</Label>
                                 <TextBox Text="{Binding NewcontactPerson.Email, Mode=TwoWay}" />
                                 <Label>Telefoon nummer</Label>
                                 <TextBox Text="{Binding NewcontactPerson.PhoneNumber, Mode=TwoWay}" />
