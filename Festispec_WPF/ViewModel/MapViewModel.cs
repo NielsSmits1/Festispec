@@ -363,7 +363,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand ShowDetailsFestivalCommand { get; set; }
         public ICommand RefreshFestivalsCommand { get; set; }
         public ICommand RefreshInspectorsCommand { get; set; }
-        public ICommand testFunction { get; set; }
+        public ICommand downloadCommand { get; set; }
         public ICommand SafeEditCommand { get; set; }
         public ICommand CreateNewLocationCommand { get; set; }
         public ICommand CloseCreateCommand { get; set; }
@@ -392,7 +392,7 @@ namespace Festispec_WPF.ViewModel
             ShowDetailsFestivalCommand = new RelayCommand(showDetailsFestival, canShowDetails);
             RefreshFestivalsCommand = new RelayCommand(LoadFestivals);
             RefreshInspectorsCommand = new RelayCommand(LoadInspectors);
-            testFunction = new RelayCommand(downloadInspection);
+            downloadCommand = new RelayCommand(downloadInspection);
 
             SafeEditCommand = new RelayCommand(complete);
             CreateNewLocationCommand = new RelayCommand(AddNewLocation);
@@ -537,6 +537,24 @@ namespace Festispec_WPF.ViewModel
                 });
             }
 
+            var questionnaireList = new List<Vragenlijst>();
+            foreach (var questionnaire in _selectedFestival.ChosenQuestionnaires.Select(quest => quest.questionnaireData).ToList())
+            {
+                questionnaireList.Add(new Vragenlijst
+                {
+                    Titel = questionnaire.Titel
+                });
+            }
+
+            var inspectorList = new List<Inspecteur>();
+            foreach (var inspector in _selectedFestival.PlannedInspectors.Select(inspect => inspect.FullName).ToList())
+            {
+                inspectorList.Add(new Inspecteur
+                {
+                    Username = inspector
+                });
+            }
+
             var obj = new Inspectie
             {
                 Titel = _selectedFestival.Title,
@@ -545,7 +563,9 @@ namespace Festispec_WPF.ViewModel
                 StartDate = _selectedFestival.StartDate,
                 EndDate = _selectedFestival.EndDate,
                 Versie = _selectedFestival.Version,
-                Certificaat = certifcateList
+                Certificaat = certifcateList,
+                Vragenlijst = questionnaireList,
+                Inspecteur = inspectorList
             };
 
             var json = new JavaScriptSerializer().Serialize(obj);
@@ -777,6 +797,7 @@ namespace Festispec_WPF.ViewModel
             InspectorVisibility = "Visible";
             InspectionVisibility = "Hidden";
             SingleInspectorVisibility = "Hidden";
+            MapVisibility = "Visible";
         }
 
         private void showInspectionList()

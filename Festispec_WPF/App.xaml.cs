@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Festispec_WPF.View;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,6 @@ namespace Festispec_WPF
     /// </summary>
     public partial class App : Application
     {
+
     }
 }
