@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace FestiSpecWebsite.Models.QuestionnaireFolder
+namespace FestiSpecWebsite.Models.QuestionnaireFolder.Validation
 {
     public class ValidateFileType: RequiredAttribute
     {

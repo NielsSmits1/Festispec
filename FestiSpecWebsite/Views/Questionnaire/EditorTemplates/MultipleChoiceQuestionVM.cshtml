@@ -8,6 +8,14 @@
         @foreach (var i in Model.answers)
         {
             @Html.DisplayFor(model => i)
-            @Html.RadioButtonFor(model => model.Answer, i)
+            if (Model.answers.IndexOf(i) == 0)
+            {
+                @Html.RadioButtonFor(model => model.Answer, i, new { @checked="checked" })
+            }
+            else
+            {
+                @Html.RadioButtonFor(model => model.Answer, i)
+            }
+
         }
     </div>

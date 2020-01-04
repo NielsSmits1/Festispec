@@ -20,10 +20,14 @@
 
         @using (Html.BeginForm("PostDetails", "Questionnaire", new { inspectionId = Model.inspectionId, questionnaireID = Model.ID }, FormMethod.Post, new { enctype = "multipart/form-data", id = "questionnaireForm" }))
         {
-            for(int i = 0; i< Model.mapQuestionsList.Count(); i++)
+            if (Model.mapQuestionsList != null)
             {
-               @Html.HiddenFor(Model =>Model.MapQuestionPosition[i])
+                for (int i = 0; i < Model.mapQuestionsList.Count(); i++)
+                {
+                    @Html.HiddenFor(Model => Model.MapQuestionPosition[i])
+                }
             }
+
             @Html.HiddenFor(model => model.inspectionId)
             @Html.HiddenFor(model => model.ID)
             @Html.HiddenFor(Model => Model.Title)
@@ -68,7 +72,7 @@
                 {
                     {
                         int j = Model.MapQuestionPosition.IndexOf(i);
-                        
+
                         @Html.EditorFor(Model => Model.mapQuestionsList[j]);
                     }
                 }
@@ -278,8 +282,9 @@
 
             // Create two sketchpads when the page loads, using our canvas elements called sketchpad1 and sketchpad2
                 function init() {
-                window.addEventListener('mouseup', sketchpad_mouseUp, false);
-                @foreach(var item in Model.mapQuestionsList)
+                    window.addEventListener('mouseup', sketchpad_mouseUp, false);
+                    @if (Model.mapQuestionsList != null) {
+                foreach(var item in Model.mapQuestionsList)
                 {
                     string skecthId = "sketchpad" + item.Id;
                     var base64 = Convert.ToBase64String(item.ByteArray);
@@ -287,6 +292,8 @@
                     @:sketch[@item.ListPosition] = new sketchpad('@skecthId', '@imgSrc')   ;
                     @:sketch[@item.ListPosition].loadAndDrawImage('@imgSrc');
                 }
+                    }
+
 
                 // Since we are listening to the entire window for the mouseup, it only needs to be done once per page,
                 // and not once per canvas

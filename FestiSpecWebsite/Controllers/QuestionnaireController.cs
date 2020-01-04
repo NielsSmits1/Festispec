@@ -188,6 +188,8 @@ namespace FestiSpecWebsite.Controllers
                 v.Is_Ingevuld = true;
                 v.Actief = false;
                 db.Vragenlijst.Add(v);
+                db.SaveChanges();
+                int dbid = v.ID;
                 Inspectie_Wel_Ingevuld_Vragenlijst inspectie_Wel_Ingevuld_Vragenlijst = new Inspectie_Wel_Ingevuld_Vragenlijst();
                 inspectie_Wel_Ingevuld_Vragenlijst.Inspecteur_ID = Userid;
                 inspectie_Wel_Ingevuld_Vragenlijst.Vragenlijst_ID = v.ID;
@@ -204,7 +206,7 @@ namespace FestiSpecWebsite.Controllers
                     {
                         Bijlagevraag_vragenlijst bv = new Bijlagevraag_vragenlijst();
                         bv.Bijlagevraag_ID = i.Id;
-                        bv.Vragenlijst_ID = v.ID;
+                        bv.Vragenlijst_ID = dbid;
                         MemoryStream target = new MemoryStream();
                         i.imageFile.InputStream.CopyTo(target);
                         byte[] data = target.ToArray();
@@ -221,7 +223,7 @@ namespace FestiSpecWebsite.Controllers
                     {
                         Openvraag_vragenlijst ov = new Openvraag_vragenlijst();
                         ov.Openvraag_ID = i.Id;
-                        ov.Vragenlijst_ID = v.ID;
+                        ov.Vragenlijst_ID = dbid;
                         ov.Positie = i.ListPosition;
                         ov.Antwoord = i.Answer;
                         db.Openvraag_vragenlijst.Add(ov);
@@ -233,7 +235,7 @@ namespace FestiSpecWebsite.Controllers
                     {
                         Meerkeuzevraag_vragenlijst mv = new Meerkeuzevraag_vragenlijst();
                         mv.Meerkeuzevraag_ID = i.Id;
-                        mv.Vragenlijst_ID = v.ID;
+                        mv.Vragenlijst_ID = dbid;
                         mv.Positie = i.ListPosition;
                         mv.Antwoord = i.Answer;
                         db.Meerkeuzevraag_vragenlijst.Add(mv);
@@ -243,7 +245,21 @@ namespace FestiSpecWebsite.Controllers
                 {
                     foreach (var i in questionnaire.TableQuestionsList)
                     {
-                        //todo
+                        for(int s = 0;s<i.Situations.Count(); s++)
+                        {
+                            Tabelvraag_antwoord ta = new Tabelvraag_antwoord();
+                            ta.Situatie = i.Situations[s];
+                            ta.Antwoord = i.Answers[s];
+                            ta.Tabelvraag_ID = i.Id;
+                            ta.Vragenlijst_ID = dbid;
+                            db.Tabelvraag_antwoord.Add(ta);
+                        }
+                        Tabelvraag_vragenlijst tv = new Tabelvraag_vragenlijst();
+                        tv.Positie = i.ListPosition;
+                        tv.Tabelvraag_ID = i.Id;
+                        tv.Vragenlijst_ID = dbid;
+                        db.Tabelvraag_vragenlijst.Add(tv);
+                        
                     }
                 }
 

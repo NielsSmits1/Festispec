@@ -145,7 +145,10 @@
     <Compile Include="Models\QuestionnaireFolder\QuestionnaireList.cs" />
     <Compile Include="Models\QuestionnaireFolder\QuestionnaireVM.cs" />
     <Compile Include="Models\QuestionnaireFolder\TableQuestionVM.cs" />
-    <Compile Include="Models\QuestionnaireFolder\ValidateFileType.cs" />
+    <Compile Include="Models\QuestionnaireFolder\Validation\ValidateFileType.cs" />
+    <Compile Include="Models\QuestionnaireFolder\Validation\ValidateQuestionSituations.cs" />
+    <Compile Include="Models\QuestionnaireFolder\Validation\ValidateTableInputLength.cs" />
+    <Compile Include="Models\QuestionnaireFolder\Validation\validateTableInputNull.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

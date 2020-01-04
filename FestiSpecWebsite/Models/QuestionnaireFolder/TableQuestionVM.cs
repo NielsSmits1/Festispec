@@ -1,5 +1,6 @@
 ﻿using FestiSpec.Domain.Model;
 using System.Collections.Generic;
+using FestiSpecWebsite.Models.QuestionnaireFolder.Validation;
 
 namespace FestiSpecWebsite.Models.QuestionnaireFolder
 {
@@ -30,7 +31,13 @@ namespace FestiSpecWebsite.Models.QuestionnaireFolder
         public string Question { get => tableQuestion.Vraag; set => tableQuestion.Vraag = value; }
         public string QuestionHead { get => tableQuestion.VraagKop; set => tableQuestion.VraagKop = value; }
         public string AnswerHead { get => tableQuestion.AntwoordKop; set => tableQuestion.AntwoordKop = value; }
+        
+        [ValidateQuestionSituations(ErrorMessage = "Situatie mag maar een keer voorkomen.")]
+        [validateTableInputNull(ErrorMessage = "Situatie mag niet null zijn")]
+        [ValidateTableInputLength(ErrorMessage ="Situatie mag maar 50 characters lang zijn")]
         public List<string> Situations { get; set; }
+        [validateTableInputNull(ErrorMessage = "Antwoord mag niet leeg zijn")]
+        [ValidateTableInputLength(ErrorMessage = "Antwoord mag maar 50 characters lang zijn")]
         public List<string> Answers { get; set; }
         private void populateList(List<string> l)
         {
