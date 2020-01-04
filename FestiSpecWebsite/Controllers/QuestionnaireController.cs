@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -9,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using FestiSpec.Domain.Model;
+using FestiSpecWebsite.Models.QuestionnaireFolder;
 
 namespace FestiSpecWebsite.Controllers
 {
@@ -16,9 +18,10 @@ namespace FestiSpecWebsite.Controllers
     public class QuestionnaireController : Controller
     {
         private FestiSpecEntities db = new FestiSpecEntities();
+        
 
         // GET: Vragenlijst
-        public ActionResult Index(int? id)
+        public ActionResult Index( int? id)
         {
             if (id == null)
             {
@@ -44,31 +47,40 @@ namespace FestiSpecWebsite.Controllers
             {
                 return View("AllQuestionnairesAnswered");
             }
-            return View(Questionnaires);
+            QuestionnaireList questionnaireList = new QuestionnaireList();
+            questionnaireList.questionnaires = Questionnaires;
+            questionnaireList.id = id;
+           
+            return View(questionnaireList);
         }
 
+
         // GET: Vragenlijst/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult loadQuestionaire(int inspectionId, int? id)
         {
             var userId = Convert.ToInt32(FormsAuthentication.Decrypt(Request.Cookies["Cookie1"].Value).Name);
-
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            if(!db.Inspectie.Any(i => i.Inspectienummer == inspectionId && i.Vragenlijst.Any(v => v.ID == id))){
+
+                return View("NotPlannedInInspection");
+            }
             Vragenlijst vragenlijst = db.Vragenlijst.Find(id);
-
-            vragenlijst.Bijlagevraag_vragenlijst = db.Bijlagevraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
-            vragenlijst.Kaartvraag_vragenlijst = db.Kaartvraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
-            vragenlijst.Meerkeuzevraag_vragenlijst = db.Meerkeuzevraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
-            vragenlijst.Openvraag_vragenlijst = db.Openvraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
-            vragenlijst.Tabelvraag_vragenlijst = db.Tabelvraag_vragenlijst.Where(v => v.Vragenlijst_ID == id).ToList();
-
+            QuestionnaireVM questionnaire = new QuestionnaireVM(vragenlijst);
+            questionnaire.loadQuestions();
+            questionnaire.inspectionId = inspectionId;
             if (vragenlijst == null)
             {
                 return HttpNotFound();
             }
-            return View(vragenlijst);
+            return View("Details", questionnaire);
+        }
+        ActionResult Details(QuestionnaireVM id)
+        {
+            return View(id);
         }
 
         // GET: Vragenlijst/Create
@@ -154,6 +166,97 @@ namespace FestiSpecWebsite.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+
+        
+        public ActionResult PostDetails(int inspectionId, int? questionnaireID, QuestionnaireVM questionnaire)
+        {
+            var Userid = Convert.ToInt32(FormsAuthentication.Decrypt(Request.Cookies["Cookie1"].Value).Name);
+            if (db.Inspectie_Wel_Ingevuld_Vragenlijst.Any(iwiv => iwiv.Vragenlijst.Stamt_af_van_ID == questionnaireID && iwiv.Inspectienummer == inspectionId && iwiv.Inspecteur_ID == Userid))
+            {
+                return View("NotPlannedInInspection");
+            }
+            
+            if (ModelState.IsValid)
+            {
+
+
+                Vragenlijst  v = new Vragenlijst();
+                v.Stamt_af_van_ID = questionnaire.ID;
+                v.Versie = questionnaire.Version;
+                v.Titel = questionnaire.Title;
+                v.Is_Ingevuld = true;
+                v.Actief = false;
+                db.Vragenlijst.Add(v);
+                Inspectie_Wel_Ingevuld_Vragenlijst inspectie_Wel_Ingevuld_Vragenlijst = new Inspectie_Wel_Ingevuld_Vragenlijst();
+                inspectie_Wel_Ingevuld_Vragenlijst.Inspecteur_ID = Userid;
+                inspectie_Wel_Ingevuld_Vragenlijst.Vragenlijst_ID = v.ID;
+                inspectie_Wel_Ingevuld_Vragenlijst.Inspectienummer = inspectionId;
+                db.Inspectie_Wel_Ingevuld_Vragenlijst.Add(inspectie_Wel_Ingevuld_Vragenlijst);
+                //foreach(var i in questionnaire.mapQuestionsList)
+                //{
+                //    Kaartvraag kv = new Kaartvraag();
+
+                //}
+                if(questionnaire.appendixQuestionsList != null)
+                {
+                    foreach (var i in questionnaire.appendixQuestionsList)
+                    {
+                        Bijlagevraag_vragenlijst bv = new Bijlagevraag_vragenlijst();
+                        bv.Bijlagevraag_ID = i.Id;
+                        bv.Vragenlijst_ID = v.ID;
+                        MemoryStream target = new MemoryStream();
+                        i.imageFile.InputStream.CopyTo(target);
+                        byte[] data = target.ToArray();
+                        bv.FileBytes = data;
+                        bv.Positie = i.ListPosition;
+                        db.Bijlagevraag_vragenlijst.Add(bv);
+
+                    }
+                }
+ 
+                if(questionnaire.openQuestionsList != null)
+                {
+                    foreach (var i in questionnaire.openQuestionsList)
+                    {
+                        Openvraag_vragenlijst ov = new Openvraag_vragenlijst();
+                        ov.Openvraag_ID = i.Id;
+                        ov.Vragenlijst_ID = v.ID;
+                        ov.Positie = i.ListPosition;
+                        ov.Antwoord = i.Answer;
+                        db.Openvraag_vragenlijst.Add(ov);
+                    }
+                }
+                if(questionnaire.multipleChoiceQuestionsList != null)
+                {
+                    foreach (var i in questionnaire.multipleChoiceQuestionsList)
+                    {
+                        Meerkeuzevraag_vragenlijst mv = new Meerkeuzevraag_vragenlijst();
+                        mv.Meerkeuzevraag_ID = i.Id;
+                        mv.Vragenlijst_ID = v.ID;
+                        mv.Positie = i.ListPosition;
+                        mv.Antwoord = i.Answer;
+                        db.Meerkeuzevraag_vragenlijst.Add(mv);
+                    }
+                }
+                if(questionnaire.TableQuestionsList != null)
+                {
+                    foreach (var i in questionnaire.TableQuestionsList)
+                    {
+                        //todo
+                    }
+                }
+
+                db.SaveChanges();
+                return RedirectToAction("Index", "Inspection");
+
+            }
+
+
+            return View("Details", questionnaire);
+
+        }
+       
 
         protected override void Dispose(bool disposing)
         {

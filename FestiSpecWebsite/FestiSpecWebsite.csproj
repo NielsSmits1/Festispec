@@ -137,6 +137,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FestispecPrincipal.cs" />
+    <Compile Include="Models\QuestionnaireFolder\AppendixQuestionVM.cs" />
+    <Compile Include="Models\QuestionnaireFolder\IQuestion.cs" />
+    <Compile Include="Models\QuestionnaireFolder\MapQuestionVM.cs" />
+    <Compile Include="Models\QuestionnaireFolder\MultipleChoiceQuestionVM.cs" />
+    <Compile Include="Models\QuestionnaireFolder\OpenQuestionVM.cs" />
+    <Compile Include="Models\QuestionnaireFolder\QuestionnaireList.cs" />
+    <Compile Include="Models\QuestionnaireFolder\QuestionnaireVM.cs" />
+    <Compile Include="Models\QuestionnaireFolder\TableQuestionVM.cs" />
+    <Compile Include="Models\QuestionnaireFolder\ValidateFileType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +200,11 @@
     <Content Include="Views\Inspection\Index.cshtml" />
     <Content Include="Views\Questionnaire\AllQuestionnairesAnswered.cshtml" />
     <Content Include="Views\Questionnaire\NotPlannedInInspection.cshtml" />
+    <Content Include="Views\Questionnaire\EditorTemplates\OpenQuestionVM.cshtml" />
+    <Content Include="Views\Questionnaire\EditorTemplates\MultipleChoiceQuestionVM.cshtml" />
+    <Content Include="Views\Questionnaire\EditorTemplates\TableQuestionVM.cshtml" />
+    <Content Include="Views\Questionnaire\EditorTemplates\AppendixQuestionVM.cshtml" />
+    <Content Include="Views\Questionnaire\EditorTemplates\MapQuestionVM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,5 +1,4 @@
-﻿@model IEnumerable<FestiSpec.Domain.Model.Vragenlijst>
-
+﻿@model FestiSpecWebsite.Models.QuestionnaireFolder.QuestionnaireList
 @{
     ViewBag.Title = "Index";
 }
@@ -12,24 +11,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Titel)
+            Titel
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Versie)
+            Versie
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Opmerking)
+            Opmerking
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Is_Ingevuld)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Template1.Type)
-        </th>
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.questionnaires) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Titel)
@@ -40,16 +34,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Opmerking)
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.Is_Ingevuld)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Template1.Type)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Details", "loadQuestionaire", new { inspectionId = Model.id, id=item.ID }) |
         </td>
     </tr>
 }

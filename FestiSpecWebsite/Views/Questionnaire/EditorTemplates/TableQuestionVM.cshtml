@@ -1,0 +1,20 @@
+﻿@model FestiSpecWebsite.Models.QuestionnaireFolder.TableQuestionVM
+
+<div>
+    @Html.HiddenFor(Model => Model.Id)
+    @Html.HiddenFor(Model => Model.Question)
+    @Html.HiddenFor(m =>m.ListPosition)
+    <table>
+        <tr>
+            <th>@Html.DisplayFor(Model => Model.QuestionHead)</th>
+            <th>@Html.DisplayFor(Model => Model.AnswerHead)</th>
+        </tr>
+        @for(int i = 0; i < 4; i++)
+        {
+            <tr>
+                <td>@Html.EditorFor(Model => Model.Situations[i])</td>
+                <td>@Html.EditorFor(Model => Model.Answers[i])</td>
+            </tr>
+        }
+    </table>
+</div>
