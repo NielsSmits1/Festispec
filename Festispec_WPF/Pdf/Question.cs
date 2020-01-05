@@ -12,6 +12,7 @@ namespace Festispec_WPF.Pdf
     {
         public int Id { get; set; }
         public string QuestionTitle { get; set; }
+        public string Type { get; set; }
         public List<string> GivenAwnsers { get; set; }
         public string _chart { get; set; }
 
