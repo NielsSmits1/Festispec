@@ -35,11 +35,22 @@
             </div>
             <div>
                 Antwoorden:<br />
-                @foreach (var awnser in question.GivenAwnsers)
+
+                @if (question.Type == "img")
                 {
-                    @awnser
-                    <br />
+                    foreach (var awnser in question.GivenAwnsers)
+                    {
+                        <img class="chart" src="@awnser" />
+                    }
                 }
+                else
+                {
+                    foreach (var awnser in question.GivenAwnsers)
+                    {
+                        @awnser
+                    }
+                }
+                <br />
             </div>
             if (question._chart != "")
             {
