@@ -88,6 +88,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
@@ -118,6 +119,7 @@
     <Compile Include="Validation rules\LengthValidator.cs" />
     <Compile Include="Validation rules\NumberValidationRule.cs" />
     <Compile Include="ViewModel\CustomerFolder\CustomerUpdateVM.cs" />
+    <Compile Include="ViewModel\HomeVM.cs" />
     <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
@@ -160,11 +162,14 @@
       <DependentUpon>CreateQuestionnaire.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MapViewModel.cs" />
+    <Compile Include="ViewModel\OfflineMapVM.cs" />
     <Compile Include="View\CreateInspectorWindow.xaml.cs">
       <DependentUpon>CreateInspectorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerCreateWindow.xaml.cs">
       <DependentUpon>CustomerCreateWindow.xaml</DependentUpon>
+    <Compile Include="View\OfflineMapView.xaml.cs">
+      <DependentUpon>OfflineMapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
@@ -248,6 +253,9 @@
     <Compile Include="View\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WeekplanningView.xaml.cs">
       <DependentUpon>WeekplanningView.xaml</DependentUpon>
     </Compile>
@@ -312,6 +320,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\OfflineMapView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -325,6 +337,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -355,6 +371,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="inspection.json" />
     <None Include="Pdf\Template.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

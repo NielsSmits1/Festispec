@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace Festispec_WPF.View
 {
     /// <summary>
-    /// Interaction logic for MapView.xaml
+    /// Interaction logic for TestWindow.xaml
     /// </summary>
-    public partial class MapView : Window
+    public partial class TestWindow : Window
     {
-        public MapView()
+        public TestWindow()
         {
             InitializeComponent();
-        }
-
-        private void Title_LostFocus(object sender, RoutedEventArgs e)
-        {
-            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
     }
 }

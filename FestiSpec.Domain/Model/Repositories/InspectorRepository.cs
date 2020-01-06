@@ -22,6 +22,11 @@ namespace FestiSpec.Domain.Model.Repositories
             return Context.Inspecteur.Include(a => a.Certificaat).SingleOrDefault(a => a.ID == id);
         }
 
+        public List<Inspecteur> GetActiveInspectors()
+        {
+            return Context.Inspecteur.Where(ins => ins.Actief == true).ToList();
+        }
+
         public List<Certificaat> GetCertificatesInspector(int id)
         {
             return Context.Inspecteur.Find(id).Certificaat.ToList();

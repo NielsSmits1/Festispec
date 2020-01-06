@@ -11,6 +11,8 @@ namespace FestiSpec.Domain.Model.Interface_Repositories
         Werknemer GetEmployeeByNAW(int id);
 
         List<Werknemer> GetAllManagers();
+
+        Werknemer FindUsername(string username);
     }
 
     

@@ -17,16 +17,11 @@ namespace Festispec_WPF.View
     /// <summary>
     /// Interaction logic for MapView.xaml
     /// </summary>
-    public partial class MapView : Window
+    public partial class OfflineMapView : Window
     {
-        public MapView()
+        public OfflineMapView()
         {
             InitializeComponent();
-        }
-
-        private void Title_LostFocus(object sender, RoutedEventArgs e)
-        {
-            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
     }
 }

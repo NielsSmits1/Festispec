@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
+        xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="Home" 
         WindowState="Maximized"
@@ -75,13 +76,8 @@
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Border BorderThickness="100">
-                <StackPanel>
-                    <Grid Margin="0, 0, 0, 100">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                <StackPanel DataContext="{Binding Home, Source={StaticResource Locator}}">
+                    
 
                         <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"
@@ -145,7 +141,24 @@
                                 <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="22"/>
                             </StackPanel>
                         </Button>
+<wpf:PieChart LegendLocation="Bottom" Hoverable="True" Series="{Binding SeriesCollection}" DataTooltip="{x:Null}" Width="200" Height="200"  >
+                       
+                    </wpf:PieChart>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Aantal inspecties afgelopen maand" FontSize="20" />
+                        <Label Content="Voltooide inspecties afgelopen maand " FontSize="20" Grid.Column="1"/>
+                        <TextBlock Text="{Binding AmountOfInspectionsLastMonth}" Grid.Column="0" Grid.Row="1" FontSize="18"/>
+                        <TextBlock Text="{Binding AmountOfInspectionsCompletedLastMonth}" Grid.Column="1" Grid.Row="1" FontSize="18"/>
                     </Grid>
+                    
                 </StackPanel>
             </Border>
         </Grid>

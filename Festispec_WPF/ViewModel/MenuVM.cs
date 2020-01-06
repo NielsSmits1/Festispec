@@ -23,6 +23,8 @@ namespace Festispec_WPF.ViewModel
         private MapView _planWindow;
         private EmployeeView _employeeView;
         private MainWindow _mainWindow;
+        private QuestionnaireCRUD _questionnaireView;
+
 
         // commands
         public ICommand ShowHomeCommand { get; set; }
@@ -43,7 +45,7 @@ namespace Festispec_WPF.ViewModel
             ShowVragenlijstCommand = new RelayCommand(ShowVragenlijst);
             ShowKalenderCommand = new RelayCommand(ShowKalender);
 
-            CheckInternetConnection();
+            HasInternet();
             ShowWerknemerCommand = new RelayCommand(ShowWerknemer);
             LogOutCommand = new RelayCommand(LogOut);
         }
@@ -57,65 +59,118 @@ namespace Festispec_WPF.ViewModel
         }
         public void ShowKlanten()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _customerCrudWindow = new CustomerCrudWindow();
-            _customerCrudWindow.Show();
-            currentWindow.Close();
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                _customerCrudWindow = new CustomerCrudWindow();
+                _customerCrudWindow.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowInplanVerzoeken()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _planWindow = new MapView();
-            _planWindow.Show();
-            currentWindow.Close();
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                _planWindow = new MapView();
+                _planWindow.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowInspecteurs()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _inspecteursWindow = new InspectorCrudWindow();
-            _inspecteursWindow.Show();
-            currentWindow.Close();
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                _inspecteursWindow = new InspectorCrudWindow();
+                _inspecteursWindow.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowVragenlijst()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             _questionnaireView = new QuestionnaireCRUD();
             _questionnaireView.Show();
             currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowKalender()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _weekPlanningWindow = new WeekplanningView();
-            _weekPlanningWindow.Show();
-            currentWindow.Close();
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                _weekPlanningWindow = new WeekplanningView();
+                _weekPlanningWindow.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
         }
         public void ShowWerknemer()
-        {
+        { 
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            _employeeView = new EmployeeView();
-            _employeeView.Show();
+
+            if (HasInternet())
+            {
+                _employeeView = new EmployeeView();
+                _employeeView.Show();
+            }
+            else
+            {
+                LogOut();
+            }
+
             currentWindow.Close();
         }
+
         public void LogOut()
         {
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             _mainWindow = new MainWindow();
             _mainWindow.Show();
             currentWindow.Close();
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
+
+            _mainWindow = new MainWindow();
+            _mainWindow.Show();
         }
 
-        private void CheckInternetConnection()
+        private bool HasInternet()
         {
             try
             {
                 using (var client = new WebClient())
                 using (client.OpenRead("http://google.com/generate_204")) 
                     ErrorVisibility = "Hidden";
+
+                return true;
             }
             catch
             {
-                ErrorVisibility = "Visible";
+                ErrorVisibility = "Visible";             
+                return false;
             }
         }
     }

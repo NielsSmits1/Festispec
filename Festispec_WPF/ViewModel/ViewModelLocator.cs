@@ -55,6 +55,7 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<CRCustomerVM>();
             SimpleIoc.Default.Register<InspectionCrudVM>();
             SimpleIoc.Default.Register<MapViewModel>();
+            SimpleIoc.Default.Register<HomeVM>();
         }
 
         public MainViewModel Main
@@ -85,10 +86,10 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                //if(ServiceLocator.Current.GetInstance<InspectorCrudVM>() == null)
-                //{
-                //    SimpleIoc.Default.Register<InspectorCrudVM>();
-                //}
+                if(ServiceLocator.Current.GetInstance<InspectorCrudVM>() != null)
+                {
+                   ServiceLocator.Current.GetInstance<InspectorCrudVM>().Init();
+                }
                 return ServiceLocator.Current.GetInstance<InspectorCrudVM>();
             }
         }
@@ -173,6 +174,7 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
+                
                 return ServiceLocator.Current.GetInstance<InspectionCrudVM>();
             }
         }
@@ -181,6 +183,10 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
+                if(ServiceLocator.Current.GetInstance<MapViewModel>() != null)
+                {
+                    ServiceLocator.Current.GetInstance<MapViewModel>().Init();
+                }
                 return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
             
@@ -230,6 +236,22 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<EditQuestionnaireVM>();
+            }
+        }
+        public OfflineMapVM OfflineMapView
+        {
+            get
+            {
+                return new OfflineMapVM();
+            }
+        }
+
+
+        public HomeVM Home
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HomeVM>();
             }
         }
         public static void Cleanup()

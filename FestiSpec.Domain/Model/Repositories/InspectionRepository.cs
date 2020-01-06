@@ -42,6 +42,23 @@ namespace FestiSpec.Domain.Model.Repositories
             return final;
         }
 
+        public List<Vragenlijst> GetMissingQuestionnaires(int id)
+        {
+            var QuestionInspection = Context.Inspectie.Find(id).Vragenlijst;
+            List<Vragenlijst> questionnaires = Context.Vragenlijst.Where(q => q.Actief == true).ToList();
+            List<Vragenlijst> final = new List<Vragenlijst>();
+            foreach (var question in questionnaires)
+            {
+                if (!QuestionInspection.Contains(question))
+                {
+                    final.Add(question);
+                }
+            }
+
+            return final;
+        }
+
+
         public List<Certificaat> GetCertificatesInspection(int id)
         {
             return Context.Inspectie.Find(id).Certificaat.ToList();

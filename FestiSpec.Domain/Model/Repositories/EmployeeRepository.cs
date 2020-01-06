@@ -23,5 +23,10 @@ namespace FestiSpec.Domain.Model.Repositories
         {
             return GetAll().Where(emp => emp.Rol == "Manager").ToList();
         }
+
+        public Werknemer FindUsername(string username)
+        {
+            return Context.Werknemer.FirstOrDefault(w => w.Username == username);
+        }
     }
 }

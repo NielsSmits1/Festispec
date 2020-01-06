@@ -68,4 +68,41 @@
             </StackPanel>
         </Border>
     </StackPanel>
+            <Label Content="{Binding ErrorText}" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
+
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="Margin" Value="12" />
+                        <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <RotateTransform />
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard >
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00.5">
+                                            <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,10" />
+                                            <SplineThicknessKeyFrame KeyTime="00:00:00.1" Value="25,0,0,10" />
+                                            <SplineThicknessKeyFrame KeyTime="00:00:00.2" Value="-25,0,0,10" />
+                                            <SplineThicknessKeyFrame KeyTime="00:00:00.3" Value="0,0,0,10" />
+                                        </ThicknessAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+                <Label Visibility="{Binding ErrorVisibility}" Content="U heeft geen internet" Margin="0,0,0,10" Foreground="Red" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" BorderBrush="Red" BorderThickness="2"/>
+            </StackPanel>
+
+            <!-- Login button -->
+            <Button Content="Login" Width="200" HorizontalAlignment="Center" Height="30" Command="{Binding LoginCommand}"/>
+            <Button Content="Offline" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" Height="30" Command="{Binding OfflineCommand}"/>
+        </StackPanel>
+    </Border> 
 </Window>
