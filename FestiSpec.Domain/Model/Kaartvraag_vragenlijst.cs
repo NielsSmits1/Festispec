@@ -16,7 +16,7 @@ namespace FestiSpec.Domain.Model
     {
         public int Vragenlijst_ID { get; set; }
         public int Kaartvraag_ID { get; set; }
-        public byte[] Filebytes { get; set; }
+        public string Filepath_Antwoord { get; set; }
         public string Opmerking { get; set; }
         public int Positie { get; set; }
     

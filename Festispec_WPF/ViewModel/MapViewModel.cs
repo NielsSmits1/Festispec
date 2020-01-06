@@ -474,8 +474,8 @@ namespace Festispec_WPF.ViewModel
         private void calculateDistances()
         {
             var festivalLocation = getFestivalLocation(null);
-            //var qualified = _UOW.Context.Getqualifiedinspector(SelectedFestival.Inspection_ID).ToList();
-            //Inspectors = new ObservableCollection<InspectorVM>(_UOW.Inspectors.Find(ins => qualified.Contains(ins.ID)).Select(ins => new InspectorVM(ins)));
+            var qualified = _UOW.Context.Getqualifiedinspector(SelectedFestival.Inspection_ID).ToList();
+            Inspectors = new ObservableCollection<InspectorVM>(_UOW.Inspectors.Find(ins => qualified.Contains(ins.ID)).Select(ins => new InspectorVM(ins)));
             RaisePropertyChanged(() => Inspectors);
             foreach (var inspector in Inspectors)
             {

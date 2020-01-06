@@ -16,7 +16,7 @@ namespace FestiSpec.Domain.Model
     {
         public int ID { get; set; }
         public string Titel { get; set; }
-        public byte[] PDF { get; set; }
+        public string Text { get; set; }
         public int Inspectienummer { get; set; }
     
         public virtual Inspectie Inspectie { get; set; }
