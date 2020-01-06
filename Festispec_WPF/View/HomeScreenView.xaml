@@ -135,7 +135,7 @@
 
                         <Button x:Name="WerknemerButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"  
-                        Grid.Column="2" Command="{Binding ShowWerknemerCommand}" Background="#FF6A6A6A" Margin="280,0,276,0">
+                        Grid.Column="2" Command="{Binding ShowWerknemerCommand}" Background="#FF6A6A6A">
                             <StackPanel>
                                 <Image Source="/Images/werknemer.png" Width="134"/>
                                 <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="22"/>
