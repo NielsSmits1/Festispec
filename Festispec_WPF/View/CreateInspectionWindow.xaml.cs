@@ -23,5 +23,10 @@ namespace Festispec_WPF.View
         {
             InitializeComponent();
         }
+
+        private void Title_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
     }
 }

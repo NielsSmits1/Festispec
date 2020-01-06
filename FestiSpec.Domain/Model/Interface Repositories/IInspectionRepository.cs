@@ -12,6 +12,7 @@ namespace FestiSpec.Domain.Model.Interface_Repositories
 
         IEnumerable<Certificaat> GetCertificatesByInspection(int id);
         List<Certificaat> GetMissingCertificates(int id);
+        List<Vragenlijst> GetMissingQuestionnaires(int id);
         List<Certificaat> GetCertificatesInspection(int id);
 
     }

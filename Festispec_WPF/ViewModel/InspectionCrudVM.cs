@@ -101,7 +101,7 @@ namespace Festispec_WPF.ViewModel
         public InspectionCrudVM()
         {
             
-            _UOW = new ViewModelLocator().UOW;
+            _UOW = ViewModelLocator.UOW;
             Inspection = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
             Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));

@@ -14,6 +14,8 @@ namespace FestiSpec.Domain.Model.Interface_Repositories
 
         List<Certificaat> GetMissingCertificates(int id);
 
+        List<Inspecteur> GetActiveInspectors();
+
         void SetInspectorInactive(int id);
 
     }

@@ -14,6 +14,8 @@ namespace Festispec_WPF.Model.UnitOfWork
         IEmployeeRepository Employee { get;}
         IRoleEmployee RoleEmployee { get; }
         INAWInspectorRepository NAWInspectors { get;}
+
+        IQuestionnaireRepository Questionnaires { get; }
         ICustomerRepository Customers { get; }
         IContactPersonRepository ContactPersons { get; }
         ICertficatesRepository Certificates { get; }

@@ -16,16 +16,16 @@ namespace Festispec_WPF.ViewModel
 {
     public class CRCustomerVM : ViewModelBase
     {
+        private ContactPersonUpdateWindow _contactPersonUpdateWindow;
+        private ContactPersonCreateWindow _contactPersonCreateWindow;
+        private UnitOfWork UOW;
+        private ObservableCollection<CustomerVM> _customers;
 
         public ICommand CreateCustomer { get; set; }
         public ICommand EditCustomer { get; set; }
-
-        private UnitOfWork UOW;
-        private ObservableCollection<CustomerVM> _customers;
         public ICommand CreateCustomerCommand { get; set; }
         public ICommand EditCustomerCommand { get; set; }
         public ICommand AddCustomerCommand { get; set; }
-
         public ICommand EditCustomerWindowCommand { get; set; }
         public ICommand EditContactPersonWindowCommand { get; set; }
         public ICommand EditCustomerDataCommand { get; set; }
@@ -34,14 +34,10 @@ namespace Festispec_WPF.ViewModel
         public ICommand OpenContactPersonCreateWindow { get; set; }
 
         public CustomerVM NewCustomer { get; set; }
-
         public CustomerVM BeforeChangeCustomer { get; set; }
         public CustomerVM SelectedCustomer { get; set; }
         public ContactPersonVM SelectedContactPerson { get; set; }
         public ContactPersonVM NewcontactPerson { get; set; }
-
-        //public ObservableCollection<CustomerVM> Customers { get; set; }
-
 
         public ObservableCollection<CustomerVM> Customers
         {
@@ -57,15 +53,14 @@ namespace Festispec_WPF.ViewModel
         }
         public CRCustomerVM()
         {
-            UOW = new ViewModelLocator().UOW;
-            
+            UOW = ViewModelLocator.UOW;       
 
             NewCustomer = new CustomerVM();
             NewcontactPerson = new ContactPersonVM();
 
-            NewcontactPerson.customer = NewCustomer; 
+            NewcontactPerson.customer = NewCustomer;
 
-            
+
             UOW.Complete();
 
             Customers = new ObservableCollection<CustomerVM>(UOW.Customers.GetAll().ToList().Select(a => new CustomerVM(a)));
@@ -92,6 +87,7 @@ namespace Festispec_WPF.ViewModel
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "De aanpassingen zijn doorgevoerd",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _contactPersonUpdateWindow.Close();
             }
             catch
             {
@@ -138,6 +134,7 @@ namespace Festispec_WPF.ViewModel
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "De aanpassingen zijn doorgevoerd",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _contactPersonCreateWindow.Close();
             }
             catch
             {
@@ -151,27 +148,25 @@ namespace Festispec_WPF.ViewModel
         }
         private void AddContactPersonWindow()
         {
-            ContactPersonCreateWindow contactPersonCreateWindow = new ContactPersonCreateWindow();
-            contactPersonCreateWindow.Show();
+            _contactPersonCreateWindow = new ContactPersonCreateWindow();
+            _contactPersonCreateWindow.Show();
         }
         private void OpenEditCustomerWindow()
         {
-            //BeforeChangeCustomer = new CustomerVM(SelectedCustomer.CustomerData);
-
             var customerid = SelectedCustomer.CustomerData.ID;
             var list = UOW.Customers.GetContactPersons(customerid).Select(Contactpersoon => new ContactPersonVM(Contactpersoon));
             SelectedCustomer.ContactPersons = new ObservableCollection<ContactPersonVM>(list);
 
-            
+            var currentWindow = System.Windows.Application.Current.Windows.OfType<System.Windows.Window>().SingleOrDefault(x => x.IsActive);
 
             CustomerUpdateWindow customerUpdateWindow = new CustomerUpdateWindow();
             customerUpdateWindow.Show();
+            currentWindow.Close();
         }
         private void EditContactPersonWindow()
         {
-            //SelectedCustomer = new CustomerVM(UOW.Customers.Find(t => t.ID == SelectedCustomer.CustomerData.ID).First());
-            ContactPersonUpdateWindow contactPersonUpdateWindow = new ContactPersonUpdateWindow();
-            contactPersonUpdateWindow.Show();
+            _contactPersonUpdateWindow = new ContactPersonUpdateWindow();
+            _contactPersonUpdateWindow.Show();
         }
 
         private void AddCustomer()

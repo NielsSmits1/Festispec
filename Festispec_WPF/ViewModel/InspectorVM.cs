@@ -28,16 +28,24 @@ namespace Festispec_WPF.ViewModel
 
         public InspectorVM(NAW_inspecteur NAW)
         {
-            _UOW = new ViewModelLocator().UOW;
+            _UOW = ViewModelLocator.UOW;
             _nawInspecteur = NAW;
             _inspecteur = _UOW.Inspectors.Find(ins => ins.NAW == _nawInspecteur.ID).FirstOrDefault();
         }
 
         public InspectorVM(Inspecteur inspector)
         {
-            _UOW = new ViewModelLocator().UOW;
-            _inspecteur = inspector;
-            _nawInspecteur =  _UOW.NAWInspectors.Find(ins => ins.ID == _inspecteur.NAW).FirstOrDefault();
+            if(inspector.ID == 0)
+            {
+                _inspecteur = inspector;
+            }
+            else
+            {
+                _UOW = ViewModelLocator.UOW;
+                _inspecteur = inspector;
+                _nawInspecteur = _UOW.NAWInspectors.Find(ins => ins.ID == _inspecteur.NAW).FirstOrDefault();
+                ChosenCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspectors.GetCertificatesInspector(Inspector_ID).Select(ct => new CertificateVM(ct)));
+            }
         }
 
         public void FillNAW(ApplicantVM applicant)
@@ -111,7 +119,7 @@ namespace Festispec_WPF.ViewModel
 
         public string FirstName
         {
-            get { return _nawInspecteur.Voornaam ; }
+            get { return _nawInspecteur.Voornaam; }
             set { _nawInspecteur.Voornaam = value; RaisePropertyChanged("FirstName"); }
         }
 
@@ -195,7 +203,7 @@ namespace Festispec_WPF.ViewModel
         public int InspectorForeignNAWID
         {
             get { return _inspecteur.NAW; }
-            set { _inspecteur.NAW = NAWInspector_ID;RaisePropertyChanged("InspectorForeignNAWID"); }
+            set { _inspecteur.NAW = NAWInspector_ID; RaisePropertyChanged("InspectorForeignNAWID"); }
         }
 
         public bool Active
@@ -227,7 +235,7 @@ namespace Festispec_WPF.ViewModel
         public string Phonenumber
         {
             get { return _nawInspecteur.Telefoonnummer; }
-            set { _nawInspecteur.Telefoonnummer = value; RaisePropertyChanged("Phonenuber");  }
+            set { _nawInspecteur.Telefoonnummer = value; RaisePropertyChanged("Phonenuber"); }
         }
 
 

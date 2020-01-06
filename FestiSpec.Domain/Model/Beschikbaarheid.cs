@@ -17,7 +17,6 @@ namespace FestiSpec.Domain.Model
     
     public partial class Beschikbaarheid
     {
-        [Key]
         public int ID { get; set; }
 
         [Required]

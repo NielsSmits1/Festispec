@@ -5,29 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="ContactPersonCreateWindow" Height="1080" Width="1920"
     DataContext="{Binding CRCustomer, Source={StaticResource Locator}}">
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="101"/>
-            <ColumnDefinition Width="103"/>
-            <ColumnDefinition Width="203"/>
-            <ColumnDefinition Width="203"/>
-            <ColumnDefinition Width="600"/>
-            <ColumnDefinition Width="203"/>
-            <ColumnDefinition Width="203"/>
-            <ColumnDefinition Width="203"/>
-
-
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="630"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Menu Grid.ColumnSpan="2">
-            <MenuItem Width="100" Height="50" Background="Purple" Foreground="White" Header="Home" FontSize="20" ></MenuItem>
-            <MenuItem Width="100" Height="50" Background="Purple" Foreground="White" Header="Inspecteurs" FontSize="16" Margin="0,20,0,0"></MenuItem>
-        </Menu>
-
-        <StackPanel Grid.Column="3" Width="630" Background="AliceBlue"  Grid.ColumnSpan="4" Margin="0,0,0,0">
+        <StackPanel Grid.Column="1" Width="630" Background="AliceBlue" Margin="0,0,0,0">
             <Label Content="Toevoegen van Contactpersoon" FontSize="30" Foreground="Black"></Label>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -75,8 +64,6 @@
             </Grid>
 
             <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-
             <Button Content="Contactpersoon aanmaken" Command="{Binding AddContactPersonCommand }" Width="auto"></Button>
         </StackPanel>
     </Grid>

@@ -113,6 +113,7 @@
     <Compile Include="Model\Interface Repositories\INAWCustomerRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWEmployeeRepository.cs" />
     <Compile Include="Model\Interface Repositories\INAWInspectorRepository.cs" />
+    <Compile Include="Model\Interface Repositories\IQuestionnaireRepository.cs" />
     <Compile Include="Model\Interface Repositories\IRepository.cs" />
     <Compile Include="Model\Interface Repositories\IRoleEmployee.cs" />
     <Compile Include="Model\Kaartvraag.cs">
@@ -182,6 +183,7 @@
     <Compile Include="Model\Repositories\NAWCustomerRepository.cs" />
     <Compile Include="Model\Repositories\NAWEmployeeRepository.cs" />
     <Compile Include="Model\Repositories\NAWInspector_Repository.cs" />
+    <Compile Include="Model\Repositories\QuestionnaireRepository.cs" />
     <Compile Include="Model\Repositories\Repository.cs" />
     <Compile Include="Model\Repositories\RoleEmployeeRepository.cs" />
     <Compile Include="Model\Rol_werknemer.cs">
