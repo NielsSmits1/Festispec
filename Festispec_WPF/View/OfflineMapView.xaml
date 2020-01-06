@@ -24,7 +24,6 @@
         <Grid Grid.Column="0" />
         <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
 
-            <!--Test button-->
             <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}" Content="Log out">
                 <!--<Image Source="/Images/weekkalender.PNG" />-->
             </Button>
@@ -75,8 +74,8 @@
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
-                                        <Button IsEnabled="False" Command="{Binding ShowInspectionListCommand}" Grid.Column="0" Content="Verzoeken" Width="175" Height="50" FontSize="28"/>
-                                        <Button IsEnabled="False" Command="{Binding ShowInspectorListCommand}" Grid.Column="1" Content="Inspecteurs" Width="175" Height="50" FontSize="28"/>
+                                        <Button IsEnabled="False" Grid.Column="0" Content="Verzoeken" Width="175" Height="50" FontSize="28"/>
+                                        <Button IsEnabled="False" Grid.Column="1" Content="Inspecteurs" Width="175" Height="50" FontSize="28"/>
                                     </Grid>
 
                                     <Grid Background="Gray" Grid.Row="1">
@@ -93,12 +92,8 @@
                                                         <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <TextBox IsEnabled="False" Grid.Column="0" Text="{Binding searchText , UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" FontSize="20">
-                                                        <TextBox.InputBindings>
-                                                            <KeyBinding Command="{Binding SearchDataGrid}" Key="Enter" />
-                                                        </TextBox.InputBindings>
-                                                    </TextBox>
-                                                    <Button IsEnabled="False" Name="InspectionNew" Visibility="{Binding InspectionVisibility}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0" Command="{Binding OpenCreateWindowCommand}"/>
+                                                    <TextBox IsEnabled="False" Grid.Column="0" Text="{Binding searchText , UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" FontSize="20"/>
+                                                    <Button IsEnabled="False" Name="InspectionNew" Visibility="{Binding InspectionVisibility}" Grid.Column="1" Content="Nieuw" FontSize="20" Width="75" Margin="5, 0, 0, 0"/>
                                                 </Grid>
                                             </Border>
                                         </Grid>
@@ -139,138 +134,175 @@
                         </Grid>
 
                         <Grid Grid.Column="2" Background="Gray" >
-                            <StackPanel Background="AliceBlue" Visibility="{Binding EditVisibility}" Margin="0,0,0,-655">
+                            <Grid Grid.Column="7" Visibility="{Binding EditVisibility}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="800"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                                <Label Content="inspectie bewerken" FontSize="30" Foreground="Black"></Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="150"></ColumnDefinition>
-                                        <ColumnDefinition Width="450"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="25"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="10"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                                    <!--NAME-->
-                                    <Label Content="Titel" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                                    <TextBox Width="450" HorizontalAlignment="Left" Name="Title" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding Festival.Title, Mode=TwoWay}"></TextBox>
-                                    <!--END NAME-->
-                                </Grid>
-                                <Border BorderThickness="1" BorderBrush="Black"></Border>
+                                <StackPanel Grid.Column="0" Background="Gray">
+                                    <StackPanel Margin="20">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Command="{Binding openDetailsCommand}" Content="Details" Width="100" Foreground="White" FontSize="20" FontWeight="Bold" Background="DarkGray"/>
+                                            <Button Command="{Binding openPlannedInspectorsCommand}" Content="Inspecteurs" Width="150" Foreground="White" FontSize="20" FontWeight="Bold" Background="DarkGray"/>
+                                        </StackPanel>
 
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="150"></ColumnDefinition>
-                                        <ColumnDefinition Width="240"></ColumnDefinition>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="20"/>
-                                        <ColumnDefinition Width="150"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="25"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="10"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Content="Locatie:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                                    <Label Content="Gekozen locatie" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                                    <TextBlock Width="200" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding Festival.Location.FullAdress}" TextWrapping="Wrap"></TextBlock>
-                                </Grid>
+                                        <Border BorderBrush="White" BorderThickness="2">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="492*"/>
+                                                    <RowDefinition Height="53*"/>
+                                                </Grid.RowDefinitions>
+                                                <StackPanel Grid.Column="0" Grid.RowSpan="2">
+                                                    <Label Content="Inspectie bewerken" FontSize="30" Foreground="White" HorizontalAlignment="Center"/>
+                                                    <Border BorderThickness="3" BorderBrush="White"/>
 
-                                <Border BorderThickness="1" BorderBrush="Black"></Border>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="150"></ColumnDefinition>
-                                        <ColumnDefinition Width="200"></ColumnDefinition>
-                                        <ColumnDefinition Width="67*"/>
-                                        <ColumnDefinition Width="183*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="25"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="10"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Content="StartDatum:" FontSize="15" Foreground="Black" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,199,0"></Label>
-                                    <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="1,0,65,0" ></Label>
-                                    <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Festival.StartDate, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="1,0,65,0"/>
-                                </Grid>
-                                <Border BorderThickness="1" BorderBrush="Black"></Border>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="150"></ColumnDefinition>
-                                        <ColumnDefinition Width="200"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="25"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="10"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Content="EindDatum:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                                    <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                                    <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Festival.EndDate, Mode=TwoWay}"/>
-                                </Grid>
-                                <Border BorderThickness="1" BorderBrush="Black"></Border>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="150"></ColumnDefinition>
-                                        <ColumnDefinition Width="200"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="25"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="10"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Content="Versie:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                                    <Label Content="Versienummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                                    <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding Festival.Version, Mode=TwoWay}"></TextBox>
-                                </Grid>
+                                                    <!-- UPDATE FESTIVAL -->
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                                            <ColumnDefinition Width="450"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="25"></RowDefinition>
+                                                            <RowDefinition Height="30"></RowDefinition>
+                                                            <RowDefinition Height="10"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                                        <!--NAME-->
+                                                        <Label Content="Titel" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
+                                                        <TextBox Width="450" HorizontalAlignment="Left" Name="Title" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding Festival.Title, Mode=TwoWay}"/>
+                                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Title}" Foreground="Red"/>
+                                                        <!--END NAME-->
+                                                    </Grid>
+                                                    <Border BorderThickness="1" BorderBrush="White"/>
 
-                                <Border BorderThickness="1" BorderBrush="Black"></Border>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                                            <ColumnDefinition Width="240"></ColumnDefinition>
+                                                            <ColumnDefinition Width="auto"/>
+                                                            <ColumnDefinition Width="20"/>
+                                                            <ColumnDefinition Width="150"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="25"></RowDefinition>
+                                                            <RowDefinition Height="50"></RowDefinition>
+                                                            <RowDefinition Height="10"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Label Content="Locatie:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                                        <Label Content="Gekozen locatie" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
+                                                        <TextBlock Width="200" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding Festival.Location.FullAdress}" TextWrapping="Wrap"></TextBlock>
+                                                    </Grid>
 
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="150"></ColumnDefinition>
-                                        <ColumnDefinition Width="200"></ColumnDefinition>
-                                        <ColumnDefinition Width="50"></ColumnDefinition>
-                                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="25"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="10"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Content="Klant:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                                    <Label Content="Gekozen klant" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Festival.Customer.CompanyName}" FontSize="20" TextWrapping="Wrap"></TextBlock>
+                                                    <Border BorderThickness="1" BorderBrush="White"/>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                                            <ColumnDefinition Width="200"></ColumnDefinition>
+                                                            <ColumnDefinition Width="150"/>
+                                                            <ColumnDefinition Width="200"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="25"></RowDefinition>
+                                                            <RowDefinition Height="30"></RowDefinition>
+                                                            <RowDefinition Height="10"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Label Content="StartDatum:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                                        <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="1,0,65,0" ></Label>
+                                                        <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Festival.StartDate, Mode=TwoWay}" Margin="1,0,65,0"/>
+                                                        <Label Content="EindDatum:" Grid.Row="1" Grid.Column="2" FontSize="15" Foreground="Black"></Label>
+                                                        <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Margin="1,0,65,0" ></Label>
+                                                        <DatePicker Grid.Row="1" Grid.Column="3" SelectedDate="{Binding Festival.EndDate, Mode=TwoWay}"/>
+                                                    </Grid>
 
-                                </Grid>
+                                                    <Border BorderThickness="1" BorderBrush="White"/>
 
-                                <Border BorderThickness="1" BorderBrush="Black"></Border>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="150"></ColumnDefinition>
-                                        <ColumnDefinition Width="200"></ColumnDefinition>
-                                        <ColumnDefinition Width="50"></ColumnDefinition>
-                                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="25"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="10"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                                    <Label Content="Gekozen certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                                    <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" ItemsSource="{Binding Festival.ChosenCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                </Grid>
-                            </StackPanel>
-                            <!--MAP-->
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                                            <ColumnDefinition Width="200"></ColumnDefinition>
+                                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="25"></RowDefinition>
+                                                            <RowDefinition Height="*"></RowDefinition>
+                                                            <RowDefinition Height="10"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Label Content="Klant:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                                        <Label Content="Gekozen klant" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                                                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Festival.Customer.CompanyName}" FontSize="20" TextWrapping="Wrap"></TextBlock>
+
+                                                    </Grid>
+
+                                                    <Border BorderThickness="1" BorderBrush="White"/>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                                            <ColumnDefinition Width="200"></ColumnDefinition>
+                                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="25"></RowDefinition>
+                                                            <RowDefinition Height="*"></RowDefinition>
+                                                            <RowDefinition Height="10"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                                        <Label Content="Gekozen certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                                                        <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding Festival.ChosenCertificates}" ItemsSource="{Binding Festival.ChosenCertificates}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                            <ListBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                                </DataTemplate>
+                                                            </ListBox.ItemTemplate>
+                                                        </ListBox>
+                                                    </Grid>
+                                                    <Border BorderThickness="1" BorderBrush="White"/>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                                            <ColumnDefinition Width="200"></ColumnDefinition>
+                                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="25"></RowDefinition>
+                                                            <RowDefinition Height="*"></RowDefinition>
+                                                            <RowDefinition Height="10"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Label Content="Vragenlijsten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                                                        <Label Content="Gekozen vragenlijsten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                                                        <ListBox Grid.Row="1" Grid.Column="1" MaxWidth="200" MaxHeight="100" SelectedItem="{Binding Festival.ChosenQuestionnaires}" ItemsSource="{Binding Festival.ChosenQuestionnaires}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                                            <ListBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Text="{Binding Title}"></TextBlock>
+                                                                </DataTemplate>
+                                                            </ListBox.ItemTemplate>
+                                                        </ListBox>
+                                                    </Grid>
+                                                    <Border BorderThickness="3" BorderBrush="White"/>
+                                                </StackPanel>
+
+                                                <StackPanel Grid.Column="0" Visibility="{Binding PlannedInspectorVisibility}" Background="Gray" Grid.RowSpan="2">
+                                                    <Label Content="Lijst ingeplande inspecteurs" FontSize="25" Foreground="White" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                                    <Label Content="Namen inspecteurs:" />
+                                                    <ListBox SelectedItem="{Binding Festival.PlannedInspectors}" ItemsSource="{Binding Festival.PlannedInspectors}" >
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate >
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="{Binding UserName}"></TextBlock>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Border>

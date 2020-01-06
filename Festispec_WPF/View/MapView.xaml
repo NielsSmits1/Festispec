@@ -233,7 +233,7 @@
                                                                     <TextBlock Text="{Binding EndDate, StringFormat=hh:mm}" FontSize="12" />
                                                                 </StackPanel>
                                                                 <DockPanel>
-                                                                    <!--<Button HorizontalAlignment="Left" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="#8000FF" Background="White" FontWeight="ExtraBold" Margin="4" Width="80" Height="25" Content="Details" Cursor="Hand" Command="{Binding DataContext.ShowDetailsFestivalCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                                                    <Button HorizontalAlignment="Left" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="#8000FF" Background="White" FontWeight="ExtraBold" Margin="4" Width="100" Height="25" Content="Download" Cursor="Hand" Command="{Binding DataContext.downloadCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
                                                                         <Button.Style>
                                                                             <Style TargetType="{x:Type Button}">
                                                                                 <Setter Property="Background" Value="Green"/>
@@ -253,7 +253,7 @@
                                                                                 </Style.Triggers>
                                                                             </Style>
                                                                         </Button.Style>
-                                                                    </Button>-->
+                                                                    </Button>
                                                                     <Button Command="{Binding DataContext.PlanInspectorCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Margin="4" Width="155" Height="25" Cursor="Hand" Content="Inspecteurs inplannen">
                                                                         <Button.Style>
                                                                             <Style TargetType="{x:Type Button}">
@@ -789,6 +789,7 @@
                                 </StackPanel>
                             </Grid>
                             <Border Background="Gray" BorderBrush="Black" BorderThickness="5" Panel.ZIndex="1" Visibility="{Binding MapErrorVisibility}">
+
                                 <StackPanel VerticalAlignment="Center">
                                     <Label HorizontalAlignment="Center" FontSize="50" Content="Geen internet" />
                                     <Label HorizontalAlignment="Center" FontSize="50" Content="Kan kaart niet laden" />
