@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Afspraak">
           <Key>
             <PropertyRef Name="ID" />
@@ -325,6 +325,14 @@
           <Property Name="Situatie" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Antwoord" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tabelvraag_situatie">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Situatie" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Situatie" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
           <Key>
@@ -950,6 +958,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tabelvraag_situatie" EntityType="Self.Tabelvraag_situatie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vereiste_certificaten" EntityType="Self.Vereiste_certificaten" Schema="dbo" store:Type="Tables" />
@@ -1477,6 +1486,14 @@
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tabelvraag" Relationship="Self.FK_Tabelvraag_antwoord_Tabelvraag" FromRole="Tabelvraag_antwoord" ToRole="Tabelvraag" />
         </EntityType>
+        <EntityType Name="Tabelvraag_situatie">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Situatie" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Situatie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
           <Key>
             <PropertyRef Name="Vragenlijst_ID" />
@@ -1975,6 +1992,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" />
+          <EntitySet Name="Tabelvraag_situatie" EntityType="Self.Tabelvraag_situatie" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" />
           <EntitySet Name="Template" EntityType="Self.Template" />
           <EntitySet Name="Verzoek" EntityType="Self.Verzoek" />
@@ -2442,6 +2460,14 @@
                 <ScalarProperty Name="Situatie" ColumnName="Situatie" />
                 <ScalarProperty Name="Antwoord" ColumnName="Antwoord" />
                 <ScalarProperty Name="Vragenlijst_ID" ColumnName="Vragenlijst_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tabelvraag_situatie">
+            <EntityTypeMapping TypeName="FestiSpecModel.Tabelvraag_situatie">
+              <MappingFragment StoreEntitySet="Tabelvraag_situatie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Situatie" ColumnName="Situatie" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

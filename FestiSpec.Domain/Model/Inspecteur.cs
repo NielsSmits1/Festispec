@@ -7,9 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
 namespace FestiSpec.Domain.Model
 {
     using System;
@@ -27,14 +24,7 @@ namespace FestiSpec.Domain.Model
         }
     
         public int ID { get; set; }
-
-        [Required]
-        [DisplayName("Gebruikersnaam")]
         public string Username { get; set; }
-
-        [Required]
-        [DisplayName("Wachtwoord")]
-        [DataType(DataType.Password)]
         public string Wachtwoord { get; set; }
         public int NAW { get; set; }
         public bool Actief { get; set; }

@@ -198,6 +198,9 @@
     <Compile Include="Model\Tabelvraag_antwoord.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Tabelvraag_situatie.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Tabelvraag_vragenlijst.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

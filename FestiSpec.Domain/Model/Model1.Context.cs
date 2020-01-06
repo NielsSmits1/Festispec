@@ -56,6 +56,7 @@ namespace FestiSpec.Domain.Model
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tabelvraag> Tabelvraag { get; set; }
         public virtual DbSet<Tabelvraag_antwoord> Tabelvraag_antwoord { get; set; }
+        public virtual DbSet<Tabelvraag_situatie> Tabelvraag_situatie { get; set; }
         public virtual DbSet<Tabelvraag_vragenlijst> Tabelvraag_vragenlijst { get; set; }
         public virtual DbSet<Template> Template { get; set; }
         public virtual DbSet<Verzoek> Verzoek { get; set; }
