@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b8d95744c5b14a748c4187ea8db7f047" Name="Diagram1">
+      <Diagram DiagramId="4f023207904647f1b45aa66d66fcaf30" Name="Diagram1">
         <EntityTypeShape EntityType="FestiSpecModel.Afspraak" Width="1.5" PointX="12.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Applicant" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Beschikbaarheid" Width="1.5" PointX="7.5" PointY="15.75" IsExpanded="true" />
@@ -34,6 +34,7 @@
         <EntityTypeShape EntityType="FestiSpecModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag" Width="1.5" PointX="18.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_antwoord" Width="1.5" PointX="21" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_situatie" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Tabelvraag_vragenlijst" Width="1.5" PointX="21" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Template" Width="1.5" PointX="18" PointY="30.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FestiSpecModel.Verzoek" Width="1.5" PointX="10.5" PointY="23" IsExpanded="true" />

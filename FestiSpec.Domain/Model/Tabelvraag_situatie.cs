@@ -12,13 +12,9 @@ namespace FestiSpec.Domain.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Inspectie_Rapportage
+    public partial class Tabelvraag_situatie
     {
         public int ID { get; set; }
-        public string Titel { get; set; }
-        public byte[] PDF { get; set; }
-        public int Inspectienummer { get; set; }
-    
-        public virtual Inspectie Inspectie { get; set; }
+        public string Situatie { get; set; }
     }
 }

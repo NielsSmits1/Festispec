@@ -35,7 +35,7 @@
                 <Button Background="#FF44AE3F" FontWeight="Bold" Foreground="White" Padding="5,5,5,5" Content="Maak template"  Margin="0,20,0,0" Command="{Binding CreateTemplateCommand }"></Button>
                 <Label Margin="0,15,0,0" FontSize="13" FontWeight="Bold">Template gebruiken voor vragenlijst</Label>
                 
-            <DataGrid IsReadOnly="True" Margin="0,5,0,0" ItemsSource="{Binding templates}" SelectedItem="{Binding selectedTemplate}" Height="300" AutoGenerateColumns="False">
+            <DataGrid IsReadOnly="True" Margin="0,5,0,0" ItemsSource="{Binding templates, Mode=TwoWay}" SelectedItem="{Binding selectedTemplate}" Height="300" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Title" Width="*">
                         <DataGridTemplateColumn.CellTemplate >

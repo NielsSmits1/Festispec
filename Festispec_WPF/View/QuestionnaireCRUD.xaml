@@ -71,7 +71,7 @@
                     </Button>
                 </Grid>
 
-                <DataGrid Height="700" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionnaire, Mode=TwoWay}" ItemsSource="{Binding Questionnaires}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                <DataGrid Height="700" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionnaire}" ItemsSource="{Binding Questionnaires}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                     <DataGrid.Columns>
 
                         <DataGridTemplateColumn Header="Naam" Width="*">
@@ -110,7 +110,7 @@
                         <DataGridTemplateColumn Width="50">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Command="{Binding DeleteTemplate, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    <Button Command="{Binding DataContext.DeleteQuestionnaireCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="30" Background="#FFD45134">Delete</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

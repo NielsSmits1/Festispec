@@ -1,4 +1,5 @@
 ﻿using FestiSpec.Domain.Model;
+using FestiSpec.Domain.Model.Repositories;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using Festispec_WPF.View.QuestionnairePages;
@@ -27,6 +28,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public ObservableCollection<QuestionnaireVM> templates { get; set; }
         private QuestionnaireVM _selectedTemplate;
         private bool basedOfTemplate = false;
+        private bool Template = false;
         public QuestionnaireVM selectedTemplate
         {
             get
@@ -140,7 +142,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void CreateTemplate()
         {
-            basedOfTemplate = true;
+            Template = true;
             SubmitQuestionnaire();
 
             Template newTemplate = new Template();
@@ -154,7 +156,16 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             UOW.Context.Template.Add(newTemplate);
 
             var temp = UOW.Questionnaires.Get(newQuestionnaireVM.ID);
-            temp.Template_ID = newTemplate.ID;
+
+                try
+                {
+                    temp.Template_ID = newTemplate.ID;
+                }
+                catch
+                {
+                    return;
+                }
+
             saveToDatabase();
 
             TemplateType = null;
@@ -173,15 +184,24 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             newQuestionnaireVM = new QuestionnaireVM();
+            Template = false;
         }
         private void SubmitQuestionnaire()
         {
+            if (selectedTemplate == null)
+            {
+                basedOfTemplate = false;
+            }
+            else
+            {
+                basedOfTemplate = true;
+            }
 
             if (newQuestionnaireVM.Title != null & newQuestionnaireVM.Version != null)
             {
 
                 newQuestionnaireVM.IsFilled = false;
-                if (basedOfTemplate)
+                if (Template)
                 {
                     newQuestionnaireVM.IsActive = false;
                 }
@@ -230,6 +250,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private void SubmitCreatedQuestionnaire()
         {
             var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            Template = false;
             SubmitQuestionnaire();
             newQuestionnaireVM = new QuestionnaireVM();
             selectedTemplate = new QuestionnaireVM() ;
