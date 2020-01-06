@@ -1,0 +1,11 @@
+﻿@model FestiSpecWebsite.Models.QuestionnaireFolder.AppendixQuestionVM
+
+<div>
+    @Html.HiddenFor(Model => Model.Id)
+    @Html.HiddenFor(Model => Model.Question)
+    @Html.DisplayFor(Model => Model.Question)
+    @Html.TextBoxFor(Model => Model.imageFile, new { type = "file", @required = "required", accept =".png"})
+    @Html.ValidationMessageFor(m => m.imageFile)
+    @Html.HiddenFor(m =>m.ListPosition)
+
+</div>
