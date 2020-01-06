@@ -21,52 +21,136 @@
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <Grid Grid.Column="0" >
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowHomeCommand}">
-                <Image Source="/Images/Home.png" />
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="#565656">
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Wheat" BorderThickness="0,2,0,2" Command="{Binding ShowKlantenCommand}">
+                <StackPanel>
+                    <Image Source="/Images/klanten.PNG" Height="40"/>
+                    <Label Content="Klanten" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-        </Grid>
-        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKlantenCommand}">
-                <Image Source="/Images/klanten.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding ShowInplanVerzoekenCommand}">
+                <StackPanel>
+                    <Image Source="/Images/verzoeken_inplannen.PNG" Height="40"/>
+                    <Label Content="Inplannen" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInplanVerzoekenCommand}">
-                <Image Source="/Images/verzoeken_inplannen.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding ShowInspecteursCommand}">
+                <StackPanel>
+                    <Image Source="/Images/inspecteurs.PNG" Height="40"/>
+                    <Label Content="Inspecteur" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowInspecteursCommand}">
-                <Image Source="/Images/inspecteurs.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding ShowVragenlijstCommand}">
+                <StackPanel>
+                    <Image Source="/Images/vragenlijsten.PNG" Height="40"/>
+                    <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowVragenlijstCommand}">
-                <Image Source="/Images/vragenlijsten.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="white" BorderThickness="0,2,0,2" Command="{Binding ShowKalenderCommand}">
+                <StackPanel>
+                    <Image Source="/Images/weekkalender.PNG" Height="40"/>
+                    <Label Content="Kalender" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowKalenderCommand}">
-                <Image Source="/Images/weekkalender.PNG" />
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="Transparent" Command="{Binding ShowWerknemerCommand}">
+                <StackPanel>
+                    <Image Source="/Images/werknemer.PNG"/>
+                    <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding ShowWerknemerCommand}"
-                    Content="Werknemers">
-                <!--<Image Source="/Images/weekkalender.PNG" />-->
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding LogOutCommand}"
-                    Content="Log out">
-                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding LogOutCommand}">
+                <StackPanel>
+                    <Image Source="/Images/logout.PNG"/>
+                    <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
             </Button>
         </StackPanel>
 
-        <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="#8000FF">
+            <Button Command="{Binding ShowHomeCommand}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
                 Festispec
-            </TextBlock>
+            </Button>
         </Grid>
 
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Border BorderThickness="100">
-                <StackPanel DataContext="{Binding Home, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Grid Margin="0, 0, 0, 100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
+                        Foreground="White"
+                        Grid.Column="0" Command="{Binding ShowKlantenCommand}" Background="#FF6A6A6A">
+                            <StackPanel>
+                                <Image Source="/Images/klanten.png"/>
+                                <Label Content="Klanten" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="InplanButton" Width="150" Height="150" FontSize="16"
+                        Foreground="White"
+                        Grid.Column="1" Command="{Binding ShowInplanVerzoekenCommand}" Background="#FF6A6A6A">
+                            <StackPanel>
+                                <Image Source="/Images/verzoeken_inplannen.png"/>
+                                <Label Content="Inplannen" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="InspecteursButton" Width="150" Height="150" FontSize="16"
+                        Foreground="White"  
+                        Grid.Column="2" Command="{Binding ShowInspecteursCommand}" Background="#FF6A6A6A">
+                            <StackPanel>
+                                <Image Source="/Images/inspecteurs.png"/>
+                                <Label Content="Inspecteurs" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
+                            </StackPanel>
+                        </Button>
+
+                    </Grid>
+
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="VragenlijstButton" Width="150" Height="150" FontSize="16" 
+                        Foreground="White"  
+                        Grid.Column="0" Command="{Binding ShowVragenlijstCommand}" Background="#FF6A6A6A">
+                            <StackPanel>
+                                <Image Source="/Images/vragenlijsten.png" Height="100" Width="136"/>
+                                <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
+                        Foreground="White"  
+                        Grid.Column="1" Command="{Binding ShowKalenderCommand}" Background="#FF6A6A6A">
+                            <StackPanel>
+                                <Image Source="/Images/weekkalender.png" Width="134"/>
+                                <Label Content="Kalender" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="WerknemerButton" Width="150" Height="150" FontSize="16"  
+                        Foreground="White"  
+                        Grid.Column="2" Command="{Binding ShowWerknemerCommand}" Background="#FF6A6A6A">
+                            <StackPanel>
+                                <Image Source="/Images/werknemer.png" Width="134"/>
+                                <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="22"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                     <wpf:PieChart LegendLocation="Bottom" Hoverable="True" Series="{Binding SeriesCollection}" DataTooltip="{x:Null}" Width="200" Height="200"  >
-                       
+
                     </wpf:PieChart>
-                    <Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -80,7 +164,6 @@
                         <TextBlock Text="{Binding AmountOfInspectionsLastMonth}" Grid.Column="0" Grid.Row="1" FontSize="18"/>
                         <TextBlock Text="{Binding AmountOfInspectionsCompletedLastMonth}" Grid.Column="1" Grid.Row="1" FontSize="18"/>
                     </Grid>
-                    
                 </StackPanel>
             </Border>
         </Grid>

@@ -20,187 +20,290 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" >
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowHomeCommand, Source={StaticResource Locator}}" >
-                <Image Source="/Images/Home.png" />
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="#565656">
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Wheat" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/klanten.PNG" Height="40"/>
+                    <Label Content="Klanten" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-        </Grid>
-        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/klanten.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/verzoeken_inplannen.PNG" Height="40"/>
+                    <Label Content="Inplannen" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/verzoeken_inplannen.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/inspecteurs.PNG" Height="40"/>
+                    <Label Content="Inspecteur" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/inspecteurs.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/vragenlijsten.PNG" Height="40"/>
+                    <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/vragenlijsten.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="white" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/weekkalender.PNG" Height="40"/>
+                    <Label Content="Kalender" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/weekkalender.PNG" />
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="Transparent" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/werknemer.PNG"/>
+                    <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}"
-                    Content="Werknemers">
-                <!--<Image Source="/Images/weekkalender.PNG" />-->
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}"
-                    Content="Log out">
-                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/logout.PNG"/>
+                    <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
             </Button>
         </StackPanel>
 
-        <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="#8000FF">
+            <Button Command="{Binding ShowHomeCommand}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
                 Festispec
-            </TextBlock>
+            </Button>
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="450"/>
-                <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="600"/>
-                <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="Auto"/>
-
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Background="AliceBlue">
-                <Label Content="Sollicitanten" FontSize="20"></Label>
-                <DataGrid ItemsSource="{Binding Applicants}" SelectedItem="{Binding SelectedApplicant}" AutoGenerateColumns="False" CanUserReorderColumns="False" IsReadOnly="True" MaxHeight="400">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Sollicitant" Binding="{Binding FullName}"/>
-                        <DataGridTextColumn Header="Postcode" Binding="{Binding ZipCode}"/>
-                        <DataGridTextColumn Header="Straatnaam" Binding="{Binding StreetName}"/>
-                        <DataGridTextColumn Header="Huisnr" Binding="{Binding HomeNumber}"/>
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <TextBlock Text="Inspecteur aanmaken voor sollicitant:" FontSize="15"/>
-                <TextBlock Text="{Binding SelectedApplicant.FullName}" FontSize="15"></TextBlock>
 
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
+            <StackPanel Visibility="{Binding addInspectorVisibility}" Grid.Column="0" Width="1000" Background="gray">
+                <StackPanel Margin="25">
+                    <Label Content="Sollicitanten" FontSize="35" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold" />
+                    <ScrollViewer MaxHeight="400">
+                        <DataGrid AutoGenerateColumns="False" CanUserReorderColumns="False" IsReadOnly="True" MaxHeight="400" CanUserAddRows="False" ItemsSource="{Binding Applicants}" SelectedItem="{Binding SelectedApplicant}" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                            <DataGrid.Resources>
+                                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Background" Value="#565656"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Height" Value="30" />
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Sollicitant" Width="300" Binding="{Binding FullName}"/>
+                                <DataGridTextColumn Header="Postcode" Width="100" Binding="{Binding ZipCode}"/>
+                                <DataGridTextColumn Header="Straatnaam" Width="200" Binding="{Binding StreetName}"/>
+                                <DataGridTextColumn Header="Huisnr" Width="50" Binding="{Binding HomeNumber}"/>
+                                <DataGridTextColumn Header="Email" Width="300" Binding="{Binding Email}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Border BorderThickness="1" BorderBrush="White" Margin="0,10"></Border>
+                    <TextBlock Text="Inspecteur aanmaken voor sollicitant:" Foreground="White" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                    <TextBlock Text="{Binding SelectedApplicant.FullName}" FontSize="15" FontWeight="Bold"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="50"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Certificaten inspecteur" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <ListView Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SelectedAppCertificate}" ItemsSource="{Binding NewAppInspector.ChosenCertificates}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <Border BorderThickness="1" BorderBrush="White"></Border>
 
-                    <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                    <ListView Grid.Row="1" Grid.Column="3" SelectedItem="{Binding SelectedAppCertificate}" ItemsSource="{Binding AvailableAppCertificates}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Certificaten:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                        <Label Content="Certificaten inspecteur" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                        <ListView Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SelectedAppCertificate}" ItemsSource="{Binding NewAppInspector.ChosenCertificates}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
 
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
+                        <Label Content="Beschikbare certificaten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
+                        <ListView Grid.Row="1" Grid.Column="3" SelectedItem="{Binding SelectedAppCertificate}" ItemsSource="{Binding AvailableAppCertificates}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="50"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Inloggegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Gebruikersnaam" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <Label Content="Wachtwoord" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="UsernameApp" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewAppInspector.UserName, Mode=TwoWay}"></TextBox>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="PasswordApp" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewAppInspector.Password, Mode=TwoWay}"></TextBox>
-                </Grid>
-                <Button Content="Inspecteur toevoegen" Command="{Binding RecruitApplicantCommand}"></Button>
+                    <Border BorderThickness="1" BorderBrush="White"></Border>
 
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Inloggegevens:" FontSize="15" Foreground="Black" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,99,0"></Label>
+                        <Label Content="Gebruikersnaam" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="1,0,48,0" ></Label>
+                        <Label Content="Wachtwoord" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Margin="3,0,146,0" ></Label>
+                        <TextBox Width="100" HorizontalAlignment="Left" Name="UsernameApp" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewAppInspector.UserName, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="1,0,0,0"></TextBox>
+                        <TextBox Width="100" HorizontalAlignment="Left" Name="PasswordApp" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewAppInspector.Password, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="3,0,0,0"></TextBox>
+                    </Grid>
+
+                    <Border BorderThickness="1" BorderBrush="White"></Border>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Width="150" Height="30" FontSize="18" Content="Annuleren" 
+                            Foreground="White" FontWeight="Bold" Margin="0,0,20,20" Background="#CE3131" 
+                            VerticalAlignment="Bottom" Command="{Binding CancelCreate}">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <Button Width="300" Height="35" FontSize="22" Content="Inspecteur toevoegen" 
+                            Foreground="White" FontWeight="Bold" Margin="0,20" Background="#8000FF" 
+                            Grid.Column="2" Command="{Binding RecruitApplicantCommand}">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Grid.Column="2" Width="600">
-                <Label Content="Inspecteurs" Grid.Column="2" FontSize="20" Background="AliceBlue"></Label>
-                <Grid  Height="50">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="300"/>
-                        <ColumnDefinition Width="300"/>
-                    </Grid.ColumnDefinitions>
-                    <!--SEARCH BAR-->
-                    <TextBox Text="Zoek voor inspecteur" FontSize="15" BorderBrush="Black"></TextBox>
-                    <!--CREATE BUTTON-->
-                    <Button Grid.Column="1" Content="Nieuwe inspecteur&#x0a; aanmaken" FontSize="15" Background="MediumPurple" Foreground="White" BorderBrush="Black" RenderTransformOrigin="0.5,0.5" Command="{Binding CreateNewInspectorCommand}">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleY="0.095"/>
-                                <RotateTransform/>
-                                <TranslateTransform Y="0.248"/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                    </Button>
-                </Grid>
-                <Grid Height="20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <RadioButton Command="{Binding ListOfAllCommand}"  IsChecked="{Binding AllChecked, Mode=TwoWay}"  Content="Alles" Grid.Column="0"/>
-                    <RadioButton Command="{Binding ListOfActiveCommand}"  IsChecked="{Binding ActiveChecked, Mode=TwoWay}"  Content="Actieve inspecteurs" Grid.Column="1"/>
-                    <RadioButton Command="{Binding ListOfInactiveCommand}"  Content="Inactieve inspecteurs" Grid.Column="2"/>
-                    <RadioButton Command="{Binding ListOfLicensedCommand}"  Content="Heeft certificaat" Grid.Column="3"/>
-                </Grid>
-                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" >
-                    <DataGrid.Columns>
-                        <!--<DataGridTextColumn Header="Inspecteur" Binding="{Binding FullName}" Width="*" />-->
-                        <DataGridTemplateColumn Header="Inspecteur">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Background="White" BorderThickness="0" Content="{Binding FullName}" Command="{Binding DataContext.OpenEditInspectorCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Postcode" Binding="{Binding ZipCode}" Width="60"/>
-                        <DataGridTextColumn Header="Straatnaam" Binding="{Binding StreetName}" Width="*" />
-                        <DataGridTextColumn Header="Huisnr" Binding="{Binding HomeNumber}" Width="50" />
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
-                        <DataGridTemplateColumn Header="Inactief/actief">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Background="Red" Foreground="White" BorderThickness="1" Content="(in)actief zetten" Command="{Binding DataContext.SetInspectorInactiveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <!--<DataGridTextColumn Header="Woonplaats" Binding="{Binding Woonplaats}" Width="*" />-->
-
-                    </DataGrid.Columns>
-                </DataGrid>
-                <!--LIST OF EXISTING INSPECTORS-->
-
+            <StackPanel Visibility="{Binding InspectorVisibility}" HorizontalAlignment="Center" Grid.Column="0" Width="1000" Background="Gray">
+                <StackPanel Margin="25">
+                    <TextBlock Text="Inspecteurs" FontSize="35" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" Margin="0,26,380,26"/>
+                    <Border BorderBrush="White" BorderThickness="2" Margin="0,0,0,20"/>
+                    <Grid  Height="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="300"/>
+                        </Grid.ColumnDefinitions>
+                        <!--SEARCH BAR-->
+                        <TextBox Text="Zoek voor inspecteur" FontSize="15" BorderBrush="Black" VerticalAlignment="Center" Height="25"></TextBox>
+                        <!--CREATE BUTTON-->
+                        <Button Width="200" Height="25" FontSize="16"
+                            Foreground="White" FontWeight="Bold" Background="#8000FF" 
+                            Grid.Column="1" Content="Nieuwe inspecteur" RenderTransformOrigin="0.5,0.5" Command="{Binding CreateNewInspectorCommand}">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleY="0.095"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform Y="0.248"/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+                    </Grid>
+                    <Grid Height="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton Command="{Binding ListOfAllCommand}"  IsChecked="{Binding AllChecked, Mode=TwoWay}"  Content="Alles" Grid.Column="0"/>
+                        <RadioButton Command="{Binding ListOfActiveCommand}"   Content="Actieve inspecteurs" Grid.Column="1"/>
+                        <RadioButton Command="{Binding ListOfInactiveCommand}"  Content="Inactieve inspecteurs" Grid.Column="2"/>
+                        <RadioButton Command="{Binding ListOfLicensedCommand}"  Content="Heeft certificaat" Grid.Column="3"/>
+                    </Grid>
+                    <ScrollViewer Height="400">
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" IsReadOnly="True" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                            <DataGrid.Resources>
+                                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Background" Value="#565656"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Height" Value="30" />
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <!--<DataGridTextColumn Header="Inspecteur" Binding="{Binding FullName}" Width="*" />-->
+                                <DataGridTemplateColumn Header="Inspecteur">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Background="White" BorderThickness="0" Content="{Binding FullName}" Command="{Binding DataContext.OpenEditInspectorCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Postcode" Binding="{Binding ZipCode}" Width="60"/>
+                                <DataGridTextColumn Header="Straatnaam" Binding="{Binding StreetName}" Width="*" />
+                                <DataGridTextColumn Header="Huisnr" Binding="{Binding HomeNumber}" Width="50" />
+                                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+                                <DataGridTemplateColumn Header="Inactief/actief">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Background="Red" Foreground="White" BorderThickness="1" Content="(in)actief zetten" Command="{Binding DataContext.SetInspectorInactiveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Grid.Column="5" Background="AliceBlue">
+            <!--<StackPanel Grid.Column="5" Background="AliceBlue">
                 <Label Content="Nieuwe inspecteur aanmaken" FontSize="30" Foreground="Black"></Label>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -215,14 +318,18 @@
                         <RowDefinition Height="10"/>
                     </Grid.RowDefinitions>
                     <Label Content="Naam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <!--NAME-->
+                    -->
+            <!--NAME-->
+            <!--
                     <Label Content="Voornaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
                     <TextBox Width="100" HorizontalAlignment="Left" Name="FirstName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewInspector.FirstName, Mode=TwoWay}"></TextBox>
                     <Label Content="Tussenvoegsel" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
                     <TextBox Width="100" HorizontalAlignment="Left" Name="InBetweenName" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewInspector.InBetween, Mode=TwoWay}"></TextBox>
                     <Label Content="Achternaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
                     <TextBox Width="100" HorizontalAlignment="Left" Name="Surname" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewInspector.LastName, Mode=TwoWay}"></TextBox>
-                    <!--END NAME-->
+                    -->
+            <!--END NAME-->
+            <!--
                 </Grid>
                 <Border BorderThickness="1" BorderBrush="Black"></Border>
 
@@ -297,7 +404,9 @@
                     <Label Content="Emailadres" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
                     <TextBox Width="225" HorizontalAlignment="Left" Name="Email" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewInspector.Email, Mode=TwoWay}"></TextBox>
                     <Label Content="Telefoonummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="2" ></Label>
-                    <!-- New binding required-->
+                    -->
+            <!-- New binding required-->
+            <!--
                     <TextBox Width="200" HorizontalAlignment="Left" Name="telefoonnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewInspector.Phonenumber, Mode=TwoWay}"></TextBox>
                 </Grid>
 
@@ -366,8 +475,8 @@
                     <TextBox Width="200" HorizontalAlignment="Left" Name="Password" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding NewInspector.Password, Mode=TwoWay}"></TextBox>
                 </Grid>
                 <Button Content="Inspecteur toevoegen" Command="{Binding AddInspectorCommand}"></Button>
-            </StackPanel>
+            </StackPanel>-->
         </Grid>
-        
+
     </Grid>
 </Window>

@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Application = System.Windows.Application;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
@@ -26,6 +27,49 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public ICommand PositionDownCommand { get; set; }
         public ICommand DeleteQuestionCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public ICommand ShowQuestionnaire { get; set; }
+        public ICommand ShowQuestions { get; set; }
+        public ICommand ShowOrder { get; set; }
+
+        #region visibility Properties
+        private string _questionVisibility;
+
+        public string QuestionVisibility
+        {
+            get { return _questionVisibility; }
+            set
+            {
+                _questionVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _questionaireVisibility;
+
+        public string QuestionaireVisibility
+        {
+            get { return _questionaireVisibility; }
+            set
+            {
+                _questionaireVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _orderVisibility;
+
+        public string OrderVisibility
+        {
+            get { return _orderVisibility; }
+            set
+            {
+                _orderVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
         public IQuestion SelectedItem
         {
             get
@@ -101,6 +145,39 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             PositionDownCommand = new RelayCommand(changePositionDOWN);
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
             SubmitCommand = new RelayCommand(Submit);
+            ShowQuestionnaire = new RelayCommand(showQuestionnaire);
+            ShowQuestions = new RelayCommand(showQuestions);
+            ShowOrder = new RelayCommand(showOrder);
+            CancelCommand = new RelayCommand(cancelQuestionnaire);
+
+            showQuestionnaire();
+        }
+
+        private void cancelQuestionnaire()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            currentWindow.Close();
+        }
+
+        public void showQuestionnaire()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Visible";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showQuestions()
+        {
+            QuestionVisibility = "Visible";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showOrder()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Visible";
         }
 
         private void Submit()
@@ -128,15 +205,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 crud.Show();
                 currentWindow.Close();
 
+                cancelQuestionnaire();
             }
             catch
             {
-                System.Windows.Forms.MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                System.Windows.Forms.MessageBox.Show("Fout bij invoeren velden", "Er is iets fout gegaan",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)

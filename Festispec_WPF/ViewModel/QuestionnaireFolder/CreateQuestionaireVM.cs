@@ -15,6 +15,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Application = System.Windows.Application;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
@@ -55,6 +56,42 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
         }
 
+        private string _questionVisibility;
+
+        public string QuestionVisibility
+        {
+            get { return _questionVisibility; }
+            set
+            {
+                _questionVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _questionaireVisibility;
+
+        public string QuestionaireVisibility
+        {
+            get { return _questionaireVisibility; }
+            set
+            {
+                _questionaireVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _orderVisibility;
+
+        public string OrderVisibility
+        {
+            get { return _orderVisibility; }
+            set
+            {
+                _orderVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
         public IQuestion SelectedItem
         {
             get
@@ -71,6 +108,10 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public ICommand PositionDownCommand { get; set; }
 
         public ICommand DeleteQuestionCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public ICommand ShowQuestionnaire { get; set; }
+        public ICommand ShowQuestions { get; set; }
+        public ICommand ShowOrder { get; set; }
 
         public string TemplateType { get; set; }
 
@@ -84,6 +125,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 RaisePropertyChanged("newQuestionnaireVM");
             }
         }
+
         private Page _currentPage;
         public Dictionary<QuestionTypes.QuestionsTypesEnum, string> _QuestionTypes
         {
@@ -132,8 +174,43 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             PositionDownCommand = new RelayCommand(changePositionDOWN);
 
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
+            ShowQuestionnaire = new RelayCommand(showQuestionnaire);
+            ShowQuestions = new RelayCommand(showQuestions);
+            ShowOrder = new RelayCommand(showOrder);
+            CancelCommand = new RelayCommand(cancelQuestionnaire);
 
             templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
+
+            showQuestionnaire();
+        }
+
+        private void cancelQuestionnaire()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            var _questionnaireView = new QuestionnaireCRUD();
+            _questionnaireView.Show();
+            currentWindow.Close();
+        }
+
+        public void showQuestionnaire()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Visible";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showQuestions()
+        {
+            QuestionVisibility = "Visible";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showOrder()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Visible";
         }
 
         private void CreateTemplate()
@@ -148,21 +225,21 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             if (newTemplate.Type != null)
             {
 
-            UOW.Context.Template.Add(newTemplate);
+                UOW.Context.Template.Add(newTemplate);
 
-            var temp = UOW.Questionnaires.Get(newQuestionnaireVM.ID);
-            temp.Template_ID = newTemplate.ID;
-            saveToDatabase();
+                var temp = UOW.Questionnaires.Get(newQuestionnaireVM.ID);
+                temp.Template_ID = newTemplate.ID;
+                saveToDatabase();
 
-            TemplateType = null;
-            RaisePropertyChanged("TemplateType");
-            templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
-            RaisePropertyChanged("templates");
+                TemplateType = null;
+                RaisePropertyChanged("TemplateType");
+                templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
+                RaisePropertyChanged("templates");
 
-            if (selectedTemplate != null)
-            {
-                clearSelectedTemplate(selectedTemplate);
-            }
+                if (selectedTemplate != null)
+                {
+                    clearSelectedTemplate(selectedTemplate);
+                }
             }
             else
             {
@@ -174,10 +251,10 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private void SubmitQuestionnaire()
         {
 
-            if(newQuestionnaireVM.Title != null & newQuestionnaireVM.Version != null)
+            if (newQuestionnaireVM.Title != null & newQuestionnaireVM.Version != null)
             {
 
-            newQuestionnaireVM.IsFilled = false;
+                newQuestionnaireVM.IsFilled = false;
                 if (basedOfTemplate)
                 {
                     newQuestionnaireVM.IsActive = false;
@@ -186,61 +263,72 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 {
                     newQuestionnaireVM.IsActive = true;
                 }
-            UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
-
-            saveToDatabase();
-
-            if (basedOfTemplate)
-            {
-                FixPostions(newQuestionnaireVM.questions);
-
-                var deletelist = new ObservableCollection<IQuestion>();
-                foreach (IQuestion question in newQuestionnaireVM.questions)
-                {
-                    if (question.ID != 0)
-                    {
-                        deletelist.Add(question);
-                    }
-                }
-                foreach (var q in deletelist)
-                {
-                    newQuestionnaireVM.questions.Remove(q);
-                    q.addNewLink(newQuestionnaireVM.ID);
-                }
-            }
-
-            foreach (IQuestion question in newQuestionnaireVM.questions)
-            {
-                if (!basedOfTemplate)
-                {
-                    question.Position = newQuestionnaireVM.questions.IndexOf(question);
-                }
-
-                question.toDatabase(newQuestionnaireVM.ID);
-            }
-
-            if (selectedTemplate != null)
-            {
-                UOW.Context.Vragenlijst.Find(_newQuestionnaireVM.ID).Stamt_af_van_ID = UOW.Context.Template.Where(t => t.Vragenlijst_ID == selectedTemplate.ID).Select(t => t.ID).FirstOrDefault();
-                
-                clearSelectedTemplate(selectedTemplate);
+                UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
 
                 saveToDatabase();
+
+                if (basedOfTemplate)
+                {
+                    FixPostions(newQuestionnaireVM.questions);
+
+                    var deletelist = new ObservableCollection<IQuestion>();
+                    foreach (IQuestion question in newQuestionnaireVM.questions)
+                    {
+                        if (question.ID != 0)
+                        {
+                            deletelist.Add(question);
+                        }
+                    }
+                    foreach (var q in deletelist)
+                    {
+                        newQuestionnaireVM.questions.Remove(q);
+                        q.addNewLink(newQuestionnaireVM.ID);
+                    }
+                }
+
+                foreach (IQuestion question in newQuestionnaireVM.questions)
+                {
+                    if (!basedOfTemplate)
+                    {
+                        question.Position = newQuestionnaireVM.questions.IndexOf(question);
+                    }
+
+                    question.toDatabase(newQuestionnaireVM.ID);
+                }
+
+                if (selectedTemplate != null)
+                {
+                    UOW.Context.Vragenlijst.Find(_newQuestionnaireVM.ID).Stamt_af_van_ID = UOW.Context.Template.Where(t => t.Vragenlijst_ID == selectedTemplate.ID).Select(t => t.ID).FirstOrDefault();
+
+                    clearSelectedTemplate(selectedTemplate);
+
+                    saveToDatabase();
+                }
+                else
+                {
+                    MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                basedOfTemplate = false;
             }
-            }
-            else
-            {
-                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            basedOfTemplate = false;
         }
 
         private void SubmitCreatedQuestionnaire()
         {
+            try
+            {
+                SubmitQuestionnaire();
+                newQuestionnaireVM = new QuestionnaireVM();
+                basedOfTemplate = false;
+
+                cancelQuestionnaire();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fout bij invoeren velden", "Er is iets fout gegaan",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            SubmitQuestionnaire();
-            newQuestionnaireVM = new QuestionnaireVM();
             selectedTemplate = new QuestionnaireVM() ;
             var newWindow = new QuestionnaireCRUD();
             currentWindow.Close();

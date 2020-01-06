@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Afspraak">
           <Key>
             <PropertyRef Name="ID" />
@@ -135,7 +135,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Titel" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Text" Type="ntext" Nullable="false" />
+          <Property Name="PDF" Type="varbinary(max)" Nullable="false" />
           <Property Name="Inspectienummer" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspectie_Wel_Ingevuld_Vragenlijst">
@@ -163,7 +163,7 @@
           </Key>
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
           <Property Name="Kaartvraag_ID" Type="int" Nullable="false" />
-          <Property Name="Filepath_Antwoord" Type="varchar(max)" />
+          <Property Name="Filebytes" Type="varbinary(max)" />
           <Property Name="Opmerking" Type="ntext" />
           <Property Name="Positie" Type="int" Nullable="false" />
         </EntityType>
@@ -1257,7 +1257,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PDF" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Inspectienummer" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Rapportage_Inspectie" FromRole="Inspectie_Rapportage" ToRole="Inspectie" />
         </EntityType>
@@ -1290,7 +1290,7 @@
           </Key>
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <Property Name="Kaartvraag_ID" Type="Int32" Nullable="false" />
-          <Property Name="Filepath_Antwoord" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Filebytes" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Opmerking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Positie" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Kaartvraag" Relationship="Self.FK_Kaartvraag_vragenlijst_Kaartvraag" FromRole="Kaartvraag_vragenlijst" ToRole="Kaartvraag" />
@@ -2243,7 +2243,7 @@
               <MappingFragment StoreEntitySet="Inspectie_Rapportage">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Titel" ColumnName="Titel" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="PDF" ColumnName="PDF" />
                 <ScalarProperty Name="Inspectienummer" ColumnName="Inspectienummer" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2271,7 +2271,7 @@
               <MappingFragment StoreEntitySet="Kaartvraag_vragenlijst">
                 <ScalarProperty Name="Vragenlijst_ID" ColumnName="Vragenlijst_ID" />
                 <ScalarProperty Name="Kaartvraag_ID" ColumnName="Kaartvraag_ID" />
-                <ScalarProperty Name="Filepath_Antwoord" ColumnName="Filepath_Antwoord" />
+                <ScalarProperty Name="Filebytes" ColumnName="Filebytes" />
                 <ScalarProperty Name="Opmerking" ColumnName="Opmerking" />
                 <ScalarProperty Name="Positie" ColumnName="Positie" />
               </MappingFragment>

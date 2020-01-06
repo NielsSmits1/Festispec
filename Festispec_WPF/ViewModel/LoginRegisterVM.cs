@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
-using Festispec_WPF.Model;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using FestiSpec.Domain.Model;
 using System.Windows;
 using Application = System.Windows.Application;
+using FestiSpec.Domain.Model;
 using MessageBox = System.Windows.Forms.MessageBox;
 using System.Net;
 
@@ -45,37 +40,62 @@ namespace Festispec_WPF.ViewModel
 
         private void HandleLogin()
         {
-            if (HasInternet())
+            if (Password != null && Username != null)
             {
-                //Window was corrupt
-                var targetPerson = UOW.Employee.GetAll()
-                    .FirstOrDefault(e => e.Wachtwoord == Password && e.Username == Username);
+                // Window was corrupt
+                // var targetPerson = UOW.Employee.GetAll()
+                //     .FirstOrDefault(e => e.Wachtwoord == Password && e.Username == Username);
 
-                if (targetPerson == null)
+                // if (targetPerson == null)
+                // {
+                //     Console.WriteLine("failed to login");
+                //     System.Windows.Forms.MessageBox.Show("Incorrecte login gegevens", "Fout bij invoeren velden",
+                //       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // }
+                // else
+                // {
+                //     Console.WriteLine("login ok");
+                //     Username = "";
+                //     Password = "";
+                //     RaisePropertyChanged(() => Username);
+                //     RaisePropertyChanged(() => Password);
+                //     var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                //     HomeScreenView home = new HomeScreenView();
+                //     home.Show();
+                //     currentWindow.Close();
+                // }
+                if (HasInternet())
                 {
-                    var username = UOW.Employee.FindUsername(Username);
-                    if(username == null)
+                    //Window was corrupt
+                    var targetPerson = UOW.Employee.GetAll()
+                        .FirstOrDefault(e => e.Wachtwoord == Password && e.Username == Username);
+
+                    if (targetPerson == null)
                     {
-                        ErrorText = "Verkeerde gebruikersnaam";
+                        var username = UOW.Employee.FindUsername(Username);
+                        if (username == null)
+                        {
+                            ErrorText = "Verkeerde gebruikersnaam";
+                        }
+                        else
+                        {
+                            ErrorText = "Verkeerd wachtwoord";
+                        }
+
+                        RaisePropertyChanged("ErrorText");
                     }
                     else
                     {
-                        ErrorText = "Verkeerd wachtwoord";
+                        var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                        Console.WriteLine("login ok");
+                        Username = "";
+                        Password = "";
+                        RaisePropertyChanged(() => Username);
+                        RaisePropertyChanged(() => Password);
+                        HomeScreenView home = new HomeScreenView();
+                        home.Show();
+                        currentWindow.Close();
                     }
-
-                    RaisePropertyChanged("ErrorText");
-                }
-                else
-                {
-                    var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                    Console.WriteLine("login ok");
-                    Username = "";
-                    Password = "";
-                    RaisePropertyChanged(() => Username);
-                    RaisePropertyChanged(() => Password);
-                    HomeScreenView home = new HomeScreenView();
-                    home.Show();
-                    currentWindow.Close();
                 }
             }
         }

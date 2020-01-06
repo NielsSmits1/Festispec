@@ -66,7 +66,30 @@ namespace Festispec_WPF.ViewModel
 
         public ObservableCollection<CertificateVM> AvailableCertificates { get; set; }
         public ObservableCollection<CertificateVM> AvailableAppCertificates { get; set; }
-        //
+        private string _addInspectorVisibility;
+
+        public string addInspectorVisibility
+        {
+            get { return _addInspectorVisibility; }
+            set
+            {
+                _addInspectorVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _InspectorVisibility;
+
+        public string InspectorVisibility
+        {
+            get { return _InspectorVisibility; }
+            set
+            {
+                _InspectorVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+        
 
         //Update Inspector Commands
         public ICommand OpenEditInspectorCommand { get; set; }
@@ -85,8 +108,8 @@ namespace Festispec_WPF.ViewModel
         public bool ActiveChecked { get; set; }
         public ICommand ListOfAllCommand { get; set; }
         public ICommand SetInspectorInactiveCommand { get; set; }
-
-
+        public ICommand CreateNewInspectorCommand { get; set; }
+        public ICommand CancelCreate { get; set; }
         public InspectorVM SelectedInspector
         {
             get
@@ -123,7 +146,6 @@ namespace Festispec_WPF.ViewModel
 
         public InspectorCrudVM()
         {
-
             ListOfAllCommand = new RelayCommand(LoadAll);
             MoveToAvailableCommand = new RelayCommand(MoveCertificateToAvailable);
             MoveToChosenCommand = new RelayCommand(MoveCertificateToChosen);
@@ -139,6 +161,8 @@ namespace Festispec_WPF.ViewModel
             OpenCreateCommand = new RelayCommand(OpenCreate);
             CloseCreateCommand = new RelayCommand(CloseCreate);
             RecruitApplicantCommand = new RelayCommand(RecruitApplicant, CanRecruit);
+            CreateNewInspectorCommand = new RelayCommand(OpenAddInspectorWindow);
+            CancelCreate = new RelayCommand(MakeInspectorVisible);
 
 
             Init();
@@ -149,6 +173,8 @@ namespace Festispec_WPF.ViewModel
         {
             try
             {
+                addInspectorVisibility = "Hidden";
+            InspectorVisibility = "Visible";
                 //UOW
                 UOW = ViewModelLocator.UOW;
 
@@ -195,8 +221,6 @@ namespace Festispec_WPF.ViewModel
                 return;
             }
 
-
-
             Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
             RaisePropertyChanged(() => Inspectors);
             AvailableCertificates = new ObservableCollection<CertificateVM>(UOW.Certificates.GetAll().Select(certificaat => new CertificateVM(certificaat)));
@@ -210,6 +234,18 @@ namespace Festispec_WPF.ViewModel
             {
                 _createInspectorWindow.Close();
             }
+        }
+
+        private void OpenAddInspectorWindow()
+        {
+            addInspectorVisibility = "Visible";
+            InspectorVisibility = "Hidden";
+        }
+
+        private void MakeInspectorVisible()
+        {
+            addInspectorVisibility = "Hidden";
+            InspectorVisibility = "Visible";
         }
 
         public void RecruitApplicant()
@@ -240,6 +276,8 @@ namespace Festispec_WPF.ViewModel
             LoadAll();
             NewAppInspector.EmptyAll();
             AvailableAppCertificates = new ObservableCollection<CertificateVM>(UOW.Certificates.GetAll().Select(certificaat => new CertificateVM(certificaat)));
+
+            MakeInspectorVisible();
         }
 
         public bool CanRecruit()

@@ -470,7 +470,6 @@ namespace Festispec_WPF.ViewModel
                 button.Cursor = System.Windows.Input.Cursors.Hand;
                 button.Command = ShowInspectorCommand;
                 button.CommandParameter = inspector.Inspector_ID;
-
                 pin.Content = button;
                 pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
 

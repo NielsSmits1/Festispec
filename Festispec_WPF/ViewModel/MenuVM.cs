@@ -18,11 +18,11 @@ namespace Festispec_WPF.ViewModel
         private CustomerCrudWindow _customerCrudWindow;
         private InspectorCrudWindow _inspecteursWindow;
         private WeekplanningView _weekPlanningWindow;
+        private QuestionnaireCRUD _questionnaireView;
         public string ErrorVisibility { get; set; }
         private MapView _planWindow;
         private EmployeeView _employeeView;
         private MainWindow _mainWindow;
-        private QuestionnaireCRUD _questionnaireView;
 
 
         // commands
@@ -145,6 +145,10 @@ namespace Festispec_WPF.ViewModel
 
         public void LogOut()
         {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            _mainWindow = new MainWindow();
+            _mainWindow.Show();
+            currentWindow.Close();
             for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
                 App.Current.Windows[intCounter].Close();
 

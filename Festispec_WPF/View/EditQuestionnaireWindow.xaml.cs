@@ -15,13 +15,35 @@ using System.Windows.Shapes;
 namespace Festispec_WPF.View
 {
     /// <summary>
-    /// Interaction logic for EditQuestionnaireWindow.xaml
+    /// Interaction logic for QuestionnaireWindow.xaml
     /// </summary>
     public partial class EditQuestionnaireWindow : Window
     {
         public EditQuestionnaireWindow()
         {
             InitializeComponent();
+        }
+
+        private void Title_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Version_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Note_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            version.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            title.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            note.GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
     }
 }
