@@ -11,7 +11,7 @@ namespace FestiSpec.Domain.Model.Repositories
     public class LocationRepository : Repository<Locatie>, ILocationRepository
     {
 
-        public LocationRepository(FestiSpecEntities1 context) : base(context)
+        public LocationRepository(FestiSpecEntities context) : base(context)
         {
 
         }

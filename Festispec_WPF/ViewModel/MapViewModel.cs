@@ -461,10 +461,15 @@ namespace Festispec_WPF.ViewModel
             {
                 var location = getInspectorLocation(inspector);
 
-                foreach (var inspector in Inspectors)
-                {
-                    var location = getInspectorLocation(inspector);
-                }
+                Pushpin pin = new Pushpin();
+
+                Button button = new Button();
+                button.Width = 45;
+                button.Height = 45;
+                button.Opacity = 0;
+                button.Cursor = System.Windows.Input.Cursors.Hand;
+                button.Command = ShowInspectorCommand;
+                button.CommandParameter = inspector.Inspector_ID;
                 pin.Content = button;
                 pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
 

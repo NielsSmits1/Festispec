@@ -9,7 +9,7 @@ namespace FestiSpec.Domain.Model.Repositories
 {
     public class NAWEmployeeRepository : Repository<NAW_werknemer>, INAWEmployeeRepository
     {
-        public NAWEmployeeRepository(FestiSpecEntities1 context) : base(context)
+        public NAWEmployeeRepository(FestiSpecEntities context) : base(context)
         {
             {
 

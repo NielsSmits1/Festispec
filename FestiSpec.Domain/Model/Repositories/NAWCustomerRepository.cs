@@ -10,7 +10,7 @@ namespace FestiSpec.Domain.Model.Repositories
     public class NAWCustomerRepository : Repository<NAW_Klant>, INAWCustomerRepository
     {
 
-        public NAWCustomerRepository(FestiSpecEntities1 context) : base(context)
+        public NAWCustomerRepository(FestiSpecEntities context) : base(context)
         {
 
         }

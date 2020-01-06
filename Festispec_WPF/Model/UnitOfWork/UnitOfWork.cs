@@ -12,13 +12,13 @@ namespace Festispec_WPF.Model.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly FestiSpecEntities1 _context;
+        private readonly FestiSpecEntities _context;
 
         public UnitOfWork()
         {
             if(_context == null)
             {
-                _context = new FestiSpecEntities1();
+                _context = new FestiSpecEntities();
             }
             
             Inspectors = new InspectorRepository(_context);
@@ -35,7 +35,7 @@ namespace Festispec_WPF.Model.UnitOfWork
             NAWCustomers = new NAWCustomerRepository(_context);
         }
 
-        public FestiSpecEntities1 Context => _context;
+        public FestiSpecEntities Context => _context;
 
         public IInspectorRepository Inspectors { get; private set; }
         public INAWEmployeeRepository NawEmployee { get; private set; }

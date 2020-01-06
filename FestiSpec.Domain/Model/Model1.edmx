@@ -135,7 +135,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Titel" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Text" Type="ntext" Nullable="false" />
+          <Property Name="PDF" Type="varbinary(max)" Nullable="false" />
           <Property Name="Inspectienummer" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspectie_Wel_Ingevuld_Vragenlijst">
@@ -163,7 +163,7 @@
           </Key>
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
           <Property Name="Kaartvraag_ID" Type="int" Nullable="false" />
-          <Property Name="Filepath_Antwoord" Type="varchar(max)" />
+          <Property Name="Filebytes" Type="varbinary(max)" />
           <Property Name="Opmerking" Type="ntext" />
           <Property Name="Positie" Type="int" Nullable="false" />
         </EntityType>
@@ -909,6 +909,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Getqualifiedinspector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IsQualified" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="Inspection" Type="int" Mode="In" />
+          <Parameter Name="Inspector" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="FestiSpecModelStoreContainer">
           <EntitySet Name="Afspraak" EntityType="Self.Afspraak" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Applicant" EntityType="Self.Applicant" Schema="dbo" store:Type="Tables" />
@@ -1250,7 +1257,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PDF" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Inspectienummer" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Rapportage_Inspectie" FromRole="Inspectie_Rapportage" ToRole="Inspectie" />
         </EntityType>
@@ -1283,7 +1290,7 @@
           </Key>
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <Property Name="Kaartvraag_ID" Type="Int32" Nullable="false" />
-          <Property Name="Filepath_Antwoord" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Filebytes" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Opmerking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Positie" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Kaartvraag" Relationship="Self.FK_Kaartvraag_vragenlijst_Kaartvraag" FromRole="Kaartvraag_vragenlijst" ToRole="Kaartvraag" />
@@ -1938,7 +1945,7 @@
           <End Role="Inspectie" Type="Self.Inspectie" Multiplicity="*" />
           <End Role="Werknemer" Type="Self.Werknemer" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="FestiSpecEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FestiSpecEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Afspraak" EntityType="Self.Afspraak" />
           <EntitySet Name="Applicant" EntityType="Self.Applicant" />
           <EntitySet Name="Beschikbaarheid" EntityType="Self.Beschikbaarheid" />
@@ -2121,13 +2128,16 @@
             <End Role="Inspectie" EntitySet="Inspectie" />
             <End Role="Werknemer" EntitySet="Werknemer" />
           </AssociationSet>
+          <FunctionImport Name="Getqualifiedinspector" ReturnType="Collection(Int32)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FestiSpecModelStoreContainer" CdmEntityContainer="FestiSpecEntities1">
+        <EntityContainerMapping StorageEntityContainer="FestiSpecModelStoreContainer" CdmEntityContainer="FestiSpecEntities">
           <EntitySetMapping Name="Afspraak">
             <EntityTypeMapping TypeName="FestiSpecModel.Afspraak">
               <MappingFragment StoreEntitySet="Afspraak">
@@ -2233,7 +2243,7 @@
               <MappingFragment StoreEntitySet="Inspectie_Rapportage">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Titel" ColumnName="Titel" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="PDF" ColumnName="PDF" />
                 <ScalarProperty Name="Inspectienummer" ColumnName="Inspectienummer" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2261,7 +2271,7 @@
               <MappingFragment StoreEntitySet="Kaartvraag_vragenlijst">
                 <ScalarProperty Name="Vragenlijst_ID" ColumnName="Vragenlijst_ID" />
                 <ScalarProperty Name="Kaartvraag_ID" ColumnName="Kaartvraag_ID" />
-                <ScalarProperty Name="Filepath_Antwoord" ColumnName="Filepath_Antwoord" />
+                <ScalarProperty Name="Filebytes" ColumnName="Filebytes" />
                 <ScalarProperty Name="Opmerking" ColumnName="Opmerking" />
                 <ScalarProperty Name="Positie" ColumnName="Positie" />
               </MappingFragment>
@@ -2538,6 +2548,7 @@
               <ScalarProperty Name="ID" ColumnName="Werknemer_ID" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Getqualifiedinspector" FunctionName="FestiSpecModel.Store.Getqualifiedinspector" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

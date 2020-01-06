@@ -35,7 +35,7 @@ namespace FestiSpecWebsite.Controllers
                 password = nvc["Wachtwoord"];
             }
 
-            using (var context = new FestiSpecEntities1())
+            using (var context = new FestiSpecEntities())
             {
                 var targetPerson = context.Inspecteur
                     .FirstOrDefault(e => e.Wachtwoord == password && e.Username == userName);

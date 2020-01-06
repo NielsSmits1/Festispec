@@ -12,7 +12,7 @@ namespace FestiSpec.Domain.Model.Repositories
     public class InspectorRepository : Repository<Inspecteur>, IInspectorRepository
     {
 
-        public InspectorRepository(FestiSpecEntities1 context) : base(context)
+        public InspectorRepository(FestiSpecEntities context) : base(context)
         {
            
         }

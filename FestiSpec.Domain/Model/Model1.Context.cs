@@ -12,11 +12,13 @@ namespace FestiSpec.Domain.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class FestiSpecEntities1 : DbContext
+    public partial class FestiSpecEntities : DbContext
     {
-        public FestiSpecEntities1()
-            : base("name=FestiSpecEntities1")
+        public FestiSpecEntities()
+            : base("name=FestiSpecEntities")
         {
         }
     
@@ -59,5 +61,14 @@ namespace FestiSpec.Domain.Model
         public virtual DbSet<Verzoek> Verzoek { get; set; }
         public virtual DbSet<Vragenlijst> Vragenlijst { get; set; }
         public virtual DbSet<Werknemer> Werknemer { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> Getqualifiedinspector(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Getqualifiedinspector", idParameter);
+        }
     }
 }

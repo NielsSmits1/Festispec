@@ -9,7 +9,7 @@ namespace FestiSpec.Domain.Model.Repositories
 {
     public class CertificatesRepository : Repository<Certificaat>, ICertficatesRepository
     {
-        public CertificatesRepository(FestiSpecEntities1 context) : base(context)
+        public CertificatesRepository(FestiSpecEntities context) : base(context)
         {
 
         }

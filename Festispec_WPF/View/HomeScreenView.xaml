@@ -21,7 +21,7 @@
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <StackPanel Grid.Column="0" Grid.Row="1" Background="#565656">
             <Button Width="100" Background="Transparent" Height="75" BorderBrush="Wheat" BorderThickness="0,2,0,2" Command="{Binding ShowKlantenCommand}">
                 <StackPanel>
@@ -76,8 +76,13 @@
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Border BorderThickness="100">
-                <StackPanel DataContext="{Binding Home, Source={StaticResource Locator}}">
-                    
+                <StackPanel>
+                    <Grid Margin="0, 0, 0, 100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
                         <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"
@@ -141,10 +146,11 @@
                                 <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="22"/>
                             </StackPanel>
                         </Button>
-<wpf:PieChart LegendLocation="Bottom" Hoverable="True" Series="{Binding SeriesCollection}" DataTooltip="{x:Null}" Width="200" Height="200"  >
-                       
+                    </Grid>
+                    <wpf:PieChart LegendLocation="Bottom" Hoverable="True" Series="{Binding SeriesCollection}" DataTooltip="{x:Null}" Width="200" Height="200"  >
+
                     </wpf:PieChart>
-                    <Grid>
+                    <Grid Grid.Column="1" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -158,7 +164,6 @@
                         <TextBlock Text="{Binding AmountOfInspectionsLastMonth}" Grid.Column="0" Grid.Row="1" FontSize="18"/>
                         <TextBlock Text="{Binding AmountOfInspectionsCompletedLastMonth}" Grid.Column="1" Grid.Row="1" FontSize="18"/>
                     </Grid>
-                    
                 </StackPanel>
             </Border>
         </Grid>

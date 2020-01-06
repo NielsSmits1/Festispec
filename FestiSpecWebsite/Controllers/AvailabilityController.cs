@@ -14,7 +14,7 @@ namespace FestiSpecWebsite.Controllers
     [Authorize]
     public class AvailabilityController : Controller
     {
-        private FestiSpecEntities1 db = new FestiSpecEntities1();
+        private FestiSpecEntities db = new FestiSpecEntities();
 
         // GET: Availability
         public ActionResult Index()

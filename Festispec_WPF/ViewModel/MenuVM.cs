@@ -23,7 +23,6 @@ namespace Festispec_WPF.ViewModel
         private MapView _planWindow;
         private EmployeeView _employeeView;
         private MainWindow _mainWindow;
-        private QuestionnaireCRUD _questionnaireView;
 
 
         // commands

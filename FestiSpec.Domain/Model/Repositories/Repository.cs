@@ -11,9 +11,9 @@ namespace FestiSpec.Domain.Model.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly FestiSpecEntities1 Context;
+        protected readonly FestiSpecEntities Context;
 
-        public Repository(FestiSpecEntities1 context)
+        public Repository(FestiSpecEntities context)
         {
             Context = context;
         }

@@ -10,7 +10,7 @@ namespace FestiSpec.Domain.Model.Repositories
 {
     public class QuestionnaireRepository : Repository<Vragenlijst>, IQuestionnaireRepository
     {
-        public QuestionnaireRepository(FestiSpecEntities1 context) : base(context)
+        public QuestionnaireRepository(FestiSpecEntities context) : base(context)
         {
         }
 

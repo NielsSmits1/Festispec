@@ -11,7 +11,7 @@ namespace Festispec_WPF.Model.Repositories
 {
     public class CustomerRepository : Repository<Klant>, ICustomerRepository
     {
-        public CustomerRepository(FestiSpecEntities1 context) : base(context)
+        public CustomerRepository(FestiSpecEntities context) : base(context)
         {
         }
 

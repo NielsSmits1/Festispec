@@ -168,6 +168,7 @@
     </Compile>
     <Compile Include="View\CustomerCreateWindow.xaml.cs">
       <DependentUpon>CustomerCreateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OfflineMapView.xaml.cs">
       <DependentUpon>OfflineMapView.xaml</DependentUpon>
     </Compile>
