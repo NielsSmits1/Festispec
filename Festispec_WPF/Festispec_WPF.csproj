@@ -88,6 +88,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
@@ -113,6 +114,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Validation rules\EmailValidator.cs" />
+    <Compile Include="Validation rules\EmptyValidator.cs" />
+    <Compile Include="Validation rules\LengthValidator.cs" />
+    <Compile Include="Validation rules\NumberValidationRule.cs" />
+    <Compile Include="ViewModel\CustomerFolder\CustomerUpdateVM.cs" />
+    <Compile Include="ViewModel\HomeVM.cs" />
     <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
@@ -138,9 +145,9 @@
     <Compile Include="Model\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Model\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="ViewModel\ApplicantVM.cs" />
-    <Compile Include="ViewModel\ContactPersonVM.cs" />
-    <Compile Include="ViewModel\CRCustomerVM.cs" />
-    <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\ContactPersonFolder\ContactPersonVM.cs" />
+    <Compile Include="ViewModel\CustomerFolder\CRCustomerVM.cs" />
+    <Compile Include="ViewModel\CustomerFolder\CustomerVM.cs" />
     <Compile Include="ViewModel\InspectionCrudVM.cs" />
     <Compile Include="ViewModel\InspectionVM.cs" />
     <Compile Include="ViewModel\LocationVM.cs" />
@@ -154,12 +161,16 @@
     <Compile Include="View\CreateQuestionnaire.xaml.cs">
       <DependentUpon>CreateQuestionnaire.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditQuestionnaireWindow.xaml.cs">
-      <DependentUpon>EditQuestionnaireWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\MapViewModel.cs" />
+    <Compile Include="ViewModel\OfflineMapVM.cs" />
     <Compile Include="View\CreateInspectorWindow.xaml.cs">
       <DependentUpon>CreateInspectorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerCreateWindow.xaml.cs">
+      <DependentUpon>CustomerCreateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OfflineMapView.xaml.cs">
+      <DependentUpon>OfflineMapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
@@ -171,9 +182,6 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ContactPersonCreateWindow.xaml.cs">
       <DependentUpon>ContactPersonCreateWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ContactPersonUpdateWindow.xaml.cs">
-      <DependentUpon>ContactPersonUpdateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MenuVM.cs" />
     <Compile Include="ViewModel\EmployeeCrudVM.cs" />
@@ -226,6 +234,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CustomerCreateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EditInspectorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -233,11 +245,17 @@
     <Compile Include="View\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditQuestionnaireWindow.xaml.cs">
+      <DependentUpon>EditQuestionnaireWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RapportageView.xaml.cs">
       <DependentUpon>RapportageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WeekplanningView.xaml.cs">
       <DependentUpon>WeekplanningView.xaml</DependentUpon>
@@ -247,10 +265,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomerCrudWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\EditQuestionnaireWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -307,7 +321,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\OfflineMapView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditQuestionnaireWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -316,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -346,6 +372,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="inspection.json" />
     <None Include="Pdf\Template.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -377,10 +404,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ContactPersonUpdateWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\CustomerUpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -398,6 +421,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\attention.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\festispec.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logout.png" />
+    <Resource Include="Images\werknemer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

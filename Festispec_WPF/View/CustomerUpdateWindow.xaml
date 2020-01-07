@@ -4,203 +4,289 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
+        xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
         WindowState="Maximized"
         Title="CustomerUpdateWindow" Height="1080" Width="1920"
-        DataContext="{Binding CRCustomer, Source={StaticResource Locator}}">
+        DataContext="{Binding CustomerUpdateVM, Source={StaticResource Locator}}">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Column="0" >
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowHomeCommand, Source={StaticResource Locator}}" >
-                <Image Source="/Images/Home.png" />
-            </Button>
-        </Grid>
-        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/klanten.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/verzoeken_inplannen.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/inspecteurs.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/vragenlijsten.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/weekkalender.PNG" />
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}"
-                    Content="Werknemers">
-                <!--<Image Source="/Images/weekkalender.PNG" />-->
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}"
-                    Content="Log out">
-                <!--<Image Source="/Images/weekkalender.PNG" />-->
-            </Button>
-        </StackPanel>
-
-        <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
-                Festispec
-            </TextBlock>
-        </Grid>
-
-        <Grid Grid.Column="1" Grid.Row="1">
+    <Border Padding="10 10">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="600"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="630"/>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
+            <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Background="#8000FF">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
+                Festispec
+                </TextBlock>
+            </Grid>
+            <StackPanel Visibility="{Binding CustomerUpdateVisibility}" Grid.Column="1" Grid.Row="1">
+                <Label Grid.Column="1" Grid.Row="1" Foreground="Gray" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Content="Klant aanpassen" />
+                <StackPanel Grid.Row="2" Grid.Column="1" Background="Gray">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90"/>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30,30,0,0">
+                            <Button Command="{Binding ShowCustomerCommand}" Cursor="Hand" Content="Klant" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
+                            <Button Command="{Binding ShowContactpersonCommand}" Cursor="Hand" Content="ContactPersoon" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
+                        </StackPanel>
 
-            <StackPanel Grid.Column="1" Width="600">
-                <Label Content="Contact Personen" Grid.Column="2" FontSize="20" Background="AliceBlue"></Label>
-                <Grid  Height="50">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="300"/>
-                        <ColumnDefinition Width="300"/>
-                    </Grid.ColumnDefinitions>
-                    <!--SEARCH BAR-->
-                    <TextBox Text="Zoek voor Klant" FontSize="15" BorderBrush="Black"></TextBox>
-                    <!--CREATE BUTTON-->
-                    <Button Grid.Column="1" Content="Nieuw Contactpersoon&#x0a;          Toevoegen" FontSize="15" Background="MediumPurple" Command="{Binding OpenContactPersonCreateWindow }" Foreground="White" BorderBrush="Black" RenderTransformOrigin="0.5,0.5">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleY="0.095"/>
-                                <RotateTransform/>
-                                <TranslateTransform Y="0.248"/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                    </Button>
-                </Grid>
+                        <Border Visibility="{Binding CustomerVisibility}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10" DataContext="{Binding Source={StaticResource Locator}}">
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Bedrijfs gegevens</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>Bedrijfsnaam</Label>
+                                <TextBox Text="{Binding CRCustomer.SelectedCustomer.CustomerData.Bedrijfsnaam}" />
+                                <Label>Vestigingsnummer</Label>
+                                <TextBox Text="{Binding CRCustomer.SelectedCustomer.CustomerData.NAW_Klant.Vestigingsnummer}"  />
 
-                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding SelectedCustomer.ContactPersons}" SelectedItem="{Binding SelectedContactPerson}" >
-                    <DataGrid.Columns >
-                        <DataGridTemplateColumn Header="Voornaam" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Background="White" BorderThickness="0" Content="{Binding FirstName}" Command="{Binding DataContext.EditContactPersonWindowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Tussenvoegsel" Binding="{Binding Affix}" Width="*" />
-                        <DataGridTextColumn Header="Achternaam" Binding="{Binding LastName}" Width="*" />
-                        <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding PhoneNumber}" Width="*" />
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
-                        
-                        <DataGridTemplateColumn Width="70">
-                            <DataGridTemplateColumn.CellTemplate >
-                                <DataTemplate>
-                                    <Button Command="{Binding DataContext.DeleteContactPersonCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                        BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="30" Background="#FFD45134">Delete</Button>
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Adres</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>Postcode</Label>
+                                <TextBox Text="{Binding CRCustomer.SelectedCustomer.CustomerData.NAW_Klant.Postcode}" />
+                                <Label>Huisnummer</Label>
+                                <TextBox Text="{Binding CRCustomer.SelectedCustomer.CustomerData.NAW_Klant.Huisnummer}" />
+                                <Label>Straatnaam</Label>
+                                <TextBox Text="{Binding CRCustomer.SelectedCustomer.CustomerData.NAW_Klant.Straatnaam}" />
 
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">KVK nummer</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>KVK nummer</Label>
+                                <TextBox Text="{Binding CRCustomer.SelectedCustomer.CustomerData.NAW_Klant.KvkNummer}" />
 
-                    </DataGrid.Columns>
-                </DataGrid>
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Financiële gegevens</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>IBAN</Label>
+                                <TextBox Text="{Binding CRCustomer.SelectedCustomer.CustomerData.NAW_Klant.IBAN}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Visibility="{Binding ContactPersonVisibility}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-                <!--LIST OF EXISTING CUSTOMERS-->
+                                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" FontSize="20" Grid.Column="0">
+                                        <TextBox.InputBindings>
+                                            <KeyBinding Command="{Binding SearchDataGrid}" Key="Enter" />
+                                        </TextBox.InputBindings>
+                                    </TextBox>
 
+                                    <Button Width="150" Height="50" FontSize="28" Content="Toevoegen" 
+                                        Foreground="White" FontWeight="Bold" Background="#8000FF" 
+                                        Grid.Column="2" Command="{Binding OpenCreateContactPersonCommand}">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background" Value="Green"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Opacity" Value="0.8" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                </Grid>
+                                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" 
+                                  BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0"
+                                  HeadersVisibility="Column" Grid.Row="1" Height="420" SelectedItem="{Binding SelectedContactPerson}" ItemsSource="{Binding ContactPersons}"  >
+                                    <DataGrid.Resources>
+                                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                                            <Setter Property="Background" Value="#565656"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Height" Value="30" />
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Voornaam"  Width="*" Binding="{Binding FirstName}" />
+                                        <DataGridTextColumn Header="Tussenvoegsel" Binding="{Binding Affix}" Width="*" />
+                                        <DataGridTextColumn Header="Achternaam" Binding="{Binding LastName}" Width="*" />
+                                        <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding PhoneNumber}" Width="*" />
+                                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+
+                                        <DataGridTemplateColumn Width="50">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Width="60" Height="30" Content="Edit" Margin="2"
+                                                    Foreground="White" Background="#8000FF" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Grid.Column="2" Command="{Binding DataContext.EditContactPersonCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                                        <Button.Style>
+                                                            <Style TargetType="{x:Type Button}">
+                                                                <Setter Property="Background" Value="Green"/>
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                                            </Border>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Opacity" Value="0.8" />
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Border>
+
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Margin="0,30,40,0" FontSize="24" Width="150" FontWeight="Bold" Foreground="White" Content="Annuleren" Padding="10,10,10,10" Command="{Binding CancelCustomerCommand}" Height="40" Background="#CE3131">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitCustomerCommand}" Height="50" Background="#8000FF">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
+            
+            <StackPanel Visibility="{Binding ContactPersonUpdateVisibility}" Grid.Column="1" Grid.Row="1">
+                <Label Grid.Column="1" Grid.Row="1" Foreground="Gray" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Content="Contact persoon aanpassen" />
+                <StackPanel Grid.Row="2" Grid.Column="1" Background="Gray" Margin="0,10,0,-10" Height="700">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90"/>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30,30,0,0">
+                            <Button Cursor="Hand" Content="Contact persoon" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
+                        </StackPanel>
 
-            <StackPanel Grid.Column="3" Width="630" Background="AliceBlue" Margin="0,0,0,0">
-                <Label Content="Aanpassen" FontSize="30" Foreground="Black"></Label>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Bedrijfsnaam:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <!--NAME-->
-                    <Label Content="Bedrijfsnaam" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                    <TextBox Width="400" HorizontalAlignment="Left" Name="CompanyName" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedCustomer.CompanyName, Mode=TwoWay}"></TextBox>
+                        <Border Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10" DataContext="{Binding SelectedContactPerson}" >
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Naam</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>Voornaam</Label>
+                                <TextBox Text="{Binding FirstName}"/>
+                                <Label>Tussenvoegsel</Label>
+                                <TextBox Text="{Binding Affix}" />
+                                <Label>Achternaam</Label>
+                                <TextBox Text="{Binding LastName}" />
 
-                    <Label Content="Vestigingsnummer" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
-                    <TextBox Width="150" HorizontalAlignment="Left" Name="LocationNumber" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedCustomer.NAW_Klant.LocationNumber, Mode=TwoWay}"></TextBox>
-                    <!--END NAME-->
-                </Grid>
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="150"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Adres:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Postcode" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
-                    <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedCustomer.NAW_Klant.ZipCode, Mode=TwoWay}"></TextBox>
-
-                    <Label Content="Huisnummer" FontSize="10" Foreground="Gray" Grid.Column="2" Grid.Row="0"></Label>
-                    <TextBox Width="50" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedCustomer.NAW_Klant.HouseNumber, Mode=TwoWay}"></TextBox>
-                    <Label Content="Straatnaam" FontSize="10" Foreground="Gray" Grid.Column="3" Grid.Row="0"></Label>
-                    <TextBox  Width="150" HorizontalAlignment="Left" Name="Straatnaam" FontSize="15" Grid.Row="1" Grid.Column="3" Text="{Binding SelectedCustomer.NAW_Klant.StreetName, Mode=TwoWay}"></TextBox>
-                </Grid>
-
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="KVK Nummer" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="Nummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <TextBox Width="150" HorizontalAlignment="Left" Name="KVk" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedCustomer.NAW_Klant.KVKNumber, Mode=TwoWay}"></TextBox>
-                </Grid>
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Financiële gegevens:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
-                    <Label Content="IBAN" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
-                    <TextBox Width="200" HorizontalAlignment="Left" Name="IBAN" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedCustomer.NAW_Klant.IBAN, Mode=TwoWay }"></TextBox>
-                </Grid>
-                <Border BorderThickness="1" BorderBrush="Black"></Border>
-                <Button Content="Klantgegevens updaten" Command="{Binding EditCustomerDataCommand }" Width="auto"></Button>
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Gegevens</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>Telefoon nummer</Label>
+                                <TextBox Text="{Binding PhoneNumber}" />
+                                <Label>E-mail</Label>
+                                <TextBox Text="{Binding Email}" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Margin="0,30,40,0" FontSize="24" Width="150" FontWeight="Bold" Foreground="White" Content="Annuleren" Padding="10,10,10,10" Command="{Binding CancelContactPersonCommand}" Height="40" Background="#CE3131">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <!--Deze button hieronder moet nog gebind worden-->
+                        <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitEditedContactPersonCommand}" Height="50" Background="#8000FF">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </Grid>
-    </Grid>
+    </Border>
 </Window>
 

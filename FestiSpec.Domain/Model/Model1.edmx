@@ -135,7 +135,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Titel" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Text" Type="ntext" Nullable="false" />
+          <Property Name="PDF" Type="varbinary(max)" Nullable="false" />
           <Property Name="Inspectienummer" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspectie_Wel_Ingevuld_Vragenlijst">
@@ -163,7 +163,7 @@
           </Key>
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
           <Property Name="Kaartvraag_ID" Type="int" Nullable="false" />
-          <Property Name="Filepath_Antwoord" Type="varchar(max)" />
+          <Property Name="Filebytes" Type="varbinary(max)" />
           <Property Name="Opmerking" Type="ntext" />
           <Property Name="Positie" Type="int" Nullable="false" />
         </EntityType>
@@ -325,6 +325,14 @@
           <Property Name="Situatie" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Antwoord" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tabelvraag_situatie">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Situatie" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Situatie" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
           <Key>
@@ -950,6 +958,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tabelvraag_situatie" EntityType="Self.Tabelvraag_situatie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vereiste_certificaten" EntityType="Self.Vereiste_certificaten" Schema="dbo" store:Type="Tables" />
@@ -1257,7 +1266,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PDF" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Inspectienummer" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Inspectie" Relationship="Self.FK_Inspectie_Rapportage_Inspectie" FromRole="Inspectie_Rapportage" ToRole="Inspectie" />
         </EntityType>
@@ -1290,7 +1299,7 @@
           </Key>
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <Property Name="Kaartvraag_ID" Type="Int32" Nullable="false" />
-          <Property Name="Filepath_Antwoord" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Filebytes" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Opmerking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Positie" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Kaartvraag" Relationship="Self.FK_Kaartvraag_vragenlijst_Kaartvraag" FromRole="Kaartvraag_vragenlijst" ToRole="Kaartvraag" />
@@ -1476,6 +1485,14 @@
           <Property Name="Antwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tabelvraag" Relationship="Self.FK_Tabelvraag_antwoord_Tabelvraag" FromRole="Tabelvraag_antwoord" ToRole="Tabelvraag" />
+        </EntityType>
+        <EntityType Name="Tabelvraag_situatie">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Situatie" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Situatie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
           <Key>
@@ -1975,6 +1992,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tabelvraag" EntityType="Self.Tabelvraag" />
           <EntitySet Name="Tabelvraag_antwoord" EntityType="Self.Tabelvraag_antwoord" />
+          <EntitySet Name="Tabelvraag_situatie" EntityType="Self.Tabelvraag_situatie" />
           <EntitySet Name="Tabelvraag_vragenlijst" EntityType="Self.Tabelvraag_vragenlijst" />
           <EntitySet Name="Template" EntityType="Self.Template" />
           <EntitySet Name="Verzoek" EntityType="Self.Verzoek" />
@@ -2243,7 +2261,7 @@
               <MappingFragment StoreEntitySet="Inspectie_Rapportage">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Titel" ColumnName="Titel" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="PDF" ColumnName="PDF" />
                 <ScalarProperty Name="Inspectienummer" ColumnName="Inspectienummer" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2271,7 +2289,7 @@
               <MappingFragment StoreEntitySet="Kaartvraag_vragenlijst">
                 <ScalarProperty Name="Vragenlijst_ID" ColumnName="Vragenlijst_ID" />
                 <ScalarProperty Name="Kaartvraag_ID" ColumnName="Kaartvraag_ID" />
-                <ScalarProperty Name="Filepath_Antwoord" ColumnName="Filepath_Antwoord" />
+                <ScalarProperty Name="Filebytes" ColumnName="Filebytes" />
                 <ScalarProperty Name="Opmerking" ColumnName="Opmerking" />
                 <ScalarProperty Name="Positie" ColumnName="Positie" />
               </MappingFragment>
@@ -2442,6 +2460,14 @@
                 <ScalarProperty Name="Situatie" ColumnName="Situatie" />
                 <ScalarProperty Name="Antwoord" ColumnName="Antwoord" />
                 <ScalarProperty Name="Vragenlijst_ID" ColumnName="Vragenlijst_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tabelvraag_situatie">
+            <EntityTypeMapping TypeName="FestiSpecModel.Tabelvraag_situatie">
+              <MappingFragment StoreEntitySet="Tabelvraag_situatie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Situatie" ColumnName="Situatie" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

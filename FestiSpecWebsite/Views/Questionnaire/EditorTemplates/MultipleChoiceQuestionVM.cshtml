@@ -1,0 +1,21 @@
+﻿@model FestiSpecWebsite.Models.QuestionnaireFolder.MultipleChoiceQuestionVM
+
+    <div>
+        @Html.HiddenFor(Model => Model.Id)
+        @Html.HiddenFor(Model => Model.Question)
+        @Html.HiddenFor(m => m.ListPosition)
+        @Html.DisplayFor(Model => Model.Question)
+        @foreach (var i in Model.answers)
+        {
+            @Html.DisplayFor(model => i)
+            if (Model.answers.IndexOf(i) == 0)
+            {
+                @Html.RadioButtonFor(model => model.Answer, i, new { @checked="checked" })
+            }
+            else
+            {
+                @Html.RadioButtonFor(model => model.Answer, i)
+            }
+
+        }
+    </div>

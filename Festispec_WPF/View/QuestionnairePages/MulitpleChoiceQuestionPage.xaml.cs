@@ -25,9 +25,14 @@ namespace Festispec_WPF.View.QuestionnairePages
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
 
+        private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
     }
 }

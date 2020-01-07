@@ -1,0 +1,44 @@
+﻿@model FestiSpecWebsite.Models.QuestionnaireFolder.QuestionnaireList
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Titel
+        </th>
+        <th>
+            Versie
+        </th>
+        <th>
+            Opmerking
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.questionnaires) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Versie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Opmerking)
+        </td>
+
+        <td>
+            @Html.ActionLink("Details", "loadQuestionaire", new { inspectionId = Model.id, id=item.ID }) |
+        </td>
+    </tr>
+}
+
+</table>

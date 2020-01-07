@@ -1,0 +1,53 @@
+﻿@model FestiSpecWebsite.Models.QuestionnaireFolder.MapQuestionVM
+    <div>
+
+        @Html.HiddenFor(Model => Model.Id)
+
+
+
+        <style>
+            /* Some CSS styling */
+            #sketchpadapp {
+                /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+        </style>
+
+
+
+
+        @{ string id = "sketchpad" + Model.Id;
+            string clear = "sketch[" + Model.ListPosition + "].clearCanvas();";
+
+            string postId = "post" + id;
+            @Html.Hidden(postId, Model.imageData);
+            @Html.HiddenFor(Model => Model.ByteArray);
+            @Html.HiddenFor(Model => Model.Question);
+            @Html.HiddenFor(m => m.ListPosition)
+            <div>@Html.DisplayFor(Model => Model.Question);</div>
+            <canvas id=@id class="sketchpad" height="300" width="400" style="border:1px solid #000000;">
+            </canvas>
+            <div>
+                <input type="button" value="verwijder route" id="clearbutton" onclick="@clear">
+                <input type="button" value="download route" onclick="putImage('@id')">
+            </div>
+            @Html.TextBoxFor(Model => Model.imageFile, new { type = "file", accept =".png" })
+            <div>
+                <label>
+                    Opmerkingen
+                </label>
+            </div>
+            <div>
+                @Html.TextAreaFor(Model => Model.note);
+            </div>
+
+
+        }
+
+
+    </div>

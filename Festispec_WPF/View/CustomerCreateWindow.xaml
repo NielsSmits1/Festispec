@@ -1,0 +1,139 @@
+﻿<Window x:Class="Festispec_WPF.View.CustomerCreateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Festispec_WPF.View"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        Title="CustomerCreateWindow" Height="1080" Width="1920"
+        DataContext="{Binding CRCustomer, Source={StaticResource Locator}}">
+    <Border Padding="10 10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Background="#8000FF">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
+                Festispec
+                </TextBlock>
+            </Grid>
+
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <Label Grid.Column="1" Grid.Row="1" Foreground="Gray" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Content="Klant aanmaken" />
+                <StackPanel Grid.Row="2" Grid.Column="1" Background="Gray" Margin="0,10,0,-10" Height="700">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90"/>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30,30,0,0">
+                            <Button Command="{Binding ViewCreateCustomer}" Cursor="Hand" Content="Klant" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
+                            <Button Command="{Binding ViewCreateContactPerson}" Cursor="Hand" Content="ContactPerson" FontWeight="Bold" Foreground="White" Background="#565656" FontSize="25" Padding="10"/>
+                        </StackPanel>
+
+                        <Border Visibility="{Binding ViewAddCustomer}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Bedrijfs gegevens</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>Bedrijfsnaam</Label>
+                                <TextBox Text="{Binding NewCustomer.CompanyName, Mode=TwoWay}" />
+                                <Label>Vestigingsnummer</Label>
+                                <TextBox Text="{Binding NewCustomer.NAW_Klant.LocationNumber, Mode=TwoWay}" />
+
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Adres</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>Postcode</Label>
+                                <TextBox Text="{Binding NewCustomer.NAW_Klant.ZipCode, Mode=TwoWay}" />
+                                <Label>Huisnummer</Label>
+                                <TextBox Text="{Binding NewCustomer.NAW_Klant.HouseNumber, Mode=TwoWay}" />
+                                <Label>Straatnaam</Label>
+                                <TextBox Text="{Binding NewCustomer.NAW_Klant.StreetName, Mode=TwoWay}" />
+
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">KVK nummer</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>KVK nummer</Label>
+                                <TextBox Text="{Binding NewCustomer.NAW_Klant.KVKNumber, Mode=TwoWay}" />
+
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Financiële gegevens</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>IBAN</Label>
+                                <TextBox Text="{Binding NewCustomer.NAW_Klant.IBAN, Mode=TwoWay}" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Visibility="{Binding ViewAddContactPerson}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
+                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Contact persoon</Label>
+                                <Border BorderBrush="White" BorderThickness="2"/>
+                                <Label>Voornaam</Label>
+                                <TextBox Text="{Binding NewcontactPerson.FirstName, Mode=TwoWay}" />
+                                <Label>tussenvoegsel</Label>
+                                <TextBox Text="{Binding NewcontactPerson.Affix, Mode=TwoWay}" />
+                                <Label>Achternaam</Label>
+                                <TextBox Text="{Binding NewcontactPerson.LastName, Mode=TwoWay}" />
+                                <Label>E-mail</Label>
+                                <TextBox Text="{Binding NewcontactPerson.Email, Mode=TwoWay}" />
+                                <Label>Telefoon nummer</Label>
+                                <TextBox Text="{Binding NewcontactPerson.PhoneNumber, Mode=TwoWay}" />
+                                <Label>Actief</Label>
+                                <TextBox Text="{Binding NewcontactPerson.Active, Mode=TwoWay}" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Margin="0,30,40,0" FontSize="24" Width="150" FontWeight="Bold" Foreground="White" Content="Annuleren" Padding="10,10,10,10" Command="{Binding CloseCreateCustomerCommand}" Height="40" Background="#CE3131">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding CreateCustomerCommand}" Height="50" Background="#8000FF">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.8" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

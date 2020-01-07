@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
+        xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
         Title="EmployeeView" Height="1080" Width="1920"
         WindowState="Maximized"
@@ -19,145 +20,382 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" >
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowHomeCommand, Source={StaticResource Locator}}" >
-                <Image Source="/Images/Home.png" />
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="#565656">
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Wheat" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/klanten.PNG" Height="40"/>
+                    <Label Content="Klanten" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-        </Grid>
-        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/klanten.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/verzoeken_inplannen.PNG" Height="40"/>
+                    <Label Content="Inplannen" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/verzoeken_inplannen.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/inspecteurs.PNG" Height="40"/>
+                    <Label Content="Inspecteur" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/inspecteurs.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/vragenlijsten.PNG" Height="40"/>
+                    <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/vragenlijsten.PNG" />
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="white" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/weekkalender.PNG" Height="40"/>
+                    <Label Content="Kalender" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
-                <Image Source="/Images/weekkalender.PNG" />
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="Transparent" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/werknemer.PNG"/>
+                    <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
             </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}"
-                    Content="Werknemers">
-                <!--<Image Source="/Images/weekkalender.PNG" />-->
-            </Button>
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}"
-                    Content="Log out">
-                <!--<Image Source="/Images/weekkalender.PNG" />-->
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/logout.PNG"/>
+                    <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
             </Button>
         </StackPanel>
 
-        <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="#8000FF">
+            <Button Command="{Binding ShowHomeCommand}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
                 Festispec
-            </TextBlock>
+            </Button>
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Border BorderThickness="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="600"/>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="630"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
+                    <StackPanel Background="Gray" Width="1000" HorizontalAlignment="Center" Visibility="{Binding EmployeeVisibility}">
+                        <StackPanel Margin="25">
+                            <TextBlock Text="Werknemers" FontSize="35" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" Margin="0,26,380,26"/>
+                            <Border BorderBrush="White" BorderThickness="2" Margin="0,0,0,20"/>
+                            <Grid  Height="50">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                <!--SEARCH BAR-->
+                                <TextBox Text="Zoek voor medewerker" FontSize="15" BorderBrush="Black" VerticalAlignment="Center" Height="25"></TextBox>
+                                <!--CREATE BUTTON-->
+                                <Button Width="200" Height="25" FontSize="16"
+                            Foreground="White" FontWeight="Bold" Background="#8000FF" 
+                            Grid.Column="1" Content="Nieuwe medewerker" RenderTransformOrigin="0.5,0.5" Command="{Binding OpenRegisterCommand}">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Green"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="0.8" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform AngleY="0.095"/>
+                                            <RotateTransform/>
+                                            <TranslateTransform Y="0.248"/>
+                                        </TransformGroup>
+                                    </Button.RenderTransform>
+                                </Button>
 
-                    <StackPanel Grid.Column="1" Width="600">
-                        <Label Content="Werknemers" Grid.Column="2" FontSize="20" Background="AliceBlue"></Label>
-                        <Grid  Height="50">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="300"/>
-                                <ColumnDefinition Width="300"/>
-                            </Grid.ColumnDefinitions>
-                            <!--SEARCH BAR-->
-                            <TextBox Text="Zoek naar werknemer" FontSize="15" BorderBrush="Black"></TextBox>
-                            <!--CREATE BUTTON-->
-                            <Button Grid.Column="1" Content="Nieuwe werknemer&#x0a; aanmaken" FontSize="15" Background="MediumPurple" Foreground="White" BorderBrush="Black" RenderTransformOrigin="0.5,0.5" Command="{Binding OpenRegisterCommand}">
-                                <Button.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform AngleY="0.095"/>
-                                        <RotateTransform/>
-                                        <TranslateTransform Y="0.248"/>
-                                    </TransformGroup>
-                                </Button.RenderTransform>
-                            </Button>
-                        </Grid>
-                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedEmployee}" ItemsSource="{Binding Employees}" >
-                            <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Voornaam">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Background="White" BorderThickness="0" Content="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Command="{Binding DataContext.LoadEditEmployeeCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="" Binding="{Binding InfixName, Mode=TwoWay}"  Width="50"/>
-                                <DataGridTextColumn Header="Achternaam" Binding="{Binding LastName, Mode=TwoWay}"  Width="*"/>
-                                <DataGridTextColumn Header="Rol" Binding="{Binding Role, Mode=TwoWay}"  Width="*"/>
-                                <DataGridTextColumn Header="E-Mail" Binding="{Binding MailAdress, Mode=TwoWay}" Width="*" />
-                                <DataGridTextColumn Header="Postcode" Binding="{Binding Postcode, Mode=TwoWay}" Width="*" />
-                                <DataGridTextColumn Header="Huisnummer" Binding="{Binding HouseNumber, Mode=TwoWay}" Width="*" />
-                                <DataGridTextColumn Header="Actief" Binding="{Binding Active, Mode=TwoWay}" Width="*" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                <Button Width="200" Height="25" FontSize="16" Visibility="{Binding EnableEdit}"
+                            Foreground="White" FontWeight="Bold" Background="#8000FF" 
+                            Grid.Column="2" Content="Medewerker aanpassen" RenderTransformOrigin="0.5,0.5" Command="{Binding ChangeViewToEdit}">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Green"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="0.8" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform AngleY="0.095"/>
+                                            <RotateTransform/>
+                                            <TranslateTransform Y="0.248"/>
+                                        </TransformGroup>
+                                    </Button.RenderTransform>
+                                </Button>
+                            </Grid>
+                            <ScrollViewer Height="400">
+                                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedEmployee}" ItemsSource="{Binding Employees}" IsReadOnly="True" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                                    <DataGrid.Resources>
+                                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                                            <Setter Property="Background" Value="#565656"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Height" Value="30" />
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Voornaam">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Background="White" BorderThickness="0" Content="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Command="{Binding DataContext.LoadEditEmployeeCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="" Binding="{Binding InfixName, Mode=TwoWay}"  Width="50"/>
+                                        <DataGridTextColumn Header="Achternaam" Binding="{Binding LastName, Mode=TwoWay}"  Width="*"/>
+                                        <DataGridTextColumn Header="Rol" Binding="{Binding Role, Mode=TwoWay}"  Width="*"/>
+                                        <DataGridTextColumn Header="E-Mail" Binding="{Binding MailAdress, Mode=TwoWay}" Width="*" />
+                                        <DataGridTextColumn Header="Postcode" Binding="{Binding Postcode, Mode=TwoWay}" Width="*" />
+                                        <DataGridTextColumn Header="Huisnummer" Binding="{Binding HouseNumber, Mode=TwoWay}" Width="*" />
+                                        <DataGridTextColumn Header="Actief" Binding="{Binding Active, Mode=TwoWay}" Width="*" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </ScrollViewer>
+                        </StackPanel>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="3" Background="AliceBlue">
-                        <Label Content="Updaten werknemer" FontSize="30" Foreground="Black"></Label>
-                        <Border BorderThickness="10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="0.5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+                    <StackPanel Width="1000" HorizontalAlignment="Center" Background="Gray" Visibility="{Binding EditVisibility}">
+                        <StackPanel Margin="25">
+                            <TextBlock Text="Werknemer aanpassen" FontSize="35" HorizontalAlignment="Right" Foreground="White" FontWeight="Bold" Margin="0,26,380,26"/>
+                            <Border BorderBrush="White" BorderThickness="2" Margin="0,0,0,20"/>
+                            <Border BorderThickness="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
-                                <!-- left row -->
-                                <StackPanel Grid.Column="0">
-                                    <TextBlock Text="Voornaam" />
-                                    <TextBox Text="{Binding SelectedEmployee.FirstName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Tussenvoegsel" />
-                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Achternaam" />
-                                    <TextBox Text="{Binding SelectedEmployee.LastName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Postcode" />
-                                    <TextBox Text="{Binding SelectedEmployee.Postcode, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Huisnummer" />
-                                    <TextBox Text="{Binding SelectedEmployee.HouseNumber,Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Plaatsnaam" />
-                                    <TextBox Text="{Binding SelectedEmployee.TownName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Geboortedatum" />
-                                    <DatePicker Text="{Binding DoB, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="IBAN" />
-                                    <TextBox Text="{Binding SelectedEmployee.Iban, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="E-mail" />
-                                    <TextBox Text="{Binding SelectedEmployee.MailAdress, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
+                                    <!-- left row -->
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Voornaam" />
+                                        <TextBox LostFocus="FirstName_LostFocus" Name="firstName" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.FirstName" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=firstName}" Foreground="Red"/>
+                                        
+                                        <TextBlock Text="Tussenvoegsel" />
+                                        <TextBox LostFocus="Prefix_LostFocus" Name="prefix" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.InfixName" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=prefix}" Foreground="Red"/>
+                                        
+                                        <TextBlock Text="Achternaam" />
+                                        <TextBox LostFocus="LastName_LostFocus" Name="lastName" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.LastName" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=lastName}" Foreground="Red"/>
+                                        
+                                        <TextBlock Text="Postcode" />
+                                        <TextBox LostFocus="PostalCode_LostFocus" Name="postalCode" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.Postcode" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=postalCode}" Foreground="Red"/>
+                                        
+                                        <TextBlock Text="Huisnummer" />
+                                        <TextBox LostFocus="HouseNumber_LostFocus" Name="houseNumber" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.HouseNumber" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=houseNumber}" Foreground="Red"/>
+                                        
+                                        <TextBlock Text="Plaatsnaam" />
+                                        <TextBox LostFocus="CityName_LostFocus" Name="cityName" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.TownName" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=cityName}" Foreground="Red"/>
 
-                                <!-- right row -->
-                                <StackPanel Grid.Column="2">
-                                    <TextBlock Text="Rol" />
-                                    <ComboBox  SelectedIndex="0" SelectedItem="{Binding SelectedEmployee.Role}" ItemsSource="{Binding NewEmployee.RolesCollection, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Username" />
-                                    <TextBox Text="{Binding SelectedEmployee.Username, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Wachtwoord" />
-                                    <TextBox Text="{Binding SelectedEmployee.Password, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Telefoonnummer" />
-                                    <TextBox Text="{Binding SelectedEmployee.InfixName, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Text="Actief" />
-                                    <CheckBox IsChecked="{Binding SelectedEmployee.Active, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-                        <Grid>
-                            <Button Content="Wijzigingen opslaan" Command="{Binding SafeEditEmployeeCommand}" Width="200" Height="40"></Button>
-                        </Grid>
+                                        <TextBlock Text="Geboortedatum" />
+                                        <DatePicker Text="{Binding DoB, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+
+                                    <!-- right row -->
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="IBAN" />
+                                        <TextBox LostFocus="IBAN_LostFocus" Name="IBAN" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.Iban" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=IBAN}" Foreground="Red"/>
+
+                                        <TextBlock Text="E-mail" />
+                                        <TextBox LostFocus="Email_LostFocus" Name="email" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.MailAdress" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                        <validationrules:EmailValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=email}" Foreground="Red"/>
+
+                                        <TextBlock Text="Rol" />
+                                        <ComboBox  SelectedIndex="0" SelectedItem="{Binding SelectedEmployee.Role}" ItemsSource="{Binding NewEmployee.RolesCollection, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+
+                                        <TextBlock Text="Username" />
+                                        <TextBox LostFocus="Username_LostFocus" Name="username" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.Username" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=username}" Foreground="Red"/>
+
+                                        <TextBlock Text="Wachtwoord" />
+                                        <TextBox LostFocus="Password_LostFocus" Name="password" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.Password" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=password}" Foreground="Red"/>
+
+                                        <TextBlock Text="Telefoonnummer" />
+                                        <TextBox LostFocus="PhoneNumber_LostFocus" Name="phoneNumber" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                            <TextBox.Text>
+                                                <Binding Path="SelectedEmployee.InfixName" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <validationrules:EmptyValidator />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=phoneNumber}" Foreground="Red"/>
+
+                                        <TextBlock Text="Actief" />
+                                        <CheckBox IsChecked="{Binding SelectedEmployee.Active, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Width="150" Height="30" FontSize="18" Content="Annuleren" 
+                            Foreground="White" FontWeight="Bold" Margin="0,0,20,20" Background="#CE3131" 
+                            VerticalAlignment="Bottom" Command="{Binding CancelEdit}">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Green"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="0.8" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <Button Click="Button_Click" Width="300" Height="35" FontSize="22" 
+                            Foreground="White" FontWeight="Bold" Margin="0,20" Background="#8000FF" 
+                            Content="Wijzigingen opslaan" Command="{Binding SafeEditEmployeeCommand}">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="Green"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="0.8" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Border>

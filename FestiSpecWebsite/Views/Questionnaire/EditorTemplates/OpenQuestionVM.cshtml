@@ -1,0 +1,11 @@
+﻿@model FestiSpecWebsite.Models.QuestionnaireFolder.OpenQuestionVM
+
+    <div>
+        @Html.HiddenFor(Model => Model.Id)
+        @Html.HiddenFor(Model => Model.Question)
+        @Html.DisplayFor(Model => Model.Question)
+        @Html.TextBoxFor(Model => Model.Answer, new { @required = "required" })
+        @Html.ValidationMessageFor(Model => Model.Answer)
+        @Html.HiddenFor(m => m.ListPosition)
+
+    </div>

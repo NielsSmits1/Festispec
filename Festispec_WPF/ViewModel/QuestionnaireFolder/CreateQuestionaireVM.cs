@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Application = System.Windows.Application;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel.QuestionnaireFolder
@@ -57,6 +58,42 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
         }
 
+        private string _questionVisibility;
+
+        public string QuestionVisibility
+        {
+            get { return _questionVisibility; }
+            set
+            {
+                _questionVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _questionaireVisibility;
+
+        public string QuestionaireVisibility
+        {
+            get { return _questionaireVisibility; }
+            set
+            {
+                _questionaireVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private string _orderVisibility;
+
+        public string OrderVisibility
+        {
+            get { return _orderVisibility; }
+            set
+            {
+                _orderVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
         public IQuestion SelectedItem
         {
             get
@@ -74,6 +111,10 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public ICommand DeleteQuestionCommand { get; set; }
         public ICommand DeleteTemplateCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public ICommand ShowQuestionnaire { get; set; }
+        public ICommand ShowQuestions { get; set; }
+        public ICommand ShowOrder { get; set; }
 
         public string TemplateType { get; set; }
 
@@ -87,6 +128,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 RaisePropertyChanged("newQuestionnaireVM");
             }
         }
+
         private Page _currentPage;
         public Dictionary<QuestionTypes.QuestionsTypesEnum, string> _QuestionTypes
         {
@@ -136,8 +178,43 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
             DeleteTemplateCommand = new RelayCommand(DeleteTemplate);
+            ShowQuestionnaire = new RelayCommand(showQuestionnaire);
+            ShowQuestions = new RelayCommand(showQuestions);
+            ShowOrder = new RelayCommand(showOrder);
+            CancelCommand = new RelayCommand(cancelQuestionnaire);
 
             templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
+
+            showQuestionnaire();
+        }
+
+        private void cancelQuestionnaire()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            var _questionnaireView = new QuestionnaireCRUD();
+            _questionnaireView.Show();
+            currentWindow.Close();
+        }
+
+        public void showQuestionnaire()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Visible";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showQuestions()
+        {
+            QuestionVisibility = "Visible";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Hidden";
+        }
+
+        public void showOrder()
+        {
+            QuestionVisibility = "Hidden";
+            QuestionaireVisibility = "Hidden";
+            OrderVisibility = "Visible";
         }
 
         private void CreateTemplate()
@@ -241,19 +318,41 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
                     question.toDatabase(newQuestionnaireVM.ID);
                 }
-                clearSelectedTemplate(selectedTemplate);
 
+                if (selectedTemplate != null)
+                {
+                    UOW.Context.Vragenlijst.Find(_newQuestionnaireVM.ID).Stamt_af_van_ID = UOW.Context.Template.Where(t => t.Vragenlijst_ID == selectedTemplate.ID).Select(t => t.ID).FirstOrDefault();
+
+                    clearSelectedTemplate(selectedTemplate);
+
+                    saveToDatabase();
+                }
+                else
+                {
+                    MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 basedOfTemplate = false;
             }
         }
 
         private void SubmitCreatedQuestionnaire()
         {
+            try
+            {
+                SubmitQuestionnaire();
+                newQuestionnaireVM = new QuestionnaireVM();
+                basedOfTemplate = false;
+
+                cancelQuestionnaire();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fout bij invoeren velden", "Er is iets fout gegaan",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            Template = false;
-            SubmitQuestionnaire();
-            newQuestionnaireVM = new QuestionnaireVM();
-            selectedTemplate = new QuestionnaireVM();
+            selectedTemplate = new QuestionnaireVM() ;
             var newWindow = new QuestionnaireCRUD();
             currentWindow.Close();
             newWindow.Show();

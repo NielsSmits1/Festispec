@@ -1,0 +1,304 @@
+﻿@model FestiSpecWebsite.Models.QuestionnaireFolder.QuestionnaireVM
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+<body onload="init()">
+    <h2>
+        @Model.Title
+    </h2>
+
+    <div>
+        <h4>Vragenlijst</h4>
+        <hr />
+
+        @using (Html.BeginForm("PostDetails", "Questionnaire", new { inspectionId = Model.inspectionId, questionnaireID = Model.ID }, FormMethod.Post, new { enctype = "multipart/form-data", id = "questionnaireForm" }))
+        {
+            if (Model.mapQuestionsList != null)
+            {
+                for (int i = 0; i < Model.mapQuestionsList.Count(); i++)
+                {
+                    @Html.HiddenFor(Model => Model.MapQuestionPosition[i])
+                }
+            }
+
+            @Html.HiddenFor(model => model.inspectionId)
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(Model => Model.Title)
+            @Html.HiddenFor(Model => Model.Version)
+            for (int i = 0; i < Model.questiontypes.Count; i++)
+            {
+                @Html.HiddenFor(Model => Model.questiontypes[i]);
+                if (Model.questiontypes[i] == "OpenQuestion")
+                {
+                    {
+                        int j = Model.OpenQuestionPosition.IndexOf(i);
+                        @Html.HiddenFor(Model => Model.OpenQuestionPosition[j]);
+
+                        @Html.EditorFor(Model => Model.openQuestionsList[j])
+                    }
+                }
+                if (Model.questiontypes[i] == "MultipleChoiceQuestion")
+                {
+                    {
+                        int j = Model.MultipleChoiceQuestionPosition.IndexOf(i);
+                        @Html.HiddenFor(Model => Model.MultipleChoiceQuestionPosition[j]);
+                        @Html.EditorFor(Model => Model.multipleChoiceQuestionsList[j])
+                    }
+                }
+                if (Model.questiontypes[i] == "TableQuestion")
+                {
+                    {
+                        int j = Model.TableQuestionPosition.IndexOf(i);
+                        @Html.HiddenFor(Model => Model.TableQuestionPosition[j]);
+                        @Html.EditorFor(Model => Model.TableQuestionsList[j])
+                    }
+                }
+                if (Model.questiontypes[i] == "AppendixQuestion")
+                {
+                    {
+                        int j = Model.AppendixQuestionPosition.IndexOf(i);
+                        @Html.HiddenFor(Model => Model.AppendixQuestionPosition[j]);
+                        @Html.EditorFor(Model => Model.appendixQuestionsList[j])
+                    }
+                }
+                if (Model.questiontypes[i] == "MapQuestion")
+                {
+                    {
+                        int j = Model.MapQuestionPosition.IndexOf(i);
+
+                        @Html.EditorFor(Model => Model.mapQuestionsList[j]);
+                    }
+                }
+
+            }
+
+            <div>
+                <input type="submit" onclick="sub()" value="Verstuur" />
+            </div>
+        }
+    </div>
+</body>
+
+</html>
+
+<script>
+    function putImage(canvasId) {
+        var canvas1 = document.getElementById(canvasId);
+        //var image = canvas1.toDataURL("image/png");
+        var win = window.open();
+        win.document.write("<img src='" + canvas1.toDataURL("image/png") + "'/>");
+        win.document.location = "#";
+        win.document.close();
+
+    }
+</script>
+<script type="text/javascript">
+             var sketch = []
+            // Variables to keep track of the mouse position and left-button status
+            var mouseX, mouseY, mouseDown = 0;
+
+            // Variables to keep track of the touch position
+            var touchX, touchY;
+
+
+            // Draws a dot at a specific position on the supplied canvas name
+            // Parameters are: A canvas context, the x position, the y position, the size of the dot
+            function drawDot(ctx, x, y, size) {
+                // Let's use black by setting RGB values to 0, and 255 alpha (completely opaque)
+                r = 0; g = 0; b = 0; a = 255;
+
+                // Select a fill style
+                ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + (a / 255) + ")";
+
+                // Draw a filled circle
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            // Get the current mouse position relative to the top-left of the canvas
+            function getMousePos(e) {
+                if (!e)
+                    var e = event;
+
+                if (e.offsetX) {
+                    mouseX = e.offsetX;
+                    mouseY = e.offsetY;
+                }
+                else if (e.layerX) {
+                    mouseX = e.layerX;
+                    mouseY = e.layerY;
+                }
+            }
+
+            // Get the touch position relative to the top-left of the canvas
+            // When we get the raw values of pageX and pageY below, they take into account the scrolling on the page
+            // but not the position relative to our target div. We'll adjust them using "target.offsetLeft" and
+            // "target.offsetTop" to get the correct values in relation to the top left of the canvas.
+            function getTouchPos(e) {
+                if (!e)
+                    var e = event;
+
+                if (e.touches) {
+                    if (e.touches.length == 1) { // Only deal with one finger
+                        var touch = e.touches[0]; // Get the information for finger #1
+                        touchX = touch.pageX - touch.target.offsetLeft;
+                        touchY = touch.pageY - touch.target.offsetTop;
+                    }
+                }
+            }
+
+            // Keep track of the mouse button being released
+            function sketchpad_mouseUp() {
+                mouseDown = 0;
+                     lastX=-1;
+                     lastY=-1;
+            }
+
+
+            // Set-up an individual sketchpad and add our event handlers
+            // Use the "this" reference to make sure variables and functions are specific to each
+            // specific sketchpad created in the "init()" function below.
+                function sketchpad(my_sketchpad, my_image) {
+
+                    var img = new Image();
+
+                    // Get the specific canvas element from the HTML document passed
+                    this.canvas = document.getElementById(my_sketchpad);
+
+                    // If the browser supports the canvas tag, get the 2d drawing context for this canvas,
+                    // and also store it with the canvas as "ctx" for convenience
+                    if (this.canvas.getContext) {
+                        this.ctx = this.canvas.getContext('2d');
+
+
+
+                    }
+
+                    img.src = my_image;
+                    // Declare some functions associated with a particular sketchpad
+                    // We will attach these to the canvas as event handlers later
+                    // Note that the sketcphad_mouseUp function is not included here, since it's not
+                    // specific to a certain canvas - we're listening to the entire window for mouseup
+                    // events.
+
+                    // Clear the canvas context using the canvas width and height
+                    this.clearCanvas = function () {
+                        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+
+
+
+                        this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
+                        console.log("I've been called");
+                    }
+
+                    // Draw something when a touch start is detected
+                    this.sketchpad_touchStart = function () {
+
+                        // Update the touch co-ordinates
+                        getTouchPos();
+
+                        drawDot(this.ctx, touchX, touchY, 5);
+
+                        // Prevents an additional mousedown event being triggered
+                        event.preventDefault();
+                    }
+
+                    // Draw something and prevent the default scrolling when touch movement is detected
+                    this.sketchpad_touchMove = function (e) {
+                        // Update the touch co-ordinates
+                        getTouchPos(e);
+
+                        // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
+                        drawDot(this.ctx, touchX, touchY, 5);
+
+                        // Prevent a scrolling action as a result of this touchmove triggering.
+                        event.preventDefault();
+                    }
+                    function sketchpad_touchEnd() {
+                    // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
+                                        lastX=-1;
+                                        lastY=-1;
+}
+
+                    // Keep track of the mouse button being pressed and draw a dot at current location
+                    this.sketchpad_mouseDown = function () {
+                        console.log(this);
+                        mouseDown = 1;
+                        drawDot(this.ctx, mouseX, mouseY, 5);
+                    }
+
+                    // Keep track of the mouse position and draw a dot if mouse button is currently pressed
+                    this.sketchpad_mouseMove = function (e) {
+                        // Update the mouse co-ordinates when moved
+                        getMousePos(e);
+
+                        // Draw a dot if the mouse button is currently being pressed
+                        if (mouseDown == 1) {
+                            drawDot(this.ctx, mouseX, mouseY, 5);
+                        }
+                    }
+                    this.loadAndDrawImage = function (url) {
+                        console.log("dddd")
+                        var image = new Image();
+
+                        var sketcher = this;
+                        image.onload = function () {
+                            console.log("aapje");
+                            sketcher.ctx.drawImage(image, 0, 0, sketcher.canvas.width, sketcher.canvas.height);
+                        }
+                        image.src = url;
+                    }
+
+
+                    // Add event handlers
+                    // Check that we have a valid context to draw on/with before adding event handlers
+                    if (this.ctx) {
+                        // React to mouse events on the canvas, and mouseup on the entire document
+                        this.canvas.addEventListener('mousedown', this.sketchpad_mouseDown.bind(this), false);
+                        this.canvas.addEventListener('mousemove', this.sketchpad_mouseMove.bind(this), false);
+
+                        // React to touch events on the canvas
+                        this.canvas.addEventListener('touchstart', this.sketchpad_touchStart.bind(this), false);
+                        this.canvas.addEventListener('touchmove', this.sketchpad_touchMove.bind(this), false);
+                        this.canvas.addEventListener('touchend', sketchpad_touchEnd, false)
+
+                    }
+
+
+
+
+
+                }
+
+            // Create two sketchpads when the page loads, using our canvas elements called sketchpad1 and sketchpad2
+                function init() {
+                    window.addEventListener('mouseup', sketchpad_mouseUp, false);
+                    @if (Model.mapQuestionsList != null) {
+                foreach(var item in Model.mapQuestionsList)
+                {
+                    string skecthId = "sketchpad" + item.Id;
+                    var base64 = Convert.ToBase64String(item.ByteArray);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    @:sketch[@item.ListPosition] = new sketchpad('@skecthId', '@imgSrc')   ;
+                    @:sketch[@item.ListPosition].loadAndDrawImage('@imgSrc');
+                }
+                    }
+
+
+                // Since we are listening to the entire window for the mouseup, it only needs to be done once per page,
+                // and not once per canvas
+
+
+            }
+
+</script>
