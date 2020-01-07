@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using FestiSpec.Domain.Model;
 using Festispec_WPF.Helpers;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.Pdf;
@@ -19,6 +20,7 @@ namespace Festispec_WPF.ViewModel
         private string _chart;
         //public variables
         public ObservableCollection<Question> questions { get; set; }
+        public ObservableCollection<Inspectie> inspecties { get; set; }
         public ObservableCollection<string> Charts { get; set; }
 
         public string Chart
@@ -44,10 +46,13 @@ namespace Festispec_WPF.ViewModel
         {
             UOW = ViewModelLocator.UOW;
             GenerateCommand = new RelayCommand(GeneratePdf);
+            inspecties = new ObservableCollection<Inspectie>(UOW.Inspections.GetAll().Where(a => a.Voltooid == true));
+        }
+        public void PrepareGenerate(int vragenlijstId, int inspectionId)
+        {
+            
 
-            var id = UOW.Inspections.Get(11).Vragenlijst.First().ID;
-            var inspection = UOW.Inspections.Get(11).Inspectie_Wel_Ingevuld_Vragenlijst.Where(q=> q.Vragenlijst.Stamt_af_van_ID == id).ToList();
-            inspection.Add(inspection.First());
+            var inspection = UOW.Inspections.Get(inspectionId).Inspectie_Wel_Ingevuld_Vragenlijst.Where(q=> q.Vragenlijst.Stamt_af_van_ID == vragenlijstId).ToList();
             var vragen = new List<Question>();
 
             var first = true;
@@ -85,6 +90,37 @@ namespace Festispec_WPF.ViewModel
                             Type = "img"
                         });
                     });
+
+                    var awns = new List<string>();
+                    var head = new List<string>();
+                    ins.Vragenlijst.Tabelvraag_vragenlijst.ToList().ForEach(a =>
+                    {
+                        a.Tabelvraag.Tabelvraag_antwoord.Where(awnser => awnser.Vragenlijst_ID == ins.Vragenlijst_ID).ToList().ForEach(awn => awns.Add(awn.Antwoord));
+                        a.Tabelvraag.Tabelvraag_antwoord.Where(awnser => awnser.Vragenlijst_ID == ins.Vragenlijst_ID).ToList().ForEach(awn => head.Add(awn.Situatie));
+                        vragen.Add(new Question()
+                        {
+                            Id = a.Tabelvraag_ID,
+                            QuestionTitle = a.Tabelvraag.Vraag,
+                            TabelHeadAwnser = a.Tabelvraag.VraagKop,
+                            TabelHeadQuestion = a.Tabelvraag.AntwoordKop,
+                            GivenAwnsers = new List<string>(awns),
+                            TabelHeaders = new List<string>(head),
+                            Type = "tabel"
+                        });
+                        awns = new List<string>();
+                        head = new List<string>();
+                    });
+
+                    //ins.Vragenlijst.Kaartvraag_vragenlijst.ToList().ForEach(a =>
+                    //{
+                    //    vragen.Add(new Question()
+                    //    {
+                    //        Id = a.Kaartvraag_ID,
+                    //        QuestionTitle = a.Kaartvraag_vragenlijst.Vraag,
+                    //        GivenAwnsers = new List<string>() { "data:image/png;base64," + Convert.ToBase64String(a.FileBytes) },
+                    //        Type = "img"
+                    //    });
+                    //});
                 }
                 else
                 {
@@ -101,6 +137,19 @@ namespace Festispec_WPF.ViewModel
                     ins.Vragenlijst.Bijlagevraag_vragenlijst.ToList().ForEach(a =>
                     {
                         vragen.Where(q => q.QuestionTitle == a.Bijlagevraag.Vraag).First().GivenAwnsers.Add("data:image/png;base64," + Convert.ToBase64String(a.FileBytes));
+                    });
+
+                    //ins.Vragenlijst.Tabelvraag_vragenlijst.ToList().ForEach(a =>
+                    //{
+                    //    vragen.Where(q => q.QuestionTitle == a.Tabelvraag.Vraag).First().GivenAwnsers.Add("data:image/png;base64," + Convert.ToBase64String(a.FileBytes));
+                    //});
+
+                    var awns = new List<string>();
+                    ins.Vragenlijst.Tabelvraag_vragenlijst.ToList().ForEach(a =>
+                    {
+                        a.Tabelvraag.Tabelvraag_antwoord.Where(awnser => awnser.Vragenlijst_ID == ins.Vragenlijst_ID).ToList().ForEach(awn => awns.Add(awn.Antwoord));
+                        vragen.Where(q => q.QuestionTitle == a.Tabelvraag.Vraag).First().GivenAwnsers.AddRange(awns);
+                        awns = new List<string>();
                     });
                 }
 
@@ -141,9 +190,9 @@ namespace Festispec_WPF.ViewModel
                        "Meer bier drinken de man, ja en bier ja." +
                        "Meer bier drinken de man, ja en bier ja." +
                        "Meer bier drinken de man, ja en bier ja.",
-                CustomerName = "Beunhaas BV",
+                CustomerName = inspection.First().Inspectie.Klant.Bedrijfsnaam,
                 Date = DateTime.Now,
-                InspectionTitle = "Is er genoeg bier op het festival?",
+                InspectionTitle = inspection.First().Inspectie.Titel,
                 Introduction = "Wij Gaan kijken of er genoeg bier is.",
                 SummaryOfInspection = "Er was niet genoeg bier de man.",
                 Questions = vragen
