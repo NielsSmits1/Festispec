@@ -1,4 +1,5 @@
 ﻿using FestiSpec.Domain.Model;
+using FestiSpec.Domain.Model.Repositories;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using Festispec_WPF.View.QuestionnairePages;
@@ -28,6 +29,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public ObservableCollection<QuestionnaireVM> templates { get; set; }
         private QuestionnaireVM _selectedTemplate;
         private bool basedOfTemplate = false;
+        private bool Template = false;
         public QuestionnaireVM selectedTemplate
         {
             get
@@ -108,6 +110,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public ICommand PositionDownCommand { get; set; }
 
         public ICommand DeleteQuestionCommand { get; set; }
+        public ICommand DeleteTemplateCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand ShowQuestionnaire { get; set; }
         public ICommand ShowQuestions { get; set; }
@@ -174,6 +177,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             PositionDownCommand = new RelayCommand(changePositionDOWN);
 
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
+            DeleteTemplateCommand = new RelayCommand(DeleteTemplate);
             ShowQuestionnaire = new RelayCommand(showQuestionnaire);
             ShowQuestions = new RelayCommand(showQuestions);
             ShowOrder = new RelayCommand(showOrder);
@@ -215,12 +219,13 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void CreateTemplate()
         {
-            basedOfTemplate = true;
+            Template = true;
             SubmitQuestionnaire();
 
             Template newTemplate = new Template();
             newTemplate.Vragenlijst_ID = newQuestionnaireVM.ID;
             newTemplate.Type = TemplateType;
+            newTemplate.Actief = true;
 
             if (newTemplate.Type != null)
             {
@@ -228,7 +233,16 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 UOW.Context.Template.Add(newTemplate);
 
                 var temp = UOW.Questionnaires.Get(newQuestionnaireVM.ID);
-                temp.Template_ID = newTemplate.ID;
+
+                try
+                {
+                    temp.Template_ID = newTemplate.ID;
+                }
+                catch
+                {
+                    return;
+                }
+
                 saveToDatabase();
 
                 TemplateType = null;
@@ -247,15 +261,24 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             newQuestionnaireVM = new QuestionnaireVM();
+            Template = false;
         }
         private void SubmitQuestionnaire()
         {
+            if (selectedTemplate == null)
+            {
+                basedOfTemplate = false;
+            }
+            else
+            {
+                basedOfTemplate = true;
+            }
 
             if (newQuestionnaireVM.Title != null & newQuestionnaireVM.Version != null)
             {
 
                 newQuestionnaireVM.IsFilled = false;
-                if (basedOfTemplate)
+                if (Template)
                 {
                     newQuestionnaireVM.IsActive = false;
                 }
@@ -420,6 +443,16 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
         }
 
+        public void DeleteTemplate()
+        {
+            UOW.Context.Template.Where(temp => temp.Vragenlijst_ID == selectedTemplate.ID).FirstOrDefault().Actief = false;
+            saveToDatabase();
+
+            templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
+            selectedTemplate = null;
+            newQuestionnaireVM = new QuestionnaireVM();
+            RaisePropertyChanged("templates");
+        }
         private void clearSelectedTemplate(QuestionnaireVM template)
         {
             template = null;
@@ -436,5 +469,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 return;
             }
         }
+
     }
 }

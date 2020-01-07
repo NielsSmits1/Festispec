@@ -48,9 +48,16 @@ namespace Festispec_WPF.ViewModel
             SearchDataGrid = new RelayCommand(searchDatagrid);
             Questionnaires = new ObservableCollection<QuestionnaireVM>();
             UOW = ViewModelLocator.UOW;
-            foreach (var item in UOW.Context.Vragenlijst.Where(v => v.Actief == true))
+
+            Questionnaires = new ObservableCollection<QuestionnaireVM>();
+            foreach (var item in UOW.Context.Vragenlijst.Include("Inspectie").Where(v => v.Actief == true))
             {
-                Questionnaires.Add(new QuestionnaireVM(item));
+
+                if (item.Inspectie.Count() == 0)
+                {
+                    Questionnaires.Add(new QuestionnaireVM(item));
+                }
+
             }
             searchText = "Zoek naam";
         }
@@ -64,26 +71,77 @@ namespace Festispec_WPF.ViewModel
         }
         private void OpenEditQuestionnaireWindow()
         {
-            var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            var temp = new EditQuestionnaireWindow();
-            Messenger.Default.Send(SelectedQuestionnaire);
-            temp.Show();
-            currentWindow.Close();
+            bool isChanged = false;
+            foreach (var item in UOW.Context.Vragenlijst.Include("Inspectie").Where(v => v.Actief == true))
+            {
+
+                if (item.Inspectie.Count() == 0)
+                {
+                    isChanged = true;
+                    var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                    var temp = new EditQuestionnaireWindow();
+                    Messenger.Default.Send(SelectedQuestionnaire);
+                    temp.Show();
+                    currentWindow.Close();
+                }
+
+            }
+            if (!isChanged)
+            {
+                System.Windows.Forms.MessageBox.Show("Deze vragenlijst is reeds ingepland bij een inspectie", "Er is geen mogelijkheid voor deze functionaliteit",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
         }
 
         private void DeleteQuestionnaire()
         {
-            UOW.Questionnaires.Get(SelectedQuestionnaire.ID).Actief = false;
-
-            saveToDatabase();
-
-            Questionnaires = new ObservableCollection<QuestionnaireVM>();
-            foreach (var item in UOW.Context.Vragenlijst.Where(v => v.Actief == true))
+            bool IsChanged = false;
+            foreach (var item in UOW.Context.Vragenlijst.Include("Inspectie").Where(v => v.Actief == true))
             {
-                Questionnaires.Add(new QuestionnaireVM(item));
+                if (item.Inspectie.Count() == 0)
+                {
+                    UOW.Questionnaires.Get(SelectedQuestionnaire.ID).Actief = false;
+                    IsChanged = true;
+                    saveToDatabase();
+                    foreach (var questionnaire in UOW.Context.Vragenlijst.Include("Inspectie").Where(v => v.Actief == true))
+                    {
+                        if (questionnaire.Inspectie.Count() == 0)
+                        {
+                            Questionnaires.Add(new QuestionnaireVM(questionnaire));
+                        }
+                        else
+                        {
+                            Questionnaires = new ObservableCollection<QuestionnaireVM>();
+                            foreach (var questionaire in UOW.Context.Vragenlijst.Include("Inspectie").Where(v => v.Actief == true))
+                            {
+
+                                if (questionaire.Inspectie.Count() == 0)
+                                {
+                                    Questionnaires.Add(new QuestionnaireVM(questionnaire));
+                                }
+
+                            }
+                            RaisePropertyChanged("Questionnaires");
+                        }
+
+                    }
+                }
+                if (!IsChanged)
+                {
+                    System.Windows.Forms.MessageBox.Show("Deze vragenlijst is reeds ingepland bij een inspectie", "Er is geen mogelijkheid voor deze functionaliteit",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                RaisePropertyChanged("Questionnaires");
             }
-            RaisePropertyChanged("Questionnaires");
+            {
+
+            }
+
         }
+
+
 
         private void saveToDatabase()
         {

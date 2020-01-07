@@ -17,10 +17,13 @@ namespace FestiSpec.Domain.Model.Repositories
 
         public List<Vragenlijst> getTemplates()
         {
-            var idList = Context.Template.Select(temp => temp.Vragenlijst_ID).ToList();
-
+            var idList = new List<int>();
+            foreach (var item in Context.Template.Where(temp => temp.Actief == true).ToList())
+            {
+                idList.Add(item.Vragenlijst_ID);
+            }
+         
             var TemplateList = Context.Vragenlijst.Where(vr => idList.Contains(vr.ID)).ToList();
-
             return TemplateList;
         }
     }
