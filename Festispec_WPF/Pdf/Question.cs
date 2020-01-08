@@ -13,7 +13,6 @@ namespace Festispec_WPF.Pdf
         public int Id { get; set; }
         public string QuestionTitle { get; set; }
         public string Type { get; set; }
-
         public string TabelHeadQuestion { get; set; }
         public string TabelHeadAwnser { get; set; }
         public int TabelHeadCount { get{ return GivenAwnsers.Count / TabelHeaders.Count + 1; } }

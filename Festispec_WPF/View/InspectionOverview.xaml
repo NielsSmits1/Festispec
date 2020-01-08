@@ -103,7 +103,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid ItemsSource="{Binding Accomplished}" AutoGenerateColumns="False" CanUserReorderColumns="False" Grid.Row="2" Grid.Column="1" Width="400" CanUserAddRows="False">
+            <DataGrid ItemsSource="{Binding Accomplished}" SelectedItem="{Binding SelectedAccInspection}" AutoGenerateColumns="False" CanUserReorderColumns="False" Grid.Row="2" Grid.Column="1" Width="400" CanUserAddRows="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Inspectienaam" Binding="{Binding Title}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Inspectiedatum" Binding="{Binding StartDate}"/>
