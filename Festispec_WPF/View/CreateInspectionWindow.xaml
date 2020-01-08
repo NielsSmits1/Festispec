@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
-        Title="EditInspectionWindow" Height="800" Width="800" WindowStyle="None"
+        Title="EditInspectionWindow" Height="800" Width="800" WindowState="Maximized"
         DataContext="{Binding MapView, Source={StaticResource Locator}}">
     <StackPanel Background="Gray">
         <Label Content="Inspectie aanmaken" FontSize="30" Foreground="White" HorizontalAlignment="Center"/>

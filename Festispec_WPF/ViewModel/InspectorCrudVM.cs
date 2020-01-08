@@ -21,7 +21,6 @@ namespace Festispec_WPF.ViewModel
     {
         private UnitOfWork UOW;
         private EditInspectorWindow _editInspectorWindow;
-        private CreateInspectorWindow _createInspectorWindow;
         private CertificateVM _selected;
         private CertificateVM _appSelected;
         private InspectorVM _inspector;
@@ -158,8 +157,6 @@ namespace Festispec_WPF.ViewModel
             ListOfInactiveCommand = new RelayCommand(LoadInactive);
             ListOfLicensedCommand = new RelayCommand(LoadLicensed);
             SetInspectorInactiveCommand = new RelayCommand(SetInspectorInactive);
-            OpenCreateCommand = new RelayCommand(OpenCreate);
-            CloseCreateCommand = new RelayCommand(CloseCreate);
             RecruitApplicantCommand = new RelayCommand(RecruitApplicant, CanRecruit);
             CreateNewInspectorCommand = new RelayCommand(OpenAddInspectorWindow);
             CancelCreate = new RelayCommand(MakeInspectorVisible);
@@ -229,11 +226,6 @@ namespace Festispec_WPF.ViewModel
             RaisePropertyChanged(() => AllChecked);
 
             NewInspector.EmptyAll();
-
-            if (_createInspectorWindow != null)
-            {
-                _createInspectorWindow.Close();
-            }
         }
 
         private void OpenAddInspectorWindow()
@@ -400,20 +392,5 @@ namespace Festispec_WPF.ViewModel
             LeftoverCertificates.Add(_selected);
             SelectedInspector.ChosenCertificates.Remove(_selected);
         }
-
-        private void OpenCreate()
-        {
-            _createInspectorWindow = new CreateInspectorWindow();
-            _createInspectorWindow.Show();
-        }
-
-        private void CloseCreate()
-        {
-            _createInspectorWindow.Close();
-        }
-
-
-
-
     }
 }
