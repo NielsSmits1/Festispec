@@ -62,6 +62,12 @@
                     <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
                 </StackPanel>
             </Button>
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding Menu.ShowInspectionCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/logout.PNG"/>
+                    <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
 
         <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="#8000FF">

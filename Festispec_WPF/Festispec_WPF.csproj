@@ -120,6 +120,7 @@
     <Compile Include="Validation rules\NumberValidationRule.cs" />
     <Compile Include="ViewModel\CustomerFolder\CustomerUpdateVM.cs" />
     <Compile Include="ViewModel\HomeVM.cs" />
+    <Compile Include="ViewModel\InspectionListVM.cs" />
     <Compile Include="ViewModel\QuestionaireCrudVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs" />
     <Compile Include="ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs" />
@@ -168,6 +169,9 @@
     </Compile>
     <Compile Include="View\CustomerCreateWindow.xaml.cs">
       <DependentUpon>CustomerCreateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectionOverview.xaml.cs">
+      <DependentUpon>InspectionOverview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OfflineMapView.xaml.cs">
       <DependentUpon>OfflineMapView.xaml</DependentUpon>
@@ -275,6 +279,10 @@
     <Compile Include="View\CustomerCrudWindow.xaml.cs">
       <DependentUpon>CustomerCrudWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\InspectionOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\InspectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

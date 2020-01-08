@@ -157,6 +157,14 @@ namespace Festispec_WPF.ViewModel
                 return new MenuVM();
             }
         }
+
+        public InspectionListVM InspectionList
+        {
+            get
+            {
+                return new InspectionListVM();
+            }
+        }
         
 
 
