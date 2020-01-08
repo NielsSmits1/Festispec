@@ -83,8 +83,6 @@
                                 <TextBox Text="{Binding NewcontactPerson.Email, Mode=TwoWay}" />
                                 <Label>Telefoon nummer</Label>
                                 <TextBox Text="{Binding NewcontactPerson.PhoneNumber, Mode=TwoWay}" />
-                                <Label>Actief</Label>
-                                <TextBox Text="{Binding NewcontactPerson.Active, Mode=TwoWay}" />
                             </StackPanel>
                         </Border>
                     </Grid>

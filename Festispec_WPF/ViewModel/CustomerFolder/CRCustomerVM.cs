@@ -143,7 +143,9 @@ namespace Festispec_WPF.ViewModel
 
             UOW.Customers.Add(NewCustomer.CustomerData);
 
-            UOW.ContactPersons.Add(NewcontactPerson.ContactPersonData);
+            var contactpersondata = NewcontactPerson.ContactPersonData;
+            contactpersondata.Actief = true;
+            UOW.ContactPersons.Add(contactpersondata);
 
             try
             {
