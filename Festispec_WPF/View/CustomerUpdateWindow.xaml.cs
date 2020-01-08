@@ -24,9 +24,38 @@ namespace Festispec_WPF.View
             InitializeComponent();
         }
 
+        private void Firstname_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Prefix_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void LastName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Number_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Mail_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            firstname.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            prefix.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            lastName.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            number.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            mail.GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
     }
 }

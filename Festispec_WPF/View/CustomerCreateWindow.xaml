@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
+        xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
         WindowState="Maximized"
         Title="CustomerCreateWindow" Height="1080" Width="1920"
@@ -44,45 +45,161 @@
                                 <Label  FontSize="16" FontWeight="Bold" Foreground="White">Bedrijfs gegevens</Label>
                                 <Border BorderBrush="White" BorderThickness="2"/>
                                 <Label>Bedrijfsnaam</Label>
-                                <TextBox Text="{Binding NewCustomer.CompanyName, Mode=TwoWay}" />
+                                <TextBox Name="company" LostFocus="Company_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewCustomer.CompanyName" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=company}" Foreground="Red"/>
+                                
                                 <Label>Vestigingsnummer</Label>
-                                <TextBox Text="{Binding NewCustomer.NAW_Klant.LocationNumber, Mode=TwoWay}" />
+                                <TextBox Name="location" LostFocus="Location_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewCustomer.NAW_Klant.LocationNumber" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=location}" Foreground="Red"/>
 
                                 <Label  FontSize="16" FontWeight="Bold" Foreground="White">Adres</Label>
                                 <Border BorderBrush="White" BorderThickness="2"/>
                                 <Label>Postcode</Label>
-                                <TextBox Text="{Binding NewCustomer.NAW_Klant.ZipCode, Mode=TwoWay}" />
+                                <TextBox Name="postalcode" LostFocus="Postalcode_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewCustomer.NAW_Klant.ZipCode" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=postalcode}" Foreground="Red"/>
+                                
                                 <Label>Huisnummer</Label>
-                                <TextBox Text="{Binding NewCustomer.NAW_Klant.HouseNumber, Mode=TwoWay}" />
+                                <TextBox Name="housenumber" LostFocus="Housenumber_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewCustomer.NAW_Klant.HouseNumber" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=housenumber}" Foreground="Red"/>
+
                                 <Label>Straatnaam</Label>
-                                <TextBox Text="{Binding NewCustomer.NAW_Klant.StreetName, Mode=TwoWay}" />
+                                <TextBox Name="streetName" LostFocus="StreetName_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewCustomer.NAW_Klant.StreetName" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=streetName}" Foreground="Red"/>
 
                                 <Label  FontSize="16" FontWeight="Bold" Foreground="White">KVK nummer</Label>
                                 <Border BorderBrush="White" BorderThickness="2"/>
                                 <Label>KVK nummer</Label>
-                                <TextBox Text="{Binding NewCustomer.NAW_Klant.KVKNumber, Mode=TwoWay}" />
+                                <TextBox Name="KVKNumber" LostFocus="KVKNumber_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewCustomer.NAW_Klant.KVKNumber" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=KVKNumber}" Foreground="Red"/>
 
+                                
                                 <Label  FontSize="16" FontWeight="Bold" Foreground="White">Financiële gegevens</Label>
                                 <Border BorderBrush="White" BorderThickness="2"/>
                                 <Label>IBAN</Label>
-                                <TextBox Text="{Binding NewCustomer.NAW_Klant.IBAN, Mode=TwoWay}" />
+                                <TextBox Name="IBAN" LostFocus="IBAN_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewCustomer.NAW_Klant.IBAN" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=IBAN}" Foreground="Red"/>
                             </StackPanel>
                         </Border>
 
-                        <Border Visibility="{Binding ViewAddContactPerson}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
+                        <Border Visibility="{Binding ViewAddCustomer}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
                             <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
                                 <Label  FontSize="16" FontWeight="Bold" Foreground="White">Contact persoon</Label>
                                 <Border BorderBrush="White" BorderThickness="2"/>
                                 <Label>Voornaam</Label>
-                                <TextBox Text="{Binding NewcontactPerson.FirstName, Mode=TwoWay}" />
+                                <TextBox Name="firstName" LostFocus="FirstName_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewcontactPerson.FirstName" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=firstName}" Foreground="Red"/>
+                                
                                 <Label>tussenvoegsel</Label>
-                                <TextBox Text="{Binding NewcontactPerson.Affix, Mode=TwoWay}" />
+                                <TextBox Name="prefix" LostFocus="Prefix_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewcontactPerson.Affix" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=prefix}" Foreground="Red"/>
+                                
                                 <Label>Achternaam</Label>
-                                <TextBox Text="{Binding NewcontactPerson.LastName, Mode=TwoWay}" />
+                                <TextBox Name="lastName" LostFocus="LastName_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewcontactPerson.LastName" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=lastName}" Foreground="Red"/>
+                                
                                 <Label>E-mail</Label>
-                                <TextBox Text="{Binding NewcontactPerson.Email, Mode=TwoWay}" />
+                                <TextBox Name="mail" LostFocus="Mail_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewcontactPerson.Email" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=mail}" Foreground="Red"/>
+                                
                                 <Label>Telefoon nummer</Label>
-                                <TextBox Text="{Binding NewcontactPerson.PhoneNumber, Mode=TwoWay}" />
+                                <TextBox Name="number" LostFocus="Number_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="NewcontactPerson.PhoneNumber" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=number}" Foreground="Red"/>
                                 <Label>Actief</Label>
                                 <TextBox Text="{Binding NewcontactPerson.Active, Mode=TwoWay}" />
                             </StackPanel>
@@ -110,7 +227,7 @@
                                 </Style>
                             </Button.Style>
                         </Button>
-                        <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding CreateCustomerCommand}" Height="50" Background="#8000FF">
+                        <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding CreateCustomerCommand}" Height="50" Background="#8000FF" Click="Button_Click">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="Green"/>
