@@ -20,6 +20,8 @@ namespace Festispec_WPF.Pdf
         public List<string> GivenAwnsers { get; set; }
         public string _chart { get; set; }
 
+        public string Visible { get; set; }
+
         public Question(string chart = "")
         {
             _chart = chart;

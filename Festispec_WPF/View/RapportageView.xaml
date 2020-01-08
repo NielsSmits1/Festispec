@@ -9,27 +9,55 @@
         Loaded="Window_Loaded"
         DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Grid>
-        <Grid>
+        <Label Content="Klant:" HorizontalAlignment="Left" Margin="74,77,0,0" VerticalAlignment="Top"/>
+        <Label Content="introductie:" HorizontalAlignment="Left" Margin="74,129,0,0" VerticalAlignment="Top"/>
+        <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,103,0,0" VerticalAlignment="Top"/>
+
+        <Label Content="{Binding Path=selectedInspection.Klant.Bedrijfsnaam}" HorizontalAlignment="Left" Margin="171,77,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Path=selectedInspection.Titel}" HorizontalAlignment="Left" Margin="171,103,0,0" VerticalAlignment="Top"/>
+        <Label Content="beschrijving" HorizontalAlignment="Left" Margin="171,129,0,0" VerticalAlignment="Top"/>
+
+        <Grid Visibility="{Binding showGenerate}">
             <Button Content="Generate" HorizontalAlignment="Left" Margin="1827,949,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
             <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Title" Binding="{Binding QuestionTitle}"  Width="*"/>
+                    <DataGridTextColumn Header="Vraag type" Binding="{Binding Type}"  Width="*"/>
                     <DataGridTemplateColumn Header="Chart type">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox  SelectedIndex="1"  SelectedItem="{Binding Chart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding DataContext.Charts, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=DataGrid}}" Width="238"/>
+                                <ComboBox  SelectedIndex="1" Visibility="{Binding Visible}" SelectedItem="{Binding Chart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding DataContext.Charts, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=DataGrid}}" Width="238"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Content="Klant:" HorizontalAlignment="Left" Margin="74,77,0,0" VerticalAlignment="Top"/>
-            <Label Content="introductie:" HorizontalAlignment="Left" Margin="74,129,0,0" VerticalAlignment="Top"/>
-            <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,103,0,0" VerticalAlignment="Top"/>
+        </Grid>
 
-            <Label Content="{Binding Path=selectedInspection.Klant.Bedrijfsnaam}" HorizontalAlignment="Left" Margin="171,77,0,0" VerticalAlignment="Top"/>
-            <Label Content="{Binding Path=selectedInspection.Titel}" HorizontalAlignment="Left" Margin="171,103,0,0" VerticalAlignment="Top"/>
-            <Label Content="beschrijving" HorizontalAlignment="Left" Margin="171,129,0,0" VerticalAlignment="Top"/>
+
+        <Grid Visibility="{Binding showVragenlijst}">
+            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False"  SelectedItem="{Binding selectedVragenlijst}" ItemsSource="{Binding vragenlijsten}" Margin="810,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding ID}"  Width="50"/>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Titel}"  Width="*"/>
+                    <DataGridTemplateColumn Header="Selecteer">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Selecteer" HorizontalAlignment="Left" Width="75" Command="{Binding DataContext.SelectVragenlijst, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Visibility="{Binding showSucces}">
+            <GroupBox Header="Succes!" HorizontalAlignment="Left" Height="181" Margin="673,305,0,0" VerticalAlignment="Top" Width="510">
+                <Button Content="Open pdf"  Command="{Binding OpenPdfButton}"  HorizontalAlignment="Left" Margin="408,133,0,0" VerticalAlignment="Top" Width="76"/>
+            </GroupBox>
+            <Label Content="Het genereren van de pdf is gelukt! Hij staat op deze locatie:" HorizontalAlignment="Left" Margin="692,342,0,0" VerticalAlignment="Top"/>
+            <Label Content="{Binding location}" HorizontalAlignment="Left" Margin="692,373,0,0" VerticalAlignment="Top" RenderTransformOrigin="-4.824,11.154"/>
+            <Label Content="Of klik op de knop hier onder om hem te openen." HorizontalAlignment="Left" Margin="692,404,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Window>

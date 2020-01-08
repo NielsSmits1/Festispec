@@ -36,14 +36,15 @@
             <div>
                 Antwoorden:<br />
 
-                @if (question.Type == "img")
+                @if (question.Type == "Bijlage vraag" || question.Type == "Kaart vraag")
                 {
                     foreach (var awnser in question.GivenAwnsers)
                     {
                         <img class="chart" src="@awnser" />
+                        <br />
                     }
                 }
-                else if (question.Type == "tabel")
+                else if (question.Type == "Tabel vraag")
                 {
                     <table cellpadding="10">
                         <thead>
@@ -78,6 +79,7 @@
                     foreach (var awnser in question.GivenAwnsers)
                     {
                         @awnser
+                        <br />
                     }
                 }
                 <br />
