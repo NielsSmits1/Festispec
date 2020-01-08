@@ -30,6 +30,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand CloseCreateCustomerCommand { get; set; }
         public ICommand EditCustomerCommand { get; set; }
 
+        public ICommand DeleteCustomerCommand { get; set; }
+
         #region visibility properties
         private string _viewAddCustomer;
 

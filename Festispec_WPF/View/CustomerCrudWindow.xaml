@@ -165,7 +165,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
-                        </DataGrid>
+                            </DataGrid>
                     </StackPanel>
                 </StackPanel>
             </Border>
