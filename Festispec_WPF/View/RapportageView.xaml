@@ -9,14 +9,20 @@
         Loaded="Window_Loaded"
         DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Grid>
+        <Button Content="Terug naar begin"  Command="{Binding BackToStart}"  HorizontalAlignment="Left" Margin="78,13,0,0" VerticalAlignment="Top" Width="103"/>
         <Label Content="Klant:" HorizontalAlignment="Left" Margin="74,77,0,0" VerticalAlignment="Top"/>
-        <Label Content="introductie:" HorizontalAlignment="Left" Margin="74,129,0,0" VerticalAlignment="Top"/>
         <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,103,0,0" VerticalAlignment="Top"/>
-
+        <Label Content="introductie:" HorizontalAlignment="Left" Margin="74,129,0,0" VerticalAlignment="Top"/>
+        <Label Content="advies:" HorizontalAlignment="Left" Margin="74,265,0,0" VerticalAlignment="Top"/>
+        <Label Content="samenvatting:" HorizontalAlignment="Left" Margin="74,418,0,0" VerticalAlignment="Top"/>
         <Label Content="{Binding Path=selectedInspection.Klant.Bedrijfsnaam}" HorizontalAlignment="Left" Margin="171,77,0,0" VerticalAlignment="Top"/>
         <Label Content="{Binding Path=selectedInspection.Titel}" HorizontalAlignment="Left" Margin="171,103,0,0" VerticalAlignment="Top"/>
-        <Label Content="beschrijving" HorizontalAlignment="Left" Margin="171,129,0,0" VerticalAlignment="Top"/>
 
+        <TextBox HorizontalAlignment="Left" Height="100" Margin="74,155,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding introductie}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
+        <TextBox HorizontalAlignment="Left" Height="100" Margin="74,291,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding advice}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
+        <TextBox HorizontalAlignment="Left" Height="100" Margin="74,449,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding samenvatting}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
+
+        <!--<Grid Visibility="Hidden">-->
         <Grid Visibility="{Binding showGenerate}">
             <Button Content="Generate" HorizontalAlignment="Left" Margin="1827,949,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
             <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
@@ -34,6 +40,7 @@
             </DataGrid>
         </Grid>
 
+        <!--<Grid Visibility="Hidden">-->
 
         <Grid Visibility="{Binding showVragenlijst}">
             <DataGrid AutoGenerateColumns="False" CanUserAddRows="False"  SelectedItem="{Binding selectedVragenlijst}" ItemsSource="{Binding vragenlijsten}" Margin="810,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
@@ -51,6 +58,7 @@
             </DataGrid>
         </Grid>
 
+        <!--<Grid Visibility="Visible">-->
         <Grid Visibility="{Binding showSucces}">
             <GroupBox Header="Succes!" HorizontalAlignment="Left" Height="181" Margin="673,305,0,0" VerticalAlignment="Top" Width="510">
                 <Button Content="Open pdf"  Command="{Binding OpenPdfButton}"  HorizontalAlignment="Left" Margin="408,133,0,0" VerticalAlignment="Top" Width="76"/>

@@ -10,6 +10,7 @@ using FestiSpec.Domain.Model;
 using Festispec_WPF.Helpers;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.Pdf;
+using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -20,7 +21,10 @@ namespace Festispec_WPF.ViewModel
         public ICommand GenerateCommand { get; set; }
         public ICommand SelectVragenlijst { get; set; }
         public ICommand OpenPdfButton { get; set; }
-        
+
+        public ICommand BackToStart { get; set; }
+
+
         private IUnitOfWork UOW;
 
         private string _chart;
@@ -66,6 +70,17 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        private string _AllowTyping;
+        public string AllowTyping
+        {
+            get { return _AllowTyping; }
+            set
+            {
+                _AllowTyping = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private Vragenlijst _selectedVragenlijst;
         public Vragenlijst selectedVragenlijst
         {
@@ -84,6 +99,39 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _location = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _advice;
+        public string advice
+        {
+            get { return _advice; }
+            set
+            {
+                _advice = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _introductie;
+        public string introductie
+        {
+            get { return _introductie; }
+            set
+            {
+                _introductie = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _samenvatting;
+        public string samenvatting
+        {
+            get { return _samenvatting; }
+            set
+            {
+                _samenvatting = value;
                 RaisePropertyChanged();
             }
         }
@@ -127,11 +175,11 @@ namespace Festispec_WPF.ViewModel
             GenerateCommand = new RelayCommand(GeneratePdf);
             SelectVragenlijst = new RelayCommand(SetVragenlijst);
             OpenPdfButton = new RelayCommand(OpenPdf);
-
+            BackToStart = new RelayCommand(RapportageOverViewOpen);
             showVragenlijst = "Visible";
             showGenerate = "Hidden";
             showSucces = "Hidden";
-
+            AllowTyping = "True";
         }
 
         void OnLoad()
@@ -265,35 +313,12 @@ namespace Festispec_WPF.ViewModel
 
             _rapportageInfo = new RapportageInfo()
             {
-                Advice = "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja." +
-                       "Meer bier drinken de man, ja en bier ja.",
+                Advice = advice,
                 CustomerName = inspection.First().Inspectie.Klant.Bedrijfsnaam,
                 Date = DateTime.Now,
                 InspectionTitle = inspection.First().Inspectie.Titel,
-                Introduction = "Wij Gaan kijken of er genoeg bier is.",
-                SummaryOfInspection = "Er was niet genoeg bier de man.",
+                Introduction = introductie,
+                SummaryOfInspection = samenvatting,
                 Questions = vragen
             };
 
@@ -304,9 +329,14 @@ namespace Festispec_WPF.ViewModel
 
         public void GeneratePdf()
         {
+            _rapportageInfo.Advice = advice;
+            _rapportageInfo.Introduction = introductie;
+            _rapportageInfo.SummaryOfInspection = samenvatting;
+
             var helper = new PdfHelper();
             _rapportageInfo.Questions.AddRange(questions);
             location = helper.GeneratePdf(_rapportageInfo);
+            AllowTyping = "False";
             showSucces = "Visible";
             showGenerate = "Hidden";
         }
@@ -324,6 +354,27 @@ namespace Festispec_WPF.ViewModel
             showVragenlijst = "Hidden";
             showGenerate = "Visible";
             PrepareGenerate((int)selectedVragenlijst.Stamt_af_van_ID, selectedInspection.Inspectienummer);
+        }
+
+        public void RapportageOverViewOpen()
+        {
+            showVragenlijst = "Visible";
+            showGenerate = "Hidden";
+            showSucces = "Hidden";
+            AllowTyping = "True";
+            selectedInspection = null;
+            selectedVragenlijst = null;
+            vragenlijsten = null;
+            questions = null;
+            location = null;
+            advice = "";
+            introductie = "";
+            samenvatting = "";
+
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            var window = new InspectionOverview();
+            window.Show();     
+            currentWindow.Close();
         }
     }
 }
