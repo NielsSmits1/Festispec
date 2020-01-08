@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
+        xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
-        Title="EditInspectionWindow" Height="800" Width="800" WindowStyle="None"
+        Title="EditInspectionWindow" Height="800" Width="800" WindowState="Maximized"
         DataContext="{Binding MapView, Source={StaticResource Locator}}">
     <StackPanel Background="Gray">
         <Label Content="Inspectie aanmaken" FontSize="30" Foreground="White" HorizontalAlignment="Center"/>
@@ -26,13 +27,13 @@
             <!--NAME-->
             <Label Content="Titel" FontSize="10" Foreground="Gray" Grid.Column="1" Grid.Row="0"></Label>
             <TextBox Width="450" LostFocus="Title_LostFocus" HorizontalAlignment="Left" Name="Title" FontSize="15" Grid.Row="1" Grid.Column="1">
-                <!--<TextBox.Text>
+                <TextBox.Text>
                     <Binding Path="NewInspection.Title" Mode="TwoWay">
                         <Binding.ValidationRules>
                             <validationrules:EmptyValidator />
                         </Binding.ValidationRules>
                     </Binding>
-                </TextBox.Text>-->
+                </TextBox.Text>
             </TextBox>
             <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Title}" Foreground="Red"/>
             <!--END NAME-->

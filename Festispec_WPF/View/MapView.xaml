@@ -210,7 +210,7 @@
                                                             </StackPanel>
                                                         </DataTemplate>
                                                     </Grid.Resources>
-                                                    <ScrollViewer VerticalScrollBarVisibility="{Binding EditVisibility}" Height="350">
+                                                    <ScrollViewer VerticalScrollBarVisibility="Visible" Height="350">
                                                         <DataGrid CanUserAddRows="false" ItemsSource="{Binding Inspectors}" SelectedItem="{Binding SelectedInspector, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
                                                             <DataGrid.Columns>
                                                                 <DataGridTemplateColumn Width="*" CellTemplate="{StaticResource DateTemplate}" />
@@ -651,17 +651,19 @@
                                                         <StackPanel Grid.Column="0" Visibility="{Binding PlannedInspectorVisibility}" Background="Gray" Grid.RowSpan="2">
                                                             <Label Content="Lijst ingeplande inspecteurs" FontSize="25" Foreground="White" HorizontalAlignment="Center" FontWeight="Bold"/>
                                                             <Label Content="Namen inspecteurs:" />
-                                                            <ListView Width="300" HorizontalAlignment="Left" SelectedItem="{Binding SelectedDeleteInspector}" ItemsSource="{Binding SelectedFestival.PlannedInspectors}" >
-                                                                <ListView.ItemTemplate>
-                                                                    <DataTemplate >
-                                                                        <StackPanel Orientation="Horizontal">
-                                                                            <TextBlock Text="{Binding FullName}"></TextBlock>
-                                                                            <Button Content=" X " BorderBrush="Black" BorderThickness="1" Background="#CE3131" HorizontalAlignment="Right" Command="{Binding DataContext.RemoveInspectorFromInspectionCommand, RelativeSource={RelativeSource FindAncestor ,AncestorType={x:Type ListView}}}"></Button>
-                                                                        </StackPanel>
-                                                                    </DataTemplate>
-                                                                </ListView.ItemTemplate>
-                                                            </ListView>
-                                                            
+                                                            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="350">
+                                                                <ListView Width="300" HorizontalAlignment="Left" SelectedItem="{Binding SelectedDeleteInspector}" ItemsSource="{Binding SelectedFestival.PlannedInspectors}" >
+                                                                    <ListView.ItemTemplate>
+                                                                        <DataTemplate >
+                                                                            <StackPanel Orientation="Horizontal">
+                                                                                <TextBlock Text="{Binding FullName}"></TextBlock>
+                                                                                <Button Content=" X " BorderBrush="Black" BorderThickness="1" Background="#CE3131" HorizontalAlignment="Right" Command="{Binding DataContext.RemoveInspectorFromInspectionCommand, RelativeSource={RelativeSource FindAncestor ,AncestorType={x:Type ListView}}}"></Button>
+                                                                            </StackPanel>
+                                                                        </DataTemplate>
+                                                                    </ListView.ItemTemplate>
+                                                                </ListView>
+                                                            </ScrollViewer>
+
                                                         </StackPanel>
 
                                                         <Grid>
