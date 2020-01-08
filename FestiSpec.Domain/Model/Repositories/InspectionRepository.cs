@@ -63,5 +63,14 @@ namespace FestiSpec.Domain.Model.Repositories
         {
             return Context.Inspectie.Find(id).Certificaat.ToList();
         }
+
+        public List<Inspectie> GetAccomplishedInspections()
+        {
+            return GetAll().Where(ins => ins.Voltooid == true).ToList();
+        }
+        public List<Inspectie> GetNonAccomplishedInspections()
+        {
+            return GetAll().Where(ins => ins.Voltooid == false).ToList();
+        }
     }
 }

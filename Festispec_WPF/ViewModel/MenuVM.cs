@@ -19,6 +19,7 @@ namespace Festispec_WPF.ViewModel
         private InspectorCrudWindow _inspecteursWindow;
         private WeekplanningView _weekPlanningWindow;
         private QuestionnaireCRUD _questionnaireView;
+        private InspectionOverview _overview;
         public string ErrorVisibility { get; set; }
         private MapView _planWindow;
         private EmployeeView _employeeView;
@@ -35,6 +36,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand ShowWerknemerCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
 
+        public ICommand ShowInspectionCommand { get; set; }
+
         public MenuVM()
         {
             ShowHomeCommand = new RelayCommand(ShowHome);
@@ -43,6 +46,7 @@ namespace Festispec_WPF.ViewModel
             ShowInspecteursCommand = new RelayCommand(ShowInspecteurs);
             ShowVragenlijstCommand = new RelayCommand(ShowVragenlijst);
             ShowKalenderCommand = new RelayCommand(ShowKalender);
+            ShowInspectionCommand = new RelayCommand(InspectionList);
 
             HasInternet();
             ShowWerknemerCommand = new RelayCommand(ShowWerknemer);
@@ -154,6 +158,21 @@ namespace Festispec_WPF.ViewModel
 
             _mainWindow = new MainWindow();
             _mainWindow.Show();
+        }
+
+        public void InspectionList()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            if (HasInternet())
+            {
+                _overview = new InspectionOverview();
+                _overview.Show();
+            }
+            else
+            {
+                LogOut();
+            }
+            currentWindow.Close();
         }
 
         private bool HasInternet()
