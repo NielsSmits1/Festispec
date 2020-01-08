@@ -51,6 +51,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand CancelContactPersonCommand { get; set; }
         public ICommand SubmitEditedContactPersonCommand { get; set; }
         public ICommand CreateContactPersonCommand { get; set; }
+        public ICommand DeleteContactPersonCommand { get; set; }
 
         #region Visibility Properties
         private string _customerVisibility;
@@ -144,11 +145,35 @@ namespace Festispec_WPF.ViewModel
             CancelContactPersonCommand = new RelayCommand(ShowContactPerson);
             SubmitEditedContactPersonCommand = new RelayCommand(SubmitContactPerson);
             CreateContactPersonCommand = new RelayCommand(CreateContactPerson);
+            DeleteContactPersonCommand = new RelayCommand(DeleteContactPerson);
 
             SearchText = "Zoek klant";
             UOW.Complete();
 
             ShowCustomer();
+        }
+
+        private void DeleteContactPerson()
+        {
+            var tempcontactperson = UOW.Context.Contactpersoon.Find(SelectedContactPerson.ContactPersonData.ID);
+            tempcontactperson.Actief = false;
+
+            try
+            {
+                UOW.Complete();
+                MessageBox.Show("De aanpassingen zijn doorgevoerd", "De aanpassingen zijn doorgevoerd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ShowContactPerson();
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            LoadContactPersons();
+            RaisePropertyChanged("ContactPersons");
         }
 
         private void SubmitContactPerson()
@@ -185,14 +210,14 @@ namespace Festispec_WPF.ViewModel
         private void CreateContactPerson()
         {
             NewcontactPerson.ContactPersonData.Klant = SelectedCustomer.CustomerData;
-
+            NewcontactPerson.ContactPersonData.Actief = true;
             UOW.ContactPersons.Add(NewcontactPerson.ContactPersonData);
             try
             {
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "De aanpassingen zijn doorgevoerd",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _contactPersonCreateWindow.Close();
+                CloseCreateContactPerson();
             }
             catch
             {

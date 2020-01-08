@@ -71,7 +71,7 @@
                                     <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=version}" Foreground="Red"/>
 
                                     <!--//Dev addin-->
-                                    <Label Margin="0,15,0,0" FontSize="13" FontWeight="Bold">Type toevoegen vraag</Label>
+                                    <!--<Label Margin="0,15,0,0" FontSize="13" FontWeight="Bold">Type toevoegen vraag</Label>
                                     <ComboBox ItemsSource="{Binding _QuestionTypes}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding SelectedQuestionType}"></ComboBox>
 
                                     <Label Margin="0,15,0,0" FontSize="13" FontWeight="Bold">Aanmaken template</Label>
@@ -89,7 +89,7 @@
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
-                                    </DataGrid>
+                                    </DataGrid>-->
                                     <!--// END dev addin-->
                                     <Label>Opmerking</Label>
                                     <TextBox Name="notes" LostFocus="Notes_LostFocus">

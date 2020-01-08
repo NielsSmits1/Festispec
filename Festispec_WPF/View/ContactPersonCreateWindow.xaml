@@ -56,11 +56,6 @@
                                 <TextBox Text="{Binding NewcontactPerson.PhoneNumber, Mode=TwoWay}" />
                                 <Label>E-mail</Label>
                                 <TextBox Text="{Binding NewcontactPerson.Email, Mode=TwoWay}" />
-
-                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Actief</Label>
-                                <Border BorderBrush="White" BorderThickness="2"/>
-                                <Label>actief</Label>
-                                <TextBox Text="{Binding NewcontactPerson.Active, Mode=TwoWay}" />
                             </StackPanel>
                         </Border>
                     </Grid>
