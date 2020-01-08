@@ -16,5 +16,7 @@ namespace FestiSpec.Domain.Model
     {
         public int ID { get; set; }
         public string Situatie { get; set; }
+    
+        public virtual Tabelvraag Tabelvraag { get; set; }
     }
 }
