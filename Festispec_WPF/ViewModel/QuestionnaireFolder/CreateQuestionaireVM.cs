@@ -319,7 +319,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                     question.toDatabase(newQuestionnaireVM.ID);
                 }
 
-                if (selectedTemplate != null)
+                if (basedOfTemplate)
                 {
                     UOW.Context.Vragenlijst.Find(_newQuestionnaireVM.ID).Stamt_af_van_ID = UOW.Context.Template.Where(t => t.Vragenlijst_ID == selectedTemplate.ID).Select(t => t.ID).FirstOrDefault();
 

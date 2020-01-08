@@ -32,7 +32,9 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private void Submit()
         {
             if (NewAppendixQuestion.Question == null)
+            {
                 return;
+            }
             IQuestion newQuestion = NewAppendixQuestion;
             NewAppendixQuestion = new AppendixQuestionVM();
             Messenger.Default.Send(newQuestion);
