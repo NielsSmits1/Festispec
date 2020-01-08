@@ -15,7 +15,7 @@ namespace Festispec_WPF.Helpers
 {
     public static class ChartHelper
     {
-        private const string Location = "c:\\festispec\\img";
+        private const string Location = "c:\\festispec\\img\\";
         public static string GenerateChart(List<string> GivenAwnsers, string chartType)
         {
             var awn = GivenAwnsers.Distinct().OrderBy(a => a).ToArray();
