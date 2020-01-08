@@ -19,6 +19,7 @@ namespace FestiSpec.Domain.Model
         {
             this.Tabelvraag_antwoord = new HashSet<Tabelvraag_antwoord>();
             this.Tabelvraag_vragenlijst = new HashSet<Tabelvraag_vragenlijst>();
+            this.Tabelvraag_situatie = new HashSet<Tabelvraag_situatie>();
         }
     
         public int ID { get; set; }
@@ -30,5 +31,7 @@ namespace FestiSpec.Domain.Model
         public virtual ICollection<Tabelvraag_antwoord> Tabelvraag_antwoord { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tabelvraag_vragenlijst> Tabelvraag_vragenlijst { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tabelvraag_situatie> Tabelvraag_situatie { get; set; }
     }
 }

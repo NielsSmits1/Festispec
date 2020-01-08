@@ -15,7 +15,7 @@
         <TextBlock Text="Vraag:"></TextBlock>
         <TextBox Name="question" LostFocus="Question_LostFocus">
             <TextBox.Text>
-                <Binding Path="NewAppendixQuestion.Question}">
+                <Binding Path="NewAppendixQuestion.Question" Mode="TwoWay">
                     <Binding.ValidationRules>
                         <validationrules:EmptyValidator />
                     </Binding.ValidationRules>

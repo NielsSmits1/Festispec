@@ -200,8 +200,6 @@
                                     </TextBox.Text>
                                 </TextBox>
                                 <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=number}" Foreground="Red"/>
-                                <Label>Actief</Label>
-                                <TextBox Text="{Binding NewcontactPerson.Active, Mode=TwoWay}" />
                             </StackPanel>
                         </Border>
                     </Grid>

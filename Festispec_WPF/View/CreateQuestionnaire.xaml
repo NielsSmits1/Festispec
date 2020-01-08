@@ -69,8 +69,6 @@
                                         </TextBox.Text>
                                     </TextBox>
                                     <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=version}" Foreground="Red"/>
-
-                                    <!--// END dev addin-->
                                     <Label>Opmerking</Label>
                                     <TextBox Name="notes" LostFocus="Notes_LostFocus">
                                         <TextBox.Text>
