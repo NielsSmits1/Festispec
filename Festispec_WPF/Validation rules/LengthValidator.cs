@@ -15,18 +15,18 @@ namespace Festispec_WPF.Validation_rules
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            int length = (int)value;
+            int length = (int)value.ToString().Length;
             bool validated = true;
             string message = "";
 
             if(length < Min)
             {
-                message = "Dit veld moet minimaal " + Min + "karakters lang zijn";
+                message = "Dit veld moet minimaal " + Min + " karakters lang zijn";
                 validated = false;
             }
             else if (length > Max)
             {
-                message = "Dit veld mag maximaal " + Max + "karakters lang zijn";
+                message = "Dit veld mag maximaal " + Max + " karakters lang zijn";
                 validated = false;
             }
 

@@ -327,11 +327,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
                     saveToDatabase();
                 }
-                else
-                {
-                    MessageBox.Show("Er is iets fout gegaan", "Fout bij invoeren velden",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
                 basedOfTemplate = false;
             }
         }

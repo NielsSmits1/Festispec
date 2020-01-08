@@ -254,18 +254,66 @@
                                 <Label  FontSize="16" FontWeight="Bold" Foreground="White">Naam</Label>
                                 <Border BorderBrush="White" BorderThickness="2"/>
                                 <Label>Voornaam</Label>
-                                <TextBox Text="{Binding FirstName}"/>
+                                <TextBox Name="firstname" LostFocus="Firstname_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="FirstName">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=firstname}" Foreground="Red"/>
+                                
                                 <Label>Tussenvoegsel</Label>
-                                <TextBox Text="{Binding Affix}" />
+                                <TextBox Name="prefix" LostFocus="Prefix_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="Affix">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=prefix}" Foreground="Red"/>
+                                
                                 <Label>Achternaam</Label>
-                                <TextBox Text="{Binding LastName}" />
+                                <TextBox Name="lastName" LostFocus="LastName_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="LastName">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=lastName}" Foreground="Red"/>
 
                                 <Label  FontSize="16" FontWeight="Bold" Foreground="White">Gegevens</Label>
                                 <Border BorderBrush="White" BorderThickness="2"/>
                                 <Label>Telefoon nummer</Label>
-                                <TextBox Text="{Binding PhoneNumber}" />
+                                <TextBox Name="number" LostFocus="Number_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="PhoneNumber">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=number}" Foreground="Red"/>
+                                
                                 <Label>E-mail</Label>
-                                <TextBox Text="{Binding Email}" />
+                                <TextBox Name="mail" LostFocus="Mail_LostFocus">
+                                    <TextBox.Text>
+                                        <Binding Path="Email">
+                                            <Binding.ValidationRules>
+                                                <validationrules:EmptyValidator />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=mail}" Foreground="Red"/>
                             </StackPanel>
                         </Border>
                     </Grid>
@@ -292,7 +340,7 @@
                             </Button.Style>
                         </Button>
                         <!--Deze button hieronder moet nog gebind worden-->
-                        <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitEditedContactPersonCommand}" Height="50" Background="#8000FF">
+                        <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding SubmitEditedContactPersonCommand}" Height="50" Background="#8000FF" Click="Button_Click">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="Green"/>

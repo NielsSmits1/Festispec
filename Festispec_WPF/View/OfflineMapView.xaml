@@ -22,22 +22,20 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0" />
-        <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF1E277A">
-
-            <Button Width="100" Height="100" BorderBrush="Black" BorderThickness="2" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}" Content="Log out">
-                <!--<Image Source="/Images/weekkalender.PNG" />-->
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="#565656">
+            <Button Width="100" Background="Transparent" Height="85" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/logout.PNG"/>
+                    <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
             </Button>
         </StackPanel>
 
         <Grid Grid.Column="0" Grid.Row="0" Background="#FF5C99D6"></Grid>
-        <Grid Grid.Column="1" Grid.Row="0" Background="#FF5C99D6">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Margin="826,23,825,23" Grid.RowSpan="2">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="#8000FF">
+            <Button Command="{Binding ShowHomeCommand}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
                 Festispec
-            </TextBlock>
+            </Button>
         </Grid>
 
 
