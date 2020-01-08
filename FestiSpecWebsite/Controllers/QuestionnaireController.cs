@@ -262,6 +262,22 @@ namespace FestiSpecWebsite.Controllers
                         
                     }
                 }
+                if (questionnaire.mapQuestionsList != null)
+                {
+                    foreach (var i in questionnaire.mapQuestionsList)
+                    {
+                        Kaartvraag_vragenlijst bv = new Kaartvraag_vragenlijst();
+                        bv.Kaartvraag_ID = i.Id;
+                        bv.Vragenlijst_ID = dbid;
+                        MemoryStream target = new MemoryStream();
+                        i.imageFile.InputStream.CopyTo(target);
+                        byte[] data = target.ToArray();
+                        bv.Filebytes = data;
+                        bv.Positie = i.ListPosition;
+                        db.Kaartvraag_vragenlijst.Add(bv);
+
+                    }
+                }
 
                 db.SaveChanges();
                 return RedirectToAction("Index", "Inspection");
