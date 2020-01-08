@@ -176,7 +176,7 @@ namespace FestiSpecWebsite.Controllers
             {
                 return View("NotPlannedInInspection");
             }
-            
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
 
