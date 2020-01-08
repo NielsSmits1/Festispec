@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FestiSpecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Afspraak">
           <Key>
             <PropertyRef Name="ID" />
@@ -331,7 +331,7 @@
             <PropertyRef Name="ID" />
             <PropertyRef Name="Situatie" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Situatie" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
@@ -785,6 +785,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tabelvraag_situatie_ID">
+          <End Role="Tabelvraag" Type="Self.Tabelvraag" Multiplicity="1" />
+          <End Role="Tabelvraag_situatie" Type="Self.Tabelvraag_situatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tabelvraag">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tabelvraag_situatie">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tabelvraag_vragenlijst_Tabelvraag">
           <End Role="Tabelvraag" Type="Self.Tabelvraag" Multiplicity="1" />
           <End Role="Tabelvraag_vragenlijst" Type="Self.Tabelvraag_vragenlijst" Multiplicity="*" />
@@ -1094,6 +1106,10 @@
             <End Role="Tabelvraag" EntitySet="Tabelvraag" />
             <End Role="Tabelvraag_antwoord" EntitySet="Tabelvraag_antwoord" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tabelvraag_situatie_ID" Association="Self.FK_Tabelvraag_situatie_ID">
+            <End Role="Tabelvraag" EntitySet="Tabelvraag" />
+            <End Role="Tabelvraag_situatie" EntitySet="Tabelvraag_situatie" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tabelvraag_vragenlijst_Tabelvraag" Association="Self.FK_Tabelvraag_vragenlijst_Tabelvraag">
             <End Role="Tabelvraag" EntitySet="Tabelvraag" />
             <End Role="Tabelvraag_vragenlijst" EntitySet="Tabelvraag_vragenlijst" />
@@ -1139,8 +1155,7 @@
             <End Role="Werknemers_inspectie" EntitySet="Werknemers_inspectie" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FestiSpecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1473,6 +1488,7 @@
           <Property Name="AntwoordKop" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Tabelvraag_antwoord" Relationship="Self.FK_Tabelvraag_antwoord_Tabelvraag" FromRole="Tabelvraag" ToRole="Tabelvraag_antwoord" />
           <NavigationProperty Name="Tabelvraag_vragenlijst" Relationship="Self.FK_Tabelvraag_vragenlijst_Tabelvraag" FromRole="Tabelvraag" ToRole="Tabelvraag_vragenlijst" />
+          <NavigationProperty Name="Tabelvraag_situatie" Relationship="FestiSpecModel.FK_Tabelvraag_situatie_ID" FromRole="Tabelvraag" ToRole="Tabelvraag_situatie" />
         </EntityType>
         <EntityType Name="Tabelvraag_antwoord">
           <Key>
@@ -1493,6 +1509,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Situatie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tabelvraag" Relationship="FestiSpecModel.FK_Tabelvraag_situatie_ID" FromRole="Tabelvraag_situatie" ToRole="Tabelvraag" />
         </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
           <Key>
@@ -2147,9 +2164,25 @@
             <End Role="Werknemer" EntitySet="Werknemer" />
           </AssociationSet>
           <FunctionImport Name="Getqualifiedinspector" ReturnType="Collection(Int32)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_Tabelvraag_situatie_ID" Association="FestiSpecModel.FK_Tabelvraag_situatie_ID">
+            <End Role="Tabelvraag" EntitySet="Tabelvraag" />
+            <End Role="Tabelvraag_situatie" EntitySet="Tabelvraag_situatie" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Tabelvraag_situatie_ID">
+          <End Type="FestiSpecModel.Tabelvraag" Role="Tabelvraag" Multiplicity="1" />
+          <End Type="FestiSpecModel.Tabelvraag_situatie" Role="Tabelvraag_situatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tabelvraag">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tabelvraag_situatie">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
