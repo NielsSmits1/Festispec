@@ -9,23 +9,29 @@
         Loaded="Window_Loaded"
         DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Grid>
-        <Button Content="Terug naar begin"  Command="{Binding BackToStart}"  HorizontalAlignment="Left" Margin="78,13,0,0" VerticalAlignment="Top" Width="103"/>
-        <Label Content="Klant:" HorizontalAlignment="Left" Margin="74,77,0,0" VerticalAlignment="Top"/>
-        <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,103,0,0" VerticalAlignment="Top"/>
-        <Label Content="introductie:" HorizontalAlignment="Left" Margin="74,129,0,0" VerticalAlignment="Top"/>
-        <Label Content="advies:" HorizontalAlignment="Left" Margin="74,265,0,0" VerticalAlignment="Top"/>
-        <Label Content="samenvatting:" HorizontalAlignment="Left" Margin="74,418,0,0" VerticalAlignment="Top"/>
-        <Label Content="{Binding Path=selectedInspection.Klant.Bedrijfsnaam}" HorizontalAlignment="Left" Margin="171,77,0,0" VerticalAlignment="Top"/>
-        <Label Content="{Binding Path=selectedInspection.Titel}" HorizontalAlignment="Left" Margin="171,103,0,0" VerticalAlignment="Top"/>
+        <Grid Grid.Column="0" Grid.Row="0" Background="#8000FF" Margin="0,0,0,962">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40">
+                Festispec
+            </TextBlock>
+        </Grid>
 
-        <TextBox HorizontalAlignment="Left" Height="100" Margin="74,155,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding introductie}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
-        <TextBox HorizontalAlignment="Left" Height="100" Margin="74,291,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding advice}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
+        <Button Content="Terug naar begin"  Command="{Binding BackToStart}"  HorizontalAlignment="Left" Margin="78,999,0,0" VerticalAlignment="Top" Width="103"/>
+        <Label Content="Klant:" HorizontalAlignment="Left" Margin="78,104,0,0" VerticalAlignment="Top"/>
+        <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Introductie:" HorizontalAlignment="Left" Margin="74,161,0,0" VerticalAlignment="Top"/>
+        <Label Content="Advies:" HorizontalAlignment="Left" Margin="71,292,0,0" VerticalAlignment="Top"/>
+        <Label Content="Samenvatting:" HorizontalAlignment="Left" Margin="71,418,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.294,0.577"/>
+        <Label Content="{Binding Path=selectedInspection.Klant.Bedrijfsnaam}" HorizontalAlignment="Left" Margin="158,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.3,3.7"/>
+        <Label Content="{Binding Path=selectedInspection.Titel}" HorizontalAlignment="Left" Margin="158,130,0,0" VerticalAlignment="Top"/>
+
+        <TextBox HorizontalAlignment="Left" Height="100" Margin="74,192,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding introductie}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
+        <TextBox HorizontalAlignment="Left" Height="100" Margin="74,318,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding advice}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
         <TextBox HorizontalAlignment="Left" Height="100" Margin="74,449,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding samenvatting}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
 
-        <!--<Grid Visibility="Hidden">-->
+        <!--<Grid Visibility="Visible">-->
         <Grid Visibility="{Binding showGenerate}">
-            <Button Content="Generate" HorizontalAlignment="Left" Margin="1827,949,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
-            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
+            <Button Content="Generate" HorizontalAlignment="Left" Margin="1805,989,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
+            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,100,10,105" SelectionChanged="DataGrid_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Title" Binding="{Binding QuestionTitle}"  Width="*"/>
                     <DataGridTextColumn Header="Vraag type" Binding="{Binding Type}"  Width="*"/>
@@ -41,9 +47,8 @@
         </Grid>
 
         <!--<Grid Visibility="Hidden">-->
-
         <Grid Visibility="{Binding showVragenlijst}">
-            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False"  SelectedItem="{Binding selectedVragenlijst}" ItemsSource="{Binding vragenlijsten}" Margin="810,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
+            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False"  SelectedItem="{Binding selectedVragenlijst}" ItemsSource="{Binding vragenlijsten}" Margin="810,100,10,105" SelectionChanged="DataGrid_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding ID}"  Width="50"/>
                     <DataGridTextColumn Header="Title" Binding="{Binding Titel}"  Width="*"/>
