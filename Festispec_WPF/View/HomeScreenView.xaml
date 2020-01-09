@@ -41,16 +41,10 @@
                     <Label Content="Inspecteur" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
                 </StackPanel>
             </Button>
-            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding ShowVragenlijstCommand}">
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="White" BorderThickness="0,0,0,2" Command="{Binding ShowVragenlijstCommand}">
                 <StackPanel>
                     <Image Source="/Images/vragenlijsten.PNG" Height="40"/>
                     <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
-                </StackPanel>
-            </Button>
-            <Button Width="100" Background="Transparent" Height="75" BorderBrush="white" BorderThickness="0,2,0,2" Command="{Binding ShowKalenderCommand}">
-                <StackPanel>
-                    <Image Source="/Images/weekkalender.PNG" Height="40"/>
-                    <Label Content="Kalender" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
                 </StackPanel>
             </Button>
             <Button Width="100" Background="Transparent" Height="85" BorderBrush="Transparent" Command="{Binding ShowWerknemerCommand}">
@@ -135,14 +129,14 @@
                             </StackPanel>
                         </Button>
 
-                        <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
+                        <!--<Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"  
                         Grid.Column="1" Command="{Binding ShowKalenderCommand}" Background="#FF6A6A6A">
                             <StackPanel>
                                 <Image Source="/Images/weekkalender.png" Width="134"/>
                                 <Label Content="Kalender" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
                             </StackPanel>
-                        </Button>
+                        </Button>-->
 
                         <Button x:Name="WerknemerButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"  
