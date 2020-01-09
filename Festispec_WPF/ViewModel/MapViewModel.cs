@@ -929,6 +929,15 @@ namespace Festispec_WPF.ViewModel
         }
         private void AddNewInspection()
         {
+            try
+            {
+                _UOW.Inspections.Find(i => i.Titel == NewInspection.Title).First();
+                MessageBox.Show("Deze naam bestaat al", "Er is iets fout gegaan",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            catch (Exception){}
+
             NewLocation = null;
             _UOW.Inspections.Add(NewInspection.Inspection);
 
