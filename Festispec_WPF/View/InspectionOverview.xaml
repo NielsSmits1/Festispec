@@ -42,10 +42,10 @@
                     <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
                 </StackPanel>
             </Button>
-            <Button Width="100" Background="Transparent" Height="75" BorderBrush="white" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowInspectionCommand, Source={StaticResource Locator}}">
                 <StackPanel>
-                    <Image Source="/Images/weekkalender.PNG" Height="40"/>
-                    <Label Content="Kalender" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                    <Image Source="/Images/rapportages.PNG"/>
+                    <Label Content="Inspecties" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
                 </StackPanel>
             </Button>
             <Button Width="100" Background="Transparent" Height="85" BorderBrush="Transparent" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}">
@@ -55,12 +55,6 @@
                 </StackPanel>
             </Button>
             <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}">
-                <StackPanel>
-                    <Image Source="/Images/logout.PNG"/>
-                    <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
-                </StackPanel>
-            </Button>
-            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding Menu.ShowInspectionCommand, Source={StaticResource Locator}}">
                 <StackPanel>
                     <Image Source="/Images/logout.PNG"/>
                     <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
