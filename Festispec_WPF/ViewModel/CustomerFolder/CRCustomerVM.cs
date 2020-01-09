@@ -30,6 +30,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand CloseCreateCustomerCommand { get; set; }
         public ICommand EditCustomerCommand { get; set; }
 
+        public ICommand DeleteCustomerCommand { get; set; }
+
         #region visibility properties
         private string _viewAddCustomer;
 
@@ -141,7 +143,9 @@ namespace Festispec_WPF.ViewModel
 
             UOW.Customers.Add(NewCustomer.CustomerData);
 
-            UOW.ContactPersons.Add(NewcontactPerson.ContactPersonData);
+            var contactpersondata = NewcontactPerson.ContactPersonData;
+            contactpersondata.Actief = true;
+            UOW.ContactPersons.Add(contactpersondata);
 
             try
             {

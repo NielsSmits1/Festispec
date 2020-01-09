@@ -15,5 +15,8 @@ namespace FestiSpec.Domain.Model.Interface_Repositories
         List<Vragenlijst> GetMissingQuestionnaires(int id);
         List<Certificaat> GetCertificatesInspection(int id);
 
+        List<Inspectie> GetAccomplishedInspections();
+        List<Inspectie> GetNonAccomplishedInspections();
+
     }
 }

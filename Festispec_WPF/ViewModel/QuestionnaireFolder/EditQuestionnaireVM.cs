@@ -207,7 +207,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 crud.Show();
                 currentWindow.Close();
 
-                cancelQuestionnaire();
+                //cancelQuestionnaire();
             }
             catch
             {
