@@ -67,7 +67,7 @@ namespace Festispec_WPF.ViewModel
         public ObservableCollection<CertificateVM> AvailableAppCertificates { get; set; }
         private string _addInspectorVisibility;
 
-        public string addInspectorVisibility
+        public string AddInspectorVisibility
         {
             get { return _addInspectorVisibility; }
             set
@@ -77,18 +77,30 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        private string _InspectorVisibility;
+        private string _inspectorVisibility;
 
         public string InspectorVisibility
         {
-            get { return _InspectorVisibility; }
+            get { return _inspectorVisibility; }
             set
             {
-                _InspectorVisibility = value;
+                _inspectorVisibility = value;
                 base.RaisePropertyChanged();
             }
         }
-        
+
+        private string _editVisibility;
+
+        public string EditVisibility
+        {
+            get { return _editVisibility; }
+            set
+            {
+                _editVisibility = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
 
         //Update Inspector Commands
         public ICommand OpenEditInspectorCommand { get; set; }
@@ -170,8 +182,9 @@ namespace Festispec_WPF.ViewModel
         {
             try
             {
-                addInspectorVisibility = "Hidden";
-            InspectorVisibility = "Visible";
+                AddInspectorVisibility = "Hidden";
+                InspectorVisibility = "Visible";
+                EditVisibility = "Hidden";
                 //UOW
                 UOW = ViewModelLocator.UOW;
 
@@ -230,14 +243,16 @@ namespace Festispec_WPF.ViewModel
 
         private void OpenAddInspectorWindow()
         {
-            addInspectorVisibility = "Visible";
+            AddInspectorVisibility = "Visible";
             InspectorVisibility = "Hidden";
+            EditVisibility = "Hidden";
         }
 
         private void MakeInspectorVisible()
         {
-            addInspectorVisibility = "Hidden";
+            AddInspectorVisibility = "Hidden";
             InspectorVisibility = "Visible";
+            EditVisibility = "Hidden";
         }
 
         public void RecruitApplicant()
@@ -284,8 +299,10 @@ namespace Festispec_WPF.ViewModel
 
             SelectedInspector.ChosenCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetCertificatesInspector(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
             LeftoverCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetMissingCertificates(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
-            _editInspectorWindow = new EditInspectorWindow();
-            _editInspectorWindow.Show();
+
+            AddInspectorVisibility = "Hidden";
+            InspectorVisibility = "Hidden";
+            EditVisibility = "Visible";
         }
 
         public void SafeEditInspector()
