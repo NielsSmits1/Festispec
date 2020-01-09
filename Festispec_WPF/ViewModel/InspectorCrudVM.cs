@@ -121,6 +121,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand SetInspectorInactiveCommand { get; set; }
         public ICommand CreateNewInspectorCommand { get; set; }
         public ICommand CancelCreate { get; set; }
+
+        public ICommand CancelEditCommand { get; set; }
         public InspectorVM SelectedInspector
         {
             get
@@ -172,6 +174,7 @@ namespace Festispec_WPF.ViewModel
             RecruitApplicantCommand = new RelayCommand(RecruitApplicant, CanRecruit);
             CreateNewInspectorCommand = new RelayCommand(OpenAddInspectorWindow);
             CancelCreate = new RelayCommand(MakeInspectorVisible);
+            CancelEditCommand = new RelayCommand(CancelEdit);
 
 
             Init();
@@ -241,6 +244,12 @@ namespace Festispec_WPF.ViewModel
             NewInspector.EmptyAll();
         }
 
+        private void CancelEdit()
+        {
+            EditVisibility = "Hidden";
+            InspectorVisibility = "Visible";
+            AddInspectorVisibility = "Hidden";
+        }
         private void OpenAddInspectorWindow()
         {
             AddInspectorVisibility = "Visible";
@@ -295,7 +304,7 @@ namespace Festispec_WPF.ViewModel
         // UPDATE 
         public void OpenEditInspector()
         {
-            SelectedInspector.InspectorData = UOW.Inspectors.GetAll().FirstOrDefault(i => i.NAW == SelectedInspector.NAWInspector_ID);
+            //SelectedInspector.InspectorData = UOW.Inspectors.GetAll().FirstOrDefault(i => i.NAW == SelectedInspector.NAWInspector_ID);
 
             SelectedInspector.ChosenCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetCertificatesInspector(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
             LeftoverCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetMissingCertificates(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
@@ -303,6 +312,8 @@ namespace Festispec_WPF.ViewModel
             AddInspectorVisibility = "Hidden";
             InspectorVisibility = "Hidden";
             EditVisibility = "Visible";
+            RaisePropertyChanged(() => LeftoverCertificates);
+            RaisePropertyChanged(() => SelectedInspector);
         }
 
         public void SafeEditInspector()
@@ -408,6 +419,7 @@ namespace Festispec_WPF.ViewModel
         {
             LeftoverCertificates.Add(_selected);
             SelectedInspector.ChosenCertificates.Remove(_selected);
+            RaisePropertyChanged(() => LeftoverCertificates);
         }
     }
 }
