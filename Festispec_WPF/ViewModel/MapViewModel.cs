@@ -173,12 +173,12 @@ namespace Festispec_WPF.ViewModel
             set { _confirmVisibility = value; CommandManager.InvalidateRequerySuggested(); RaisePropertyChanged(() => ConfirmVisibility); }
         }
 
-        private string _detailsInspectionVisibility;
+        private string _detailsVisibility;
 
-        public string DetailsInspectionVisibility
+        public string DetailsVisibility
         {
-            get { return _detailsInspectionVisibility; }
-            set { _detailsInspectionVisibility = value; base.RaisePropertyChanged(); }
+            get { return _detailsVisibility; }
+            set { _detailsVisibility = value; base.RaisePropertyChanged(); }
         }
 
 
@@ -466,13 +466,13 @@ namespace Festispec_WPF.ViewModel
 
         private void openPlannedInspectors()
         {
-            DetailsInspectionVisibility = "Hidden";
+            DetailsVisibility = "Hidden";
             PlannedInspectorVisibility = "Visible";
         }
 
         private void openDetails()
         {
-            DetailsInspectionVisibility = "Visible";
+            DetailsVisibility = "Visibile";
             PlannedInspectorVisibility = "Hidden";
             ConfirmVisibility = "Visible";
         }
