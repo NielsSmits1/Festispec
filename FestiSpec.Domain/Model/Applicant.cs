@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 namespace FestiSpec.Domain.Model
 {
     using System;
@@ -20,16 +23,60 @@ namespace FestiSpec.Domain.Model
             this.Certificaat = new HashSet<Certificaat>();
         }
     
+        [Key]
         public int ID { get; set; }
+
+        [DisplayName("Voornaam")]
+        [Required]
+        [MinLength(2)]
+        [MaxLength(30)]
         public string Voornaam { get; set; }
+
+        [DisplayName("Tussenvoegsel")]
         public string Tussenvoegsel { get; set; }
+
+        [Required]
+        [DisplayName("Achternaam")]
+        [MinLength(2)]
+        [MaxLength(30)]
         public string Achternaam { get; set; }
+
+        [Required]
+        [DisplayName("Postcode")]
+        [MinLength(4)]
+        [MaxLength(6)]
         public string Postcode { get; set; }
+
+        [Required]
+        [DisplayName("Huisnummer")]
+        [MaxLength(6)]
         public string Huisnummer { get; set; }
+
+        [Required]
+        [DisplayName("Straatnaam")]
+        [MinLength(2)]
+        [MaxLength(30)]
         public string Straatnaam { get; set; }
+
+        [Required]
+        [DisplayName("Geboortedatum")]
+        [DataType(DataType.Date)]
         public System.DateTime Geboortedatum { get; set; }
+
+        [Required]
+        [DisplayName("IBAN")]
+        [MaxLength(35)]
         public string IBAN { get; set; }
+
+        [Required]
+        [DisplayName("E-mail")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Required]
+        [DisplayName("Telefoonnummer")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Telefoonnummer voldoet niet aan het format. Klopt hij wel?")]
         public string Telefoonnummer { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

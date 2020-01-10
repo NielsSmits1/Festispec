@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 namespace FestiSpec.Domain.Model
 {
     using System;
@@ -23,9 +26,17 @@ namespace FestiSpec.Domain.Model
             this.Inspectie = new HashSet<Inspectie>();
         }
     
+        [Key]
         public int ID { get; set; }
+
+        [DisplayName("Gebruikersnaam")]
+        [Required]
         public string Username { get; set; }
+
+        [DisplayName("Wachtwoord")]
+        [Required]
         public string Wachtwoord { get; set; }
+
         public int NAW { get; set; }
         public bool Actief { get; set; }
     
