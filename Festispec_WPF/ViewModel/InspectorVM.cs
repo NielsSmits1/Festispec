@@ -16,7 +16,7 @@ namespace Festispec_WPF.ViewModel
 {
     public class InspectorVM : ViewModelBase
     {
-        public ObservableCollection<CertificateVM> ChosenCertificates { get; set;}
+        public ObservableCollection<CertificateVM> ChosenCertificates { get; set; }
         private UnitOfWork _UOW;
         public InspectorVM()
         {
@@ -35,7 +35,7 @@ namespace Festispec_WPF.ViewModel
 
         public InspectorVM(Inspecteur inspector)
         {
-            if(inspector.ID == 0)
+            if (inspector.ID == 0)
             {
                 _inspecteur = inspector;
             }
@@ -61,19 +61,6 @@ namespace Festispec_WPF.ViewModel
             StreetName = applicant.StreetName;
             HomeNumber = applicant.HomeNumber;
             Phonenumber = applicant.Phonenumber;
-        }
-
-        public string ActiveText
-        {
-            get
-            {
-                if (Active)
-                {
-                    return "Inactief zetten";
-                }
-
-                return "Actief zetten";
-            }
         }
 
         //NAW data
@@ -219,10 +206,10 @@ namespace Festispec_WPF.ViewModel
             get
             {
                 IGeocoder geocoder = new BingMapsGeocoder(ApiKeys.BING_MAPS_KEY);
-                    var inspectorNAW = _UOW.NAWInspectors.Find(n => n.ID == _inspecteur.NAW).FirstOrDefault();
-                    var location = geocoder.Geocode(inspectorNAW.Straatnaam + " " + inspectorNAW.Huisnummer, "", "", inspectorNAW.Postcode, "Netherlands").First();
+                var inspectorNAW = _UOW.NAWInspectors.Find(n => n.ID == _inspecteur.NAW).FirstOrDefault();
+                var location = geocoder.Geocode(inspectorNAW.Straatnaam + " " + inspectorNAW.Huisnummer, "", "", inspectorNAW.Postcode, "Netherlands").First();
 
-                    return location.FormattedAddress;
+                return location.FormattedAddress;
             }
         }
 
@@ -236,6 +223,36 @@ namespace Festispec_WPF.ViewModel
         {
             get { return _nawInspecteur.Telefoonnummer; }
             set { _nawInspecteur.Telefoonnummer = value; RaisePropertyChanged("Phonenuber"); }
+        }
+
+        public string ActiveText
+        {
+            get
+            {
+                if (Active)
+                {
+                    return "Zet op inactief";
+                }
+                else
+                {
+                    return "Zet op actief";
+                }
+            }
+        }
+
+        public string Color
+        {
+            get
+            {
+                if (Active)
+                {
+                    return "Red";
+                }
+                else
+                {
+                    return "Green";
+                }
+            }
         }
 
 

@@ -336,7 +336,7 @@ namespace Festispec_WPF.ViewModel
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "Het is gelukt!",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                CancelEdit();
+                _editInspectorWindow.Close();
             }
             catch
             {

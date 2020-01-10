@@ -40,16 +40,16 @@
                     <Label Content="Inspecteur" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
                 </StackPanel>
             </Button>
-            <Button Width="100" Background="Transparent" Height="75" BorderBrush="White" BorderThickness="0,0,0,2" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
                 <StackPanel>
                     <Image Source="/Images/vragenlijsten.PNG" Height="40"/>
                     <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
                 </StackPanel>
             </Button>
-            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowInspectionCommand, Source={StaticResource Locator}}">
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="white" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowKalenderCommand, Source={StaticResource Locator}}">
                 <StackPanel>
-                    <Image Source="/Images/rapportages.PNG"/>
-                    <Label Content="Inspecties" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                    <Image Source="/Images/weekkalender.PNG" Height="40"/>
+                    <Label Content="Kalender" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
                 </StackPanel>
             </Button>
             <Button Width="100" Background="Transparent" Height="85" BorderBrush="Transparent" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}">
@@ -59,6 +59,12 @@
                 </StackPanel>
             </Button>
             <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/logout.PNG"/>
+                    <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
+            </Button>
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding Menu.ShowInspectionCommand, Source={StaticResource Locator}}">
                 <StackPanel>
                     <Image Source="/Images/logout.PNG"/>
                     <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
@@ -266,8 +272,9 @@
                         </Grid.ColumnDefinitions>
                         <RadioButton Command="{Binding ListOfAllCommand}"  IsChecked="{Binding AllChecked, Mode=TwoWay}"  Content="Alles" Grid.Column="0"/>
                         <RadioButton Command="{Binding ListOfActiveCommand}"   Content="Actieve inspecteurs" Grid.Column="1"/>
-                        <RadioButton Command="{Binding ListOfInactiveCommand}"  Content="Inactieve inspecteurs" Grid.Column="2"/><!--CONFIRM-->
-                                                
+                        <RadioButton Command="{Binding ListOfInactiveCommand}"  Content="Inactieve inspecteurs" Grid.Column="2"/>
+                        <!--CONFIRM-->
+
                         <RadioButton Command="{Binding ListOfLicensedCommand}"  Content="Heeft certificaat" Grid.Column="3"/>
                     </Grid>
                     <ScrollViewer Height="400">
@@ -295,7 +302,7 @@
                                 <DataGridTemplateColumn Header="Inactief/actief">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Background="Red" Foreground="White" BorderThickness="1" Content="(in)actief zetten" Command="{Binding DataContext.SetInspectorInactiveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                            <Button Background="{Binding Color}" Foreground="White" BorderThickness="1" Content="{Binding ActiveText}" Command="{Binding DataContext.SetInspectorInactiveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -526,7 +533,7 @@
 
                         <Button Click="Button_Click" Width="300" Height="35" FontSize="22" 
                             Foreground="White" FontWeight="Bold" Margin="0,20" Background="#8000FF" 
-                            Content="Wijzigingen opslaan" Command="{Binding SafeEditInspectorCommand}">
+                            Content="Wijzigingen opslaan" Command="{Binding SafeEditEmployeeCommand}">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="Green"/>
