@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
         Title="Rapportage" Height="1080" Width="1920"
+        Loaded="Window_Loaded"
         DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Grid>
-        <Button Content="Generate" HorizontalAlignment="Left" Margin="1827,949,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
+        <!-- <Button Content="Generate" HorizontalAlignment="Left" Margin="1827,949,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
         <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding QuestionTitle}"  Width="*"/>
@@ -27,6 +28,125 @@
 
         <Label Content="{Binding Path=selectedInspection.CustomerName}" HorizontalAlignment="Left" Margin="171,77,0,0" VerticalAlignment="Top"/>
         <Label Content="{Binding Path=selectedInspection.InspectionTitle}" HorizontalAlignment="Left" Margin="171,129,0,0" VerticalAlignment="Top"/>
-        <Label Content="{Binding Path=selectedInspection.Introduction}" HorizontalAlignment="Left" Margin="171,103,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Path=selectedInspection.Introduction}" HorizontalAlignment="Left" Margin="171,103,0,0" VerticalAlignment="Top"/> -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Background="#565656">
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Wheat" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowKlantenCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/klanten.PNG" Height="40"/>
+                    <Label Content="Klanten" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
+            </Button>
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowInplanVerzoekenCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/verzoeken_inplannen.PNG" Height="40"/>
+                    <Label Content="Inplannen" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
+            </Button>
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowInspecteursCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/inspecteurs.PNG" Height="40"/>
+                    <Label Content="Inspecteur" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
+            </Button>
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/vragenlijsten.PNG" Height="40"/>
+                    <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                </StackPanel>
+            </Button>
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowInspectionCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/rapportages.PNG"/>
+                    <Label Content="Inspecties" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
+            </Button>
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="Transparent" Command="{Binding Menu.ShowWerknemerCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/werknemer.PNG"/>
+                    <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
+            </Button>
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,0" Command="{Binding Menu.LogOutCommand, Source={StaticResource Locator}}">
+                <StackPanel>
+                    <Image Source="/Images/logout.PNG"/>
+                    <Label Content="Uitloggen" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="#8000FF">
+            <Button Command="{Binding Menu.ShowHomeCommand, Source={StaticResource Locator}}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
+                Festispec
+            </Button>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Button Content="Terug naar begin"  Command="{Binding BackToStart}"  HorizontalAlignment="Left" Margin="78,999,0,0" VerticalAlignment="Top" Width="103"/>
+            <Label Content="Klant:" HorizontalAlignment="Left" Margin="78,104,0,0" VerticalAlignment="Top"/>
+            <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,130,0,0" VerticalAlignment="Top"/>
+            <Label Content="Introductie:" HorizontalAlignment="Left" Margin="74,161,0,0" VerticalAlignment="Top"/>
+            <Label Content="Advies:" HorizontalAlignment="Left" Margin="71,292,0,0" VerticalAlignment="Top"/>
+            <Label Content="Samenvatting:" HorizontalAlignment="Left" Margin="71,418,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.294,0.577"/>
+            <Label Content="{Binding Path=selectedInspection.Klant.Bedrijfsnaam}" HorizontalAlignment="Left" Margin="158,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.3,3.7"/>
+            <Label Content="{Binding Path=selectedInspection.Titel}" HorizontalAlignment="Left" Margin="158,130,0,0" VerticalAlignment="Top"/>
+
+            <TextBox HorizontalAlignment="Left" Height="100" Margin="74,192,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding introductie}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
+            <TextBox HorizontalAlignment="Left" Height="100" Margin="74,318,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding advice}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
+            <TextBox HorizontalAlignment="Left" Height="100" Margin="74,449,0,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding samenvatting}" VerticalAlignment="Top" Width="375" IsEnabled="{Binding AllowTyping}"/>
+
+            <!--<Grid Visibility="Visible">-->
+            <Grid Visibility="{Binding showGenerate}">
+                <Button Content="Generate" HorizontalAlignment="Left" Margin="1805,989,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
+                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,100,10,105" SelectionChanged="DataGrid_SelectionChanged" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Title" Binding="{Binding QuestionTitle}"  Width="*"/>
+                        <DataGridTextColumn Header="Vraag type" Binding="{Binding Type}"  Width="*"/>
+                        <DataGridTemplateColumn Header="Chart type">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox  SelectedIndex="1" Visibility="{Binding Visible}" SelectedItem="{Binding Chart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding DataContext.Charts, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=DataGrid}}" Width="238"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!--<Grid Visibility="Hidden">-->
+            <Grid Visibility="{Binding showVragenlijst}">
+                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False"  SelectedItem="{Binding selectedVragenlijst}" ItemsSource="{Binding vragenlijsten}" Margin="810,100,10,105" SelectionChanged="DataGrid_SelectionChanged" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding ID}"  Width="50"/>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Titel}"  Width="*"/>
+                        <DataGridTemplateColumn Header="Selecteer">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Selecteer" HorizontalAlignment="Left" Width="75" Command="{Binding DataContext.SelectVragenlijst, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!--<Grid Visibility="Visible">-->
+            <Grid Visibility="{Binding showSucces}">
+                <GroupBox Header="Succes!" HorizontalAlignment="Left" Height="181" Margin="673,305,0,0" VerticalAlignment="Top" Width="510">
+                    <Button Content="Open pdf"  Command="{Binding OpenPdfButton}"  HorizontalAlignment="Left" Margin="408,133,0,0" VerticalAlignment="Top" Width="76"/>
+                </GroupBox>
+                <Label Content="Het genereren van de pdf is gelukt! Hij staat op deze locatie:" HorizontalAlignment="Left" Margin="692,342,0,0" VerticalAlignment="Top"/>
+                <Label Content="{Binding location}" HorizontalAlignment="Left" Margin="692,373,0,0" VerticalAlignment="Top" RenderTransformOrigin="-4.824,11.154"/>
+                <Label Content="Of klik op de knop hier onder om hem te openen." HorizontalAlignment="Left" Margin="692,404,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

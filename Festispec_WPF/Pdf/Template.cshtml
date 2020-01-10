@@ -16,15 +16,24 @@
     </div>
     <br />
     <div>
-        @Model.Introduction
+        Introductie<br />
+        <span style="white-space: pre-line">
+            @Model.Introduction
+        </span>
     </div>
     <br />
     <div>
-        @Model.SummaryOfInspection
+        Samenvatting<br />
+        <span style="white-space: pre-line">
+            @Model.SummaryOfInspection
+        </span>
     </div>
     <br />
     <div>
-        @Model.Advice
+        Advies<br/>
+        <span style="white-space: pre-line">
+            @Model.Advice
+        </span>
     </div>
     <br />
     <div>
@@ -35,10 +44,52 @@
             </div>
             <div>
                 Antwoorden:<br />
-                @foreach (var awnser in question.GivenAwnsers)
+
+                @if (question.Type == "Bijlage vraag" || question.Type == "Kaart vraag")
                 {
-                    @awnser
-                    <br />
+                    foreach (var awnser in question.GivenAwnsers)
+                    {
+                        <img class="chart" src="@awnser" />
+                        <br />
+                    }
+                }
+                else if (question.Type == "Tabel vraag")
+                {
+                    <table cellpadding="10">
+                        <thead>
+                            <tr>
+                                <th>@question.TabelHeadQuestion</th>
+                                @for (var i = 1; i < question.TabelHeadCount; i++)
+                                {
+                                    <th>@question.TabelHeadAwnser</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < question.TabelHeaders.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @question.TabelHeaders.ElementAt(i)
+                                    </td>
+
+                                    @for (var j = 1; j < question.TabelHeadCount; j++)
+                                    {
+                                        <td>@question.getNext(i, j)</td>
+                                    }
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    foreach (var awnser in question.GivenAwnsers)
+                    {
+                        @awnser
+                        <br />
+                    }
                 }
             </div>
             if (question._chart != "")

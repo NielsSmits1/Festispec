@@ -21,6 +21,7 @@ using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using Application = System.Windows.Application;
 using Button = System.Windows.Controls.Button;
 using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -63,7 +64,6 @@ namespace Festispec_WPF.ViewModel
                 base.RaisePropertyChanged();
             }
         }
-
 
         private string _inspectorVisibility;
 
@@ -379,6 +379,8 @@ namespace Festispec_WPF.ViewModel
         public ICommand openDetailsCommand { get; set; }
         public ICommand openPlannedInspectorsCommand { get; set; }
 
+        public ICommand CancelNewLocationCommand { get; set; }
+
 
         public MapViewModel()
         {
@@ -407,7 +409,15 @@ namespace Festispec_WPF.ViewModel
             openPlannedInspectorsCommand = new RelayCommand(openPlannedInspectors);
             openDetailsCommand = new RelayCommand(openDetails);
 
+            CancelNewLocationCommand = new RelayCommand(CancelNewLocation);
+
             Init();
+        }
+
+        private void CancelNewLocation()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            currentWindow.Close();
         }
 
         public void Init()
@@ -453,6 +463,7 @@ namespace Festispec_WPF.ViewModel
         private void openDetails()
         {
             PlannedInspectorVisibility = "Hidden";
+            //ConfirmVisibility = "Visible";
         }
 
         private void DrawInspectors()
@@ -847,12 +858,7 @@ namespace Festispec_WPF.ViewModel
 
         private void showDetailsFestival()
         {
-            //if (EditVisibility.Equals("Hidden"))
-            //{
                 switchVisibility();
-            
-            //}
-
         }
 
         private bool canShowDetails()
