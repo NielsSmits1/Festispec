@@ -36,7 +36,8 @@ namespace FestiSpec.Domain.Model
         [DisplayName("Tussenvoegsel")]
         public string Tussenvoegsel { get; set; }
 
-
+        [Required]
+        [DisplayName("Achternaam")]
         [MinLength(2)]
         [MaxLength(30)]
         public string Achternaam { get; set; }
@@ -46,7 +47,9 @@ namespace FestiSpec.Domain.Model
         [MinLength(4)]
         [MaxLength(6)]
         public string Postcode { get; set; }
+
         [MaxLength(6)]
+        [Required]
         public string Huisnummer { get; set; }
 
         [Required]
