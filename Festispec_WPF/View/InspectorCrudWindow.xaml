@@ -81,7 +81,7 @@
                 <StackPanel Margin="25">
                     <Label Content="Sollicitanten" FontSize="35" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold" />
                     <ScrollViewer MaxHeight="400">
-                        <DataGrid AutoGenerateColumns="False" CanUserReorderColumns="False" IsReadOnly="True" MaxHeight="400" CanUserAddRows="False" ItemsSource="{Binding Applicants}" SelectedItem="{Binding SelectedApplicant}" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                        <DataGrid AutoGenerateColumns="False" CanUserReorderColumns="False" IsReadOnly="True" Height="400"  CanUserAddRows="False" ItemsSource="{Binding Applicants}" SelectedItem="{Binding SelectedApplicant}" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                             <DataGrid.Resources>
                                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="Background" Value="#565656"/>

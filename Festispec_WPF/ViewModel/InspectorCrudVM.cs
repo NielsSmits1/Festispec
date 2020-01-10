@@ -199,6 +199,7 @@ namespace Festispec_WPF.ViewModel
                 ActiveChecked = true;
                 RaisePropertyChanged(() => ActiveChecked);
                 _currentlist = 2;
+                LoadAll();
 
                 //All Certificates - Create
                 var list = UOW.Certificates.GetAll().Select(certificaat => new CertificateVM(certificaat));
