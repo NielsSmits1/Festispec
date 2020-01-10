@@ -25,11 +25,11 @@
             string clear = "sketch[" + Model.ListPosition + "].clearCanvas();";
 
             string postId = "post" + id;
-            @Html.Hidden(postId, Model.imageData)
-            @Html.HiddenFor(Model => Model.ByteArray)
-            @Html.HiddenFor(Model => Model.Question)
+            @Html.Hidden(postId, Model.imageData);
+            @Html.HiddenFor(Model => Model.ByteArray);
+            @Html.HiddenFor(Model => Model.Question);
             @Html.HiddenFor(m => m.ListPosition)
-            <div>@Html.DisplayFor(Model => Model.Question)</div>
+            <div>@Html.DisplayFor(Model => Model.Question);</div>
             <canvas id=@id class="sketchpad" height="300" width="400" style="border:1px solid #000000;">
             </canvas>
             <div>

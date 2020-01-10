@@ -4,18 +4,15 @@
         @Html.HiddenFor(Model => Model.Id)
         @Html.HiddenFor(Model => Model.Question)
         @Html.HiddenFor(m => m.ListPosition)
-        @Html.HiddenFor(Model => Model.QuestionHead)
-        @Html.HiddenFor(Model => Model.AnswerHead)
         <table>
             <tr>
                 <th>@Html.DisplayFor(Model => Model.QuestionHead)</th>
                 <th>@Html.DisplayFor(Model => Model.AnswerHead)</th>
             </tr>
-            @for (int i = 0; i < Model.Situations.Count(); i++)
+            @for (int i = 0; i < 4; i++)
             {
-                @Html.HiddenFor(Model => Model.Situations[i])
                 <tr>
-                    <td>@Html.TextBoxFor(Model => Model.Situations[i], new { @readonly = "readonly" })</td>
+                    <td>@Html.EditorFor(Model => Model.Situations[i])</td>
                     <td>@Html.EditorFor(Model => Model.Answers[i])</td>
                 </tr>
             }
