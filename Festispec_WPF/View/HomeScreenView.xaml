@@ -49,7 +49,7 @@
             </Button>
             <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding ShowInspectionCommand, Source={StaticResource Locator}}">
                 <StackPanel>
-                    <Image Source="/Images/rapportages.png"/>
+                    <Image Source="/Images/rapportages.PNG"/>
                     <Label Content="Inspecties" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
                 </StackPanel>
             </Button>
@@ -129,14 +129,14 @@
                             </StackPanel>
                         </Button>
 
-                        <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
+                        <!--<Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"  
                         Grid.Column="1" Command="{Binding ShowInspectionCommand}" Background="#FF6A6A6A">
                             <StackPanel>
-                                <Image Source="/Images/rapportages.png"/>
+                                <Image Source="/Images/rapportages.PNG"/>
                                 <Label Content="Inspecties" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
                             </StackPanel>
-                        </Button>
+                        </Button>-->
 
                         <Button x:Name="WerknemerButton" Width="150" Height="150" FontSize="16"  
                         Foreground="White"  
