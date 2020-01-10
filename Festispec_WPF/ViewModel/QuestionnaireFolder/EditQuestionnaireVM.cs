@@ -156,8 +156,8 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private void cancelQuestionnaire()
         {
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            var crud = new QuestionnaireCRUD();
-            crud.Show();
+            var _questionnaireView = new QuestionnaireCRUD();
+            _questionnaireView.Show();
             currentWindow.Close();
         }
 

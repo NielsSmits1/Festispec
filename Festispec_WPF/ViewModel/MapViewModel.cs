@@ -173,15 +173,6 @@ namespace Festispec_WPF.ViewModel
             set { _confirmVisibility = value; CommandManager.InvalidateRequerySuggested(); RaisePropertyChanged(() => ConfirmVisibility); }
         }
 
-        private string _detailsVisibility;
-
-        public string DetailsVisibility
-        {
-            get { return _detailsVisibility; }
-            set { _detailsVisibility = value; base.RaisePropertyChanged(); }
-        }
-
-
         #endregion
 
         public ObservableCollection<UIElement> MapElements
@@ -466,13 +457,11 @@ namespace Festispec_WPF.ViewModel
 
         private void openPlannedInspectors()
         {
-            DetailsVisibility = "Hidden";
             PlannedInspectorVisibility = "Visible";
         }
 
         private void openDetails()
         {
-            DetailsVisibility = "Visibile";
             PlannedInspectorVisibility = "Hidden";
             //ConfirmVisibility = "Visible";
         }
@@ -946,6 +935,15 @@ namespace Festispec_WPF.ViewModel
         }
         private void AddNewInspection()
         {
+            try
+            {
+                _UOW.Inspections.Find(i => i.Titel == NewInspection.Title).First();
+                MessageBox.Show("Deze naam bestaat al", "Er is iets fout gegaan",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            catch (Exception){}
+
             NewLocation = null;
             _UOW.Inspections.Add(NewInspection.Inspection);
 

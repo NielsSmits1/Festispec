@@ -11,9 +11,7 @@ namespace FestiSpec.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Inspecteur
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,14 +22,9 @@ namespace FestiSpec.Domain.Model
             this.Certificaat = new HashSet<Certificaat>();
             this.Inspectie = new HashSet<Inspectie>();
         }
-
-        [Key]
+    
         public int ID { get; set; }
-        [Required]
         public string Username { get; set; }
-        [Required]
-        [DisplayName("Wachtwoord")]
-        [DataType(DataType.Password)]
         public string Wachtwoord { get; set; }
         public int NAW { get; set; }
         public bool Actief { get; set; }

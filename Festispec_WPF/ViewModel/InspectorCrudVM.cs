@@ -398,7 +398,6 @@ namespace Festispec_WPF.ViewModel
 
 
 
-
         public void MoveCertificateToChosen()
         {
             NewInspector.ChosenCertificates.Add(_selected);

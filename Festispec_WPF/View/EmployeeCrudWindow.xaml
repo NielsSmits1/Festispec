@@ -39,7 +39,7 @@
                     <Label Content="Inspecteur" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
                 </StackPanel>
             </Button>
-            <Button Width="100" Background="Transparent" Height="75" BorderBrush="Transparent" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
+            <Button Width="100" Background="Transparent" Height="75" BorderBrush="White" BorderThickness="0,0,0,2" Command="{Binding Menu.ShowVragenlijstCommand, Source={StaticResource Locator}}">
                 <StackPanel>
                     <Image Source="/Images/vragenlijsten.PNG" Height="40"/>
                     <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>

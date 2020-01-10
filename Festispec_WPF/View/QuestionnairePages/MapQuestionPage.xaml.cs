@@ -29,5 +29,15 @@ namespace Festispec_WPF.View.QuestionnairePages
         {
             ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            question.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            if(image.Source == null)
+            {
+                imageError.Text = "Er is geen afbeelding geselecteerd";
+                return;
+            }
+        }
     }
 }

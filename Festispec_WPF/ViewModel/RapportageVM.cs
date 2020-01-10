@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using FestiSpec.Domain.Model;
 using Festispec_WPF.Helpers;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.Pdf;
@@ -59,8 +58,8 @@ namespace Festispec_WPF.ViewModel
             set { _rapportageInfo = value; RaisePropertyChanged(); }
         }
 
-        private Inspectie _selectedInspection;
-        public Inspectie selectedInspection
+        private RapportageInfo _selectedInspection;
+        public RapportageInfo selectedInspection
         {
             get { return _selectedInspection; }
             set
@@ -305,7 +304,6 @@ namespace Festispec_WPF.ViewModel
 
             Charts = new ObservableCollection<string>()
             {
-                "",
                 "Bar",
                 "Row",
                 "Pie"

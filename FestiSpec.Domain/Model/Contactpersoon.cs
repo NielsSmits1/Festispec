@@ -11,8 +11,7 @@ namespace FestiSpec.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Contactpersoon
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,8 +19,7 @@ namespace FestiSpec.Domain.Model
         {
             this.Afspraak = new HashSet<Afspraak>();
         }
-
-        
+    
         public int ID { get; set; }
         public int Klant_ID { get; set; }
         public string Voornaam { get; set; }
