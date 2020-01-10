@@ -16,15 +16,24 @@
     </div>
     <br />
     <div>
-        @Model.Introduction
+        Introductie<br />
+        <span style="white-space: pre-line">
+            @Model.Introduction
+        </span>
     </div>
     <br />
     <div>
-        @Model.SummaryOfInspection
+        Samenvatting<br />
+        <span style="white-space: pre-line">
+            @Model.SummaryOfInspection
+        </span>
     </div>
     <br />
     <div>
-        @Model.Advice
+        Advies<br/>
+        <span style="white-space: pre-line">
+            @Model.Advice
+        </span>
     </div>
     <br />
     <div>
@@ -36,14 +45,15 @@
             <div>
                 Antwoorden:<br />
 
-                @if (question.Type == "img")
+                @if (question.Type == "Bijlage vraag" || question.Type == "Kaart vraag")
                 {
                     foreach (var awnser in question.GivenAwnsers)
                     {
                         <img class="chart" src="@awnser" />
+                        <br />
                     }
                 }
-                else if (question.Type == "tabel")
+                else if (question.Type == "Tabel vraag")
                 {
                     <table cellpadding="10">
                         <thead>
@@ -78,6 +88,7 @@
                     foreach (var awnser in question.GivenAwnsers)
                     {
                         @awnser
+                        <br />
                     }
                 }
                 <br />

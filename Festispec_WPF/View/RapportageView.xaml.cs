@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FestiSpec.Domain.Model;
+using Festispec_WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +21,20 @@ namespace Festispec_WPF.View
     /// </summary>
     public partial class RapportageView : Window
     {
-        public RapportageView()
+        public RapportageView(Inspectie Inspection)
         {
             InitializeComponent();
+            ((RapportageVM)DataContext).selectedInspection = Inspection;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((RapportageVM)DataContext).loaded = true;
         }
     }
 }
