@@ -7,17 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 namespace FestiSpec.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Beschikbaarheid
     {
+        [Key]
         public int ID { get; set; }
+
+        [Required]
+        [DisplayName("Gebruikersnaam")]
         public int Inspecteur_ID { get; set; }
+
+        [Required]
+        [DisplayName("Datum")]
         public System.DateTime Datum { get; set; }
-    
+
         public virtual Inspecteur Inspecteur { get; set; }
     }
 }
