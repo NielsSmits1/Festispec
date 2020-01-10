@@ -409,6 +409,9 @@
     <Resource Include="Images\logout.png" />
     <Resource Include="Images\werknemer.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rapportages.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
