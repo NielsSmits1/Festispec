@@ -48,5 +48,13 @@ namespace Festispec_WPF.Pdf
                 RaisePropertyChanged();
             }
         }
+
+        public string getNext(int i, int j)
+        {
+            // i is row
+            // j column
+            var index = j * TabelHeaders.Count + i - TabelHeaders.Count;
+            return GivenAwnsers.ElementAt(index);
+        }
     }
 }
