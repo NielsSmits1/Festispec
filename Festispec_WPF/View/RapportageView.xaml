@@ -8,60 +8,25 @@
         Title="Rapportage" Height="1080" Width="1920"
         DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Grid>
-        <Grid Visibility="{Binding Path=showGenerate}">
-            <Button Content="Generate" HorizontalAlignment="Left" Margin="1827,949,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
-            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding QuestionTitle}"  Width="*"/>
-                    <DataGridTemplateColumn Header="Chart type">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <ComboBox  SelectedIndex="1"  SelectedItem="{Binding Chart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding DataContext.Charts, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=DataGrid}}" Width="238"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-            <Label Content="Klant:" HorizontalAlignment="Left" Margin="74,77,0,0" VerticalAlignment="Top"/>
-            <Label Content="introductie:" HorizontalAlignment="Left" Margin="74,129,0,0" VerticalAlignment="Top"/>
-            <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,103,0,0" VerticalAlignment="Top"/>
+        <Button Content="Generate" HorizontalAlignment="Left" Margin="1827,949,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
+        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding QuestionTitle}"  Width="*"/>
+                <DataGridTemplateColumn Header="Chart type">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox  SelectedIndex="1"  SelectedItem="{Binding Chart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding DataContext.Charts, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=DataGrid}}" Width="238"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Klant:" HorizontalAlignment="Left" Margin="74,77,0,0" VerticalAlignment="Top"/>
+        <Label Content="introductie:" HorizontalAlignment="Left" Margin="74,129,0,0" VerticalAlignment="Top"/>
+        <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,103,0,0" VerticalAlignment="Top"/>
 
-            <Label Content="{Binding Path=rapportageInfo.CustomerName}" HorizontalAlignment="Left" Margin="171,77,0,0" VerticalAlignment="Top"/>
-            <Label Content="{Binding Path=rapportageInfo.Introduction}" HorizontalAlignment="Left" Margin="171,129,0,0" VerticalAlignment="Top"/>
-            <Label Content="{Binding Path=rapportageInfo.InspectionTitle}" HorizontalAlignment="Left" Margin="171,103,0,0" VerticalAlignment="Top"/>
-        </Grid>
-
-
-        <Grid Visibility="{Binding Path=showRapportageSelect}">
-            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding inspecties}" SelectedItem="{Binding selectedInspection}" Margin="10,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Inspectienummer}"  Width="100"/>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Titel}"  Width="*"/>
-                    <DataGridTemplateColumn Header="select">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="selecteer" Width="75" Command="{Binding SelectInspection}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-
-        <Grid Visibility="{Binding Path=showVragenlijstSelect}">
-            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding vragenlijsten}" SelectedItem="{Binding selectedInspection}" Margin="10,10,10,105" SelectionChanged="DataGrid_SelectionChanged" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Inspectienummer}"  Width="100"/>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Titel}"  Width="*"/>
-                    <DataGridTemplateColumn Header="select">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="selecteer" Width="75" Command="{Binding SelectInspection}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+        <Label Content="{Binding Path=selectedInspection.CustomerName}" HorizontalAlignment="Left" Margin="171,77,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Path=selectedInspection.InspectionTitle}" HorizontalAlignment="Left" Margin="171,129,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Path=selectedInspection.Introduction}" HorizontalAlignment="Left" Margin="171,103,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

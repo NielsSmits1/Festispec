@@ -35,59 +35,18 @@
             </div>
             <div>
                 Antwoorden:<br />
-
-                @if (question.Type == "img")
+                @foreach (var awnser in question.GivenAwnsers)
                 {
-                    foreach (var awnser in question.GivenAwnsers)
-                    {
-                        <img class="chart" src="@awnser" />
-                    }
+                    @awnser
+                    <br />
                 }
-                else if (question.Type == "tabel")
-                {
-                    <table cellpadding="10">
-                        <thead>
-                            <tr>
-                                <th>@question.TabelHeadQuestion</th>
-                                @for (var i = 1; i < question.TabelHeadCount; i++)
-                                {
-                                    <th>@question.TabelHeadAwnser</th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (var i = 0; i < question.TabelHeaders.Count; i++)
-                            {
-                                <tr>
-                                    <td>
-                                        @question.TabelHeaders.ElementAt(i)
-                                    </td>
-
-                                    @for (var j = 1; j < question.TabelHeadCount; j++)
-                                    {
-                                        <td>@question.getNext(i, j)</td>
-                                    }
-
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                }
-                else
-                {
-                    foreach (var awnser in question.GivenAwnsers)
-                    {
-                        @awnser
-                    }
-                }
-                <br />
             </div>
             if (question._chart != "")
             {
-                <div>
-                    Chart: <br />
-                    <img class="chart" src="@question.ChartHtml" />
-                </div>
+            <div>
+                Chart: <br />
+                <img class="chart" src="@question.ChartHtml" />
+            </div>
             }
             <br />
         }
@@ -99,16 +58,8 @@
         width: 250px;
     }
 
-    .chart {
+    .chart{
         width: 300px;
         height: 300px;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    table, th, td {
-        border: 1px solid black;
     }
 </style>
