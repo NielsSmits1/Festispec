@@ -23,7 +23,7 @@
             </TextBox.Text>
         </TextBox>
             <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=question}" Foreground="Red"/>
-        <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="300" Margin="0, 50" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen" Click="Button_Click">
+        <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="300" Margin="0, 50" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Green"/>

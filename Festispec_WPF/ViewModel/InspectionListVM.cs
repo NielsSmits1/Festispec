@@ -1,5 +1,4 @@
 ﻿using Festispec_WPF.Model.UnitOfWork;
-using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -8,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec_WPF.ViewModel
@@ -62,10 +60,8 @@ namespace Festispec_WPF.ViewModel
 
         private void makeRapport()
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            var rapportageWindow = new RapportageView(SelectedAccInspection.Inspection);
-            rapportageWindow.Show();
-            currentWindow.Close();
+            //Nieuw window
+            // Gebruik SelectedAccInspection
         }
     }
 }

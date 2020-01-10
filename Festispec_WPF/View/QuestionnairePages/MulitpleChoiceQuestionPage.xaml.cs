@@ -34,25 +34,5 @@ namespace Festispec_WPF.View.QuestionnairePages
         {
             ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            option.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            question.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            if(questionOptionList.Items.Count == 0)
-            {
-                errorText.Text = "U heeft geen opties aangemaakt";
-                return;
-            }
-            else
-            {
-                errorText.Text = "";
-
-            }
-        }
     }
 }

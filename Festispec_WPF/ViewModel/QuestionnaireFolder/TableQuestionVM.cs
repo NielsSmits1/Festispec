@@ -17,8 +17,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private Tabelvraag tableQuestionModel;
         private int position;
         private string questiontype;
-
-
+        public ICollection<Tabelvraag_situatie> Situations { get => tableQuestionModel.Tabelvraag_situatie; set => tableQuestionModel.Tabelvraag_situatie = value; }
         public string Question { get => tableQuestionModel.Vraag; set => tableQuestionModel.Vraag = value; }
         public string QuestionHead { get => tableQuestionModel.VraagKop; set => tableQuestionModel.VraagKop = value; }
         public string AnswerHead { get => tableQuestionModel.AntwoordKop; set => tableQuestionModel.AntwoordKop = value; }
@@ -31,10 +30,12 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             }
             set
             {
+                
                 position = value;
                 RaisePropertyChanged();
             }
         }
+        
         public string QuestionType { get => questiontype; set => questiontype = value; }
         public TableQuestionVM()
         {
@@ -85,6 +86,11 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        public Tabelvraag toModel()
+        {
+            return tableQuestionModel;
         }
     }
 }

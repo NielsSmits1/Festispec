@@ -13,14 +13,13 @@ namespace Festispec_WPF.Pdf
         public int Id { get; set; }
         public string QuestionTitle { get; set; }
         public string Type { get; set; }
+
         public string TabelHeadQuestion { get; set; }
         public string TabelHeadAwnser { get; set; }
         public int TabelHeadCount { get{ return GivenAwnsers.Count / TabelHeaders.Count + 1; } }
         public List<string> TabelHeaders { get; set; }
         public List<string> GivenAwnsers { get; set; }
         public string _chart { get; set; }
-
-        public string Visible { get; set; }
 
         public Question(string chart = "")
         {
@@ -49,7 +48,7 @@ namespace Festispec_WPF.Pdf
             }
         }
 
-        public string getNext(int i, int j)
+        public string getNext(int i , int j)
         {
             // i is row
             // j column

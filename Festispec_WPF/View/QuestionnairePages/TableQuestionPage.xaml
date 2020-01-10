@@ -9,77 +9,96 @@
       d:DesignHeight="500" d:DesignWidth="1200"
       Title="TableQuestionPage"
       DataContext="{Binding TableQuestionPageVM, Source={StaticResource Locator}}">
-    <StackPanel HorizontalAlignment="Center">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Center" Margin="20,0,0,0">
 
-        <Label FontSize="13" FontWeight="Bold">Aanmaken tabel vraag</Label>
-        <TextBlock Text="Vraag:"></TextBlock>
-        <TextBox Name="question" LostFocus="TextBox_LostFocus">
-            <TextBox.Text>
-                <Binding Path="NewTableQuestion.Question" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <validationrules:EmptyValidator />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=question}" Foreground="Red"/>
+            <Label FontSize="13" FontWeight="Bold">Aanmaken tabel vraag</Label>
+            <TextBlock Text="Vraag:"></TextBlock>
+            <TextBox Name="question" LostFocus="TextBox_LostFocus">
+                <TextBox.Text>
+                    <Binding Path="NewTableQuestion.Question" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <validationrules:EmptyValidator />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=question}" Foreground="Red"/>
 
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" Width="200">
-                <TextBlock Margin="0,20,0,0" Text="VraagKop:"></TextBlock>
-                <TextBox Name="head" LostFocus="TextBox_LostFocus_1">
-                    <TextBox.Text>
-                        <Binding Path="NewTableQuestion.QuestionHead" Mode="TwoWay">
-                            <Binding.ValidationRules>
-                                <validationrules:EmptyValidator />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=head}" Foreground="Red"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="200">
+                    <TextBlock Margin="0,20,0,0" Text="VraagKop:"></TextBlock>
+                    <TextBox Name="head" LostFocus="TextBox_LostFocus_1">
+                        <TextBox.Text>
+                            <Binding Path="NewTableQuestion.QuestionHead" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validationrules:EmptyValidator />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=head}" Foreground="Red"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="200" Margin="100,0,0,0">
+                    <TextBlock Margin="0,20,0,0" Text="AntwoordKop:"></TextBlock>
+                    <TextBox Name="head2" LostFocus="TextBox_LostFocus_2">
+                        <TextBox.Text>
+                            <Binding Path="NewTableQuestion.AnswerHead" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validationrules:EmptyValidator />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=head2}" Foreground="Red"/>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Width="200" Margin="100,0,0,0">
-                <TextBlock Margin="0,20,0,0" Text="AntwoordKop:"></TextBlock>
-                <TextBox Name="head2" LostFocus="TextBox_LostFocus_2">
-                    <TextBox.Text>
-                        <Binding Path="NewTableQuestion.AnswerHead" Mode="TwoWay">
-                            <Binding.ValidationRules>
-                                <validationrules:EmptyValidator />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-                <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=head2}" Foreground="Red"/>
-            </StackPanel>
+
+
+
+            <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="500" Margin="0, 30" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Green"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
 
-        <DataGrid Grid.Column="1" Grid.RowSpan="3" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False" Margin="0,0,0,13" Width="250">
+        <StackPanel Orientation="Vertical" Margin="150,0,0,0">
+            <TextBlock Margin="0,27,0,0" Text="Situatie:"></TextBlock>
+            <TextBox Name="situatie" LostFocus="TextBox_LostFocus_1" Width="200">
+                <TextBox.Text>
+                    <Binding Path="Situation" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <validationrules:EmptyValidator />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Button Command="{Binding addSituationCommand}" Width="200" Height="40" Margin="0,5,0,0" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Situatie toevoegen">
+            </Button>
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding Situations}" AutoGenerateColumns="False" Margin="20,10,0,13" Width="250" Height="250">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding}" Width="*"
                                 Foreground="Black" Header="Vraag opties" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-
-        <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="500" Margin="0, 30" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen" Click="Button_Click">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="Green"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.8" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
     </StackPanel>
+
 </Page>

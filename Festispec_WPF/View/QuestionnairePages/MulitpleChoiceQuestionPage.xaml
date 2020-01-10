@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="165" />
+                <RowDefinition Height="150" />
                 <RowDefinition Height="61" />
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="7*"/>
@@ -50,10 +50,9 @@
                     </TextBox.Text>
                 </TextBox>
                 <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=option}" Foreground="Red"/>
-                <TextBlock Name="errorText" Foreground="Red"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,1,0,13" Grid.RowSpan="2">
-                <Button  Padding="8,8,8,8" Height="40" Command="{Binding SubmitAnwserOption}" Margin="50 10" VerticalAlignment="Center" FontSize="12" BorderBrush="#8000FF" BorderThickness="3" Foreground="#8000FF" Background="Transparent" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag optie toevoegen" Click="Button_Click">
+                <Button  Padding="8,8,8,8" Height="40" Command="{Binding SubmitAnwserOption}" Margin="50 10" VerticalAlignment="Center" FontSize="12" BorderBrush="#8000FF" BorderThickness="3" Foreground="#8000FF" Background="Transparent" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag optie toevoegen">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Green"/>
@@ -74,7 +73,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Padding="10,10,10,10" Height="40" Command="{Binding SubmitQuestion}" VerticalAlignment="Center" FontSize="14" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen" Click="Button_Click_1">
+                <Button Padding="10,10,10,10" Height="40" Command="{Binding SubmitQuestion}" VerticalAlignment="Center" FontSize="14" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Green"/>
@@ -97,7 +96,7 @@
                 </Button>
             </StackPanel>
 
-            <DataGrid Name="questionOptionList" Grid.Column="1" Grid.RowSpan="3" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False" Margin="0,0,0,13">
+            <DataGrid Grid.Column="1" Grid.RowSpan="3" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False" Margin="0,0,0,13">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding}" Width="*"
                                 Foreground="Black" Header="Vraag opties" IsReadOnly="True" />

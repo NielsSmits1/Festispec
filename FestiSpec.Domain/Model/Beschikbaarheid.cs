@@ -11,11 +11,15 @@ namespace FestiSpec.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Beschikbaarheid
     {
         public int ID { get; set; }
+        [Required]
         public int Inspecteur_ID { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
         public System.DateTime Datum { get; set; }
     
         public virtual Inspecteur Inspecteur { get; set; }

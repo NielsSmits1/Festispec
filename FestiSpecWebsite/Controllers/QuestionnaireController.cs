@@ -176,7 +176,7 @@ namespace FestiSpecWebsite.Controllers
             {
                 return View("NotPlannedInInspection");
             }
-            
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
 
@@ -260,6 +260,22 @@ namespace FestiSpecWebsite.Controllers
                         tv.Vragenlijst_ID = dbid;
                         db.Tabelvraag_vragenlijst.Add(tv);
                         
+                    }
+                }
+                if (questionnaire.mapQuestionsList != null)
+                {
+                    foreach (var i in questionnaire.mapQuestionsList)
+                    {
+                        Kaartvraag_vragenlijst bv = new Kaartvraag_vragenlijst();
+                        bv.Kaartvraag_ID = i.Id;
+                        bv.Vragenlijst_ID = dbid;
+                        MemoryStream target = new MemoryStream();
+                        i.imageFile.InputStream.CopyTo(target);
+                        byte[] data = target.ToArray();
+                        bv.Filebytes = data;
+                        bv.Positie = i.ListPosition;
+                        db.Kaartvraag_vragenlijst.Add(bv);
+
                     }
                 }
 

@@ -26,8 +26,6 @@
                 </TextBox.Text>
             </TextBox>
             <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=question}" Foreground="Red"/>
-            <TextBlock Name="imageError" Foreground="Red"/>
-
             <StackPanel Orientation="Horizontal">
                 <Button Padding="8,8,8,8" Command="{Binding LoadPicture}" Width="200" Margin="20,20" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="3" BorderBrush="#8000FF" Foreground="#8000FF" Background="Transparent" FontWeight="ExtraBold" Cursor="Hand" Content="Laad afbeelding">
                     <Button.Style>
@@ -49,7 +47,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="200" Margin="20, 50" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen" Click="Button_Click">
+                <Button Padding="10,10,10,10" Command="{Binding SubmitQuestion}" Width="200" Margin="20, 50" Height="45" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Cursor="Hand" Content="Vraag toevoegen">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Green"/>
@@ -72,6 +70,6 @@
                 </Button>
             </StackPanel>
         </StackPanel>
-        <Image Name="image" Width="300" Height="200" Source="{Binding NewMapQuestion.Picture, UpdateSourceTrigger=PropertyChanged}" ></Image>
+        <Image Width="300" Height="200" Source="{Binding NewMapQuestion.Picture, UpdateSourceTrigger=PropertyChanged}" ></Image>
     </StackPanel>
 </Page>
