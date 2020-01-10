@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
         Title="Rapportage" Height="1080" Width="1920"
-        Loaded="Window_Loaded"
+        Loaded="Window_Loaded" WindowState="Maximized"
         DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Grid>
         <!-- <Button Content="Generate" HorizontalAlignment="Left" Margin="1827,949,0,0" VerticalAlignment="Top" Width="75" Command="{Binding GenerateCommand}"/>
@@ -65,7 +65,7 @@
             </Button>
             <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowInspectionCommand, Source={StaticResource Locator}}">
                 <StackPanel>
-                    <Image Source="/Images/rapportages.PNG"/>
+                    <Image Source="/Images/rapportages.png"/>
                     <Label Content="Inspecties" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
                 </StackPanel>
             </Button>
