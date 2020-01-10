@@ -16,24 +16,15 @@
     </div>
     <br />
     <div>
-        Introductie<br />
-        <span style="white-space: pre-line">
-            @Model.Introduction
-        </span>
+        @Model.Introduction
     </div>
     <br />
     <div>
-        Samenvatting<br />
-        <span style="white-space: pre-line">
-            @Model.SummaryOfInspection
-        </span>
+        @Model.SummaryOfInspection
     </div>
     <br />
     <div>
-        Advies<br/>
-        <span style="white-space: pre-line">
-            @Model.Advice
-        </span>
+        @Model.Advice
     </div>
     <br />
     <div>
@@ -45,15 +36,14 @@
             <div>
                 Antwoorden:<br />
 
-                @if (question.Type == "Bijlage vraag" || question.Type == "Kaart vraag")
+                @if (question.Type == "img")
                 {
                     foreach (var awnser in question.GivenAwnsers)
                     {
                         <img class="chart" src="@awnser" />
-                        <br />
                     }
                 }
-                else if (question.Type == "Tabel vraag")
+                else if (question.Type == "tabel")
                 {
                     <table cellpadding="10">
                         <thead>
@@ -88,16 +78,16 @@
                     foreach (var awnser in question.GivenAwnsers)
                     {
                         @awnser
-                        <br />
                     }
                 }
+                <br />
             </div>
             if (question._chart != "")
             {
-            <div>
-                Chart: <br />
-                <img class="chart" src="@question.ChartHtml" />
-            </div>
+                <div>
+                    Chart: <br />
+                    <img class="chart" src="@question.ChartHtml" />
+                </div>
             }
             <br />
         }
@@ -109,8 +99,16 @@
         width: 250px;
     }
 
-    .chart{
+    .chart {
         width: 300px;
         height: 300px;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
     }
 </style>

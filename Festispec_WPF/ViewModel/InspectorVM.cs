@@ -63,19 +63,6 @@ namespace Festispec_WPF.ViewModel
             Phonenumber = applicant.Phonenumber;
         }
 
-        public string ActiveText
-        {
-            get
-            {
-                if (Active)
-                {
-                    return "Inactief zetten";
-                }
-
-                return "Actief zetten";
-            }
-        }
-
         //NAW data
         private NAW_inspecteur _nawInspecteur;
 
@@ -236,6 +223,36 @@ namespace Festispec_WPF.ViewModel
         {
             get { return _nawInspecteur.Telefoonnummer; }
             set { _nawInspecteur.Telefoonnummer = value; RaisePropertyChanged("Phonenuber"); }
+        }
+
+        public string ActiveText
+        {
+            get
+            {
+                if(Active)
+                {
+                    return "Zet op inactief";
+                }
+                else
+                {
+                    return "Zet op actief";
+                }
+            }
+        }
+
+        public string Color
+        {
+            get
+            {
+                if (Active)
+                {
+                    return "Red";
+                }
+                else
+                {
+                    return "Green";
+                }
+            }
         }
 
 

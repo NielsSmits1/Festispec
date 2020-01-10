@@ -4,78 +4,62 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
-        xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
-        Title="Nieuwe locatie aanmaken" Height="400" Width="700"
+        Title="Nieuwe locatie aanmaken" Height="308" Width="400"
         DataContext="{Binding MapView, Source={StaticResource Locator}}">
-    
-    <StackPanel Width="700" HorizontalAlignment="Center" Background="Gray">
-        <StackPanel Margin="25">
-            <TextBlock Text="Locatie Toevoegen" FontSize="35" HorizontalAlignment="Right" Foreground="White" FontWeight="Bold"/>
-            <Border BorderBrush="White" BorderThickness="2" Margin="0,0,0,20"/>
-            <Border BorderThickness="10">
-                <Grid>
-                    <StackPanel Grid.Column="0">
-                        <TextBlock Text="Postcode" />
-                        <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewLocation.ZipCode, Mode=TwoWay}" Margin="0,0,0,10"></TextBox>
+    <Grid>
+        <StackPanel Grid.Column="8" Background="AliceBlue" >
+            <Label Content="Locatie aanmaken" FontSize="30" Foreground="Black"></Label>
 
-                        <TextBlock Text="Huisnummer" />
-                        <TextBox Width="100" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewLocation.HomeNumber, Mode=TwoWay}" Margin="0,0,0,10"></TextBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Postcode:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Postcode" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewLocation.ZipCode, Mode=TwoWay}"></TextBox>
+            </Grid>
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Huisnummer:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
+                <Label Content="Huisnummer" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" ></Label>
+                <TextBox Width="100" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewLocation.HomeNumber, Mode=TwoWay}"></TextBox>
+            </Grid>
+            <Border BorderThickness="1" BorderBrush="Black"></Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="55*"/>
+                    <ColumnDefinition Width="387*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label Content="Straatnaam:" FontSize="15" Foreground="Black" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,199,0"></Label>
+                <Label Content="Straatnaam" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="1,0,53.472,0" ></Label>
+                <TextBox Width="200" HorizontalAlignment="Left" Name="Straatnaam" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewLocation.StreetName, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="1,0,0,0"></TextBox>
+            </Grid>
 
-                        <TextBlock Text="Straatnaam" />
-                        <TextBox Width="200" HorizontalAlignment="Left" Name="Straatnaam" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewLocation.StreetName, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="0,0,0,10"></TextBox>
-                    </StackPanel>
-                </Grid>
-            </Border>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Width="150" Height="30" FontSize="18" Content="Annuleren" 
-                            Foreground="White" FontWeight="Bold" Margin="0,0,20,20" Background="#CE3131" 
-                            VerticalAlignment="Bottom" Command="{Binding CancelNewLocationCommand}">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Green"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Opacity" Value="0.8" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
 
-                <Button Width="300" Height="35" FontSize="22" 
-                            Foreground="White" FontWeight="Bold" Margin="0,20" Background="#8000FF" 
-                            Content="Wijzigingen opslaan" Command="{Binding CreateNewLocationCommand}">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Green"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Opacity" Value="0.8" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </StackPanel>
+            <Button Content="Locatie aanmaken" Command="{Binding CreateNewLocationCommand}"></Button>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>

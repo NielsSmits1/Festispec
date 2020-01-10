@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace Festispec_WPF.View
 {
     /// <summary>
-    /// Interaction logic for RapportageView.xaml
+    /// Interaction logic for WeekplanningView.xaml
     /// </summary>
-    public partial class RapportageView : Window
+    public partial class WeekplanningView : Window
     {
-        public RapportageView()
+        public WeekplanningView()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

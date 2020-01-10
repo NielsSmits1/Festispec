@@ -14,7 +14,8 @@ namespace FestiSpec.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Applicant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +23,11 @@ namespace FestiSpec.Domain.Model
         {
             this.Certificaat = new HashSet<Certificaat>();
         }
-    
+
         [Key]
+
         public int ID { get; set; }
 
-        [DisplayName("Voornaam")]
         [Required]
         [MinLength(2)]
         [MaxLength(30)]
@@ -35,8 +36,7 @@ namespace FestiSpec.Domain.Model
         [DisplayName("Tussenvoegsel")]
         public string Tussenvoegsel { get; set; }
 
-        [Required]
-        [DisplayName("Achternaam")]
+
         [MinLength(2)]
         [MaxLength(30)]
         public string Achternaam { get; set; }
@@ -46,9 +46,6 @@ namespace FestiSpec.Domain.Model
         [MinLength(4)]
         [MaxLength(6)]
         public string Postcode { get; set; }
-
-        [Required]
-        [DisplayName("Huisnummer")]
         [MaxLength(6)]
         public string Huisnummer { get; set; }
 
@@ -74,11 +71,12 @@ namespace FestiSpec.Domain.Model
         public string Email { get; set; }
 
         [Required]
-        [DisplayName("Telefoonnummer")]
+        [MinLength(2)]
+        [MaxLength(15)]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Telefoonnummer voldoet niet aan het format. Klopt hij wel?")]
         public string Telefoonnummer { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Certificaat> Certificaat { get; set; }
     }

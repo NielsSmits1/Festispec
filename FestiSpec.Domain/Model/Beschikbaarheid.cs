@@ -14,7 +14,8 @@ namespace FestiSpec.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Beschikbaarheid
     {
         [Key]
@@ -27,7 +28,7 @@ namespace FestiSpec.Domain.Model
         [Required]
         [DisplayName("Datum")]
         public System.DateTime Datum { get; set; }
-    
+
         public virtual Inspecteur Inspecteur { get; set; }
     }
 }

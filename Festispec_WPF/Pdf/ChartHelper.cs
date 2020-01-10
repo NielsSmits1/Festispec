@@ -15,7 +15,7 @@ namespace Festispec_WPF.Helpers
 {
     public static class ChartHelper
     {
-        private const string Location = "c:\\festispec\\img\\";
+        private const string Location = "D:/documents/temp/";
         public static string GenerateChart(List<string> GivenAwnsers, string chartType)
         {
             var awn = GivenAwnsers.Distinct().OrderBy(a => a).ToArray();
@@ -186,8 +186,6 @@ namespace Festispec_WPF.Helpers
 
         private static void SaveToPng(FrameworkElement visual, string fileName)
         {
-            System.IO.Directory.CreateDirectory("c:\\festispec");
-            System.IO.Directory.CreateDirectory("c:\\festispec\\img");
             var encoder = new PngBitmapEncoder();
             EncodeVisual(visual, fileName, encoder);
         }

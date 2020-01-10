@@ -44,16 +44,6 @@ namespace Festispec_WPF.View
             version.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             title.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             notes.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-
-            if(orderGrid.Items.Count == 0)
-            {
-                errorText.Text = "Vragenlijst moet minimaal 1 vraag bevatten";
-                return;
-            }
-            else
-            {
-                errorText.Text = "";
-            }
         }
     }
 }

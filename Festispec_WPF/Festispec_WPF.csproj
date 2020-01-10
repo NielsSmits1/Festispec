@@ -248,6 +248,9 @@
     <Compile Include="View\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WeekplanningView.xaml.cs">
+      <DependentUpon>WeekplanningView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\CreateQuestionnaire.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,6 +329,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WeekplanningView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -408,6 +415,9 @@
   <ItemGroup>
     <Resource Include="Images\logout.png" />
     <Resource Include="Images\werknemer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rapportages.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -28,12 +28,5 @@ namespace Festispec_WPF.View
         {
             ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Title.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            Location.GetBindingExpression(ListBox.SelectedItemProperty).UpdateSource();
-            customer.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
-        }
     }
 }

@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
+using FestiSpec.Domain.Model;
 using Festispec_WPF.Helpers;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.Pdf;
-using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -17,27 +14,40 @@ namespace Festispec_WPF.ViewModel
 {
     public class RapportageVM : ViewModelBase
     {
+        #region properties
         public ICommand GenerateCommand { get; set; }
-        public ICommand SelectVragenlijst { get; set; }
-        public ICommand OpenPdfButton { get; set; }
-
-        public ICommand BackToStart { get; set; }
-
+        public ICommand SelectInspection { get; set; }
 
         private IUnitOfWork UOW;
 
         private string _chart;
         //public variables
         public ObservableCollection<Question> questions { get; set; }
-        public ObservableCollection<Vragenlijst> vragenlijsten { get; set; }
+        public ObservableCollection<Inspectie> inspecties { get; set; }
+        public ObservableCollection<Inspectie_Wel_Ingevuld_Vragenlijst> vragenlijsten { get; set; }
+
         public ObservableCollection<string> Charts { get; set; }
 
-        public bool loaded
+        //hidden
+        private string _showRapportageSelect;
+        public string showRapportageSelect
         {
-            set
-            {
-                OnLoad();
-            }
+            get { return _showRapportageSelect; }
+            set { _showRapportageSelect = value; RaisePropertyChanged(); }
+        }
+
+        private string _showVragenlijstSelect;
+        public string showVragenlijstSelect
+        {
+            get { return _showVragenlijstSelect; }
+            set { _showVragenlijstSelect = value; RaisePropertyChanged(); }
+        }
+
+        private string _showGenerate;
+        public string showGenerate
+        {
+            get { return _showGenerate; }
+            set { _showGenerate = value; RaisePropertyChanged(); }
         }
 
         public string Chart
@@ -51,142 +61,52 @@ namespace Festispec_WPF.ViewModel
                 _chart = value; RaisePropertyChanged(() => Chart);
             }
         }
+
+        private Inspectie _selectedInspection;
+        public Inspectie selectedInspection
+        {
+            get { return _selectedInspection; }
+            set
+            {
+                _selectedInspection = value;
+                showRapportageSelect = "hidden";
+                showVragenlijstSelect = "visible";
+                vragenlijsten = new ObservableCollection<Inspectie_Wel_Ingevuld_Vragenlijst>(UOW.Inspections.Get(_selectedInspection.Inspectienummer).Inspectie_Wel_Ingevuld_Vragenlijst);
+                RaisePropertyChanged();
+            }
+        }
+
+        private Inspectie _selectedVragenlijst;
+        public Inspectie selectedVragenlijst
+        {
+            get { return _selectedVragenlijst; }
+            set
+            {
+                _selectedVragenlijst = value;
+                showVragenlijstSelect = "hidden";
+                showGenerate = "visible";
+                PrepareGenerate(_selectedVragenlijst.Vragenlijst.First().ID, selectedInspection.Inspectienummer);
+                RaisePropertyChanged();
+            }
+        }
+
         private RapportageInfo _rapportageInfo;
         public RapportageInfo rapportageInfo
         {
             get { return _rapportageInfo; }
             set { _rapportageInfo = value; RaisePropertyChanged(); }
         }
-
-        private RapportageInfo _selectedInspection;
-        public RapportageInfo selectedInspection
-        {
-            get { return _selectedInspection; }
-            set
-            {
-                _selectedInspection = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _AllowTyping;
-        public string AllowTyping
-        {
-            get { return _AllowTyping; }
-            set
-            {
-                _AllowTyping = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private Vragenlijst _selectedVragenlijst;
-        public Vragenlijst selectedVragenlijst
-        {
-            get { return _selectedVragenlijst; }
-            set
-            {
-                _selectedVragenlijst = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _location;
-        public string location
-        {
-            get { return _location; }
-            set
-            {
-                _location = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _advice;
-        public string advice
-        {
-            get { return _advice; }
-            set
-            {
-                _advice = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _introductie;
-        public string introductie
-        {
-            get { return _introductie; }
-            set
-            {
-                _introductie = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _samenvatting;
-        public string samenvatting
-        {
-            get { return _samenvatting; }
-            set
-            {
-                _samenvatting = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _showGenerate;
-        public string showGenerate
-        {
-            get { return _showGenerate; }
-            set
-            {
-                _showGenerate = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _showSucces;
-        public string showSucces
-        {
-            get { return _showSucces; }
-            set
-            {
-                _showSucces = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _showVragenlijst;
-        public string showVragenlijst
-        {
-            get { return _showVragenlijst; }
-            set
-            {
-                _showVragenlijst = value;
-                RaisePropertyChanged();
-            }
-        }
+        #endregion
 
         public RapportageVM()
         {
+            showVragenlijstSelect = "hidden";
+            showGenerate = "hidden";
+
             UOW = ViewModelLocator.UOW;
             GenerateCommand = new RelayCommand(GeneratePdf);
-            SelectVragenlijst = new RelayCommand(SetVragenlijst);
-            OpenPdfButton = new RelayCommand(OpenPdf);
-            BackToStart = new RelayCommand(RapportageOverViewOpen);
-            showVragenlijst = "Visible";
-            showGenerate = "Hidden";
-            showSucces = "Hidden";
-            AllowTyping = "True";
-        }
 
-        void OnLoad()
-        {
-            var _vragenlijst = new List<Vragenlijst>();
-            UOW.Inspections.Get(selectedInspection.Inspectienummer).Inspectie_Wel_Ingevuld_Vragenlijst.ToList().ForEach(a => _vragenlijst.Add(a.Vragenlijst));
-            vragenlijsten = new ObservableCollection<Vragenlijst>(_vragenlijst);
-            RaisePropertyChanged("vragenlijsten");
+            inspecties = new ObservableCollection<Inspectie>(UOW.Inspections.GetAll().Where(a => a.Voltooid == true));
         }
 
         public void PrepareGenerate(int vragenlijstId, int inspectionId)
@@ -205,9 +125,7 @@ namespace Festispec_WPF.ViewModel
                         {
                             Id = a.Openvraag_ID,
                             QuestionTitle = a.Openvraag.Vraag,
-                            GivenAwnsers = new List<string>() { a.Antwoord },
-                            Type = "Open vraag",
-                            Visible = "Hidden"
+                            GivenAwnsers = new List<string>() { a.Antwoord }
                         });
                     });
 
@@ -217,9 +135,7 @@ namespace Festispec_WPF.ViewModel
                         {
                             Id = a.Meerkeuzevraag_ID,
                             QuestionTitle = a.Meerkeuzevraag.Vraag,
-                            GivenAwnsers = new List<string>() { a.Antwoord },
-                            Type = "Meerkeuze vraag",
-                            Visible = "Visible"
+                            GivenAwnsers = new List<string>() { a.Antwoord }
                         });
                     });
 
@@ -230,8 +146,7 @@ namespace Festispec_WPF.ViewModel
                             Id = a.Bijlagevraag_ID,
                             QuestionTitle = a.Bijlagevraag.Vraag,
                             GivenAwnsers = new List<string>() { "data:image/png;base64," + Convert.ToBase64String(a.FileBytes) },
-                            Type = "Bijlage vraag",
-                            Visible = "Hidden"
+                            Type = "img"
                         });
                     });
 
@@ -249,8 +164,7 @@ namespace Festispec_WPF.ViewModel
                             TabelHeadQuestion = a.Tabelvraag.AntwoordKop,
                             GivenAwnsers = new List<string>(awns),
                             TabelHeaders = new List<string>(head),
-                            Type = "Tabel vraag",
-                            Visible = "Hidden"
+                            Type = "tabel"
                         });
                         awns = new List<string>();
                         head = new List<string>();
@@ -263,8 +177,7 @@ namespace Festispec_WPF.ViewModel
                             Id = a.Kaartvraag_ID,
                             QuestionTitle = a.Kaartvraag.Vraag,
                             GivenAwnsers = new List<string>() { "data:image/png;base64," + Convert.ToBase64String(a.Filebytes) },
-                            Type = "Kaart vraag",
-                            Visible = "Hidden"
+                            Type = "img"
                         });
                     });
                 }
@@ -304,75 +217,56 @@ namespace Festispec_WPF.ViewModel
 
             Charts = new ObservableCollection<string>()
             {
+                "",
                 "Bar",
                 "Row",
                 "Pie"
             };
 
-            _rapportageInfo = new RapportageInfo()
+            rapportageInfo = new RapportageInfo()
             {
-                Advice = advice,
+                Advice = "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja." +
+                       "Meer bier drinken de man, ja en bier ja.",
                 CustomerName = inspection.First().Inspectie.Klant.Bedrijfsnaam,
                 Date = DateTime.Now,
                 InspectionTitle = inspection.First().Inspectie.Titel,
-                Introduction = introductie,
-                SummaryOfInspection = samenvatting,
+                Introduction = "Wij Gaan kijken of er genoeg bier is.",
+                SummaryOfInspection = "Er was niet genoeg bier de man.",
                 Questions = vragen
             };
 
-            questions = new ObservableCollection<Question>(_rapportageInfo.Questions);
-            _rapportageInfo.Questions = new List<Question>();
-            RaisePropertyChanged("questions");
+            questions = new ObservableCollection<Question>(rapportageInfo.Questions);
+            rapportageInfo.Questions = new List<Question>();
+            Chart = "Bar";
         }
 
         public void GeneratePdf()
         {
-            _rapportageInfo.Advice = advice;
-            _rapportageInfo.Introduction = introductie;
-            _rapportageInfo.SummaryOfInspection = samenvatting;
-
             var helper = new PdfHelper();
-            _rapportageInfo.Questions.AddRange(questions);
-            location = helper.GeneratePdf(_rapportageInfo);
-            AllowTyping = "False";
-            showSucces = "Visible";
-            showGenerate = "Hidden";
-        }
-
-        public void OpenPdf()
-        {
-            if (File.Exists(location))
-            {
-                Process.Start(location);
-            }
-        }
-
-        public void SetVragenlijst()
-        {
-            showVragenlijst = "Hidden";
-            showGenerate = "Visible";
-            PrepareGenerate((int)selectedVragenlijst.Stamt_af_van_ID, selectedInspection.Inspectienummer);
-        }
-
-        public void RapportageOverViewOpen()
-        {
-            showVragenlijst = "Visible";
-            showGenerate = "Hidden";
-            showSucces = "Hidden";
-            AllowTyping = "True";
-            selectedInspection = null;
-            selectedVragenlijst = null;
-            vragenlijsten = null;
-            questions = null;
-            location = null;
-            advice = "";
-            introductie = "";
-            samenvatting = "";
-
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            var window = new InspectionOverview();
-            window.Show();     
-            currentWindow.Close();
+            rapportageInfo.Questions.AddRange(questions);
+            var location = helper.GeneratePdf(rapportageInfo);
         }
     }
 }
