@@ -474,7 +474,7 @@ namespace Festispec_WPF.ViewModel
         {
             DetailsVisibility = "Visibile";
             PlannedInspectorVisibility = "Hidden";
-            ConfirmVisibility = "Visible";
+            //ConfirmVisibility = "Visible";
         }
 
         private void DrawInspectors()
