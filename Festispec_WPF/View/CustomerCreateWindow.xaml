@@ -136,7 +136,7 @@
                                 <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=IBAN}" Foreground="Red"/>
                             </StackPanel>
                         </Border>
-                        <!--CONTACTPERSOON-->
+
                         <Border Visibility="{Binding ViewAddContactPerson}" Grid.Row="1" BorderBrush="#565656" BorderThickness="15" Margin="30,0">
                             <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
                                 <Label  FontSize="16" FontWeight="Bold" Foreground="White">Contact persoon</Label>

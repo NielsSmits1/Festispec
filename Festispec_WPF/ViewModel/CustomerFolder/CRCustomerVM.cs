@@ -41,7 +41,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _viewAddCustomer = value;
-                RaisePropertyChanged(() => ViewAddCustomer);
+                base.RaisePropertyChanged();
             }
         }
 
@@ -53,7 +53,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _viewAddContactPerson = value;
-                RaisePropertyChanged(() => ViewAddContactPerson);
+                base.RaisePropertyChanged();
             }
         }
         #endregion
@@ -94,7 +94,7 @@ namespace Festispec_WPF.ViewModel
         public CRCustomerVM()
         {
             UOW = ViewModelLocator.UOW;
-            ViewCustomerCreate();
+
             NewCustomer = new CustomerVM();
             NewcontactPerson = new ContactPersonVM();
 
@@ -113,7 +113,7 @@ namespace Festispec_WPF.ViewModel
 
             SearchText = "Zoek klant";
 
-            
+            ViewCustomerCreate();
         }
 
         private void OpenEditCustomerWindow()

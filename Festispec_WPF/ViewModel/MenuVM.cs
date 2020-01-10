@@ -17,6 +17,7 @@ namespace Festispec_WPF.ViewModel
         private HomeScreenView _homeScreenWindow;
         private CustomerCrudWindow _customerCrudWindow;
         private InspectorCrudWindow _inspecteursWindow;
+        private WeekplanningView _weekPlanningWindow;
         private QuestionnaireCRUD _questionnaireView;
         private InspectionOverview _overview;
         public string ErrorVisibility { get; set; }
@@ -31,6 +32,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand ShowInplanVerzoekenCommand { get; set; }
         public ICommand ShowInspecteursCommand { get; set; }
         public ICommand ShowVragenlijstCommand { get; set; }
+        public ICommand ShowKalenderCommand { get; set; }
         public ICommand ShowWerknemerCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
 
@@ -43,6 +45,7 @@ namespace Festispec_WPF.ViewModel
             ShowInplanVerzoekenCommand = new RelayCommand(ShowInplanVerzoeken);
             ShowInspecteursCommand = new RelayCommand(ShowInspecteurs);
             ShowVragenlijstCommand = new RelayCommand(ShowVragenlijst);
+            ShowKalenderCommand = new RelayCommand(ShowKalender);
             ShowInspectionCommand = new RelayCommand(InspectionList);
 
             HasInternet();
@@ -113,7 +116,20 @@ namespace Festispec_WPF.ViewModel
                 LogOut();
             }
         }
-
+        public void ShowKalender()
+        {
+            if (HasInternet())
+            {
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                _weekPlanningWindow = new WeekplanningView();
+                _weekPlanningWindow.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                LogOut();
+            }
+        }
         public void ShowWerknemer()
         { 
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
