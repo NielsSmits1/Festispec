@@ -329,10 +329,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 }
                 basedOfTemplate = false;
             }
-            else
-            {
-                throw new Exception();
-            }
         }
 
         private void SubmitCreatedQuestionnaire()
@@ -346,7 +342,15 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 cancelQuestionnaire();
             }
             catch (Exception)
-            {}
+            {
+                MessageBox.Show("Fout bij invoeren velden", "Er is iets fout gegaan",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            selectedTemplate = new QuestionnaireVM();
+            var newWindow = new QuestionnaireCRUD();
+            currentWindow.Close();
+            newWindow.Show();
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
