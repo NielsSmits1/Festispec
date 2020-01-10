@@ -152,7 +152,7 @@
                                     </TextBox.Text>
                                 </TextBox>
                                 <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=firstName}" Foreground="Red"/>
-                                
+
                                 <Label>tussenvoegsel</Label>
                                 <TextBox Name="prefix" LostFocus="Prefix_LostFocus">
                                     <TextBox.Text>
@@ -164,7 +164,7 @@
                                     </TextBox.Text>
                                 </TextBox>
                                 <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=prefix}" Foreground="Red"/>
-                                
+
                                 <Label>Achternaam</Label>
                                 <TextBox Name="lastName" LostFocus="LastName_LostFocus">
                                     <TextBox.Text>
@@ -176,7 +176,7 @@
                                     </TextBox.Text>
                                 </TextBox>
                                 <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=lastName}" Foreground="Red"/>
-                                
+
                                 <Label>E-mail</Label>
                                 <TextBox Name="mail" LostFocus="Mail_LostFocus">
                                     <TextBox.Text>
@@ -188,7 +188,7 @@
                                     </TextBox.Text>
                                 </TextBox>
                                 <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=mail}" Foreground="Red"/>
-                                
+
                                 <Label>Telefoon nummer</Label>
                                 <TextBox Name="number" LostFocus="Number_LostFocus">
                                     <TextBox.Text>
@@ -202,8 +202,52 @@
                                 <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=number}" Foreground="Red"/>
                             </StackPanel>
                         </Border>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Margin="0,30,40,0" FontSize="24" Width="150" FontWeight="Bold" Foreground="White" Content="Annuleren" Padding="10,10,10,10" Command="{Binding CloseCreateCustomerCommand}" Height="40" Background="#CE3131">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Green"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.8" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Margin="0,20,50,0" FontSize="28" Width="150" FontWeight="Bold" Foreground="White" Content="Opslaan" Padding="10,10,10,10" Command="{Binding CreateCustomerCommand}" Height="50" Background="#8000FF" Click="Button_Click">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Green"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.8" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
                     </Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Margin="0,30,40,0" FontSize="24" Width="150" FontWeight="Bold" Foreground="White" Content="Annuleren" Padding="10,10,10,10" Command="{Binding CloseCreateCustomerCommand}" Height="40" Background="#CE3131">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
@@ -246,7 +290,7 @@
                                 </Style>
                             </Button.Style>
                         </Button>
-                    </StackPanel>
+                    </StackPanel>-->
                 </StackPanel>
             </StackPanel>
         </Grid>
