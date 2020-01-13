@@ -33,6 +33,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand OpenCreateCommand { get; set; }
         public ICommand CloseCreateCommand { get; set; }
         public ICommand RecruitApplicantCommand { get; set; }
+        public ICommand SearchDataGrid { get; set; }
         public InspectorVM NewInspector { get; set; }
 
         public CertificateVM SelectedCertificate
@@ -60,6 +61,21 @@ namespace Festispec_WPF.ViewModel
                 {
                     NewAppInspector.ChosenCertificates.Add(value); AvailableAppCertificates.Remove(value);
                 }
+            }
+        }
+
+        private string _searchText;
+
+        public string searchText
+        {
+            get
+            {
+                return _searchText;
+            }
+            set
+            {
+                _searchText = value;
+                base.RaisePropertyChanged();
             }
         }
 
@@ -175,10 +191,31 @@ namespace Festispec_WPF.ViewModel
             CreateNewInspectorCommand = new RelayCommand(OpenAddInspectorWindow);
             CancelCreate = new RelayCommand(MakeInspectorVisible);
             CancelEditCommand = new RelayCommand(CancelEdit);
-
+            SearchDataGrid = new RelayCommand(searchDatagrid);
 
             Init();
 
+        }
+
+        private void searchDatagrid()
+        {
+            if (searchText == "")
+            {
+                Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)));
+                RaisePropertyChanged("Inspectors");
+            }
+            else
+            {
+                Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.GetAll().ToList().Select(a => new InspectorVM(a)).Where(a => a.FullName.ToLower().Contains(searchText.ToLower())));
+                RaisePropertyChanged("Inspectors");
+            }
+
+            if (Inspectors.Count == 0 && searchText != "")
+            {
+                var inspector = new InspectorVM();
+                inspector.StreetName = "Geen zoekresultaten";
+                Inspectors.Add(inspector);
+            }
         }
 
         public void Init()
@@ -188,6 +225,7 @@ namespace Festispec_WPF.ViewModel
                 AddInspectorVisibility = "Hidden";
                 InspectorVisibility = "Visible";
                 EditVisibility = "Hidden";
+                searchText = "Zoek voor inspecteur";
                 //UOW
                 UOW = ViewModelLocator.UOW;
 
@@ -305,16 +343,19 @@ namespace Festispec_WPF.ViewModel
         // UPDATE 
         public void OpenEditInspector()
         {
-            //SelectedInspector.InspectorData = UOW.Inspectors.GetAll().FirstOrDefault(i => i.NAW == SelectedInspector.NAWInspector_ID);
+            if(SelectedInspector.StreetName != "Geen zoekresultaten")
+            {
+                //SelectedInspector.InspectorData = UOW.Inspectors.GetAll().FirstOrDefault(i => i.NAW == SelectedInspector.NAWInspector_ID);
 
-            SelectedInspector.ChosenCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetCertificatesInspector(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
-            LeftoverCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetMissingCertificates(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
+                SelectedInspector.ChosenCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetCertificatesInspector(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
+                LeftoverCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetMissingCertificates(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
 
-            AddInspectorVisibility = "Hidden";
-            InspectorVisibility = "Hidden";
-            EditVisibility = "Visible";
-            RaisePropertyChanged(() => LeftoverCertificates);
-            RaisePropertyChanged(() => SelectedInspector);
+                AddInspectorVisibility = "Hidden";
+                InspectorVisibility = "Hidden";
+                EditVisibility = "Visible";
+                RaisePropertyChanged(() => LeftoverCertificates);
+                RaisePropertyChanged(() => SelectedInspector);
+            }
         }
 
         public void SafeEditInspector()
@@ -357,22 +398,25 @@ namespace Festispec_WPF.ViewModel
         }
         public void SetInspectorInactive()
         {
-            UOW.Inspectors.SetInspectorInactive(SelectedInspector.NAWInspector_ID);
-            UOW.Complete();
-            switch (_currentlist)
+            if (SelectedInspector.StreetName != "Geen zoekresultaten")
             {
-                case 1:
-                    LoadAll();
-                    break;
-                case 2:
-                    LoadActive();
-                    break;
-                case 3:
-                    LoadInactive();
-                    break;
-                case 4:
-                    LoadLicensed();
-                    break;
+                UOW.Inspectors.SetInspectorInactive(SelectedInspector.NAWInspector_ID);
+                UOW.Complete();
+                switch (_currentlist)
+                {
+                    case 1:
+                        LoadAll();
+                        break;
+                    case 2:
+                        LoadActive();
+                        break;
+                    case 3:
+                        LoadInactive();
+                        break;
+                    case 4:
+                        LoadLicensed();
+                        break;
+                }
             }
         }
 

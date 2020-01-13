@@ -30,6 +30,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand CreateCustomerCommand { get; set; }
         public ICommand CloseCreateCustomerCommand { get; set; }
         public ICommand EditCustomerCommand { get; set; }
+        public ICommand SearchDataGrid { get; set; }
 
         public ICommand DeleteCustomerCommand { get; set; }
 
@@ -75,7 +76,7 @@ namespace Festispec_WPF.ViewModel
 
         private string _searchText;
 
-        public string SearchText
+        public string searchText
         {
             get
             {
@@ -126,23 +127,46 @@ namespace Festispec_WPF.ViewModel
             CreateCustomerCommand = new RelayCommand(AddCustomer);
             CloseCreateCustomerCommand = new RelayCommand(CloseCreateCustomerWindow);
             EditCustomerCommand = new RelayCommand(OpenEditCustomerWindow);
+            SearchDataGrid = new RelayCommand(searchDatagrid);
 
-            SearchText = "Zoek klant";
+            searchText = "Zoek klant";
 
             ViewCustomerCreate();
         }
 
+        private void searchDatagrid()
+        {
+            if (searchText == "")
+            {
+                Customers = new ObservableCollection<CustomerVM>(UOW.Customers.GetAll().ToList().Select(a => new CustomerVM(a)));
+            }
+            else
+            {
+                Customers = new ObservableCollection<CustomerVM>(UOW.Customers.GetAll().ToList().Select(a => new CustomerVM(a)).Where(a => a.CompanyName.ToLower().Contains(searchText.ToLower())));
+            }
+
+            if (Customers.Count == 0 && searchText != "")
+            {
+                var customer = new CustomerVM();
+                customer.CompanyName = "Geen zoekresultaten";
+                Customers.Add(customer);
+            }
+        }
+
         private void OpenEditCustomerWindow()
         {
-            var customerid = SelectedCustomer.CustomerData.ID;
-            var list = UOW.Customers.GetContactPersons(customerid).Select(Contactpersoon => new ContactPersonVM(Contactpersoon));
-            SelectedCustomer.ContactPersons = new ObservableCollection<ContactPersonVM>(list);
+            if(SelectedCustomer.CompanyName != "Geen zoekresultaten")
+            {
+                var customerid = SelectedCustomer.CustomerData.ID;
+                var list = UOW.Customers.GetContactPersons(customerid).Select(Contactpersoon => new ContactPersonVM(Contactpersoon));
+                SelectedCustomer.ContactPersons = new ObservableCollection<ContactPersonVM>(list);
 
-            var currentWindow = System.Windows.Application.Current.Windows.OfType<System.Windows.Window>().SingleOrDefault(x => x.IsActive);
+                var currentWindow = System.Windows.Application.Current.Windows.OfType<System.Windows.Window>().SingleOrDefault(x => x.IsActive);
 
-            CustomerUpdateWindow customerUpdateWindow = new CustomerUpdateWindow();
-            customerUpdateWindow.Show();
-            currentWindow.Close();
+                CustomerUpdateWindow customerUpdateWindow = new CustomerUpdateWindow();
+                customerUpdateWindow.Show();
+                currentWindow.Close();
+            } 
         }
 
         private void CloseCreateCustomerWindow()
