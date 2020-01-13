@@ -26,6 +26,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand CustomerCreateCommand { get; set; }
         public ICommand ViewCreateCustomer { get; set; }
         public ICommand ViewCreateContactPerson { get; set; }
+        public ICommand ViewCreateWishes { get; set; }
         public ICommand CreateCustomerCommand { get; set; }
         public ICommand CloseCreateCustomerCommand { get; set; }
         public ICommand EditCustomerCommand { get; set; }
@@ -56,6 +57,20 @@ namespace Festispec_WPF.ViewModel
                 base.RaisePropertyChanged();
             }
         }
+
+        private string _viewAddWishes;
+
+        public string ViewAddWishes
+        {
+            get { return _viewAddWishes; }
+            set
+            {
+                _viewAddWishes = value;
+                RaisePropertyChanged(() => ViewAddWishes);
+            }
+
+        }
+
         #endregion
 
         private string _searchText;
@@ -107,6 +122,7 @@ namespace Festispec_WPF.ViewModel
             CustomerCreateCommand = new RelayCommand(OpenCustomerCreateWindow);
             ViewCreateCustomer = new RelayCommand(ViewCustomerCreate);
             ViewCreateContactPerson = new RelayCommand(ViewContactPersonCreate);
+            ViewCreateWishes = new RelayCommand(ViewWishesCreate);
             CreateCustomerCommand = new RelayCommand(AddCustomer);
             CloseCreateCustomerCommand = new RelayCommand(CloseCreateCustomerWindow);
             EditCustomerCommand = new RelayCommand(OpenEditCustomerWindow);
@@ -180,12 +196,21 @@ namespace Festispec_WPF.ViewModel
         {
             ViewAddCustomer = "Hidden";
             ViewAddContactPerson = "Visible";
+            ViewAddWishes = "Hidden";
+        }
+
+        private void ViewWishesCreate()
+        {
+            ViewAddCustomer = "Hidden";
+            ViewAddContactPerson = "Hidden";
+            ViewAddWishes = "Visible";
         }
 
         private void ViewCustomerCreate()
         {
             ViewAddCustomer = "Visible";
             ViewAddContactPerson = "Hidden";
+            ViewAddWishes = "Hidden";
         }
 
         private void OpenCustomerCreateWindow()

@@ -37,6 +37,7 @@ namespace Festispec_WPF.ViewModel
             ChosenQuestionnaires = new ObservableCollection<QuestionnaireVM>();
             StartDate = DateTime.Now.Date;
             EndDate = DateTime.Now.Date.AddDays(1);
+            Version = "1";
         }
 
         public InspectionVM(Inspectie inspectie)

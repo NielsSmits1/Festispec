@@ -253,6 +253,7 @@ namespace Festispec_WPF.ViewModel
                 return new OfflineMapVM();
             }
         }
+        public static string CurrentRole { get; set; }
 
 
         public HomeVM Home

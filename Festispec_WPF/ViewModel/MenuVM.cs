@@ -39,11 +39,11 @@ namespace Festispec_WPF.ViewModel
         public MenuVM()
         {
             ShowHomeCommand = new RelayCommand(ShowHome);
-            ShowKlantenCommand = new RelayCommand(ShowKlanten);
-            ShowInplanVerzoekenCommand = new RelayCommand(ShowInplanVerzoeken);
-            ShowInspecteursCommand = new RelayCommand(ShowInspecteurs);
-            ShowVragenlijstCommand = new RelayCommand(ShowVragenlijst);
-            ShowInspectionCommand = new RelayCommand(InspectionList);
+            ShowKlantenCommand = new RelayCommand(ShowKlanten, CanShowKlanten);
+            ShowInplanVerzoekenCommand = new RelayCommand(ShowInplanVerzoeken, CanShowInplanVerzoeken);
+            ShowInspecteursCommand = new RelayCommand(ShowInspecteurs, CanShowInspecteurs);
+            ShowVragenlijstCommand = new RelayCommand(ShowVragenlijst, CanShowVragenlijst);
+            ShowInspectionCommand = new RelayCommand(InspectionList, CanShowInspectionList);
 
             HasInternet();
             ShowWerknemerCommand = new RelayCommand(ShowWerknemer);
@@ -71,6 +71,18 @@ namespace Festispec_WPF.ViewModel
                 LogOut();
             }
         }
+
+        private bool CanShowKlanten()
+        {
+            if (ViewModelLocator.CurrentRole == "Manager" || ViewModelLocator.CurrentRole == "Directie")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public void ShowInplanVerzoeken()
         {
             if (HasInternet())
@@ -83,6 +95,18 @@ namespace Festispec_WPF.ViewModel
             else
             {
                 LogOut();
+            }
+        }
+
+        private bool CanShowInplanVerzoeken()
+        {
+            if (ViewModelLocator.CurrentRole == "Sales" || ViewModelLocator.CurrentRole == "Directie")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         public void ShowInspecteurs()
@@ -99,6 +123,17 @@ namespace Festispec_WPF.ViewModel
                 LogOut();
             }
         }
+        private bool CanShowInspecteurs()
+        {
+            if (ViewModelLocator.CurrentRole == "Sales" || ViewModelLocator.CurrentRole == "Directie")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public void ShowVragenlijst()
         {
             if (HasInternet())
@@ -111,6 +146,18 @@ namespace Festispec_WPF.ViewModel
             else
             {
                 LogOut();
+            }
+        }
+
+        private bool CanShowVragenlijst()
+        {
+            if (ViewModelLocator.CurrentRole == "Sales" || ViewModelLocator.CurrentRole == "Directie")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -158,6 +205,20 @@ namespace Festispec_WPF.ViewModel
             }
             currentWindow.Close();
         }
+
+        private bool CanShowInspectionList()
+        {
+            if (ViewModelLocator.CurrentRole == "Sales" || ViewModelLocator.CurrentRole == "Directie")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
 
         private bool HasInternet()
         {

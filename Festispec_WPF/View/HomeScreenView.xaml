@@ -47,7 +47,7 @@
                     <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
                 </StackPanel>
             </Button>
-            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding ShowInspectionCommand, Source={StaticResource Locator}}">
+            <Button Width="100" Background="Transparent" Height="85" BorderBrush="White" BorderThickness="0,2,0,2" Command="{Binding Menu.ShowInspectionCommand, Source={StaticResource Locator}}">
                 <StackPanel>
                     <Image Source="/Images/rapportages.png"/>
                     <Label Content="Inspecties" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
