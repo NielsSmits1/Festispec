@@ -481,6 +481,7 @@ namespace Festispec_WPF.ViewModel
                 button.Cursor = System.Windows.Input.Cursors.Hand;
                 button.Command = ShowInspectorCommand;
                 button.CommandParameter = inspector.Inspector_ID;
+                pin.Background = new SolidColorBrush(Color.FromArgb(161, 7, 36, 0));
                 pin.Content = button;
                 pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
 
@@ -497,7 +498,7 @@ namespace Festispec_WPF.ViewModel
 
                 Pushpin pin = new Pushpin();
 
-                pin.Background = new SolidColorBrush(Color.FromArgb(100, 100, 100, 100));
+                pin.Background = new SolidColorBrush(Color.FromArgb(151, 29, 252, 0));
                 pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
 
                 MapElements.Add(pin);
@@ -510,7 +511,7 @@ namespace Festispec_WPF.ViewModel
 
                     Pushpin pin = new Pushpin();
 
-                    pin.Background = new SolidColorBrush(Color.FromArgb(100, 100, 100, 100));
+                    pin.Background = new SolidColorBrush(Color.FromArgb(151, 29, 252, 0));
                     pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
 
                     MapElements.Add(pin);
@@ -580,6 +581,9 @@ namespace Festispec_WPF.ViewModel
 
             var json = new JavaScriptSerializer().Serialize(obj);
             System.IO.File.WriteAllText(@"../../inspection.json", json);
+
+            System.Windows.Forms.MessageBox.Show("Inspectie is gedownload voor offline weergave", "Download voltooid",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void searchDatagrid()
