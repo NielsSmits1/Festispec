@@ -50,7 +50,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Vraag" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vraag" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Bijlagevraag_vragenlijst">
           <Key>
@@ -153,7 +153,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Vraag" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vraag" Type="varchar(max)" Nullable="false" />
           <Property Name="FileBytes" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Kaartvraag_vragenlijst">
@@ -189,7 +189,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Vraag" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vraag" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag_antwoord">
           <Key>
@@ -197,7 +197,7 @@
             <PropertyRef Name="Antwoord" />
           </Key>
           <Property Name="Meerkeuzevraag_ID" Type="int" Nullable="false" />
-          <Property Name="Antwoord" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Antwoord" Type="varchar" MaxLength="300" Nullable="false" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag_vragenlijst">
           <Key>
@@ -206,7 +206,7 @@
           </Key>
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
           <Property Name="Meerkeuzevraag_ID" Type="int" Nullable="false" />
-          <Property Name="Antwoord" Type="varchar" MaxLength="50" />
+          <Property Name="Antwoord" Type="varchar(max)" />
           <Property Name="Positie" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="NAW_inspecteur">
@@ -268,7 +268,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Vraag" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vraag" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Openvraag_vragenlijst">
           <Key>
@@ -311,9 +311,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Vraag" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="VraagKop" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="AntwoordKop" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vraag" Type="varchar(max)" Nullable="false" />
+          <Property Name="VraagKop" Type="varchar(max)" Nullable="false" />
+          <Property Name="AntwoordKop" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Tabelvraag_antwoord">
           <Key>
@@ -322,8 +322,8 @@
             <PropertyRef Name="Vragenlijst_ID" />
           </Key>
           <Property Name="Tabelvraag_ID" Type="int" Nullable="false" />
-          <Property Name="Situatie" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Antwoord" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Situatie" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Antwoord" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tabelvraag_situatie">
@@ -332,7 +332,7 @@
             <PropertyRef Name="Situatie" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Situatie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Situatie" Type="varchar" MaxLength="300" Nullable="false" />
         </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
           <Key>
@@ -1199,7 +1199,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vraag" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Bijlagevraag_vragenlijst" Relationship="Self.FK_Bijlagevraag_vragenlijst_Bijlagevraag" FromRole="Bijlagevraag" ToRole="Bijlagevraag_vragenlijst" />
         </EntityType>
         <EntityType Name="Bijlagevraag_vragenlijst">
@@ -1303,7 +1303,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vraag" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FileBytes" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="Kaartvraag_vragenlijst" Relationship="Self.FK_Kaartvraag_vragenlijst_Kaartvraag" FromRole="Kaartvraag" ToRole="Kaartvraag_vragenlijst" />
         </EntityType>
@@ -1347,7 +1347,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vraag" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Meerkeuzevraag_antwoord" Relationship="Self.FK_Meerkeuzevraag_antwoord_Meerkeuzevraag" FromRole="Meerkeuzevraag" ToRole="Meerkeuzevraag_antwoord" />
           <NavigationProperty Name="Meerkeuzevraag_vragenlijst" Relationship="Self.FK_Meerkeuzevraag_vragenlijst_Meerkeuzevraag" FromRole="Meerkeuzevraag" ToRole="Meerkeuzevraag_vragenlijst" />
         </EntityType>
@@ -1357,7 +1357,7 @@
             <PropertyRef Name="Antwoord" />
           </Key>
           <Property Name="Meerkeuzevraag_ID" Type="Int32" Nullable="false" />
-          <Property Name="Antwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Antwoord" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Meerkeuzevraag" Relationship="Self.FK_Meerkeuzevraag_antwoord_Meerkeuzevraag" FromRole="Meerkeuzevraag_antwoord" ToRole="Meerkeuzevraag" />
         </EntityType>
         <EntityType Name="Meerkeuzevraag_vragenlijst">
@@ -1367,7 +1367,7 @@
           </Key>
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <Property Name="Meerkeuzevraag_ID" Type="Int32" Nullable="false" />
-          <Property Name="Antwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Antwoord" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Positie" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Meerkeuzevraag" Relationship="Self.FK_Meerkeuzevraag_vragenlijst_Meerkeuzevraag" FromRole="Meerkeuzevraag_vragenlijst" ToRole="Meerkeuzevraag" />
           <NavigationProperty Name="Vragenlijst" Relationship="Self.FK_Meerkeuzevraag_vragenlijst_Vragenlijst" FromRole="Meerkeuzevraag_vragenlijst" ToRole="Vragenlijst" />
@@ -1435,7 +1435,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vraag" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Openvraag_vragenlijst" Relationship="Self.FK_Openvraag_vragenlijst_Openvraag" FromRole="Openvraag" ToRole="Openvraag_vragenlijst" />
         </EntityType>
         <EntityType Name="Openvraag_vragenlijst">
@@ -1483,9 +1483,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Vraag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="VraagKop" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AntwoordKop" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vraag" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VraagKop" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AntwoordKop" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Tabelvraag_antwoord" Relationship="Self.FK_Tabelvraag_antwoord_Tabelvraag" FromRole="Tabelvraag" ToRole="Tabelvraag_antwoord" />
           <NavigationProperty Name="Tabelvraag_vragenlijst" Relationship="Self.FK_Tabelvraag_vragenlijst_Tabelvraag" FromRole="Tabelvraag" ToRole="Tabelvraag_vragenlijst" />
           <NavigationProperty Name="Tabelvraag_situatie" Relationship="FestiSpecModel.FK_Tabelvraag_situatie_ID" FromRole="Tabelvraag" ToRole="Tabelvraag_situatie" />
@@ -1497,8 +1497,8 @@
             <PropertyRef Name="Vragenlijst_ID" />
           </Key>
           <Property Name="Tabelvraag_ID" Type="Int32" Nullable="false" />
-          <Property Name="Situatie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Antwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Situatie" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Antwoord" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Vragenlijst_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tabelvraag" Relationship="Self.FK_Tabelvraag_antwoord_Tabelvraag" FromRole="Tabelvraag_antwoord" ToRole="Tabelvraag" />
         </EntityType>
@@ -1508,7 +1508,7 @@
             <PropertyRef Name="Situatie" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Situatie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Situatie" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Tabelvraag" Relationship="FestiSpecModel.FK_Tabelvraag_situatie_ID" FromRole="Tabelvraag_situatie" ToRole="Tabelvraag" />
         </EntityType>
         <EntityType Name="Tabelvraag_vragenlijst">
