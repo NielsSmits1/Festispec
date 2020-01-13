@@ -265,70 +265,80 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         }
         private void SubmitQuestionnaire()
         {
-            if (selectedTemplate == null)
+            if (newQuestionnaireVM.questions.Count() != 0)
             {
-                basedOfTemplate = false;
-            }
-            else
-            {
-                basedOfTemplate = true;
-            }
-
-            if (newQuestionnaireVM.Title != null & newQuestionnaireVM.Version != null)
-            {
-
-                newQuestionnaireVM.IsFilled = false;
-                if (Template)
+                if (selectedTemplate == null)
                 {
-                    newQuestionnaireVM.IsActive = false;
+                    basedOfTemplate = false;
                 }
                 else
                 {
-                    newQuestionnaireVM.IsActive = true;
-                }
-                UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
-
-                saveToDatabase();
-
-                if (basedOfTemplate)
-                {
-                    FixPostions(newQuestionnaireVM.questions);
-
-                    var deletelist = new ObservableCollection<IQuestion>();
-                    foreach (IQuestion question in newQuestionnaireVM.questions)
-                    {
-                        if (question.ID != 0)
-                        {
-                            deletelist.Add(question);
-                        }
-                    }
-                    foreach (var q in deletelist)
-                    {
-                        newQuestionnaireVM.questions.Remove(q);
-                        q.addNewLink(newQuestionnaireVM.ID);
-                    }
+                    basedOfTemplate = true;
                 }
 
-                foreach (IQuestion question in newQuestionnaireVM.questions)
+                if (newQuestionnaireVM.Title != null & newQuestionnaireVM.Version != null)
                 {
-                    if (!basedOfTemplate)
+
+                    newQuestionnaireVM.IsFilled = false;
+                    if (Template)
                     {
-                        question.Position = newQuestionnaireVM.questions.IndexOf(question);
+                        newQuestionnaireVM.IsActive = false;
                     }
-
-                    question.toDatabase(newQuestionnaireVM.ID);
-                }
-
-                if (basedOfTemplate)
-                {
-                    UOW.Context.Vragenlijst.Find(_newQuestionnaireVM.ID).Stamt_af_van_ID = UOW.Context.Template.Where(t => t.Vragenlijst_ID == selectedTemplate.ID).Select(t => t.ID).FirstOrDefault();
-
-                    clearSelectedTemplate(selectedTemplate);
+                    else
+                    {
+                        newQuestionnaireVM.IsActive = true;
+                    }
+                    UOW.Questionnaires.Add(newQuestionnaireVM.ToModel());
 
                     saveToDatabase();
+
+                    if (basedOfTemplate)
+                    {
+                        FixPostions(newQuestionnaireVM.questions);
+
+                        var deletelist = new ObservableCollection<IQuestion>();
+                        foreach (IQuestion question in newQuestionnaireVM.questions)
+                        {
+                            if (question.ID != 0)
+                            {
+                                deletelist.Add(question);
+                            }
+                        }
+                        foreach (var q in deletelist)
+                        {
+                            newQuestionnaireVM.questions.Remove(q);
+                            q.addNewLink(newQuestionnaireVM.ID);
+                        }
+                    }
+
+                    foreach (IQuestion question in newQuestionnaireVM.questions)
+                    {
+                        if (!basedOfTemplate)
+                        {
+                            question.Position = newQuestionnaireVM.questions.IndexOf(question);
+                        }
+
+                        question.toDatabase(newQuestionnaireVM.ID);
+                    }
+
+                    if (basedOfTemplate)
+                    {
+                        UOW.Context.Vragenlijst.Find(_newQuestionnaireVM.ID).Stamt_af_van_ID = UOW.Context.Template.Where(t => t.Vragenlijst_ID == selectedTemplate.ID).Select(t => t.ID).FirstOrDefault();
+
+                        clearSelectedTemplate(selectedTemplate);
+
+                        saveToDatabase();
+                    }
+                    basedOfTemplate = false;
                 }
-                basedOfTemplate = false;
             }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Er moeten vragen zijn toegevoegd voor het aanmaken van een vragenlijst", "Er moeten vragen zijn toegevoegd voor het aanmaken van een vragenlijst",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
         }
 
         private void SubmitCreatedQuestionnaire()
