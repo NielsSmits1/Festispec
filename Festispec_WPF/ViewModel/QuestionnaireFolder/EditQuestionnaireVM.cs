@@ -184,37 +184,49 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         private void Submit()
         {
-            var updateQuestionnaire = UOW.Context.Vragenlijst.FirstOrDefault(q => q.ID == EditetQuestionnaireVM.ID);
-            updateQuestionnaire = EditetQuestionnaireVM.questionnaireData;
-            foreach(IQuestion q in newQuestions)
-            {
-                EditetQuestionnaireVM.questions.Remove(q);
-                q.toDatabase(EditetQuestionnaireVM.ID);
-            }
-            foreach(IQuestion q in deleteQuestions)
-            {
-                q.deleteConnection(EditetQuestionnaireVM.ID);
-            }
-            foreach(IQuestion q in EditetQuestionnaireVM.questions)
-            {
-                q.updateLink(EditetQuestionnaireVM.ID);
-            }
-            try
-            {
-                UOW.Complete();
-                var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                var crud = new QuestionnaireCRUD();
-                crud.Show();
-                currentWindow.Close();
+           
+                var updateQuestionnaire = UOW.Context.Vragenlijst.FirstOrDefault(q => q.ID == EditetQuestionnaireVM.ID);
+                updateQuestionnaire = EditetQuestionnaireVM.questionnaireData;
 
-                //cancelQuestionnaire();
-            }
-            catch
+            if (EditetQuestionnaireVM.questions.Count() != 0)
             {
-                System.Windows.Forms.MessageBox.Show("Fout bij invoeren velden", "Er is iets fout gegaan",
+                foreach (IQuestion q in newQuestions)
+                {
+                    EditetQuestionnaireVM.questions.Remove(q);
+                    q.toDatabase(EditetQuestionnaireVM.ID);
+                }
+                foreach (IQuestion q in deleteQuestions)
+                {
+                    q.deleteConnection(EditetQuestionnaireVM.ID);
+                }
+                foreach (IQuestion q in EditetQuestionnaireVM.questions)
+                {
+                    q.updateLink(EditetQuestionnaireVM.ID);
+                }
+                try
+                {
+                    UOW.Complete();
+                    var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                    var crud = new QuestionnaireCRUD();
+                    crud.Show();
+                    currentWindow.Close();
+
+                    //cancelQuestionnaire();
+                }
+                catch
+                {
+                    System.Windows.Forms.MessageBox.Show("Fout bij invoeren velden", "Er is iets fout gegaan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Er moeten vragen zijn toegevoegd voor het aanmaken van een vragenlijst", "Er moeten vragen zijn toegevoegd voor het aanmaken van een vragenlijst",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
