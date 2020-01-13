@@ -653,10 +653,10 @@ namespace Festispec_WPF.ViewModel
 
             var festivalLocation = getFestivalLocation(null);
 
-                if(inpsector_id != null)
-                {
-                    SelectedInspector = new InspectorVM(_UOW.Inspectors.Find(i => i.ID == (int)inpsector_id).FirstOrDefault());
-                }
+            if(inpsector_id != null)
+            {
+                SelectedInspector = new InspectorVM(_UOW.Inspectors.Find(i => i.ID == (int)inpsector_id).FirstOrDefault());
+            }
 
             var inspectorLocation = getInspectorLocation(null);
 
@@ -665,11 +665,11 @@ namespace Festispec_WPF.ViewModel
 
         public void selectSingleInspector(object inspector_id)
         {
-                var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i)).Where(i => i.Inspector_ID == (int)inspector_id);
-                SingleInspector = new ObservableCollection<InspectorVM>(inspectorList);
-                calculateSingleRoute(getInspectorLocation(inspectorList.First()), getFestivalLocation(SelectedFestival), SingleInspector.First());
+            var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i)).Where(i => i.Inspector_ID == (int)inspector_id);
+            SingleInspector = new ObservableCollection<InspectorVM>(inspectorList);
+            calculateSingleRoute(getInspectorLocation(inspectorList.First()), getFestivalLocation(SelectedFestival), SingleInspector.First());
 
-                RaisePropertyChanged("SingleInspector");
+            RaisePropertyChanged("SingleInspector");
         }
 
         private void calculateDistances()
@@ -830,6 +830,7 @@ namespace Festispec_WPF.ViewModel
         {
             calculateDistances();
             AvailableInspectorsVisibility = "Visible";
+            MapVisibility = "Visible";
         }
 
         private void cancelPlanning()

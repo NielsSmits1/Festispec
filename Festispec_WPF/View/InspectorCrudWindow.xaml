@@ -223,7 +223,11 @@
                             <ColumnDefinition Width="300"/>
                         </Grid.ColumnDefinitions>
                         <!--SEARCH BAR-->
-                        <TextBox Text="Zoek voor inspecteur" FontSize="15" BorderBrush="Black" VerticalAlignment="Center" Height="25"></TextBox>
+                        <TextBox Text="{Binding searchText, UpdateSourceTrigger=PropertyChanged}" FontSize="15" BorderBrush="Black" VerticalAlignment="Center" Height="25">
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding SearchDataGrid}" Key="Enter" />
+                            </TextBox.InputBindings>
+                        </TextBox>
                         <!--CREATE BUTTON-->
                         <Button Width="200" Height="25" FontSize="16"
                             Foreground="White" FontWeight="Bold" Background="#8000FF" 

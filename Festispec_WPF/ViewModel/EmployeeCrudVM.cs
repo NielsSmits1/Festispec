@@ -78,6 +78,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand OpenRegisterCommand { get; set; }
         public ICommand ChangeViewToEdit { get; set; }
         public ICommand CancelEdit { get; set; }
+        public ICommand SearchDataGrid { get; set; }
 
         public EmployeeVM SelectedEmployee
         {
@@ -88,6 +89,21 @@ namespace Festispec_WPF.ViewModel
                 IsSelected = true;
                 EnableEdit = "Visible";
                 RaisePropertyChanged();
+            }
+        }
+
+        private string _searchText;
+
+        public string searchText
+        {
+            get
+            {
+                return _searchText;
+            }
+            set
+            {
+                _searchText = value;
+                base.RaisePropertyChanged();
             }
         }
 
@@ -102,6 +118,7 @@ namespace Festispec_WPF.ViewModel
             EmployeeVisibility = "Visible";
             EditVisibility = "Hidden";
             EnableEdit = "Hidden";
+            searchText = "Zoek voor medewerker";
 
             //List of all Emmployees - Read
             LoadAll();
@@ -112,8 +129,30 @@ namespace Festispec_WPF.ViewModel
             OpenRegisterCommand = new RelayCommand(OpenRegister);
             ChangeViewToEdit = new RelayCommand(OpenEditView);
             CancelEdit = new RelayCommand(MakeEmployeeVisible);
+            SearchDataGrid = new RelayCommand(searchDatagrid);
         }
-        
+
+        private void searchDatagrid()
+        {
+            if (searchText == "")
+            {
+                Employees = new ObservableCollection<EmployeeVM>(UOW.NawEmployee.GetAll().ToList().Select(e => new EmployeeVM(e)));
+                RaisePropertyChanged("Employees");
+            }
+            else
+            {
+                Employees = new ObservableCollection<EmployeeVM>(UOW.NawEmployee.GetAll().ToList().Select(e => new EmployeeVM(e)).Where(e => e.FullName.ToLower().Contains(searchText.ToLower())));
+                RaisePropertyChanged("Employees");
+            }
+
+            if (Employees.Count == 0 && searchText != "")
+            {
+                var employee = new EmployeeVM();
+                employee.LastName = "Geen zoekresultaten";
+                Employees.Add(employee);
+            }
+        }
+
         private void MakeEmployeeVisible()
         {
             EditVisibility = "Hidden";
@@ -122,8 +161,11 @@ namespace Festispec_WPF.ViewModel
 
         private void OpenEditView()
         {
-            EditVisibility = "Visible";
-            EmployeeVisibility = "Hidden";
+            if (SelectedEmployee.LastName != "Geen zoekresultaten")
+            {
+                EditVisibility = "Visible";
+                EmployeeVisibility = "Hidden";
+            }
         }
 
         private void OpenRegister()
