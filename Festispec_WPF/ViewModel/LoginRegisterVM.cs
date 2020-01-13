@@ -42,28 +42,6 @@ namespace Festispec_WPF.ViewModel
         {
             if (Password != null && Username != null)
             {
-                // Window was corrupt
-                // var targetPerson = UOW.Employee.GetAll()
-                //     .FirstOrDefault(e => e.Wachtwoord == Password && e.Username == Username);
-
-                // if (targetPerson == null)
-                // {
-                //     Console.WriteLine("failed to login");
-                //     System.Windows.Forms.MessageBox.Show("Incorrecte login gegevens", "Fout bij invoeren velden",
-                //       MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // }
-                // else
-                // {
-                //     Console.WriteLine("login ok");
-                //     Username = "";
-                //     Password = "";
-                //     RaisePropertyChanged(() => Username);
-                //     RaisePropertyChanged(() => Password);
-                //     var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                //     HomeScreenView home = new HomeScreenView();
-                //     home.Show();
-                //     currentWindow.Close();
-                // }
                 if (HasInternet())
                 {
                     //Window was corrupt
@@ -90,6 +68,7 @@ namespace Festispec_WPF.ViewModel
                         Console.WriteLine("login ok");
                         Username = "";
                         Password = "";
+                        ViewModelLocator.CurrentRole = targetPerson.Rol;
                         RaisePropertyChanged(() => Username);
                         RaisePropertyChanged(() => Password);
                         HomeScreenView home = new HomeScreenView();

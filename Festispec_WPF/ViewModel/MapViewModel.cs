@@ -944,7 +944,7 @@ namespace Festispec_WPF.ViewModel
             }
             catch (Exception){}
 
-            NewLocation = null;
+            //NewLocation = null;
             _UOW.Inspections.Add(NewInspection.Inspection);
 
             foreach (var item in NewInspection.ChosenCertificates)
@@ -962,7 +962,7 @@ namespace Festispec_WPF.ViewModel
                 _UOW.Complete();
                 _createWindow.Close();
                 LoadFestivals();
-
+                CloseCreate();
             }
             catch
             {

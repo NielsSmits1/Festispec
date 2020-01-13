@@ -139,7 +139,7 @@
             <Label Content="Lijst van klanten" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" ></Label>
             <ComboBox Name="customer" Grid.Row="1" Grid.Column="3" MaxWidth="200" ItemsSource="{Binding Customers}" >
                 <ComboBox.SelectedItem>
-                    <Binding Path="NewSelectedCustomer">
+                    <Binding Path="NewSelectedCustomer" Mode="TwoWay">
                         <Binding.ValidationRules>
                             <validationrules:EmptyValidator />
                         </Binding.ValidationRules>
