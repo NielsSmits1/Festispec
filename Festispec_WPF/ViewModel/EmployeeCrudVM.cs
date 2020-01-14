@@ -230,6 +230,7 @@ namespace Festispec_WPF.ViewModel
         {
             try
             {
+                NewEmployee.Active = true;
                 UOW.NawEmployee.Add(NewEmployee.NAWWerknemer);
                 UOW.Employee.Add(NewEmployee.Werknemer);
                 UOW.Complete();
