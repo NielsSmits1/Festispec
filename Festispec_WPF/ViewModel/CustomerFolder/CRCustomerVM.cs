@@ -31,7 +31,6 @@ namespace Festispec_WPF.ViewModel
         public ICommand CloseCreateCustomerCommand { get; set; }
         public ICommand EditCustomerCommand { get; set; }
         public ICommand SearchDataGrid { get; set; }
-
         public ICommand DeleteCustomerCommand { get; set; }
 
         #region visibility properties
@@ -39,7 +38,7 @@ namespace Festispec_WPF.ViewModel
 
         public string ViewAddCustomer
         {
-            get { return _viewAddCustomer; }
+            get => _viewAddCustomer;
             set
             {
                 _viewAddCustomer = value;
@@ -51,7 +50,7 @@ namespace Festispec_WPF.ViewModel
 
         public string ViewAddContactPerson
         {
-            get { return _viewAddContactPerson; }
+            get => _viewAddContactPerson;
             set
             {
                 _viewAddContactPerson = value;
@@ -63,25 +62,20 @@ namespace Festispec_WPF.ViewModel
 
         public string ViewAddWishes
         {
-            get { return _viewAddWishes; }
+            get => _viewAddWishes;
             set
             {
                 _viewAddWishes = value;
                 RaisePropertyChanged(() => ViewAddWishes);
             }
-
         }
-
         #endregion
 
         private string _searchText;
 
         public string searchText
         {
-            get
-            {
-                return _searchText;
-            }
+            get => _searchText;
             set
             {
                 _searchText = value;
@@ -97,10 +91,7 @@ namespace Festispec_WPF.ViewModel
 
         public ObservableCollection<CustomerVM> Customers
         {
-            get
-            {
-                return _customers;
-            }
+            get => _customers;
             set
             {
                 _customers = value;
@@ -112,10 +103,8 @@ namespace Festispec_WPF.ViewModel
             UOW = ViewModelLocator.UOW;
 
             NewCustomer = new CustomerVM();
-            NewcontactPerson = new ContactPersonVM();
-
-            NewcontactPerson.customer = NewCustomer;
-
+            NewcontactPerson = new ContactPersonVM {customer = NewCustomer};
+            
             UOW.Complete();
 
             Customers = new ObservableCollection<CustomerVM>(UOW.Customers.GetAll().ToList().Select(a => new CustomerVM(a)));
@@ -200,11 +189,11 @@ namespace Festispec_WPF.ViewModel
                 return;
             }
             Customers = new ObservableCollection<CustomerVM>(UOW.Customers.GetAll().ToList().Select(a => new CustomerVM(a)));
-            NewCustomer = new CustomerVM();
-            NewCustomer.NAW_Klant = new NAW_KlantVM();
-            NewCustomer.ContactPersons = new ObservableCollection<ContactPersonVM>();
-            NewcontactPerson = new ContactPersonVM();
-            NewcontactPerson.customer = NewCustomer;
+            NewCustomer = new CustomerVM
+            {
+                NAW_Klant = new NAW_KlantVM(), ContactPersons = new ObservableCollection<ContactPersonVM>()
+            };
+            NewcontactPerson = new ContactPersonVM {customer = NewCustomer};
             RaisePropertyChanged(() => NewCustomer);
             RaisePropertyChanged(() => NewCustomer.NAW_Klant);
             RaisePropertyChanged(() => NewCustomer.ContactPersons);
