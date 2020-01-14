@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
-        Title="EditInspectionWindow" Height="800" Width="800" WindowState="Maximized"
+        Title="CreateInspectionWindow" Height="800" Width="800" WindowState="Maximized"
         DataContext="{Binding MapView, Source={StaticResource Locator}}">
     <StackPanel Background="Gray">
         <Label Content="Inspectie aanmaken" FontSize="30" Foreground="White" HorizontalAlignment="Center"/>
@@ -112,10 +112,10 @@
             </Grid.RowDefinitions>
             <Label Content="StartDatum:" FontSize="15" Foreground="Black" Grid.Row="1"></Label>
             <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="1,0,65,0" ></Label>
-            <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding NewInspection.StartDate, Mode=TwoWay}" Margin="1,0,65,0"/>
+            <DatePicker Name="startdate" Grid.Row="1" Grid.Column="1" SelectedDate="{Binding NewInspection.StartDate, Mode=TwoWay}" Margin="1,0,65,0"/>
             <Label Content="EindDatum:" Grid.Row="1" Grid.Column="2" FontSize="15" Foreground="Black"></Label>
             <Label Content="Selecteer een datum" FontSize="10" Foreground="Gray" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Margin="1,0,65,0" ></Label>
-            <DatePicker Grid.Row="1" Grid.Column="3" SelectedDate="{Binding NewInspection.EndDate, Mode=TwoWay}"/>
+            <DatePicker Name="enddate" Grid.Row="1" Grid.Column="3" SelectedDate="{Binding NewInspection.EndDate, Mode=TwoWay}"/>
         </Grid>
 
         <Border BorderThickness="1" BorderBrush="White"/>
@@ -219,8 +219,9 @@
             </ListBox>
         </Grid>
         <Border BorderBrush="White" BorderThickness="3" />
+            <Label Name="errorText" Foreground="Red" />
             <Button Margin="0,10"  Content="Inspectie aanmaken" Command="{Binding CreateNewInspectionCommand}" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Width="150" Height="30" Cursor="Hand" Click="Button_Click">
-            <Button.Style>
+              <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Green"/>
                     <Setter Property="Template">

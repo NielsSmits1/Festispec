@@ -276,7 +276,7 @@
                                         <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=cityName}" Foreground="Red"/>
 
                                         <TextBlock Text="Geboortedatum" />
-                                        <DatePicker Text="{Binding SelectedEmployee.DoB, Mode=TwoWay}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                        <DatePicker SelectedDate="{Binding SelectedEmployee.DoB, Mode=TwoWay, StringFormat='yyyy/MM/dd'}" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
 
                                     <!-- right row -->

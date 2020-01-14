@@ -14,6 +14,7 @@ using Festispec_WPF.View;
 using MessageBox = System.Windows.Forms.MessageBox;
 using System.Windows.Data;
 using FestiSpec.Domain.Model;
+using Application = System.Windows.Application;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -155,8 +156,18 @@ namespace Festispec_WPF.ViewModel
 
         private void MakeEmployeeVisible()
         {
-            EditVisibility = "Hidden";
-            EmployeeVisibility = "Visible";
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            if(currentWindow.Title == "RegisterView")
+            {
+                var employeeView = new EmployeeView();
+                employeeView.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                EditVisibility = "Hidden";
+                EmployeeVisibility = "Visible";
+            }
         }
 
         private void OpenEditView()
@@ -170,9 +181,11 @@ namespace Festispec_WPF.ViewModel
 
         private void OpenRegister()
         {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             NewEmployee = new EmployeeVM();
             _window = new RegisterView();
             _window.Show();
+            currentWindow.Close();
         }
 
 
