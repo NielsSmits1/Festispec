@@ -33,9 +33,7 @@ namespace Festispec_WPF.Helpers
             else
                 myChart = GeneratePie(awn, values);
 
-
-            var viewbox = new Viewbox();
-            viewbox.Child = myChart;
+            var viewbox = new Viewbox {Child = myChart};
             viewbox.Measure(myChart.RenderSize);
             viewbox.Arrange(new Rect(new Point(0, 0), myChart.RenderSize));
             myChart.Update(true, true); //force chart redraw
@@ -43,7 +41,6 @@ namespace Festispec_WPF.Helpers
 
             var name = DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss-fff") + ".png";
             SaveToPng(myChart, name);
-
 
             return Location + name;
         }
@@ -89,7 +86,6 @@ namespace Festispec_WPF.Helpers
                 },
                 FontSize = 25
             };
-
 
             myChart.AxisX.Add(countAxis);
             myChart.AxisY.Add(awnsersAxis);

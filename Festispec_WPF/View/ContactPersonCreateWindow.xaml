@@ -59,9 +59,6 @@
                                 <TextBox Name="prefix" LostFocus="Prefix_LostFocus">
                                     <TextBox.Text>
                                         <Binding Path="NewcontactPerson.Affix" Mode="TwoWay">
-                                            <Binding.ValidationRules>
-                                                <validationrules:EmptyValidator />
-                                            </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
@@ -103,11 +100,6 @@
                                     </TextBox.Text>
                                 </TextBox>
                                 <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=mail}" Foreground="Red"/>
-
-                                <Label  FontSize="16" FontWeight="Bold" Foreground="White">Actief</Label>
-                                <Border BorderBrush="White" BorderThickness="2"/>
-                                <Label>actief</Label>
-                                <TextBox Text="{Binding NewcontactPerson.Active, Mode=TwoWay}"></TextBox>
                             </StackPanel>
                         </Border>
                     </Grid>

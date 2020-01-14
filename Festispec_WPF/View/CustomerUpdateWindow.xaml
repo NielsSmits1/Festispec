@@ -269,9 +269,6 @@
                                 <TextBox Name="prefix" LostFocus="Prefix_LostFocus">
                                     <TextBox.Text>
                                         <Binding Path="Affix">
-                                            <Binding.ValidationRules>
-                                                <validationrules:EmptyValidator />
-                                            </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
@@ -309,6 +306,7 @@
                                         <Binding Path="Email">
                                             <Binding.ValidationRules>
                                                 <validationrules:EmptyValidator />
+                                                <validationrules:EmailValidator />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
