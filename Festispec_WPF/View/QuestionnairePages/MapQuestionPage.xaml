@@ -16,7 +16,7 @@
             <Label  FontSize="13" FontWeight="Bold">Aanmaken kaartvraag</Label>
             
             <TextBlock Text="Vraag:"></TextBlock>
-            <TextBox Name="question" LostFocus="Question_LostFocus">
+            <TextBox Name="question" LostFocus="Question_LostFocus" Width="1000" Height="50" TextWrapping="Wrap">
                 <TextBox.Text>
                     <Binding Path="NewMapQuestion.Question" Mode="TwoWay">
                         <Binding.ValidationRules>

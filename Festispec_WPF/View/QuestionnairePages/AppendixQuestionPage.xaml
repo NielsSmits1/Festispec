@@ -13,7 +13,7 @@
     <StackPanel HorizontalAlignment="Center">
         <Label  FontSize="13" FontWeight="Bold">Aanmaken bijlagevraag</Label>
         <TextBlock Text="Vraag:"></TextBlock>
-        <TextBox Name="question" LostFocus="Question_LostFocus">
+        <TextBox Name="question" LostFocus="Question_LostFocus" Height="75" Width="1000" TextWrapping="Wrap">
             <TextBox.Text>
                 <Binding Path="NewAppendixQuestion.Question" Mode="TwoWay">
                     <Binding.ValidationRules>
