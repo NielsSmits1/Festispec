@@ -72,6 +72,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand ChangeViewToEdit { get; set; }
         public ICommand CancelEdit { get; set; }
         public ICommand SearchDataGrid { get; set; }
+        public ICommand CloseCreateCommand { get; set; }
 
         public EmployeeVM SelectedEmployee
         {
@@ -120,6 +121,7 @@ namespace Festispec_WPF.ViewModel
             ChangeViewToEdit = new RelayCommand(OpenEditView);
             CancelEdit = new RelayCommand(MakeEmployeeVisible);
             SearchDataGrid = new RelayCommand(searchDatagrid);
+            CloseCreateCommand = new RelayCommand(CloseCreate);
         }
 
         private void searchDatagrid()
@@ -147,6 +149,11 @@ namespace Festispec_WPF.ViewModel
         {
             EditVisibility = "Hidden";
             EmployeeVisibility = "Visible";
+        }
+
+        private void CloseCreate()
+        {
+            _window.Close();
         }
 
         private void OpenEditView()

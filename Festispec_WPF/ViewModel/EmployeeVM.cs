@@ -22,6 +22,7 @@ namespace Festispec_WPF.ViewModel
             GetAllRoles();
             _werknemer = new Werknemer();
             _nawWerknemer = new NAW_werknemer();
+            DoB = DateTime.Now.AddYears(-18).Date;
         }
 
         public EmployeeVM(Werknemer werknemer)
@@ -29,7 +30,6 @@ namespace Festispec_WPF.ViewModel
             UOW = ViewModelLocator.UOW;
             _werknemer = werknemer;
             _nawWerknemer = UOW.NawEmployee.Get(werknemer.NAW);
-            DoB = DateTime.Now.Date;
         }
 
         public EmployeeVM(NAW_werknemer ne)
@@ -134,7 +134,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 _nawWerknemer.GeboorteDatum = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged(() => DoB);
             }
         }
 

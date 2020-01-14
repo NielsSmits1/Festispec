@@ -110,7 +110,7 @@
                             <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=cityName}" Foreground="Red"/>
 
                             <TextBlock Text="Geboortedatum" />
-                            <DatePicker Text="{Binding NewEmployee.DoB, Mode=TwoWay}"/>
+                            <DatePicker SelectedDate="{Binding NewEmployee.DoB, Mode=TwoWay}"/>
                         </StackPanel>
 
                         <!-- right row -->
@@ -184,7 +184,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Width="150" Height="30" FontSize="18" Content="Annuleren" 
                             Foreground="White" FontWeight="Bold" Margin="0,0,20,20" Background="#CE3131" 
-                            VerticalAlignment="Bottom" Command="{Binding CancelEdit}">
+                            VerticalAlignment="Bottom" Command="{Binding CloseCreateCommand}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Green"/>
