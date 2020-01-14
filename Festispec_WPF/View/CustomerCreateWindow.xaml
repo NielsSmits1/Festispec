@@ -161,6 +161,7 @@
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
+                                <TextBlock/> <!--staat hier voor goede verdeling van scherm--> 
 
                                 <Label>Achternaam</Label>
                                 <TextBox Name="lastName" LostFocus="LastName_LostFocus">
@@ -180,6 +181,7 @@
                                         <Binding Path="NewcontactPerson.Email" Mode="TwoWay">
                                             <Binding.ValidationRules>
                                                 <validationrules:EmptyValidator />
+                                                <validationrules:EmailValidator />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
