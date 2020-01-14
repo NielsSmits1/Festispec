@@ -336,7 +336,7 @@
                                         <TextBlock Text="Telefoonnummer" />
                                         <TextBox LostFocus="PhoneNumber_LostFocus" Name="phoneNumber" IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
                                             <TextBox.Text>
-                                                <Binding Path="SelectedEmployee.InfixName" Mode="TwoWay">
+                                                <Binding Path="SelectedEmployee.Phonenumber" Mode="TwoWay">
                                                     <Binding.ValidationRules>
                                                         <validationrules:EmptyValidator />
                                                     </Binding.ValidationRules>
