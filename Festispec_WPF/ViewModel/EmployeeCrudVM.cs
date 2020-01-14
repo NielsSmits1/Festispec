@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.View;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.Windows;
+using Application = System.Windows.Application;
 
 namespace Festispec_WPF.ViewModel
 {
