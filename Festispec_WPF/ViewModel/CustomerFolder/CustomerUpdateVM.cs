@@ -136,7 +136,7 @@ namespace Festispec_WPF.ViewModel
             DeleteContactPersonCommand = new RelayCommand(DeleteContactPerson);
 
             SearchText = "Zoek klant";
-            UOW.Complete();
+            //UOW.Complete();
 
             ShowCustomer();
         }
@@ -195,7 +195,7 @@ namespace Festispec_WPF.ViewModel
         private void CreateContactPerson()
         {
             NewcontactPerson.ContactPersonData.Klant = SelectedCustomer.CustomerData;
-            NewcontactPerson.ContactPersonData.Actief = true;
+            //NewcontactPerson.ContactPersonData.Actief = true;
             UOW.ContactPersons.Add(NewcontactPerson.ContactPersonData);
             try
             {
