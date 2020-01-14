@@ -138,7 +138,7 @@ namespace Festispec_WPF.ViewModel
 
         public DateTime DoB
         {
-            get => _nawWerknemer.GeboorteDatum;
+            get => _nawWerknemer.GeboorteDatum.Date;
             set
             {
                 _nawWerknemer.GeboorteDatum = value;
