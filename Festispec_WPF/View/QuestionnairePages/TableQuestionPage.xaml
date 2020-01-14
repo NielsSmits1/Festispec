@@ -14,7 +14,7 @@
 
             <Label FontSize="13" FontWeight="Bold">Aanmaken tabel vraag</Label>
             <TextBlock Text="Vraag:"></TextBlock>
-            <TextBox Name="question" LostFocus="TextBox_LostFocus">
+            <TextBox Name="question" LostFocus="TextBox_LostFocus" Height="75" Width="500" TextWrapping="Wrap">
                 <TextBox.Text>
                     <Binding Path="NewTableQuestion.Question" Mode="TwoWay">
                         <Binding.ValidationRules>
