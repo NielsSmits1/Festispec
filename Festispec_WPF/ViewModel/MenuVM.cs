@@ -184,11 +184,7 @@ namespace Festispec_WPF.ViewModel
             _mainWindow = new MainWindow();
             _mainWindow.Show();
             currentWindow.Close();
-            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
-                App.Current.Windows[intCounter].Close();
 
-            _mainWindow = new MainWindow();
-            _mainWindow.Show();
         }
 
         public void InspectionList()
