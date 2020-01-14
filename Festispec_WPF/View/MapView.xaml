@@ -68,7 +68,7 @@
         </StackPanel>
 
         <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="#8000FF">
-            <Button Command="{Binding ShowHomeCommand}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
+            <Button Command="{Binding Menu.ShowHomeCommand, Source={StaticResource Locator}}" Cursor="Hand" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="40">
                 Festispec
             </Button>
         </Grid>
@@ -121,7 +121,7 @@
                                     <Grid Background="Gray" Grid.Row="1">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="50" />
-                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="auto" />
                                         </Grid.RowDefinitions>
 
                                         <Grid Grid.Row="0">
@@ -215,9 +215,9 @@
                                             </Grid>
                                         </Grid>
 
-                                        <Grid Grid.Row="1" Visibility="{Binding InspectionVisibility}">
+                                        <Grid Grid.Row="1" Visibility="{Binding InspectionVisibility}" Height="460">
                                             <Grid>
-                                                <Grid>
+                                                <Grid >
                                                     <Grid.Resources>
                                                         <DataTemplate x:Key="DateTemplate" >
                                                             <StackPanel Margin="10,0,0,0">
@@ -279,7 +279,7 @@
                                                             </StackPanel>
                                                         </DataTemplate>
                                                     </Grid.Resources>
-                                                    <ScrollViewer VerticalScrollBarVisibility="Visible" Height="350">
+                                                    <ScrollViewer VerticalScrollBarVisibility="Visible">
                                                         <DataGrid IsSynchronizedWithCurrentItem="True" CanUserAddRows="false" ItemsSource="{Binding Festivals}" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
                                                             <DataGrid.Columns>
                                                                 <DataGridTemplateColumn Width="*" CellTemplate="{StaticResource DateTemplate}" />
@@ -645,70 +645,71 @@
                                 </Border>
                             </Grid>
                             <!--CONFIRM-->
+                            <Border BorderBrush="Black" Background="Gray" BorderThickness="5" Visibility="{Binding ConfirmVisibility}" >
+                                <Grid >
 
-                            <Grid Visibility="{Binding ConfirmVisibility}" Background="LightCyan">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="*"/>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="5"/>
-                                    <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="50"/>
+                                    </Grid.RowDefinitions>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="50"/>
-                                </Grid.RowDefinitions>
-
-                                <StackPanel>
-                                    <Label Content="Inspectie Details" FontSize="15"></Label>
-                                    <Label Content="Inspectie naam:" HorizontalAlignment="Center"/>
-                                    <TextBlock Width="150" Text="{Binding SelectedFestival.Title}"></TextBlock>
-                                    <Label Content="Startdatum:" HorizontalAlignment="Center"/>
-                                    <TextBlock Width="150" Text="{Binding SelectedFestival.StartDate}"></TextBlock>
-                                    <Label Content="Benodigde certificaten:" HorizontalAlignment="Center"/>
-                                    <ListBox Width="150" Height="80" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding SelectedFestival.ChosenCertificates}">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}"/>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                    <TextBlock Width="150"></TextBlock>
-                                    <Label Content="Locatie inspectie:" HorizontalAlignment="Center"/>
-                                    <TextBlock Width="150" Text="{Binding SelectedFestival.Address}" TextWrapping="Wrap"></TextBlock>
-                                    <Label Content="Opdrachtgever:" HorizontalAlignment="Center"/>
-                                    <TextBlock Width="150" Text="{Binding SelectedFestival.Customer.CompanyName}"></TextBlock>
-                                </StackPanel>
+                                    <StackPanel>
+                                        <Label Content="Inspectie Details" FontSize="15"></Label>
+                                        <Label Content="Inspectie naam:" HorizontalAlignment="Center"/>
+                                        <TextBlock Width="150" Text="{Binding SelectedFestival.Title}" ></TextBlock>
+                                        <Label Content="Startdatum:" HorizontalAlignment="Center"/>
+                                        <TextBlock Width="150" Text="{Binding SelectedFestival.StartDate}"></TextBlock>
+                                        <Label Content="Benodigde certificaten:" HorizontalAlignment="Center"/>
+                                        <ListBox Width="150" Height="80" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding SelectedFestival.ChosenCertificates}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <TextBlock Width="150"></TextBlock>
+                                        <Label Content="Locatie inspectie:" HorizontalAlignment="Center"/>
+                                        <TextBlock Width="150" Text="{Binding SelectedFestival.Address}" TextWrapping="Wrap"></TextBlock>
+                                        <Label Content="Opdrachtgever:" HorizontalAlignment="Center"/>
+                                        <TextBlock Width="150" Text="{Binding SelectedFestival.Customer.CompanyName}"></TextBlock>
+                                    </StackPanel>
 
 
 
-                                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="5" Grid.RowSpan="2"></Border>
+                                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="5" Grid.RowSpan="2"></Border>
 
-                                <StackPanel Grid.Column="2">
-                                    <Label Content="Inspecteur Details" FontSize="15"></Label>
-                                    <Label Content="Inspecteur naam:" HorizontalAlignment="Center"/>
-                                    <TextBlock Width="150" Text="{Binding SelectedInspector.FullName}"></TextBlock>
-                                    <Label Content="Geboortedatum:" HorizontalAlignment="Center"/>
-                                    <TextBlock Width="150" Text="{Binding SelectedInspector.DateOfBirth}"></TextBlock>
-                                    <Label Content="Certificaten in bezit:" HorizontalAlignment="Center"/>
-                                    <ListBox Width="150" Height="80" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding SelectedInspector.ChosenCertificates}">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}"/>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                    <TextBlock Width="150"></TextBlock>
-                                    <Label Content="Woonplaats:" HorizontalAlignment="Center"/>
-                                    <TextBlock Width="150" Text="{Binding SelectedInspector.Address}" TextWrapping="Wrap"></TextBlock>
-                                </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <Label Content="Inspecteur Details" FontSize="15"></Label>
+                                        <Label Content="Inspecteur naam:" HorizontalAlignment="Center"/>
+                                        <TextBlock Width="150" Text="{Binding SelectedInspector.FullName}"></TextBlock>
+                                        <Label Content="Geboortedatum:" HorizontalAlignment="Center"/>
+                                        <TextBlock Width="150" Text="{Binding SelectedInspector.DateOfBirth}"></TextBlock>
+                                        <Label Content="Certificaten in bezit:" HorizontalAlignment="Center"/>
+                                        <ListBox Width="150" Height="80" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding SelectedInspector.ChosenCertificates}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <TextBlock Width="150"></TextBlock>
+                                        <Label Content="Woonplaats:" HorizontalAlignment="Center"/>
+                                        <TextBlock Width="150" Text="{Binding SelectedInspector.Address}" TextWrapping="Wrap"></TextBlock>
+                                    </StackPanel>
 
-                                <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" >
-                                    <Button Content="Annuleer bevestiging" Width="145" Margin="5,0,0,0" Background="IndianRed" BorderBrush="Black" Command="{Binding CancelConfirmationCommand}"></Button>
-                                    <Button Content="Bevestig Inspecteur" Width="145" Margin="95,0,0,0" Background="ForestGreen" Foreground="White" BorderBrush="Black" Command="{Binding AddToInspectionCommand}"/>
-                                </StackPanel>
-                            </Grid>
+                                    <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" >
+                                        <Button Content="Annuleer bevestiging" Width="145" Margin="5,0,0,0" Background="IndianRed" BorderBrush="Black" Command="{Binding CancelConfirmationCommand}"></Button>
+                                        <Button Content="Bevestig Inspecteur" Width="145" Margin="95,0,0,0" Background="ForestGreen" Foreground="White" BorderBrush="Black" Command="{Binding AddToInspectionCommand}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
                             <Border Background="Gray" BorderBrush="Black" BorderThickness="5" Visibility="{Binding MapErrorVisibility}">
                                 <StackPanel VerticalAlignment="Center">
                                     <Label HorizontalAlignment="Center" FontSize="50" Content="Geen internet" />
