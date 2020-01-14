@@ -1,15 +1,9 @@
-﻿using Festispec_WPF.Model;
-using Festispec_WPF.Model.Repositories;
-using Festispec_WPF.Model.UnitOfWork;
+﻿using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -53,10 +47,8 @@ namespace Festispec_WPF.ViewModel
 
         public ObservableCollection<LocationVM> Locations { get; set; }
         public ObservableCollection<CustomerVM> Customers { get; set; }
-
         public ICommand OpenCreateWindowCommand { get; set; }
         public ICommand CreateNewInspectionCommand { get; set; }
-
         public ICommand OpenCreateLocationWindowCommand { get; set; }
         public ICommand CreateNewLocationCommand { get; set; }
         public ICommand SafeEditCommand { get; set; }
@@ -100,7 +92,6 @@ namespace Festispec_WPF.ViewModel
 
         public InspectionCrudVM()
         {
-            
             _UOW = ViewModelLocator.UOW;
             Inspection = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
@@ -116,7 +107,6 @@ namespace Festispec_WPF.ViewModel
         private void OpenCreateWindow()
         {
             NewInspection = new InspectionVM();
-            //Managers = new ObservableCollection<EmployeeVM>(_UOW.Employee.GetAllManagers().Select(emp => new EmployeeVM(emp)));
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
             Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));
             _createWindow = new CreateInspectionWindow();
