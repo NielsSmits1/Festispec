@@ -255,6 +255,11 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
+        public int GetInspectionCount(int year)
+        {
+            return InspectorData.Inspectie.Where(ins => ins.StartDate.Year == year).Count();
+        }
+
 
         public void EmptyAll()
         {
