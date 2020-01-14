@@ -147,8 +147,18 @@ namespace Festispec_WPF.ViewModel
 
         private void MakeEmployeeVisible()
         {
-            EditVisibility = "Hidden";
-            EmployeeVisibility = "Visible";
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            if(currentWindow.Title == "RegisterView")
+            {
+                var employeeView = new EmployeeView();
+                employeeView.Show();
+                currentWindow.Close();
+            }
+            else
+            {
+                EditVisibility = "Hidden";
+                EmployeeVisibility = "Visible";
+            }
         }
 
         private void CloseCreate()
@@ -167,9 +177,11 @@ namespace Festispec_WPF.ViewModel
 
         private void OpenRegister()
         {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             NewEmployee = new EmployeeVM();
             _window = new RegisterView();
             _window.Show();
+            currentWindow.Close();
         }
 
 
@@ -214,6 +226,7 @@ namespace Festispec_WPF.ViewModel
         {
             try
             {
+                NewEmployee.Active = true;
                 UOW.NawEmployee.Add(NewEmployee.NAWWerknemer);
                 UOW.Employee.Add(NewEmployee.Werknemer);
                 UOW.Complete();

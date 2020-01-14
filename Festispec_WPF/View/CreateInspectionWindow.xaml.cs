@@ -34,6 +34,12 @@ namespace Festispec_WPF.View
             Title.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             Location.GetBindingExpression(ListBox.SelectedItemProperty).UpdateSource();
             customer.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+
+            if(startdate.SelectedDate > enddate.SelectedDate)
+            {
+                errorText.Content = "Startdatum kan niet later dan einddatum zijn";
+                return;
+            }
         }
     }
 }

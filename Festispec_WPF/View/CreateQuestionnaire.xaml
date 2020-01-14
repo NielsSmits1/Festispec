@@ -28,7 +28,7 @@
                 Festispec
                 </TextBlock>
             </Grid>
-            <Label Grid.Column="1" Grid.Row="1" Foreground="Gray" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Content="Vragenlijst aanpassen" />
+            <Label Grid.Column="1" Grid.Row="1" Foreground="Gray" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Content="Vragenlijst aanmaken" />
             <StackPanel Grid.Row="2" Grid.Column="1" Background="Gray">
                 <Grid>
                     <Grid.RowDefinitions>
