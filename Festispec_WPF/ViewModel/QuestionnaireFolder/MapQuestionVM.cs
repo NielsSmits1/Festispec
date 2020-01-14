@@ -42,10 +42,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public int ID { get => mapQuestionModel.ID; }
         public int Position
         {
-            get
-            {
-                return position;
-            }
+            get => position;
             set
             {
                 position = value;

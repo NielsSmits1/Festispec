@@ -29,10 +29,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public ObservableCollection<string> AnwserOptions
         {
-            get
-            {
-                return NewMultipleChoiceQuestion.AnwserOptions;
-            }
+            get => NewMultipleChoiceQuestion.AnwserOptions;
 
             set
             {

@@ -19,11 +19,10 @@ namespace Festispec_WPF.ViewModel
     {
         private Vragenlijst _questionnaire;
         private UnitOfWork UOW;
-        //variables
         private ObservableCollection<IQuestion> _questions;
         public ObservableCollection<IQuestion> questions 
         {
-            get { return _questions; }
+            get => _questions;
             set { _questions = value;
                 RaisePropertyChanged();
             }
@@ -116,7 +115,6 @@ namespace Festispec_WPF.ViewModel
                 IQuestion question = new MultipleChoiceQuestionVM(UOW.Context.Meerkeuzevraag.Find(id));
                 d.Add(ov.Positie, question);
             }
-
         }
         private void LoadAppendixQuestions(Dictionary<int, IQuestion> d)
         {
@@ -127,7 +125,6 @@ namespace Festispec_WPF.ViewModel
                 IQuestion question = new AppendixQuestionVM(UOW.Context.Bijlagevraag.Find(id));
                 d.Add(ov.Positie, question);
             }
-
         }
     }
 }

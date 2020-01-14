@@ -72,100 +72,27 @@
                 Festispec
             </Button>
         </Grid>
+        <StackPanel DataContext="{Binding Home, Source={StaticResource Locator}}" Orientation="Horizontal" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="0,250,0,0">
+            <StackPanel Margin="0,0,200,0">
+                <Label Content="Inspecties afgelopen maand"/>
+                <wpf:PieChart LegendLocation="Bottom" Hoverable="True" Series="{Binding SeriesCollection}" DataTooltip="{x:Null}" Width="200" Height="200"  >
 
-
-        <Grid Grid.Column="1" Grid.Row="1">
-            <Border BorderThickness="100">
-                <StackPanel>
-                    <Grid Margin="0, 0, 0, 100">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button x:Name="klantButton" Width="150" Height="150" FontSize="16"  
-                        Foreground="White"
-                        Grid.Column="0" Command="{Binding ShowKlantenCommand}" Background="#FF6A6A6A">
-                            <StackPanel>
-                                <Image Source="/Images/klanten.png"/>
-                                <Label Content="Klanten" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
-                            </StackPanel>
-                        </Button>
-
-                        <Button x:Name="InplanButton" Width="150" Height="150" FontSize="16"
-                        Foreground="White"
-                        Grid.Column="1" Command="{Binding ShowInplanVerzoekenCommand}" Background="#FF6A6A6A">
-                            <StackPanel>
-                                <Image Source="/Images/verzoeken_inplannen.png"/>
-                                <Label Content="Inplannen" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
-                            </StackPanel>
-                        </Button>
-
-                        <Button x:Name="InspecteursButton" Width="150" Height="150" FontSize="16"
-                        Foreground="White"  
-                        Grid.Column="2" Command="{Binding ShowInspecteursCommand}" Background="#FF6A6A6A">
-                            <StackPanel>
-                                <Image Source="/Images/inspecteurs.png"/>
-                                <Label Content="Inspecteurs" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
-                            </StackPanel>
-                        </Button>
-
-                    </Grid>
-
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button x:Name="VragenlijstButton" Width="150" Height="150" FontSize="16" 
-                        Foreground="White"  
-                        Grid.Column="0" Command="{Binding ShowVragenlijstCommand}" Background="#FF6A6A6A">
-                            <StackPanel>
-                                <Image Source="/Images/vragenlijsten.png" Height="100" Width="136"/>
-                                <Label Content="Vragenlijst" HorizontalAlignment="Center" Foreground="White" FontSize="26"/>
-                            </StackPanel>
-                        </Button>
-
-                        <Button x:Name="KalenderButton" Width="150" Height="150" FontSize="16"  
-                        Foreground="White"  
-                        Grid.Column="1" Command="{Binding ShowInspectionCommand}" Background="#FF6A6A6A">
-                            <StackPanel>
-                                <Image Source="/Images/rapportages.png"/>
-                                <Label Content="Inspecties" HorizontalAlignment="Center" Foreground="White" FontSize="15"/>
-                            </StackPanel>
-                        </Button>
-
-                        <Button x:Name="WerknemerButton" Width="150" Height="150" FontSize="16"  
-                        Foreground="White"  
-                        Grid.Column="2" Command="{Binding ShowWerknemerCommand}" Background="#FF6A6A6A">
-                            <StackPanel>
-                                <Image Source="/Images/werknemer.png" Width="134"/>
-                                <Label Content="Werknemers" HorizontalAlignment="Center" Foreground="White" FontSize="22"/>
-                            </StackPanel>
-                        </Button>
-                    </Grid>
-                    <wpf:PieChart LegendLocation="Bottom" Hoverable="True" Series="{Binding SeriesCollection}" DataTooltip="{x:Null}" Width="200" Height="200"  >
-
-                    </wpf:PieChart>
-                    <Grid Grid.Column="1" Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Label Content="Aantal inspecties afgelopen maand" FontSize="20" />
-                        <Label Content="Voltooide inspecties afgelopen maand " FontSize="20" Grid.Column="1"/>
-                        <TextBlock Text="{Binding AmountOfInspectionsLastMonth}" Grid.Column="0" Grid.Row="1" FontSize="18"/>
-                        <TextBlock Text="{Binding AmountOfInspectionsCompletedLastMonth}" Grid.Column="1" Grid.Row="1" FontSize="18"/>
-                    </Grid>
-                </StackPanel>
-            </Border>
-        </Grid>
+            </wpf:PieChart>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Inspecteurs met meeste inspecties afgelopen jaar"></Label>
+            <wpf:CartesianChart Series="{Binding InspectorsOnInspectionCollection}" LegendLocation="Bottom" Height="300" Width="500">
+                <wpf:CartesianChart.AxisX>
+                    <wpf:Axis Title="Gehouden inspecties"></wpf:Axis>
+                </wpf:CartesianChart.AxisX>
+                <wpf:CartesianChart.AxisY>
+                    <wpf:Axis Title="Inspecteurs" Labels="{Binding Labels}"></wpf:Axis>
+                </wpf:CartesianChart.AxisY>
+                <wpf:CartesianChart.DataTooltip>
+                    <wpf:DefaultTooltip SelectionMode="SharedYValues"></wpf:DefaultTooltip>
+                </wpf:CartesianChart.DataTooltip>
+            </wpf:CartesianChart>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

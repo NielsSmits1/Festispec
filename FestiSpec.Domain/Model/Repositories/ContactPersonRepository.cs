@@ -12,5 +12,11 @@ namespace FestiSpec.Domain.Model.Repositories
         public ContactPersonRepository(FestiSpecEntities context) : base(context)
         {
         }
+
+        public override void Add(Contactpersoon entity)
+        {
+            entity.Actief = true;
+            base.Add(entity);
+        }
     }
 }

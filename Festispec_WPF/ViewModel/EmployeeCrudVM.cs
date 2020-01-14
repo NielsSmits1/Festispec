@@ -1,20 +1,12 @@
 ﻿using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.View;
 using MessageBox = System.Windows.Forms.MessageBox;
-using System.Windows.Data;
-using FestiSpec.Domain.Model;
-using Application = System.Windows.Application;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -27,7 +19,7 @@ namespace Festispec_WPF.ViewModel
 
         public bool IsSelected
         {
-            get { return isSelected; }
+            get => isSelected;
             set
             {
                 isSelected = value;
@@ -39,7 +31,7 @@ namespace Festispec_WPF.ViewModel
 
         public string EditVisibility
         {
-            get { return _editVisibility; }
+            get => _editVisibility;
             set
             {
                 _editVisibility = value;
@@ -50,7 +42,7 @@ namespace Festispec_WPF.ViewModel
         private string _enableEdit;
         public string EnableEdit
         {
-            get { return _enableEdit; }
+            get => _enableEdit;
             set
             {
                 _enableEdit = value;
@@ -62,7 +54,7 @@ namespace Festispec_WPF.ViewModel
 
         public string EmployeeVisibility
         {
-            get { return _employeeVisibility; }
+            get => _employeeVisibility;
             set
             {
                 _employeeVisibility = value;
@@ -80,6 +72,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand ChangeViewToEdit { get; set; }
         public ICommand CancelEdit { get; set; }
         public ICommand SearchDataGrid { get; set; }
+        public ICommand CloseCreateCommand { get; set; }
 
         public EmployeeVM SelectedEmployee
         {
@@ -97,10 +90,7 @@ namespace Festispec_WPF.ViewModel
 
         public string searchText
         {
-            get
-            {
-                return _searchText;
-            }
+            get => _searchText;
             set
             {
                 _searchText = value;
@@ -131,6 +121,7 @@ namespace Festispec_WPF.ViewModel
             ChangeViewToEdit = new RelayCommand(OpenEditView);
             CancelEdit = new RelayCommand(MakeEmployeeVisible);
             SearchDataGrid = new RelayCommand(searchDatagrid);
+            CloseCreateCommand = new RelayCommand(CloseCreate);
         }
 
         private void searchDatagrid()
@@ -168,6 +159,11 @@ namespace Festispec_WPF.ViewModel
                 EditVisibility = "Hidden";
                 EmployeeVisibility = "Visible";
             }
+        }
+
+        private void CloseCreate()
+        {
+            _window.Close();
         }
 
         private void OpenEditView()

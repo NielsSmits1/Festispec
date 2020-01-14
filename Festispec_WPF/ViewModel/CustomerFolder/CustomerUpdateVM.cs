@@ -3,12 +3,8 @@ using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -25,27 +21,25 @@ namespace Festispec_WPF.ViewModel
         private UnitOfWork UOW;
         private ContactPersonCreateWindow _contactPersonCreateWindow;
         private CustomerUpdateWindow _customerUpdateWindow;
+        private ContactPersonVM _selectedContactPerson;
 
         public CustomerVM SelectedCustomer { get; set; }
         public ObservableCollection<ContactPersonVM> ContactPersons { get; set; }
         public ContactPersonVM NewcontactPerson { get; set; }
         public CustomerVM NewCustomer { get; set; }
 
-        private ContactPersonVM _selectedContactPerson;
 
         public ContactPersonVM SelectedContactPerson
         {
-            get { return _selectedContactPerson; }
+            get => _selectedContactPerson;
             set { _selectedContactPerson = value; RaisePropertyChanged(() => SelectedContactPerson); }
         }
 
         public ICommand ShowCustomerCommand { get; set; }
         public ICommand ShowContactpersonCommand { get; set; }
         public ICommand EditContactPersonCommand { get; set; }
-
         public ICommand CancelCustomerCommand { get; set; }
         public ICommand SubmitCustomerCommand { get; set; }
-
         public ICommand CloseCreateContactPersonCommand { get; set; }
         public ICommand OpenCreateContactPersonCommand { get; set; } 
         public ICommand CancelContactPersonCommand { get; set; }
@@ -58,7 +52,7 @@ namespace Festispec_WPF.ViewModel
 
         public string CustomerVisibility
         {
-            get { return _customerVisibility; }
+            get => _customerVisibility;
             set
             {
                 _customerVisibility = value;
@@ -70,7 +64,7 @@ namespace Festispec_WPF.ViewModel
 
         public string ContactPersonVisibility   
         {
-            get { return _contactPersonVisibility; }
+            get => _contactPersonVisibility;
             set 
             { 
                 _contactPersonVisibility = value;
@@ -82,7 +76,7 @@ namespace Festispec_WPF.ViewModel
 
         public string CustomerUpdateVisibility
         {
-            get { return _customerUpdateVisibility; }
+            get => _customerUpdateVisibility;
             set
             {
                 _customerUpdateVisibility = value;
@@ -94,7 +88,7 @@ namespace Festispec_WPF.ViewModel
 
         public string ContactPersonUpdateVisibility
         {
-            get { return _contactPersonUpdateVisibility; }
+            get => _contactPersonUpdateVisibility;
             set
             {
                 _contactPersonUpdateVisibility = value;
@@ -107,17 +101,13 @@ namespace Festispec_WPF.ViewModel
 
         public string SearchText
         {
-            get
-            {
-                return _searchText;
-            }
+            get => _searchText;
             set
             {
                 _searchText = value;
                 base.RaisePropertyChanged();
             }
         }
-
 
         public CustomerUpdateVM(CRCustomerVM customer)
         {
@@ -126,9 +116,7 @@ namespace Festispec_WPF.ViewModel
             SelectedCustomer = _crCustomerVM.SelectedCustomer;
 
             NewCustomer = new CustomerVM();
-            NewcontactPerson = new ContactPersonVM();
-
-            NewcontactPerson.customer = NewCustomer;
+            NewcontactPerson = new ContactPersonVM {customer = NewCustomer};
 
             LoadContactPersons();
 
@@ -148,7 +136,7 @@ namespace Festispec_WPF.ViewModel
             DeleteContactPersonCommand = new RelayCommand(DeleteContactPerson);
 
             SearchText = "Zoek klant";
-            UOW.Complete();
+            //UOW.Complete();
 
             ShowCustomer();
         }
@@ -171,7 +159,6 @@ namespace Festispec_WPF.ViewModel
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             LoadContactPersons();
             RaisePropertyChanged("ContactPersons");
         }
@@ -179,9 +166,7 @@ namespace Festispec_WPF.ViewModel
         private void SubmitContactPerson()
         {
             var contactpersonid = SelectedContactPerson.ContactPersonData.ID;
-
             var databaseCustomer = UOW.ContactPersons.Find(t => t.ID == contactpersonid).First();
-
             databaseCustomer = SelectedContactPerson.ContactPersonData;
 
             try
@@ -210,7 +195,7 @@ namespace Festispec_WPF.ViewModel
         private void CreateContactPerson()
         {
             NewcontactPerson.ContactPersonData.Klant = SelectedCustomer.CustomerData;
-            NewcontactPerson.ContactPersonData.Actief = true;
+            //NewcontactPerson.ContactPersonData.Actief = true;
             UOW.ContactPersons.Add(NewcontactPerson.ContactPersonData);
             try
             {
@@ -285,7 +270,6 @@ namespace Festispec_WPF.ViewModel
             CustomerUpdateVisibility = "Visible";
             CustomerVisibility = "Hidden";
             ContactPersonVisibility = "Visible";
-
             ContactPersonUpdateVisibility = "Hidden";
         }
 
@@ -294,7 +278,6 @@ namespace Festispec_WPF.ViewModel
             CustomerUpdateVisibility = "Visible";
             CustomerVisibility = "Visible";
             ContactPersonVisibility = "Hidden";
-
             ContactPersonUpdateVisibility = "Hidden";
         }
 
@@ -303,7 +286,6 @@ namespace Festispec_WPF.ViewModel
             CustomerUpdateVisibility = "Hidden";
             CustomerVisibility = "Hidden";
             ContactPersonVisibility = "Hidden";
-
             ContactPersonUpdateVisibility = "Visible";
         }
     }

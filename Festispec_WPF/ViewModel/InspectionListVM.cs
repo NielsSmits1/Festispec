@@ -2,12 +2,8 @@
 using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -24,7 +20,7 @@ namespace Festispec_WPF.ViewModel
 
         public InspectionVM SelectedInspection
         {
-            get { return _selectedInspection; }
+            get => _selectedInspection;
             set { _selectedInspection = value; RaisePropertyChanged(() => SelectedInspection); }
         }
 
@@ -32,7 +28,7 @@ namespace Festispec_WPF.ViewModel
 
         public InspectionVM SelectedAccInspection
         {
-            get { return _selectedAccomplishedInspection; }
+            get => _selectedAccomplishedInspection;
             set { _selectedAccomplishedInspection = value; RaisePropertyChanged(() => SelectedAccInspection); }
         }
 

@@ -3,16 +3,11 @@ using Festispec_WPF.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Forms;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -30,10 +25,7 @@ namespace Festispec_WPF.ViewModel
 
         public string searchText
         {
-            get
-            {
-                return _searchText;
-            }
+            get => _searchText;
             set
             {
                 _searchText = value;
@@ -108,9 +100,7 @@ namespace Festispec_WPF.ViewModel
                 RaisePropertyChanged("Questionnaires");
             }
         }
-
-
-
+        
         private void saveToDatabase()
         {
             try
@@ -160,7 +150,6 @@ namespace Festispec_WPF.ViewModel
                 {
                     Questionnaires.Add(new QuestionnaireVM(item));
                 }
-
             }
         }
     }

@@ -932,6 +932,19 @@
         <Function Name="Getqualifiedinspector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetTop5Inspectors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="int" Nullable="false" />
+                <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="Wachtwoord" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="NAW" Type="int" Nullable="false" />
+                <Property Name="Actief" Type="bit" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="IsQualified" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="Inspection" Type="int" Mode="In" />
           <Parameter Name="Inspector" Type="int" Mode="In" />
@@ -2170,6 +2183,7 @@
             <End Role="Tabelvraag" EntitySet="Tabelvraag" />
             <End Role="Tabelvraag_situatie" EntitySet="Tabelvraag_situatie" />
           </AssociationSet>
+          <FunctionImport Name="GetTop5Inspectors" IsComposable="true" EntitySet="Inspecteur" ReturnType="Collection(FestiSpecModel.Inspecteur)" />
         </EntityContainer>
         <Association Name="FK_Tabelvraag_situatie_ID">
           <End Type="FestiSpecModel.Tabelvraag" Role="Tabelvraag" Multiplicity="1" />
@@ -2183,6 +2197,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetTop5Inspectors_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Wachtwoord" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NAW" Nullable="false" />
+          <Property Type="Boolean" Name="Actief" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2608,6 +2629,8 @@
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="Getqualifiedinspector" FunctionName="FestiSpecModel.Store.Getqualifiedinspector" />
+          <FunctionImportMapping FunctionImportName="GetTop5Inspectors" FunctionName="FestiSpecModel.Store.GetTop5Inspectors">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

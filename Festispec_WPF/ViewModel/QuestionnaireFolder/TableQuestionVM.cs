@@ -21,13 +21,11 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public string Question { get => tableQuestionModel.Vraag; set => tableQuestionModel.Vraag = value; }
         public string QuestionHead { get => tableQuestionModel.VraagKop; set => tableQuestionModel.VraagKop = value; }
         public string AnswerHead { get => tableQuestionModel.AntwoordKop; set => tableQuestionModel.AntwoordKop = value; }
-        public int ID { get => tableQuestionModel.ID; }
+        public int ID => tableQuestionModel.ID;
+
         public int Position
         {
-            get
-            {
-                return position;
-            }
+            get => position;
             set
             {
 

@@ -23,7 +23,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             {QuestionsTypesEnum.TableQuestion, "Tabel vraag"},
             {QuestionsTypesEnum.MapQuestion, "Kaart vraag"},
             {QuestionsTypesEnum.AppendixQuestion, "Bijlage vraag"},
-            
         };
     }
 }

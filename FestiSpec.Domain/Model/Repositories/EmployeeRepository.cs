@@ -28,5 +28,11 @@ namespace FestiSpec.Domain.Model.Repositories
         {
             return Context.Werknemer.FirstOrDefault(w => w.Username == username);
         }
+
+        public override void Add(Werknemer entity)
+        {
+            entity.Actief = true;
+            base.Add(entity);
+        }
     }
 }

@@ -11,9 +11,7 @@ namespace Festispec_WPF.Helpers
         public string Introduction { get; set; }
         public string SummaryOfInspection { get; set; }
         public string Advice { get; set; }
-
         public List<Question> Questions { get; set; }
-
         public DateTime Date { get; set; }
     }
 }

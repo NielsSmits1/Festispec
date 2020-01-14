@@ -1,11 +1,5 @@
 ﻿using FestiSpec.Domain.Model;
-using Festispec_WPF.Model;
 using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -28,13 +22,13 @@ namespace Festispec_WPF.ViewModel
 
         public int ID
         {
-            get { return _certificate.ID; }
+            get => _certificate.ID;
             set { _certificate.ID = value; RaisePropertyChanged("ID"); }
         }
 
         public string Name
         {
-            get { return _certificate.Name; }
+            get => _certificate.Name;
             set { _certificate.Name = value; RaisePropertyChanged("Name"); }
         }
     }

@@ -177,10 +177,7 @@ namespace Festispec_WPF.ViewModel
 
         public ObservableCollection<UIElement> MapElements
         {
-            get
-            {
-                return mapElements;
-            }
+            get => mapElements;
             set
             {
                 mapElements = value;
@@ -192,10 +189,7 @@ namespace Festispec_WPF.ViewModel
 
         public string searchText
         {
-            get
-            {
-                return _searchText;
-            }
+            get => _searchText;
             set
             {
                 _searchText = value;
@@ -245,7 +239,7 @@ namespace Festispec_WPF.ViewModel
         private InspectorVM _selectedInspector;
         public InspectorVM SelectedInspector
         {
-            get { return _selectedInspector; }
+            get => _selectedInspector;
             set
             {
                 _selectedInspector = value;
@@ -256,10 +250,7 @@ namespace Festispec_WPF.ViewModel
         private InspectorVM _selectedDeleteInspector;
         public InspectorVM SelectedDeleteInspector
         {
-            get
-            {
-                return _selectedDeleteInspector;
-            }
+            get => _selectedDeleteInspector;
             set
             {
                 _selectedDeleteInspector = value; RaisePropertyChanged(() => SelectedDeleteInspector);
@@ -269,12 +260,12 @@ namespace Festispec_WPF.ViewModel
         private InspectionVM _selectedFestival;
         public InspectionVM SelectedFestival
         {
-            get { return _selectedFestival; }
+            get => _selectedFestival;
             set
             {
                 _selectedFestival = value;
                 CommandManager.InvalidateRequerySuggested();
-                if(EditVisibility == "Visible" && _selectedFestival != null)
+                if (EditVisibility == "Visible" && _selectedFestival != null)
                 {
                     _selectedFestival.ChosenCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetCertificatesInspection(_selectedFestival.Inspection_ID).Select(c => new CertificateVM(c)));
                     LeftoverCertificates = new ObservableCollection<CertificateVM>(_UOW.Inspections.GetMissingCertificates(_selectedFestival.Inspection_ID).Select(cert => new CertificateVM(cert)));
@@ -288,7 +279,7 @@ namespace Festispec_WPF.ViewModel
 
         private CertificateVM _selectedCertificate;
 
-       public CertificateVM SelectedCertificate
+        public CertificateVM SelectedCertificate
         {
             get => _selectedCertificate;
             set
@@ -301,7 +292,7 @@ namespace Festispec_WPF.ViewModel
                 {
                     AvailableCertificates.Add(value); NewInspection.ChosenCertificates.Remove(value);
                 }
-                
+
             }
         }
         private QuestionnaireVM _selectedQuestionnaire;
@@ -344,7 +335,7 @@ namespace Festispec_WPF.ViewModel
             set
             {
                 if (LeftoverCertificates.Contains(value))
-                {  
+                {
                     SelectedFestival.ChosenCertificates.Add(value); LeftoverCertificates.Remove(value);
                 }
                 else
@@ -369,22 +360,17 @@ namespace Festispec_WPF.ViewModel
         public ICommand CloseCreateCommand { get; set; }
         public ICommand OpenCreateWindowCommand { get; set; }
         public ICommand CreateNewInspectionCommand { get; set; }
-
         public ICommand OpenCreateLocationWindowCommand { get; set; }
         public ICommand AddToInspectionCommand { get; set; }
-
         public ICommand ShowConfirmationDetailsCommand { get; set; }
         public ICommand CancelConfirmationCommand { get; set; }
         public ICommand RemoveInspectorFromInspectionCommand { get; set; }
         public ICommand openDetailsCommand { get; set; }
         public ICommand openPlannedInspectorsCommand { get; set; }
-
         public ICommand CancelNewLocationCommand { get; set; }
-
 
         public MapViewModel()
         {
-            
             ShowInspectorCommand = new RelayCommand<object>(showInspectorRoute);
             ShowInspectorListCommand = new RelayCommand(showInspectorList, CanShowInspectors);
             ShowInspectionListCommand = new RelayCommand(showInspectionList, CanShowInspections);
@@ -395,7 +381,6 @@ namespace Festispec_WPF.ViewModel
             RefreshFestivalsCommand = new RelayCommand(LoadFestivals);
             RefreshInspectorsCommand = new RelayCommand(LoadInspectors);
             downloadCommand = new RelayCommand(downloadInspection);
-
             SafeEditCommand = new RelayCommand(complete);
             CreateNewLocationCommand = new RelayCommand(AddNewLocation);
             OpenCreateLocationWindowCommand = new RelayCommand(OpenCreateLocationWindow);
@@ -408,7 +393,6 @@ namespace Festispec_WPF.ViewModel
             RemoveInspectorFromInspectionCommand = new RelayCommand(RemoveInspectorFromInspection);
             openPlannedInspectorsCommand = new RelayCommand(openPlannedInspectors);
             openDetailsCommand = new RelayCommand(openDetails);
-
             CancelNewLocationCommand = new RelayCommand(CancelNewLocation);
 
             Init();
@@ -491,23 +475,11 @@ namespace Festispec_WPF.ViewModel
 
         private void DrawInspections(bool selectSingle)
         {
-            try { 
-            if (selectSingle)
+            try
             {
-                var location = getFestivalLocation(SelectedFestival);
-
-                Pushpin pin = new Pushpin();
-
-                pin.Background = new SolidColorBrush(Color.FromArgb(151, 29, 252, 0));
-                pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
-
-                MapElements.Add(pin);
-            }
-            else
-            {
-                foreach (var festival in Festivals)
+                if (selectSingle)
                 {
-                    var location = getFestivalLocation(festival);
+                    var location = getFestivalLocation(SelectedFestival);
 
                     Pushpin pin = new Pushpin();
 
@@ -516,7 +488,20 @@ namespace Festispec_WPF.ViewModel
 
                     MapElements.Add(pin);
                 }
-            }
+                else
+                {
+                    foreach (var festival in Festivals)
+                    {
+                        var location = getFestivalLocation(festival);
+
+                        Pushpin pin = new Pushpin();
+
+                        pin.Background = new SolidColorBrush(Color.FromArgb(151, 29, 252, 0));
+                        pin.Location = new Microsoft.Maps.MapControl.WPF.Location(location.Coordinates.Latitude, location.Coordinates.Longitude);
+
+                        MapElements.Add(pin);
+                    }
+                }
             }
             catch (Exception)
             {
@@ -524,7 +509,7 @@ namespace Festispec_WPF.ViewModel
                 LoadOfflineFestival();
             }
         }
-    
+
         private void downloadInspection()
         {
             var location = new Locatie
@@ -540,7 +525,7 @@ namespace Festispec_WPF.ViewModel
             };
 
             var certifcateList = new List<Certificaat>();
-            foreach(var certificate in _selectedFestival.ChosenCertificates.Select(cert => cert.Certificate).ToList())
+            foreach (var certificate in _selectedFestival.ChosenCertificates.Select(cert => cert.Certificate).ToList())
             {
                 certifcateList.Add(new Certificaat
                 {
@@ -588,12 +573,12 @@ namespace Festispec_WPF.ViewModel
 
         private void searchDatagrid()
         {
-            if(InspectorVisibility == "Hidden")
+            if (InspectorVisibility == "Hidden")
             {
                 Festivals = null;
 
-                
-                if(searchText == "")
+
+                if (searchText == "")
                 {
                     var InspectionList = _UOW.Inspections.GetAll().ToList().Select(i => new InspectionVM(i));
                     Festivals = new ObservableCollection<InspectionVM>(InspectionList);
@@ -603,9 +588,9 @@ namespace Festispec_WPF.ViewModel
                     var InspectionList = _UOW.Inspections.GetAll().ToList().Select(f => new InspectionVM(f)).Where(f => f.Title.ToLower().Contains(searchText.ToLower()));
                     Festivals = new ObservableCollection<InspectionVM>(InspectionList);
                 }
-                
 
-                if(Festivals.Count == 0 && searchText != "")
+
+                if (Festivals.Count == 0 && searchText != "")
                 {
                     var festival = new InspectionVM();
                     festival.Title = "Geen zoekresultaten";
@@ -628,7 +613,7 @@ namespace Festispec_WPF.ViewModel
                 {
                     var inspectorList = _UOW.Inspectors.GetAll().ToList().Select(i => new InspectorVM(i)).Where(i => i.UserName.ToLower().Contains(searchText.ToLower()));
                     Inspectors = new ObservableCollection<InspectorVM>(inspectorList);
-                }   
+                }
             }
 
             if (Inspectors.Count == 0 && searchText != "")
@@ -645,7 +630,7 @@ namespace Festispec_WPF.ViewModel
                 calculateDistances();
             }
         }
-        
+
 
         private async Task calculateRoute(object inpsector_id)
         {
@@ -653,7 +638,7 @@ namespace Festispec_WPF.ViewModel
 
             var festivalLocation = getFestivalLocation(null);
 
-            if(inpsector_id != null)
+            if (inpsector_id != null)
             {
                 SelectedInspector = new InspectorVM(_UOW.Inspectors.Find(i => i.ID == (int)inpsector_id).FirstOrDefault());
             }
@@ -762,32 +747,32 @@ namespace Festispec_WPF.ViewModel
         {
             Locatie festivalNAW;
 
-                if (festival != null)
-                {
-                    festivalNAW = _UOW.InspectionLocations.Find(l => l.ID == festival.Location_ID).FirstOrDefault();
-                }
-                else
-                {
-                    festivalNAW = _UOW.InspectionLocations.Find(l => l.ID == _selectedFestival.Location_ID).FirstOrDefault();
-                }
+            if (festival != null)
+            {
+                festivalNAW = _UOW.InspectionLocations.Find(l => l.ID == festival.Location_ID).FirstOrDefault();
+            }
+            else
+            {
+                festivalNAW = _UOW.InspectionLocations.Find(l => l.ID == _selectedFestival.Location_ID).FirstOrDefault();
+            }
 
-                return geocoder.Geocode(festivalNAW.Straatnaam + " " + festivalNAW.Huisnummer, "", "", festivalNAW.Postcode, "Netherlands").First();
+            return geocoder.Geocode(festivalNAW.Straatnaam + " " + festivalNAW.Huisnummer, "", "", festivalNAW.Postcode, "Netherlands").First();
         }
 
         private Geocoding.Address getInspectorLocation(InspectorVM inspector)
         {
             NAW_inspecteur inspectorNAW;
 
-                if(inspector != null)
-                {
-                    inspectorNAW = _UOW.NAWInspectors.Find(n => n.ID == inspector.InspectorForeignNAWID).FirstOrDefault();
-                }
-                else
-                {
-                    inspectorNAW = _UOW.NAWInspectors.Find(n => n.ID == _selectedInspector.InspectorForeignNAWID).FirstOrDefault();
-                }
-                
-                return geocoder.Geocode(inspectorNAW.Straatnaam + " " + inspectorNAW.Huisnummer, "", "", inspectorNAW.Postcode, "Netherlands").First();
+            if (inspector != null)
+            {
+                inspectorNAW = _UOW.NAWInspectors.Find(n => n.ID == inspector.InspectorForeignNAWID).FirstOrDefault();
+            }
+            else
+            {
+                inspectorNAW = _UOW.NAWInspectors.Find(n => n.ID == _selectedInspector.InspectorForeignNAWID).FirstOrDefault();
+            }
+
+            return geocoder.Geocode(inspectorNAW.Straatnaam + " " + inspectorNAW.Huisnummer, "", "", inspectorNAW.Postcode, "Netherlands").First();
         }
 
         private void showInspectorRoute(object inspector_id)
@@ -863,7 +848,7 @@ namespace Festispec_WPF.ViewModel
 
         private void showDetailsFestival()
         {
-                switchVisibility();
+            switchVisibility();
         }
 
         private bool canShowDetails()
@@ -890,7 +875,7 @@ namespace Festispec_WPF.ViewModel
         private void LoadInspectors()
         {
             Inspectors = new ObservableCollection<InspectorVM>(_UOW.Inspectors.GetActiveInspectors().Select(ins => new InspectorVM(ins)));
-            RaisePropertyChanged(() => Inspectors);   
+            RaisePropertyChanged(() => Inspectors);
         }
 
         private void complete()
@@ -923,7 +908,6 @@ namespace Festispec_WPF.ViewModel
         private void OpenCreateWindow()
         {
             NewInspection = new InspectionVM();
-            //Managers = new ObservableCollection<EmployeeVM>(_UOW.Employee.GetAllManagers().Select(emp => new EmployeeVM(emp)));
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
             Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));
             AvailableCertificates = new ObservableCollection<CertificateVM>(_UOW.Certificates.GetAll().Select(cert => new CertificateVM(cert)));
@@ -947,9 +931,8 @@ namespace Festispec_WPF.ViewModel
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            catch (Exception){}
+            catch (Exception) { }
 
-            //NewLocation = null;
             _UOW.Inspections.Add(NewInspection.Inspection);
 
             foreach (var item in NewInspection.ChosenCertificates)
@@ -1047,15 +1030,13 @@ namespace Festispec_WPF.ViewModel
 
         private void RemoveInspectorFromInspection()
         {
-            if(SelectedDeleteInspector != null)
+            if (SelectedDeleteInspector != null)
             {
                 _UOW.Inspections.Get(SelectedFestival.Inspection_ID).Inspecteur.Remove(SelectedDeleteInspector.InspectorData);
                 SelectedFestival.RefreshInspectors();
                 _UOW.Complete();
                 SelectedDeleteInspector = null;
             }
-            
         }
-
     }
 }

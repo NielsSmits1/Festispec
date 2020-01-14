@@ -59,9 +59,6 @@
                                 <TextBox Name="prefix" LostFocus="Prefix_LostFocus">
                                     <TextBox.Text>
                                         <Binding Path="NewcontactPerson.Affix" Mode="TwoWay">
-                                            <Binding.ValidationRules>
-                                                
-                                            </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
@@ -69,7 +66,7 @@
                                 <Label>Achternaam</Label>
                                 <TextBox Name="lastName" LostFocus="LastName_LostFocus">
                                     <TextBox.Text>
-                                        <Binding Path="NewcontactPerson.Lastname" Mode="TwoWay">
+                                        <Binding Path="NewcontactPerson.LastName" Mode="TwoWay">
                                             <Binding.ValidationRules>
                                                 <validationrules:EmptyValidator />
                                             </Binding.ValidationRules>
@@ -98,6 +95,7 @@
                                         <Binding Path="NewcontactPerson.Email" Mode="TwoWay">
                                             <Binding.ValidationRules>
                                                 <validationrules:EmptyValidator />
+                                                <validationrules:EmailValidator />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>

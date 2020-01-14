@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
@@ -8,8 +7,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
 using Application = System.Windows.Application;
-using FestiSpec.Domain.Model;
-using MessageBox = System.Windows.Forms.MessageBox;
 using System.Net;
 
 namespace Festispec_WPF.ViewModel

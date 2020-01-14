@@ -71,5 +71,11 @@ namespace FestiSpec.Domain.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Getqualifiedinspector", idParameter);
         }
+    
+        [DbFunction("FestiSpecEntities", "GetTop5Inspectors")]
+        public virtual IQueryable<Inspecteur> GetTop5Inspectors()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Inspecteur>("[FestiSpecEntities].[GetTop5Inspectors]()");
+        }
     }
 }
