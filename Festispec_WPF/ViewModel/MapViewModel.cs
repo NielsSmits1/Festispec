@@ -872,7 +872,7 @@ namespace Festispec_WPF.ViewModel
         }
         private void LoadFestivals()
         {
-            Festivals = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Select(ins => new InspectionVM(ins)));
+            Festivals = new ObservableCollection<InspectionVM>(_UOW.Inspections.GetAll().Where(ins => ins.Voltooid == false).Select(ins => new InspectionVM(ins)));
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(l => new LocationVM(l)));
             Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().Select(c => new CustomerVM(c)));
             RaisePropertyChanged(() => Festivals);
