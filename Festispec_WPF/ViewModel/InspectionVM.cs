@@ -1,16 +1,10 @@
-
 using Geocoding;
 using Geocoding.Microsoft;
 ﻿using FestiSpec.Domain.Model;
-using Festispec_WPF.Model;
-using Festispec_WPF.Model.Repositories;
 using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
 namespace Festispec_WPF.ViewModel

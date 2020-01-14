@@ -18,17 +18,13 @@ namespace Festispec_WPF.ViewModel
 {
     public class RapportageVM : ViewModelBase
     {
+        private IUnitOfWork UOW;
+        private string _chart;
+
         public ICommand GenerateCommand { get; set; }
         public ICommand SelectVragenlijst { get; set; }
         public ICommand OpenPdfButton { get; set; }
-
         public ICommand BackToStart { get; set; }
-
-
-        private IUnitOfWork UOW;
-
-        private string _chart;
-        //public variables
         public ObservableCollection<Question> questions { get; set; }
         public ObservableCollection<Vragenlijst> vragenlijsten { get; set; }
         public ObservableCollection<string> Charts { get; set; }
@@ -43,10 +39,7 @@ namespace Festispec_WPF.ViewModel
 
         public string Chart
         {
-            get
-            {
-                return _chart;
-            }
+            get => _chart;
             set
             {
                 _chart = value; RaisePropertyChanged(() => Chart);
@@ -55,14 +48,14 @@ namespace Festispec_WPF.ViewModel
         private RapportageInfo _rapportageInfo;
         public RapportageInfo rapportageInfo
         {
-            get { return _rapportageInfo; }
+            get => _rapportageInfo;
             set { _rapportageInfo = value; RaisePropertyChanged(); }
         }
 
         private Inspectie _selectedInspection;
         public Inspectie selectedInspection
         {
-            get { return _selectedInspection; }
+            get => _selectedInspection;
             set
             {
                 _selectedInspection = value;
@@ -73,7 +66,7 @@ namespace Festispec_WPF.ViewModel
         private string _AllowTyping;
         public string AllowTyping
         {
-            get { return _AllowTyping; }
+            get => _AllowTyping;
             set
             {
                 _AllowTyping = value;
@@ -84,7 +77,7 @@ namespace Festispec_WPF.ViewModel
         private Vragenlijst _selectedVragenlijst;
         public Vragenlijst selectedVragenlijst
         {
-            get { return _selectedVragenlijst; }
+            get => _selectedVragenlijst;
             set
             {
                 _selectedVragenlijst = value;
@@ -95,7 +88,7 @@ namespace Festispec_WPF.ViewModel
         private string _location;
         public string location
         {
-            get { return _location; }
+            get => _location;
             set
             {
                 _location = value;
@@ -106,7 +99,7 @@ namespace Festispec_WPF.ViewModel
         private string _advice;
         public string advice
         {
-            get { return _advice; }
+            get => _advice;
             set
             {
                 _advice = value;
@@ -117,7 +110,7 @@ namespace Festispec_WPF.ViewModel
         private string _introductie;
         public string introductie
         {
-            get { return _introductie; }
+            get => _introductie;
             set
             {
                 _introductie = value;
@@ -128,7 +121,7 @@ namespace Festispec_WPF.ViewModel
         private string _samenvatting;
         public string samenvatting
         {
-            get { return _samenvatting; }
+            get => _samenvatting;
             set
             {
                 _samenvatting = value;
@@ -139,7 +132,7 @@ namespace Festispec_WPF.ViewModel
         private string _showGenerate;
         public string showGenerate
         {
-            get { return _showGenerate; }
+            get => _showGenerate;
             set
             {
                 _showGenerate = value;
@@ -150,7 +143,7 @@ namespace Festispec_WPF.ViewModel
         private string _showSucces;
         public string showSucces
         {
-            get { return _showSucces; }
+            get => _showSucces;
             set
             {
                 _showSucces = value;
@@ -161,7 +154,7 @@ namespace Festispec_WPF.ViewModel
         private string _showVragenlijst;
         public string showVragenlijst
         {
-            get { return _showVragenlijst; }
+            get => _showVragenlijst;
             set
             {
                 _showVragenlijst = value;

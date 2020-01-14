@@ -1,28 +1,11 @@
-﻿using BingMapsRESTToolkit;
-using FestiSpec.Domain.Model;
-using Festispec_WPF.Model.UnitOfWork;
-using Festispec_WPF.View;
+﻿using FestiSpec.Domain.Model;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Geocoding;
-using Geocoding.Microsoft;
-using Microsoft.Maps.MapControl.WPF;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using Button = System.Windows.Controls.Button;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -37,7 +20,7 @@ namespace Festispec_WPF.ViewModel
 
         public string PlannedInspectorVisibility
         {
-            get { return _plannedInspectorVisibility; }
+            get => _plannedInspectorVisibility;
             set
             {
                 _plannedInspectorVisibility = value;
@@ -45,22 +28,13 @@ namespace Festispec_WPF.ViewModel
             }
         }
 
-        public InspectionVM Festival
-        {
-            get
-            {
-                return Festivals.First();
-            }
-        }
+        public InspectionVM Festival => Festivals.First();
 
         private string _searchText;
 
         public string searchText
         {
-            get
-            {
-                return _searchText;
-            }
+            get => _searchText;
             set
             {
                 _searchText = value;
