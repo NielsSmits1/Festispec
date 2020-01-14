@@ -91,6 +91,9 @@
     <Compile Include="Model\Contactpersoon.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\GetTop5Inspectors_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Inspecteur.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

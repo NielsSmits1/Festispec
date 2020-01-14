@@ -18,5 +18,7 @@ namespace FestiSpec.Domain.Model.Interface_Repositories
 
         void SetInspectorInactive(int id);
 
+        List<Inspecteur> GetTop5PlannedInspectors();
+
     }
 }

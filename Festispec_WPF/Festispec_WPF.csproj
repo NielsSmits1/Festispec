@@ -118,6 +118,7 @@
     <Compile Include="Validation rules\EmptyValidator.cs" />
     <Compile Include="Validation rules\LengthValidator.cs" />
     <Compile Include="Validation rules\NumberValidationRule.cs" />
+    <Compile Include="Validation rules\PostalcodeValidator.cs" />
     <Compile Include="ViewModel\CustomerFolder\CustomerUpdateVM.cs" />
     <Compile Include="ViewModel\HomeVM.cs" />
     <Compile Include="ViewModel\InspectionListVM.cs" />

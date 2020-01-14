@@ -21,5 +21,7 @@ namespace Festispec_WPF.Model.Repositories
             return Context.Contactpersoon.Where(a => a.Klant_ID == id && a.Actief == true).ToList();
         }
 
+        
+
     }
 }
