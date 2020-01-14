@@ -32,10 +32,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private bool Template = false;
         public QuestionnaireVM selectedTemplate
         {
-            get
-            {
-                return _selectedTemplate;
-            }
+            get => _selectedTemplate;
             set
             {
                 _selectedTemplate = value;
@@ -44,7 +41,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 {
                     _selectedTemplate.questions = new ObservableCollection<IQuestion>();
                     _selectedTemplate.loadQuestions();
-
                     FixPostions(_selectedTemplate.questions);
                     newQuestionnaireVM.questions = _selectedTemplate.questions;
                     RaisePropertyChanged();
@@ -62,7 +58,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public string QuestionVisibility
         {
-            get { return _questionVisibility; }
+            get => _questionVisibility;
             set
             {
                 _questionVisibility = value;
@@ -74,7 +70,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public string QuestionaireVisibility
         {
-            get { return _questionaireVisibility; }
+            get => _questionaireVisibility;
             set
             {
                 _questionaireVisibility = value;
@@ -86,7 +82,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public string OrderVisibility
         {
-            get { return _orderVisibility; }
+            get => _orderVisibility;
             set
             {
                 _orderVisibility = value;
@@ -96,32 +92,26 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public IQuestion SelectedItem
         {
-            get
-            {
-                return _selectedItem;
-            }
-            set
-            {
-                _selectedItem = value;
-            }
+            get => _selectedItem;
+            set => _selectedItem = value;
         }
         public ICommand SubmitCommand { get; set; }
         public ICommand PositionUpCommand { get; set; }
         public ICommand PositionDownCommand { get; set; }
-
         public ICommand DeleteQuestionCommand { get; set; }
         public ICommand DeleteTemplateCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand ShowQuestionnaire { get; set; }
         public ICommand ShowQuestions { get; set; }
         public ICommand ShowOrder { get; set; }
+        public ICommand CreateTemplateCommand { get; set; }
+
 
         public string TemplateType { get; set; }
 
-        public ICommand CreateTemplateCommand { get; set; }
         public QuestionnaireVM newQuestionnaireVM
         {
-            get { return _newQuestionnaireVM; }
+            get => _newQuestionnaireVM;
             set
             {
                 _newQuestionnaireVM = value;
@@ -137,10 +127,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private QuestionTypes.QuestionsTypesEnum _SelectedQuestionType;
         public QuestionTypes.QuestionsTypesEnum SelectedQuestionType
         {
-            get
-            {
-                return _SelectedQuestionType;
-            }
+            get => _SelectedQuestionType;
             set
             {
                 _SelectedQuestionType = value;
@@ -151,7 +138,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public Page CurrentPage
         {
-            get { return _currentPage; }
+            get => _currentPage;
             set
             {
                 _currentPage = value;
@@ -172,17 +159,14 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
             SubmitCommand = new RelayCommand(SubmitCreatedQuestionnaire);
             CreateTemplateCommand = new RelayCommand(CreateTemplate);
-
             PositionUpCommand = new RelayCommand(changePositionUP);
             PositionDownCommand = new RelayCommand(changePositionDOWN);
-
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
             DeleteTemplateCommand = new RelayCommand(DeleteTemplate);
             ShowQuestionnaire = new RelayCommand(showQuestionnaire);
             ShowQuestions = new RelayCommand(showQuestions);
             ShowOrder = new RelayCommand(showOrder);
             CancelCommand = new RelayCommand(cancelQuestionnaire);
-
             templates = new ObservableCollection<QuestionnaireVM>(UOW.Questionnaires.getTemplates().Select(tp => new QuestionnaireVM(tp)));
 
             showQuestionnaire();
@@ -222,10 +206,10 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             Template = true;
             SubmitQuestionnaire();
 
-            Template newTemplate = new Template();
-            newTemplate.Vragenlijst_ID = newQuestionnaireVM.ID;
-            newTemplate.Type = TemplateType;
-            newTemplate.Actief = true;
+            Template newTemplate = new Template
+            {
+                Vragenlijst_ID = newQuestionnaireVM.ID, Type = TemplateType, Actief = true
+            };
 
             if (newTemplate.Type != null)
             {
@@ -338,7 +322,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
         }
 
         private void SubmitCreatedQuestionnaire()
@@ -362,7 +345,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
             currentWindow.Close();
             newWindow.Show();
         }
-
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
         {
             switch (type)
@@ -414,7 +396,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 newPosition = SelectedItem.Position - 1;
             }
 
-
             if (newPosition >= 0 && newPosition < _newQuestionnaireVM.questions.Count)
             {
                 IQuestion newposQuestion = _newQuestionnaireVM.questions[newPosition];
@@ -425,7 +406,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
                 newposQuestion.Position = _newQuestionnaireVM.questions.IndexOf(newposQuestion);
                 oldposQuestion.Position = _newQuestionnaireVM.questions.IndexOf(oldposQuestion);
-
             }
         }
 
@@ -474,6 +454,5 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 return;
             }
         }
-
     }
 }

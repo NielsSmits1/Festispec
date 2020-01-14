@@ -17,7 +17,6 @@ namespace Festispec_WPF.ViewModel
 {
     public class InspectionVM : ViewModelBase
     {
-
         private Inspectie _inspection;
         private LocationVM _location;
         private CustomerVM _customer;
@@ -101,9 +100,7 @@ namespace Festispec_WPF.ViewModel
                 _inspection.Inspectienummer = value; RaisePropertyChanged(() => Inspection_ID);
             }
         }
-
-       
-
+        
         public DateTime StartDate
         {
             get => _inspection.StartDate;
@@ -121,8 +118,7 @@ namespace Festispec_WPF.ViewModel
                 _inspection.EndDate = value; RaisePropertyChanged(() => EndDate);
             }
         }
-
-
+        
         public int Customer_ID
         {
             get => _inspection.Klant_ID;
@@ -130,7 +126,6 @@ namespace Festispec_WPF.ViewModel
             {
                 _inspection.Klant_ID = value; RaisePropertyChanged(() => Customer_ID);
             }
-
         }
 
         public string Title
@@ -163,7 +158,6 @@ namespace Festispec_WPF.ViewModel
             }
         }
        
-
         public string Version
         {
             get => _inspection.Versie;

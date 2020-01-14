@@ -1,14 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using Geocoding;
 using Geocoding.Microsoft;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using FestiSpec.Domain.Model;
 using Festispec_WPF.Model.UnitOfWork;
 
@@ -79,14 +74,8 @@ namespace Festispec_WPF.ViewModel
 
         public Inspecteur InspectorData
         {
-            get
-            {
-                return _inspecteur;
-            }
-            set
-            {
-                _inspecteur = value;
-            }
+            get => _inspecteur;
+            set => _inspecteur = value;
         }
 
 
@@ -100,72 +89,66 @@ namespace Festispec_WPF.ViewModel
 
         public int NAWInspector_ID
         {
-            get { return _nawInspecteur.ID; }
+            get => _nawInspecteur.ID;
             set { _nawInspecteur.ID = value; RaisePropertyChanged("NAWInspector_ID"); }
         }
 
         public string FirstName
         {
-            get { return _nawInspecteur.Voornaam; }
+            get => _nawInspecteur.Voornaam;
             set { _nawInspecteur.Voornaam = value; RaisePropertyChanged("FirstName"); }
         }
 
         public string LastName
         {
-            get { return _nawInspecteur.Achternaam; }
+            get => _nawInspecteur.Achternaam;
             set { _nawInspecteur.Achternaam = value; RaisePropertyChanged("LastName"); }
         }
         public string InBetween
         {
-            get { return _nawInspecteur.Tussenvoegsel; }
+            get => _nawInspecteur.Tussenvoegsel;
             set { _nawInspecteur.Tussenvoegsel = value; RaisePropertyChanged("InBetween"); }
         }
 
         public string HomeNumber
         {
-            get { return _nawInspecteur.Huisnummer; }
+            get => _nawInspecteur.Huisnummer;
             set { _nawInspecteur.Huisnummer = value; RaisePropertyChanged("HomeNumber"); }
         }
 
         public string ZipCode
         {
-            get
-            {
-                return _nawInspecteur.Postcode;
-            }
+            get => _nawInspecteur.Postcode;
             set { _nawInspecteur.Postcode = value; RaisePropertyChanged("ZipCode"); }
         }
 
         public string StreetName
         {
-            get
-            {
-                return _nawInspecteur.Straatnaam;
-            }
+            get => _nawInspecteur.Straatnaam;
             set { _nawInspecteur.Straatnaam = value; RaisePropertyChanged("StreetName"); }
         }
 
         public DateTime DateOfBirth
         {
-            get { return _nawInspecteur.Geboortedatum; }
+            get => _nawInspecteur.Geboortedatum;
             set { _nawInspecteur.Geboortedatum = value; RaisePropertyChanged("DateOfBirth"); }
         }
 
         public string IBAN
         {
-            get { return _nawInspecteur.IBAN; }
+            get => _nawInspecteur.IBAN;
             set { _nawInspecteur.IBAN = value; RaisePropertyChanged("IBAN"); }
         }
 
         public string Email
         {
-            get { return _nawInspecteur.Email; }
+            get => _nawInspecteur.Email;
             set { _nawInspecteur.Email = value; RaisePropertyChanged("Email"); }
         }
 
         public int Inspector_ID
         {
-            get { return _inspecteur.ID; }
+            get => _inspecteur.ID;
             set
             {
                 _inspecteur.ID = value; RaisePropertyChanged("Inspector_ID");
@@ -174,32 +157,27 @@ namespace Festispec_WPF.ViewModel
 
         public string UserName
         {
-            get { return _inspecteur.Username; }
+            get => _inspecteur.Username;
             set { _inspecteur.Username = value; RaisePropertyChanged("UserName"); }
         }
 
         public string Password
         {
-            get
-            {
-                return _inspecteur.Wachtwoord;
-            }
+            get => _inspecteur.Wachtwoord;
             set { _inspecteur.Wachtwoord = value; RaisePropertyChanged("Password"); }
         }
 
         public int InspectorForeignNAWID
         {
-            get { return _inspecteur.NAW; }
+            get => _inspecteur.NAW;
             set { _inspecteur.NAW = NAWInspector_ID; RaisePropertyChanged("InspectorForeignNAWID"); }
         }
 
         public bool Active
         {
-            get { return _inspecteur.Actief; }
+            get => _inspecteur.Actief;
             set { _inspecteur.Actief = value; RaisePropertyChanged("Active"); }
         }
-
-
 
         public string Address
         {
@@ -216,12 +194,12 @@ namespace Festispec_WPF.ViewModel
         private double _travelDistance;
         public double TravelDistance
         {
-            get { return _travelDistance; }
+            get => _travelDistance;
             set { _travelDistance = value; RaisePropertyChanged("TravelDistance"); }
         }
         public string Phonenumber
         {
-            get { return _nawInspecteur.Telefoonnummer; }
+            get => _nawInspecteur.Telefoonnummer;
             set { _nawInspecteur.Telefoonnummer = value; RaisePropertyChanged("Phonenuber"); }
         }
 
@@ -269,6 +247,5 @@ namespace Festispec_WPF.ViewModel
             DateOfBirth = DateTime.Today;
             RaisePropertyChanged(null);
         }
-
     }
 }

@@ -37,7 +37,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public string QuestionVisibility
         {
-            get { return _questionVisibility; }
+            get => _questionVisibility;
             set
             {
                 _questionVisibility = value;
@@ -49,7 +49,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public string QuestionaireVisibility
         {
-            get { return _questionaireVisibility; }
+            get => _questionaireVisibility;
             set
             {
                 _questionaireVisibility = value;
@@ -61,7 +61,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public string OrderVisibility
         {
-            get { return _orderVisibility; }
+            get => _orderVisibility;
             set
             {
                 _orderVisibility = value;
@@ -72,18 +72,12 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         #endregion
         public IQuestion SelectedItem
         {
-            get
-            {
-                return _selectedItem;
-            }
-            set
-            {
-                _selectedItem = value;
-            }
+            get => _selectedItem;
+            set => _selectedItem = value;
         }
         public QuestionnaireVM EditetQuestionnaireVM
         {
-            get { return _editetQuestionnaireVM; }
+            get => _editetQuestionnaireVM;
             set
             {
                 _editetQuestionnaireVM = value;
@@ -98,10 +92,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         private IQuestion _selectedItem;
         public QuestionTypes.QuestionsTypesEnum SelectedQuestionType
         {
-            get
-            {
-                return _SelectedQuestionType;
-            }
+            get => _SelectedQuestionType;
             set
             {
                 _SelectedQuestionType = value;
@@ -113,7 +104,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
         public Page CurrentPage
         {
-            get { return _currentPage; }
+            get => _currentPage;
             set
             {
                 _currentPage = value;
@@ -211,7 +202,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                     crud.Show();
                     currentWindow.Close();
 
-                    //cancelQuestionnaire();
                 }
                 catch
                 {
@@ -226,7 +216,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
         }
 
         private void changeQuestionType(QuestionTypes.QuestionsTypesEnum type)
@@ -279,7 +268,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 newPosition = SelectedItem.Position - 1;
             }
 
-
             if (newPosition >= 0 && newPosition < EditetQuestionnaireVM.questions.Count)
             {
                 IQuestion newposQuestion = EditetQuestionnaireVM.questions[newPosition];
@@ -290,7 +278,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 
                 newposQuestion.Position = EditetQuestionnaireVM.questions.IndexOf(newposQuestion);
                 oldposQuestion.Position = EditetQuestionnaireVM.questions.IndexOf(oldposQuestion);
-
             }
         }
 

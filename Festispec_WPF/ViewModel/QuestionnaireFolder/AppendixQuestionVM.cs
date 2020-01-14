@@ -13,7 +13,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
 {
     public class AppendixQuestionVM : ViewModelBase, IQuestion
     {
-
         private UnitOfWork UOW;
         private Bijlagevraag appendixQuestionModel;
         private int position;
@@ -22,10 +21,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         public string Question { get => appendixQuestionModel.Vraag; set => appendixQuestionModel.Vraag = value; }
         public int Position
         {
-            get
-            {
-                return position;
-            }
+            get => position;
             set
             {
                 position = value;
@@ -34,7 +30,7 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
         }
         public string QuestionType { get => questiontype; set => questiontype = value; }
 
-        public int ID { get => appendixQuestionModel.ID; }
+        public int ID => appendixQuestionModel.ID;
 
         public AppendixQuestionVM()
         {

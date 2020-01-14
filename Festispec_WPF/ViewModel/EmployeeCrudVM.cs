@@ -1,19 +1,12 @@
 ﻿using Festispec_WPF.Model.UnitOfWork;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec_WPF.View;
 using MessageBox = System.Windows.Forms.MessageBox;
-using System.Windows.Data;
-using FestiSpec.Domain.Model;
 
 namespace Festispec_WPF.ViewModel
 {
@@ -26,7 +19,7 @@ namespace Festispec_WPF.ViewModel
 
         public bool IsSelected
         {
-            get { return isSelected; }
+            get => isSelected;
             set
             {
                 isSelected = value;
@@ -38,7 +31,7 @@ namespace Festispec_WPF.ViewModel
 
         public string EditVisibility
         {
-            get { return _editVisibility; }
+            get => _editVisibility;
             set
             {
                 _editVisibility = value;
@@ -49,7 +42,7 @@ namespace Festispec_WPF.ViewModel
         private string _enableEdit;
         public string EnableEdit
         {
-            get { return _enableEdit; }
+            get => _enableEdit;
             set
             {
                 _enableEdit = value;
@@ -61,7 +54,7 @@ namespace Festispec_WPF.ViewModel
 
         public string EmployeeVisibility
         {
-            get { return _employeeVisibility; }
+            get => _employeeVisibility;
             set
             {
                 _employeeVisibility = value;
@@ -96,10 +89,7 @@ namespace Festispec_WPF.ViewModel
 
         public string searchText
         {
-            get
-            {
-                return _searchText;
-            }
+            get => _searchText;
             set
             {
                 _searchText = value;

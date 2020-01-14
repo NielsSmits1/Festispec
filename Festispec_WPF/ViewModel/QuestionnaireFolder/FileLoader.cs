@@ -22,8 +22,6 @@ namespace Festispec_WPF.ViewModel.QuestionnaireFolder
                 return new BitmapImage(new Uri(op.FileName));
             }
             return null;
-
-
         }
     }
 }

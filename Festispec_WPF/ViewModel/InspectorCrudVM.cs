@@ -38,14 +38,8 @@ namespace Festispec_WPF.ViewModel
 
         public CertificateVM SelectedCertificate
         {
-            get
-            {
-                return _selected;
-            }
-            set
-            {
-                _selected = value;
-            }
+            get => _selected;
+            set => _selected = value;
         }
 
         public CertificateVM SelectedAppCertificate
@@ -68,10 +62,7 @@ namespace Festispec_WPF.ViewModel
 
         public string searchText
         {
-            get
-            {
-                return _searchText;
-            }
+            get => _searchText;
             set
             {
                 _searchText = value;
@@ -85,7 +76,7 @@ namespace Festispec_WPF.ViewModel
 
         public string AddInspectorVisibility
         {
-            get { return _addInspectorVisibility; }
+            get => _addInspectorVisibility;
             set
             {
                 _addInspectorVisibility = value;
@@ -97,7 +88,7 @@ namespace Festispec_WPF.ViewModel
 
         public string InspectorVisibility
         {
-            get { return _inspectorVisibility; }
+            get => _inspectorVisibility;
             set
             {
                 _inspectorVisibility = value;
@@ -109,15 +100,14 @@ namespace Festispec_WPF.ViewModel
 
         public string EditVisibility
         {
-            get { return _editVisibility; }
+            get => _editVisibility;
             set
             {
                 _editVisibility = value;
                 base.RaisePropertyChanged();
             }
         }
-
-
+        
         //Update Inspector Commands
         public ICommand OpenEditInspectorCommand { get; set; }
         public ICommand MoveToLeftoverCommand { get; set; }
@@ -141,24 +131,15 @@ namespace Festispec_WPF.ViewModel
         public ICommand CancelEditCommand { get; set; }
         public InspectorVM SelectedInspector
         {
-            get
-            {
-                return _inspector;
-            }
-            set
-            {
-                _inspector = value;
-            }
+            get => _inspector;
+            set => _inspector = value;
         }
 
         private ApplicantVM _selectedApplicant;
 
         public ApplicantVM SelectedApplicant
         {
-            get
-            {
-                return _selectedApplicant;
-            }
+            get => _selectedApplicant;
             set
             {
                 _selectedApplicant = value;
@@ -194,7 +175,6 @@ namespace Festispec_WPF.ViewModel
             SearchDataGrid = new RelayCommand(searchDatagrid);
 
             Init();
-
         }
 
         private void searchDatagrid()
@@ -253,7 +233,6 @@ namespace Festispec_WPF.ViewModel
         // CREATE
         public void AddInspector()
         {
-
             UOW.NAWInspectors.Add(NewInspector.NAWInspector);
             UOW.Inspectors.Add(NewInspector.InspectorData);
 
@@ -279,7 +258,6 @@ namespace Festispec_WPF.ViewModel
             RaisePropertyChanged(() => AvailableCertificates);
             AllChecked = true;
             RaisePropertyChanged(() => AllChecked);
-
             NewInspector.EmptyAll();
         }
 
@@ -345,8 +323,6 @@ namespace Festispec_WPF.ViewModel
         {
             if(SelectedInspector.StreetName != "Geen zoekresultaten")
             {
-                //SelectedInspector.InspectorData = UOW.Inspectors.GetAll().FirstOrDefault(i => i.NAW == SelectedInspector.NAWInspector_ID);
-
                 SelectedInspector.ChosenCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetCertificatesInspector(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
                 LeftoverCertificates = new ObservableCollection<CertificateVM>(UOW.Inspectors.GetMissingCertificates(SelectedInspector.Inspector_ID).Select(c => new CertificateVM(c)));
 
@@ -362,8 +338,6 @@ namespace Festispec_WPF.ViewModel
         {
             var NAW = UOW.NAWInspectors.GetAll().FirstOrDefault(ins => ins.ID == SelectedInspector.NAWInspector_ID);
             NAW = SelectedInspector.NAWInspector;
-            // UOW.Context.Telefoonnummer_inspecteur.Remove(UOW.Context.Telefoonnummer_inspecteur.ToList().FirstOrDefault(ins => ins.NAW_Inspecteur_ID == SelectedInspector.NAWInspector_ID));
-            //UOW.Context.Telefoonnummer_inspecteur.Add(SelectedInspector.PhonenumberModel);
             var inspector = UOW.Inspectors.GetAll().FirstOrDefault(ins => ins.ID == SelectedInspector.Inspector_ID);
             inspector = SelectedInspector.InspectorData;
 
@@ -419,7 +393,6 @@ namespace Festispec_WPF.ViewModel
                 }
             }
         }
-
         public void LoadActive()
         {
             Inspectors = new ObservableCollection<InspectorVM>(UOW.NAWInspectors.ListOfActiveInspectors.Select(ins => new InspectorVM(ins)));
@@ -441,8 +414,6 @@ namespace Festispec_WPF.ViewModel
             _currentlist = 4;
         }
 
-
-
         public void MoveCertificateToChosen()
         {
             NewInspector.ChosenCertificates.Add(_selected);
@@ -459,7 +430,6 @@ namespace Festispec_WPF.ViewModel
             SelectedInspector.ChosenCertificates.Add(_selected);
             LeftoverCertificates.Remove(_selected);
         }
-
         public void MoveCertificateToLeftover()
         {
             LeftoverCertificates.Add(_selected);

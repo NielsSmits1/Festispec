@@ -1,13 +1,8 @@
 ﻿using Festispec_WPF.View;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using FestiSpec.Domain.Model;
 using System.Net;
 
 namespace Festispec_WPF.ViewModel
@@ -23,7 +18,6 @@ namespace Festispec_WPF.ViewModel
         private MapView _planWindow;
         private EmployeeView _employeeView;
         private MainWindow _mainWindow;
-
 
         // commands
         public ICommand ShowHomeCommand { get; set; }
@@ -71,7 +65,6 @@ namespace Festispec_WPF.ViewModel
                 LogOut();
             }
         }
-
         private bool CanShowKlanten()
         {
             if (ViewModelLocator.CurrentRole == "Manager" || ViewModelLocator.CurrentRole == "Directie")
@@ -205,7 +198,6 @@ namespace Festispec_WPF.ViewModel
             }
             currentWindow.Close();
         }
-
         private bool CanShowInspectionList()
         {
             if (ViewModelLocator.CurrentRole == "Sales" || ViewModelLocator.CurrentRole == "Directie")
@@ -217,9 +209,6 @@ namespace Festispec_WPF.ViewModel
                 return false;
             }
         }
-
-
-
         private bool HasInternet()
         {
             try
