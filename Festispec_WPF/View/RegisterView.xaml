@@ -170,7 +170,7 @@
                             <TextBlock Text="Telefoonnummer" />
                             <TextBox LostFocus="PhoneNumber_LostFocus" Name="phoneNumber">
                                 <TextBox.Text>
-                                    <Binding Path="NewEmployee.InfixName" Mode="TwoWay">
+                                    <Binding Path="NewEmployee.Phonenumber" Mode="TwoWay">
                                         <Binding.ValidationRules>
                                             <validationrules:EmptyValidator />
                                         </Binding.ValidationRules>
