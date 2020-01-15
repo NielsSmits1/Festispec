@@ -17,7 +17,7 @@ namespace Festispec_WPF.Validation_rules
             Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
             isValid = regex.IsMatch((string)value);
 
-            return new ValidationResult(isValid, "Dit is geen geldige email");
+            return new ValidationResult(isValid, "Je email moeten lijken op dit formaat: Festispec@it4j.com");
         }
     }
 }

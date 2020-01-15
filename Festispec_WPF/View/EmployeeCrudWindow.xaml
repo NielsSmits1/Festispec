@@ -245,6 +245,7 @@
                                                 <Binding Path="SelectedEmployee.Postcode" Mode="TwoWay">
                                                     <Binding.ValidationRules>
                                                         <validationrules:EmptyValidator />
+                                                        <validationrules:PostalcodeValidator/>
                                                     </Binding.ValidationRules>
                                                 </Binding>
                                             </TextBox.Text>

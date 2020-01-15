@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace Festispec_WPF.Validation_rules
 {
-    class PostalcodeValidator : ValidationRule
+    public class PostalcodeValidator : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -17,7 +17,7 @@ namespace Festispec_WPF.Validation_rules
             Regex regex = new Regex(@"^\d{4}?\w{2}$");
             isValid = regex.IsMatch((string)value);
 
-            return new ValidationResult(isValid, "Dit is geen geldige postcode");
+            return new ValidationResult(isValid, "Je postcode moet dit formaat hebben: 1111ZZ");
         }
     }
 }

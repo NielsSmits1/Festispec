@@ -47,6 +47,7 @@ namespace Festispec_WPF.ViewModel
 
         private CreateLocationWindow _createLocation;
         private CreateInspectionWindow _createWindow;
+        private MapView _index;
         public LocationVM NewLocation { get; set; }
         public InspectionVM NewInspection { get; set; }
 
@@ -368,6 +369,7 @@ namespace Festispec_WPF.ViewModel
         public ICommand openDetailsCommand { get; set; }
         public ICommand openPlannedInspectorsCommand { get; set; }
         public ICommand CancelNewLocationCommand { get; set; }
+        public ICommand CancelNewInspectionCommand { get; set; }
 
         public MapViewModel()
         {
@@ -383,7 +385,7 @@ namespace Festispec_WPF.ViewModel
             downloadCommand = new RelayCommand(downloadInspection);
             SafeEditCommand = new RelayCommand(complete);
             CreateNewLocationCommand = new RelayCommand(AddNewLocation);
-            OpenCreateLocationWindowCommand = new RelayCommand(OpenCreateLocationWindow);
+            OpenCreateLocationWindowCommand = new RelayCommand(OpenCreateLocationWindow, CanOpenCreateLocationWindow);
             CreateNewInspectionCommand = new RelayCommand(AddNewInspection);
             OpenCreateWindowCommand = new RelayCommand(OpenCreateWindow);
             CloseCreateCommand = new RelayCommand(CloseCreate);
@@ -394,6 +396,7 @@ namespace Festispec_WPF.ViewModel
             openPlannedInspectorsCommand = new RelayCommand(openPlannedInspectors);
             openDetailsCommand = new RelayCommand(openDetails);
             CancelNewLocationCommand = new RelayCommand(CancelNewLocation);
+            CancelNewInspectionCommand = new RelayCommand(CloseCreate);
 
             Init();
         }
@@ -402,6 +405,8 @@ namespace Festispec_WPF.ViewModel
         {
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             currentWindow.Close();
+            _createLocation = null;
+            CommandManager.InvalidateRequerySuggested();
         }
 
         public void Init()
@@ -907,6 +912,7 @@ namespace Festispec_WPF.ViewModel
 
         private void OpenCreateWindow()
         {
+            var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             NewInspection = new InspectionVM();
             Locations = new ObservableCollection<LocationVM>(_UOW.InspectionLocations.GetAll().Select(loc => new LocationVM(loc)));
             Customers = new ObservableCollection<CustomerVM>(_UOW.Customers.GetAll().ToList().Select(cus => new CustomerVM(cus)));
@@ -914,13 +920,20 @@ namespace Festispec_WPF.ViewModel
             AvailableQuestionnaires = new ObservableCollection<QuestionnaireVM>(_UOW.Questionnaires.GetAll().Where(vr => vr.Actief == true).Select(vr => new QuestionnaireVM(vr)));
             _createWindow = new CreateInspectionWindow();
             _createWindow.Show();
+            currentWindow.Close();
         }
 
         private void CloseCreate()
         {
             NewInspection = null;
             NewLocation = null;
+            _index = new MapView();
+            _index.Show();
             _createWindow.Close();
+            if(_createLocation != null)
+            {
+                _createLocation.Close();
+            }
         }
         private void AddNewInspection()
         {
@@ -986,6 +999,12 @@ namespace Festispec_WPF.ViewModel
             NewLocation = new LocationVM();
             _createLocation = new CreateLocationWindow();
             _createLocation.Show();
+            CommandManager.InvalidateRequerySuggested();
+        }
+
+        private bool CanOpenCreateLocationWindow()
+        {
+            return _createLocation == null;
         }
 
         private void addInspectorToInspection()

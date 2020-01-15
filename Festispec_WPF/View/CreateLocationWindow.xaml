@@ -7,6 +7,8 @@
         xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
         Title="Nieuwe locatie aanmaken" Height="400" Width="700"
+        WindowStyle="None"
+        ResizeMode="NoResize"
         DataContext="{Binding MapView, Source={StaticResource Locator}}">
     
     <StackPanel Width="700" HorizontalAlignment="Center" Background="Gray">
@@ -16,14 +18,40 @@
             <Border BorderThickness="10">
                 <Grid>
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="Postcode" />
-                        <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewLocation.ZipCode, Mode=TwoWay}" Margin="0,0,0,10"></TextBox>
-
+                        <TextBlock Text="Postcode"/>
+                        <TextBox Width="100" HorizontalAlignment="Left" Name="Postcode" FontSize="15" Grid.Row="1" Grid.Column="2" Margin="0,0,0,10" LostFocus="Postcode_LostFocus">
+                            <TextBox.Text>
+                                <Binding Path="NewLocation.Zipcode" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validationrules:PostalcodeValidator/>
+                                        <validationrules:EmptyValidator />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Postcode}" Foreground="Red"/>
                         <TextBlock Text="Huisnummer" />
-                        <TextBox Width="100" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Text="{Binding NewLocation.HomeNumber, Mode=TwoWay}" Margin="0,0,0,10"></TextBox>
-
+                        <TextBox Width="100" HorizontalAlignment="Left" Name="Huisnummer" FontSize="15" Grid.Row="1" Grid.Column="2" Margin="0,0,0,10" LostFocus="Huisnummer_LostFocus">
+                            <TextBox.Text>
+                                <Binding Path="NewLocation.HomeNumber" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validationrules:EmptyValidator />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Huisnummer}" Foreground="Red"/>
                         <TextBlock Text="Straatnaam" />
-                        <TextBox Width="200" HorizontalAlignment="Left" Name="Straatnaam" FontSize="15" Grid.Row="1" Grid.Column="1" Text="{Binding NewLocation.StreetName, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="0,0,0,10"></TextBox>
+                        <TextBox Width="200" HorizontalAlignment="Left" Name="Straatnaam" FontSize="15" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="2" Margin="0,0,0,10" LostFocus="Straatnaam_LostFocus">
+                            <TextBox.Text>
+                                <Binding Path="NewLocation.StreetName" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validationrules:EmptyValidator />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=Straatnaam}" Foreground="Red"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -54,7 +82,7 @@
 
                 <Button Width="300" Height="35" FontSize="22" 
                             Foreground="White" FontWeight="Bold" Margin="0,20" Background="#8000FF" 
-                            Content="Wijzigingen opslaan" Command="{Binding CreateNewLocationCommand}">
+                            Content="Wijzigingen opslaan" Command="{Binding CreateNewLocationCommand}" Click="Button_Click">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Green"/>

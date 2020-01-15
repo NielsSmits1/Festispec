@@ -23,5 +23,29 @@ namespace Festispec_WPF.View
         {
             InitializeComponent();
         }
+
+
+        private void Postcode_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Huisnummer_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void Straatnaam_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Postcode.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            Huisnummer.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            Straatnaam.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
     }
 }

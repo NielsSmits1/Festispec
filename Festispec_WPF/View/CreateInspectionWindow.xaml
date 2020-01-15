@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
-        Title="CreateInspectionWindow" Height="800" Width="800" WindowState="Maximized"
+        Title="CreateInspectionWindow" WindowState="Maximized" WindowStyle="None"
         DataContext="{Binding MapView, Source={StaticResource Locator}}">
     <StackPanel Background="Gray">
         <Label Content="Inspectie aanmaken" FontSize="30" Foreground="White" HorizontalAlignment="Center"/>
@@ -220,7 +220,30 @@
         </Grid>
         <Border BorderBrush="White" BorderThickness="3" />
             <Label Name="errorText" Foreground="Red" />
-            <Button Margin="0,10"  Content="Inspectie aanmaken" Command="{Binding CreateNewInspectionCommand}" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Width="150" Height="30" Cursor="Hand" Click="Button_Click">
+        <StackPanel Orientation="Horizontal" Margin="0,0,50,0" HorizontalAlignment="Right">
+            <Button FontSize="18" Width="150" FontWeight="Bold" Foreground="White" Content="Annuleren" Padding="10,10,10,10"  Margin="0,0,20,0"  Command="{Binding CancelNewInspectionCommand}" Height="30" Background="#CE3131">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Green"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.8" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        
+        <Button Content="Inspectie aanmaken" Command="{Binding CreateNewInspectionCommand}" HorizontalAlignment="Right" FontSize="14" BorderThickness="2" BorderBrush="#8000FF" Foreground="White" Background="#8000FF" FontWeight="ExtraBold" Width="150" Height="30" Cursor="Hand" Click="Button_Click">
               <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Green"/>
@@ -241,5 +264,6 @@
                 </Style>
             </Button.Style>
         </Button>
+        </StackPanel>
     </StackPanel>
 </Window>
