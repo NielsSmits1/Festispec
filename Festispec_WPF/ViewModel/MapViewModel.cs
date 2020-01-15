@@ -942,6 +942,7 @@ namespace Festispec_WPF.ViewModel
 
             foreach (var item in NewInspection.ChosenQuestionnaires)
             {
+                item.IsActive = false;
                 _UOW.Inspections.Get(NewInspection.Inspection_ID).Vragenlijst.Add(item.ToModel());
             }
 

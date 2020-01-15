@@ -12,7 +12,6 @@ namespace FestiSpecWebsite.Models.QuestionnaireFolder
         private Openvraag openQuestion;
         public string Question { get => openQuestion.Vraag; set { openQuestion.Vraag = value; } }
         [Required(ErrorMessage = "Input is required.")]
-        [StringLength(50, ErrorMessage = "Answer cannot be longer than 50 characters.")]
         public string Answer { get; set; }
      
         public string Type => "OpenQuestion";
