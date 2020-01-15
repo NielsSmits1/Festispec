@@ -40,7 +40,6 @@ namespace Festispec_WPF.ViewModel
             SimpleIoc.Default.Register<RapportageVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<CreateQuestionaireVM>();
-            SimpleIoc.Default.Register<EditQuestionnaireVM>();
             SimpleIoc.Default.Register<CRCustomerVM>();
             SimpleIoc.Default.Register<InspectionCrudVM>();
             SimpleIoc.Default.Register<MapViewModel>();
@@ -232,7 +231,7 @@ namespace Festispec_WPF.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<EditQuestionnaireVM>();
+                return new EditQuestionnaireVM();
             }
         }
         public OfflineMapVM OfflineMapView
