@@ -7,13 +7,15 @@ using System.Windows.Input;
 using Festispec_WPF.Model.UnitOfWork;
 using Festispec_WPF.View;
 using System.Windows.Forms;
+using System.Windows;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec_WPF.ViewModel
 {
     public class InspectorCrudVM : ViewModelBase
     {
         private UnitOfWork UOW;
-        private EditInspectorWindow _editInspectorWindow;
         private CertificateVM _selected;
         private CertificateVM _appSelected;
         private InspectorVM _inspector;
@@ -345,7 +347,12 @@ namespace Festispec_WPF.ViewModel
                 UOW.Complete();
                 MessageBox.Show("De aanpassingen zijn doorgevoerd", "Het is gelukt!",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _editInspectorWindow.Close();
+
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                var _inspecteursWindow = new InspectorCrudWindow();
+                _inspecteursWindow.Show();
+                currentWindow.Close();
+                return;
             }
             catch
             {

@@ -25,6 +25,7 @@ namespace FestiSpec.Domain.Model
 
         [Required]
         [DisplayName("Datum")]
+        [DataType(DataType.Date)]
         public System.DateTime Datum { get; set; }
 
         public virtual Inspecteur Inspecteur { get; set; }
