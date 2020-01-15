@@ -22,6 +22,7 @@ namespace Festispec_WPF.ViewModel
         //reference commands
         public ICommand LoginCommand { get; set; }
         public ICommand OfflineCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
 
         //local variables
         private IUnitOfWork UOW;
@@ -33,6 +34,7 @@ namespace Festispec_WPF.ViewModel
             LoginCommand = new RelayCommand(HandleLogin);
             UOW = ViewModelLocator.UOW;
             OfflineCommand = new RelayCommand(HandleOffline);
+            ExitCommand = new RelayCommand(ExitApplication);
         }
 
         private void HandleLogin()
@@ -81,6 +83,12 @@ namespace Festispec_WPF.ViewModel
             var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             _offlineMapView = new OfflineMapView();
             _offlineMapView.Show();
+            currentWindow.Close();
+        }
+
+        private void ExitApplication()
+        {
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             currentWindow.Close();
         }
 

@@ -7,7 +7,8 @@
         xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="CustomerCreateWindow" Height="1080" Width="1920"
+        WindowStyle="None"
+        Title="CustomerCreateWindow" 
         DataContext="{Binding CRCustomer, Source={StaticResource Locator}}">
     <Border Padding="10 10">
         <Grid>

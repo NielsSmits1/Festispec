@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         WindowState="Maximized"
+        WindowStyle="None"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
-        Title="CreateQuestionnaire" Height="1080" Width="1920"
+        Title="CreateQuestionnaire"
         DataContext="{Binding CreateQuestionnaire, Source={StaticResource Locator}}">
 
     <Border Padding="10 10">

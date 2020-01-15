@@ -8,8 +8,7 @@
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="OfflineMapView" WindowState="Maximized"
-        Width="1920"
-        Height="1080"
+        WindowStyle="None"
         DataContext="{Binding OfflineMapView, Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>

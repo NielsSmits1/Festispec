@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="CustomerCrudWindow" Height="1080" Width="1920"
+        WindowStyle="None"
+        Title="CustomerCrudWindow"
         DataContext="{Binding CRCustomer, Source={StaticResource Locator}}">
 
     <Grid>

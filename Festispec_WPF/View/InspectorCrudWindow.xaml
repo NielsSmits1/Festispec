@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Festispec_WPF"
         xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
-        WindowState="Maximized"
-        Title="InspectorCrud" Height="1080" Width="1920"
+        Title="InspectorCrud" WindowState="Maximized"
+        WindowStyle="None"
         DataContext="{Binding InspectorCrud, Source={StaticResource Locator}}">
     <!--WindowState="Maximized" WindowStyle="None"-->
 

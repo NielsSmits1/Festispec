@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
-        WindowState="Maximized"
-        Title="CustomerUpdateWindow" Height="1080" Width="1920"
+        Title="CustomerUpdateWindow" WindowState="Maximized"
+        WindowStyle="None"
         DataContext="{Binding CustomerUpdateVM, Source={StaticResource Locator}}">
 
     <Border Padding="10 10">

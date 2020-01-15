@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d"
         WindowState="Maximized"
+        WindowStyle="None"
         DataContext="{Binding QuestionaireCrud, Source={StaticResource Locator}}"
     Title="QuestionnaireCRUD" Height="1080" Width="1920">
     <Grid>

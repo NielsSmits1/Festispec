@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec_WPF.View"
         mc:Ignorable="d" WindowState="Maximized"
-        Title="InspectionOverview" Height="1080" Width="1920"
+        WindowStyle="None"
+        Title="InspectionOverview"
         DataContext="{Binding InspectionList, Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>

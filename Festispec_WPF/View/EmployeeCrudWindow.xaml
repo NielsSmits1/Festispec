@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Festispec_WPF.View"
         xmlns:validationrules="clr-namespace:Festispec_WPF.Validation_rules"
         mc:Ignorable="d"
-        Title="EmployeeView" Height="1080" Width="1920"
-        WindowState="Maximized"
+        Title="EmployeeView" WindowState="Maximized"
+        WindowStyle="None"
         DataContext="{Binding EmployeeCrud, Source={StaticResource Locator}}">
 
     <Grid>
