@@ -70,7 +70,6 @@ namespace FestiSpec.Domain.Model.Repositories
 
         public List<Inspecteur> GetTop5PlannedInspectors()
         {
-            // var inspections = Context.Inspectie.Where(ins => ins.StartDate.Year == DateTime.Now.Year || ins.StartDate.Year == DateTime.Now.AddYears(-1).Year);
             var inspectors = Context.GetTop5Inspectors().ToList();
             return inspectors;
         }
