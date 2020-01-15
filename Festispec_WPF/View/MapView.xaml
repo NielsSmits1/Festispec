@@ -217,7 +217,7 @@
 
                                         <Grid Grid.Row="1" Visibility="{Binding InspectionVisibility}">
                                             <Grid>
-                                                <Grid>
+                                                <Grid Height="460">
                                                     <Grid.Resources>
                                                         <DataTemplate x:Key="DateTemplate" >
                                                             <StackPanel Margin="10,0,0,0">
@@ -279,7 +279,7 @@
                                                             </StackPanel>
                                                         </DataTemplate>
                                                     </Grid.Resources>
-                                                    <ScrollViewer VerticalScrollBarVisibility="Visible" Height="350">
+                                                    <ScrollViewer VerticalScrollBarVisibility="Visible">
                                                         <DataGrid IsSynchronizedWithCurrentItem="True" CanUserAddRows="false" ItemsSource="{Binding Festivals}" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" AutoGenerateColumns="False" HeadersVisibility="None">
                                                             <DataGrid.Columns>
                                                                 <DataGridTemplateColumn Width="*" CellTemplate="{StaticResource DateTemplate}" />

@@ -97,7 +97,7 @@
                 </Button>
             </StackPanel>
 
-            <DataGrid Name="questionOptionList" Grid.Column="1" Grid.RowSpan="3" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False" Margin="0,0,0,13">
+            <DataGrid Name="questionOptionList" Grid.Column="1" Grid.RowSpan="3" ItemsSource="{Binding AnwserOptions}" AutoGenerateColumns="False" Margin="0,0,0,13" Height="200">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding}" Width="*"
                                 Foreground="Black" Header="Vraag opties" IsReadOnly="True" />
