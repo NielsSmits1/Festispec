@@ -80,8 +80,8 @@
             <StackPanel Visibility="{Binding addInspectorVisibility}" Grid.Column="0" Width="1000" Background="gray">
                 <StackPanel Margin="25">
                     <Label Content="Sollicitanten" FontSize="35" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold" />
-                    <ScrollViewer MaxHeight="400">
-                        <DataGrid AutoGenerateColumns="False" CanUserReorderColumns="False" IsReadOnly="True" Height="400"  CanUserAddRows="False" ItemsSource="{Binding Applicants}" SelectedItem="{Binding SelectedApplicant}" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                    <ScrollViewer MaxHeight="200">
+                        <DataGrid AutoGenerateColumns="False" CanUserReorderColumns="False" IsReadOnly="True" Height="200" CanUserAddRows="False" ItemsSource="{Binding Applicants}" SelectedItem="{Binding SelectedApplicant}" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                             <DataGrid.Resources>
                                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="Background" Value="#565656"/>
