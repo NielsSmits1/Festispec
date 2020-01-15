@@ -15,6 +15,7 @@ namespace Festispec_WPF.ViewModel
     public class EmployeeCrudVM : ViewModelBase
     {
         private RegisterView _window;
+        private EmployeeView _index;
         private UnitOfWork UOW;
         private EmployeeVM _employee;
         private bool isSelected;
@@ -165,7 +166,10 @@ namespace Festispec_WPF.ViewModel
 
         private void CloseCreate()
         {
+            _index = new EmployeeView();
+            _index.Show();
             _window.Close();
+            
         }
 
         private void OpenEditView()
