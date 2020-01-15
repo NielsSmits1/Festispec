@@ -4,7 +4,7 @@
         @Html.HiddenFor(Model => Model.Id)
         @Html.HiddenFor(Model => Model.Question)
         @Html.DisplayFor(Model => Model.Question)
-        @Html.TextBoxFor(Model => Model.Answer, new { @required = "required" })
+        <div>@Html.TextBoxFor(Model => Model.Answer, new { @required = "required" })</div>
         @Html.ValidationMessageFor(Model => Model.Answer)
         @Html.HiddenFor(m => m.ListPosition)
 

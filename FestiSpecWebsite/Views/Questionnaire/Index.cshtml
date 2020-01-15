@@ -3,11 +3,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Vragenlijst</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -36,7 +33,7 @@
         </td>
 
         <td>
-            @Html.ActionLink("Details", "loadQuestionaire", new { inspectionId = Model.id, id=item.ID }) |
+            @Html.ActionLink("Vragenlijst invullen", "loadQuestionaire", new { inspectionId = Model.id, id=item.ID }) |
         </td>
     </tr>
 }
