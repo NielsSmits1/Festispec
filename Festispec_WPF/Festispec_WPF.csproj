@@ -353,6 +353,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="inspection.json" />
     <None Include="Pdf\Template.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

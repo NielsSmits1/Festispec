@@ -1,1 +1,54 @@
-{"Inspectienummer":0,"StartDate":"\/Date(1574895600000)\/","EndDate":"\/Date(1574982000000)\/","Klant_ID":0,"Titel":"Testen is leuk","Versie":"1","Locatie_ID":0,"Voltooid":false,"Klant":{"ID":0,"Bedrijfsnaam":"TestBVBB","NAW":0,"Contactpersoon":[],"Inspectie":[],"NAW_Klant":null,"Verzoek":[]},"Locatie":{"ID":0,"Postcode":"1234TT","Huisnummer":"12","Straatnaam":"Testersteronlaan","Inspectie":[]},"Inspectie_Rapportage":[],"Inspectie_Wel_Ingevuld_Vragenlijst":[],"Inspecteur":[{"ID":0,"Username":"Test1  Testtest","Wachtwoord":null,"NAW":0,"Actief":false,"Beschikbaarheid":[],"NAW_inspecteur":null,"Inspectie_Wel_Ingevuld_Vragenlijst":[],"Certificaat":[],"Inspectie":[]}],"Vragenlijst":[],"Certificaat":[{"ID":0,"Name":"Brandveiligheid","Applicant":[],"Inspecteur":[],"Inspectie":[]}],"Werknemer":[]}
+{
+  "Inspectienummer": 0,
+  "StartDate": "\/Date(1574895600000)\/",
+  "EndDate": "\/Date(1574982000000)\/",
+  "Klant_ID": 0,
+  "Titel": "Testen is leuk",
+  "Versie": "1",
+  "Locatie_ID": 0,
+  "Voltooid": false,
+  "Klant": {
+    "ID": 0,
+    "Bedrijfsnaam": "TestBVBB",
+    "NAW": 0,
+    "Contactpersoon": [],
+    "Inspectie": [],
+    "NAW_Klant": null,
+    "Verzoek": []
+  },
+  "Locatie": {
+    "ID": 0,
+    "Postcode": "1234TT",
+    "Huisnummer": "12",
+    "Straatnaam": "Testersteronlaan",
+    "Inspectie": []
+  },
+  "Inspectie_Rapportage": [],
+  "Inspectie_Wel_Ingevuld_Vragenlijst": [],
+  "Inspecteur": [
+    {
+      "ID": 0,
+      "Username": "Test1  Testtest",
+      "Wachtwoord": null,
+      "NAW": 0,
+      "Actief": false,
+      "Beschikbaarheid": [],
+      "NAW_inspecteur": null,
+      "Inspectie_Wel_Ingevuld_Vragenlijst": [],
+      "Certificaat": [],
+      "Inspectie": []
+    }
+  ],
+  "Vragenlijst": [],
+  "Certificaat": [
+    {
+      "ID": 0,
+      "Name": "Brandveiligheid",
+      "Applicant": [],
+      "Inspecteur": [],
+      "Inspectie": []
+    }
+  ],
+  "Werknemer": []
+
+}

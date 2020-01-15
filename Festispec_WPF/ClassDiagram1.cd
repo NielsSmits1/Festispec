@@ -1,2 +1,155 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.AppendixQuestionPageVM" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAARAAAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\AppendixQuestionPageVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.AppendixQuestionVM" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAEgAAgAAAAIAAACAQAQAhEAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\AppendixQuestionVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.CreateQuestionaireVM" Collapsed="true">
+    <Position X="16.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>xAEREAABEGQkKQBEAMIqASAIAQgEAAgQBhJIiAQAAiI=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\CreateQuestionaireVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.EditQuestionnaireVM" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>xAABEAABAGAkKSAAAMIhACAAAQgAAAgQBhBAAQaAAiI=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\EditQuestionnaireVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.MapQuestionPageVM" Collapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAAAAAAAIAAAAAAAAAAABAAAAARAAAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\MapQuestionPageVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.MapQuestionVM" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgABAAAAEgAAgAIAAIAAACAAAQAhEAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\MapQuestionVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.MultipleChoiceQuestionPageVM" Collapsed="true">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAABAAACAAAAAAAAAACgARAAAAE=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\MultipleChoiceQuestionPageVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.MultipleChoiceQuestionVM" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAQAAEgAAgAAAAIAACCAAAQAhEAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\MultipleChoiceQuestionVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.OpenQuestionPageVM" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAACRAAAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\OpenQuestionPageVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.OpenQuestionVM" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAACEgAAgAAAAIAAACAAAQAhEAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\OpenQuestionVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.TableQuestionPageVM" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAkAAUAAAAAAAAAAAAAAAAAAAAAAAEARgCAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\TableQuestionPageVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireFolder.TableQuestionVM" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAQAAEgAAwAAAAIAAACAEAwAhEAAAAAAgAAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\TableQuestionVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.ViewModel.QuestionnaireVM" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIAAAAAkAAAEiEAAEAAAAAAASAQAABABEAAAAAEIAAQ=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\QuestionnaireVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Festispec_WPF.View.QuestionnairePages.AppendixQuestionPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>View\QuestionnairePages\AppendixQuestionPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.View.QuestionnairePages.MapQuestionPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>View\QuestionnairePages\MapQuestionPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.View.QuestionnairePages.MulitpleChoiceQuestionPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAACAEEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\QuestionnairePages\MulitpleChoiceQuestionPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.View.QuestionnairePages.OpenQuestionPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>View\QuestionnairePages\OpenQuestionPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.View.QuestionnairePages.TableQuestionPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAEkAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\QuestionnairePages\TableQuestionPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Festispec_WPF.View.QuestionnaireCRUD" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\QuestionnaireCRUD.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Festispec_WPF.ViewModel.IQuestion" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAgAAgAAAAAAAACAAAQABEAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\QuestionnaireFolder\IQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
