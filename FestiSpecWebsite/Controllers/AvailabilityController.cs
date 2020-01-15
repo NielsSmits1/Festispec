@@ -20,7 +20,7 @@ namespace FestiSpecWebsite.Controllers
         public ActionResult Index()
         {
             var id = Convert.ToInt32(FormsAuthentication.Decrypt(Request.Cookies["Cookie1"].Value).Name);
-            var beschikbaarheid = db.Beschikbaarheid.Where(b => b.Inspecteur_ID == id).ToList();
+            var beschikbaarheid = db.Beschikbaarheid.Where(b => b.Inspecteur_ID == id).OrderByDescending(b => b.Datum).ToList();
             return View(beschikbaarheid);
         }
 
