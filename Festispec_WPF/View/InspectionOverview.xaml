@@ -83,7 +83,7 @@
             <Label Content="Voltooid" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" FontSize="70"/>
 
 
-            <DataGrid SelectedItem="{Binding SelectedInspection}" ItemsSource="{Binding NonAccomplished}" AutoGenerateColumns="False" CanUserReorderColumns="False" Grid.Column="0" Grid.Row="2" Width="400" CanUserAddRows="False">
+            <DataGrid SelectedItem="{Binding SelectedInspection}" ItemsSource="{Binding NonAccomplished}" AutoGenerateColumns="False" CanUserReorderColumns="False" Grid.Column="0" Grid.Row="2" Width="400" CanUserAddRows="False" Height="400">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Inspectienaam" Binding="{Binding Title}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Inspectiedatum" Binding="{Binding StartDate}"/>
@@ -97,7 +97,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid ItemsSource="{Binding Accomplished}" SelectedItem="{Binding SelectedAccInspection}" AutoGenerateColumns="False" CanUserReorderColumns="False" Grid.Row="2" Grid.Column="1" Width="400" CanUserAddRows="False">
+            <DataGrid ItemsSource="{Binding Accomplished}" SelectedItem="{Binding SelectedAccInspection}" AutoGenerateColumns="False" CanUserReorderColumns="False" Grid.Row="2" Grid.Column="1" Width="400" CanUserAddRows="False" Height="400">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Inspectienaam" Binding="{Binding Title}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Inspectiedatum" Binding="{Binding StartDate}"/>
@@ -110,7 +110,6 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-
         </Grid>
     </Grid>
 </Window>

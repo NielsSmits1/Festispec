@@ -90,7 +90,7 @@
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
-            <Button Content="Terug naar begin"  Command="{Binding BackToStart}"  HorizontalAlignment="Left" Margin="78,836,0,0" VerticalAlignment="Top" Width="103"/>
+            <Button Content="Terug naar begin"  Command="{Binding BackToStart}"  HorizontalAlignment="Left" Margin="78,600,0,0" VerticalAlignment="Top" Width="103"/>
             <Label Content="Klant:" HorizontalAlignment="Left" Margin="78,104,0,0" VerticalAlignment="Top"/>
             <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,130,0,0" VerticalAlignment="Top"/>
             <Label Content="Introductie:" HorizontalAlignment="Left" Margin="74,161,0,0" VerticalAlignment="Top"/>
@@ -105,7 +105,7 @@
 
             <!--<Grid Visibility="Visible">-->
             <Grid Visibility="{Binding showGenerate}">
-                <Button Content="Generate" HorizontalAlignment="Left" Margin="1682,849,0,0" VerticalAlignment="Top" Width="74" Command="{Binding GenerateCommand}"/>
+                <Button Content="Generate" HorizontalAlignment="Left" Margin="1300,650,0,0" VerticalAlignment="Top" Width="74" Command="{Binding GenerateCommand}"/>
                 <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,100,10,105" SelectionChanged="DataGrid_SelectionChanged" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Title" Binding="{Binding QuestionTitle}"  Width="*"/>
@@ -123,7 +123,7 @@
 
             <!--<Grid Visibility="Hidden">-->
             <Grid Visibility="{Binding showVragenlijst}">
-                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False"  SelectedItem="{Binding selectedVragenlijst}" ItemsSource="{Binding vragenlijsten}" Margin="810,100,10,105" SelectionChanged="DataGrid_SelectionChanged" >
+                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False"  SelectedItem="{Binding selectedVragenlijst}" ItemsSource="{Binding vragenlijsten}" Margin="810,100,10,105" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding ID}"  Width="50"/>
                         <DataGridTextColumn Header="Title" Binding="{Binding Titel}"  Width="*"/>
