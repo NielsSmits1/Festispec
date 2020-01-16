@@ -195,12 +195,24 @@ namespace FestiSpecWebsite.Controllers
                 inspectie_Wel_Ingevuld_Vragenlijst.Vragenlijst_ID = v.ID;
                 inspectie_Wel_Ingevuld_Vragenlijst.Inspectienummer = inspectionId;
                 db.Inspectie_Wel_Ingevuld_Vragenlijst.Add(inspectie_Wel_Ingevuld_Vragenlijst);
-                //foreach(var i in questionnaire.mapQuestionsList)
-                //{
-                //    Kaartvraag kv = new Kaartvraag();
+                if(questionnaire.mapQuestionsList != null)
+                {
+                    foreach (var i in questionnaire.mapQuestionsList)
+                    {
+                        Kaartvraag_vragenlijst kv = new Kaartvraag_vragenlijst();
+                        kv.Kaartvraag_ID = i.Id;
+                        kv.Vragenlijst_ID = dbid;
+                        MemoryStream target = new MemoryStream();
+                        i.imageFile.InputStream.CopyTo(target);
+                        byte[] data = target.ToArray();
+                        kv.Filebytes = data;
+                        kv.Positie = i.ListPosition;
+                        db.Kaartvraag_vragenlijst.Add(kv);
 
-                //}
-                if(questionnaire.appendixQuestionsList != null)
+                    }
+                }
+
+                if (questionnaire.appendixQuestionsList != null)
                 {
                     foreach (var i in questionnaire.appendixQuestionsList)
                     {

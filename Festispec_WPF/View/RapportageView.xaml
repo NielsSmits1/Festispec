@@ -91,7 +91,10 @@
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
-            <Button Content="Terug naar begin"  Command="{Binding BackToStart}"  HorizontalAlignment="Left" Margin="78,600,0,0" VerticalAlignment="Top" Width="103"/>
+            <StackPanel Orientation="Horizontal" Margin="78,600,0,0">
+            <Button Content="Terug naar begin"  Command="{Binding BackToStart}"  HorizontalAlignment="Left"  VerticalAlignment="Top" Width="103"/>
+            <Button Content="Generate" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top" Width="74" Command="{Binding GenerateCommand}" Visibility="{Binding showGenerate}" />
+            </StackPanel>
             <Label Content="Klant:" HorizontalAlignment="Left" Margin="78,104,0,0" VerticalAlignment="Top"/>
             <Label Content="Inspectie:" HorizontalAlignment="Left" Margin="74,130,0,0" VerticalAlignment="Top"/>
             <Label Content="Introductie:" HorizontalAlignment="Left" Margin="74,161,0,0" VerticalAlignment="Top"/>
@@ -106,7 +109,7 @@
 
             <!--<Grid Visibility="Visible">-->
             <Grid Visibility="{Binding showGenerate}">
-                <Button Content="Generate" HorizontalAlignment="Left" Margin="1300,650,0,0" VerticalAlignment="Top" Width="74" Command="{Binding GenerateCommand}"/>
+                
                 <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding questions}" Margin="810,100,10,105" SelectionChanged="DataGrid_SelectionChanged" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Title" Binding="{Binding QuestionTitle}"  Width="*"/>

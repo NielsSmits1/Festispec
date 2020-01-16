@@ -962,8 +962,9 @@ namespace Festispec_WPF.ViewModel
             try
             {
                 _UOW.Complete();
-                _createWindow.Close();
+                //_createWindow.Close();
                 LoadFestivals();
+                DrawInspections(false);
                 CloseCreate();
             }
             catch
