@@ -14,7 +14,6 @@ namespace FestiSpec.Domain.Model.Interface_Repositories
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
-        // This method was not in the videos, but I thought it would be useful to add.
         TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);
